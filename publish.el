@@ -102,7 +102,7 @@
                       (div (@ (class "row align-items-center justify-content-between"))
                            (div (@ (class "col-sm-8 col-md-8"))
                                 (nav (@ (class "nav"))
-                                     (a (@ (class "nav-link") (href "/")) "About")
+                                     (a (@ (class "nav-link") (href "/")) "Home")
                                      (a (@ (class "nav-link") (href "/articles")) "Articles")))
                            (div (@ (class "col-sm-4 col-md-4 nav-icons"))
                                 (div (@ (class "text-sm-left text-md-right text-lg-right text-xl-right"))
