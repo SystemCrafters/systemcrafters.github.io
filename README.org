@@ -1,0 +1,3 @@
+#+title: System Crafters Homepage
+
+This repo contains the content and site automation for the System Crafters homepage, https://systemcrafters.cc.  It is all generated using Emacs' Org Mode, check out [[file:./publish.el][publish.el]] for the code!
