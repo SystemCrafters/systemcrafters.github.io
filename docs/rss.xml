@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>System Crafters</title>
+<description>The home for computer configuration enthusiasts.</description>
+<generator>Emacs webfeeder.el</generator>
+<link>https://systemcrafters.cc/</link>
+<atom:link href="https://systemcrafters.cc/rss.xml" rel="self" type="application/rss+xml"/>
+<lastBuildDate>Thu, 15 Oct 2020 09:21:33 -0700</lastBuildDate>
+</channel>
+</rss>

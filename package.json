@@ -1,0 +1,23 @@
+{
+  "name": "harmonicschemes.com",
+  "private": true,
+  "version": "0.0.0",
+  "description": "harmonicschemes.com",
+  "main": "index.js",
+  "scripts": {
+    "build": "emacs --batch -l ./publish.el --funcall sc/publish",
+    "preview": "npx browser-sync start --server ./docs --watch --files ./docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daviwil/harmonicschemes.com.git"
+  },
+  "author": "David Wilson",
+  "bugs": {
+    "url": "https://github.com/daviwil/harmonicschemes.com/issues"
+  },
+  "homepage": "https://harmonicschemes.com",
+  "devDependencies": {
+    "browser-sync": "^2.26.7"
+  }
+}
