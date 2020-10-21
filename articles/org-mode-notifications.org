@@ -1,0 +1,97 @@
+#+title: Desktop Notifications for Org Mode Events
+#+date: <2020-10-21 Wed>
+#+page-type: article
+#+filetags: :emacs:org-mode:tips:
+
+* org-alert
+
+[[https://github.com/spegoraro/org-alert][org-alert]] is a simple notification package for Org Mode.  It uses John Wiegley's alert.el package for showing notifications in a variety of ways.  You can check for alerts manually by running =M-x org-alert-check= or by enabling recurring checks with =M-x org-alert-enable=.
+
+** Configuration
+
+#+begin_src emacs-lisp
+
+  (use-package org-alert
+    :ensure t
+    :custom (alert-default-style 'notifications)
+    :config
+    (setq org-alert-interval 300
+          org-alert-notification-title "Org Alert Reminder!")
+    (org-alert-enable))
+
+#+end_src
+
+** Pros
+
+- Simple, does the job
+- Uses alert.el for flexible, cross-platform notifications
+
+** Cons
+
+- Filtering of notified headers can only be configured with regular expressions
+- Reminds you about every due item each time you check, not things that are newly due (maybe a pro for some?)
+- Only reminds you about items with SCHEDULE or DEADLINE, not timestamped items
+
+* org-wild-notifier
+
+[[https://github.com/akhramov/org-wild-notifier.el][org-wild-notifier]] is a more configurable notification package for Org Mode which also uses alert.el for displaying the notifications.  You can manually invoke notification checks by running =M-x org-wild-notifier-check= and schedule recurring checks using =M-x org-wild-notifier-mode=
+
+** Configuration
+
+#+begin_src emacs-lisp
+
+  (use-package org-wild-notifier
+    :ensure t
+    :custom
+    (alert-default-style 'notifications)
+    (org-wild-notifier-alert-time '(1 10 30))
+    (org-wild-notifier-keyword-whitelist nil)
+    (org-wild-notifier-notification-title "Org Wild Reminder!")
+    :config
+    (org-wild-notifier-mode 1))
+
+#+end_src
+
+** Pros
+
+- Uses alert.el for flexible, cross-platform notifications
+- Doesn't require regular expressions to configure
+- Doesn't repeatedly notify on tasks with deadlines that have already passed (could be a con for some?)
+
+** Cons
+
+- Notifications don't show predictably at times
+- Requires some configuration if you use custom task states like =NEXT=
+
+* org-notify
+
+[[https://code.orgmode.org/bzg/org-mode/raw/master/contrib/lisp/org-notify.el][org-notify]] is part of Org Mode's user-contributed packages so it can be installed using the package name =org-plus-contrib= from the Org Mode package repository.  It uses Emacs' built in [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Desktop-Notifications.html][desktop notifications]] API which relies on a D-Bus session being active for notifications to work  in Linux and macOS.  It also works with Windows' notification system.
+
+Check out the documentation for =org-notify-add= for more details on how to configure notification types.
+
+** Configuration
+
+*NOTE*: This one requires =org-plus-contrib= when installing from MELPA!
+
+#+begin_src emacs-lisp
+
+  (use-package org
+    :ensure org-plus-contrib)
+
+  (use-package org-notify
+    :ensure nil
+    :after org
+    :config
+    (org-notify-start))
+
+#+end_src
+
+** Pros
+
+- Part of Org Contrib
+- Very flexible, allows very granular notification configuration
+- Can provide actions on the notification which update the Org item (state, timestamp, etc), but this depends on which notification backend you're using on Linux
+
+** Cons
+
+- Relies on =notifications-notify= API in Emacs which only supports D-Bus notifications so it might not work out of the box on macOS.  It does support Windows, however.
