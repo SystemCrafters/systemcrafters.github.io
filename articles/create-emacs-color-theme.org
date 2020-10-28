@@ -1,0 +1,110 @@
+#+title: Emacs Tips: How to Create an Emacs Color Theme
+#+date: <2020-10-28 Wed>
+#+page-type: article
+#+filetags: :emacs:themes:tips:
+
+* Autothemer
+
+The [[https://github.com/jasonm23/autothemer][Autothemer]] package makes it easy to create new color themes for Emacs.
+
+An example of using Autothemer can be found [[https://github.com/emacsfodder/emacs-theme-darktooth/blob/master/darktooth-theme.el#L24][in the source]] of the [[https://github.com/emacsfodder/emacs-theme-darktooth][Darktooth]] theme.
+
+Installing Autothemer is easy with =use-package=:
+
+#+begin_src emacs-lisp
+
+(use-package autothemer
+  :ensure t)
+
+#+end_src
+
+* Disable Your Theme!
+
+One important step before attempting to design your own theme is to disable any theme you are currently using so that you don't get the wrong impression about how your theme will look in an uncustomized Emacs.  You can do this easily by running the =disable-theme= command and then select any themes that show up there:
+
+#+begin_src emacs-lisp
+
+M-x disable-theme
+
+#+end_src
+
+* Define Your New Theme
+
+Now you can create a new Emacs Lisp file called =hallo-theme.el= inside of your Emacs configuration folder =~/.emacs.d/= (or possibly =C:\Users\yourusername\AppData\Roaming\.emacs.d= on Windows) and populate it with these initial contents:
+
+#+begin_src emacs-lisp
+
+(require 'autothemer)
+
+(autothemer-deftheme
+ hallo "A theme to set the mood for Halloween"
+
+ ((((class color) (min-colors #xFFFFFF))) ;; We're only concerned with graphical Emacs
+
+  ;; Define our color palette
+  (hallo-black      "#000000")
+  (hallo-white      "#ffffff")
+  (hallo-dk-orange  "#eb6123"))
+
+ ;; Customize faces
+ ((default                   (:foreground hallo-white :background hallo-black))
+  (cursor                    (:background hallo-dk-orange))))
+
+(provide-theme 'hallo)
+
+#+end_src
+
+The =provide-theme= line at the bottom tells Emacs that this source file contains a theme named =hallo=.
+
+* Define Colors and Faces
+
+Since this post is being written close to Halloween in the US, I decided to make a theme inspired by the holiday as an example.  Thankfully if you're using Ivy and Counsel you can use the =counsel-colors-emacs= command to show a nice list of colors known by Emacs which is searchable thanks to Ivy.
+
+You can also put your cursor on any text in a buffer and use =describe-face= to find out what the name of the face is at that point.
+
+Another useful command is =list-faces-display= which will give you a preview of every face Emacs knows about so that it's easier to search for the face you're looking for.
+
+Helpful commands for building your theme:
+
+- =counsel-colors-emacs= shows you all of Emacs' built in colors
+- =describe-face= will tell you about the face under the point or you can search for face names
+- =list-faces-display= shows you ALL faces in Emacs and a preview of each
+- =autothemer-generate-templates= will generate a buffer with all of the faces you still need to customize
+
+* Loading Your Theme
+
+If you've stored your theme in your Emacs configuration path, you can run the following expression using =M-:= (=eval-expression=):
+
+#+begin_src emacs-lisp
+
+(load-theme 'hallo t)
+
+#+end_src
+
+Your new theme should be loaded.  You can also run this expression again any time you'd like to refresh the theme and see any changes you've made to it.
+
+If you've placed your theme file in another location, however, you may see an error appear in a popup window:
+
+#+begin_src emacs-lisp
+
+Debugger entered--Lisp error: (error "Unable to find theme file for ‘hallo’")
+
+#+end_src
+
+In this case, we also need to let Emacs the directory where we keep theme files.  For our testing purposes, you can add the folder where your =hallo-theme.el= file is stored by evaluating the following expression using =M-:= (=eval-expression=):
+
+#+begin_src emacs-lisp
+
+(add-to-list 'custom-theme-load-path
+               (file-name-as-directory (file-name-directory buffer-file-name)))
+
+#+end_src
+
+This expression uses =buffer-file-name= (the path of the current buffer) to add your theme's directory to the =custom-theme-load-path=.  After evaluating this expression, =load-theme= should be able to find and load your theme successfully.
+
+
+* Theming Without Autothemer
+
+- [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Custom-Themes.html][Custom Themes conceptual documentation]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Custom-Themes.html#Custom-Themes][Custom Themes API documentation]]
+- Built-in Emacs themes: http://git.savannah.gnu.org/cgit/emacs.git/tree/etc/themes
