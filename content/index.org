@@ -12,7 +12,7 @@ We hope you'll join us for our regular *live streams every Friday at 9:15 am Pac
 
 * Around the Web
 
-- Visit System Crafters on [[https://youtube.com/c/SystemCrafters][YouTube]]
+- Visit System Crafters on [[https://youtube.com/c/SystemCrafters][YouTube]] or [[https://lbry.tv/@SystemCrafters:e][lbry.tv]]
 - Follow System Crafters on [[https://twitter.com/SystemCrafters][Twitter]]
 - Join the System Crafters Community on [[https://discord.gg/yVD8Gx6][Discord]]
 - E-mail David - david at systemcrafters.cc
