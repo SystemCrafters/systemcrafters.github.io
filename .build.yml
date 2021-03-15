@@ -9,8 +9,8 @@ environment:
   site: systemcrafters.cc
 tasks:
   - build: |
-      cd systemcrafters/site
-      cp -R ../../daviwil.com/public .
+      cd site
+      cp -R ../daviwil.com/public .
       emacs --batch -l ./publish.el --funcall dw/publish
       cd public
       tar -cvz . > ../../site.tar.gz
