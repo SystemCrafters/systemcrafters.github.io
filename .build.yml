@@ -9,10 +9,10 @@ environment:
   site: systemcrafters.cc
 tasks:
   - build: |
-      cd dotfiles/.site
+      cd systemcrafters/site
       cp -R ../../daviwil.com/public .
       emacs --batch -l ./publish.el --funcall dw/publish
       cd public
-      tar -cvz . > ../../../site.tar.gz
+      tar -cvz . > ../../site.tar.gz
   - upload: |
       acurl -f https://pages.sr.ht/publish/$site -Fcontent=@site.tar.gz
