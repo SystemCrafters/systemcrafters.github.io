@@ -198,7 +198,12 @@
                               (downcase
                                (file-name-sans-extension
                                 (org-element-property :path link)))))
-  (org-export-with-backend 'slimhtml link contents info))
+
+  (if (equal contents nil)
+      (format "<a href=\"%s\">%s</a>"
+              (org-element-property :raw-link link)
+              (org-element-property :raw-link link))
+    (org-export-with-backend 'slimhtml link contents info)))
 
 (defun dw/org-html-headline (headline contents info)
   (let* ((text (org-export-data (org-element-property :title headline) info))
