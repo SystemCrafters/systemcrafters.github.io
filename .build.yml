@@ -1,0 +1,18 @@
+image: archlinux
+packages:
+  - emacs-nox
+oauth: pages.sr.ht/PAGES:RW
+sources:
+  - https://git.sr.ht/~systemcrafters/site
+  - https://git.sr.ht/~daviwil/daviwil.com
+environment:
+  site: systemcrafters.cc
+tasks:
+  - build: |
+      cd dotfiles/.site
+      cp -R ../../daviwil.com/public .
+      emacs --batch -l ./publish.el --funcall dw/publish
+      cd public
+      tar -cvz . > ../../../site.tar.gz
+  - upload: |
+      acurl -f https://pages.sr.ht/publish/$site -Fcontent=@site.tar.gz
