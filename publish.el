@@ -233,6 +233,7 @@
   :translate-alist
   '((template . dw/org-html-template)
     (link . dw/org-html-link)
+    (code . ox-slimhtml-verbatim)
     (headline . dw/org-html-headline))
   :options-alist
   '((:page-type "PAGE-TYPE" nil nil t)
