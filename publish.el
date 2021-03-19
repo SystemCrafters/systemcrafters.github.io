@@ -205,10 +205,20 @@
               (org-element-property :raw-link link))
     (org-export-with-backend 'slimhtml link contents info)))
 
+;; Make sure we have thread-last
+(require 'subr-x)
+
+(defun dw/make-heading-anchor-name (headline-text)
+  (thread-last headline-text
+    (downcase)
+    (replace-regexp-in-string " " "-")
+    (replace-regexp-in-string "[^[:alnum:]_-]" "")))
+
 (defun dw/org-html-headline (headline contents info)
   (let* ((text (org-export-data (org-element-property :title headline) info))
          (level (org-export-get-relative-level headline info))
          (level (min 7 (when level (1+ level))))
+         (anchor-name (dw/make-heading-anchor-name text))
          (attributes (org-element-property :ATTR_HTML headline))
          (container (org-element-property :HTML_CONTAINER headline))
          (container-class (and container (org-element-property :HTML_CONTAINER_CLASS headline))))
@@ -221,7 +231,7 @@
      (when (and container (not (string= "" container)))
        (format "<%s%s>" container (if container-class (format " class=\"%s\"" container-class) "")))
      (if (not (org-export-low-level-p headline info))
-         (format "<h%d%s>%s</h%d>%s" level (or attributes "") text level (or contents ""))
+         (format "<h%d%s><a id=\"%s\" href=\"#\"></a>%s</h%d>%s" level (or attributes "") anchor-name text level (or contents ""))
        (concat
         (when (org-export-first-sibling-p headline info) "<ul>")
         (format "<li>%s%s</li>" text (or contents ""))
