@@ -231,7 +231,14 @@
      (when (and container (not (string= "" container)))
        (format "<%s%s>" container (if container-class (format " class=\"%s\"" container-class) "")))
      (if (not (org-export-low-level-p headline info))
-         (format "<h%d%s><a id=\"%s\" href=\"#\"></a>%s</h%d>%s" level (or attributes "") anchor-name text level (or contents ""))
+         (format "<h%d%s><a id=\"%s\" class=\"anchor\" href=\"#%s\">¶</a>%s</h%d>%s"
+                 level
+                 (or attributes "")
+                 anchor-name
+                 anchor-name
+                 text
+                 level
+                 (or contents ""))
        (concat
         (when (org-export-first-sibling-p headline info) "<ul>")
         (format "<li>%s%s</li>" text (or contents ""))
