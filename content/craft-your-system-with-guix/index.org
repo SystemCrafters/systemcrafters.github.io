@@ -2,4 +2,4 @@
 
 * Episodes
 
-1. [[an-introduction-to-guix/][An Introduction to GNU Guix]]
+1. [[introduction/][An Introduction to GNU Guix]]
