@@ -1,0 +1,7 @@
+#+title: Emacs Essentials
+
+You can find the complete YouTube playlist here: [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPZvSdewHG8uApD7THlLLCV][Emacs Essentials]]
+
+* Episodes
+
+1. [[https://youtu.be/48JlgiBpw_I][The Absolute Beginner's Guide to Emacs]]
