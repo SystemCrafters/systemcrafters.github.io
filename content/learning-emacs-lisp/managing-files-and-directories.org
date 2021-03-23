@@ -4,6 +4,8 @@ This is Part 6 of the [[/learning-emacs-lisp][Learning Emacs Lisp]] series!
 
 Watch the video on YouTube: https://youtu.be/nq-gqNGmayI
 
+The final code from this episode can be found [[https://github.com/daviwil/dotcrafter.el/blob/8589c71e64b60f9395b418c09b60815a86c7da8f/dotcrafter.el][on GitHub]].
+
 * What will we cover?
 
 Today we're going to talk about the many ways you can interact with files and directories using Emacs Lisp!
