@@ -34,7 +34,7 @@ Episode 2 of the [[../][Emacs From Scratch]] series
 
 ** which-key
 
-https://github.com/justbur/emacs-which-key
+[[https://github.com/justbur/emacs-which-key][which-key package]] on GitHub
 
 #+begin_src emacs-lisp
 
@@ -48,7 +48,7 @@ https://github.com/justbur/emacs-which-key
 
 ** ivy-rich
 
-https://github.com/Yevgnen/ivy-rich
+[[https://github.com/Yevgnen/ivy-rich][ivy-rich package]] on GitHub
 
 #+begin_src emacs-lisp
 
@@ -77,10 +77,11 @@ https://github.com/Yevgnen/ivy-rich
 
 ** helpful
 
-https://github.com/Wilfred/helpful
+[[https://github.com/Wilfred/helpful][helpful package]] on GitHub
 
 ** doom-themes
-https://github.com/hlissner/emacs-doom-themes
+
+[[https://github.com/hlissner/emacs-doom-themes][doom-themes package]] on GitHub
 
 - doom theme
 - which-key
