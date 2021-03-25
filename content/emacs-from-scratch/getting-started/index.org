@@ -1,7 +1,9 @@
 #+title: Emacs from Scratch #1
 
 [[https://youtu.be/74zOY-vgkyw][Watch the video]] on YouTube!
+
 Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/c0266ff684f670ecc5e41615c0282912e6615214][final code]] on GitHub
+
 Episode 1 of the [[../][Emacs From Scratch]] series
 
 * The plan
