@@ -6,9 +6,9 @@ If you enjoy the content on the System Crafters channel, please consider support
 
 If you'd like to provide monthly financial support to help me keep making this content, you can use one of the providers below.  Currently GitHub Sponsors is my preferred platform because they don't take a percentage of your contribution!
 
-- GitHub Sponsors: https://github.com/sponsors/daviwil
-- Patreon: https://patreon.com/SystemCrafters
+- [[https://github.com/sponsors/daviwil][GitHub Sponsors]]
+- [[https://patreon.com/SystemCrafters][Patreon]]
 
 * One-Time Tips
 
-You can also send a tip via PayPal: https://paypal.me/daviwil
+You can also send a tip via [[https://paypal.me/daviwil][PayPal]]

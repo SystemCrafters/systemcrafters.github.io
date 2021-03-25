@@ -1,4 +1,4 @@
-#+title:Videos
+#+title: Videos
 
 * Video Schedule
 

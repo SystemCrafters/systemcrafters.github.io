@@ -62,6 +62,9 @@
 (use-package ox-slimhtml
   :ensure t)
 
+(use-package ox-gemini
+  :ensure t)
+
 (use-package htmlize
   :ensure t)
 
@@ -306,7 +309,13 @@
              :publishing-directory "./public"
              :with-timestamps t
              :with-title nil)
-       (list "site" :components '("systemcrafters:main"))))
+       (list "systemcrafters:gemini"
+             :recursive t
+             :base-extension "org"
+             :base-directory "./content"
+             :publishing-function '(org-gemini-publish-to-gemini)
+             :publishing-directory "./gemini"
+             :with-timestamps t)))
 
 (defun dw/publish ()
   (interactive)

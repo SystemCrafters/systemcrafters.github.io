@@ -6,3 +6,6 @@
 
 ; Ignore shared content with daviwil.com
 public/
+
+; Ignore Gemini output
+gemini/
