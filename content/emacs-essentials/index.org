@@ -4,4 +4,4 @@ You can find the complete YouTube playlist here: [[https://www.youtube.com/playl
 
 * Episodes
 
-1. [[https://youtu.be/48JlgiBpw_I][The Absolute Beginner's Guide to Emacs]]
+1. [[absolute-beginners-guide-to-emacs/][The Absolute Beginner's Guide to Emacs]]

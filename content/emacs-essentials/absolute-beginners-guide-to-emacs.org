@@ -1,5 +1,7 @@
 #+title: The Absolute Beginner's Guide to Emacs
 
+[[https://youtu.be/48JlgiBpw_I][Watch the video]] on YouTube!
+
 * Welcome!
 
 If this is your first time here, this channel is about crafting your own system configuration using free and open source tools like GNU Emacs, GNU Guix, and more!
