@@ -16,23 +16,23 @@ We have a number of video tutorial series to help you get started with system cr
 
 ** GNU Emacs
 
-*** [[emacs-essentials/][Emacs Essentials]]
+*** [[../emacs-essentials/][Emacs Essentials]]
 
 This series intends to teach you everything you need to know about the built-in functionality of GNU Emacs. Emacs beginners should start here, but seasoned Emacs users might learn a few hidden gems too!
 
-*** [[emacs-from-scratch/][Emacs From Scratch]]
+*** [[../emacs-from-scratch/][Emacs From Scratch]]
 
 This series is for users who know the basics and now want to create their own modern Emacs configuration.  I take you step by step through the process of building up a fully custom configuration using many packages that are either built-in or authored by the Emacs community.
 
-*** [[emacs-desktop-environment/][Emacs Desktop Environment]]
+*** [[../emacs-desktop-environment/][Emacs Desktop Environment]]
 
 This is a more advanced series where I show you how to build an entire desktop environment with Emacs and EXWM on Linux.  If you want to truly "live" in Emacs, this is for you!
 
-*** [[learning-emacs-lisp/][Learning Emacs Lisp]]
+*** [[../learning-emacs-lisp/][Learning Emacs Lisp]]
 
 In this series, I will teach you the core customization language of Emacs called Emacs Lisp.  We start with the basics of the language and then embark on a project to build an Emacs package from scratch!
 
-*** [[emacs-ide/][Emacs IDE]]
+*** [[../emacs-ide/][Emacs IDE]]
 
 Emacs can also be used as an IDE (integrated development environment) like you might be used to from other editors.  This series will show you how to set up Emacs as an IDE to get rich development functionality for many languages!
 
@@ -40,12 +40,12 @@ Emacs can also be used as an IDE (integrated development environment) like you m
 
 Emacs can do many things, and this series will show you how you can use it to manage your e-mail!
 
-*** [[emacs-tips/][Emacs Tips]]
+*** [[../emacs-tips/][Emacs Tips]]
 
 There are many interesting topics we can cover about Emacs that don't require their own dedicated series.  This series is a collection of videos that will cover many other packages and configuration tricks we didn't get to in the other series!
 
 ** GNU Guix
 
-*** [[craft-your-system-with-guix/][Craft Your System with GNU Guix]]
+*** [[../craft-your-system-with-guix/][Craft Your System with GNU Guix]]
 
 GNU Guix is an amazing tool for managing not only the programs you use, but also your entire system configuration.  In this series I will walk you through the process of learning and using Guix step by step so that you can craft your own repeatable system configuration!
