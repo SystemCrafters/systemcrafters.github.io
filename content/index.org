@@ -4,7 +4,7 @@ System Crafters is a community for computer enthusiasts who love to craft their 
 
 * Video Series
 
-We've got a [[videos/][ton of videos]] to help you get started!
+Check out the many [[videos/][video series]] we have to help you learn Emacs and Guix in depth!
 
 * Live Streams
 
