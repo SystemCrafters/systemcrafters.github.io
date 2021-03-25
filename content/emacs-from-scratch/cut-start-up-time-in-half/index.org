@@ -1,8 +1,8 @@
 #+title: How to Cut Emacs Startup Time in Half
 
-[[https://youtu.be/9i_9hse_Y08][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/blob/d23348b4a52dde97f4f7cbcd66a519b5fd0a143c/Emacs.org][final code]] on GitHub
-Episode 12 of the [[../][Emacs From Scratch]] series
+- [[https://youtu.be/9i_9hse_Y08][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/blob/d23348b4a52dde97f4f7cbcd66a519b5fd0a143c/Emacs.org][final code]] on GitHub
+- Episode 12 of the [[../][Emacs From Scratch]] series
 
 * Why is Emacs so slow to start up?
 

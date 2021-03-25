@@ -1,9 +1,9 @@
 #+title: Build Your Own IDE with lsp-mode
 
-[[https://youtu.be/E-NAM9U5JYE][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/6d078217a41134cc667f969430d150c50d03f448][final code]] on GitHub
-Episode 8 of the [[../][Emacs From Scratch]] series
-Episode 1 of the [[../../emacs-ide/][Emacs IDE]] series
+- [[https://youtu.be/E-NAM9U5JYE][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/6d078217a41134cc667f969430d150c50d03f448][final code]] on GitHub
+- Episode 8 of the [[../][Emacs From Scratch]] series
+- Episode 1 of the [[../../emacs-ide/][Emacs IDE]] series
 
 * What is lsp-mode?
 

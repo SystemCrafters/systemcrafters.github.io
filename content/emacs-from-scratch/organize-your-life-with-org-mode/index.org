@@ -1,8 +1,8 @@
 #+title: Organize Your Life with Org Mode
 
-[[https://youtu.be/PNE-mgkZ6HM][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/c55d0f5e309f7ed8ffa3c00bc35c75937a5184e4][final code]] on GitHub
-Episode 6 of the [[../][Emacs From Scratch]] series
+- [[https://youtu.be/PNE-mgkZ6HM][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/c55d0f5e309f7ed8ffa3c00bc35c75937a5184e4][final code]] on GitHub
+- Episode 6 of the [[../][Emacs From Scratch]] series
 
 * Viewer Questions
 

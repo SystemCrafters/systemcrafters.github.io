@@ -1,8 +1,8 @@
 #+title: Effortless File Management with Dired
 
-[[https://youtu.be/PMWwM8QJAtU][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/blob/8c302a79bf5700f6ef0279a3daeeb4123ae8bd59/Emacs.org#dired][final code]] on GitHub
-Episode 10 of the [[../][Emacs From Scratch]] series
+- [[https://youtu.be/PMWwM8QJAtU][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/blob/8c302a79bf5700f6ef0279a3daeeb4123ae8bd59/Emacs.org#dired][final code]] on GitHub
+- Episode 10 of the [[../][Emacs From Scratch]] series
 
 * Dired Basics
 

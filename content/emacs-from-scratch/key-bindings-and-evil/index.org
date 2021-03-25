@@ -1,8 +1,8 @@
 #+title: Key Bindings and Evil
 
-[[https://youtu.be/xaZMwNELaJY][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/29e542c79632853d85124019e47506cc0571cd05][final code]] on GitHub
-Episode 3 of the [[../][Emacs From Scratch]] series
+- [[https://youtu.be/xaZMwNELaJY][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/29e542c79632853d85124019e47506cc0571cd05][final code]] on GitHub
+- Episode 3 of the [[../][Emacs From Scratch]] series
 
 * Notes from previous streams
 

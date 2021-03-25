@@ -1,8 +1,8 @@
 #+title: Keeping Your Emacs Packages Up to Date
 
-[[https://youtu.be/dtjq68F2dXw][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/blob/4e921ccbe603d5fdd9c7f16c2418ac7322c8ab71/Emacs.org#automatic-package-updates][final code]] on GitHub
-Episode 11 of the [[../][Emacs From Scratch]] series
+- [[https://youtu.be/dtjq68F2dXw][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/blob/4e921ccbe603d5fdd9c7f16c2418ac7322c8ab71/Emacs.org#automatic-package-updates][final code]] on GitHub
+- Episode 11 of the [[../][Emacs From Scratch]] series
 
 * A question you'll eventually ask yourself...
 

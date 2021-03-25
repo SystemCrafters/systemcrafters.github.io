@@ -1,8 +1,8 @@
 #+title: Learn to Love the Terminal Modes
 
-[[https://youtu.be/wa_wZIuT9Vw][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/bbfbc77b3afab0c14149e07d0ab08d275d4ba575][final code]] on GitHub
-Episode 9 of the [[../][Emacs From Scratch]] series
+- [[https://youtu.be/wa_wZIuT9Vw][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/bbfbc77b3afab0c14149e07d0ab08d275d4ba575][final code]] on GitHub
+- Episode 9 of the [[../][Emacs From Scratch]] series
 
 * term-mode
 

@@ -1,8 +1,8 @@
 #+title: Projectile and Magit
 
-[[https://youtu.be/INTu30BHZGk][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/500370fa06889dad313e60473d73090fcfbe106d][final code]] on GitHub
-Episode 4 of the [[../][Emacs From Scratch]] series
+- [[https://youtu.be/INTu30BHZGk][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/500370fa06889dad313e60473d73090fcfbe106d][final code]] on GitHub
+- Episode 4 of the [[../][Emacs From Scratch]] series
 
 * Projectile
 

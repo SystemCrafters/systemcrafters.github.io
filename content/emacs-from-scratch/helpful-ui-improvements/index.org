@@ -1,8 +1,8 @@
 #+title: Adding Helpful UI Improvements
 
-[[https://youtu.be/IspAZtNTslY][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/43c0401355c7971cb4491690ee4b8449505a5d58][final code]] on GitHub
-Episode 2 of the [[../][Emacs From Scratch]] series
+- [[https://youtu.be/IspAZtNTslY][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/43c0401355c7971cb4491690ee4b8449505a5d58][final code]] on GitHub
+- Episode 2 of the [[../][Emacs From Scratch]] series
 
 * General Improvements
 

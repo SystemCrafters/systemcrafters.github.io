@@ -1,8 +1,8 @@
 #+title: Org Mode Basics
 
-[[https://youtu.be/VcgjTEa0kU4][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/1a13fcf0dd6afb41fce71bf93c5571931999fed8][final code]] on GitHub
-Episode 5 of the [[../][Emacs From Scratch]] series
+- [[https://youtu.be/VcgjTEa0kU4][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/1a13fcf0dd6afb41fce71bf93c5571931999fed8][final code]] on GitHub
+- Episode 5 of the [[../][Emacs From Scratch]] series
 
 * Org Mode!
 

@@ -1,8 +1,8 @@
 #+title: Configure Everything with Org Babel
 
-[[https://youtu.be/kkqVTDbfYp4][Watch the video]] on YouTube!
-Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/9388cf6ecd9b44c430867a5c3dad5f050fdc0ee1][final code]] on GitHub
-Episode 7 of the [[../][Emacs From Scratch]] series
+- [[https://youtu.be/kkqVTDbfYp4][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/9388cf6ecd9b44c430867a5c3dad5f050fdc0ee1][final code]] on GitHub
+- Episode 7 of the [[../][Emacs From Scratch]] series
 
 * Org Babel
 
