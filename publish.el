@@ -273,6 +273,15 @@
                           plist
                           article-path))))
 
+(defun dw/org-gemini-publish-to-gemini (plist filename pub-dir)
+  (let ((article-path (get-article-output-path filename pub-dir)))
+    (cl-letf (((symbol-function 'org-export-output-file-name)
+               (lambda (extension &optional subtreep pub-dir)
+                 (message "ARTICLE PATH: %s" article-path)
+                 (concat article-path "index" extension))))
+      (org-publish-org-to
+       'gemini filename ".gmi" plist pub-dir))))
+
 (defun dw/sitemap-entry (entry style project)
   (format "<h4><em>%s</em> - <a href=\"%s\">%s</a></h4>"
           (format-time-string "%Y-%m-%d" (org-publish-find-date entry project))
@@ -313,7 +322,7 @@
              :recursive t
              :base-extension "org"
              :base-directory "./content"
-             :publishing-function '(org-gemini-publish-to-gemini)
+             :publishing-function '(dw/org-gemini-publish-to-gemini)
              :publishing-directory "./gemini"
              :with-timestamps t)))
 
