@@ -5,3 +5,4 @@ You can find the complete YouTube playlist here: [[https://www.youtube.com/playl
 * Episodes
 
 1. [[absolute-beginners-guide-to-emacs/][The Absolute Beginner's Guide to Emacs]]
+2. [[efficient-movement-key-bindings/][Efficient Movement with Emacs Key Bindings]]
