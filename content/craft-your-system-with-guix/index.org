@@ -3,3 +3,4 @@
 * Episodes
 
 1. [[introduction/][An Introduction to GNU Guix]]
+2. [[installing-the-package-manager/][Installing the GNU Guix Package Manager]]
