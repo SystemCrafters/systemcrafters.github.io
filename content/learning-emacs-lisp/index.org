@@ -10,3 +10,4 @@ You can find the complete YouTube playlist here: [[https://www.youtube.com/watch
 4. [[https://youtu.be/tq4kTNL1VD8][Defining Variables and Scopes]] ([[file:show-notes/Emacs-Lisp-04.org][Notes]])
 5. [[https://youtu.be/J7d2LmivyyM][Reading and Writing Buffers in Practice]] ([[file:show-notes/Emacs-Lisp-05.org][Notes]], [[https://github.com/daviwil/dotcrafter.el/blob/8d507eda31e08a789c38a5d729866eb4cda6abaf/dotcrafter.el][Code]])
 6. [[managing-files-and-directories/][Managing Files and Directories in Practice]]
+7. [[creating-minor-modes/][Creating a Custom Minor Mode]]
