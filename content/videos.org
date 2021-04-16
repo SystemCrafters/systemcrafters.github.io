@@ -50,6 +50,6 @@ There are many interesting topics we can cover about Emacs that don't require th
 
 GNU Guix is an amazing tool for managing not only the programs you use, but also your entire system configuration.  In this series I will walk you through the process of learning and using Guix step by step so that you can craft your own repeatable system configuration!
 
-** [[live-streams/][System Crafters Live!]]
+** [[../live-streams/][System Crafters Live!]]
 
 This is the Friday live stream series where the System Crafters community gets together discuss news and interesting topics!
