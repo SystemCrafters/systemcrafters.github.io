@@ -1,0 +1,9 @@
+#+title: Systems Crafters Live!
+
+We stream every Friday at 9:15 am Pacific time!
+
+You can find the complete YouTube playlist here: [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPZvSdewHG8uApD7THlLLCV][Emacs Essentials]]
+
+* Episodes
+
+- [[april-16-2021/][April 16, 2021]]: I'm creating a new Lisp • Emacs News

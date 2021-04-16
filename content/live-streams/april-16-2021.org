@@ -1,0 +1,170 @@
+#+title: System Crafters Live! - April 16, 2021
+
+[[https://youtu.be/fo-Px21AyTE][Watch the recording]] on YouTube!
+
+* Emacs News
+
+- [[https://lists.gnu.org/archive/html/emacs-devel/2021-04/msg00484.html][Emacs native-comp branch is being merged into Emacs 28 this weekend!]]
+- [[https://git.savannah.gnu.org/cgit/emacs.git/commit/etc/NEWS?id=5761e9004aa73d3aa7c34be9a064a1e768c3129c][icomplete-vertical-mode merged into Emacs 28]]
+- [[https://github.com/rksm/clj-org-analyzer][Org Analyzer - visualize your Org Mode clock data]]
+
+* Creating a New Lisp
+
+Over the last year, I've been hacking occasionally on a few different projects in my free time:
+
+- A game engine and game written in Scheme
+- An alternative game engine in C that attempted to use data-oriented programming
+- Early hacking on an audio synthesizer in C
+
+The one thing that left me unsatisfied in these projects is that I couldn't easily have the power of Scheme with the low-level memory management and system access of C.
+
+Scheme is designed to be garbage collected!  You can access C APIs and structures but ultimately you're still dealing with a garbage collected language.
+
+What if I could write my own Scheme-inspired language for systems programming?
+
+** Goals
+
+- Create my own Lisp dialect for writing extensible, high performance applications like video games, multimedia editing tools, text editors, etc.
+
+- Scheme-inspired focus on tail-call optimization and continuations as control constructs
+
+- While Scheme-inspired, this language won't follow the R*RS specifications.  A more opinionated design will be needed to accomplish the goals
+
+- A mixture of dynamic and manual memory management.  Create specifically-sized structs that may or may not be garbage collected, use a "memory arena" for a particular subsystem, defer GC in a code section until later, etc.
+
+- Fully custom compiler toolchain that is tailored to compiling Lisp applications: compiler, assembler, linker.  No GCC or LLVM!
+
+- JIT compilation of code instead of writing an interpreter (if possible)
+
+- Produce small, standalone binaries by tree-shaking dependencies.  For a simple application, it'd be *excellent* if the binary was 5MB or less.  If the code is only a "Hello world", it should be less than 100kb!
+
+- Standalone binary can contain the compiler for live code patching, but it must be minimal enough to not bloat the output
+
+- Must interoperate well with C libraries
+
+- Rich macro facilities (later), possibly inspired by Scheme =define-syntax=
+
+- Go-style dependencies, pulling from Git repositories, locking to specific commits or tags
+
+- Compilation backends for Intel, ARM, and WebAssembly
+
+- Allow user to write assembly for some performance sensitive functions like in C
+
+** Components
+
+To accomplish these goals, here are the parts that are needed:
+
+*** Compiler
+
+This is the obvious part.  To produce standalone binaries, I'm going to need a compiler that can take the code of the language and produce an intermediate representation which can be optimized and ultimately turned into a form of assembly.
+
+- Parsing and macro application
+- Conversion of code into continuations (what's that?)
+- Module system
+- Tree-shaking
+- Optimization
+
+The intermediate representation will have only the necessary code prepared in a format that is ready to be converted to machine language.
+
+One other job of the compiler would be to manage just-in-time (JIT) compilation at runtime.  Since this is a Lisp, we definitely need the ability to dynamically evaluate code!
+
+*** Assembler
+
+The assembler takes a low-level representation of your code and turns it into machine instructions.  You've probably seen code that looks like this:
+
+#+begin_src asm
+
+  .text
+
+  .global _start
+
+  _start:
+      mov $1, %eax   # System call number 1: exit()
+      mov $42, %ebx  # Exits with exit status 42
+      int $0x80      # Invoke system call
+
+#+end_src
+
+This is a simple program that just sets the program exit code to 42 and then exits.
+
+It is written in a way that is closer to what actually happens in machine instructions, but in reality an instruction like =mov= can turn into a variety of different operation codes based on the parameters that are given!
+
+The assembler needs to know the appropriate instruction encoding for the target architecture (64-bit Intel in my case) so that it can produce the proper opcodes and use the processor effectively.
+
+One other interesting aspect here: the assembly representation will be written in the language itself, meaning that the full power of macros can be used for low-level code generation!
+
+The output of the assembler will be object files, typically in the system's object file format.  These object files will be used by the next component in the toolchain: the linker.
+
+*** Linker
+
+The linker's job is to take the object files produced by the assembler and produce a working executable.  For now I'm only focused on 64-bit Linux so I have a clear path to follow to produce ELF (Executable and Linkable Format) binaries.
+
+- Combining code from modules together into program code segments
+- Integrating static libraries
+- Finding references to symbols in dynamic libraries
+- Building the memory layout of the initial process
+- Managing memory addresses for everything
+
+This is the part of the code that is very OS-dependent so I probably won't get to Windows support for a while and macOS support for even longer.
+
+*** Runtime
+
+Once I have a toolchain that is capable of compiling basic code, I'll also need some kind of lightweight runtime or standard library that can implement memory management and other low-level tasks like module loading.  My goal is to make this part as small as possible so that the output program isn't weighed down with unneeded code.
+
+Any extra behavior needed by the programmer should be pulled in using modules which aren't built into the program by default.
+
+*** Modules
+
+I'll try to produce a set of modules that feel like a coherent standard library for the language, providing all the functionality and data structures you would need for day to day coding.  The compiler itself may not come with these parts bundled: it could be better if they were installed as dependencies for your project where only the parts you use actually get compiled into the program.
+
+This does mean that compiled programs wouldn't be able to arbitrarily load modules that weren't compiled, but I might be able to find a way to make that possible, perhaps with a secondary tool.
+
+** The Plan
+
+I'm actually starting from the bottom with this project!  I want to write my own standalone toolchain which doesn't depend on anything else aside from the language/compiler needed to bootstrap the project.
+
+I've started working on the assembler and linker first which may sound strange but it has a few benefits:
+
+- It enables me to reach my goal of producing my own binaries faster without relying on GNU Assembler, ld, etc
+- It allows me to learn how these components work so that I can think holistically about the entire toolchain when I start writing the compiler
+- I can build everything up incrementally and redesign as needed!  My choices aren't limited by someone else's tools
+
+I'm using Chibi Scheme as the bootstrapping language because it's easy to embed in a simple C application.  This gives me the ability to produce a compiler executable which can produce binaries for my language before I can rewrite the compiler in the language itself.
+
+Bootstrapping your Lisp with another Lisp is a longstanding tradition!
+
+** But why?
+
+Primarily to learn!  But also because it's an opportunity to write a fully Lisp-oriented toolchain from the ground up and optimize everything for my goals.  For some reason the idea is irresistable to me: I started thinking about it a year ago and it keeps popping up so now I've decided to go for it!
+
+Another option is using something like LLVM, but LLVM is huge and is a whole system I'd have to learn anyway!
+
+By writing the toolchain from the ground up, every aspect of it can be optimized for the control flow and memory management schemes of the language: continuations and hybrid GC/manual memory.  It'd be similarly hard work to do this with existing toolchains, so it's better to do it myself and learn a lot in the process!
+
+What I want in the end is a tool that is tailored to the kinds of projects I want to work on and produces the kind of programs that feel right to me.  Once it's working I'm going to write a lot of the programs I've been dreaming about for years!
+
+** Are you interested in learning more?
+
+Part of the reason I'm telling you about this today is to see if you would be interested in hearing more about building a compiler toolchain from scratch.  I'm no expert, but I can share what I'm learning over time!
+
+The project itself won't be meant for other people to use for a long time, I'm really just building it for myself for now.  However, if you want to follow along you can sign up for the mailing list on Sourcehut here:
+
+https://lists.sr.ht/~mesche/dev
+
+The (empty) repository for the compiler project is here:
+
+https://git.sr.ht/~mesche/compiler
+
+Why the name "Mesche":
+
+Mesche
+   scheme
+
+* Q&A and Chat
+
+** What books or resources am I reading for this project so far?
+
+- [[https://www.amazon.com/gp/product/1558604960/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=theinvincibleele&creative=9325&linkCode=as2&creativeASIN=1558604960&linkId=60ef3399471f4ff99ba8904e10668f21][Linkers and Loaders]] by John R. Levine
+- [[https://uclibc.org/docs/elf-64-gen.pdf][ELF 64-bit specification]]
+- Looking at various programs using =hexl-find-file=, =readelf= and other tools
+- Ashraz suggests [[https://fasterthanli.me/series/making-our-own-executable-packer][Making our own executable packer]] by fasterthanlime (Amos)
