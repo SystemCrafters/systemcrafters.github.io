@@ -1,0 +1,54 @@
+#+title: System Crafters Live! - April 23, 2021
+
+* Mesche Progress Update
+
+Last week I detailed my plans for creating a compiler toolchain for a new Lisp called Mesche.  Today I'll show some early progress on it and explain a bit of what I had to do to get this far!
+
+You can check out the code on Sourcehut: https://git.sr.ht/~mesche/compiler
+
+** Areas
+
+- Linker
+- Assembler
+- Basic program execution
+
+** Challenges
+
+- Understanding the ELF format and generating it correctly
+- x86 instruction encoding
+
+#+begin_src
+
+  401000:	b8 01 00 00 00       	mov    $0x1,%eax
+  401005:	48 8b 1c 25 00 20 40 	mov    0x402000,%rbx
+
+#+end_src
+
+
+** Next steps
+
+- Encoding (and decoding) more instructions
+- Detecting instructions that use memory addresses, updating them
+- Writing functions in assembly and calling them
+
+** Resources
+
+- [[http://ref.x86asm.net/][x86 Opcode Reference]] ([[http://ref.x86asm.net/coder64-abc.html][coder64-abc]], [[http://ref.x86asm.net/geek64-abc.html][geek64-abc]])
+- [[https://wiki.osdev.org/X86-64_Instruction_Encoding#Usage][x86-64 Instruction Encoding]] on osdev.org Wiki
+- [[https://refspecs.linuxfoundation.org/elf/x86_64-SysV-psABI.pdf][x86-64 SysV ABI Reference]]
+- [[https://uclibc.org/docs/elf-64-gen.pdf][ELF-64 Object File Format Reference]]
+- [[https://www.swansontec.com/sintel.html][Understanding Intel Instruction Sizes]] (doesn't mention 64-bit though)
+
+* Lisp Live Hacking
+
+Let's hack on a Lisp project!  To make things interesting, I'll let you choose:
+
+- Gemini Exporter for Org Mode
+- Mesche Compiler
+- Music Player in Guile Scheme
+
+Cast your vote here: https://fast-poll.com/poll/1387af43
+
+We ended up working on the Gemini exporter, you can find the code here:
+
+https://git.sr.ht/~daviwil/ox-gemini-clean
