@@ -1,5 +1,7 @@
 #+title: Efficient Movement with Emacs
 
+[[https://www.youtube.com/watch?v=wT_jUtEGfeg][Watch the video]] on YouTube!
+
 * What will we learn?
 
 We covered the basics of using Emacs in The Absolute Beginners' Guide to Emacs but we didn't really get a chance to talk about the key bindings you might want to use to navigate around file buffers.
