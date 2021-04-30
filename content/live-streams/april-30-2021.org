@@ -1,0 +1,17 @@
+#+title: System Crafters Live! - April 30, 2021
+
+* Trying Emacs Packages
+
+- eshell-info-banner.el: https://github.com/Phundrak/eshell-info-banner.el
+- Vertico: https://github.com/minad/vertico
+- Corfu: https://github.com/minad/corfu
+
+* Finishing the Gemini Exporter
+
+The source can be found here: https://git.sr.ht/~daviwil/ox-gemini-clean
+
+Things to implement:
+
+- Finish link sections and numbered references
+- Code blocks
+- Find any other gaps!

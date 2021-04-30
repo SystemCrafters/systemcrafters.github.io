@@ -6,5 +6,6 @@ You can find the complete YouTube playlist here: [[https://www.youtube.com/playl
 
 * Episodes
 
+- [[april-30-2021/][April 30, 2021]]: Trying out Emacs Packages: Vertico and Corfu • Emacs Lisp Hacking
 - [[april-23-2021/][April 23, 2021]]: Lisp Compiler Progress • Live Lisp Hacking
 - [[april-16-2021/][April 16, 2021]]: I'm creating a new Lisp • Emacs News
