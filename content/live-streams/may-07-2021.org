@@ -1,0 +1,66 @@
+#+title: System Crafters Live! - May 7, 2021
+
+* Should you use pre-made Emacs configurations?
+
+Pre-made Emacs configurations like Doom Emacs and Spacemacs are really popular and a common entry point into the world of Emacs.
+
+** Benefits of pre-made configurations
+
+- Makes getting started with Emacs much easier!  Skip the early learning curve
+- Gives a better representation of what Emacs can really do
+- Many things you might want to use are already configured and polished
+- Better integration between various packages
+- Better configuration of Vim-style keybindings if you need them
+- Large communities where you can get help easily
+- Often there's more learning resources about them
+
+** Downsides of pre-made configurations
+
+- It might convince you that "vanilla" Emacs is too hard or weird to use
+- Specialized configuration logic can make things /more/ confusing in my opinion
+- You're not learning how to customize Emacs yourself because you have to do less work
+- If the authors of the pre-made configuration want to make a fundamental change, it might break your workflow!
+
+That said, I don't think there's any catastrophic risk to using a pre-made configuration.  If you like Emacs enough you'll eventually get curious about learning how to do more of it yourself.
+
+** Is there a middle ground?
+
+An idea that I've been thinking about a lot: providing configuration "packs" for certain configuration areas that can be installed in your own configuration.  The [[https://git.sr.ht/~technomancy/better-defaults][better-defaults]] package is a good example of this.
+
+Enable someone to skip configuring something like development configuration for a particular language by using a configuration package!
+
+It's not very different than just installing Emacs packages, but that's the point.
+
+I just learned of this config project which might implement a similar idea: https://github.com/lambdaisland/corgi
+
+However, Corgi seems to provide its own approach to setting key bindings, so I'm not sure how I feel about it!
+
+** What's my recommendation?
+
+- If you've never used Emacs before, try whatever seems the most interesting to you
+- Use Doom or Spacemacs for a few months to get acquainted with Emacs
+- When you start to become more curious about how to configure Emacs yourself, try experimenting with a from-scratch config on the side
+- Take the parts you liked about the pre-made configuration and implement them in your configuration
+- Use Emacs a lot, improve it whenever you have ideas.  Your config will evolve over time!
+
+However, if you enjoy using Doom or Spacemacs, keep using them if they work well for you!
+
+You can have both!  Just use [[https://github.com/plexus/chemacs2][Chemacs2]] to manage multiple configurations.
+
+* Emacs and Community News
+
+- [[https://www.reddit.com/r/emacs/comments/n13v5l/what_is_the_next_big_feature_after_native_comp/][What's the next big feature in Emacs?]]
+- [[https://www.reddit.com/r/emacs/comments/n3d4vv/emacs_vs_vim_keybindings_for_emacs/][Emacs vs Vim keybindings for Emacs]]
+- [[http://git.savannah.gnu.org/cgit/emacs.git/commit/etc/NEWS?id=6c1c3204e4761fd0d8bdbf22c6519d2328f60450][New command in Emacs 28: describe-command]]
+- https://karthinks.com/software/bridging-islands-in-emacs-1/
+- [[https://zerokspot.com/weblog/2021/04/28/disabling-outline-style-indentation-in-org-mode/][Disabling Outline Indentation in Org-Mode]]
+- [[https://www.mattduck.com/emacs-fuzzy-launcher.html][Emacs as launcher and Alfred replacement]] ([[https://www.mattduck.com/emacs-fuzzy-launcher-part-two.html][Part 2]])
+- [[https://github.com/thblt/sway.el][Integrating Emacs with Sway Window Manager]]
+- [[http://mbork.pl/2021-05-01_Emacs_Lisp_book_revived][A new book in preview about Emacs Lisp]]
+- [[https://www.reddit.com/r/emacs/comments/n1xake/this_month_in_org_april_2021/][This Month in Org - April 2021]]
+
+Huge thanks to [[https://sachachua.com][Sacha Chua]] for putting together the [[https://sachachua.com/blog/2021/05/2021-05-03-emacs-news/][Emacs News post]] that was the source of these links!
+
+* Chat and Q&A
+
+- My new Vertico-based config: https://config.daviwil.com/emacs#completion-system

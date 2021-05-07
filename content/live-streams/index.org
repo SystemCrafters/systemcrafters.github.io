@@ -6,6 +6,7 @@ You can find the complete YouTube playlist here: [[https://www.youtube.com/playl
 
 * Episodes
 
+- [[may-07-2021/][May 7, 2021]]: Should you use pre-made Emacs configurations? • Emacs News
 - [[april-30-2021/][April 30, 2021]]: Trying out Emacs Packages: Vertico and Corfu • Emacs Lisp Hacking
 - [[april-23-2021/][April 23, 2021]]: Lisp Compiler Progress • Live Lisp Hacking
 - [[april-16-2021/][April 16, 2021]]: I'm creating a new Lisp • Emacs News
