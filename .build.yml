@@ -22,6 +22,6 @@ tasks:
       cd ../gemini
       tar -czf /home/build/gemini.tar.gz .
   - upload: |
-      ls -al
+      tar -ztvf html.tar.gz
       acurl --fail-with-body https://pages.sr.ht/publish/$site -Fcontent=@html.tar.gz
       acurl --fail-with-body https://pages.sr.ht/publish/$site -Fcontent=@gemini.tar.gz -Fprotocol=GEMINI
