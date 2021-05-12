@@ -22,5 +22,5 @@ tasks:
       cd ../gemini
       tar -cvz . > ../../gemini.tar.gz
   - upload: |
-      acurl -f https://pages.sr.ht/publish/$site -Fcontent=@html.tar.gz
-      acurl -f https://pages.sr.ht/publish/$site -Fcontent=@gemini.tar.gz -Fprotocol=GEMINI
+      acurl --fail-with-body https://pages.sr.ht/publish/$site -Fcontent=@html.tar.gz
+      acurl --fail-with-body https://pages.sr.ht/publish/$site -Fcontent=@gemini.tar.gz -Fprotocol=GEMINI
