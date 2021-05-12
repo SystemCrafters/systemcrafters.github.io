@@ -5,3 +5,4 @@
 1. [[introduction/][An Introduction to GNU Guix]]
 2. [[installing-the-package-manager/][Installing the GNU Guix Package Manager]]
 3. [[everyday-package-management/][Everyday Package Management with GNU Guix]]
+3. [[using-package-channels/][Using Package Channels in GNU Guix]]
