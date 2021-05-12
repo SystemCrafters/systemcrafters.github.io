@@ -21,6 +21,10 @@ tasks:
       # Bundle the Gemini site
       cd ../gemini
       tar -cvz . > ../../gemini.tar.gz
+
+      cd ../..
+      pwd
+      ls .
   - upload: |
       echo $(pwd)
       acurl --fail-with-body https://pages.sr.ht/publish/$site -Fcontent=@html.tar.gz
