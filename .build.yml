@@ -16,16 +16,11 @@ tasks:
 
       # Bundle the HTML site
       cd public
-      tar -cvz . > ../../html.tar.gz
+      tar -czf /home/build/html.tar.gz .
 
       # Bundle the Gemini site
       cd ../gemini
-      tar -cvz . > ../../gemini.tar.gz
-
-      cd ../..
-      pwd
-      ls .
+      tar -czf /home/build/gemini.tar.gz .
   - upload: |
-      echo $(pwd)
       acurl --fail-with-body https://pages.sr.ht/publish/$site -Fcontent=@html.tar.gz
       acurl --fail-with-body https://pages.sr.ht/publish/$site -Fcontent=@gemini.tar.gz -Fprotocol=GEMINI
