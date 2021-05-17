@@ -1,0 +1,104 @@
+#+title: Streamline Your Emacs Completions with Vertico
+
+[[https://youtu.be/J0OaRy85MOo][Watch the video]] on YouTube!
+
+* Completions in Emacs
+
+In Emacs, one of the most important features of the user interface is the way in which the user makes selections from lists of items.  For example:
+
+- Opening files
+- Switching buffers
+- Using =M-x= to execute commands
+
+There are a few built-in packages (ido, icomplete, etc) which provide different ways of displaying selections, but in my opinion most of them aren't very attractive.
+
+These days, many people use completion "frameworks" like Helm or Ivy which provide enhanced interfaces and special commands that provide a lot of additional behavior.
+
+But what if you don't use or want all of that extra functionality?  This is where a new breed of completion interfaces come in, providing a more minimal and componentized ecosystem of packages that allow you to build your own completion framework with only the parts you care about.
+
+I've been using Vertico for this purpose recently and I really like it!
+
+* What is Vertico?
+
+Vertico is a relatively new Emacs package which provides a streamlined interface for minibuffer completions which doesn't include any of the other cruft that comes along with the more heavy-weight third party options.
+
+One important feature is that it plugs in directly to Emacs' own completion engine unlike Helm and Ivy which have their own layer on top.  This enables all existing completion commands in Emacs to use Vertico's UI with no extra configuration!
+
+Read more at the GitHub repository: https://github.com/minad/vertico
+
+* Setting it up
+
+Getting started with Vertico is very easy!  It's on [[http://elpa.gnu.org/packages/vertico.html][GNU ELPA]] so you can install it easily with =package.el= and =use-package=:
+
+#+begin_src emacs-lisp
+
+  (use-package vertico
+    :ensure t
+    :init
+    (vertico-mode))
+
+#+end_src
+
+Once you run =vertico-mode=, all completions will now use Vertico's completion UI!
+
+Try these out:
+
+- =find-file=
+- =switch-to-buffer=
+- =describe-function=
+- ~M-x~
+
+* Improving the configuration
+
+Now that we've got the basic completion UI set up, let's polish it a bit.  The following configuration will add a few improvements:
+
+- Additional key bindings for users that like Vim-style movement keys
+- Cycling selections when you reach the beginning/end of the list
+- Saving completion history, Vertico will sort items based on history!
+- Adding extra metadata for completions in the margins using [[https://github.com/minad/marginalia][Marginalia]]
+
+#+begin_src emacs-lisp
+
+  (use-package vertico
+    :ensure t
+    :bind (:map vertico-map
+           ("C-j" . vertico-next)
+           ("C-k" . vertico-previous)
+           ("C-f" . vertico-exit)
+           :map minibuffer-local-map
+           ("M-h" . backward-kill-word))
+    :custom
+    (vertico-cycle t)
+    :init
+    (vertico-mode))
+
+  (use-package savehist
+    :init
+    (savehist-mode))
+
+  (use-package marginalia
+    :after vertico
+    :ensure t
+    :custom
+    (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+    :init
+    (marginalia-mode))
+
+#+end_src
+
+* Any downsides?
+
+At the moment there are a small number of downsides to using Vertico:
+
+- You have to do a little more work to configure something that provides similar features to Ivy or Helm (but that's the point!)
+- It's still fairly early in development so there can be bugs, but the author is very responsive!
+- Performance for completions in TRAMP sessions is poor
+
+* Other useful packages
+
+- [[https://github.com/minad/consult][Consult]]: A collection of commands (like Counsel for Ivy) which provide additional completions
+- [[https://github.com/oantolin/embark][Embark]]: Provides actions for the current selection in Vertico completion lists
+- [[https://github.com/oantolin/orderless][Orderless]]: Improves searching across completions
+- [[https://github.com/raxod502/selectrum][Selectrum]]: An alternative to Vertico, less minimal but follows similar principles
+
+We'll cover all of these in future videos!
