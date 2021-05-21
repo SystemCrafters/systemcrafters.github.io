@@ -1,0 +1,79 @@
+#+title: System Crafters Live! - May 21, 2021
+
+[[https://www.youtube.com/watch?v=UtqE-lR2HCA][Watch the recording]] on YouTube!
+
+* Replacing Ivy and Counsel with Vertico and Consult
+
+If you tried out Vertico after the video on Monday, you probably wondered how you can get back to the level of functionality you had with Ivy.
+
+Today we're going to survey the set of commands that come with the Consult package to figure out which will be useful for the transition away from Ivy.
+
+I'll be making a video on this soon, but today we'll be figuring it out together!
+
+** Mapping Ivy/Swiper/Counsel to Consult
+
+- =swiper= -> =consult-line=
+- =counsel-rg= -> =consult-ripgrep=
+- =counsel-switch-buffer= -> =consult-buffer=.  Annotations are better for =switch-to-buffer=?
+- =counsel-org-goto= -> =consult-imenu= or =consult-org-heading=
+
+*TIP:* You should set =consult-project-root-function= to something like this if you use Projectile:
+
+#+begin_src emacs-lisp
+
+  (defun dw/get-project-root ()
+    (when (fboundp 'projectile-project-root)
+      (projectile-project-root)))
+
+#+end_src
+
+** Other useful commands
+
+- =consult-mark=: Show a list of previous mark locations
+- =consult-outline=: Show a list of headings in the current file depending on type
+- =consult-minor-mode-menu=: Show a list of all minor modes, press =i SPC= to narrow to active modes
+- =consult-history=: History for current minibuffer, also works for terminal modes
+- =consult-file-externally=: Open a file in an external program
+- =consult-preview-mode=: Preview selections for various commands
+- =consult-completion-in-region=: Can be used with the =completion-in-region-function= variable to do in-buffer completions using Vertico
+
+** Going up a directory in =find-file=
+
+One bit of functionality I got used to in Ivy was how the =counsel-find-file= command would go up a directory whenever I pressed Backspace.  Here's how to replicate it in Vertico!
+
+#+begin_src emacs-lisp
+
+  (defun dw/minibuffer-backward-kill (arg)
+    "When minibuffer is completing a file name delete up to parent
+  folder, otherwise delete a character backward"
+    (interactive "p")
+    (if minibuffer-completing-file-name
+        ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
+        (if (string-match-p "/." (minibuffer-contents))
+            (zap-up-to-char (- arg) ?/)
+          (delete-minibuffer-contents))
+        (delete-backward-char arg)))
+
+  ;; This is not a full config, just an example of the :bind!
+  (use-package vertico
+    :bind (:map minibuffer-local-map
+           ("<Backspace>" . dw/minibuffer-backward-kill)))
+
+#+end_src
+
+** Other Consult packages
+
+- [[https://github.com/gagbo/consult-lsp][lsp-mode interface for Consult]]
+- [[https://github.com/SebastienWae/app-launcher][App launching like counsel-linux-app with app-launcher]]
+
+** Other resources
+
+- [[https://github.com/minad/consult/wiki][The Consult wiki]]
+- [[https://github.com/minad/consult/issues/6][Consult command wishlist]] - has some good pointers on where to find replacement functionality
+
+* Emacs News
+
+- [[https://github.com/minad/affe][New package: minad/affe]]
+- [[https://www.reddit.com/r/emacs/comments/n9ts4j/gccemacs_prebuilt_package_on_windows_10/][Prebuilt Emacs 28 package for Windows with native compilation]]
+- [[https://www.philnewton.net/blog/bug-reference-config-org-mode/][Configuring bug-reference-mode from within org-mode]]
+- [[https://nyxt.atlas.engineer/article/release-2.0.0.org][Nyxt 2.0 released]]
