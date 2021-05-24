@@ -57,7 +57,7 @@ One bit of functionality I got used to in Ivy was how the =counsel-find-file= co
   ;; This is not a full config, just an example of the :bind!
   (use-package vertico
     :bind (:map minibuffer-local-map
-           ("<Backspace>" . dw/minibuffer-backward-kill)))
+           ("<backspace>" . dw/minibuffer-backward-kill)))
 
 #+end_src
 
