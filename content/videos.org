@@ -44,6 +44,10 @@ Emacs can do many things, and this series will show you how you can use it to ma
 
 There are many interesting topics we can cover about Emacs that don't require their own dedicated series.  This series is a collection of videos that will cover many other packages and configuration tricks we didn't get to in the other series!
 
+*** [[../chatting-with-emacs/][Chatting with Emacs]]
+
+Want to chat with the communities around various free and open source projects from the comfort of Emacs?  Check out this series!
+
 ** GNU Guix
 
 *** [[../craft-your-system-with-guix/][Craft Your System with GNU Guix]]
