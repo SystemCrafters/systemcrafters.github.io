@@ -1,0 +1,174 @@
+#+title: System Crafters Live! - June 4, 2021
+
+[[https://www.youtube.com/watch?v=Qci8t_jpVGA][Watch the recording]] on YouTube!
+
+* The Great IRC Experiment
+
+- About 40-50 people in the channel at any time
+- We're now a registered community on Libera.Chat!
+- The #systemcrafters channel is bridged to Matrix (matrix.org instance)
+- Benoit is working on =crafter-bot= derived from the one from =#emacs=
+- Will we be leaving Discord?  Short answer: no!
+
+Shom's wiki page: https://wiki.systemcrafters.cc/community/chat-with-us/
+
+Contribute to the System Crafters wiki! https://github.com/SystemCrafters/wiki-site
+
+I'm experimenting with a ZNC bouncer for $5+ sponsors, looking for 5 people to try it!
+
+* Improving the IRC Experience in ERC
+
+** Improving the display of messages
+
+You can change how ERC displays messages with =erc-fill-mode=:
+
+#+begin_src emacs-lisp
+
+  (setq erc-fill-column 120
+        erc-fill-function 'erc-fill-static
+        erc-fill-static-center 20)
+
+#+end_src
+
+** Customizing activity tracking
+
+Mode line tracking of channels is useful but can be a little annoying:
+
+#+begin_src emacs-lisp
+
+  (setq erc-track-exclude '("#emacs")
+        erc-track-exclude-types '("JOIN" "NICK" "QUIT" "MODE" "AWAY")
+        erc-hide-list '("JOIN" "NICK" "QUIT" "MODE" "AWAY")
+        erc-track-exclude-server-buffer t)
+
+#+end_src
+
+If you're using multiple frames, especially if you keep IRC buffers on a specific EXWM workspace, this setting can be useful:
+
+#+begin_src emacs-lisp
+
+  (setq erc-track-visibility nil) ; Only use the selected frame for visibility
+
+#+end_src
+
+** Tracking specific keywords or people
+
+#+begin_src emacs-lisp
+
+  (setq erc-pals '("shom_" "masteroman" "benoitj")
+	      erc-fools '("daviwil-test")
+	      erc-keywords '("guix" "wiki"))
+
+#+end_src
+
+** Desktop notifications for matches/mentions
+
+#+begin_src emacs-lisp
+
+  (add-to-list 'erc-modules 'notifications)
+
+#+end_src
+
+** Uniquely colorizing nicknames in chat
+
+This makes it easier to recognize specific people at a glance!
+
+#+begin_src emacs-lisp
+
+  (use-package erc-hl-nicks
+    :ensure t
+    :after erc
+    :config
+    (add-to-list 'erc-modules 'hl-nicks))
+
+#+end_src
+
+You might need to run =M-: (erc-update-modules)= after running this in an existing Emacs session!
+
+** Displaying inline images
+
+#+begin_src emacs-lisp
+
+  (use-package erc-image
+    :ensure t
+    :after erc
+    :config
+    (setq erc-image-inline-rescale 300)
+    (add-to-list 'erc-modules 'image))
+
+#+end_src
+
+Try it out in a chat (like in =/query NickServ=): https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/EmacsIcon.svg/1200px-EmacsIcon.svg.png
+
+*NOTE:* Make sure to pull the latest version of the package! Karthik and TitanOfOld on #systemcrafters IRC worked together to fix image scaling on Emacs 27+!
+
+https://github.com/kidd/erc-image.el/pull/25
+
+** Displaying emojis in messages
+
+Use emojify-mode:
+
+#+begin_src emacs-lisp
+
+  (use-package emojify
+    :ensure t
+    :hook (erc-mode . emojify-mode)
+    :commands emojify-mode)
+
+#+end_src
+
+** Connecting to a specific server with a keybinding
+
+#+begin_src emacs-lisp
+
+  (defun my/connect-irc ()
+    (interactive)
+    (erc-tls
+        :server "irc.libera.chat"
+        :port 6697
+        :nick "mynick"
+        ;; This is using password-store.el.  Not needed if you use auth-source!
+        :password (password-store-get "IRC/irc.libera.chat")))
+
+  (global-set-key (kbd "C-c c c") 'my/connect-irc)
+  
+#+end_src
+
+** Jumping to IRC buffers easily
+
+Two commands are useful for this:
+
+- =erc-switch-to-buffer=
+- =erc-track-switch-buffer= (bound to C-c C-SPC if =erc-track-enable-keybindings= is =t=)
+
+#+begin_src emacs-lisp
+
+  (setq erc-track-enable-keybindings t)
+
+#+end_src
+
+** Automatically logging in
+
+You'll need =auth-source= set up for this to work!  Check out the video I made about [[https://www.youtube.com/watch?v=nZ_T7Q49B8Y][storing your passwords in Emacs]].
+
+Setting this variable to =nil= will tell ERC that it should look up your password automatically when connecting.
+
+#+begin_src emacs-lisp
+
+  (setq erc-prompt-for-password nil)
+
+#+end_src
+
+** Using ZNC
+
+https://github.com/sshirokov/ZNC.el
+
+* Emacs News
+
+- [[https://github.com/rougier/svg-lib][svg-lib]]
+- [[https://www.reddit.com/r/emacs/comments/noh7da/consult_08_and_marginalia_06_released_on_gnu_elpa/][Consult 0.8 and Marginalia 0.6 released to ELPA]]
+- [[https://tech.toryanderson.com/2021/05/29/what-can-emacs-give-me-in-2021-a-response-to-the-mother-of-all-emacs-papers/#1-memory-limitations-a-thing-of-the-past-mostly][What can Emacs give me in 2021?]] ([[https://www.multicians.org/mepap.html][Original paper)]]
+
+* Next week on the stream
+
+We'll be doing another Dotfile Detective stream featuring a discussion with [[https://ambrevar.xyz][Ambrevar]] about [[https://gitlab.com/ambrevar/dotfiles/][his dotfiles]] and possibly other topics!

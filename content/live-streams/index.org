@@ -4,6 +4,7 @@ We stream every Friday at 9:15 am Pacific time!
 
 * Episodes
 
+- [[june-04-2021/][June 4, 2021]]: Improving the IRC Experience in ERC
 - [[may-21-2021/][May 21, 2021]]: Replacing Ivy and Counsel with Vertico and Consult
 - [[may-07-2021/][May 7, 2021]]: Should you use pre-made Emacs configurations? • Emacs News
 - [[april-30-2021/][April 30, 2021]]: Trying out Emacs Packages: Vertico and Corfu • Emacs Lisp Hacking
