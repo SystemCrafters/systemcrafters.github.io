@@ -55,10 +55,10 @@
   (package-install 'use-package))
 (require 'use-package)
 
-;; Install other dependencies
-(package-install 'org)
-(use-package org)
+;; Unfortunately this is necessary for now...
+(load-file "./ox-slimhtml.el")
 
+;; Install other dependencies
 (use-package esxml
   :ensure t)
 
