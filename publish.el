@@ -56,6 +56,9 @@
 (require 'use-package)
 
 ;; Install other dependencies
+(use-package org
+  :ensure t)
+
 (use-package esxml
   :ensure t)
 
