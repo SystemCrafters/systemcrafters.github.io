@@ -44,6 +44,10 @@ Emacs can do many things, and this series will show you how you can use it to ma
 
 There are many interesting topics we can cover about Emacs that don't require their own dedicated series.  This series is a collection of videos that will cover many other packages and configuration tricks we didn't get to in the other series!
 
+*** [[../mastering-git-with-magit/][Mastering Git with Magit]]
+
+The best interface for Git is in Emacs and it's called Magit!  This series will show you the ropes of how to use Magit to make all of your day to day source control operations ninja fast!
+
 *** [[../chatting-with-emacs/][Chatting with Emacs]]
 
 Want to chat with the communities around various free and open source projects from the comfort of Emacs?  Check out this series!

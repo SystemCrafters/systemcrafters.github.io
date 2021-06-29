@@ -1,0 +1,5 @@
+#+title: Mastering Git with Magit
+
+* Episodes
+
+1. [[introduction/][An Introduction to Magit]]
