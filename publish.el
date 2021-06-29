@@ -62,9 +62,6 @@
 (use-package esxml
   :ensure t)
 
-(use-package ox-slimhtml
-  :ensure t)
-
 (use-package ox-gemini
   :ensure t)
 
