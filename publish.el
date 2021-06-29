@@ -57,7 +57,8 @@
 
 ;; Install other dependencies
 (use-package org
-  :ensure t)
+  :ensure t
+  :pin elpa)
 
 (use-package esxml
   :ensure t)
