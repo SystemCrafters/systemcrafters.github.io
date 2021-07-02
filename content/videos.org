@@ -48,6 +48,7 @@ There are many interesting topics we can cover about Emacs that don't require th
 
 The best interface for Git is in Emacs and it's called Magit!  This series will show you the ropes of how to use Magit to make all of your day to day source control operations ninja fast!
 
+*** [[advanced-package-management/][Advanced Emacs Package Management]]
 *** [[../chatting-with-emacs/][Chatting with Emacs]]
 
 Want to chat with the communities around various free and open source projects from the comfort of Emacs?  Check out this series!
