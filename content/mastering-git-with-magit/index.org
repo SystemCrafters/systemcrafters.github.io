@@ -3,3 +3,4 @@
 * Episodes
 
 1. [[introduction/][An Introduction to Magit]]
+2. [[everyday-git-workflow/][Everyday Git Workflow with Magit]]
