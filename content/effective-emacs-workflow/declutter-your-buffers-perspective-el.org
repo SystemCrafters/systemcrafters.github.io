@@ -1,0 +1,116 @@
+#+title: Declutter Your Emacs Buffers with Perspective.el
+
+[[https://youtu.be/uyMdDzjQFMU][Watch the video]] on YouTube!
+
+* What is Perspective.el?
+
+There's a question I see pretty often in the [[http://systemcrafters.chat][System Crafters Discord]]:
+
+*"How do I get a buffer list for only the files or buffers I want to see?"*
+
+In Emacs, running =switch-to-buffer= or =ibuffer= shows you every single buffer that is open in Emacs which can be a little overwhelming in long-running Emacs sessions.
+
+The *perspective.el* package provides a convenient way to define individual "perspectives" for managing separate sets of buffers and windows.  You can think of perspectives like the "workspace" concept you see in some window managers.
+
+- https://github.com/nex3/perspective-el
+
+There are other alternatives to this package that have a different take on the workspace concept, we may cover them in future videos.
+
+* Benefits of perspective.el
+
+- Each perspective keeps its own buffer list and window layout
+- Perspectives are attached to specific frames
+- It works pretty seamlessly with EXWM if you use that too
+- Provides functionality for saving perspectives to use in future sessions
+- You can write Emacs Lisp code to automate perspective creation
+
+I've been using perspective.el for a few months now and it has become an important part of my workflow!
+
+* Basic configuration
+
+If you use =use-package= with =package.el=, you can copy the following Emacs Lisp into your =init.el= file and execute it for the first time with ~C-M-x~.
+
+#+begin_src emacs-lisp
+
+(use-package perspective
+  :ensure t  ; use `:straight t` if using straight.el!
+  :bind (("C-x k" . persp-kill-buffer*))
+  :init
+  (persp-mode))
+
+#+end_src
+
+This will install the package and enable it immediately when Emacs starts up.
+
+*TIP:* By default the prefix for perspective.el bindings is =C-x x= but you can change it by setting the variable =persp-mode-prefix-key=.
+
+We'll try out perspective.el in a basic Emacs configuration so that we can learn how to use it!
+
+* The "main" perspective
+
+By default, =perspective.el= will create a perspective called "main" in every frame that Emacs creates.  In the very first frame, all of Emacs' starting buffers will be in the "main" perspective of that frame.
+
+*NOTE:* When you create a new frame, a new "main" perspective will be created but it is *NOT* the same as the "main" perspective in other frames!  They have the same name but they are actually different.
+
+Whenever you open a file or some other buffer inside of a perspective, the buffer then becomes attached to that perspective and won't show up in other perspectives unless it is explicitly added to them.
+
+*TIP:* The name of the default perspective can be customized with the variable =persp-initial-frame-name=.
+
+* Listing buffers in the perspective
+
+To list all buffers in the current perspective, use the normal =switch-to-buffer= command!  This should work great with Emacs' built-in completion systems, Helm, and Vertico.
+
+- If you use Ivy, you might want to use =persp-ivy-switch-buffer= or =persp-counsel-switch-buffer= for better integration
+- If you use Selectrum, you might want =persp-switch-to-buffer*= for better integration
+- If you prefer an =ibuffer=-style interface you can use =persp-ibuffer=.
+
+You can also choose from all open buffers and automatically switch to the perspective that "owns" the buffer with =persp-switch-to-buffer= (~C-x x b~).
+
+* Creating a perspective
+
+Having only one perspective isn't very useful, though, so let's create another!
+
+The =persp-switch= command (~C-x x s~) will prompt you for the name of a perspective to switch to.  If you enter a name for a perspective that doesn't exist yet, it will be created.
+
+We can now list the buffers of this new perspective using =switch-to-buffer= or any of the commands mentioned before.
+
+*TIP:* All perspectives get their own =*scratch*= buffer!  This can be useful for keeping temporary notes within a specific workspace.
+
+* Switching perspectives
+
+You can select from a list of all perspectives for the current frame using the =persp-switch= command (~C-x x s~).
+
+There are also a couple of helpful commands for cycling between perspectives:
+
+- =persp-next= (~C-x x n~ or ~C-x x <right>~): switch to the next perspective
+- =persp-prev= (~C-x x p~ or ~C-x x <left>~): switch to the previous perspective
+
+This is a good time to point out that the list of perspectives for the current frame are displayed in the mode line!
+
+You can also select between perspectives using the number row keys with ~C-x x 1~ through ~C-x x 0~ (10).
+
+* Adding an existing buffer to a perspective
+
+Sometimes you'll end up in this situation: you open a file in a perspective and then realize that you should have opened it in a more appropriate perspective.
+
+There are a few ways to get that buffer into the desired perspective:
+
+- =persp-add-buffer= (~C-x x a~) will prompt you for the buffer to add to the *current* perspective (but it won't switch to that buffer)
+- =persp-set-buffer= (~C-x x A~) will prompt for a buffer to move to the current perspective and remove from all others!
+- Use the universal argument key ~C-u~ before running =switch-to-buffer= and select the desired buffer
+
+* Removing a buffer from a perspective
+
+If you want to remove a buffer from a perspective, you can use the =persp-remove= (~C-x x k~) command.  Once you select a buffer, it will only be removed from the current perspective.
+
+* Killing perspectives
+
+If you're done with a particular perspective, you can "kill" it using =persp-kill= (~C-x x c~).
+
+The documentation for =persp-kill= says that only buffers associated with the killed perspective and no others will be killed.  That hasn't been true in my experience, they all seem to remain active, just not visible in other perspectives!
+
+In a very recent commit a new command named =persp-kill-others= was added for quickly killing all perspectives in the frame except the current one.
+
+* What's next?
+
+That was just a brief overview of the =perspective.el= package to get you started!  In future videos we'll cover more ways to customize the your perspective workflow and also how to integrate it with EXWM and Projectile!
