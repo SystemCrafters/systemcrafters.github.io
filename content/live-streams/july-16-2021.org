@@ -1,0 +1,66 @@
+#+title: System Crafters Live! - July 16, 2021
+
+* Do we really need use-package?
+
+=use-package= is a (very?) commonly used package for writing one's Emacs configuration in a more "concise" way.  It provides a macro called =use-package= which removes some boilerplate needed in Emacs configs.
+
+If you followed my Emacs From Scratch series, you're probably using it!
+
+I've been experimenting with a new configuration lately which doesn't use =use-package=.  Why?
+
+* The value of use-package
+
+=use-package= certainly provides some useful features:
+
+- It can make your configuration *appear* more concise and well-organized
+- Installs external packages when necessary
+- Streamlined configuration of key bindings, hooks, faces, and custom variables
+- Can set up "autoloads" for commands that don't already have them
+- Makes =init.el= look more like a configuration file syntax instead of code, more beginner friendly?
+
+What else?
+
+* The downsides of use-package
+
+In my opinion, there are a few downsides to using =use-package=, especially for new Emacs users:
+
+- Obscures the underlying Emacs Lisp code for configuration by providing a different syntax that must be learned
+- Encourages you to cram all the config for a package inside of one expression
+- =:init= vs =:config= is confusing to new users
+- Harder to really understand when packages will be loaded
+
+With all that said, I'm not recommending that people get rid of =use-package=!
+
+This conversation is mainly an exercise to make us think critically about what it provides and look at that the equivalent Emacs Lisp would be.
+
+* What does use-package really do?
+
+I mentioned before that =use-package= is a macro, but what does that mean?
+
+In Lisp languages, a macro can be thought of like a "code template" which is defined like a function but operates slightly differently.
+
+Instead of the arguments to the macro "function" being evaluated and then passed in, the arguments are *not* evaluated.  The body of the macro "function" returns the /real/ code that should be executed instead!
+
+We can use =M-x emacs-lisp-macroexpand= with the cursor before a macro call to expand it into the resulting forms.  We'll use this in the Emacs From Scratch configuration to understand what =use-package= does and then convert it to plain Emacs Lisp!
+
+** Features to investigate
+
+- =:ensure t=
+- =:after=
+- =:config= and =:init=
+- =:custom= (use =custom-set-variables=?)
+- =:defer=
+- =:bind=
+- =:hook=
+- =:commands=
+- =:mode=
+
+* What would we need in Emacs?
+
+I think that with some additional built-in helpers in Emacs, packages like =use-package= would be less necessary:
+
+- A macro for defining multiple keys more easily
+- A macro (or optional args to =add-hook=) for adding multiple hooks more easily
+- A macro for setting custom variables
+
+Take a look at leaf: https://github.com/conao3/leaf.el
