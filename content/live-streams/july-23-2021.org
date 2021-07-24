@@ -1,0 +1,88 @@
+#+title: System Crafters Live! - July 23, 2021
+
+* Is Emacs hard / intimidating to learn?
+
+Let's discuss the various barriers to learning Emacs.  I want to hear from all of you on this topic!
+
+** What were the things that made Emacs hard to learn or get started?
+
+- Scary for the first few days at least, don't know where to start
+- Remembering keyboard shortcuts, especially if English is a second language
+- Lack of stable basis for configurations, i.e. a good starting point as opposed to nothing
+- The user manual is garbage
+- Learning a new programming language for configuration (Emacs Lisp)
+- Concerns about RSI from the key bindings
+- Figuring out your key binding strategy for customization
+- Not knowing how to do certain operations because things are named differently or have nonstandard key bindings
+- Takes a long time to get comfortable and experienced with making your own configuration
+- Community packages can be hard to learn due to documentation, etc
+- The Emacs interaction model isn't clear from the beginning
+- Being told to RTFM when asking legitimate questions
+- Not enough content to get started with Emacs Lisp, difficult to grasp at first
+- Key bindings are too complex, too many keystrokes
+- If you're familiar with vim, evil-mode isn't really compatible enough
+- Antiquated/arcane default configuration (probably from terminal days)
+- Emacs sometimes can feel less responsive than other editors
+- Knowing that it will be a time sink
+- Many community packages that do similar things, hard to know which one to use, decision fatigue, motivation killer
+- Hard to start using it at work because it takes a lot of time to set up a config to be productive, especially compared to other IDEs
+- Knowing how to get better performance out of Emacs
+- Finding content for learning
+- Major and minor modes are hard to understand at first
+- Not enough interactive learning tools
+
+** What's the one thing someone could have told you to save you a lot of time and/or trouble?
+
+- Basic navigation guide on the keybindings
+- How to organize config files when starting your first init.el
+- Specific resources like Mastering Emacs
+- That there is a built-in tutorial
+- A better initial overview of Emacs Lisp, including things like quoting
+- How to easily find documentation for concepts, especially describe-function describe-variable, describe-key, the manual, etc
+- Understanding the general Emacs window management workflow
+- How to configure some of the more powerful packages like Projectile, Helm/Ivy, etc
+- Explaining the unfamiliar Emacs terminology
+- Install which-key
+- Encouragement and instruction to get more comfortable with Emacs Lisp for configuration
+- Knowing that you can chain keybindings by holding Ctrl, etc, and also that Emacs will wait for the next key in a sequence
+- Focus more on aliens concepts first, keybindings second
+- Encouragement that Emacs isn't too old to use
+- Dispel the myth that Emacs will cause RSI (change config, key mappings, etc)
+- Understanding commands and M-x from the beginning
+
+** My own experience
+
+I've come in contact with Emacs a few times over the years before I really started to learn and understand it.
+
+- University
+- Lisp in a Box
+- Trying again, learning about customization
+- Really investing in making Emacs a full environment
+
+* What made you stick with Emacs?
+
+Despite the difficulty, what was it that made you keep trying to learn it?
+
+- Being able to configure it how I want
+- Being able to do "everything" inside of Emacs
+- Looking cool
+- Instant gratification programming
+- The feeling that it can evolve with my needs
+- Understanding what Emacs is really capable of even on the terminal
+- Org Mode for writing
+- The community
+- Nostalgia
+- LaTeX, other languages
+- The feeling of getting something in your config to work
+- Using Org Mode mode for time tracking
+- Writing documentation in Org Mode
+- Great packages like Org Mode, Magit, etc
+- Having evil-mode available as a former Vim user
+- Being able to curate my experience in a way that no other program allows
+- Convinced Emacs has long-term positive effects
+- Less context switching
+* Emacs News
+
+- [[https://blog.jethro.dev/posts/org_roam_v2/][Org Roam v2 released!]] ([[https://github.com/org-roam/org-roam/wiki/Hitchhiker's-Rough-Guide-to-Org-roam-V2][v2 guide]])
+- [[http://git.savannah.gnu.org/cgit/emacs.git/commit/etc/NEWS?id=5afe27624f7168713611dc9c24043091f8f820b6][Emacs 28: New option dired-kill-when-opening-new-buffer]]
+- [[https://lists.gnu.org/archive/html/emacs-orgmode/2021-07/msg00290.html][Citations support now added to Org Mode]] ([[https://www.youtube.com/watch?v=4ta4J20kpmM][Demo by John Kitchin]])

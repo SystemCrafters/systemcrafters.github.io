@@ -4,6 +4,7 @@ We stream every Friday at 9:15 am Pacific time!
 
 * Episodes
 
+- [[july-23-2021/][July 23, 2021]]: Is Emacs intimidating to learn for beginners?
 - [[july-16-2021/][July 16, 2021]]: Do we really need use-package in Emacs?
 - [[june-04-2021/][June 4, 2021]]: Improving the IRC Experience in ERC
 - [[may-21-2021/][May 21, 2021]]: Replacing Ivy and Counsel with Vertico and Consult
