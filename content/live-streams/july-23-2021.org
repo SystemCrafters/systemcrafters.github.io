@@ -4,12 +4,14 @@
 
 Let's discuss the various barriers to learning Emacs.  I want to hear from all of you on this topic!
 
+*DISCLAIMER:* The content below is a set of experiences viewers shared while discussing this topic on stream.  All of the things stated below are opinions and not meant to be taken as fact!  The goal was to gather information on the various ways people have trouble learning Emacs so that educational gaps might be filled both by Emacs' documentation and the community.
+
 ** What were the things that made Emacs hard to learn or get started?
 
 - Scary for the first few days at least, don't know where to start
 - Remembering keyboard shortcuts, especially if English is a second language
 - Lack of stable basis for configurations, i.e. a good starting point as opposed to nothing
-- The user manual is garbage
+- The user manual is "garbage"
 - Learning a new programming language for configuration (Emacs Lisp)
 - Concerns about RSI from the key bindings
 - Figuring out your key binding strategy for customization
