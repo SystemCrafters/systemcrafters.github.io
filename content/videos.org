@@ -49,6 +49,13 @@ There are many interesting topics we can cover about Emacs that don't require th
 The best interface for Git is in Emacs and it's called Magit!  This series will show you the ropes of how to use Magit to make all of your day to day source control operations ninja fast!
 
 *** [[advanced-package-management/][Advanced Emacs Package Management]]
+
+Learn more about how to use package managers like straight.el to manage Emacs packages in a more effective way!
+
+*** [[build-a-second-brain-in-emacs/][Build a Second Brain in Emacs]]
+
+Org Mode gives us the ability to organize our life in Emacs, but we can go even further by building a personal knowledgebase in Emacs using tools like Org Roam!
+
 *** [[../chatting-with-emacs/][Chatting with Emacs]]
 
 Want to chat with the communities around various free and open source projects from the comfort of Emacs?  Check out this series!
