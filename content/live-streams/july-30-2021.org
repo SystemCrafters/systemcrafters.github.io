@@ -1,0 +1,86 @@
+#+title: System Crafters Live! - July 30, 2021
+
+[[https://youtu.be/Mu_04oY_ub0][Watch the recording]] on YouTube!
+
+* The Future of System Crafters
+
+I love making content and engaging with this community.  I want to do even better!
+
+Let's have a discussion about a few different areas where I might be able to improve.
+
+For each area I'll suggest some ideas and I'd love to hear your thoughts on each one.  Suggest anything that you don't see there!
+
+* What's the best way to present video content?
+
+- Split up series into shorter videos (15 min) focusing on a more narrow aspect of the topic
+- Shorter high-level videos with more detailed show notes?
+- Don't change anything!
+- Something else?  Any examples of other channels that do it well?
+
+- Shorter getting started videos, longer advanced config video
+- Setting the context better at the beginning of the video
+- Check out egghead.io templates
+
+* What's the best use of live streams?
+
+- Community discussions around a topic
+- Going more in-depth on the week's video topic
+- Interviews with package authors and other interesting people (even multiple talking about the same topic, sharing workflows)
+- Live coding
+
+- Workflow demos
+- More live streams?
+- Community-suggested topics, what's cool this week
+- Live coding with the purpose of showing workflow
+- Pair programming and discussion
+- Live preparation for videos
+- Talking about Emacs News
+- Live-coding Guix packages suggested by viewers
+
+* What other forms of content would you be interested in?
+
+- Books that go more in-depth
+- Full video courses, possibly with exercises
+- Podcast
+- Newsletter
+
+- Comparison videos like Ivy vs Vertico vs Selectrum, etc
+- Short feature-focused videos to get people interested in Emacs
+
+* What other topics would you be interested in?
+
+- Learning programming languages
+- More focus on using Emacs for personal productivity (Org Mode, Org Roam)
+- Discussing other tools outside of Emacs / Lisp space
+- Game streaming
+
+- Shell programming, but maybe with things like Babashka, Guile, Elisp, etc
+- Window managers - StumpWM
+- Getting better at scripting/automating your system
+- Talking about my streaming/recording setup
+- Learning how to read Emacs package code
+- Keyboard-specific material like QMK, kmonad
+- Prog langs like Nim, Crystal, Zig, Scheme, things that are more obscure
+- Antipatterns in Emacs config
+- Explaining the "emacs model"
+- Book reviews and discussions
+- Contributing to Emacs or Guix
+
+* What do you think would make it worthwhile to become a sponsor?
+
+- Sponsor-only content like behind the scenes, prep streams
+- Special member activities (book club, weekly discussions, learning projects)
+- Being more of a community-within-the-community
+- "Free" merch (stickers, etc)
+- Different sponsorship platform?  Liberapay, subscribestar
+
+- Better pubnix
+- Code review
+
+* What are some good ways to fund the channel long term?
+
+- Sponsorship / membership
+- Paid content like books or courses
+- Merchandise (t-shirts, stickers, mugs, etc)
+- Hands-on learning events
+- Something else you're not getting that would be valuable?
