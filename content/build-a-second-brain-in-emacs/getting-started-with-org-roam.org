@@ -13,7 +13,7 @@ Org Mode is known to be a great tool not just for writing and personal notes but
 
 Org Roam solves these problems by making it easy to create topic-focused Org Files and link them together so that you can treat the information as nodes in a network rather than as hierarchical documents.  You can think of it like a personal wiki!
 
-It's inspired by a program called [[https://roamresearch.com/][Roam]] and a note-taking strategy called [[https://www.orgroam.com/manual.html#A-Brief-Introduction-to-the-Zettelkasten-Method][Zettlekasten]] where the goal is to create many individual single-topic notes that are linked together to create a "networked" knowledge base.
+It's inspired by a program called [[https://roamresearch.com/][Roam]] and a note-taking strategy called [[https://www.orgroam.com/manual.html#A-Brief-Introduction-to-the-Zettelkasten-Method][Zettelkasten]] where the goal is to create many individual single-topic notes that are linked together to create a "networked" knowledge base.
 
 Many people consider this like creating a "second brain" because it can easily handle a huge amount of knowledge and remind you of connections between topics very effectively.
 
