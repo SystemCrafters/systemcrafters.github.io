@@ -4,11 +4,12 @@ If you enjoy the content on the System Crafters channel, please consider support
 
 * Monthly Sponsorship
 
-If you'd like to provide monthly financial support to help me keep making this content, you can use one of the providers below.  Currently GitHub Sponsors is my preferred platform because they don't take a percentage of your contribution!
+If you'd like to provide monthly financial support to help me keep making this content, you can use one of the providers below.  Currently GitHub Sponsors or Liberapay are my preferred platforms because they don't take a percentage of your contribution!
 
 - [[https://github.com/sponsors/daviwil][GitHub Sponsors]]
+- [[https://liberapay.com/SystemCrafters/][Liberapay]]
 - [[https://patreon.com/SystemCrafters][Patreon]]
 
 * One-Time Tips
 
-You can also send a tip via [[https://paypal.me/daviwil][PayPal]]
+You can also send a tip via [[https://paypal.me/SystemCrafters][PayPal]]
