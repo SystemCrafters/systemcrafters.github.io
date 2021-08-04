@@ -162,7 +162,7 @@
             (link (@ (rel "stylesheet")
                      (href "/css/site.css")))
             (script (@ (defer "defer")
-                       (data-domain "systemcrafters.org")
+                       (data-domain "systemcrafters.net")
                        (src "https://plausible.io/js/plausible.js"))
                     ;; Empty string to cause a closing </script> tag
                     "")
