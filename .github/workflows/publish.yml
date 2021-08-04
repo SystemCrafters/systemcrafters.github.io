@@ -17,6 +17,7 @@ jobs:
 
       - name: Build the site
         run: |
+          apt install emacs
           cp -R daviwil.com/public .
           emacs --batch -l ./publish.el --funcall dw/publish
 
