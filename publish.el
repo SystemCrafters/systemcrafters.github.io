@@ -162,7 +162,9 @@
                      (href "/css/site.css")))
             (script (@ (defer "defer")
                        (data-domain "systemcrafters.org")
-                       (src "https://plausible.io/js/plausible.js")))
+                       (src "https://plausible.io/js/plausible.js"))
+                    ;; Empty string to cause a closing </script> tag
+                    "")
             (title ,(concat (org-export-data (plist-get info :title) info) " - System Crafters")))
            (body
              ,(dw/site-header info)
