@@ -15,9 +15,13 @@ jobs:
       - name: Check out the style repo
         run: git clone --depth 1 https://git.sr.ht/~daviwil/daviwil.com daviwil.com
 
+      - name: Install Emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: 27.2
+
       - name: Build the site
         run: |
-          apt install emacs
           cp -R daviwil.com/public .
           emacs --batch -l ./publish.el --funcall dw/publish
 
