@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>Organize Your Life with Org Mode - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Organize Your Life with Org Mode</h1><p class="blog-post-meta"></p><div><ul><li><a href="https://youtu.be/PNE-mgkZ6HM">Watch the video</a> on YouTube!</li>
+<li>Check out the <a href="https://github.com/daviwil/emacs-from-scratch/tree/c55d0f5e309f7ed8ffa3c00bc35c75937a5184e4">final code</a> on GitHub</li>
+<li>Episode 6 of the <a href="../">Emacs From Scratch</a> series</li>
+</ul>
+
+<h2><a id="viewer-questions" class="anchor" href="#viewer-questions">¶</a>Viewer Questions</h2><p>From <strong>Kristoffer Balintona</strong>:
+</p>
+
+<p>Again, thank you for the video. One thing that I think myself and some of your viewers would like clarification on is the distinction from visual-fill-column (from the melpa package) and visual-fill-mode (built-in) as well as their interaction. Based on reading some documentation, it seems that visual-fill-column-mode widens the right margin and can center the window. On the other hand. visual-fill-mode inserts line breaks automatically once you reach the window's margin. Thus, you can use them both independently but also in conjunction - which is what you have done.
+</p>
+
+<p>I also am confused about whether or not this will result in hard or soft wrapping. There are some cases where I don't want to change the actual contents of the page but would like to see it wrapped in the buffer. I don't know if visual-fill-column + visual-line does this.
+</p>
+
+<p>From <strong>Konstantin Petrov</strong>:
+</p>
+
+<p>Couple of questions about org:
+</p>
+<ol><li>I use tags in org-mode. Can you tell how to set/edit tags using ivy/counsel tooling to search and select?</li>
+<li>Could you cover capturing (org-capture) and creating nicer menus for capture templates selection?</li>
+</ol>
+
+<h2><a id="the-agenda" class="anchor" href="#the-agenda">¶</a>The Agenda</h2><p>Run <kbd>org-agenda</kbd> to see possible agenda views.
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> org-directory <span class="org-string">"~/Projects/Code/emacs-from-scratch/OrgFiles"</span>)
+(<span class="org-keyword">setq</span> org-agenda-files '(<span class="org-string">"Tasks.org"</span> <span class="org-string">"Birthdays.org"</span> <span class="org-string">"Habits.org"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">If you only want to see the agenda for today</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(setq org-agenda-span 'day)</span>
+
+(<span class="org-keyword">setq</span> org-agenda-start-with-log-mode t)
+(<span class="org-keyword">setq</span> org-log-done 'time)
+(<span class="org-keyword">setq</span> org-log-into-drawer t)
+
+</code></pre>
+
+<h2><a id="scheduling-and-deadlines" class="anchor" href="#scheduling-and-deadlines">¶</a>Scheduling and Deadlines</h2><ul><li><kbd>org-schedule</kbd></li>
+<li><kbd>org-deadline</kbd></li>
+<li><kbd>org-time-stamp</kbd></li>
+<li><a href="https://orgmode.org/manual/Repeated-tasks.html#Repeated-tasks">Repeated Tasks</a></li>
+</ul>
+
+<h2><a id="custom-todo-states-and-agendas" class="anchor" href="#custom-todo-states-and-agendas">¶</a>Custom TODO states and Agendas</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> org-todo-keywords
+  '((sequence <span class="org-string">"TODO(t)"</span> <span class="org-string">"NEXT(n)"</span> <span class="org-string">"|"</span> <span class="org-string">"DONE(d!)"</span>)
+    (sequence <span class="org-string">"BACKLOG(b)"</span> <span class="org-string">"PLAN(p)"</span> <span class="org-string">"READY(r)"</span> <span class="org-string">"ACTIVE(a)"</span> <span class="org-string">"REVIEW(v)"</span> <span class="org-string">"WAIT(w@/!)"</span> <span class="org-string">"HOLD(h)"</span> <span class="org-string">"|"</span> <span class="org-string">"COMPLETED(c)"</span> <span class="org-string">"CANC(k@)"</span>)))
+
+</code></pre>
+
+<p><a href="https://orgmode.org/manual/Custom-Agenda-Views.html#Custom-Agenda-Views">Org Mode Manual: Custom Agenda Views</a>
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Configure custom agenda views</span>
+(<span class="org-keyword">setq</span> org-agenda-custom-commands
+  '((<span class="org-string">"d"</span> <span class="org-string">"Dashboard"</span>
+     ((agenda <span class="org-string">""</span> ((org-deadline-warning-days 7)))
+      (todo <span class="org-string">"NEXT"</span>
+        ((org-agenda-overriding-header <span class="org-string">"Next Tasks"</span>)))
+      (tags-todo <span class="org-string">"agenda/ACTIVE"</span> ((org-agenda-overriding-header <span class="org-string">"Active Projects"</span>)))))
+
+    (<span class="org-string">"n"</span> <span class="org-string">"Next Tasks"</span>
+     ((todo <span class="org-string">"NEXT"</span>
+        ((org-agenda-overriding-header <span class="org-string">"Next Tasks"</span>)))))
+
+
+    (<span class="org-string">"W"</span> <span class="org-string">"Work Tasks"</span> tags-todo <span class="org-string">"+work"</span>)
+
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">Low-effort next actions</span>
+    (<span class="org-string">"e"</span> tags-todo <span class="org-string">"+TODO=\"NEXT\"+Effort&lt;15&amp;+Effort&gt;0"</span>
+     ((org-agenda-overriding-header <span class="org-string">"Low Effort Tasks"</span>)
+      (org-agenda-max-todos 20)
+      (org-agenda-files org-agenda-files)))
+
+    (<span class="org-string">"w"</span> <span class="org-string">"Workflow Status"</span>
+     ((todo <span class="org-string">"WAIT"</span>
+            ((org-agenda-overriding-header <span class="org-string">"Waiting on External"</span>)
+             (org-agenda-files org-agenda-files)))
+      (todo <span class="org-string">"REVIEW"</span>
+            ((org-agenda-overriding-header <span class="org-string">"In Review"</span>)
+             (org-agenda-files org-agenda-files)))
+      (todo <span class="org-string">"PLAN"</span>
+            ((org-agenda-overriding-header <span class="org-string">"In Planning"</span>)
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo <span class="org-string">"BACKLOG"</span>
+            ((org-agenda-overriding-header <span class="org-string">"Project Backlog"</span>)
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo <span class="org-string">"READY"</span>
+            ((org-agenda-overriding-header <span class="org-string">"Ready for Work"</span>)
+             (org-agenda-files org-agenda-files)))
+      (todo <span class="org-string">"ACTIVE"</span>
+            ((org-agenda-overriding-header <span class="org-string">"Active Projects"</span>)
+             (org-agenda-files org-agenda-files)))
+      (todo <span class="org-string">"COMPLETED"</span>
+            ((org-agenda-overriding-header <span class="org-string">"Completed Projects"</span>)
+             (org-agenda-files org-agenda-files)))
+      (todo <span class="org-string">"CANC"</span>
+            ((org-agenda-overriding-header <span class="org-string">"Cancelled Projects"</span>)
+             (org-agenda-files org-agenda-files)))))))
+
+</code></pre>
+
+<h2><a id="refiling" class="anchor" href="#refiling">¶</a>Refiling</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> org-refile-targets
+      '((<span class="org-string">"Archive.org"</span> <span class="org-builtin">:maxlevel</span> . 1)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Save Org buffers after refiling!</span>
+(advice-add 'org-refile <span class="org-builtin">:after</span> 'org-save-all-org-buffers)
+
+</code></pre>
+
+<h2><a id="capture-templates" class="anchor" href="#capture-templates">¶</a>Capture Templates</h2><ul><li>Tasks</li>
+<li>Meeting notes</li>
+<li>Table entries</li>
+<li>Journal entries</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/read-file-as-string</span> (path)
+  (<span class="org-keyword">with-temp-buffer</span>
+    (insert-file-contents path)
+    (buffer-string)))
+
+(<span class="org-keyword">setq</span> org-capture-templates
+  `((<span class="org-string">"t"</span> <span class="org-string">"Tasks / Projects"</span>)
+    (<span class="org-string">"tt"</span> <span class="org-string">"Task"</span> entry (file+olp <span class="org-string">"~/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org"</span> <span class="org-string">"Inbox"</span>)
+         <span class="org-string">"* TODO %?\n  %U\n  %a\n  %i"</span> <span class="org-builtin">:empty-lines</span> 1)
+    (<span class="org-string">"ts"</span> <span class="org-string">"Clocked Entry Subtask"</span> entry (clock)
+         <span class="org-string">"* TODO %?\n  %U\n  %a\n  %i"</span> <span class="org-builtin">:empty-lines</span> 1)
+
+    (<span class="org-string">"j"</span> <span class="org-string">"Journal Entries"</span>)
+    (<span class="org-string">"jj"</span> <span class="org-string">"Journal"</span> entry
+         (file+olp+datetree <span class="org-string">"~/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org"</span>)
+         <span class="org-string">"\n* %&lt;%I:%M %p&gt; - Journal :journal:\n\n%?\n\n"</span>
+         <span class="org-comment-delimiter">;; </span><span class="org-comment">,(dw/read-file-as-string "~/Notes/Templates/Daily.org")</span>
+         <span class="org-builtin">:clock-in</span> <span class="org-builtin">:clock-resume</span>
+         <span class="org-builtin">:empty-lines</span> 1)
+    (<span class="org-string">"jm"</span> <span class="org-string">"Meeting"</span> entry
+         (file+olp+datetree <span class="org-string">"~/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org"</span>)
+         <span class="org-string">"* %&lt;%I:%M %p&gt; - %a :meetings:\n\n%?\n\n"</span>
+         <span class="org-builtin">:clock-in</span> <span class="org-builtin">:clock-resume</span>
+         <span class="org-builtin">:empty-lines</span> 1)
+
+    (<span class="org-string">"w"</span> <span class="org-string">"Workflows"</span>)
+    (<span class="org-string">"we"</span> <span class="org-string">"Checking Email"</span> entry (file+olp+datetree ,(dw/get-todays-journal-file-name))
+         <span class="org-string">"* Checking Email :email:\n\n%?"</span> <span class="org-builtin">:clock-in</span> <span class="org-builtin">:clock-resume</span> <span class="org-builtin">:empty-lines</span> 1)
+
+    (<span class="org-string">"m"</span> <span class="org-string">"Metrics Capture"</span>)
+    (<span class="org-string">"mw"</span> <span class="org-string">"Weight"</span> table-line (file+headline <span class="org-string">"~/Projects/Code/emacs-from-scratch/OrgFiles/Metrics.org"</span> <span class="org-string">"Weight"</span>)
+     <span class="org-string">"| %U | %^{Weight} | %^{Notes} |"</span> <span class="org-builtin">:kill-buffer</span> t)))
+
+</code></pre>
+
+<p>Bindings straight to templates
+</p>
+
+<pre><code class="emacs-lisp">
+(define-key global-map (kbd <span class="org-string">"C-c j"</span>)
+  (<span class="org-keyword">lambda</span> () (<span class="org-keyword">interactive</span>) (org-capture nil <span class="org-string">"j"</span>)))
+
+</code></pre>
+
+<h2><a id="habit-tracking" class="anchor" href="#habit-tracking">¶</a>Habit Tracking</h2><p><a href="https://orgmode.org/manual/Tracking-your-habits.html">Org Mode Manual: Tracking Your Habits</a>
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">require</span> '<span class="org-constant">org-habit</span>)
+(add-to-list 'org-modules 'org-habit)
+(<span class="org-keyword">setq</span> org-habit-graph-column 60)
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

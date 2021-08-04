@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>Build Your Own IDE with lsp-mode - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Build Your Own IDE with lsp-mode</h1><p class="blog-post-meta"></p><div><ul><li><a href="https://youtu.be/E-NAM9U5JYE">Watch the video</a> on YouTube!</li>
+<li>Check out the <a href="https://github.com/daviwil/emacs-from-scratch/tree/6d078217a41134cc667f969430d150c50d03f448">final code</a> on GitHub</li>
+<li>Episode 8 of the <a href="../">Emacs From Scratch</a> series</li>
+<li>Episode 1 of the <a href="../../emacs-ide/">Emacs IDE</a> series</li>
+</ul>
+
+<h2><a id="what-is-lsp-mode" class="anchor" href="#what-is-lsp-mode">¶</a>What is lsp-mode?</h2><ul><li><a href="https://emacs-lsp.github.io/lsp-mode/">Documentation</a></li>
+<li><a href="https://emacs-lsp.github.io/lsp-mode/page/languages/">Supported language servers</a></li>
+</ul>
+
+<h2><a id="initial-configuration" class="anchor" href="#initial-configuration">¶</a>Initial Configuration</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">lsp-mode</span>
+  <span class="org-builtin">:commands</span> (lsp lsp-deferred)
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> lsp-keymap-prefix <span class="org-string">"C-c l"</span>)  <span class="org-comment-delimiter">;; </span><span class="org-comment">Or 'C-l', 's-l'</span>
+  <span class="org-builtin">:config</span>
+  (lsp-enable-which-key-integration t))
+
+</code></pre>
+
+<h3><a id="basic-completions" class="anchor" href="#basic-completions">¶</a>Basic Completions</h3><ul><li><kbd>completion-at-point</kbd> for completions</li>
+<li>Signatures when writing methods (<kbd>C-n</kbd>, <kbd>C-p</kbd> to cycle signatures)</li>
+</ul>
+
+<h3><a id="hover" class="anchor" href="#hover">¶</a>Hover</h3>
+
+<h3><a id="find-definitions-and-references" class="anchor" href="#find-definitions-and-references">¶</a>Find Definitions and References</h3><ul><li><kbd>lsp-find-definition</kbd>: <kbd>C-c l g r</kbd></li>
+<li><kbd>lsp-find-references</kbd>:  <kbd>C-c l g g</kbd></li>
+</ul>
+
+<h3><a id="rename-symbol" class="anchor" href="#rename-symbol">¶</a>Rename Symbol</h3><ul><li><kbd>lsp-rename</kbd>: <kbd>C-c l r r</kbd></li>
+</ul>
+
+<h3><a id="diagnostics" class="anchor" href="#diagnostics">¶</a>Diagnostics</h3><ul><li><kbd>flymake-show-diagnostics-buffer</kbd> to show diagnostics</li>
+</ul>
+
+<h3><a id="code-actions" class="anchor" href="#code-actions">¶</a>Code Actions</h3>
+
+<h3><a id="code-formatting" class="anchor" href="#code-formatting">¶</a>Code Formatting</h3><ul><li><kbd>lsp-format-buffer</kbd>: <kbd>C-c l =</kbd> ==</li>
+</ul>
+
+<p>Configure formatting options for some languages with <kbd>lsp-&lt;language&gt;-format-</kbd> variables
+</p>
+
+<h3><a id="header-breadcrumb" class="anchor" href="#header-breadcrumb">¶</a>Header Breadcrumb</h3><pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">efs/lsp-mode-setup</span> ()
+  (<span class="org-keyword">setq</span> lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
+
+  <span class="org-builtin">:hook</span> (lsp-mode . efs/lsp-mode-setup)
+
+</code></pre>
+
+<h2><a id="better-completions-with-company-mode" class="anchor" href="#better-completions-with-company-mode">¶</a>Better Completions with company-mode</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">company</span>
+  <span class="org-builtin">:after</span> lsp-mode
+  <span class="org-builtin">:hook</span> (prog-mode . company-mode)
+  <span class="org-builtin">:bind</span> (<span class="org-builtin">:map</span> company-active-map
+         (<span class="org-string">"&lt;tab&gt;"</span> . company-complete-selection))
+        (<span class="org-builtin">:map</span> lsp-mode-map
+         (<span class="org-string">"&lt;tab&gt;"</span> . company-indent-or-complete-common))
+  <span class="org-builtin">:custom</span>
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">company-box</span>
+  <span class="org-builtin">:hook</span> (company-mode . company-box-mode))
+
+</code></pre>
+
+<h2><a id="more-ui-enhancements-lsp-ui-mode" class="anchor" href="#more-ui-enhancements-lsp-ui-mode">¶</a>More UI Enhancements lsp-ui-mode</h2><p><a href="https://emacs-lsp.github.io/lsp-ui/">lsp-ui Documentation</a>
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">lsp-ui</span>
+  <span class="org-builtin">:hook</span> (lsp-mode . lsp-ui-mode))
+
+</code></pre>
+
+<h3><a id="documentation" class="anchor" href="#documentation">¶</a>Documentation</h3><ul><li><kbd>lsp-ui-doc-focus-frame</kbd> to enter the documentation frame to navigate and search around</li>
+<li><kbd>lsp-ui-doc-unfocus-frame</kbd> to leave documentation frame</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> lsp-ui-doc-position 'bottom)
+
+</code></pre>
+
+<h3><a id="sideline" class="anchor" href="#sideline">¶</a>Sideline</h3><p><a href="https://emacs-lsp.github.io/lsp-ui/#lsp-ui-sideline">lsp-sideline configuration</a>
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> lsp-ui-sideline-enable nil)
+(<span class="org-keyword">setq</span> lsp-ui-sideline-show-hover nil)
+
+</code></pre>
+
+<h3><a id="peek" class="anchor" href="#peek">¶</a>Peek</h3><ul><li><kbd>lsp-ui-peek-find-references</kbd> to show references inline (<kbd>M-n</kbd>, <kbd>M-p</kbd> to cycle)</li>
+</ul>
+
+<h2><a id="lsp-treemacs" class="anchor" href="#lsp-treemacs">¶</a>lsp-treemacs</h2><p>Provides an even nicer UI on top of lsp-mode using Treemacs
+</p>
+
+<ul><li><kbd>lsp-treemacs-symbols</kbd> - Show a tree view of the symbols in the current file</li>
+<li><kbd>lsp-treemacs-references</kbd> - Show a tree view for the references of the symbol under the cursor</li>
+<li><kbd>lsp-treemacs-error-list</kbd> - Show a tree view for the diagnostic messages in the project</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">lsp-treemacs</span>
+  <span class="org-builtin">:after</span> lsp)
+
+</code></pre>
+
+<h2><a id="quicker-symbol-searching-with-lsp-ivy" class="anchor" href="#quicker-symbol-searching-with-lsp-ivy">¶</a>Quicker symbol searching with lsp-ivy</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">lsp-ivy</span>)
+
+</code></pre>
+
+<h2><a id="typescript" class="anchor" href="#typescript">¶</a>TypeScript</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">typescript-mode</span>
+  <span class="org-builtin">:mode</span> <span class="org-string">"\\.ts\\'"</span>
+  <span class="org-builtin">:hook</span> (typescript-mode . lsp-deferred)
+  <span class="org-builtin">:config</span>
+  (<span class="org-keyword">setq</span> typescript-indent-level 2))
+
+</code></pre>
+
+<p>Install the <kbd>typescript-language-server</kbd>:
+</p>
+
+<pre><code class="sh">
+npm install -g typescript-language-server
+
+</code></pre>
+
+<h2><a id="c" class="anchor" href="#c">¶</a>C</h2><p>Install the <kbd>ccls</kbd> language server.
+</p>
+
+<h2><a id="bonus-commenting-lines" class="anchor" href="#bonus-commenting-lines">¶</a>Bonus: Commenting lines</h2><p><kbd>M-;</kbd> does comment, but the behavior sometimes isn't exactly what you'd expect.
+</p>
+
+<p><a href="https://github.com/redguardtoo/evil-nerd-commenter">evil-nerd-commenter</a> on GitHub
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">evil-nerd-commenter</span>
+  <span class="org-builtin">:bind</span> (<span class="org-string">"M-/"</span> . evilnc-comment-or-uncomment-lines))
+
+</code></pre>
+
+<h2><a id="theres-more-to-talk-about-later" class="anchor" href="#theres-more-to-talk-about-later">¶</a>There's more to talk about later!</h2><ul><li>dap-mode for debugging</li>
+<li>yasnippet</li>
+<li>running compilers and unit test tools</li>
+<li>language-specific videos</li>
+</ul>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

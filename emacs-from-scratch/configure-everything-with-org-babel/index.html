@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>Configure Everything with Org Babel - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Configure Everything with Org Babel</h1><p class="blog-post-meta"></p><div><ul><li><a href="https://youtu.be/kkqVTDbfYp4">Watch the video</a> on YouTube!</li>
+<li>Check out the <a href="https://github.com/daviwil/emacs-from-scratch/tree/9388cf6ecd9b44c430867a5c3dad5f050fdc0ee1">final code</a> on GitHub</li>
+<li>Episode 7 of the <a href="../">Emacs From Scratch</a> series</li>
+</ul>
+
+<h2><a id="org-babel" class="anchor" href="#org-babel">¶</a>Org Babel</h2><p>Execution: <kbd>C-c C-c</kbd> (output, value results)
+</p>
+
+<p><a href="https://orgmode.org/worg/org-contrib/babel/">Org Babel Documentation</a>
+<a href="https://orgmode.org/worg/org-contrib/babel/languages/index.html">Org Babel: Languages</a>
+</p>
+
+<pre><code class="emacs-lisp">
+42
+
+</code></pre>
+
+<pre><code class="emacs-lisp">
+(org-babel-do-load-languages
+  'org-babel-load-languages
+  '((emacs-lisp . t)
+    (python . t)))
+
+(<span class="org-keyword">setq</span> org-confirm-babel-evaluate nil)
+
+</code></pre>
+
+<h2><a id="structure-templates" class="anchor" href="#structure-templates">¶</a>Structure Templates</h2><pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">This is needed as of Org 9.2</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">org-tempo</span>)
+
+(add-to-list 'org-structure-template-alist '(<span class="org-string">"sh"</span> . <span class="org-string">"src shell"</span>))
+(add-to-list 'org-structure-template-alist '(<span class="org-string">"el"</span> . <span class="org-string">"src emacs-lisp"</span>))
+(add-to-list 'org-structure-template-alist '(<span class="org-string">"py"</span> . <span class="org-string">"src python"</span>))
+
+</code></pre>
+
+<h2><a id="setting-up-the-config" class="anchor" href="#setting-up-the-config">¶</a>Setting Up the Config</h2><p>Apply the same configuration to every block:
+</p>
+
+<h2><a id="tangling-output" class="anchor" href="#tangling-output">¶</a>Tangling Output</h2><pre><code class="emacs-lisp">
+(org-babel-tangle)
+(org-babel-tangle-file <span class="org-string">"~/Projects/Code/emacs-from-scratch/Emacs.org"</span>)
+
+</code></pre>
+
+<h2><a id="configuring-other-apps" class="anchor" href="#configuring-other-apps">¶</a>Configuring Other Apps</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">push</span> '(<span class="org-string">"conf-unix"</span> . conf-unix) org-src-lang-modes)
+
+</code></pre>
+
+<pre><code class="conf">
+<span class="org-variable-name">value</span>=42
+
+</code></pre>
+
+<p>To create output directories automatically, add <kbd>:mkdirp yes</kbd>
+</p>
+
+<p><a href="~/.dotfiles/desktop">My mpv configuration</a>
+</p>
+
+<h2><a id="noweb-blocks" class="anchor" href="#noweb-blocks">¶</a>Noweb Blocks</h2><p>Enables you to pass variables into a source block!
+</p>
+
+<pre><code class="emacs-lisp">55
+</code></pre>
+
+<p>Add <kbd>:noweb yes</kbd>!
+</p>
+
+<pre><code class="conf">
+<span class="org-variable-name">value</span>=&lt;&lt;the-value&gt;&gt;
+
+</code></pre>
+
+<p><a href="~/.dotfiles/systems">Per-System Settings</a>
+</p>
+
+<h2><a id="tips" class="anchor" href="#tips">¶</a>Tips</h2><ul><li>Automatically tangle on save</li>
+<li>Should I also commit tangle output?</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Automatically tangle our Emacs.org config file when we save it</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">efs/org-babel-tangle-config</span> ()
+  (<span class="org-keyword">when</span> (string-equal (buffer-file-name)
+                      (expand-file-name <span class="org-string">"~/Projects/Code/emacs-from-scratch/Emacs.org"</span>))
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">Dynamic scoping to the rescue</span>
+    (<span class="org-keyword">let</span> ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle)))
+
+(add-hook 'org-mode-hook (<span class="org-keyword">lambda</span> () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

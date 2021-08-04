@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>Learn to Love the Terminal Modes - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Learn to Love the Terminal Modes</h1><p class="blog-post-meta"></p><div><ul><li><a href="https://youtu.be/wa_wZIuT9Vw">Watch the video</a> on YouTube!</li>
+<li>Check out the <a href="https://github.com/daviwil/emacs-from-scratch/tree/bbfbc77b3afab0c14149e07d0ab08d275d4ba575">final code</a> on GitHub</li>
+<li>Episode 9 of the <a href="../">Emacs From Scratch</a> series</li>
+</ul>
+
+<h2><a id="term-mode" class="anchor" href="#term-mode">¶</a>term-mode</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">term</span>
+  <span class="org-builtin">:config</span>
+  (<span class="org-keyword">setq</span> explicit-shell-file-name <span class="org-string">"bash"</span>)
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">(setq explicit-zsh-args '())</span>
+  (<span class="org-keyword">setq</span> term-prompt-regexp <span class="org-string">"^[</span><span class="org-string"><span class="org-negation-char">^</span></span><span class="org-string">#$%&gt;\n]*[#$%&gt;] *"</span>))
+
+</code></pre>
+
+<ul><li><kbd>C-c C-p</kbd> / <kbd>C-c C-n</kbd> - go back and forward in the buffer's prompts (also <kbd>[[</kbd> and <kbd>]]</kbd> with evil-mode)</li>
+<li><kbd>C-c C-k</kbd> - Enter char-mode</li>
+<li><kbd>C-c C-j</kbd> - Return to line-mode</li>
+<li>If you have <kbd>evil-collection</kbd> installed, <kbd>term-mode</kbd> will enter char mode when you use Evil's Insert mode</li>
+<li>Caveat - editing the input line with Evil motions doesn't work</li>
+</ul>
+
+<p>NOTE: term-mode doesn't work on Windows: "Spawning child process: invalid argument"
+</p>
+
+<h3><a id="for-better-color-support" class="anchor" href="#for-better-color-support">¶</a>For better color support</h3><p>Make sure the <kbd>tic</kbd> program is available on your machine (could be part of <kbd>ncurses</kbd> package).
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">eterm-256color</span>
+  <span class="org-builtin">:hook</span> (term-mode . eterm-256color-mode))
+
+</code></pre>
+
+<pre><code class="shell">
+<span class="org-builtin">echo</span> <span class="org-string">"Hello System Crafters!"</span> | cowsay | lolcat -h 0.7
+
+</code></pre>
+
+<h3><a id="ansi-term" class="anchor" href="#ansi-term">¶</a>ansi-term</h3><p><kbd>ansi-term</kbd> is a specialization of <kbd>term-mode.</kbd>
+</p>
+
+<p>Minor differences:
+</p>
+<ul><li>C-x is prefix key instead of C-c</li>
+<li>Buffers are managed slightly differently</li>
+</ul>
+
+<p>Same caveats for Windows still apply.
+</p>
+
+<h2><a id="vterm-emacs-libvterm" class="anchor" href="#vterm-emacs-libvterm">¶</a>vterm (emacs-libvterm)</h2><p><a href="https://github.com/akermu/emacs-libvterm/">vterm</a> on GitHub
+</p>
+
+<p>NOTE: This one needs to compile a native library, make sure to install its dependencies!
+</p>
+
+<p>Differences to <kbd>term</kbd>:
+</p>
+
+<ul><li>Written in native code, much faster and better emulation</li>
+<li>There is no <kbd>line-mode</kbd> / <kbd>char-mode</kbd> split</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">vterm</span>
+  <span class="org-builtin">:commands</span> vterm
+  <span class="org-builtin">:config</span>
+  (<span class="org-keyword">setq</span> term-prompt-regexp <span class="org-string">"^[</span><span class="org-string"><span class="org-negation-char">^</span></span><span class="org-string">#$%&gt;\n]*[#$%&gt;] *"</span>)
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">(setq vterm-shell "zsh")</span>
+  (<span class="org-keyword">setq</span> vterm-max-scrollback 10000))
+
+</code></pre>
+
+<ul><li>Read docs on <kbd>vterm-use-vterm-prompt-detection-method</kbd> for prompt detection</li>
+</ul>
+
+<p><a href="https://github.com/akermu/emacs-libvterm/tree/01a1332ebb11daca5408f7fcb8a08454b0176e79#shell-side-configuration">vterm: Shell-side configuration</a>
+</p>
+
+<h2><a id="shell-mode" class="anchor" href="#shell-mode">¶</a>shell-mode</h2><p>Runs a shell program on your computer in a more controlled buffer.  Does not operate as a terminal emulator.
+</p>
+
+<ul><li><kbd>C-c C-p</kbd> / <kbd>C-c C-n</kbd> - go back and forward in the buffer's prompts</li>
+<li><kbd>M-p</kbd> / <kbd>M-n</kbd> - go back and forward in the input history</li>
+<li><kbd>C-c C-u</kbd> - delete the current input string backwards up to the cursor</li>
+<li><kbd>counsel-shell-history</kbd> - A searchable history of commands typed into the shell</li>
+</ul>
+
+<p>Pros/Cons
+</p>
+
+<p>Better colors:
+</p>
+
+<p><a href="https://github.com/atomontage/xterm-color">xterm-color</a> on GitHub
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> comint-output-filter-functions
+      (remove 'ansi-color-process-output comint-output-filter-functions))
+
+(add-hook 'shell-mode-hook
+          (<span class="org-keyword">lambda</span> ()
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">Disable font-locking in this buffer to improve performance</span>
+            (font-lock-mode -1)
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">Prevent font-locking from being re-enabled in this buffer</span>
+            (make-local-variable 'font-lock-function)
+            (<span class="org-keyword">setq</span> font-lock-function (<span class="org-keyword">lambda</span> (_) nil))
+            (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter nil t)))
+
+</code></pre>
+
+<p>In Windows if you like PowerShell you can use this config:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Kudos to Jeffrey Snover: https://docs.microsoft.com/en-us/archive/blogs/dotnetinterop/run-powershell-as-a-shell-within-emacs</span>
+(<span class="org-keyword">setq</span> explicit-shell-file-name <span class="org-string">"powershell.exe"</span>)
+(<span class="org-keyword">setq</span> explicit-powershell.exe-args '())
+
+</code></pre>
+
+<h2><a id="eshell" class="anchor" href="#eshell">¶</a>Eshell</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">efs/configure-eshell</span> ()
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Save command history when commands are entered</span>
+  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Truncate buffer for performance</span>
+  (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Bind some useful keys for evil-mode</span>
+  (evil-define-key '(normal insert visual) eshell-mode-map (kbd <span class="org-string">"C-r"</span>) 'counsel-esh-history)
+  (evil-define-key '(normal insert visual) eshell-mode-map (kbd <span class="org-string">"&lt;home&gt;"</span>) 'eshell-bol)
+  (evil-normalize-keymaps)
+
+  (<span class="org-keyword">setq</span> eshell-history-size         10000
+        eshell-buffer-maximum-lines 10000
+        eshell-hist-ignoredups t
+        eshell-scroll-to-bottom-on-input t))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">eshell</span>
+  <span class="org-builtin">:hook</span> (eshell-first-time-mode . efs/configure-eshell))
+
+</code></pre>
+
+<ul><li><kbd>counsel-eshell-history</kbd> - A searchable history of commands typed into the shell</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">eshell-git-prompt</span>)
+
+<span class="org-builtin">:config</span>
+(eshell-git-prompt-use-theme 'powerline))
+
+</code></pre>
+
+<p>Running programs in a term-mode buffer:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">with-eval-after-load</span> 'esh-opt
+  (<span class="org-keyword">setq</span> eshell-destroy-buffer-when-process-dies t)
+  (<span class="org-keyword">setq</span> eshell-visual-commands '(<span class="org-string">"htop"</span> <span class="org-string">"zsh"</span> <span class="org-string">"vim"</span>)))
+
+</code></pre>
+
+<p>Pros:
+</p>
+
+<ul><li>Replicates Bash with cross-platform elisp functions</li>
+<li>Consistent shell experience across all OSes</li>
+<li>You can run Emacs commands and arbitrary Emacs Lisp in the shell</li>
+<li>You can pipe output of commands directly into an Emacs buffer</li>
+<li>Supports TRAMP!</li>
+</ul>
+
+<p>Cons:
+</p>
+
+<ul><li>Completions are not great out of the box compared to Bash</li>
+<li>Eshell commands can be very slow compared to the real programs</li>
+<li>Piping is much less functional than in "real" shells</li>
+<li>Subshell syntax is a bit different - <kbd>${}</kbd> instead of <kbd>$()</kbd></li>
+<li>Programs that read input (like language REPLs) can operate strangely</li>
+<li>Tools that depend on setting shell environment (<kbd>nvm</kbd>, <kbd>virtualenv</kbd>, etc) don't work</li>
+<li>Can be a little slow on Windows</li>
+</ul>
+
+<p>Interesting articles:
+</p>
+<ul><li><a href="https://ambrevar.xyz/emacs-eshell/index.html">Ambrevar's article on eshell</a></li>
+<li><a href="https://ambrevar.xyz/emacs-eshell-versus-shell/index.html">Ambrevar's article on eshell vs shell</a></li>
+</ul>
+
+<h2><a id="recommendations" class="anchor" href="#recommendations">¶</a>Recommendations</h2><ul><li>Use <kbd>term</kbd> or <kbd>ansi-term</kbd> if you're on Linux / macOS and don't care as much about output speed</li>
+<li>Use <kbd>vterm</kbd> if you're on Linux / macOS and want faster output and better terminal emulation</li>
+<li>Use <kbd>shell</kbd> on Windows if you want to use PowerShell, Bash, or WSL</li>
+<li>Use <kbd>eshell</kbd> on any OS if you want a consistent shell experience everywhere with Lisp superpowers full Emacs integration</li>
+</ul>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

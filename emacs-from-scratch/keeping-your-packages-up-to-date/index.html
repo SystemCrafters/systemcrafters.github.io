@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>Keeping Your Emacs Packages Up to Date - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Keeping Your Emacs Packages Up to Date</h1><p class="blog-post-meta"></p><div><ul><li><a href="https://youtu.be/dtjq68F2dXw">Watch the video</a> on YouTube!</li>
+<li>Check out the <a href="https://github.com/daviwil/emacs-from-scratch/blob/4e921ccbe603d5fdd9c7f16c2418ac7322c8ab71/Emacs.org#automatic-package-updates">final code</a> on GitHub</li>
+<li>Episode 11 of the <a href="../">Emacs From Scratch</a> series</li>
+</ul>
+
+<h2><a id="a-question-youll-eventually-ask-yourself" class="anchor" href="#a-question-youll-eventually-ask-yourself">¶</a>A question you'll eventually ask yourself...</h2><p>"How do I update my packages?"
+</p>
+
+<p>Emacs won't remind you!  You have to remember to do it and initiate the process yourself.
+</p>
+
+<p>Luckily it's pretty easy!
+</p>
+
+<h2><a id="the-package-listing" class="anchor" href="#the-package-listing">¶</a>The package listing</h2><p>Unfortunately there isn't a simple command you can use that will run the update process for you.
+</p>
+
+<p>We'll have to start up the package menu with <kbd>M-x list-packages</kbd>
+</p>
+
+<p>This view shows you all available packages and everything you have installed!  We will talk more about it in a future video.
+</p>
+
+<h2><a id="initiating-an-upgrade" class="anchor" href="#initiating-an-upgrade">¶</a>Initiating an upgrade</h2><p>For now, the important thing to know is that you can mark all packages for upgrading using the <kbd>U</kbd> key (capital 'u').  This will mark all packages with updates so that they will be upgraded.
+</p>
+
+<p>You can also mark individual packages for upgrade using <kbd>u</kbd> (lower-case 'u').
+</p>
+
+<p>Once you've marked packages for upgrade, press <kbd>x</kbd> (lower-case 'x') to initiate the upgrade!
+</p>
+
+<p>After this completes, you should restart Emacs to make sure you load the latest versions of all your packages.
+</p>
+
+<h2><a id="updating-your-packages-automatically" class="anchor" href="#updating-your-packages-automatically">¶</a>Updating your packages automatically</h2><p>There's a useful package called <kbd>auto-package-update</kbd> which will help you configure Emacs to automatically upgrade your packages on a regular basis!
+</p>
+
+<p><a href="https://github.com/rranelli/auto-package-update.el">auto-package-update.el</a> on GitHub
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">auto-package-update</span>
+  <span class="org-builtin">:custom</span>
+  (auto-package-update-interval 7)
+  (auto-package-update-prompt-before-update t)
+  (auto-package-update-hide-results t)
+  <span class="org-builtin">:config</span>
+  (auto-package-update-maybe)
+  (auto-package-update-at-time <span class="org-string">"09:00"</span>))
+
+</code></pre>
+
+<p>You can also use <kbd>M-x auto-package-update-now</kbd> to update right now!
+</p>
+
+<h2><a id="should-i-update-my-packages-automatically" class="anchor" href="#should-i-update-my-packages-automatically">¶</a>Should I update my packages automatically?</h2><p>It depends!
+</p>
+
+<p>Package updates can possibly break your configuration.  That doesn't mean you should be afraid to update, though.
+</p>
+
+<p>It is possible that you could back up your package folder using the <kbd>auto-package-update-before-hook</kbd>.  If you're interested in an approach for this, let me know in the comments!
+</p>
+
+<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>In a future video, I'll go more in depth on Emacs' built-in package manager, <kbd>package.el</kbd>.
+</p>
+
+<p>I'm also planning to make videos on alternative package managers like <kbd>straight.el</kbd> so that you have even more options on how you can manage your configuration!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

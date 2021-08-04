@@ -1,0 +1,119 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>Effortless File Management with Dired - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Effortless File Management with Dired</h1><p class="blog-post-meta"></p><div><ul><li><a href="https://youtu.be/PMWwM8QJAtU">Watch the video</a> on YouTube!</li>
+<li>Check out the <a href="https://github.com/daviwil/emacs-from-scratch/blob/8c302a79bf5700f6ef0279a3daeeb4123ae8bd59/Emacs.org#dired">final code</a> on GitHub</li>
+<li>Episode 10 of the <a href="../">Emacs From Scratch</a> series</li>
+</ul>
+
+<h2><a id="dired-basics" class="anchor" href="#dired-basics">¶</a>Dired Basics</h2><h3><a id="invocation" class="anchor" href="#invocation">¶</a>Invocation</h3><ul><li><kbd>C-x d</kbd> or <kbd>C-x C-f</kbd> - <kbd>dired</kbd></li>
+<li><kbd>dired-jump</kbd> - open Dired buffer, select the current file</li>
+<li><kbd>projectile-dired</kbd></li>
+</ul>
+
+<h3><a id="navigation" class="anchor" href="#navigation">¶</a>Navigation</h3><p><strong>Emacs</strong> / <strong>Evil</strong>
+</p>
+<ul><li><kbd>n</kbd> / <kbd>j</kbd> - next line</li>
+<li><kbd>p</kbd> / <kbd>k</kbd> - previous line</li>
+<li><kbd>j</kbd> / <kbd>J</kbd> - jump to file in buffer</li>
+<li><kbd>RET</kbd> - select file or directory</li>
+<li><kbd>^</kbd> - go to parent directory</li>
+<li><kbd>S-RET</kbd> / <kbd>g O</kbd> - Open file in "other" window</li>
+<li><kbd>M-RET</kbd> - Show file in other window without focusing (previewing files)</li>
+<li><kbd>g o</kbd> (<kbd>dired-view-file</kbd>) - Open file but in a "preview" mode, close with <kbd>q</kbd></li>
+</ul>
+
+<h3><a id="configuration" class="anchor" href="#configuration">¶</a>Configuration</h3><ul><li><kbd>dired-listing-switches:</kbd> Try <kbd>-agho --group-directories-first</kbd></li>
+<li><kbd>g</kbd> / <kbd>g r</kbd> Refresh the buffer with <kbd>revert-buffer</kbd> after changing configuration (and after filesystem changes!)
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">dired</span>
+  <span class="org-builtin">:ensure</span> nil
+  <span class="org-builtin">:commands</span> (dired dired-jump)
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-x C-j"</span> . dired-jump))
+  <span class="org-builtin">:config</span>
+  (evil-collection-define-key 'normal 'dired-mode-map
+    <span class="org-string">"h"</span> 'dired-up-directory
+    <span class="org-string">"l"</span> 'dired-find-file))
+
+</code></pre></li>
+</ul>
+
+<h3><a id="file-operations" class="anchor" href="#file-operations">¶</a>File Operations</h3><h4><a id="marking-files" class="anchor" href="#marking-files">¶</a>Marking files</h4><ul><li><kbd>m</kbd> - Marks a file</li>
+<li><kbd>u</kbd> - Unmarks a file</li>
+<li><kbd>U</kbd> - Unmarks all files in buffer</li>
+<li><kbd>* t</kbd> / <kbd>t</kbd> - Inverts marked files in buffer</li>
+<li><kbd>% m</kbd> - Mark files in buffer using regular expression</li>
+<li><kbd>*</kbd> - Lots of other auto-marking functions</li>
+<li><kbd>k</kbd> / <kbd>K</kbd> - "Kill" marked items (refresh buffer with <kbd>g</kbd> / <kbd>g r</kbd> to get them back)</li>
+<li>Many operations can be done on a single file if there are no active marks!</li>
+</ul>
+
+<h4><a id="copying-and-renaming-files" class="anchor" href="#copying-and-renaming-files">¶</a>Copying and Renaming files</h4><ul><li><kbd>C</kbd> - Copy marked files (or if no files are marked, the current file)</li>
+<li>Copying single and multiple files</li>
+<li><kbd>U</kbd> - Unmark all files in buffer</li>
+<li><kbd>R</kbd> - Rename marked files, renaming multiple is a move!</li>
+<li><kbd>% R</kbd> - Rename based on regular expression: <kbd>^test</kbd> , <kbd>old-\&amp;</kbd></li>
+</ul>
+
+<h4><a id="deleting-files" class="anchor" href="#deleting-files">¶</a>Deleting files</h4><ul><li><kbd>D</kbd> - Delete marked file</li>
+<li><kbd>d</kbd> - Mark file for deletion</li>
+<li><kbd>x</kbd> - Execute deletion for marks</li>
+<li><kbd>delete-by-moving-to-trash</kbd> - Move to trash instead of deleting permanently</li>
+</ul>
+
+<h4><a id="creating-and-extracting-archives" class="anchor" href="#creating-and-extracting-archives">¶</a>Creating and extracting archives</h4><ul><li><kbd>Z</kbd> - Compress or uncompress a file or folder to (<kbd>.tar.gz</kbd>)</li>
+<li><kbd>c</kbd> - Compress selection to a specific file</li>
+<li><kbd>dired-compress-files-alist</kbd> - Bind compression commands to file extension</li>
+</ul>
+
+<h4><a id="other-common-operations" class="anchor" href="#other-common-operations">¶</a>Other common operations</h4><ul><li><kbd>T</kbd> - Touch (change timestamp)</li>
+<li><kbd>M</kbd> - Change file mode</li>
+<li><kbd>O</kbd> - Change file owner</li>
+<li><kbd>G</kbd> - Change file group</li>
+<li><kbd>S</kbd> - Create a symbolic link to this file</li>
+<li><kbd>L</kbd> - Load an Emacs Lisp file into Emacs</li>
+</ul>
+
+<h2><a id="single-dired-buffer" class="anchor" href="#single-dired-buffer">¶</a>Single Dired buffer</h2><p>Closed Dired buffers are just buried!  They need to be refreshed if you go back to them.
+</p>
+
+<p>Use <a href="https://github.com/crocket/dired-single">dired-single</a> to help with this!
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Inside `use-package dired`</span>
+(<span class="org-keyword">use-package</span> <span class="org-constant">dired-single</span>)
+
+    (evil-collection-define-key 'normal 'dired-mode-map
+      <span class="org-string">"h"</span> 'dired-single-up-directory
+      <span class="org-string">"l"</span> 'dired-single-buffer))
+
+</code></pre>
+
+<h2><a id="file-icons" class="anchor" href="#file-icons">¶</a>File icons</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">all-the-icons-dired</span>
+  <span class="org-builtin">:hook</span> (dired-mode . all-the-icons-dired-mode))
+
+</code></pre>
+
+<h2><a id="open-external-files" class="anchor" href="#open-external-files">¶</a>Open external files</h2><ul><li><kbd>!</kbd> or <kbd>&amp;</kbd> to launch an external program on a file</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">dired-open</span>
+  <span class="org-builtin">:config</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Doesn't work as expected!</span>
+  (add-to-list 'dired-open-functions #'dired-open-xdg t)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">-- OR! --</span>
+  (<span class="org-keyword">setq</span> dired-open-extensions '((<span class="org-string">"png"</span> . <span class="org-string">"feh"</span>)
+                                (<span class="org-string">"mkv"</span> . <span class="org-string">"mpv"</span>))))
+
+</code></pre>
+
+<h2><a id="hide--show-dotfiles" class="anchor" href="#hide--show-dotfiles">¶</a>Hide / show dotfiles</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">dired-hide-dotfiles</span>
+  <span class="org-builtin">:hook</span> (dired-mode . dired-hide-dotfiles-mode)
+  <span class="org-builtin">:config</span>
+  (evil-collection-define-key 'normal 'dired-mode-map
+    <span class="org-string">"H"</span> 'dired-hide-dotfiles-mode))
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

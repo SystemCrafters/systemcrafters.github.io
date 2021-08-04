@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>System Crafters Live! - June 4, 2021 - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - June 4, 2021</h1><p class="blog-post-meta"></p><div><p><a href="https://www.youtube.com/watch?v=Qci8t_jpVGA">Watch the recording</a> on YouTube!
+</p>
+
+<h2><a id="the-great-irc-experiment" class="anchor" href="#the-great-irc-experiment">¶</a>The Great IRC Experiment</h2><ul><li>About 40-50 people in the channel at any time</li>
+<li>We're now a registered community on Libera.Chat!</li>
+<li>The #systemcrafters channel is bridged to Matrix (matrix.org instance)</li>
+<li>Benoit is working on <kbd>crafter-bot</kbd> derived from the one from <kbd>#emacs</kbd></li>
+<li>Will we be leaving Discord?  Short answer: no!</li>
+</ul>
+
+<p>Shom's wiki page: <a href="https://wiki.systemcrafters.cc/community/chat-with-us/">https://wiki.systemcrafters.cc/community/chat-with-us/</a>
+</p>
+
+<p>Contribute to the System Crafters wiki! <a href="https://github.com/SystemCrafters/wiki-site">https://github.com/SystemCrafters/wiki-site</a>
+</p>
+
+<p>I'm experimenting with a ZNC bouncer for $5+ sponsors, looking for 5 people to try it!
+</p>
+
+<h2><a id="improving-the-irc-experience-in-erc" class="anchor" href="#improving-the-irc-experience-in-erc">¶</a>Improving the IRC Experience in ERC</h2><h3><a id="improving-the-display-of-messages" class="anchor" href="#improving-the-display-of-messages">¶</a>Improving the display of messages</h3><p>You can change how ERC displays messages with <kbd>erc-fill-mode</kbd>:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> erc-fill-column 120
+      erc-fill-function 'erc-fill-static
+      erc-fill-static-center 20)
+
+</code></pre>
+
+<h3><a id="customizing-activity-tracking" class="anchor" href="#customizing-activity-tracking">¶</a>Customizing activity tracking</h3><p>Mode line tracking of channels is useful but can be a little annoying:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> erc-track-exclude '(<span class="org-string">"#emacs"</span>)
+      erc-track-exclude-types '(<span class="org-string">"JOIN"</span> <span class="org-string">"NICK"</span> <span class="org-string">"QUIT"</span> <span class="org-string">"MODE"</span> <span class="org-string">"AWAY"</span>)
+      erc-hide-list '(<span class="org-string">"JOIN"</span> <span class="org-string">"NICK"</span> <span class="org-string">"QUIT"</span> <span class="org-string">"MODE"</span> <span class="org-string">"AWAY"</span>)
+      erc-track-exclude-server-buffer t)
+
+</code></pre>
+
+<p>If you're using multiple frames, especially if you keep IRC buffers on a specific EXWM workspace, this setting can be useful:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> erc-track-visibility nil) <span class="org-comment-delimiter">; </span><span class="org-comment">Only use the selected frame for visibility</span>
+
+</code></pre>
+
+<h3><a id="tracking-specific-keywords-or-people" class="anchor" href="#tracking-specific-keywords-or-people">¶</a>Tracking specific keywords or people</h3><pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> erc-pals '(<span class="org-string">"shom_"</span> <span class="org-string">"masteroman"</span> <span class="org-string">"benoitj"</span>)
+            erc-fools '(<span class="org-string">"daviwil-test"</span>)
+            erc-keywords '(<span class="org-string">"guix"</span> <span class="org-string">"wiki"</span>))
+
+</code></pre>
+
+<h3><a id="desktop-notifications-for-matchesmentions" class="anchor" href="#desktop-notifications-for-matchesmentions">¶</a>Desktop notifications for matches/mentions</h3><pre><code class="emacs-lisp">
+(add-to-list 'erc-modules 'notifications)
+
+</code></pre>
+
+<h3><a id="uniquely-colorizing-nicknames-in-chat" class="anchor" href="#uniquely-colorizing-nicknames-in-chat">¶</a>Uniquely colorizing nicknames in chat</h3><p>This makes it easier to recognize specific people at a glance!
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">erc-hl-nicks</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:after</span> erc
+  <span class="org-builtin">:config</span>
+  (add-to-list 'erc-modules 'hl-nicks))
+
+</code></pre>
+
+<p>You might need to run <kbd>M-: (erc-update-modules)</kbd> after running this in an existing Emacs session!
+</p>
+
+<h3><a id="displaying-inline-images" class="anchor" href="#displaying-inline-images">¶</a>Displaying inline images</h3><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">erc-image</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:after</span> erc
+  <span class="org-builtin">:config</span>
+  (<span class="org-keyword">setq</span> erc-image-inline-rescale 300)
+  (add-to-list 'erc-modules 'image))
+
+</code></pre>
+
+<p>Try it out in a chat (like in <kbd>/query NickServ</kbd>): <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/EmacsIcon.svg/1200px-EmacsIcon.svg.png">https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/EmacsIcon.svg/1200px-EmacsIcon.svg.png</a>
+</p>
+
+<p><strong>NOTE:</strong> Make sure to pull the latest version of the package! Karthik and TitanOfOld on #systemcrafters IRC worked together to fix image scaling on Emacs 27+!
+</p>
+
+<p><a href="https://github.com/kidd/erc-image.el/pull/25">https://github.com/kidd/erc-image.el/pull/25</a>
+</p>
+
+<h3><a id="displaying-emojis-in-messages" class="anchor" href="#displaying-emojis-in-messages">¶</a>Displaying emojis in messages</h3><p>Use emojify-mode:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">emojify</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:hook</span> (erc-mode . emojify-mode)
+  <span class="org-builtin">:commands</span> emojify-mode)
+
+</code></pre>
+
+<h3><a id="connecting-to-a-specific-server-with-a-keybinding" class="anchor" href="#connecting-to-a-specific-server-with-a-keybinding">¶</a>Connecting to a specific server with a keybinding</h3><pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/connect-irc</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (erc-tls
+      <span class="org-builtin">:server</span> <span class="org-string">"irc.libera.chat"</span>
+      <span class="org-builtin">:port</span> 6697
+      <span class="org-builtin">:nick</span> <span class="org-string">"mynick"</span>
+      <span class="org-comment-delimiter">;; </span><span class="org-comment">This is using password-store.el.  Not needed if you use auth-source!</span>
+      <span class="org-builtin">:password</span> (password-store-get <span class="org-string">"IRC/irc.libera.chat"</span>)))
+
+(global-set-key (kbd <span class="org-string">"C-c c c"</span>) 'my/connect-irc)
+
+</code></pre>
+
+<h3><a id="jumping-to-irc-buffers-easily" class="anchor" href="#jumping-to-irc-buffers-easily">¶</a>Jumping to IRC buffers easily</h3><p>Two commands are useful for this:
+</p>
+
+<ul><li><kbd>erc-switch-to-buffer</kbd></li>
+<li><kbd>erc-track-switch-buffer</kbd> (bound to C-c C-SPC if <kbd>erc-track-enable-keybindings</kbd> is <kbd>t</kbd>)</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> erc-track-enable-keybindings t)
+
+</code></pre>
+
+<h3><a id="automatically-logging-in" class="anchor" href="#automatically-logging-in">¶</a>Automatically logging in</h3><p>You'll need <kbd>auth-source</kbd> set up for this to work!  Check out the video I made about <a href="https://www.youtube.com/watch?v=nZ_T7Q49B8Y">storing your passwords in Emacs</a>.
+</p>
+
+<p>Setting this variable to <kbd>nil</kbd> will tell ERC that it should look up your password automatically when connecting.
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> erc-prompt-for-password nil)
+
+</code></pre>
+
+<h3><a id="using-znc" class="anchor" href="#using-znc">¶</a>Using ZNC</h3><p><a href="https://github.com/sshirokov/ZNC.el">https://github.com/sshirokov/ZNC.el</a>
+</p>
+
+<h2><a id="emacs-news" class="anchor" href="#emacs-news">¶</a>Emacs News</h2><ul><li><a href="https://github.com/rougier/svg-lib">svg-lib</a></li>
+<li><a href="https://www.reddit.com/r/emacs/comments/noh7da/consult_08_and_marginalia_06_released_on_gnu_elpa/">Consult 0.8 and Marginalia 0.6 released to ELPA</a></li>
+<li><a href="https://tech.toryanderson.com/2021/05/29/what-can-emacs-give-me-in-2021-a-response-to-the-mother-of-all-emacs-papers/#1-memory-limitations-a-thing-of-the-past-mostly">What can Emacs give me in 2021?</a> (<a href="https://www.multicians.org/mepap.html">Original paper)</a></li>
+</ul>
+
+<h2><a id="next-week-on-the-stream" class="anchor" href="#next-week-on-the-stream">¶</a>Next week on the stream</h2><p>We'll be doing another Dotfile Detective stream featuring a discussion with <a href="https://ambrevar.xyz">Ambrevar</a> about <a href="https://gitlab.com/ambrevar/dotfiles/">his dotfiles</a> and possibly other topics!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

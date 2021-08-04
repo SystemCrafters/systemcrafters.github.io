@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>Efficient Text Selection with Emacs Key Bindings - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Efficient Text Selection with Emacs Key Bindings</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/Dq5UOt63Mms">Watch the video</a> on YouTube!
+</p>
+
+<h2><a id="what-will-we-learn" class="anchor" href="#what-will-we-learn">¶</a>What will we learn?</h2><p>In the last video we learned the key bindings you can use to move around Emacs buffers efficiently.  In this video I'll how you how you can efficiently mark and select text while editing!
+</p>
+
+<p>We'll also learn about a cool feature called the "mark ring" that will make it easy to jump back to places you've been in the buffers you have open.
+</p>
+
+<h2><a id="oh-hi-mark" class="anchor" href="#oh-hi-mark">¶</a>Oh hi, Mark</h2><p>To understand selections in Emacs, it's best to start with the concept of the "mark."  The mark is a location in the buffer that is used as the starting point for various selection and editing operations.
+</p>
+
+<p>The primary way to "activate" the mark at the location of the point is to press <kbd>C-SPC</kbd> (<kbd>set-mark-command</kbd>).  There is also an alternate keybinding of <kbd>C-@</kbd> which is a little harder to press but might be useful if you've replaced the default <kbd>C-SPC</kbd> keybinding.
+</p>
+
+<p>Once the mark is activated, you will be able to create regions to select text!
+</p>
+
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Setting-Mark.html">Emacs Manual: Setting the Mark</a>
+</p>
+
+<h2><a id="regions" class="anchor" href="#regions">¶</a>Regions</h2><p>In Emacs, selections of text are called "regions".  A region is the range of text in a buffer between the active mark and the point (the cursor).
+</p>
+
+<p>There are a few ways to create a region:
+</p>
+
+<ul><li>Set an active mark at the current location and then move the point using any of the movement keybindings we talked about in the last video.  For example, press <kbd>C-SPC</kbd> (<kbd>set-mark-command</kbd>) and then <kbd>M-f</kbd> to move the point to the end of the next word.  This will create a region!</li>
+
+<li>Hold Shift while pressing any movement keybinding.  Like the previous example, you can press <kbd>S-M-f</kbd> (Shift+Alt+F) to create a selection to the end of the next word.  You can continue pressing this key combination to extend the selection by more words.</li>
+
+<li>If you have a deactivated mark (more on this later), you can press <kbd>C-x C-x</kbd> (<kbd>exchange-point-and-mark</kbd>) when the point is anywhere in the buffer to set the mark at point and then move the mark to the previous point.</li>
+
+<li>Using your mouse!  Just click and drag over a region of text.  This should also work in the terminal if your terminal supports mouse events.</li>
+
+<li>Using specialized marking commands which we'll talk about in a bit.</li>
+</ul>
+
+<p>The important thing to note about the shift-selection approach is that it creates a mark for you automatically at the point where you started the selection so functionally it isn't much different than setting the mark first and the moving the point.  Whether you use mark-first or shift-select is really a matter of preference!
+</p>
+
+<p>Once you have a region of text selected in a buffer, you can execute a variety of commands that are meant for editing the region:
+</p>
+
+<ul><li><kbd>C-w</kbd> executes <kbd>kill-region</kbd> which deletes the text in the region and copies to the kill ring</li>
+<li><kbd>M-w</kbd> executes <kbd>kill-ring-save</kbd> which merely copies the text in the region to the kill ring</li>
+<li>The <kbd>upcase-region</kbd> / <kbd>downcase-region</kbd> commands convert all characters in the region to upper or lower case</li>
+<li>The <kbd>eval-region</kbd> command will evaluate a selected region of code in Emacs Lisp buffers</li>
+</ul>
+
+<p>You can typically identify region commands by searching for any that end in <kbd>-region</kbd>!
+</p>
+
+<p>One last thing to mention: if you want to deselect or clear the current region, just press <kbd>C-g</kbd> (<kbd>keyboard-quit</kbd>)!
+</p>
+
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Mark.html">Emacs Manual: The Mark and the Region</a>
+<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Shift-Selection.html">Emacs Manual: Shift Selection</a>
+</p>
+
+<h2><a id="specialized-marking-commands" class="anchor" href="#specialized-marking-commands">¶</a>Specialized Marking Commands</h2><p>There are some other specialized marking commands that might be useful when you want to select a particular text "object" without using the typical movement bindings:
+</p>
+
+<ul><li><kbd>M-@</kbd> (<kbd>mark-word</kbd>) sets the mark at the end of the next word without moving the point!</li>
+<li><kbd>C-M-@</kbd> (<kbd>mark-sexp</kbd>) sets the mark after the end of the current s-expression in Emacs Lisp buffers without moving the point</li>
+<li><kbd>M-h</kbd> (<kbd>mark-paragraph</kbd>) marks the whole current paragraph and move the point to the beginning</li>
+<li><kbd>C-M-h</kbd> (<kbd>mark-defun</kbd>) marks the whole "defun" under the point in Emacs Lisp buffers and move point to the beginning</li>
+<li><kbd>C-x C-p</kbd> (<kbd>mark-page</kbd>) marks the entire page by setting point at the beginning of the visible part of the buffer and mark at the end</li>
+<li><kbd>C-x h</kbd> (<kbd>mark-whole-buffer</kbd>) moves the point to the beginning of the buffer and sets mark at the end, selecting the whole buffer</li>
+</ul>
+
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Marking-Objects.html">Emacs Manual: Commands to Mark Textual Objects</a>
+</p>
+
+<h2><a id="remember-your-place-with-the-mark-ring" class="anchor" href="#remember-your-place-with-the-mark-ring">¶</a>Remember Your Place with the Mark Ring</h2><p>The mark ring is a really useful feature for navigating around in buffers while editing.  We learned before that you can activate the mark with the <kbd>C-SPC</kbd> key binding.  When the current mark becomes deactivated it will be added to the "mark ring."  This is a history list of the most recent marks in the current buffer!
+</p>
+
+<p>There are a few ways the mark will become deactivated:
+</p>
+
+<ul><li>Typing text into the buffer</li>
+<li>Running an editing command that affects the region</li>
+<li>Pressing <kbd>C-g</kbd></li>
+<li>You can also create and deactivate the mark instantly by pressing <kbd>C-SPC C-SPC</kbd></li>
+</ul>
+
+<p>The mark ring enables you to jump to the location of previous marks in the current buffer using the <kbd>C-u C-SPC</kbd> key binding (<kbd>C-SPC</kbd> modified by the universal prefix <kbd>C-u</kbd>).  This can be really useful for jumping back to previous locations you were editing in a file.
+</p>
+
+<p>So why is it called a "ring"?  It's because the history list will wrap back around to the beginning as you "pop" the current mark.  This is useful because it enables you to get back to the latest mark if you just keep pressing <kbd>C-u C-SPC</kbd>.
+</p>
+
+<p>You might want to customize the size of the mark ring if you use it a lot!  Set the value of <kbd>mark-ring-max</kbd> to a number larger than <kbd>16</kbd> (the default) to control how many mark locations are stored.
+</p>
+
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Mark-Ring.html">Emacs Manual: Mark Ring</a>
+</p>
+
+<h2><a id="the-global-mark-ring" class="anchor" href="#the-global-mark-ring">¶</a>The Global Mark Ring</h2><p>There's a separate mark ring that works across all of the buffers you've visited!  Each time you deactivate a mark in the buffer, it's added to both the buffer's mark ring and the global mark ring.  This enables you to jump back into other files you recently visited!
+</p>
+
+<p>To pop marks on the global mark ring, press <kbd>C-x C-SPC</kbd> (<kbd>pop-global-mark</kbd>).  Keep in mind that this will jump backward to other marks in the same file if you have deactivated multiple after switching from the previous buffer!
+</p>
+
+<p>Just as with the buffer mark ring, the size of the global mark ring can be customized with <kbd>global-mark-ring-max</kbd>.
+</p>
+
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Global-Mark-Ring.html">Emacs Manual: Global Mark Ring</a>
+</p>
+
+<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>Now that we've learned enough essentials for day to day editing tasks, the next thing you're probably wondering about is how to customize Emacs to set the theme, font, and even the indentation width for various programming languages.  In the next episode I'll walk you through how you can use Emacs' customization interface to set everything up!
+</p>
+
+<p>If you have any specific areas you'd like to learn about Emacs for day to day use, leave suggestions in the comments!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

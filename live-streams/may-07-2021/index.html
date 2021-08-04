@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>System Crafters Live! - May 7, 2021 - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - May 7, 2021</h1><p class="blog-post-meta"></p><div>
+<h2><a id="should-you-use-pre-made-emacs-configurations" class="anchor" href="#should-you-use-pre-made-emacs-configurations">¶</a>Should you use pre-made Emacs configurations?</h2><p>Pre-made Emacs configurations like Doom Emacs and Spacemacs are really popular and a common entry point into the world of Emacs.
+</p>
+
+<h3><a id="benefits-of-pre-made-configurations" class="anchor" href="#benefits-of-pre-made-configurations">¶</a>Benefits of pre-made configurations</h3><ul><li>Makes getting started with Emacs much easier!  Skip the early learning curve</li>
+<li>Gives a better representation of what Emacs can really do</li>
+<li>Many things you might want to use are already configured and polished</li>
+<li>Better integration between various packages</li>
+<li>Better configuration of Vim-style keybindings if you need them</li>
+<li>Large communities where you can get help easily</li>
+<li>Often there's more learning resources about them</li>
+</ul>
+
+<h3><a id="downsides-of-pre-made-configurations" class="anchor" href="#downsides-of-pre-made-configurations">¶</a>Downsides of pre-made configurations</h3><ul><li>It might convince you that "vanilla" Emacs is too hard or weird to use</li>
+<li>Specialized configuration logic can make things <em>more</em> confusing in my opinion</li>
+<li>You're not learning how to customize Emacs yourself because you have to do less work</li>
+<li>If the authors of the pre-made configuration want to make a fundamental change, it might break your workflow!</li>
+</ul>
+
+<p>That said, I don't think there's any catastrophic risk to using a pre-made configuration.  If you like Emacs enough you'll eventually get curious about learning how to do more of it yourself.
+</p>
+
+<h3><a id="is-there-a-middle-ground" class="anchor" href="#is-there-a-middle-ground">¶</a>Is there a middle ground?</h3><p>An idea that I've been thinking about a lot: providing configuration "packs" for certain configuration areas that can be installed in your own configuration.  The <a href="https://git.sr.ht/~technomancy/better-defaults">better-defaults</a> package is a good example of this.
+</p>
+
+<p>Enable someone to skip configuring something like development configuration for a particular language by using a configuration package!
+</p>
+
+<p>It's not very different than just installing Emacs packages, but that's the point.
+</p>
+
+<p>I just learned of this config project which might implement a similar idea: <a href="https://github.com/lambdaisland/corgi">https://github.com/lambdaisland/corgi</a>
+</p>
+
+<p>However, Corgi seems to provide its own approach to setting key bindings, so I'm not sure how I feel about it!
+</p>
+
+<h3><a id="whats-my-recommendation" class="anchor" href="#whats-my-recommendation">¶</a>What's my recommendation?</h3><ul><li>If you've never used Emacs before, try whatever seems the most interesting to you</li>
+<li>Use Doom or Spacemacs for a few months to get acquainted with Emacs</li>
+<li>When you start to become more curious about how to configure Emacs yourself, try experimenting with a from-scratch config on the side</li>
+<li>Take the parts you liked about the pre-made configuration and implement them in your configuration</li>
+<li>Use Emacs a lot, improve it whenever you have ideas.  Your config will evolve over time!</li>
+</ul>
+
+<p>However, if you enjoy using Doom or Spacemacs, keep using them if they work well for you!
+</p>
+
+<p>You can have both!  Just use <a href="https://github.com/plexus/chemacs2">Chemacs2</a> to manage multiple configurations.
+</p>
+
+<h2><a id="emacs-and-community-news" class="anchor" href="#emacs-and-community-news">¶</a>Emacs and Community News</h2><ul><li><a href="https://www.reddit.com/r/emacs/comments/n13v5l/what_is_the_next_big_feature_after_native_comp/">What's the next big feature in Emacs?</a></li>
+<li><a href="https://www.reddit.com/r/emacs/comments/n3d4vv/emacs_vs_vim_keybindings_for_emacs/">Emacs vs Vim keybindings for Emacs</a></li>
+<li><a href="http://git.savannah.gnu.org/cgit/emacs.git/commit/etc/NEWS?id=6c1c3204e4761fd0d8bdbf22c6519d2328f60450">New command in Emacs 28: describe-command</a></li>
+<li><a href="https://karthinks.com/software/bridging-islands-in-emacs-1/">https://karthinks.com/software/bridging-islands-in-emacs-1/</a></li>
+<li><a href="https://zerokspot.com/weblog/2021/04/28/disabling-outline-style-indentation-in-org-mode/">Disabling Outline Indentation in Org-Mode</a></li>
+<li><a href="https://www.mattduck.com/emacs-fuzzy-launcher.html">Emacs as launcher and Alfred replacement</a> (<a href="https://www.mattduck.com/emacs-fuzzy-launcher-part-two.html">Part 2</a>)</li>
+<li><a href="https://github.com/thblt/sway.el">Integrating Emacs with Sway Window Manager</a></li>
+<li><a href="http://mbork.pl/2021-05-01_Emacs_Lisp_book_revived">A new book in preview about Emacs Lisp</a></li>
+<li><a href="https://www.reddit.com/r/emacs/comments/n1xake/this_month_in_org_april_2021/">This Month in Org - April 2021</a></li>
+</ul>
+
+<p>Huge thanks to <a href="https://sachachua.com">Sacha Chua</a> for putting together the <a href="https://sachachua.com/blog/2021/05/2021-05-03-emacs-news/">Emacs News post</a> that was the source of these links!
+</p>
+
+<h2><a id="chat-and-qampa" class="anchor" href="#chat-and-qampa">¶</a>Chat and Q&amp;A</h2><ul><li>My new Vertico-based config: <a href="https://config.daviwil.com/emacs#completion-system">https://config.daviwil.com/emacs#completion-system</a></li>
+</ul>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

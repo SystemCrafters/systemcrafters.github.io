@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>Advanced Emacs Package Management with straight.el - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Advanced Emacs Package Management with straight.el</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/UmbVeqphGlc">Watch the video</a> on YouTube!
+</p>
+
+<h2><a id="what-will-we-learn" class="anchor" href="#what-will-we-learn">¶</a>What will we learn?</h2><p>Today I'm going to show you a different way to install all of the community packages you use in your Emacs configuration with an alternative package manager called <kbd>straight.el</kbd>.
+</p>
+
+<p>We'll walk through all of the main features it provides and take a look at how you would use it day to day.
+</p>
+
+<p>I'll also convert the Emacs From Scratch configuration to use <kbd>straight.el</kbd> so you can see how to update your own configuration to use it with very little effort!
+</p>
+
+<h2><a id="what-is-straightel" class="anchor" href="#what-is-straightel">¶</a>What is straight.el?</h2><p><kbd>straight.el</kbd> describes itself as a "next-generation, purely functional package manager for Emacs."  What's that?
+</p>
+
+<p>It essentially means that <kbd>straight.el</kbd> enables you to have more detailed control over how you manage the Emacs packages you use in your configuration.
+</p>
+
+<p>It accomplishes this by cloning the actual source repositories of all the Emacs packages you use regardless of whether you find them on MELPA, ELPA, or an arbitrary GitHub or GitLab repo.
+</p>
+
+<p>Since we're using actual source repositories, we can be more explicit about which version, branch, or even commit used for each package, even locking all packages to specific commits.
+</p>
+
+<p>You can learn more about <kbd>straight.el</kbd> from its <a href="https://github.com/raxod502/straight.el#readme">README.md file</a>.
+</p>
+
+<h2><a id="straightel-features" class="anchor" href="#straightel-features">¶</a>straight.el features</h2><p>Practically, <kbd>straight.el</kbd> is an alternative to Emacs' built in package manager, <kbd>package.el</kbd>.  It provides some useful benefits you might be interested in:
+</p>
+
+<ul><li>Easy <kbd>package.el</kbd>-style package installation and upgrades (no UI list, though)</li>
+<li>Integrates with <kbd>use-package</kbd> so that you can use <kbd>:straight t</kbd> instead of <kbd>:ensure t</kbd></li>
+<li>All MELPA and ELPA packages are easily installable by name</li>
+<li>You can also install Emacs packages from specific Git repos</li>
+<li>You can even use your own forked versions of Emacs packages and merge improvements from the original repo</li>
+<li>You can use the cloned package repositories to make changes and send improvements back upstream</li>
+<li>Your package list can be fully reproducible down to the exact commit of the Git repository where the package comes from, using only your init file and an additional lockfile</li>
+</ul>
+
+<p>It may sound like <kbd>straight.el</kbd> is only meant for power users, but everyday use is very straightforward for any Emacs user!
+</p>
+
+<h2><a id="installing-straightel" class="anchor" href="#installing-straightel">¶</a>Installing straight.el</h2><p>Since <kbd>straight.el</kbd> doesn't come with Emacs, we need a way to make sure it can be installed <em>without</em> using <kbd>package.el</kbd>.  The maintainers provide a short "bootstrapping" script which will download and configure <kbd>straight.el</kbd> for you.
+</p>
+
+<p>Add this bootstrapping snippet to your <kbd>init.el</kbd> file:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">bootstrap-version</span>)
+(<span class="org-keyword">let</span> ((bootstrap-file
+      (expand-file-name <span class="org-string">"straight/repos/straight.el/bootstrap.el"</span> user-emacs-directory))
+      (bootstrap-version 5))
+  (<span class="org-keyword">unless</span> (file-exists-p bootstrap-file)
+    (<span class="org-keyword">with-current-buffer</span>
+        (url-retrieve-synchronously
+        <span class="org-string">"https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"</span>
+        'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+</code></pre>
+
+<p>You can either run this snippet directly for the first time (<kbd>eval-region</kbd>, etc) or just restart Emacs to pick it up while Emacs is initializing.
+</p>
+
+<p>If <kbd>straight.el</kbd> is already installed, this script won't try to download it again!  You should leave it in your configuration so that it gets installed correctly on any machine where you load your Emacs configuration.
+</p>
+
+<h2><a id="installing-a-package-with-straightel" class="anchor" href="#installing-a-package-with-straightel">¶</a>Installing a package with straight.el</h2><p>Now that we've installed <kbd>straight.el</kbd>, let's see how to install a package with it.  This part is a little different than what you might be familiar with from <kbd>package.el</kbd>.
+</p>
+
+<p><kbd>straight.el</kbd> depends on a "source of truth" for the list of packages that should be installed and loaded.  Conveniently, it uses your Emacs configuration's <kbd>init.el</kbd> file for this purpose!
+</p>
+
+<p>To install a package, you should include an expression like this for it in your <kbd>init.el</kbd> file:
+</p>
+
+<pre><code class="emacs-lisp">
+(straight-use-package 'evil)
+
+</code></pre>
+
+<p>This will cause <kbd>straight.el</kbd> to install the package if it hasn't been already.  Straight depends on this line being in your configuration (in some form) to acknowledge that the package is installed and used!
+</p>
+
+<p>Straight takes care of downloading, compiling (either byte or native compilation), and adding the package to Emacs' load path.
+</p>
+
+<p>One thing to point out: the name <kbd>straight-use-package</kbd> implies some connection to the <kbd>use-package</kbd> function but they are not related!  We'll look at how to integrate them later.
+</p>
+
+<h3><a id="tip-using-kbdstraight-use-packagekbd-interactively-to-list-packages" class="anchor" href="#tip-using-kbdstraight-use-packagekbd-interactively-to-list-packages">¶</a>TIP: Using <kbd>straight-use-package</kbd> interactively to list packages</h3><p>If you want an easy way to see a list of all packages that you might want to install run <kbd>M-x straight-use-package</kbd>!  If you have a good completion system enabled, you will be able to filter the package list to find interesting packages to install.
+</p>
+
+<p><strong>IMPORTANT:</strong> If you install a package like this, it will not be available the next time you start Emacs!  This is because the package needs to be referenced in your <kbd>init.el</kbd> like I mentioned before.
+</p>
+
+<h2><a id="understanding-package-recipes" class="anchor" href="#understanding-package-recipes">¶</a>Understanding package recipes</h2><p>I mentioned before that <kbd>straight.el</kbd> is installing all packages from their associated Git repositories.  How does it know where to find them?
+</p>
+
+<p>Straight uses another type of package called a "recipe repository" which contains the details on where the sources for many packages can be found.  There are a few recipe repository packages that it already knows about:
+</p>
+
+<ul><li><kbd>melpa</kbd>: Uses recipes found at the <a href="https://github.com/melpa/melpa">MELPA package repository</a></li>
+<li><kbd>gnu-elpa-mirror</kbd>: Uses a special mirror of package from the GNU ELPA repository</li>
+<li><kbd>emacsmirror-mirror</kbd>: Uses a <a href="https://github.com/emacs-straight/emacsmirror-mirror">special mirror</a> of packages from the <a href="https://emacsmirror.net/">Emacsmirror</a></li>
+</ul>
+
+<p>You can get the recipe for any package inside of <kbd>straight.el</kbd> by using the <kbd>M-x straight-get-recipe</kbd> command!
+</p>
+
+<p>For example, the recipe for <kbd>org-mode</kbd>:
+</p>
+
+<pre><code class="emacs-lisp">
+(org <span class="org-builtin">:type</span> git
+     <span class="org-builtin">:repo</span> <span class="org-string">"https://code.orgmode.org/bzg/org-mode.git"</span>
+     <span class="org-builtin">:local-repo</span> <span class="org-string">"org"</span>
+     <span class="org-builtin">:depth</span> full
+     <span class="org-builtin">:pre-build</span> (straight-recipes-org-elpa--build)
+     <span class="org-builtin">:build</span> (<span class="org-builtin">:not</span> autoloads)
+     <span class="org-builtin">:files</span> (<span class="org-builtin">:defaults</span> <span class="org-string">"lisp/*.el"</span> (<span class="org-string">"etc/styles/"</span> <span class="org-string">"etc/styles/*"</span>)))
+
+</code></pre>
+
+<h2><a id="installing-a-package-from-a-git-repository" class="anchor" href="#installing-a-package-from-a-git-repository">¶</a>Installing a package from a Git repository</h2><p><kbd>straight.el</kbd> makes it really easy to install Emacs packages directly from Git repositories.  Here's an example of how to install my <kbd>dotcrafter.el</kbd> package directly from GitHub:
+</p>
+
+<pre><code class="emacs-lisp">
+(straight-use-package '(dotcrafter <span class="org-builtin">:host</span> github
+                                   <span class="org-builtin">:repo</span> <span class="org-string">"daviwil/dotcrafter.el"</span>
+                                   <span class="org-builtin">:branch</span> <span class="org-string">"main"</span>))
+
+</code></pre>
+
+<p>You might wonder why you wouldn't just do this for every package.  In my opinion, it's better to use the pre-defined recipes for packages that come from MELPA, etc, because they might come with other configuration that's necessary to load the package successfully!
+</p>
+
+<p>There are <a href="https://github.com/raxod502/straight.el#git-backend">other parameters</a> you can use in repo recipes, but we'll cover those in another video!
+</p>
+
+<h2><a id="upgrading-packages" class="anchor" href="#upgrading-packages">¶</a>Upgrading packages</h2><p><kbd>straight.el</kbd> allows you to upgrade packages individually or all at once.  Package upgrades are performed by pulling a newer version of a package from the associated Git repository.
+</p>
+
+<ul><li><kbd>M-x straight-pull-package</kbd> will pull a single package to upgrade it to the latest version</li>
+<li><kbd>M-x straight-pull-package-and-deps</kbd> will pull a package and all of its dependencies</li>
+<li><kbd>M-x straight-pull-all</kbd> will upgrade all of your active packages</li>
+</ul>
+
+<p>Keep in mind that pulling/upgrading a package doesn't take effect immediately!  When you restart Emacs, <kbd>straight.el</kbd> will rebuild and load the latest versions of the packages you installed.
+</p>
+
+<p>If you want to activate the upgraded version of a package while Emacs is running, you can run <kbd>M-x straight-check-package</kbd> (or <kbd>M-x straight-check-all</kbd>).  This will check packages to see if their files have changed since the last build and rebuild them if necessary.
+</p>
+
+<h2><a id="removing-a-package" class="anchor" href="#removing-a-package">¶</a>Removing a package</h2><p>Removing or uninstalling a package works a bit differently with <kbd>straight.el</kbd>; there is no explicit "uninstall" command for packages.
+</p>
+
+<p>Instead, just remove the <kbd>straight-use-package</kbd> line from your configuration!  Let's try it.
+</p>
+
+<p>Comment out the <kbd>(straight-use-package 'evil)</kbd> line and restart Emacs, then try to run <kbd>(require 'evil)</kbd>.  It doesn't seem to exist now!
+</p>
+
+<p>Uncomment the <kbd>'evil</kbd> line and restart Emacs.  Now <kbd>evil-mode</kbd> is available again!
+</p>
+
+<p>If you really want to make sure those unused repository folders are gone, you can run <kbd>M-x straight-remove-unused-repos</kbd> to delete them.  Those unused repos won't be loaded if they aren't referenced in your <kbd>init.el</kbd> file, though!
+</p>
+
+<h2><a id="integrating-with-use-package" class="anchor" href="#integrating-with-use-package">¶</a>Integrating with use-package</h2><p>If you use <kbd>use-package</kbd> to simplify your configuration patterns, you can easily set up <kbd>straight.el</kbd> to be used with it:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Use straight.el for use-package expressions</span>
+(straight-use-package 'use-package)
+
+</code></pre>
+
+<p>If you like <kbd>use-package</kbd> to automatically install all of your packages without the need for adding <kbd>:straight t</kbd>, you can replicate the same behavior with the following setting:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> straight-use-package-by-default t)
+
+</code></pre>
+
+<p>This is equivalent to setting <kbd>use-package-always-ensure</kbd> to <kbd>t</kbd>.
+</p>
+
+<h2><a id="locking-package-versions" class="anchor" href="#locking-package-versions">¶</a>Locking package versions</h2><p>If you'd like to have a more consistent and repeatable configuration across multiple machines, you can create a "lockfile" which ensures that all of the packages you install are locked to specific commits of the associated repositories.
+</p>
+
+<p>To generate such a lockfile, you can run the <kbd>M-x straight-freeze-versions</kbd> command.  This will generate a file in your Emacs configuration folder called <kbd>straight/versions/default.el</kbd> which contains contents like this:
+</p>
+
+<pre><code class="emacs-lisp">
+((<span class="org-string">"dotcrafter.el"</span> . <span class="org-string">"b88d1fa4b528f39f6c5e844e1240aaaab1036b1c"</span>)
+ (<span class="org-string">"el-get"</span> . <span class="org-string">"ec135b5353867ce3564a675e99024944b834395d"</span>)
+ (<span class="org-string">"emacsmirror-mirror"</span> . <span class="org-string">"dd06221ff3b997b8460eb6eefc92a8b07f844f95"</span>)
+ (<span class="org-string">"evil"</span> . <span class="org-string">"f20d442ff006aa5a6dc48ac654906b48b95107fd"</span>)
+ (<span class="org-string">"gnu-elpa-mirror"</span> . <span class="org-string">"bd355379a3143beb3514948685791096c3c5f750"</span>)
+ (<span class="org-string">"goto-chg"</span> . <span class="org-string">"3ce1389fea12edde4e343bc7d54c8da97a1a6136"</span>)
+ (<span class="org-string">"melpa"</span> . <span class="org-string">"9370b3c06f065ee50ed7e4ffcfd9d503b6e9563f"</span>)
+ (<span class="org-string">"straight.el"</span> . <span class="org-string">"1e27b0590df77a5d478970ca58fd6606971692f5"</span>))
+<span class="org-builtin">:beta</span>
+
+</code></pre>
+
+<p>This list contains the name of each installed package and the commit that is currently installed.  If you check this file into your Emacs configuration repository, it can be shared between machines to ensure the same package versions are installed!
+</p>
+
+<p>Now when you clone your Emacs configuration to a new machine, <kbd>straight.el</kbd> will install the versions of packages specified in this file.
+</p>
+
+<p>If you freeze newer versions of packages after running <kbd>M-x straight-pull-all</kbd>, you may need to run <kbd>M-x straight-thaw-versions</kbd> on other machines to ensure that all versions are in sync!
+</p>
+
+<h3><a id="important-note" class="anchor" href="#important-note">¶</a>Important note!</h3><p>The package freezing behavior requires you to set up your configuration in a way where the <kbd>straight-use-package</kbd> lines are executed consistently every time Emacs loads!
+</p>
+
+<p>In practice, this means that you shouldn't put <kbd>straight-use-package</kbd> calls behind code that doesn't get executed immediately during the <kbd>init.el</kbd> evaluation.  If you delay <kbd>straight-use-package</kbd> calls until later (like in a hook for some other mode), <kbd>straight.el</kbd> won't be able to track those packages correctly!
+</p>
+
+<p><a href="https://github.com/raxod502/straight.el#lockfile-management">See the documentation</a> for more tips and considerations to make when freezing your package versions.
+</p>
+
+<h2><a id="converting-an-existing-configuration-to-straightel" class="anchor" href="#converting-an-existing-configuration-to-straightel">¶</a>Converting an existing configuration to straight.el</h2><p>While you can use both <kbd>package.el</kbd> and <kbd>straight.el</kbd> at the same time, I recommend that you only one use one of them just to make sure you don't have any weird issues resulting from it.
+</p>
+
+<p>Let's convert the existing Emacs From Scratch configuration to use <kbd>straight.el</kbd> instead of <kbd>package.el</kbd> just to show how little work it requires.
+</p>
+
+<ul><li>Add the bootstrap script</li>
+<li>Add <kbd>(straight-use-package 'use-package)</kbd> after the bootstrap script</li>
+<li>Replace <kbd>:ensure</kbd> with <kbd>:straight</kbd></li>
+<li>If you use <kbd>use-package-always-ensure</kbd>, replace it with <kbd>straight-use-package-by-default</kbd></li>
+<li>Close Emacs and delete (or move) your old <kbd>elpa</kbd> folder where <kbd>package.el</kbd> packages are installed</li>
+<li>Start up Emacs!</li>
+</ul>
+
+<p><kbd>straight.el</kbd> will now start the process of installing the same set of packages that were installed before with <kbd>package.el</kbd>.  This may take a while, but Straight does a good job of giving you progress updates in the echo area to tell you which package it is currently installing.
+</p>
+
+<p>The final config:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">bootstrap-version</span>)
+(<span class="org-keyword">let</span> ((bootstrap-file
+      (expand-file-name <span class="org-string">"straight/repos/straight.el/bootstrap.el"</span> user-emacs-directory))
+      (bootstrap-version 5))
+  (<span class="org-keyword">unless</span> (file-exists-p bootstrap-file)
+    (<span class="org-keyword">with-current-buffer</span>
+        (url-retrieve-synchronously
+        <span class="org-string">"https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"</span>
+        'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+
+(<span class="org-keyword">setq</span> straight-use-package-by-default t)
+
+</code></pre>
+
+<h2><a id="why-should-i-use-straightel" class="anchor" href="#why-should-i-use-straightel">¶</a>Why should I use straight.el?</h2><p>Now that we've taken a look at all of the functionality provided by <kbd>straight.el</kbd>, let's talk about why you might want to try it:
+</p>
+
+<ul><li>You prefer having a stable configuration that won't be randomly broken by unexpected package upgrades</li>
+<li>You develop Emacs packages or you maintain your own forks of Emacs packages</li>
+<li>You need to use Emacs packages that aren't in MELPA or ELPA</li>
+</ul>
+
+<p>That said, if all the packages you use can be found on MELPA or ELPA and you don't do any package development yet, <kbd>straight.el</kbd> might not be worth the switch until you start having these needs!
+</p>
+
+<p>However, there's no major downside to switching to <kbd>straight.el</kbd> if you want to try something new!
+</p>
+
+<p>If you'd like to see detailed comparisons between <kbd>straight.el</kbd> and other Emacs package managers, <a href="https://github.com/raxod502/straight.el#comparison-to-other-package-managers">check out this section</a> of the README.
+</p>
+
+<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>We've covered most everything you will need to know about <kbd>straight.el</kbd> to use it effectively day to day!  If you've got any questions or tips to share, please feel free to leave them in the comments and I might make a follow-up video to address them!
+</p>
+
+<p>I'm also considering making a video to show how you can use <kbd>straight.el</kbd> to manage your own custom forks of Emacs packages and use it in a package development workflow.  Let me know in the comments if you would be interested in that!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

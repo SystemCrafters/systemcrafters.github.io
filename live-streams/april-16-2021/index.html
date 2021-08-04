@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>System Crafters Live! - April 16, 2021 - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - April 16, 2021</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/fo-Px21AyTE">Watch the recording</a> on YouTube!
+</p>
+
+<h2><a id="emacs-news" class="anchor" href="#emacs-news">¶</a>Emacs News</h2><ul><li><a href="https://lists.gnu.org/archive/html/emacs-devel/2021-04/msg00484.html">Emacs native-comp branch is being merged into Emacs 28 this weekend!</a></li>
+<li><a href="https://git.savannah.gnu.org/cgit/emacs.git/commit/etc/NEWS?id=5761e9004aa73d3aa7c34be9a064a1e768c3129c">icomplete-vertical-mode merged into Emacs 28</a></li>
+<li><a href="https://github.com/rksm/clj-org-analyzer">Org Analyzer - visualize your Org Mode clock data</a></li>
+</ul>
+
+<h2><a id="creating-a-new-lisp" class="anchor" href="#creating-a-new-lisp">¶</a>Creating a New Lisp</h2><p>Over the last year, I've been hacking occasionally on a few different projects in my free time:
+</p>
+
+<ul><li>A game engine and game written in Scheme</li>
+<li>An alternative game engine in C that attempted to use data-oriented programming</li>
+<li>Early hacking on an audio synthesizer in C</li>
+</ul>
+
+<p>The one thing that left me unsatisfied in these projects is that I couldn't easily have the power of Scheme with the low-level memory management and system access of C.
+</p>
+
+<p>Scheme is designed to be garbage collected!  You can access C APIs and structures but ultimately you're still dealing with a garbage collected language.
+</p>
+
+<p>What if I could write my own Scheme-inspired language for systems programming?
+</p>
+
+<h3><a id="goals" class="anchor" href="#goals">¶</a>Goals</h3><ul><li>Create my own Lisp dialect for writing extensible, high performance applications like video games, multimedia editing tools, text editors, etc.</li>
+
+<li>Scheme-inspired focus on tail-call optimization and continuations as control constructs</li>
+
+<li>While Scheme-inspired, this language won't follow the R*RS specifications.  A more opinionated design will be needed to accomplish the goals</li>
+
+<li>A mixture of dynamic and manual memory management.  Create specifically-sized structs that may or may not be garbage collected, use a "memory arena" for a particular subsystem, defer GC in a code section until later, etc.</li>
+
+<li>Fully custom compiler toolchain that is tailored to compiling Lisp applications: compiler, assembler, linker.  No GCC or LLVM!</li>
+
+<li>JIT compilation of code instead of writing an interpreter (if possible)</li>
+
+<li>Produce small, standalone binaries by tree-shaking dependencies.  For a simple application, it'd be <strong>excellent</strong> if the binary was 5MB or less.  If the code is only a "Hello world", it should be less than 100kb!</li>
+
+<li>Standalone binary can contain the compiler for live code patching, but it must be minimal enough to not bloat the output</li>
+
+<li>Must interoperate well with C libraries</li>
+
+<li>Rich macro facilities (later), possibly inspired by Scheme <kbd>define-syntax</kbd></li>
+
+<li>Go-style dependencies, pulling from Git repositories, locking to specific commits or tags</li>
+
+<li>Compilation backends for Intel, ARM, and WebAssembly</li>
+
+<li>Allow user to write assembly for some performance sensitive functions like in C</li>
+</ul>
+
+<h3><a id="components" class="anchor" href="#components">¶</a>Components</h3><p>To accomplish these goals, here are the parts that are needed:
+</p>
+
+<h4><a id="compiler" class="anchor" href="#compiler">¶</a>Compiler</h4><p>This is the obvious part.  To produce standalone binaries, I'm going to need a compiler that can take the code of the language and produce an intermediate representation which can be optimized and ultimately turned into a form of assembly.
+</p>
+
+<ul><li>Parsing and macro application</li>
+<li>Conversion of code into continuations (what's that?)</li>
+<li>Module system</li>
+<li>Tree-shaking</li>
+<li>Optimization</li>
+</ul>
+
+<p>The intermediate representation will have only the necessary code prepared in a format that is ready to be converted to machine language.
+</p>
+
+<p>One other job of the compiler would be to manage just-in-time (JIT) compilation at runtime.  Since this is a Lisp, we definitely need the ability to dynamically evaluate code!
+</p>
+
+<h4><a id="assembler" class="anchor" href="#assembler">¶</a>Assembler</h4><p>The assembler takes a low-level representation of your code and turns it into machine instructions.  You've probably seen code that looks like this:
+</p>
+
+<pre><code class="asm">
+<span class="org-keyword">.text</span>
+
+<span class="org-keyword">.global</span> _start
+
+<span class="org-function-name">_start</span>:
+    <span class="org-keyword">mov</span> $1, <span class="org-variable-name">%eax</span>   # System call number 1: exit()
+    <span class="org-keyword">mov</span> $42, <span class="org-variable-name">%ebx</span>  # Exits with exit status 42
+    <span class="org-keyword">int</span> $0x80      # Invoke system call
+
+</code></pre>
+
+<p>This is a simple program that just sets the program exit code to 42 and then exits.
+</p>
+
+<p>It is written in a way that is closer to what actually happens in machine instructions, but in reality an instruction like <kbd>mov</kbd> can turn into a variety of different operation codes based on the parameters that are given!
+</p>
+
+<p>The assembler needs to know the appropriate instruction encoding for the target architecture (64-bit Intel in my case) so that it can produce the proper opcodes and use the processor effectively.
+</p>
+
+<p>One other interesting aspect here: the assembly representation will be written in the language itself, meaning that the full power of macros can be used for low-level code generation!
+</p>
+
+<p>The output of the assembler will be object files, typically in the system's object file format.  These object files will be used by the next component in the toolchain: the linker.
+</p>
+
+<h4><a id="linker" class="anchor" href="#linker">¶</a>Linker</h4><p>The linker's job is to take the object files produced by the assembler and produce a working executable.  For now I'm only focused on 64-bit Linux so I have a clear path to follow to produce ELF (Executable and Linkable Format) binaries.
+</p>
+
+<ul><li>Combining code from modules together into program code segments</li>
+<li>Integrating static libraries</li>
+<li>Finding references to symbols in dynamic libraries</li>
+<li>Building the memory layout of the initial process</li>
+<li>Managing memory addresses for everything</li>
+</ul>
+
+<p>This is the part of the code that is very OS-dependent so I probably won't get to Windows support for a while and macOS support for even longer.
+</p>
+
+<h4><a id="runtime" class="anchor" href="#runtime">¶</a>Runtime</h4><p>Once I have a toolchain that is capable of compiling basic code, I'll also need some kind of lightweight runtime or standard library that can implement memory management and other low-level tasks like module loading.  My goal is to make this part as small as possible so that the output program isn't weighed down with unneeded code.
+</p>
+
+<p>Any extra behavior needed by the programmer should be pulled in using modules which aren't built into the program by default.
+</p>
+
+<h4><a id="modules" class="anchor" href="#modules">¶</a>Modules</h4><p>I'll try to produce a set of modules that feel like a coherent standard library for the language, providing all the functionality and data structures you would need for day to day coding.  The compiler itself may not come with these parts bundled: it could be better if they were installed as dependencies for your project where only the parts you use actually get compiled into the program.
+</p>
+
+<p>This does mean that compiled programs wouldn't be able to arbitrarily load modules that weren't compiled, but I might be able to find a way to make that possible, perhaps with a secondary tool.
+</p>
+
+<h3><a id="the-plan" class="anchor" href="#the-plan">¶</a>The Plan</h3><p>I'm actually starting from the bottom with this project!  I want to write my own standalone toolchain which doesn't depend on anything else aside from the language/compiler needed to bootstrap the project.
+</p>
+
+<p>I've started working on the assembler and linker first which may sound strange but it has a few benefits:
+</p>
+
+<ul><li>It enables me to reach my goal of producing my own binaries faster without relying on GNU Assembler, ld, etc</li>
+<li>It allows me to learn how these components work so that I can think holistically about the entire toolchain when I start writing the compiler</li>
+<li>I can build everything up incrementally and redesign as needed!  My choices aren't limited by someone else's tools</li>
+</ul>
+
+<p>I'm using Chibi Scheme as the bootstrapping language because it's easy to embed in a simple C application.  This gives me the ability to produce a compiler executable which can produce binaries for my language before I can rewrite the compiler in the language itself.
+</p>
+
+<p>Bootstrapping your Lisp with another Lisp is a longstanding tradition!
+</p>
+
+<h3><a id="but-why" class="anchor" href="#but-why">¶</a>But why?</h3><p>Primarily to learn!  But also because it's an opportunity to write a fully Lisp-oriented toolchain from the ground up and optimize everything for my goals.  For some reason the idea is irresistable to me: I started thinking about it a year ago and it keeps popping up so now I've decided to go for it!
+</p>
+
+<p>Another option is using something like LLVM, but LLVM is huge and is a whole system I'd have to learn anyway!
+</p>
+
+<p>By writing the toolchain from the ground up, every aspect of it can be optimized for the control flow and memory management schemes of the language: continuations and hybrid GC/manual memory.  It'd be similarly hard work to do this with existing toolchains, so it's better to do it myself and learn a lot in the process!
+</p>
+
+<p>What I want in the end is a tool that is tailored to the kinds of projects I want to work on and produces the kind of programs that feel right to me.  Once it's working I'm going to write a lot of the programs I've been dreaming about for years!
+</p>
+
+<h3><a id="are-you-interested-in-learning-more" class="anchor" href="#are-you-interested-in-learning-more">¶</a>Are you interested in learning more?</h3><p>Part of the reason I'm telling you about this today is to see if you would be interested in hearing more about building a compiler toolchain from scratch.  I'm no expert, but I can share what I'm learning over time!
+</p>
+
+<p>The project itself won't be meant for other people to use for a long time, I'm really just building it for myself for now.  However, if you want to follow along you can sign up for the mailing list on Sourcehut here:
+</p>
+
+<p><a href="https://lists.sr.ht/~mesche/dev">https://lists.sr.ht/~mesche/dev</a>
+</p>
+
+<p>The (empty) repository for the compiler project is here:
+</p>
+
+<p><a href="https://git.sr.ht/~mesche/compiler">https://git.sr.ht/~mesche/compiler</a>
+</p>
+
+<p>Why the name "Mesche":
+</p>
+
+<p>Mesche
+   scheme
+</p>
+
+<h2><a id="qampa-and-chat" class="anchor" href="#qampa-and-chat">¶</a>Q&amp;A and Chat</h2><h3><a id="what-books-or-resources-am-i-reading-for-this-project-so-far" class="anchor" href="#what-books-or-resources-am-i-reading-for-this-project-so-far">¶</a>What books or resources am I reading for this project so far?</h3><ul><li><a href="https://www.amazon.com/gp/product/1558604960/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=theinvincibleele&creative=9325&linkCode=as2&creativeASIN=1558604960&linkId=60ef3399471f4ff99ba8904e10668f21">Linkers and Loaders</a> by John R. Levine</li>
+<li><a href="https://uclibc.org/docs/elf-64-gen.pdf">ELF 64-bit specification</a></li>
+<li>Looking at various programs using <kbd>hexl-find-file</kbd>, <kbd>readelf</kbd> and other tools</li>
+<li>Ashraz suggests <a href="https://fasterthanli.me/series/making-our-own-executable-packer">Making our own executable packer</a> by fasterthanlime (Amos)</li>
+</ul>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

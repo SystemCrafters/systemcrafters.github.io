@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><title>Emacs Has a Built-in Pomodoro Timer? - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Emacs Has a Built-in Pomodoro Timer?</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/JbHE819kVGQ">Watch the video</a> on YouTube!
+</p>
+
+<h2><a id="its-true" class="anchor" href="#its-true">¶</a>It's true!</h2><p>Sometimes the best way to focus is to use a short timer like a Pomodoro!
+</p>
+
+<p>You can do this from anywhere in Emacs, just make sure you've loaded Org Mode first.
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">In your configuration</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">org</span>)
+
+</code></pre>
+
+<p>Just use <kbd>M-x</kbd> to run the command <kbd>org-timer-set-timer</kbd> or press <kbd>C-c C-x ;</kbd> inside of an Org file buffer.
+</p>
+
+<p>At the prompt, type in a number of minutes for the timer and press Enter.
+</p>
+
+<p>In the mode line you'll see the timer counting down to show you how much time you have left.
+</p>
+
+<p>If you need to pause the timer run <kbd>org-timer-pause-or-continue</kbd> and to stop the timer, run <kbd>org-timer-stop</kbd>.
+</p>
+
+<p>A Pomodoro wouldn't be complete without a bell, so let's add one!
+</p>
+
+<p>Just set the variable <kbd>org-clock-sound</kbd> to the path of a <kbd>.wav</kbd> file.
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Download the sound at https://freesound.org/people/.Andre_Onate/sounds/484665/</span>
+(<span class="org-keyword">setq</span> org-clock-sound <span class="org-string">"~/Downloads/ding.wav"</span>)
+
+</code></pre>
+
+<p>Now let's run a 2 second timer to try it out!
+</p>
+
+<p>That's it!  Check the link in the description for more info and don't forget to subscribe to System Crafters!  Happy Hacking!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
