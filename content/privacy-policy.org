@@ -2,7 +2,7 @@
 
 This website, systemcrafters.org, uses [[https://plausible.io/privacy-focused-web-analytics][Plausible]] to capture anonymized metrics about the page views it receives.  Plausible is an open-source, privacy-focused analytics service which strives to provide helpful metrics without capturing any personally-identifiable information about visitors.  It claims to be GDPR, CCPA and cookie law compliant.
 
-- Very little information about you is captured, none of it personally identifiable
+- [[https://plausible.io/data-policy][Very little information]] about you is captured, none of it personally identifiable
 - I don't see any IP addresses for visitors!
 - No cookies or browser fingerprinting are used for tracking
 - You are not tracked across multiple sites like with Google Analytics
@@ -18,7 +18,7 @@ If you'd like to see the exact information that I see, check out my [[https://pl
 
 I am very interested in improving the content and organization of this site to ensure that people get the most value out of it.  Page analytics help me to understand which topics are more interesting to visitors so that I can make further investments in those areas.  It also helps me to learn when I am receiving traffic from another site!
 
-If you're interested in helping me make this site better, please consider disable tracker blocking for this domain!
+If you're interested in helping me make this site better, please consider disabling tracker blocking for this domain!
 
 *Any questions or concerns?*
 
