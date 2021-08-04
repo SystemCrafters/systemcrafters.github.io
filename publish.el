@@ -160,6 +160,9 @@
                      (href "/css/code.css")))
             (link (@ (rel "stylesheet")
                      (href "/css/site.css")))
+            (script (@ (defer "defer")
+                       (data-domain "systemcrafters.org")
+                       (src "https://plausible.io/js/plausible.js")))
             (title ,(concat (org-export-data (plist-get info :title) info) " - System Crafters")))
            (body
              ,(dw/site-header info)
