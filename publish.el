@@ -278,7 +278,6 @@
   (let ((article-path (get-article-output-path filename pub-dir)))
     (cl-letf (((symbol-function 'org-export-output-file-name)
                (lambda (extension &optional subtreep pub-dir)
-                 (message "ARTICLE PATH: %s" article-path)
                  (concat article-path "index" extension))))
       (org-publish-org-to
        'gemini filename ".gmi" plist pub-dir))))
