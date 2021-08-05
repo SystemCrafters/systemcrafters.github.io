@@ -73,6 +73,27 @@
 
 (require 'ox-publish)
 
+(defvar yt-iframe-format
+  ;; TODO: Change this after switching from Bootstrap
+  (concat "<div class=\"embed-responsive embed-responsive-16by9\">"
+          " <iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/%s\" allowfullscreen></iframe>"
+          " </div>"))
+
+(org-link-set-parameters
+ "yt"
+ :follow
+ (lambda (handle)
+   (browse-url
+    (concat "https://www.youtube.com/watch?v="
+            handle)))
+ :export
+ (lambda (path desc backend channel)
+   (cl-case backend
+     (html (format yt-iframe-format
+                   path (or desc "")))
+     (latex (format "\href{%s}{%s}"
+                    path (or desc "video"))))))
+
 (setq dw/site-title   "System Crafters")
 (setq dw/site-tagline "")
 

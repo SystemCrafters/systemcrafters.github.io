@@ -1,6 +1,6 @@
 #+title: Build a Second Brain in Emacs with Org Roam
 
-[[https://youtu.be/AyhPmypHDEw][Watch the video]] on YouTube!
+[[yt:AyhPmypHDEw][Watch the video on YouTube!]]
 
 * What is Org Roam?
 
