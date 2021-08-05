@@ -88,11 +88,9 @@
             handle)))
  :export
  (lambda (path desc backend channel)
-   (cl-case backend
-     (html (format yt-iframe-format
-                   path (or desc "")))
-     (latex (format "\href{%s}{%s}"
-                    path (or desc "video"))))))
+   (when (eq backend 'html)
+     (format yt-iframe-format
+             path (or desc "")))))
 
 (setq dw/site-title   "System Crafters")
 (setq dw/site-tagline "")
@@ -230,11 +228,14 @@
                                (file-name-sans-extension
                                 (org-element-property :path link)))))
 
-  (if (equal contents nil)
+  (let ((exported-link (org-export-custom-protocol-maybe link contents 'html info)))
+    (cond
+     (exported-link exported-link)
+     ((equal contents nil)
       (format "<a href=\"%s\">%s</a>"
               (org-element-property :raw-link link)
-              (org-element-property :raw-link link))
-    (org-export-with-backend 'slimhtml link contents info)))
+              (org-element-property :raw-link link)))
+     (t (org-export-with-backend 'slimhtml link contents info)))))
 
 ;; Make sure we have thread-last
 (require 'subr-x)
