@@ -1,0 +1,153 @@
+#+title: System Crafters Live! - August 6, 2021
+
+* Updates
+
+- I've created a Twitch channel! https://twitch.tv/SystemCrafters
+- You can now sponsor System Crafters on Liberapay: https://liberapay.com/SystemCrafters
+- The EmacsConf 2021 call for presentations is now live! https://emacsconf.org/2021/cfp/
+- Emacs 28 is [[https://lists.gnu.org/archive/html/emacs-devel/2021-07/msg00812.html][heading toward stabilization]]!
+
+* Can you apply Zettelkasten faithfully in Emacs with Org Roam?
+
+Today we're going to discuss the concept of Zettelkasten, who it's for, and how it might be applied in Emacs.
+
+This isn't meant to be a tutorial.  Even though I'll give an overview, this is primarily meant to be a discussion!
+
+- Who is this method for?
+- Can you do it in Emacs?
+- Do you really need to follow it faithfully?
+- What are your tricks?
+
+* An overview of Zettelkasten
+
+I've been reading the book /How to Take Smart Notes/ by Sönke Ahrens - https://amzn.to/3rWzhHe (affiliate)
+
+There has been a recurring note taking approach used in some form by writers and researchers since the 1500s where ideas and notes are stored on individual pieces of paper or note cards and organized in a way that enables the author to find them easily.
+
+Zettelkasten, also known as the "slip box" method, is an approach developed by a sociologist named Niklas Luhmann who used it to write over 70 books and 400 research papers in his lifetime.
+
+The system is designed to facilitate not only memory and reference, but the development of insight and ideas over time.  The goal being that a written work can be constructed directly from the material that's been captured in the slip box after the author has been inspired to write on a topic.
+
+Another good resource: https://zettelkasten.de/introduction/
+Read Luhmann's own paper about it:  https://luhmann.surge.sh/communicating-with-slip-boxes
+
+* Who is this method for?
+
+The group who will derive the most value out of this approach are those who need to create new ideas and content out of their personal research.
+
+- Writers and Bloggers
+- Researchers
+- Documentarians
+- YouTubers
+
+What about programmers?  Maybe not as helpful, but still useful.
+
+* How does it work?
+
+The method is performed by capturing 3 kinds of notes:
+
+- Permanent notes
+- Project notes
+- Fleeting notes
+
+Each of these has their own purpose and "lifetime" in the system.
+
+* Permanent notes
+
+These are the notes you will want to keep forever, and the ones that give you the most long-term value.
+
+Each note will be focused on a single idea and written in full prose (but short!).
+
+Permanent notes are given alphanumeric identifiers so that links can be made between them.  The numbering system also introduces locality between notes:
+
+https://zettelkasten.de/introduction/#the-fixed-address-of-each-note
+
+This numbering helps to identify clusters of notes since related notes will have IDs that share the same prefix!
+
+There are a few kinds of permanent notes:
+
+- Main notes
+- Literature notes
+- Structure or "hub" notes
+
+* Project notes
+
+These are the notes that help you organize your work on a particular project.  Org Mode users should be quite familiar with this type of note!
+
+This is the place where you store your TODOs for the project!
+
+A project note is kept for the lifetime of the project it refers to and then either archived or discarded once the project is complete.
+
+In the zettelkasten workflow, these notes are actually kept separately from the slip box in their own folder.
+
+* Fleeting notes
+
+Capturing any ideas, notes, thoughts, during the day however is appropriate.
+
+Fleeting notes are meant to be discarded after being processed!
+
+* So can you apply Zettelkasten correctly in Org Roam?
+
+** Permanent notes
+
+This is where Org Roam shines!  You can easily create and find notes with =org-roam-node-find= and create links between notes with =org-roam-node-insert=.
+
+However, do backlinks give you the same visibility into "clustering" that the slip box does?  Org Roam IDs are totally opaque UUIDs which don't follow Luhmann's numbering model.
+
+Maybe =org-roam-ui= will help: https://github.com/org-roam/org-roam-ui
+
+Also, will the infinite "space" of an Org document keep you from keeping notes short and single-topic?
+
+Consider the follow note titles:
+
+- Zettelkasten in Org Roam
+- Can you apply Zettelkasten in Org Roam
+
+Being single-topic allows you to evolve ideas without source control!
+
+** Project notes
+
+Org Roam can also be great for this!
+
+- Add project notes to the Org Agenda to aggregate tasks across multiple projects
+- Link directly to permanent notes
+
+Can you archive project notes, though?
+
+- Filter out completed projects from the node listing using custom functions
+
+** Fleeting notes
+
+This is one place where Org Roam may deviate from the method.  Since everything captured can easily be kept forever, will you actually discard notes that should be fleeting reminders?
+
+Or should you even care about discarding them?
+
+The "dailies" feature is very useful for capturing fleeting notes and linking them to your permanent notes, though I wonder if it won't encourage keeping the notes short and discardable.
+
+It's great for journalling, but perhaps some journal entries should be permanent notes?
+
+* Do you really need Org Roam for this?
+
+This is a question I was asked a few times after the first Org Roam video.
+
+Why do I need Org Roam if I can quickly search across all of my Org files easily?
+
+The answer is *maybe you don't need it*!
+
+If all you want is a personal knowledgebase with notes that can be linked together, Org Mode gives you all the tools for it.
+
+Org Roam removes the need for knowing *where* to put the notes, especially paired with a method like Zettelkasten.  It also makes the process of linking much faster and gives you the opportunity.
+
+The real benefit of Org Roam arises with the information stored in the database and how it can be efficiently queried.  There's a huge opportunity for community package authors to build interesting functionality on top of this.  You can also do it!
+
+* What other approaches have you used?
+
+org-cite: https://www.youtube.com/watch?v=4ta4J20kpmM
+
+https://www.youtube.com/channel/UCQp2VLAOlvq142YN3JO3y8w
+
+https://github.com/daviwil/emacs-from-scratch/wiki/Org-roam-setup-from-scratch#custom-functions
+
+https://github.com/alphapapa/org-ql
+
+https://zettelkasten.de
