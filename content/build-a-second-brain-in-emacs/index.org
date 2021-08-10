@@ -3,3 +3,4 @@
 * Episodes
 
 1. [[getting-started-with-org-roam/][Getting Started with Org Roam]]
+2. [[capturing-notes-efficiently/][Capturing Notes Efficiently with Org Roam]]
