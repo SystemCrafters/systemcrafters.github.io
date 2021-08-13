@@ -1,0 +1,122 @@
+#+title: System Crafters Live! - August 13, 2021
+
+[[https://youtu.be/EmLCTPwhC4I][Watch the recording]] on YouTube!
+
+* News
+
+- The System Crafters Shop (or Store? Cache? Depot?) is coming soon!
+- 15k soon?
+- Don't forget to submit a proposal for EmacsConf 2021! https://emacsconf.org/2021/cfp/
+- Next week we'll cover Org Roam "Dailies" and maybe another Emacs short?
+
+* Emacs Package Potluck
+
+Let's try something new!
+
+I want to try your package suggestions, they can be any of the following:
+
+- A package you wrote (preferrable!)
+- A package you love
+- A package that doesn't get enough attention
+- A package you've never got working
+
+** Live Suggestions
+
+- benoitj: [[https://github.com/benoitj/crafter-bot][crafter-bot]]
+- rpr1mus: [[https://orgmode.org/worg/org-contrib/org-protocol.html][org-protocol]], [[https://github.com/alphapapa/org-protocol-capture-html][org-protocol-capture-html]]
+- angrybacon: [[https://github.com/etu/webpaste.el][webpaste.el]], [[https://github.com/pashky/restclient.el][restclient.el]] (see also [[https://github.com/alf/ob-restclient.el][ob-restclient]] for org-babel), [[https://github.com/Kungsgeten/selected.el][selected.el]]
+- Ramses: [[https://github.com/zainab-ali/pair-tree.el][pair-tree.el]], [[https://github.com/rougier/svg-tag-mode][svg-tag-mode]]
+- Nova: [[https://github.com/m-cat/org-recur][org-recur]], org-super-agenda
+- garjola: [[https://github.com/cadadr/elisp/blob/stable/forecast.el][Forecast]], [[https://github.com/abo-abo/org-download][org-download]]
+- cayetano: [[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent-mode]]
+- Pavel: [[https://github.com/SqrtMinusOne/lyrics-fetcher.el][lyrics-fetcher.el]]
+- nackjicholson: [[https://gitlab.com/willvaughn/emacs-0x0][0x0]]
+- Marduk: [[https://github.com/semiosis/pen.el][pen.el]]
+- Solarinas: [[https://depp.brause.cc/nov.el/][nov.el]]
+- TitanOfOld: beacon
+- Appenzell, garjola: ement.el
+- Drishal: shackle
+- karthik: consult-dir, popper, ytel
+- Zel: Vuiet
+- Mayush: ranger
+- dean: selectric mode
+- Tae Eun Kim: org-special-block-extras
+- Charlie McMackin: esup
+
+** The Config
+
+#+begin_src emacs-lisp
+
+  (use-package webpaste
+    :ensure t
+    :straight t
+    :bind (("C-c C-p C-b" . webpaste-paste-buffer)
+           ("C-c C-p C-r" . webpaste-paste-region)
+           ("C-c C-p C-p" . webpaste-paste-buffer-or-region)))
+
+  (use-package 0x0
+    :straight (:host gitlab :repo "willvaughn/emacs-0x0"))
+
+  (use-package restclient
+    :straight t)
+
+  (use-package selected
+    :straight t
+    :commands selected-minor-mode
+    :bind (:map selected-keymap
+                ("q" . selected-off)
+                ("u" . upcase-region)
+                ("d" . downcase-region)
+                ("w" . count-words-region)
+                ("m" . apply-macro-to-region-lines)))
+
+  (use-package pair-tree
+    :straight t)
+
+  (use-package org-recur
+    :straight t
+    :hook ((org-mode . org-recur-mode)
+           (org-agenda-mode . org-recur-agenda-mode))
+    :demand t
+    :config
+    (define-key org-recur-mode-map (kbd "C-c d") 'org-recur-finish)
+
+    ;; Rebind the 'd' key in org-agenda (default: `org-agenda-day-view').
+    (define-key org-recur-agenda-mode-map (kbd "d") 'org-recur-finish)
+    (define-key org-recur-agenda-mode-map (kbd "C-c d") 'org-recur-finish)
+
+    (setq org-recur-finish-done t
+          org-recur-finish-archive t))
+
+  (setq org-agenda-files '("~/TestNotes/Tasks.org"))
+
+  (use-package svg-tag-mode
+    :straight '(svg-tag-mode :repo "rougier/svg-tag-mode"
+                             :fetcher github
+                             :files ("svg-tag-mode.el")))
+
+  (use-package lyrics-fetcher
+    :straight (:host github :repo "SqrtMinusOne/lyrics-fetcher.el"))
+
+  (use-package org-download
+    :straight t)
+
+  (use-package aggressive-indent
+    :straight t)
+
+  (use-package forecast
+    :straight t)
+  (setq calendar-latitude 41.168602
+        calendar-longitude 29.047024
+        calendar-location-name "İstanbul, Türkiye"
+        forecast-api-key nil)
+
+  (use-package nov
+    :straight t)
+
+  (use-package consult-dir
+    :straight '(consult-dir :repo "https://github.com/karthink/consult-dir"
+                            :fetcher github))
+  (setq consult-dir-project-list-function #'consult-dir-projectile-dirs)
+
+#+end_src

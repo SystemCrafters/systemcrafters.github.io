@@ -4,6 +4,8 @@ We stream every Friday at 9:15 am Pacific time!
 
 * Episodes
 
+- [[august-13-2021/][August 13, 2021]]: Emacs Package Potluck (Trying Your Suggestions!)
+- [[august-06-2021/][August 6, 2021]]: Can You Apply Zettelkasten in Emacs?
 - [[july-30-2021/][July 30, 2021]]: The Future of System Crafters
 - [[july-23-2021/][July 23, 2021]]: Is Emacs intimidating to learn for beginners?
 - [[july-16-2021/][July 16, 2021]]: Do we really need use-package in Emacs?
