@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - August 13, 2021 - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - August 13, 2021</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/EmLCTPwhC4I">Watch the recording</a> on YouTube!
+</p>
+
+<h2><a id="news" class="anchor" href="#news">¶</a>News</h2><ul><li>The System Crafters Shop (or Store? Cache? Depot?) is coming soon!</li>
+<li>15k soon?</li>
+<li>Don't forget to submit a proposal for EmacsConf 2021! <a href="https://emacsconf.org/2021/cfp/">https://emacsconf.org/2021/cfp/</a></li>
+<li>Next week we'll cover Org Roam "Dailies" and maybe another Emacs short?</li>
+</ul>
+
+<h2><a id="emacs-package-potluck" class="anchor" href="#emacs-package-potluck">¶</a>Emacs Package Potluck</h2><p>Let's try something new!
+</p>
+
+<p>I want to try your package suggestions, they can be any of the following:
+</p>
+
+<ul><li>A package you wrote (preferrable!)</li>
+<li>A package you love</li>
+<li>A package that doesn't get enough attention</li>
+<li>A package you've never got working</li>
+</ul>
+
+<h3><a id="live-suggestions" class="anchor" href="#live-suggestions">¶</a>Live Suggestions</h3><ul><li>benoitj: <a href="https://github.com/benoitj/crafter-bot">crafter-bot</a></li>
+<li>rpr1mus: <a href="https://orgmode.org/worg/org-contrib/org-protocol.html">org-protocol</a>, <a href="https://github.com/alphapapa/org-protocol-capture-html">org-protocol-capture-html</a></li>
+<li>angrybacon: <a href="https://github.com/etu/webpaste.el">webpaste.el</a>, <a href="https://github.com/pashky/restclient.el">restclient.el</a> (see also <a href="https://github.com/alf/ob-restclient.el">ob-restclient</a> for org-babel), <a href="https://github.com/Kungsgeten/selected.el">selected.el</a></li>
+<li>Ramses: <a href="https://github.com/zainab-ali/pair-tree.el">pair-tree.el</a>, <a href="https://github.com/rougier/svg-tag-mode">svg-tag-mode</a></li>
+<li>Nova: <a href="https://github.com/m-cat/org-recur">org-recur</a>, org-super-agenda</li>
+<li>garjola: <a href="https://github.com/cadadr/elisp/blob/stable/forecast.el">Forecast</a>, <a href="https://github.com/abo-abo/org-download">org-download</a></li>
+<li>cayetano: <a href="https://github.com/Malabarba/aggressive-indent-mode">aggressive-indent-mode</a></li>
+<li>Pavel: <a href="https://github.com/SqrtMinusOne/lyrics-fetcher.el">lyrics-fetcher.el</a></li>
+<li>nackjicholson: <a href="https://gitlab.com/willvaughn/emacs-0x0">0x0</a></li>
+<li>Marduk: <a href="https://github.com/semiosis/pen.el">pen.el</a></li>
+<li>Solarinas: <a href="https://depp.brause.cc/nov.el/">nov.el</a></li>
+<li>TitanOfOld: beacon</li>
+<li>Appenzell, garjola: ement.el</li>
+<li>Drishal: shackle</li>
+<li>karthik: consult-dir, popper, ytel</li>
+<li>Zel: Vuiet</li>
+<li>Mayush: ranger</li>
+<li>dean: selectric mode</li>
+<li>Tae Eun Kim: org-special-block-extras</li>
+<li>Charlie McMackin: esup</li>
+</ul>
+
+<h3><a id="the-config" class="anchor" href="#the-config">¶</a>The Config</h3><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">webpaste</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-c C-p C-b"</span> . webpaste-paste-buffer)
+         (<span class="org-string">"C-c C-p C-r"</span> . webpaste-paste-region)
+         (<span class="org-string">"C-c C-p C-p"</span> . webpaste-paste-buffer-or-region)))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">0x0</span>
+  <span class="org-builtin">:straight</span> (<span class="org-builtin">:host</span> gitlab <span class="org-builtin">:repo</span> <span class="org-string">"willvaughn/emacs-0x0"</span>))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">restclient</span>
+  <span class="org-builtin">:straight</span> t)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">selected</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:commands</span> selected-minor-mode
+  <span class="org-builtin">:bind</span> (<span class="org-builtin">:map</span> selected-keymap
+              (<span class="org-string">"q"</span> . selected-off)
+              (<span class="org-string">"u"</span> . upcase-region)
+              (<span class="org-string">"d"</span> . downcase-region)
+              (<span class="org-string">"w"</span> . count-words-region)
+              (<span class="org-string">"m"</span> . apply-macro-to-region-lines)))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">pair-tree</span>
+  <span class="org-builtin">:straight</span> t)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">org-recur</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:hook</span> ((org-mode . org-recur-mode)
+         (org-agenda-mode . org-recur-agenda-mode))
+  <span class="org-builtin">:demand</span> t
+  <span class="org-builtin">:config</span>
+  (define-key org-recur-mode-map (kbd <span class="org-string">"C-c d"</span>) 'org-recur-finish)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Rebind the 'd' key in org-agenda (default: `</span><span class="org-comment"><span class="org-constant">org-agenda-day-view</span></span><span class="org-comment">').</span>
+  (define-key org-recur-agenda-mode-map (kbd <span class="org-string">"d"</span>) 'org-recur-finish)
+  (define-key org-recur-agenda-mode-map (kbd <span class="org-string">"C-c d"</span>) 'org-recur-finish)
+
+  (<span class="org-keyword">setq</span> org-recur-finish-done t
+        org-recur-finish-archive t))
+
+(<span class="org-keyword">setq</span> org-agenda-files '(<span class="org-string">"~/TestNotes/Tasks.org"</span>))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">svg-tag-mode</span>
+  <span class="org-builtin">:straight</span> '(svg-tag-mode <span class="org-builtin">:repo</span> <span class="org-string">"rougier/svg-tag-mode"</span>
+                           <span class="org-builtin">:fetcher</span> github
+                           <span class="org-builtin">:files</span> (<span class="org-string">"svg-tag-mode.el"</span>)))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">lyrics-fetcher</span>
+  <span class="org-builtin">:straight</span> (<span class="org-builtin">:host</span> github <span class="org-builtin">:repo</span> <span class="org-string">"SqrtMinusOne/lyrics-fetcher.el"</span>))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">org-download</span>
+  <span class="org-builtin">:straight</span> t)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">aggressive-indent</span>
+  <span class="org-builtin">:straight</span> t)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">forecast</span>
+  <span class="org-builtin">:straight</span> t)
+(<span class="org-keyword">setq</span> calendar-latitude 41.168602
+      calendar-longitude 29.047024
+      calendar-location-name <span class="org-string">"&#304;stanbul, T&#252;rkiye"</span>
+      forecast-api-key nil)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">nov</span>
+  <span class="org-builtin">:straight</span> t)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">consult-dir</span>
+  <span class="org-builtin">:straight</span> '(consult-dir <span class="org-builtin">:repo</span> <span class="org-string">"https://github.com/karthink/consult-dir"</span>
+                          <span class="org-builtin">:fetcher</span> github))
+(<span class="org-keyword">setq</span> consult-dir-project-list-function #'consult-dir-projectile-dirs)
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
