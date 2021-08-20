@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - August 20, 2021 - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a><a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - August 20, 2021</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/AA9EyyTufVo">Watch the recording</a> on YouTube!
+</p>
+
+<h2><a id="news" class="anchor" href="#news">¶</a>News</h2><ul><li>Next Org Roam video coming this week (for realz this time)</li>
+<li>Don't forget to submit a proposal for EmacsConf 2021 (deadline Sep 30)! <a href="https://emacsconf.org/2021/cfp/">https://emacsconf.org/2021/cfp/</a></li>
+</ul>
+
+<h2><a id="can-we-fix-a-bug-in-emacs" class="anchor" href="#can-we-fix-a-bug-in-emacs">¶</a>Can We Fix a Bug in Emacs?</h2><p>We're going to find out :)
+</p>
+
+<ul><li>fosskers' post "Contributing to Emacs": <a href="https://www.fosskers.ca/en/blog/contributing-to-emacs">https://www.fosskers.ca/en/blog/contributing-to-emacs</a></li>
+<li>Reddit discussion: <a href="https://www.reddit.com/r/emacs/comments/p67jni/blog_how_to_contribute_to_emacs/">https://www.reddit.com/r/emacs/comments/p67jni/blog_how_to_contribute_to_emacs/</a></li>
+<li>Lars Ingebrigtsen's blog posts: <a href="https://lars.ingebrigtsen.no/2021/08/14/10x10/">https://lars.ingebrigtsen.no/2021/08/14/10x10/</a></li>
+</ul>
+
+<h2><a id="building-emacs" class="anchor" href="#building-emacs">¶</a>Building Emacs</h2><p>On Debian / Ubuntu, install the following packages:
+</p>
+
+<pre><code class="sh">
+sudo apt install git build-essential automake
+sudo apt build-dep emacs
+
+</code></pre>
+
+<p>In Guix:
+</p>
+
+<pre><code class="emacs-lisp">
+guix environment --pure emacs-next --ad-hoc git
+
+</code></pre>
+
+<p>Now you can clone and build Emacs:
+</p>
+
+<pre><code class="sh">
+git clone https://git.savannah.gnu.org/git/emacs.git
+./autogen.sh
+./configure
+make
+
+</code></pre>
+
+<p>I personally used this <kbd>configure</kbd> line:
+</p>
+
+<pre><code class="sh">
+./configure --with-cairo --with-modules --disable-build-details
+
+</code></pre>
+
+<h2><a id="finding-a-bug" class="anchor" href="#finding-a-bug">¶</a>Finding a Bug</h2><p>We may still look at the bug tracker to find one:
+</p>
+
+<p><a href="https://debbugs.gnu.org/cgi/pkgreport.cgi?package=emacs;max-bugs=100;base-order=1;bug-rev=1">https://debbugs.gnu.org/cgi/pkgreport.cgi?package=emacs;max-bugs=100;base-order=1;bug-rev=1</a>
+</p>
+
+<p>For new contributors, try the <kbd>easy</kbd> tag!
+</p>
+
+<p>Here are the bugs we looked at:
+</p>
+
+<ul><li><kbd>vc</kbd> file revision issue: <a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=31763">https://debbugs.gnu.org/cgi/bugreport.cgi?bug=31763</a></li>
+<li>"Setting current directory" issue: <a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=32004">https://debbugs.gnu.org/cgi/bugreport.cgi?bug=32004</a></li>
+<li><kbd>equal-including-properties</kbd> issue: <a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=6581">https://debbugs.gnu.org/cgi/bugreport.cgi?bug=6581</a></li>
+<li>GIF animations <a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=45224">https://debbugs.gnu.org/cgi/bugreport.cgi?bug=45224</a> (<a href="https://www.business2community.com/social-buzz/make-fly-90s-website-geocities-tribute-01531323">test page</a>)</li>
+</ul>
+
+<p>Here's how to report bugs: <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Bugs.html">https://www.gnu.org/software/emacs/manual/html_node/emacs/Bugs.html</a>
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
