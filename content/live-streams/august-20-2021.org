@@ -1,0 +1,71 @@
+#+title: System Crafters Live! - August 20, 2021
+
+[[https://youtu.be/AA9EyyTufVo][Watch the recording]] on YouTube!
+
+* News
+
+- Next Org Roam video coming this week (for realz this time)
+- Don't forget to submit a proposal for EmacsConf 2021 (deadline Sep 30)! https://emacsconf.org/2021/cfp/
+
+* Can We Fix a Bug in Emacs?
+
+We're going to find out :)
+
+- fosskers' post "Contributing to Emacs": https://www.fosskers.ca/en/blog/contributing-to-emacs
+- Reddit discussion: https://www.reddit.com/r/emacs/comments/p67jni/blog_how_to_contribute_to_emacs/
+- Lars Ingebrigtsen's blog posts: https://lars.ingebrigtsen.no/2021/08/14/10x10/
+
+* Building Emacs
+
+On Debian / Ubuntu, install the following packages:
+
+#+begin_src sh
+
+  sudo apt install git build-essential automake
+  sudo apt build-dep emacs
+
+#+end_src
+
+In Guix:
+
+#+begin_src emacs-lisp
+
+  guix environment --pure emacs-next --ad-hoc git
+
+#+end_src
+
+Now you can clone and build Emacs:
+
+#+begin_src sh
+
+  git clone https://git.savannah.gnu.org/git/emacs.git
+  ./autogen.sh
+  ./configure
+  make
+
+ #+end_src
+
+I personally used this =configure= line:
+
+#+begin_src sh
+
+  ./configure --with-cairo --with-modules --disable-build-details
+
+#+end_src
+
+* Finding a Bug
+
+We may still look at the bug tracker to find one:
+
+https://debbugs.gnu.org/cgi/pkgreport.cgi?package=emacs;max-bugs=100;base-order=1;bug-rev=1
+
+For new contributors, try the =easy= tag!
+
+Here are the bugs we looked at:
+
+- =vc= file revision issue: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=31763
+- "Setting current directory" issue: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=32004
+- =equal-including-properties= issue: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=6581
+- GIF animations https://debbugs.gnu.org/cgi/bugreport.cgi?bug=45224 ([[https://www.business2community.com/social-buzz/make-fly-90s-website-geocities-tribute-01531323][test page]])
+
+Here's how to report bugs: https://www.gnu.org/software/emacs/manual/html_node/emacs/Bugs.html
