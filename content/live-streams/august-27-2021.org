@@ -1,0 +1,89 @@
+#+title: System Crafters Live! - August 27, 2021
+
+[[https://youtu.be/nMH3QXWxTGg][Watch the recording]] on YouTube!
+
+* System Crafters Store is live!
+
+I've been getting requests for merch for a while, that day has finally arrived!
+
+Check out the set of items I've put together with the System Crafters logo:
+
+https://store.systemcrafters.net
+
+These are all high quality print-on-demand items so shipping can take up to 2 weeks but it's usually faster than the estimate you get when you buy something.
+
+Please let me know your feedback on /everything/: items, pricing, shipping costs, etc.  I want the community to be proud to wear them!
+
+This is just the first step; I plan to add new designs every 3 months or so, it will only get better from here!
+
+* We Need to Talk About EXWM
+
+As I've mentioned before a few times, EXWM the maintainer [[https://github.com/ch11ng][ch11ng]] has been missing for over a year.
+
+- Last commits to EXWM and XELB were in July 2020
+- People are concerned: https://github.com/ch11ng/exwm/issues/845
+- Many lingering issues that people face daily, I've been burned frequently
+- I even tried StumpWM again!
+- Nothing beats EXWM, though.
+
+What can be done about it?
+
+* Can the project be revived?
+
+- The project is in definite need of help to address pain points
+- It seems [[https://github.com/medranocalvo][medranocalvo]] might be an admin on the repo
+- All it would really take is for an individual or small group to learn the code and try fixing things
+- FSF copyright assignment approval is a big challenge (can that be abandoned?)
+- Many people would be happy and relieved for EXWM to be maintained again
+
+* Should someone fork EXWM?
+
+- A hard fork with no intention to merge upstream can avoid FSF assignment issues
+- Could be an opportunity to rethink some things, redesign the code
+- Aside from learning the code, the challenge would be making it enticing (and smooth) to migrate
+- This could be the fastest route to a bright new future
+
+* A new alternative?
+
+If we're considering a fork, why not think bigger?
+
+- Can we fix some core issues with EXWM while planning for the future?
+- Minimal window manager core /not/ written in Emacs Lisp but driven by it via RPC
+- Write it either in C or an embedded Scheme (Chibi, perhaps)
+- Create an abstract internal model; focus on X Window System and Wayland later
+- Make it possible to have a more traditional tiling window manager that is still Emacs-driven
+- OMG GAPS
+
+Could be a huge undertaking, but possibly more future-proof!
+
+* Here's what I'll do
+
+Solving this problem is important to me!  I can't live without my Emacs Desktop Environment.
+
+- I'm going to start investigating all possibilities in my (limited) free time
+- Great opportunity to stream the work on Twitch: https://twitch.tv/SystemCrafters
+- Start building a knowledgebase of how window management works with Xorg
+- Investigate various technical options, live coding regularly
+- As soon as a good direction is determined, get community involvement
+
+For stream schedule: Mondays or Wednesdays?  Tentatively 8am-10am Pacific Time.
+
+* What do you think?
+
+* Random Chat
+
+- [[https://emacsconf.org/2021/cfp/][EmacsConf CFP]]
+- [[https://vieb.dev/screenshots][Vieb browser]]
+- [[https://luakit.github.io/][Luakit browser]]
+- [[https://fennel-lang.org/][Fennel language]]
+- [[https://daviwil.com/ld28/][One Sword game]]
+- [[https://lucidmanager.org/productivity/emacs-windows/][Installing Emacs on Windows 10]]
+- [[https://github.com/Wilfred/helpful][helpful.el]]
+- [[https://gitlab.com/ideasman42/emacs-sidecar-locals][emacs-sidecar-locals]] - or =dir-locals-set-directory-class=, etc
+- [[https://sachachua.com/blog/2021/08/started-learning-how-to-interactively-debug-javascript-in-emacs-with-indium/][Debugging JavaScript in Emacs with Indium]]
+- [[https://www.youtube.com/watch?v=w3NfOeecMkI][Taking a look at GNU Hurd]]
+- [[https://takeonrules.com/2021/08/22/ever-further-refinements-of-org-roam-usage/][Even Further Refinements of Org Roam Usage]]
+- [[https://github.com/a-schaefers/systemE][systemE]]
+- [[https://protesilaos.com/news/2021-08-16-status-update-computer/][Prot system failure]] ([[https://www.paypal.me/protesilaos][Paypal]])
+
+Check out [[https://sachachua.com/blog/category/emacs-news/][Emacs News]]!

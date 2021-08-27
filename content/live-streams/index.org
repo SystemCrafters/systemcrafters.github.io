@@ -4,6 +4,7 @@ We stream every Friday at 9:15 am Pacific time!
 
 * Episodes
 
+- [[august-20-2021/][August 20, 2021]]: We Need to Talk About EXWM
 - [[august-20-2021/][August 20, 2021]]: Can We Fix a Bug in Emacs?
 - [[august-13-2021/][August 13, 2021]]: Emacs Package Potluck (Trying Your Suggestions!)
 - [[august-06-2021/][August 6, 2021]]: Can You Apply Zettelkasten in Emacs?
