@@ -2,6 +2,10 @@
 
 If you enjoy the content on the System Crafters channel, please consider supporting it using one of the methods below!
 
+* Buy System Crafters Merchandise!
+
+Check out the [[https://store.systemcrafters.net?utm_source=support-the-channel][System Crafters Store]] for t-shirts, hoodies, coffee cups, hats, stickers, and more in the future!
+
 * Monthly Sponsorship
 
 If you'd like to provide monthly financial support to help me keep making this content, you can use one of the providers below.  Currently GitHub Sponsors or Liberapay are my preferred platforms because they don't take a percentage of your contribution!

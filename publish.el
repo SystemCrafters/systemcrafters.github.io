@@ -128,8 +128,9 @@
                                 (nav (@ (class "nav"))
                                      (a (@ (class "nav-link") (href "/")) "Home") " "
                                      ;; (a (@ (class "nav-link") (href "/articles")) "Articles")
-                                     (a (@ (class "nav-link") (href "/videos")) "Videos")
+                                     (a (@ (class "nav-link") (href "/videos")) "Videos") " "
                                      (a (@ (class "nav-link") (href "https://wiki.systemcrafters.cc")) "Wiki") " "
+                                     (a (@ (class "nav-link") (href "https://store.systemcrafters.net")) "Merch Store") " "
                                      (a (@ (class "nav-link") (href "/support-the-channel")) "Support The Channel")))))))))))
 
 (defun dw/site-footer (info)
