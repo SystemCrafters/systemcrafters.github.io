@@ -5,6 +5,7 @@ on:
     branches:
       - master
 
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -25,8 +26,11 @@ jobs:
           cp -R daviwil.com/public .
           emacs --batch -l ./publish.el --funcall dw/publish
 
-      - name: Publish generated content to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+      - name: checking broken url
+        uses: ruzickap/action-my-broken-link-checker@v1.0.3
         with:
-          branch: gh-pages
-          folder: public
+          url: https://systemcrafters.net
+          pages_path: ./public
+          cmd_params: "-v"
+          run_timeout: 10
+          debug: true
