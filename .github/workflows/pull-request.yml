@@ -1,9 +1,6 @@
 name: Verify site builds and links are not broken
 
-on:
-  push:
-    branches:
-      - master
+on: pull_request
 
 jobs:
   publish:
