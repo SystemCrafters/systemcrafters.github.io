@@ -41,7 +41,7 @@ Run =org-agenda= to see possible agenda views.
 - =org-schedule=
 - =org-deadline=
 - =org-time-stamp=
-- [[https://orgmode.org/manual/Repeated-tasks.html][Repeated Tasks]]
+- [[https://orgmode.org/manual/Repeated-tasks.html#Repeated-tasks][Repeated Tasks]]
 
 * Custom TODO states and Agendas
 
@@ -53,7 +53,7 @@ Run =org-agenda= to see possible agenda views.
 
 #+end_src
 
-[[https://orgmode.org/manual/Custom-Agenda-Views.html][Org Mode Manual: Custom Agenda Views]]
+[[https://orgmode.org/manual/Custom-Agenda-Views.html#Custom-Agenda-Views][Org Mode Manual: Custom Agenda Views]]
 
 #+begin_src emacs-lisp
 
