@@ -36,7 +36,7 @@ In this series, I will teach you the core customization language of Emacs called
 
 Emacs can also be used as an IDE (integrated development environment) like you might be used to from other editors.  This series will show you how to set up Emacs as an IDE to get rich development functionality for many languages!
 
-*** [[emacs-mail/][Emacs Mail]]
+*** [[../emacs-mail/][Emacs Mail]]
 
 Emacs can do many things, and this series will show you how you can use it to manage your e-mail!
 
@@ -48,11 +48,11 @@ There are many interesting topics we can cover about Emacs that don't require th
 
 The best interface for Git is in Emacs and it's called Magit!  This series will show you the ropes of how to use Magit to make all of your day to day source control operations ninja fast!
 
-*** [[advanced-package-management/][Advanced Emacs Package Management]]
+*** [[../advanced-package-management/][Advanced Emacs Package Management]]
 
 Learn more about how to use package managers like straight.el to manage Emacs packages in a more effective way!
 
-*** [[build-a-second-brain-in-emacs/][Build a Second Brain in Emacs]]
+*** [[../build-a-second-brain-in-emacs/][Build a Second Brain in Emacs]]
 
 Org Mode gives us the ability to organize our life in Emacs, but we can go even further by building a personal knowledgebase in Emacs using tools like Org Roam!
 
