@@ -1,0 +1,31 @@
+name: Verify site builds and links are not broken
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v1
+
+      - name: Check out the style repo
+        run: git clone --depth 1 https://git.sr.ht/~daviwil/daviwil.com daviwil.com
+
+      - name: Install Emacs
+        uses: purcell/setup-emacs@master
+        with:
+          version: 27.2
+
+      - name: Build the site
+        run: |
+          cp -R daviwil.com/public .
+          emacs --batch -l ./publish.el --funcall dw/publish
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1.0.8
+        with:
+          args: --verbose --no-progress ./public/**/*.html
