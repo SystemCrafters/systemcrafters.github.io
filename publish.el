@@ -79,6 +79,8 @@
           " <iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/%s\" allowfullscreen></iframe>"
           " </div>"))
 
+(setq dw/site-url "https://systemcrafters.net")
+
 (org-link-set-parameters
  "yt"
  :follow
@@ -142,7 +144,7 @@
            (div (@ (class "row"))
                 (div (@ (class "col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"))
                      (p "Made with " ,(plist-get info :creator))
-                     (p (a (@ (href "privacy-policy/")) "Privacy Policy")))))))
+                     (p (a (@ (href ,(concat dw/site-url "/privacy-policy/"))) "Privacy Policy")))))))
    (sxml-to-xml
     `(script (@ (src "/js/bootstrap.bundle.min.js"))))))
 

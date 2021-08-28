@@ -1,4 +1,4 @@
-name: Publish to GitHub Pages
+name: Verify site builds and links are not broken
 
 on:
   push:
@@ -29,9 +29,3 @@ jobs:
         uses: lycheeverse/lychee-action@v1.0.8
         with:
           args: --verbose --no-progress ./public/**/*.html
-
-      - name: Publish generated content to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          branch: gh-pages
-          folder: public
