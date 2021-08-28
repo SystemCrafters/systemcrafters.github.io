@@ -82,7 +82,7 @@ Thanks to Kyle Sexton and Nathan Chen for pointing out that all-the-icons is nee
 
 #+end_src
 
-[[https://github.com/emacs-evil/evil-collection#configuration][Configuring evil-collection]]
+[[https://github.com/emacs-evil/evil-collection#user-content-configuration][Configuring evil-collection]]
 
 If we want to be hardcore...
 

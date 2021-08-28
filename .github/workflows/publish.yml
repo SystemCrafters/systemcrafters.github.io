@@ -5,7 +5,6 @@ on:
     branches:
       - master
 
-
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -26,11 +25,7 @@ jobs:
           cp -R daviwil.com/public .
           emacs --batch -l ./publish.el --funcall dw/publish
 
-      - name: checking broken url
-        uses: ruzickap/action-my-broken-link-checker@v1.0.3
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v1.0.8
         with:
-          url: https://systemcrafters.net
-          pages_path: ./public
-          cmd_params: "-v"
-          run_timeout: 10
-          debug: true
+          args: --verbose --no-progress ./public/**/*.html

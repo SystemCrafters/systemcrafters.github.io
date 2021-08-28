@@ -75,8 +75,6 @@ value=42
 
 To create output directories automatically, add =:mkdirp yes=
 
-[[file:~/.dotfiles/Desktop.org::*mpv][My mpv configuration]]
-
 * Noweb Blocks
 
 Enables you to pass variables into a source block!
@@ -93,8 +91,6 @@ Add =:noweb yes=!
 value=<<the-value>>
 
 #+end_src
-
-[[file:~/.dotfiles/Systems.org::*Per-System Settings][Per-System Settings]]
 
 * Tips
 
