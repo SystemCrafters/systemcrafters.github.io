@@ -1,0 +1,130 @@
+#+title: System Crafters Live! - September 3, 2021
+
+[[https://youtu.be/fWmZoaTvA8k][Watch the recording]] on YouTube!
+
+* System Crafters Store Update
+
+- The first orders from the new System Crafters Store should be arriving in the next few days!
+- I want to see what you got!  Post in #general on the System Crafters Discord or tag @SystemCrafters on Twitter
+- Also, let me know what you think about the item quality
+- Those who checked out the site, please send me feedback!
+
+https://store.systemcrafters.net
+
+* News
+
+- The first EXWM hacking stream went great!
+- New video next week
+- Don't forget to submit a proposal for EmacsConf 2021!  Deadline Sep 30 - https://emacsconf.org/2021/cfp/
+- Sponsors, check your transactions
+
+* Exploring the Org Roam DB API
+
+Today we'll take a look at the =org-roam-db-query= function which allows us to gather information about our notes and their connections to other notes.
+
+This API actually queries a local SQLite database!  We may have to look at the docs for =emacsql= to learn more of the options.
+
+#+begin_src emacs-lisp
+
+  (require 'org-roam-node)
+
+#+end_src
+
+* Checking out the DB schema
+
+Take a look at =org-roam-db.el=, find the comment labelled "Schemata" (line 144).
+
+There are functions for accessing columns like =org-roam-node-tags=.
+
+* Querying for nodes
+
+There are a few useful ways to do this:
+
+- =org-roam-node-read=: Show a completion list, potentially filtered, returning selected node
+- =org-roam-node-at-point=: Figure out which node is represented by where the cursor is
+- =org-roam-db-query=: Query the database directly using SQL-like syntax
+
+There are other useful functions in =org-roam-db.el= that we might look at if we have time!
+
+[[https://www.orgroam.com/manual.html#Accessing-and-Modifying-Nodes][Org Roam Manual: Accessing and Modifying Nodes]]
+
+* Show a completion list of nodes with specific tag
+
+#+begin_src emacs-lisp
+
+(defun my/org-roam-select-language ()
+  (interactive)
+  (org-roam-node-read
+   nil
+   (lambda (node)
+     (member "Language" (org-roam-node-tags node)))
+   (lambda (completion-a completion-b)
+     (< (length (org-roam-node-title (cdr completion-a)))
+        (length (org-roam-node-title (cdr completion-b)))))
+   t))
+
+#+end_src
+
+* Build an agenda from tagged nodes
+
+#+begin_src emacs-lisp
+
+(require 'seq)
+
+(defun my/org-roam-get-project-notes ()
+  (interactive)
+  (mapcar
+   #'org-roam-node-file
+   (seq-filter
+    (lambda (node)
+      (member "Project" (org-roam-node-tags node)))
+    (org-roam-node-list))))
+
+(setq org-directory "~/RoamFiles")
+(setq org-agenda-files (my/org-roam-get-project-notes))
+
+#+end_src
+
+* Build an agenda from projects linked to a node
+
+EmacSQL readme: https://github.com/skeeto/emacsql
+
+#+begin_src emacs-lisp
+
+(defun my/org-roam-show-linked-agenda ()
+  (interactive)
+  (let ((node (org-roam-node-read))
+        (org-agenda-files))
+    (setq org-agenda-files
+        (cons (org-roam-node-file node)
+            (mapcar
+                (lambda (res)
+                (org-roam-node-file (org-roam-node-from-id (car res))))
+                (org-roam-db-query
+                    [:select :distinct [dest]
+                        :from links
+                        :where (= source $s1)
+                        :and (= type "id")]
+                    (org-roam-node-id node)))))
+    (org-agenda)))
+
+#+end_src
+
+* Adding information to the node completion list
+
+Showing node TODO state:
+
+#+begin_src emacs-lisp
+
+(setq org-roam-node-display-template "${title:*} ${todo:10} ${tags:20}")
+
+#+end_src
+
+Showing node deadline:
+
+#+begin_src emacs-lisp
+
+(setq org-roam-node-display-template "${title:*} Deadline: ${deadline:10} ${tags:20}")
+
+#+end_src
+

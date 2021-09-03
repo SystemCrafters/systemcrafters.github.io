@@ -4,6 +4,7 @@ We stream every Friday at 9:15 am Pacific time!
 
 * Episodes
 
+- [[september-03-2021/][September 3, 2021]]: Exploring the Org Roam DB API
 - [[august-27-2021/][August 27, 2021]]: We Need to Talk About EXWM
 - [[august-20-2021/][August 20, 2021]]: Can We Fix a Bug in Emacs?
 - [[august-13-2021/][August 13, 2021]]: Emacs Package Potluck (Trying Your Suggestions!)
