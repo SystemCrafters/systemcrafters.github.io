@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Clean Your Commits Like a Git Rebase Expert with Magit - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.cc">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Clean Your Commits Like a Git Rebase Expert with Magit</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/zM7K1y4h6UQ">Watch the video</a> on YouTube!
+</p>
+
+<h2><a id="intro" class="anchor" href="#intro">¶</a>Intro</h2><p>Have you ever made a mistake or created sloppy commits when checking in changes to a Git repository?
+</p>
+
+<p>After watching this video, you'll know exactly how to fix those problems and create a clean commit history with <kbd>git rebase</kbd> and Magit.
+</p>
+
+<h2><a id="support-the-channel" class="anchor" href="#support-the-channel">¶</a>Support the Channel</h2><p>The content on this channel is supported by the System Crafters Community!
+</p>
+
+<p>If you enjoy this video, please click the "Like" button and check out the links below in the description to see other ways you can support my work!
+</p>
+
+<p><a href="https://systemcrafters.net/support-the-channel">https://systemcrafters.net/support-the-channel</a>
+<a href="https://store.systemcrafters.net">https://store.systemcrafters.net</a>
+</p>
+
+<h2><a id="getting-started" class="anchor" href="#getting-started">¶</a>Getting Started</h2><p>Make sure you've got Magit installed first, check out the first video in the series for more information:
+</p>
+
+<ul><li><a href="https://youtu.be/_zfvQkJsYwI">An Introduction to the Ultimate Git Interface, Magit!</a></li>
+</ul>
+
+<p>We'll be using the <kbd>magit-status</kbd> interface a lot in this video!
+</p>
+
+<p>I've prepared an example repository that you can use to try the techniques I'll show you in this video, you can clone it here:
+</p>
+
+<p><a href="https://github.com/SystemCrafters/filet-magit">https://github.com/SystemCrafters/filet-magit</a>
+</p>
+
+<p>To make sure you're in the right branch when you clone this repository, use this command!
+</p>
+
+<pre><code class="sh">
+git clone https://github.com/SystemCrafters/filet-magit -b add-recipes
+
+</code></pre>
+
+<h2><a id="reviewing-our-commits" class="anchor" href="#reviewing-our-commits">¶</a>Reviewing our commits</h2><p>Let's imagine that we're writing a cookbook package for Emacs.  We've been working on a feature for adding new cookbook entries and we're just about ready to push those changes to the public repository.
+</p>
+
+<p>But before we do that, let's take a look at our commit history and see if there's any cleanup work we want to do.
+</p>
+
+<p>From a file within the project folder, we can run <kbd>M-x magit-status</kbd> to pull up the status buffer.
+</p>
+
+<p>We can take a look at the "Recent commits" section to review what we've done so far.
+</p>
+
+<h2><a id="weve-got-some-work-to-do" class="anchor" href="#weve-got-some-work-to-do">¶</a>We've got some work to do</h2><p>We're going to clean up these commits using a feature of Git called "interactive rebase".
+</p>
+
+<p>This is a very powerful tool that allows you to edit commit history in a number of ways, so it's very important to know to use it if you work with Git a lot.
+</p>
+
+<p>And as usual, Magit makes it much easier and more efficient to perform rebase operations than it would be on the command line.
+</p>
+
+<p><strong>NOTE:</strong> If you have changes to tracked files in your repo you will need to <a href="https://systemcrafters.net/mastering-git-with-magit/everyday-git-workflow/#saving-local-changes-for-later">stash them</a> before proceeding!  (See <a href="https://youtu.be/qPfJoeQCIvA?t=2176">this video</a> for an example).
+</p>
+
+<h2><a id="an-important-tip" class="anchor" href="#an-important-tip">¶</a>An important tip!</h2><p>Here's something I recommend before doing any rebase operation if you're not that familiar with it yet.
+</p>
+
+<p>Back up your branch before the rebase just to make sure you won't lose access to the original commits!
+</p>
+
+<p>In the <kbd>magit-status</kbd> buffer you can press <kbd>b n</kbd> to create a new branch.  It will ask you the source branch and the name for the target branch.
+</p>
+
+<p>Now that we have our backup branch, we can always get the original commits back if we make a mistake!
+</p>
+
+<h2><a id="rewording-commits" class="anchor" href="#rewording-commits">¶</a>Rewording commits</h2><p>You can reword any commit in your branch's history by performing an interactive rebase using Magit.
+</p>
+
+<p>In the <kbd>magit-status</kbd> buffer, put your cursor on the commit you want to reword and press <kbd>r i</kbd> (lower-case <kbd>R</kbd> then <kbd>I</kbd>).  This will bring up a rebase interface which displays the list of commits starting at the selected commit to allow you to pick which operation to take on each of them.
+</p>
+
+<p>For the commit we want to reword, we can put our cursor on its line and press <kbd>r</kbd> (lower-case <kbd>R</kbd>) and it will be marked as <kbd>reword</kbd>.  Press <kbd>C-c C-c</kbd> to confirm.
+</p>
+
+<p>You will now be given a commit message editing buffer to fix the wording of the commit.  Make your changes and press <kbd>C-c C-c</kbd> to confirm.
+</p>
+
+<h2><a id="you-just-changed-history" class="anchor" href="#you-just-changed-history">¶</a>You just changed history!</h2><p>Keep in mind that editing <strong>any</strong> commit in the history will cause <strong>all following commits</strong> to be recreated so they will all have a new commit hash!  This means that you will need to "force push" your changes to the remote repository if you have already pushed the branch there once before.
+</p>
+
+<h2><a id="reordering-commits" class="anchor" href="#reordering-commits">¶</a>Reordering commits</h2><p>The commit history you create can be seen as the story of the code's creation.  Sometimes it makes sense for a more recent change to be moved back before other changes to improve the narrative.
+</p>
+
+<p>You can reorder commits easily in the interactive rebase view by placing the cursor on a particular commit and using the following key bindings:
+</p>
+
+<ul><li><kbd>M-n</kbd> / <kbd>M-j</kbd> (evil): Move the commit forward in time by one commit</li>
+<li><kbd>M-p</kbd> / <kbd>M-k</kbd> (evil): Move the commit backward in time by one commit</li>
+</ul>
+
+<p>You can reorder multiple commits in one interactive rebase operation!
+</p>
+
+<h2><a id="dealing-with-conflicts-when-moving-commits" class="anchor" href="#dealing-with-conflicts-when-moving-commits">¶</a>Dealing with conflicts when moving commits</h2><p>Now let's move another commit, but this time the move is going to create a conflict with the changes in the commit history.
+</p>
+
+<p>We're going to move the commit titled "Add function to make a cookbook entry" to come just after the initial commit of the package code.
+</p>
+
+<p>Since there's a conflict in the changes of both commits, we need to edit the file to resolve the issues.  Once we've finished the edit the changes will be automatically staged and we can use <kbd>r r</kbd> (two lower-case 'r') to continue the rebase.
+</p>
+
+<p>We'll be asked to edit and confirm the commit message.  We don't need to add any changes so we can use <kbd>C-c C-c</kbd> to complete the commit.
+</p>
+
+<p>We'll also have to deal with another conflict!  Let's add the function back in the next commit and continue from there.
+</p>
+
+<p><strong>NOTE:</strong> If the merge is looking too complicated and you want to start over, you can use <kbd>r a</kbd> to abort the current rebase!
+</p>
+
+<h2><a id="editing-a-commit" class="anchor" href="#editing-a-commit">¶</a>Editing a commit</h2><p>We'll need to make a tweak to the following commit to restore the use of the new <kbd>filet-new-recipe</kbd> in the <kbd>filet-add-recipe</kbd> command since we had to remove it when resolving the previous conflicts.
+</p>
+
+<p>Let's start a new interactive rebase and use the <kbd>edit</kbd> command on that commit by pressing <kbd>e</kbd> with the cursor on that line.
+</p>
+
+<p>We can now go and change the code however we like and then stage those changes to be added to the existing commit.
+</p>
+
+<p>In the <kbd>magit-status</kbd> screen press <kbd>r r</kbd> to complete the rebase operation.
+</p>
+
+<h2><a id="combining-commits" class="anchor" href="#combining-commits">¶</a>Combining commits</h2><p>Now we're going to see how we can combine two commits together.  There are two ways to do this:
+</p>
+
+<ul><li><kbd>fixup</kbd>: Merges only the changes of a commit into the previous commit</li>
+<li><kbd>squash</kbd>: Merges the changes of a commit into the previous commit and combines their commits messages</li>
+</ul>
+
+<p>Use <kbd>fixup</kbd> when you don't care about the commit message and <kbd>squash</kbd> when you want to keep it!
+</p>
+
+<p>We'll use <kbd>fixup</kbd> to combine the "oops" commit into the initial package code commit and <kbd>squash</kbd> to combine the two documentation commits and merge their messages.
+</p>
+
+<h2><a id="deleting-commits" class="anchor" href="#deleting-commits">¶</a>Deleting commits</h2><p>Sometimes you will make temporary commits that are only useful for debugging purposes or maybe diagnosing a test failure in your CI runs.
+</p>
+
+<p>Before you merge your branch, you will probably want to delete these commits!  Thankfully interactive rebase makes this easy.
+</p>
+
+<p>Start a new interactive rebase at the commit that you want to delete.  We can press the <kbd>k</kbd> key to use the "drop" operation on the temporary commit and then press <kbd>C-c C-c</kbd> to confirm and then the commit will be deleted!  (<kbd>evil-collection</kbd> users will need to press <kbd>d</kbd> instead)
+</p>
+
+<h2><a id="lets-do-it-all-at-once" class="anchor" href="#lets-do-it-all-at-once">¶</a>Let's do it all at once!</h2><p>Now that we know the whole flow, let's clean up the same commits all in one interactive rebase!
+</p>
+
+<p>Here's the point where the backup branch we created becomes useful.
+</p>
+
+<p>Inside the <kbd>magit-status</kbd> screen we can press <kbd>X</kbd> (capital letter 'X') to open the "Reset" panel.  <kbd>evil-collection</kbd> users will need to press <kbd>O</kbd> (capital letter 'O') instead!
+</p>
+
+<p>We will then press <kbd>h</kbd> (lower-cased 'H') to select the "Hard" option.  In this case, a hard reset will set our working tree back to the state of the source we select.
+</p>
+
+<p>We can now select our <kbd>add-recipes-backup</kbd> branch to reset the <kbd>add-recipes</kbd> branch back to its previous history!
+</p>
+
+<p>Now let's start the interactive rebase process again and perform all the changes we saw so far in one operation.
+</p>
+
+<h2><a id="thats-it" class="anchor" href="#thats-it">¶</a>That's it!</h2><p>Let me know in the comments if this video was helpful or if you have any questions and don't forget to click the "Like" button!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
