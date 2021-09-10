@@ -1,0 +1,150 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - September 10, 2021 - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - September 10, 2021</h1><p class="blog-post-meta"></p><div><p><a href="https://www.youtube.com/watch?v=ajm71wB7FTc">Watch the recording</a> on YouTube!
+</p>
+
+<h2><a id="news" class="anchor" href="#news">¶</a>News</h2><ul><li>Tomorrow (Saturday the 11th) marks 1 year since the first Emacs From Scratch stream + 100 videos!</li>
+<li>Sunday Sep 12, 1pm Pacific / 8pm UTC, Emacs/<a href="https://www.nushell.sh/">Nushell</a> stream with <a href="https://www.youtube.com/channel/UCrW38UKhlPoApXiuKNghuig">Systems with JT</a></li>
+<li>Submit a proposal for EmacsConf 2021!  Deadline Sep 30 - <a href="https://emacsconf.org/2021/cfp/">https://emacsconf.org/2021/cfp/</a></li>
+</ul>
+
+<p><a href="~/Pictures/efs_1_year.png">~/Pictures/efs_1_year.png</a>
+</p>
+
+<h2><a id="channel-brainstorming" class="anchor" href="#channel-brainstorming">¶</a>Channel Brainstorming</h2><ul><li>Move Friday streams one hour earlier to 8am Pacific / 3pm UTC?</li>
+<li>Create a second channel for Hack Sessions?</li>
+<li>Which video series next?  Finish an older one?  Something new?</li>
+</ul>
+
+<h2><a id="emacs-package-potluck" class="anchor" href="#emacs-package-potluck">¶</a>Emacs Package Potluck</h2><p>Just like last time, let's try a bunch of Emacs packages.
+</p>
+
+<p>I want to try your package suggestions, they can be any of the following:
+</p>
+
+<ul><li>A package you wrote (preferrable!)</li>
+<li>A package you love</li>
+<li>A package that doesn't get enough attention</li>
+<li>A package you've never got working</li>
+</ul>
+
+<h3><a id="suggestions" class="anchor" href="#suggestions">¶</a>Suggestions</h3><ul><li>TitanOfOld: <a href="https://github.com/Malabarba/beacon">beacon</a></li>
+<li>Appenzell, garjola: <a href="https://github.com/alphapapa/ement.el">ement.el</a> (try it with <a href="https://wiki.systemcrafters.cc/community/chat-with-us/#matrix-bridge">System Crafters Matrix bridge</a>)</li>
+<li>Drishal: <a href="https://depp.brause.cc/shackle/">shackle</a></li>
+<li>karthik: consult-dir, <a href="https://github.com/karthink/popper">popper</a>, <a href="https://github.com/gRastello/ytel">ytel</a> (<a href="https://sqrtminusone.xyz/posts/2021-09-07-emms/">YouTube via elfeed</a>)</li>
+<li>Zel: <a href="https://github.com/mihaiolteanu/vuiet">Vuiet</a></li>
+<li>Mayush: <a href="https://github.com/ralesi/ranger.el">ranger</a></li>
+<li>dean: <a href="https://github.com/rbanffy/selectric-mode">selectric-mode</a> (thanks Abin!)</li>
+<li>Tae Eun Kim: org-special-block-extras</li>
+<li>Charlie McMackin: esup</li>
+<li>Appenzell: org-roam-ui</li>
+<li>Shubham: evil-replace-with-register</li>
+<li>Eddas: org-sidebar</li>
+<li>Noble&amp;Savage: vue-mode</li>
+<li>Abin Simon: evil-textobj-tree-sitter, fancy-narrow</li>
+<li>Thomas Birkmaier - org-gantt</li>
+<li>Tyler Grinn: org-real</li>
+<li>ZW Wang: company-tabnine</li>
+</ul>
+
+<h3><a id="final-config" class="anchor" href="#final-config">¶</a>Final Config</h3><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">beacon</span>
+  <span class="org-builtin">:straight</span> t)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">plz</span>
+  <span class="org-builtin">:straight</span> (plz <span class="org-builtin">:host</span> github <span class="org-builtin">:repo</span> <span class="org-string">"alphapapa/plz.el"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install Ement.</span>
+(<span class="org-keyword">use-package</span> <span class="org-constant">ement</span>
+  <span class="org-builtin">:straight</span> (ement <span class="org-builtin">:host</span> github <span class="org-builtin">:repo</span> <span class="org-string">"alphapapa/ement.el"</span>))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">shackle</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:config</span>
+  (shackle-mode 1)
+  (<span class="org-keyword">setq</span> <span class="org-comment-delimiter">;</span><span class="org-comment">shackle-rules '((help-mode :noselect t))</span>
+        shackle-default-rule '(<span class="org-builtin">:same</span> t)))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">popper</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-`"</span>   . popper-toggle-latest)
+         (<span class="org-string">"M-`"</span>   . popper-cycle)
+         (<span class="org-string">"C-M-`"</span> . popper-toggle-type))
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> popper-reference-buffers
+        '(<span class="org-string">"\\*Messages\\*"</span>
+          <span class="org-string">"Output\\*$"</span>
+          <span class="org-string">"*eshell*"</span>
+          help-mode
+          compilation-mode))
+  (popper-mode +1))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">ytel</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:config</span>
+  (<span class="org-keyword">setq</span> ytel-invidious-api-url <span class="org-string">"https://invidious.snopyta.org"</span>))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">ytel-watch</span> ()
+  <span class="org-doc">"Stream video at point in mpv."</span>
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let*</span> ((video (ytel-get-current-video))
+       (id    (ytel-video-id video)))
+    (start-process <span class="org-string">"ytel mpv"</span> nil
+       <span class="org-string">"mpv"</span>
+       (concat <span class="org-string">"https://www.youtube.com/watch?v="</span> id))
+    <span class="org-string">"--ytdl-format=bestvideo[height&lt;=?720]+bestaudio/best"</span>)
+  (message <span class="org-string">"Starting streaming..."</span>))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">vuiet</span>
+  <span class="org-builtin">:straight</span> t)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">ranger</span>
+  <span class="org-builtin">:straight</span> t)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">selectric-mode</span>
+  <span class="org-builtin">:straight</span> t)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">https://github.com/benoitj/dotfiles/blob/main/private_dot_irssi/notify.wav</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">selectric-type-sound</span> ()
+  <span class="org-doc">"Make the sound of the printing element hitting the paper."</span>
+  (selectric-make-sound (expand-file-name <span class="org-string">"~/Downloads/notify.wav"</span>)))
+
+</code></pre>
+
+<h3><a id="ashrazs-random-package-picker" class="anchor" href="#ashrazs-random-package-picker">¶</a>Ashraz's Random Package Picker</h3><p>Ashraz offered up this little gem before the stream but I didn't get to use it (yet!):
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">potluck--show-winner</span> (name)
+  <span class="org-doc">"Use animation to anounce the winner of a potluck draw.</span>
+
+<span class="org-doc">See `</span><span class="org-doc"><span class="org-constant">potluck-random-package</span></span><span class="org-doc">' for more information."</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Heavily inspired by `</span><span class="org-comment"><span class="org-constant">butterfly</span></span><span class="org-comment">'.</span>
+  (switch-to-buffer (get-buffer-create <span class="org-string">"*potluck*"</span>))
+  (erase-buffer)
+  (sit-for 0)
+  (animate-string <span class="org-string">"And the winner is..."</span>
+                  (/ (window-height) 2)
+                  (- (/ (window-width) 2) 11))
+  (animate-string name
+                  (+ 3 (/ (window-height) 2))
+                  (- (/ (window-width) 2) (/ (length name) 2))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">potluck--random-element</span> (sequence)
+  <span class="org-doc">"Pick one of the elements out of SEQUENCE randomly."</span>
+  (seq-elt sequence (random (length sequence))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">potluck-random-package</span> (<span class="org-type">&amp;optional</span> include-installed print-only)
+  <span class="org-doc">"Show a random not installed package.</span>
+
+<span class="org-doc">If INCLUDE-INSTALLED is not nil, then also include installed packages.</span>
+<span class="org-doc">If PRINT-ONLY is `t' the don't use any animation."</span>
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let</span> ((all-names (mapcar 'car package-archive-contents)))
+    (<span class="org-keyword">unless</span> include-installed
+      (<span class="org-keyword">setq</span> all-names (seq-difference all-names (mapcar 'car package-alist))))
+    (<span class="org-keyword">let</span> ((winner (symbol-name (potluck--random-element all-names))))
+      (<span class="org-keyword">if</span> print-only
+          (princ winner)
+        (potluck--show-winner winner)))))
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
