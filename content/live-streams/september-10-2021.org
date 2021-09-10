@@ -1,0 +1,157 @@
+#+title: System Crafters Live! - September 10, 2021
+
+[[https://www.youtube.com/watch?v=ajm71wB7FTc][Watch the recording]] on YouTube!
+
+* News
+
+- Tomorrow (Saturday the 11th) marks 1 year since the first Emacs From Scratch stream + 100 videos!
+- Sunday Sep 12, 1pm Pacific / 8pm UTC, Emacs/[[https://www.nushell.sh/][Nushell]] stream with [[https://www.youtube.com/channel/UCrW38UKhlPoApXiuKNghuig][Systems with JT]]
+- Submit a proposal for EmacsConf 2021!  Deadline Sep 30 - https://emacsconf.org/2021/cfp/
+
+[[~/Pictures/efs_1_year.png]]
+
+* Channel Brainstorming
+
+- Move Friday streams one hour earlier to 8am Pacific / 3pm UTC?
+- Create a second channel for Hack Sessions?
+- Which video series next?  Finish an older one?  Something new?
+
+* Emacs Package Potluck
+
+Just like last time, let's try a bunch of Emacs packages.
+
+I want to try your package suggestions, they can be any of the following:
+
+- A package you wrote (preferrable!)
+- A package you love
+- A package that doesn't get enough attention
+- A package you've never got working
+
+** Suggestions
+
+- TitanOfOld: [[https://github.com/Malabarba/beacon][beacon]]
+- Appenzell, garjola: [[https://github.com/alphapapa/ement.el][ement.el]] (try it with [[https://wiki.systemcrafters.cc/community/chat-with-us/#matrix-bridge][System Crafters Matrix bridge]])
+- Drishal: [[https://depp.brause.cc/shackle/][shackle]]
+- karthik: consult-dir, [[https://github.com/karthink/popper][popper]], [[https://github.com/gRastello/ytel][ytel]] ([[https://sqrtminusone.xyz/posts/2021-09-07-emms/][YouTube via elfeed]])
+- Zel: [[https://github.com/mihaiolteanu/vuiet][Vuiet]]
+- Mayush: [[https://github.com/ralesi/ranger.el][ranger]]
+- dean: [[https://github.com/rbanffy/selectric-mode][selectric-mode]] (thanks Abin!)
+- Tae Eun Kim: org-special-block-extras
+- Charlie McMackin: esup
+- Appenzell: org-roam-ui
+- Shubham: evil-replace-with-register
+- Eddas: org-sidebar
+- Noble&Savage: vue-mode
+- Abin Simon: evil-textobj-tree-sitter, fancy-narrow
+- Thomas Birkmaier - org-gantt
+- Tyler Grinn: org-real
+- ZW Wang: company-tabnine
+
+** Final Config
+
+#+begin_src emacs-lisp
+
+  (use-package beacon
+    :straight t)
+
+  (use-package plz
+    :straight (plz :host github :repo "alphapapa/plz.el"))
+
+  ;; Install Ement.
+  (use-package ement
+    :straight (ement :host github :repo "alphapapa/ement.el"))
+
+  (use-package shackle
+    :straight t
+    :config
+    (shackle-mode 1)
+    (setq ;shackle-rules '((help-mode :noselect t))
+          shackle-default-rule '(:same t)))
+
+  (use-package popper
+    :straight t
+    :bind (("C-`"   . popper-toggle-latest)
+           ("M-`"   . popper-cycle)
+           ("C-M-`" . popper-toggle-type))
+    :init
+    (setq popper-reference-buffers
+          '("\\*Messages\\*"
+            "Output\\*$"
+            "*eshell*"
+            help-mode
+            compilation-mode))
+    (popper-mode +1))
+
+  (use-package ytel
+    :straight t
+    :config
+    (setq ytel-invidious-api-url "https://invidious.snopyta.org"))
+
+  (defun ytel-watch ()
+    "Stream video at point in mpv."
+    (interactive)
+    (let* ((video (ytel-get-current-video))
+         (id    (ytel-video-id video)))
+      (start-process "ytel mpv" nil
+         "mpv"
+         (concat "https://www.youtube.com/watch?v=" id))
+      "--ytdl-format=bestvideo[height<=?720]+bestaudio/best")
+    (message "Starting streaming..."))
+
+  (use-package vuiet
+    :straight t)
+
+  (use-package ranger
+    :straight t)
+
+  (use-package selectric-mode
+    :straight t)
+
+  ;; https://github.com/benoitj/dotfiles/blob/main/private_dot_irssi/notify.wav
+  (defun selectric-type-sound ()
+    "Make the sound of the printing element hitting the paper."
+    (selectric-make-sound (expand-file-name "~/Downloads/notify.wav")))
+
+#+end_src
+
+** Ashraz's Random Package Picker
+
+Ashraz offered up this little gem before the stream but I didn't get to use it (yet!):
+
+#+begin_src emacs-lisp
+
+  (defun potluck--show-winner (name)
+    "Use animation to anounce the winner of a potluck draw.
+
+  See `potluck-random-package' for more information."
+    ;; Heavily inspired by `butterfly'.
+    (switch-to-buffer (get-buffer-create "*potluck*"))
+    (erase-buffer)
+    (sit-for 0)
+    (animate-string "And the winner is..."
+                    (/ (window-height) 2)
+                    (- (/ (window-width) 2) 11))
+    (animate-string name
+                    (+ 3 (/ (window-height) 2))
+                    (- (/ (window-width) 2) (/ (length name) 2))))
+
+  (defun potluck--random-element (sequence)
+    "Pick one of the elements out of SEQUENCE randomly."
+    (seq-elt sequence (random (length sequence))))
+
+  (defun potluck-random-package (&optional include-installed print-only)
+    "Show a random not installed package.
+
+  If INCLUDE-INSTALLED is not nil, then also include installed packages.
+  If PRINT-ONLY is `t' the don't use any animation."
+    (interactive)
+    (let ((all-names (mapcar 'car package-archive-contents)))
+      (unless include-installed
+        (setq all-names (seq-difference all-names (mapcar 'car package-alist))))
+      (let ((winner (symbol-name (potluck--random-element all-names))))
+        (if print-only
+            (princ winner)
+          (potluck--show-winner winner)))))
+
+#+end_src
+
