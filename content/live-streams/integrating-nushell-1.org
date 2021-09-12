@@ -1,0 +1,30 @@
+#+title: System Crafters Live! - Integrating Nushell with Emacs
+
+[[https://www.youtube.com/watch?v=IHeKUeO7bpo][Watch the recording]] on YouTube!
+
+* Systems with JT
+
+Check out [[https://www.youtube.com/channel/UCrW38UKhlPoApXiuKNghuig][Systems with JT]] on YouTube, [[https://twitch.tv/jntrnr][Twitch]], and follow [[https://twitter.com/jntrnr][@jntrnr]] on Twitter!
+
+They cover operating systems, programming systems, interviews with people who do interesting technical work, coding streams and more.
+
+* What is Nushell?
+
+Nushell is a command line shell which deals with data in a structured way, unlike POSIX shells which pass strings between programs.  It is written and extended with Rust!
+
+Because it can handle structured data, we might have an easier time wiring it up to Emacs in a few interesting ways.
+
+The homepage is https://nushell.sh and you can follow on Twitter [[https://twitter.com/nu_shell][@nu_shell]].
+
+* How can we integrate it with Emacs?
+
+- Run Nushell commands and interactively view output in Emacs
+- Filter and edit structured data in the command pipeline using Emacs
+- Hook it up to Org Babel for a Jupyter-like interactive notebook
+- Literate DevOps with Org Mode
+
+* Check out the code!
+
+We made some progress in this episode, you can see the code we came up with here:
+
+https://github.com/daviwil/emacs-nushell
