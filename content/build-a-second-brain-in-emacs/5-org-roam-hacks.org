@@ -97,8 +97,6 @@ Here is a snippet that will find all the notes with a specific tag and then set 
   (defun my/org-roam-list-notes-by-tag (tag-name)
     (mapcar #'org-roam-node-file
             (seq-filter
-             (lambda (node)
-               (member tag-name (org-roam-node-tags node)))
              (my/org-roam-filter-by-tag tag-name)
              (org-roam-node-list))))
 
