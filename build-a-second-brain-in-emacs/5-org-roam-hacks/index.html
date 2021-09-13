@@ -100,8 +100,6 @@
 (<span class="org-keyword">defun</span> <span class="org-function-name">my/org-roam-list-notes-by-tag</span> (tag-name)
   (mapcar #'org-roam-node-file
           (seq-filter
-           (<span class="org-keyword">lambda</span> (node)
-             (member tag-name (org-roam-node-tags node)))
            (my/org-roam-filter-by-tag tag-name)
            (org-roam-node-list))))
 
