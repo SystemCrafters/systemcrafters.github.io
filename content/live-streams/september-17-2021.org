@@ -1,0 +1,115 @@
+#+title: System Crafters Live! - September 17, 2021
+
+Watch the recordings here:
+
+- [[https://youtu.be/PE714pm1kvE][Part 1 - Before the Catastrophe]]
+- [[https://youtu.be/JMP8JjmS3ds][Part 2 - Homesteading the Wasteland]]
+
+I crashed the stream midway through by killing OBS by accident.  Enjoy :)
+
+* News
+
+- You have one more week to submit a proposal for EmacsConf 2021!  Deadline Sep 30 - https://emacsconf.org/2021/cfp/
+
+* The Many Varieties of Emacs
+
+Today we're going to take a look at the many forks and variants of Emacs that have come and gone over the years.
+
+Why?  Because Emacs has a colorful history and it might be interesting to see the different directions people have tried to take it.
+
+We're not going to cover every variant!
+
+There are a couple of good sources of information about Emacs variants:
+
+- https://en.wikipedia.org/wiki/Emacs
+- http://www.finseth.com/emacs.html
+- https://www.emacswiki.org/emacs/EmacsImplementations
+
+Gavin's video about Neovim and Fennel: https://www.youtube.com/watch?v=VC1DhAoRSpg
+
+* The birthplace: Editing Macros for TECO (1974)
+
+TECO was a line editor in use at MIT while
+
+https://en.wikipedia.org/wiki/Emacs#History
+
+* Gosling Emacs (1981)
+
+Created by James Gosling, also the creator of Java.
+
+https://en.wikipedia.org/wiki/Gosling_Emacs
+
+* GNU Emacs (1985)
+
+You're looking at it :)
+
+Based on Gosling Emacs but with a rewritten Lisp interpreter.
+
+https://en.wikipedia.org/wiki/GNU_Emacs
+https://www.gnu.org/gnu/rms-lisp.html
+
+* MicroEMACS (1985) / mg (1986)
+
+https://en.wikipedia.org/wiki/MicroEMACS
+https://en.wikipedia.org/wiki/Mg_(text_editor)
+
+* XEmacs (1992)
+
+Originally called Lucid Emacs but renamed to XEmacs after Lucid Inc went out of business.
+
+Image: https://en.wikipedia.org/wiki/Emacs#/media/File:Xemacs-21.5.b29.png
+
+History of the fork: https://www.emacswiki.org/emacs/EmacsSchism
+
+Jamie Zawinski (jwz) is a pretty interesting character: https://www.jwz.org/about.html
+
+Brief history: https://www.xemacs.org/About/index.html
+https://www.emacswiki.org/emacs/LucidEmacs
+
+My misunderstanding of the name when I saw XEmacs was that it somehow meant it was for the X Window System!
+
+* SXEmacs (2004)
+
+A fork of XEmacs!
+
+Founding email: https://lists.gnu.org/archive/html/emacs-devel/2004-12/msg01057.html
+
+https://www.sxemacs.org/
+https://www.emacswiki.org/emacs/SXEmacs
+
+* Aquamacs (2007?)
+
+Currently based on Emacs 25, but planned to catch up to 27 or 28 after 3.6:
+
+/Aquamacs 3.6 will likely be the last release based on Emacs 25. Beyond 3.6, Aquamacs will be updated to run with a fairly recent version of Emacs 27 or Emacs 28, depending on when the development catches up. The merge to catch up with current Emacs will probably take a while, although there's been a lot of behind-the-scenes work to set the stage for that./
+
+http://aquamacs.org/
+https://en.wikipedia.org/wiki/Aquamacs
+
+* Remacs (2017)
+
+Announcement post: http://www.wilfred.me.uk/blog/2017/01/11/announcing-remacs-porting-emacs-to-rust/
+GitHub repo: https://github.com/remacs/remacs
+
+Progress report: http://db48x.net/rust-remacs-2018/
+
+[[https://github.com/remacs/remacs/commit/a684a4c282f98fbe21df551030f1859f52f3ac6d][Deprecation announcement]]:
+
+/This project isn't maintained anymore. If you are looking for a rust based emacs fork, you can take a look at emacs-ng. However this fork is not about replacing the C code base, but to provide additional features using the rich ecosystem of rust./
+
+* Emacs NG (2020)
+
+https://emacs-ng.github.io/emacs-ng/
+https://github.com/emacs-ng/emacs-ng
+
+/The goal of this fork is to explore new development approaches. To accomplish this, we aim to maintain an inclusive and innovative environment. The project is not about replacing elisp with a more popular language like Javascript. We just want to make emacs more approachable for people who don't like lisp as much as we do./
+
+* Commercial Emacs (2021)
+
+A recent fork that also seems to be geared toward solving the "Emacs development modernization" problem.
+
+https://github.com/dickmao/commercial-emacs
+
+* So which one should I use?
+
+Just use GNU Emacs unless you've got a good reason to use something else!
