@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Using GNU Stow to Manage Symbolic Links for Your Dotfiles - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Using GNU Stow to Manage Symbolic Links for Your Dotfiles</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/CxAT1u8G7is">Watch the video</a> on YouTube!
+</p>
+
+<h2><a id="intro" class="anchor" href="#intro">¶</a>Intro</h2><p>One painful part of keeping a dotfiles directory is managing symbolic links between your configuration files and the locations where they need to go in your home directory.
+</p>
+
+<p>In this video, I'll show you how easy it is to use GNU Stow to automate the creation of all your symbolic links with a single command!
+</p>
+
+<h2><a id="getting-started" class="anchor" href="#getting-started">¶</a>Getting started</h2><p>To get started, make sure you've already set up a dotfiles directory like I've described in the video called <a href="https://www.youtube.com/watch?v=gibqkbdVbeY">How to Create a Dotfiles Folder</a>.
+</p>
+
+<p>In this video I'm going to assume that your dotfiles directory is located right inside of your home directory and it's called <kbd>~/.dotfiles</kbd>.
+</p>
+
+<p>You'll also need to install GNU Stow, you can find it in the package managers of most GNU/Linux distributions with the name <kbd>stow</kbd>.
+</p>
+
+<p>If you're on macOS, you can install it with Homebrew via the command <kbd>brew install stow</kbd>
+</p>
+
+<p>On Windows, you can install Stow via the <a href="https://www.msys2.org/">MSYS2</a> command shell using <kbd>pacman -S stow</kbd>, but make sure you run the shell as Administrator and have the <kbd>MSYS</kbd> environment variable set to <kbd>winsymlinks:nativestrict</kbd> so that it creates symbolic links correctly, otherwise <kbd>stow</kbd> just copies the files!
+</p>
+
+<h2><a id="about-gnu-stow" class="anchor" href="#about-gnu-stow">¶</a>About GNU Stow</h2><p><a href="https://www.gnu.org/software/stow/">GNU Stow</a> describes itself as a "symlink farm manager," but in practical terms it's just a program that can mirror the structure of one directory into another by creating symbolic links back to the original files.
+</p>
+
+<p>This is extremely useful when you have a directory full of configuration files that is managed by Git and you want to send all of those configuration files to where they belong in your home directory.
+</p>
+
+<h2><a id="basic-usage" class="anchor" href="#basic-usage">¶</a>Basic usage</h2><p>Let's say we've got our configuration files stored in a directory under the home directory called <kbd>.dotfiles</kbd>.  We can easily create symbolic links to the files in this directory to the equivalent locations in the home directory using the following command:
+</p>
+
+<pre><code class="sh">
+stow .
+
+</code></pre>
+
+<p>Before we run that, let's take a look at what's already in the <kbd>.dotfiles</kbd> directory and the home directory:
+</p>
+
+<pre><code class="sh">
+ls -al ~
+ls -al ~/.dotfiles
+
+</code></pre>
+
+<p>Now let's run the <kbd>stow</kbd> command that I mentioned before:
+</p>
+
+<pre><code class="sh">
+<span class="org-builtin">cd</span> ~/.dotfiles
+stow .
+ls -al ~
+
+</code></pre>
+
+<p>We can now see that all of the configuration files under <kbd>~/.dotfiles</kbd>, even those in child directories, have had symbolic links created!
+</p>
+
+<p>It's possible that you will receive an error saying that the target file or link already exists so you might need to remove existing files before this command will succeed.
+</p>
+
+<h2><a id="how-it-works" class="anchor" href="#how-it-works">¶</a>How it works</h2><p>GNU Stow walks the file and directory hierarchy of the directory passed as the first parameter to the <kbd>stow</kbd> command and creates symbolic links to those files in the equivalent locations in the target directory.
+</p>
+
+<p>The important thing to be aware of here is that our dotfiles directory <strong>must have the same layout</strong> as where the files would be placed under the home directory.  This means you will need to have the equivalent subdirectory structure in your dotfiles folder so that all symbolic links get created in the right place.
+</p>
+
+<p>One thing you may have noticed: we didn't specify what the target directory is!  By default, <kbd>stow</kbd> assumes that the target directory is the parent directory of the one that you specified.
+</p>
+
+<p>This means that <kbd>stow .</kbd> is equivalent to:
+</p>
+
+<pre><code class="sh">
+stow --dir=~/.dotfiles --target=~/
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">OR</span>
+
+stow -d ~/.dotfiles -t ~/
+
+</code></pre>
+
+<p>This means that you have full control over the source and target directories that Stow uses!
+</p>
+
+<p><strong>TIP:</strong> If you keep your dotfiles directory somewhere other than the home folder, I'd recommend creating a simple Bash script for invoking <kbd>stow</kbd> with the right parameters since you'll probably have to run it occasionally.
+</p>
+
+<h2><a id="ignoring-files-and-directories" class="anchor" href="#ignoring-files-and-directories">¶</a>Ignoring files and directories</h2><p>By default, GNU Stow does a good job of <a href="https://www.gnu.org/software/stow/manual/stow.html#Types-And-Syntax-Of-Ignore-Lists">ignoring common files and directories</a> you might not want to be linked back to your home directory like <kbd>README</kbd> and <kbd>LICENSE</kbd> files, source control folders.
+</p>
+
+<p>Let's say you have other files in your dotfiles folder that you don't want to have linked to your home directory.  For example, our dotfiles folder has a <kbd>Notes.org</kbd> file.  That really doesn't need to be in our home folder.
+</p>
+
+<p>To skip files like this, we can create a file in our dotfiles folder called <kbd>.stow-local-ignore</kbd>.  Each line of this file should be a string or regular expression representing any file or directory you don't want to link to your home folder.
+</p>
+
+<p>Here's an example:
+</p>
+
+<pre><code class="sh">
+<span class="org-string">\.</span>git
+misc
+<span class="org-comment-delimiter">#</span><span class="org-comment">LICENSE</span>
+^/.*<span class="org-string">\.</span>org
+
+</code></pre>
+
+<p>This will avoid linking the <kbd>.git</kbd> folder (important!), a folder called <kbd>misc</kbd>, the <kbd>LICENSE</kbd> file, and any files ending in <kbd>.org</kbd>, the latter being useful for you if you use Emacs and Org Mode to keep literate configuration files!
+</p>
+
+<p>An important detail here is that specifying your own ignore file will override Stow's default ignore list!  We now need to add <kbd>LICENSE</kbd> to this list to ensure it doesn't get linked.
+</p>
+
+<p><a href="https://www.gnu.org/software/stow/manual/stow.html#Types-And-Syntax-Of-Ignore-Lists">GNU Stow Manual: Types and Syntax of Ignore Lists</a>
+</p>
+
+<h2><a id="cleaning-up-symbolic-links" class="anchor" href="#cleaning-up-symbolic-links">¶</a>Cleaning up symbolic links</h2><p>If for some reason you'd like to get rid of all the symbolic links that GNU Stow created in your home folder, you can do that with one extra parameter to the command we've been running so far:
+</p>
+
+<pre><code class="sh">
+stow -D .
+
+</code></pre>
+
+<p>All of the previously-created symbolic links in the home directory will now be gone!
+</p>
+
+<h2><a id="dont-forget-to-kbdstowkbd-every-time-you-sync" class="anchor" href="#dont-forget-to-kbdstowkbd-every-time-you-sync">¶</a>Don't forget to <kbd>stow</kbd> every time you sync!</h2><p>One last tip I'll mention: if you use Git to commit your configuration files to a repo that is shared between multiple machines, don't forget to run <kbd>stow</kbd> each time you sync to ensure that any new configuration files get linked into the proper location.
+</p>
+
+<p>To make sure you never forget to do this, you can use this script I created <kbd>sync-dotfiles</kbd> to automate the whole process.  This script will stash current changes to your dotfiles folder, pull any new changes from the remote repo, pop the stashed changes, and then run <kbd>stow .</kbd>
+</p>
+
+<p>You might consider keeping this in a <kbd>bin</kbd> subfolder of your <kbd>~/.dotfiles</kbd> directory and add it to your <kbd>PATH</kbd>!
+</p>
+
+<pre><code class="sh">
+<span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/sh</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Sync dotfiles repo and ensure that dotfiles are tangled correctly afterward</span>
+
+<span class="org-variable-name">GREEN</span>=<span class="org-string">'\033[1;32m'</span>
+<span class="org-variable-name">BLUE</span>=<span class="org-string">'\033[1;34m'</span>
+<span class="org-variable-name">RED</span>=<span class="org-string">'\033[1;30m'</span>
+<span class="org-variable-name">NC</span>=<span class="org-string">'\033[0m'</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Navigate to the directory of this script (generally ~/.dotfiles/.bin)</span>
+<span class="org-builtin">cd</span> $(dirname $(readlink -f $<span class="org-variable-name">0</span>))
+<span class="org-builtin">cd</span> ..
+
+<span class="org-builtin">echo</span> -e <span class="org-string">"${BLUE}Stashing existing changes...${NC}"</span>
+<span class="org-variable-name">stash_result</span>=$(git stash push -m <span class="org-string">"sync-dotfiles: Before syncing dotfiles"</span>)
+<span class="org-variable-name">needs_pop</span>=1
+<span class="org-keyword">if</span> [ <span class="org-string">"$stash_result"</span> = <span class="org-string">"No local changes to save"</span> ]; <span class="org-keyword">then</span>
+    <span class="org-variable-name">needs_pop</span>=0
+<span class="org-keyword">fi</span>
+
+<span class="org-builtin">echo</span> -e <span class="org-string">"${BLUE}Pulling updates from dotfiles repo...${NC}"</span>
+<span class="org-builtin">echo</span>
+git pull origin master
+<span class="org-builtin">echo</span>
+
+<span class="org-keyword">if</span> [[ $<span class="org-variable-name">needs_pop</span> -eq 1 ]]; <span class="org-keyword">then</span>
+    <span class="org-builtin">echo</span> -e <span class="org-string">"${BLUE}Popping stashed changes...${NC}"</span>
+    <span class="org-builtin">echo</span>
+    git stash pop
+<span class="org-keyword">fi</span>
+
+<span class="org-variable-name">unmerged_files</span>=$(git diff --name-only --diff-filter=U)
+<span class="org-keyword">if</span> [[ <span class="org-negation-char">!</span> -z $<span class="org-variable-name">unmerged_files</span> ]]; <span class="org-keyword">then</span>
+   <span class="org-builtin">echo</span> -e <span class="org-string">"${RED}The following files have merge conflicts after popping the stash:${NC}"</span>
+   <span class="org-builtin">echo</span>
+   printf %<span class="org-string">"s\n"</span> $<span class="org-variable-name">unmerged_files</span>  <span class="org-comment-delimiter"># </span><span class="org-comment">Ensure newlines are printed</span>
+<span class="org-keyword">else</span>
+   <span class="org-comment-delimiter"># </span><span class="org-comment">Run stow to ensure all new dotfiles are linked</span>
+   stow .
+<span class="org-keyword">fi</span>
+
+</code></pre>
+
+<p><strong>NOTE:</strong> You might need to change the name of the <kbd>master</kbd> branch to <kbd>main</kbd> if your repository uses that instead!
+</p>
+
+<h2><a id="check-out-the-gnu-stow-manual" class="anchor" href="#check-out-the-gnu-stow-manual">¶</a>Check out the GNU Stow manual</h2><p>For more information about GNU Stow and details on other ways it can be used, check out the manual:
+</p>
+
+<p><a href="https://www.gnu.org/software/stow/manual/stow.html">GNU Stow Manual</a>
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
