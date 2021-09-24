@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - Investigating use-package Alternatives - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - Investigating use-package Alternatives</h1><p class="blog-post-meta"></p><div>
+<h2><a id="news" class="anchor" href="#news">¶</a>News</h2><ul><li>Proposal deadline for EmacsConf 2021 is Sep 30, Thursday! <a href="https://emacsconf.org/2021/cfp/">https://emacsconf.org/2021/cfp/</a></li>
+</ul>
+
+<h2><a id="investigating-use-package-alternatives" class="anchor" href="#investigating-use-package-alternatives">¶</a>Investigating use-package Alternatives</h2><p>Today we'll be taking a look at two alternatives to <kbd>use-package</kbd>: <kbd>setup.el</kbd> and <kbd>leaf.el</kbd>.
+</p>
+
+<p>The goal isn't to try and replace <kbd>use-package</kbd>, just to investigate the alternate ways that Emacs users have created to simplify configuration authoring!
+</p>
+
+<h2><a id="comparing-with-kbduse-packagekbd" class="anchor" href="#comparing-with-kbduse-packagekbd">¶</a>Comparing with <kbd>use-package</kbd></h2><p>I'll try to put together configurations with <kbd>setup.el</kbd> and <kbd>leaf.el</kbd> to compare how they would look to an equivalent <kbd>use-package</kbd> configuration.
+</p>
+
+<p>We'll try to see how to replicate the same features that <kbd>use-package</kbd> provides:
+</p>
+
+<ul><li>:ensure - Install package</li>
+<li>:after - Load after another package</li>
+<li>:init - Run code before package loads</li>
+<li>:config - Run code after package loads</li>
+<li>:custom - Set custom variables with concise syntax</li>
+<li>:defer - Defer loading until some later point</li>
+<li>:demand - Ensure loading at startup</li>
+<li>:bind - Bind keys for modes</li>
+<li>:hook - Set hooks that will cause package to load</li>
+<li>:commands - Set autoloaded commands that will cause packag to load</li>
+<li>:mode - Activate mode when particular file types are opened</li>
+</ul>
+
+<h2><a id="the-example-configuration" class="anchor" href="#the-example-configuration">¶</a>The example configuration</h2><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">evil</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> evil-want-c-u-scroll t)
+  (evil-mode 1))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">org</span>
+  <span class="org-builtin">:after</span> evil
+  <span class="org-builtin">:demand</span> t)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">org-roam</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> org-roam-v2-ack t)
+  (<span class="org-keyword">setq</span> dw/daily-note-filename <span class="org-string">"%&lt;%Y-%m-%d&gt;.org"</span>
+        dw/daily-note-header <span class="org-string">"#+title: %&lt;%Y-%m-%d %a&gt;\n\n[[roam:%&lt;%Y-%B&gt;]]\n\n"</span>)
+  <span class="org-builtin">:custom</span>
+  (org-roam-directory <span class="org-string">"~/RoamNotes/"</span>)
+  (org-roam-dailies-directory <span class="org-string">"Journal/"</span>)
+  (org-roam-completion-everywhere t)
+  (org-roam-capture-templates
+   '((<span class="org-string">"d"</span> <span class="org-string">"default"</span> plain <span class="org-string">"%?"</span>
+      <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span>
+                         <span class="org-string">"#+title: ${title}\n"</span>)
+      <span class="org-builtin">:unnarrowed</span> t)))
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-c n l"</span> . org-roam-buffer-toggle)
+         (<span class="org-string">"C-c n f"</span> . org-roam-node-find)
+         <span class="org-builtin">:map</span> org-mode-map
+         ((<span class="org-string">"C-c n i"</span> . org-roam-node-insert)))
+  <span class="org-builtin">:config</span>
+  (org-roam-db-autosync-mode))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">scheme-mode</span>
+  <span class="org-builtin">:mode</span> <span class="org-string">"\\.sld\\'"</span>)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">rainbow-mode</span>
+  <span class="org-builtin">:defer</span> t
+  <span class="org-builtin">:hook</span> (org-mode
+         emacs-lisp-mode
+         web-mode
+         typescript-mode
+         js2-mode))
+
+</code></pre>
+
+<h2><a id="setupel" class="anchor" href="#setupel">¶</a>setup.el</h2><p><a href="https://git.sr.ht/~pkal/setup">https://git.sr.ht/~pkal/setup</a>
+<a href="https://www.emacswiki.org/emacs/SetupEl">https://www.emacswiki.org/emacs/SetupEl</a>
+</p>
+
+<h3><a id="benefits" class="anchor" href="#benefits">¶</a>Benefits</h3><ul><li>Much easier to to</li>
+<li>Can add conditional logic inside of the macro body to set bindings, hooks, etc only if something is true</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(setup (<span class="org-builtin">:if-package</span> avy)
+  (<span class="org-builtin">:option</span> avy-single-candidate-jump nil)
+  (<span class="org-keyword">if</span> (display-graphic-p)
+      (<span class="org-builtin">:global</span> <span class="org-string">"M-z"</span> #'avy-goto-word-1)
+    (<span class="org-builtin">:global</span> <span class="org-string">"C-z"</span> #'avy-goto-word-1)))
+
+</code></pre>
+
+<h3><a id="final-config" class="anchor" href="#final-config">¶</a>Final config</h3><pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">-*- lexical-binding: t; -*-</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install setup.el</span>
+(<span class="org-keyword">unless</span> (package-installed-p 'setup)
+  (package-install 'setup))
+
+(<span class="org-keyword">require</span> '<span class="org-constant">setup</span>)
+
+(setup-define <span class="org-builtin">:straight</span>
+  (<span class="org-keyword">lambda</span> (recipe)
+    `(straight-use-package ',recipe))
+  <span class="org-builtin">:documentation</span> <span class="org-doc">"Install RECIPE if it hasn't been installed yet.</span>
+<span class="org-doc">This macro can be used as HEAD, and it will replace itself with</span>
+<span class="org-doc">the package name from RECIPE."</span>
+  <span class="org-builtin">:repeatable</span> t
+  <span class="org-builtin">:shorthand</span> #'cadr)
+
+(setup (<span class="org-builtin">:straight</span> evil)
+  (<span class="org-builtin">:also-load</span> org)
+  (<span class="org-keyword">setq</span> evil-want-C-u-scroll t)
+  (evil-mode 1))
+
+(setup org
+  (<span class="org-builtin">:also-load</span> org-roam))
+
+(setup (<span class="org-builtin">:straight</span> org-roam)
+  (<span class="org-keyword">setq</span> org-roam-v2-ack t
+        dw/daily-note-filename <span class="org-string">"%&lt;%Y-%m-%d&gt;.org"</span>
+        dw/daily-note-header <span class="org-string">"#+title: %&lt;%Y-%m-%d %a&gt;\n\n[[roam:%&lt;%Y-%B&gt;]]\n\n"</span>)
+  (<span class="org-builtin">:option</span> org-roam-directory <span class="org-string">"~/RoamNotes/"</span>
+           org-roam-dailies-directory <span class="org-string">"Journal/"</span>
+           org-roam-completion-everywhere t
+           org-roam-capture-templates
+            '((<span class="org-string">"d"</span> <span class="org-string">"default"</span> plain <span class="org-string">"%?"</span>
+               <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span>
+                                  <span class="org-string">"#+title: ${title}\n"</span>)
+               <span class="org-builtin">:unnarrowed</span> t)))
+  (<span class="org-builtin">:global</span> <span class="org-string">"C-c n l"</span> org-roam-buffer-toggle
+           <span class="org-string">"C-c n f"</span> org-roam-node-find)
+  (<span class="org-builtin">:with-map</span> org-mode-map
+    (<span class="org-builtin">:bind</span> <span class="org-string">"C-c n i"</span> org-roam-node-insert))
+  (<span class="org-builtin">:when-loaded</span> (org-roam-db-autosync-mode)))
+
+(setup scheme-mode
+  (<span class="org-builtin">:file-match</span> <span class="org-string">"\\.sld\\'"</span>))
+
+(setup (<span class="org-builtin">:straight</span> rainbow-mode)
+  (<span class="org-builtin">:hook</span> org-mode
+         emacs-lisp-mode
+         emacs-lisp-mode
+         web-mode
+         typescript-mode
+         js2-mode))
+
+</code></pre>
+
+<h2><a id="leafel" class="anchor" href="#leafel">¶</a>leaf.el</h2><p><a href="https://github.com/conao3/leaf.el">https://github.com/conao3/leaf.el</a>
+<a href="https://github.com/conao3/leaf.el/issues/257">https://github.com/conao3/leaf.el/issues/257</a>
+<a href="https://github.com/conao3/leaf-defaults.el">https://github.com/conao3/leaf-defaults.el</a>
+</p>
+
+<h3><a id="final-config" class="anchor" href="#final-config">¶</a>Final config</h3><pre><code class="emacs-lisp">
+(<span class="org-keyword">eval-and-compile</span>
+  (customize-set-variable
+   'package-archives '((<span class="org-string">"melpa"</span> . <span class="org-string">"https://melpa.org/packages/"</span>)
+                       (<span class="org-string">"gnu"</span> . <span class="org-string">"https://elpa.gnu.org/packages/"</span>)))
+  (package-initialize)
+  (<span class="org-keyword">unless</span> (package-installed-p 'leaf)
+    (package-refresh-contents)
+    (package-install 'leaf))
+
+  (leaf leaf-keywords
+    <span class="org-builtin">:ensure</span> t
+    <span class="org-builtin">:init</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">optional packages if you want to use :hydra, :el-get, :blackout,,,</span>
+    (leaf hydra <span class="org-builtin">:ensure</span> t)
+    (leaf el-get <span class="org-builtin">:ensure</span> t)
+    (leaf blackout <span class="org-builtin">:ensure</span> t)
+
+    <span class="org-builtin">:config</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">initialize leaf-keywords.el</span>
+    (leaf-keywords-init)))
+
+(leaf evil
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> evil-want-c-u-scroll t)
+  (evil-mode 1))
+
+(leaf org
+  <span class="org-builtin">:after</span> evil
+  <span class="org-builtin">:leaf-defer</span> nil)
+
+(leaf org-roam
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> org-roam-v2-ack t)
+  (<span class="org-keyword">setq</span> dw/daily-note-filename <span class="org-string">"%&lt;%Y-%m-%d&gt;.org"</span>
+        dw/daily-note-header <span class="org-string">"#+title: %&lt;%Y-%m-%d %a&gt;\n\n[[roam:%&lt;%Y-%B&gt;]]\n\n"</span>)
+  <span class="org-builtin">:custom</span>
+  (org-roam-directory . <span class="org-string">"~/RoamNotes/"</span>)
+  (org-roam-dailies-directory . <span class="org-string">"Journal/"</span>)
+  (org-roam-completion-everywhere . t)
+  (org-roam-capture-templates .
+   '((<span class="org-string">"d"</span> <span class="org-string">"default"</span> plain <span class="org-string">"%?"</span>
+      <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span>
+                         <span class="org-string">"#+title: ${title}\n"</span>)
+      <span class="org-builtin">:unnarrowed</span> t)))
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-c n l"</span> . org-roam-buffer-toggle)
+         (<span class="org-string">"C-c n f"</span> . org-roam-node-find)
+         (<span class="org-builtin">:org-mode-map</span>
+          ((<span class="org-string">"C-c n i"</span> . org-roam-node-insert))))
+  <span class="org-builtin">:config</span>
+  (org-roam-db-autosync-mode))
+
+(leaf scheme-mode
+  <span class="org-builtin">:mode</span> <span class="org-string">"\\.sld\\'"</span>)
+
+(leaf rainbow-mode
+  <span class="org-builtin">:leaf-defer</span> nil
+  <span class="org-builtin">:hook</span> org-mode
+        emacs-lisp-mode
+        web-mode
+        typescript-mode
+        js2-mode)
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
