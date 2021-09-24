@@ -1,0 +1,234 @@
+#+title: System Crafters Live! - Investigating use-package Alternatives
+
+* News
+
+- Proposal deadline for EmacsConf 2021 is Sep 30, Thursday! https://emacsconf.org/2021/cfp/
+
+* Investigating use-package Alternatives
+
+Today we'll be taking a look at two alternatives to =use-package=: =setup.el= and =leaf.el=.
+
+The goal isn't to try and replace =use-package=, just to investigate the alternate ways that Emacs users have created to simplify configuration authoring!
+
+* Comparing with =use-package=
+
+I'll try to put together configurations with =setup.el= and =leaf.el= to compare how they would look to an equivalent =use-package= configuration.
+
+We'll try to see how to replicate the same features that =use-package= provides:
+
+- :ensure - Install package
+- :after - Load after another package
+- :init - Run code before package loads
+- :config - Run code after package loads
+- :custom - Set custom variables with concise syntax
+- :defer - Defer loading until some later point
+- :demand - Ensure loading at startup
+- :bind - Bind keys for modes
+- :hook - Set hooks that will cause package to load
+- :commands - Set autoloaded commands that will cause packag to load
+- :mode - Activate mode when particular file types are opened
+
+* The example configuration
+
+#+begin_src emacs-lisp
+
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-want-c-u-scroll t)
+    (evil-mode 1))
+
+  (use-package org
+    :after evil
+    :demand t)
+
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    (setq dw/daily-note-filename "%<%Y-%m-%d>.org"
+          dw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
+    :custom
+    (org-roam-directory "~/RoamNotes/")
+    (org-roam-dailies-directory "Journal/")
+    (org-roam-completion-everywhere t)
+    (org-roam-capture-templates
+     '(("d" "default" plain "%?"
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                           "#+title: ${title}\n")
+        :unnarrowed t)))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           :map org-mode-map
+           (("C-c n i" . org-roam-node-insert)))
+    :config
+    (org-roam-db-autosync-mode))
+
+  (use-package scheme-mode
+    :mode "\\.sld\\'")
+
+  (use-package rainbow-mode
+    :defer t
+    :hook (org-mode
+           emacs-lisp-mode
+           web-mode
+           typescript-mode
+           js2-mode))
+
+#+end_src
+
+* setup.el
+
+https://git.sr.ht/~pkal/setup
+https://www.emacswiki.org/emacs/SetupEl
+
+** Benefits
+
+- Much easier to to
+- Can add conditional logic inside of the macro body to set bindings, hooks, etc only if something is true
+
+#+begin_src emacs-lisp
+
+  (setup (:if-package avy)
+    (:option avy-single-candidate-jump nil)
+    (if (display-graphic-p)
+        (:global "M-z" #'avy-goto-word-1)
+      (:global "C-z" #'avy-goto-word-1)))
+
+#+end_src
+
+** Final config
+
+#+begin_src emacs-lisp
+
+  ;; -*- lexical-binding: t; -*-
+
+  ;; Install setup.el
+  (unless (package-installed-p 'setup)
+    (package-install 'setup))
+
+  (require 'setup)
+
+  (setup-define :straight
+    (lambda (recipe)
+      `(straight-use-package ',recipe))
+    :documentation "Install RECIPE if it hasn't been installed yet.
+  This macro can be used as HEAD, and it will replace itself with
+  the package name from RECIPE."
+    :repeatable t
+    :shorthand #'cadr)
+
+  (setup (:straight evil)
+    (:also-load org)
+    (setq evil-want-C-u-scroll t)
+    (evil-mode 1))
+
+  (setup org
+    (:also-load org-roam))
+
+  (setup (:straight org-roam)
+    (setq org-roam-v2-ack t
+          dw/daily-note-filename "%<%Y-%m-%d>.org"
+          dw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
+    (:option org-roam-directory "~/RoamNotes/"
+             org-roam-dailies-directory "Journal/"
+             org-roam-completion-everywhere t
+             org-roam-capture-templates
+              '(("d" "default" plain "%?"
+                 :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                    "#+title: ${title}\n")
+                 :unnarrowed t)))
+    (:global "C-c n l" org-roam-buffer-toggle
+             "C-c n f" org-roam-node-find)
+    (:with-map org-mode-map
+      (:bind "C-c n i" org-roam-node-insert))
+    (:when-loaded (org-roam-db-autosync-mode)))
+
+  (setup scheme-mode
+    (:file-match "\\.sld\\'"))
+
+  (setup (:straight rainbow-mode)
+    (:hook org-mode
+           emacs-lisp-mode
+           emacs-lisp-mode
+           web-mode
+           typescript-mode
+           js2-mode))
+
+#+end_src
+
+* leaf.el
+
+https://github.com/conao3/leaf.el
+https://github.com/conao3/leaf.el/issues/257
+https://github.com/conao3/leaf-defaults.el
+
+** Final config
+
+#+begin_src emacs-lisp
+
+  (eval-and-compile
+    (customize-set-variable
+     'package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")))
+    (package-initialize)
+    (unless (package-installed-p 'leaf)
+      (package-refresh-contents)
+      (package-install 'leaf))
+
+    (leaf leaf-keywords
+      :ensure t
+      :init
+      ;; optional packages if you want to use :hydra, :el-get, :blackout,,,
+      (leaf hydra :ensure t)
+      (leaf el-get :ensure t)
+      (leaf blackout :ensure t)
+
+      :config
+      ;; initialize leaf-keywords.el
+      (leaf-keywords-init)))
+
+  (leaf evil
+    :ensure t
+    :init
+    (setq evil-want-c-u-scroll t)
+    (evil-mode 1))
+
+  (leaf org
+    :after evil
+    :leaf-defer nil)
+
+  (leaf org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    (setq dw/daily-note-filename "%<%Y-%m-%d>.org"
+          dw/daily-note-header "#+title: %<%Y-%m-%d %a>\n\n[[roam:%<%Y-%B>]]\n\n")
+    :custom
+    (org-roam-directory . "~/RoamNotes/")
+    (org-roam-dailies-directory . "Journal/")
+    (org-roam-completion-everywhere . t)
+    (org-roam-capture-templates .
+     '(("d" "default" plain "%?"
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                           "#+title: ${title}\n")
+        :unnarrowed t)))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           (:org-mode-map
+            (("C-c n i" . org-roam-node-insert))))
+    :config
+    (org-roam-db-autosync-mode))
+
+  (leaf scheme-mode
+    :mode "\\.sld\\'")
+
+  (leaf rainbow-mode
+    :leaf-defer nil
+    :hook org-mode
+          emacs-lisp-mode
+          web-mode
+          typescript-mode
+          js2-mode)
+
+#+end_src

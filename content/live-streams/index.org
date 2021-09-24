@@ -4,6 +4,7 @@ We stream every Friday at 9 am Pacific time!
 
 * Episodes
 
+- [[september-24-2021/][September 24, 2021]]: Investigating =use-package= Alternatives
 - [[september-17-2021/][September 17, 2021]]: The Many Varieties of Emacs
 - [[september-10-2021/][September 10, 2021]]: Emacs Package Potluck: The Sequel!
 - [[september-03-2021/][September 3, 2021]]: Exploring the Org Roam DB API
