@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Build Your Website with Org Mode - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Build Your Website with Org Mode</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/AfkrzFodoNw">Watch the video</a> on YouTube!
+</p>
+
+<h2><a id="intro" class="anchor" href="#intro">¶</a>Intro</h2><p>One of Org Mode's most useful features is its publishing system which allows you to turn Org files into many other formats.
+</p>
+
+<p>In this video, I'll show you how to use it to generate a simple but nice looking website using Org Mode's HTML publishing capabilities!
+</p>
+
+<h2><a id="getting-started" class="anchor" href="#getting-started">¶</a>Getting started</h2><p>To get started, we'll need a place to put all of the code we'll use to generate the site along with the <kbd>.org</kbd> files that will provide the site's content.
+</p>
+
+<p>We'll create a folder called <kbd>my-org-site</kbd> with a subfolder called <kbd>content</kbd> which contains a single <kbd>index.org</kbd> file.  This will create a file called <kbd>index.html</kbd> which will be the root page of our site!
+</p>
+
+<p>The <kbd>.org</kbd> file you place in there can be very simple like the one I'll show you.  Don't put any code blocks in there yet, we'll cover that a bit later in this video.
+</p>
+
+<p>Most of what we'll do in this episode only requires Emacs version 24.5 or higher with the Org Mode package that comes built-in.
+</p>
+
+<h2><a id="creating-the-build-script" class="anchor" href="#creating-the-build-script">¶</a>Creating the build script</h2><p>Now we're going to create a script in Emacs Lisp that will generate the HTML files for your Org documents by running a single shell command.
+</p>
+
+<p>Let's call it <kbd>build-site.el</kbd>:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Load the publishing system</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">ox-publish</span>)
+
+(message <span class="org-string">"Build complete!"</span>)
+
+</code></pre>
+
+<p>We also need a shell script that can run our Emacs Lisp script.  We'll call that <kbd>build.sh</kbd>:
+</p>
+
+<pre><code class="sh">
+<span class="org-comment-delimiter">#</span><span class="org-comment">!/bin/sh</span>
+emacs -Q --script build-site.el
+  
+</code></pre>
+
+<p>Don't forget to use <kbd>chmod +x build.sh</kbd> to make the script executable!
+</p>
+
+<p><strong>NOTE:</strong> If you're on Windows, you can create a <kbd>build.cmd</kbd> file that invokes Emacs the same way.
+</p>
+
+<p>The <kbd>-Q</kbd> parameter prevents Emacs from loading your own Emacs configuration which will help ensure that this same script can be executed cleanly on other machines once we get ready to start publishing this site.
+</p>
+
+<h2><a id="setting-up-the-publish-project" class="anchor" href="#setting-up-the-publish-project">¶</a>Setting up the publish project</h2><p>Now that we have our basic script ready, we can set up a Org publishing configuration for our website.
+</p>
+
+<p>We'll add the following snippet into our <kbd>build-site.el</kbd> file:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Define the publishing project</span>
+(<span class="org-keyword">setq</span> org-publish-project-alist
+      (list
+       (list <span class="org-string">"my-org-site"</span>
+             <span class="org-builtin">:recursive</span> t
+             <span class="org-builtin">:base-directory</span> <span class="org-string">"./content"</span>
+             <span class="org-builtin">:publishing-directory</span> <span class="org-string">"./public"</span>
+             <span class="org-builtin">:publishing-function</span> 'org-html-publish-to-html)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Generate the site output</span>
+(org-publish-all t)
+
+</code></pre>
+
+<p>This configures the <kbd>org-publish-project-alist</kbd> variable to define a publishing project for our site.  Read the documentation of this variable using <kbd>M-x describe-variable</kbd> for a lot more information!
+</p>
+
+<p>We use the name <kbd>my-org-site</kbd> but you can call the project whatever you want!
+</p>
+
+<ul><li><kbd>:base-directory</kbd> tells Org the folder of files that we want to publish to HTML</li>
+<li><kbd>:publishing-directory</kbd> configures the output folder for all published files</li>
+<li><kbd>:recursive</kbd> tells Org to publish <kbd>.org</kbd> files under all subdirectories of <kbd>:base-directory</kbd></li>
+<li><kbd>:publishing-function</kbd> tells Org that we want to publish the files as HTML</li>
+</ul>
+
+<p>The <kbd>org-publish-all</kbd> function at the end tells Org to publish every project configured in <kbd>org-publish-project-alist</kbd>!  The <kbd>t</kbd> parameter tells it to regenerate all files regardless of when they were last generated.
+</p>
+
+<p>We can now generate the output of our site by running <kbd>build.sh</kbd>!  Check out the <kbd>public/</kbd> folder after running it.
+</p>
+
+<h2><a id="previewing-the-generated-site" class="anchor" href="#previewing-the-generated-site">¶</a>Previewing the generated site</h2><p>Let's take a look at the basic site we just generated.  There's a great Emacs package called <a href="https://github.com/skeeto/emacs-web-server">simple-httpd</a> which can host your files as a website on your local machine so that you can pull it up in your browser.
+</p>
+
+<p>You can install <kbd>simple-httpd</kbd> from <a href="https://melpa.org/#/getting-started">MELPA</a> using <kbd>M-x package-install</kbd> or by putting the following snippet <strong>in your Emacs configuration</strong> if you have <kbd>use-package</kbd> installed and MELPA configured as a package source:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">simple-httpd</span>
+  <span class="org-builtin">:ensure</span> t)
+
+</code></pre>
+
+<p>Now you can run <kbd>M-x httpd-serve-directory</kbd>.  It will prompt you for a directory to serve from within Emacs.
+</p>
+
+<p>Select the path of your <kbd>public/</kbd> directory and then open your browser to <a href="http://localhost:8080">http://localhost:8080</a> to see the preview of your site!  Set <kbd>httpd-port</kbd> to change the default port if necessary.
+</p>
+
+<p>Any time you regenerate the site files, you can just reload the page to see the result of changes you made!
+</p>
+
+<h2><a id="improving-the-html-output" class="anchor" href="#improving-the-html-output">¶</a>Improving the HTML output</h2><p>There are a few things about the page we just looked at that I'd like to change to make the output look a bit cleaner:
+</p>
+
+<ul><li>Section numbers</li>
+<li>Author name</li>
+<li>Publish timestamp</li>
+<li>Validate link</li>
+</ul>
+
+<p>Luckily the publish system is very customizable so I'll show you how we can disable a few things in the project configuration to get a better result.
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Define the publishing project</span>
+(<span class="org-keyword">setq</span> org-publish-project-alist
+      (list
+       (list <span class="org-string">"org-site:main"</span>
+             <span class="org-builtin">:recursive</span> t
+             <span class="org-builtin">:base-directory</span> <span class="org-string">"./content"</span>
+             <span class="org-builtin">:publishing-function</span> 'org-html-publish-to-html
+             <span class="org-builtin">:publishing-directory</span> <span class="org-string">"./public"</span>
+             <span class="org-builtin">:with-author</span> nil           <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't include author name</span>
+             <span class="org-builtin">:with-creator</span> t            <span class="org-comment-delimiter">;; </span><span class="org-comment">Include Emacs and Org versions in footer</span>
+             <span class="org-builtin">:with-toc</span> t                <span class="org-comment-delimiter">;; </span><span class="org-comment">Include a table of contents</span>
+             <span class="org-builtin">:section-numbers</span> nil       <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't include section numbers</span>
+             <span class="org-builtin">:time-stamp-file</span> nil)))    <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't include time stamp in file</span>
+
+</code></pre>
+
+<p>We'll need to set a different variable to get rid of the validate link at the bottom:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> org-html-validation-link nil)
+
+</code></pre>
+
+<h3><a id="other-project-settings-you-might-want-to-customize" class="anchor" href="#other-project-settings-you-might-want-to-customize">¶</a>Other project settings you might want to customize</h3><p>Here's a list of some more project settings you might want to customize, pulled directly from the <kbd>org-publish-project-alist</kbd> documentation:
+</p>
+
+<h2><a id="improving-the-page-styling" class="anchor" href="#improving-the-page-styling">¶</a>Improving the page styling</h2><p>At this point have a decent basic output for our website, but what if we want to make it look a little bit nicer?
+</p>
+
+<p>By setting a few more variables, we can use a nice stylesheet to give our site a more polished look:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Customize the HTML output</span>
+(<span class="org-keyword">setq</span> org-html-validation-link nil            <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't show validation link</span>
+      org-html-head-include-scripts nil       <span class="org-comment-delimiter">;; </span><span class="org-comment">Use our own scripts</span>
+      org-html-head-include-default-style nil <span class="org-comment-delimiter">;; </span><span class="org-comment">Use our own styles</span>
+      org-html-head <span class="org-string">"&lt;link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" /&gt;"</span>)
+
+</code></pre>
+
+<p>This will remove the default JavaScript and CSS code that gets injected into the HTML output by default and replace it with the link to a nice stylesheet called <a href="https://simplecss.org/">Simple.css</a> (or a CSS file of your own!).
+</p>
+
+<p>Let's regenerate the site and take a look!
+</p>
+
+<h2><a id="generating-pages-with-code-blocks" class="anchor" href="#generating-pages-with-code-blocks">¶</a>Generating pages with code blocks</h2><p>So far we've been looking at a very simple example page that doesn't really have much on it.  What happens when we try to generate a more elaborate Org file containing code blocks?
+</p>
+
+<p>Let's try it out with another file, a version of my literate Emacs configuration called <kbd>Emacs.org</kbd>!
+</p>
+
+<p>If you're generating a site that features code blocks like a coding blog or a literate Emacs configuration, you'll probably see an error like this when you generate the site:
+</p>
+
+<pre><code class="sh">
+Cannot fontify source block (htmlize.el &gt;= 1.34 required)
+
+</code></pre>
+
+<p>To resolve this issue, you will need to install the <kbd>htmlize</kbd> package from MELPA.  We can automate the process of installing this package by adding the following snippet to our <kbd>build-site.el</kbd> file:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set the package installation directory so that packages aren't stored in the</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">~/.emacs.d/elpa path.</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">package</span>)
+(<span class="org-keyword">setq</span> package-user-dir (expand-file-name <span class="org-string">"./.packages"</span>))
+(<span class="org-keyword">setq</span> package-archives '((<span class="org-string">"melpa"</span> . <span class="org-string">"https://melpa.org/packages/"</span>)
+                         (<span class="org-string">"elpa"</span> . <span class="org-string">"https://elpa.gnu.org/packages/"</span>)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Initialize the package system</span>
+(package-initialize)
+(<span class="org-keyword">unless</span> package-archive-contents
+  (package-refresh-contents))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install dependencies</span>
+(package-install 'htmlize)
+
+</code></pre>
+
+<p>In this snippet, we load Emacs' package manager and configure the <kbd>package-user-dir</kbd> to be a sub-directory of our project folder.  This allows you to install packages for the script without mixing them up with the packages of your personal Emacs configuration!
+</p>
+
+<p>The next thing we do is add MELPA to the package archive list and refresh the package archive so that <kbd>htmlize</kbd> can be found.  Finally, we call <kbd>package-install</kbd> to install it!
+</p>
+
+<p>In a future video I'll show you how to convert your Emacs color theme to a CSS file that you can use to colorize source blocks with exactly the same colors used in the theme!
+</p>
+
+<h2><a id="linking-between-pages" class="anchor" href="#linking-between-pages">¶</a>Linking between pages</h2><p>One last thing I want to show you is how you can create links between pages on your site.  Let's open up <kbd>index.org</kbd> and create a link to the <kbd>Emacs.org</kbd> file.
+</p>
+
+<p>Inside <kbd>index.org</kbd>, we can press <kbd>C-c C-l</kbd> (<kbd>org-insert-link</kbd>), enter the path of the Org file we want to link to (<kbd>./Emacs.org</kbd>), press Enter, then enter the text for the link ("My Emacs configuration").
+</p>
+
+<p>When you generate the site again, you should be able to follow the link between pages because Org's publishing system will convert the link to the proper output extension.
+</p>
+
+<p>It will also complain when a linked file can't be found!
+</p>
+
+<pre><code class="sh">
+Debugger entered--Lisp error: (user-error <span class="org-string">"Unable to resolve link: \"Emacs2.org\""</span>)
+
+</code></pre>
+
+<h2><a id="the-final-build-script" class="anchor" href="#the-final-build-script">¶</a>The final build script</h2><p>I've committed all of the code you see in this video to the following GitHub repository:
+</p>
+
+<p><a href="https://github.com/SystemCrafters/org-website-example/">https://github.com/SystemCrafters/org-website-example/</a> (see the <a href="https://github.com/SystemCrafters/org-website-example/commit/1ee251e97f5b4d6c614936030203cd7368d4adc8">commit for this episode</a>)
+</p>
+
+<p>In the next video I'll show you how to automatically publish an Org-based website to Git hosting services like GitHub Pages and Sourcehut Pages!
+</p>
+
+<p>Here is the final form of our <kbd>build-site.el</kbd> script:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set the package installation directory so that packages aren't stored in the</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">~/.emacs.d/elpa path.</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">package</span>)
+(<span class="org-keyword">setq</span> package-user-dir (expand-file-name <span class="org-string">"./.packages"</span>))
+(<span class="org-keyword">setq</span> package-archives '((<span class="org-string">"melpa"</span> . <span class="org-string">"https://melpa.org/packages/"</span>)
+                         (<span class="org-string">"elpa"</span> . <span class="org-string">"https://elpa.gnu.org/packages/"</span>)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Initialize the package system</span>
+(package-initialize)
+(<span class="org-keyword">unless</span> package-archive-contents
+  (package-refresh-contents))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install dependencies</span>
+(package-install 'htmlize)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Load the publishing system</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">ox-publish</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Customize the HTML output</span>
+(<span class="org-keyword">setq</span> org-html-validation-link nil            <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't show validation link</span>
+      org-html-head-include-scripts nil       <span class="org-comment-delimiter">;; </span><span class="org-comment">Use our own scripts</span>
+      org-html-head-include-default-style nil <span class="org-comment-delimiter">;; </span><span class="org-comment">Use our own styles</span>
+      org-html-head <span class="org-string">"&lt;link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" /&gt;"</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Define the publishing project</span>
+(<span class="org-keyword">setq</span> org-publish-project-alist
+      (list
+       (list <span class="org-string">"org-site:main"</span>
+             <span class="org-builtin">:recursive</span> t
+             <span class="org-builtin">:base-directory</span> <span class="org-string">"./content"</span>
+             <span class="org-builtin">:publishing-function</span> 'org-html-publish-to-html
+             <span class="org-builtin">:publishing-directory</span> <span class="org-string">"./public"</span>
+             <span class="org-builtin">:with-author</span> nil           <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't include author name</span>
+             <span class="org-builtin">:with-creator</span> t            <span class="org-comment-delimiter">;; </span><span class="org-comment">Include Emacs and Org versions in footer</span>
+             <span class="org-builtin">:with-toc</span> t                <span class="org-comment-delimiter">;; </span><span class="org-comment">Include a table of contents</span>
+             <span class="org-builtin">:section-numbers</span> nil       <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't include section numbers</span>
+             <span class="org-builtin">:time-stamp-file</span> nil)))    <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't include time stamp in file</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Generate the site output</span>
+(org-publish-all t)
+
+(message <span class="org-string">"Build complete!"</span>)
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
