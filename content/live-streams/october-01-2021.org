@@ -1,0 +1,45 @@
+#+title: System Crafters Live! - A First Look at Guix Home
+
+[[https://youtu.be/R5cdtSfTpE0][Watch the recording]] on YouTube!
+
+* News
+
+- Emacs 28 release branch has been created!  Start testing it out now to help find bugs before release: https://lists.gnu.org/archive/html/emacs-devel/2021-09/msg02290.html
+
+* What is =guix home=?
+
+=guix home= allows you to apply configurations to your user account with all the same benefits that you get from =guix system=:
+
+- Install packages
+- Place files in the filesystem (dotfiles?)
+- Configure your programs with Scheme (!)
+- Run user-level services
+- Roll back to previous configurations (!)
+
+One really nice benefit is that it can be used on "foreign" distributions, try it out without fully switching to Guix System!
+
+This could easily replace some of the configuration work I do with Org Babel, so it will be interesting to see how this plays out.
+
+Check out the [[https://guix.gnu.org/manual/devel/en/html_node/Home-Configuration.html][Home Configuration]] page in the Guix manual for more information.
+
+** Useful Links
+
+- Andrew Tropin's YouTube channel: https://www.youtube.com/c/TROP1N/
+- Andrew's rde channel/repo: https://github.com/abcdw/rde
+- rde home config example: https://github.com/abcdw/rde/blob/master/rde/examples/abcdw/configs.scm
+- yoctocel's home config: https://hg.sr.ht/~yoctocell/guixrc/browse/yoctocell/home
+- krevedkokun's home config: https://git.sr.ht/~krevedkokun/dotfiles/tree/master/item/home/yggdrasil
+
+* Let's try it!
+
+I have not tried to use =guix home= yet, so we're going to try it out for the first time together today.
+
+I'll try to see how far we can get with building a home configuration in a test environment, including cloning my dotfiles repo and applying some of the files from it.
+
+Some questions:
+
+- What happens when =.profile= already exists?
+- Can manifest files be kept separately and loaded into the home config?
+- Can we put system and home configurations into the same file? (I think yes)
+- Is there a way to pin user-level channel configuration easily?
+- How nicely will this play with Org Babel configs or anything else that will be hand-edited outside of the scope of =guix home= (like an Emacs config)?
