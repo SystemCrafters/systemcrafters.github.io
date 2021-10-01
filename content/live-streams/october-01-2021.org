@@ -26,6 +26,7 @@ Check out the [[https://guix.gnu.org/manual/devel/en/html_node/Home-Configuratio
 
 - Andrew Tropin's YouTube channel: https://www.youtube.com/c/TROP1N/
 - Andrew's rde channel/repo: https://github.com/abcdw/rde
+- Andrew's rde mailing lists: https://lists.sr.ht/~abcdw
 - rde home config example: https://github.com/abcdw/rde/blob/master/rde/examples/abcdw/configs.scm
 - yoctocel's home config: https://hg.sr.ht/~yoctocell/guixrc/browse/yoctocell/home
 - krevedkokun's home config: https://git.sr.ht/~krevedkokun/dotfiles/tree/master/item/home/yggdrasil
