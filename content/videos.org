@@ -56,6 +56,10 @@ Learn more about how to use package managers like straight.el to manage Emacs pa
 
 Org Mode gives us the ability to organize our life in Emacs, but we can go even further by building a personal knowledgebase in Emacs using tools like Org Roam!
 
+*** [[../publishing-websites-with-org-mode/][Publishing Websites with Org Mode]]
+
+Org Mode has the ability to export to various other formats including HTML. We can use that capability to publish website directly from Emacs Org Mode.
+
 *** [[../chatting-with-emacs/][Chatting with Emacs]]
 
 Want to chat with the communities around various free and open source projects from the comfort of Emacs?  Check out this series!
