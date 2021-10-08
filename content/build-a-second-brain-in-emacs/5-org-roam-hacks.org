@@ -273,7 +273,7 @@ The following snippet sets up a hook for all Org task state changes and then cop
 
 #+end_src
 
-If you want to move the completed task instead, set =org-refile-keep= in thise code to =t=!
+If you want to move the completed task instead, set =org-refile-keep= in this code to =nil=!
 
 This code is a little more advanced, so consult the next section to learn more about how it works!
 
