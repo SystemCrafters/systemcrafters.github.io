@@ -4,6 +4,7 @@ We stream every Friday at 9 am Pacific time!
 
 * Episodes
 
+- [[october-08-2021/][October 8, 2021]]: Comparing Project.el to Projectile
 - [[october-01-2021/][October 1, 2021]]: A First Look at Guix Home
 - [[september-24-2021/][September 24, 2021]]: Investigating =use-package= Alternatives
 - [[september-17-2021/][September 17, 2021]]: The Many Varieties of Emacs
