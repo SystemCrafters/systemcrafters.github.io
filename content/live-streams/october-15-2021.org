@@ -1,0 +1,129 @@
+#+title: System Crafters Live! - October 15, 2021
+
+[[https://youtu.be/qk2Is_sC8Lk][Watch the recording]] on YouTube!
+
+* Updates
+
+- This week's video
+- I've started [[https://github.com/daviwil/dotfiles/tree/guix-home/daviwil][converting my dotfiles]] to use =guix home=
+- I might be taking 2 weeks off starting next week!
+
+* The Many Uses of Embark
+
+Embark is a package that enables you to define context-specific actions and key bindings for different "targets" that you might encounter in Emacs:
+
+- Files
+- Buffers
+- Packages
+- Bookmarks
+- URLs
+- Identifiers (symbols, commands, variables)
+- Selected Regions
+
+See the [[https://github.com/oantolin/embark/wiki/Default-Actions][Default Actions]] wiki page and the variable =embark-keymap-alist= for a list of the default targets.
+
+Embark can be used for a variety of different tasks:
+
+- A "context menu"
+- A command "retargeter"
+- A quick-action key for the thing at point
+- A way to gather completions for further actions
+- A way to switch the current minibuffer command
+- A =which-key= alternative
+- A completion interface
+
+If you've switched from Helm or Ivy to Vertico or Selectrum, Embark gives you the ability to run actions on the current completion selection, but I'd argue that Embark is a lot more versatile than that.
+
+We'll be taking a look at a few sources today for ideas on how you can use Embark in your Emacs workflow:
+
+- Embark README: https://github.com/oantolin/embark
+- Karthik's great blog post:  https://karthinks.com/software/fifteen-ways-to-use-embark/
+- https://github.com/oantolin/embark/wiki/Additional-Actions
+- https://github.com/oantolin/embark/wiki/Additional-Configuration
+- Prot's Embark video: https://www.youtube.com/watch?v=uoP9ZYdNCHg
+
+*Starting Configuration*
+
+#+begin_src emacs-lisp
+
+  (use-package embark
+    :ensure t
+    :bind
+    (("C-." . embark-act)
+     ("M-." . embark-dwim)
+     ("C-h B" . embark-bindings))
+
+    :init
+    (setq prefix-help-command #'embark-prefix-help-command))
+
+#+end_src
+
+** Questions
+
+- How does one use =embark-collect-live= as a completion system?
+- How can you customize the default action for =embark-dwim=?
+
+** The "final" configuration
+
+Here's a transcript of the configuration I was experimenting with in the stream:
+
+#+begin_src emacs-lisp
+
+  (use-package embark
+    :straight t
+    :bind
+    (("C-." . embark-act)
+     ("M-." . embark-dwim)
+     ("C-h B" . embark-bindings))
+    :init
+    (setq prefix-help-command #'embark-prefix-help-command))
+
+  (use-package embark-consult
+    :straight t)
+
+  (use-package ace-window
+    :straight t)
+
+  (global-set-key (kbd "M-o") 'ace-window)
+  (setq aw-dispatch-always t)
+
+  (use-package 0x0
+    :straight t)
+
+  (define-key embark-region-map (kbd "U") '0x0-dwim)
+
+  (defun my/test-func ()
+    (message "~/init.el"))
+
+  (eval-when-compile
+    (defmacro my/embark-ace-action (fn)
+      `(defun ,(intern (concat "my/embark-ace-" (symbol-name fn))) ()
+         (interactive)
+         (with-demoted-errors "%s"
+           (require 'ace-window)
+           (aw-switch-to-window (aw-select nil))
+           (call-interactively (symbol-function ',fn)))))
+
+    (defmacro my/embark-split-action (fn split-type)
+      `(defun ,(intern (concat "my/embark-"
+                               (symbol-name fn)
+                               "-"
+                               (car (last  (split-string
+                                            (symbol-name split-type) "-"))))) ()
+         (interactive)
+         (funcall #',split-type)
+         (call-interactively #',fn))))
+
+  (define-key embark-file-map     (kbd "o") (my/embark-ace-action find-file))
+  (define-key embark-buffer-map   (kbd "o") (my/embark-ace-action switch-to-buffer))
+  (define-key embark-bookmark-map (kbd "o") (my/embark-ace-action bookmark-jump))
+
+  (define-key embark-file-map     (kbd "2") (my/embark-split-action find-file split-window-below))
+  (define-key embark-buffer-map   (kbd "2") (my/embark-split-action switch-to-buffer split-window-below))
+  (define-key embark-bookmark-map (kbd "2") (my/embark-split-action bookmark-jump split-window-below))
+
+  (define-key embark-file-map     (kbd "3") (my/embark-split-action find-file split-window-right))
+  (define-key embark-buffer-map   (kbd "3") (my/embark-split-action switch-to-buffer split-window-right))
+  (define-key embark-bookmark-map (kbd "3") (my/embark-split-action bookmark-jump split-window-right))
+
+#+end_src
