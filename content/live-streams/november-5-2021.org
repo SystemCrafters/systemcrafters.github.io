@@ -1,0 +1,66 @@
+#+title: System Crafters Live! - November 5, 2021
+
+[[https://youtu.be/ogama8yMlTU][Watch the recording]] on YouTube!
+
+* Catching Up With Emacs
+
+- EmacsConf schedule has been posted: https://emacsconf.org/2021/schedule/
+- [[https://lists.gnu.org/archive/html/emacs-devel/2021-10/msg01377.html][EXWM has a new maintainer!]]
+
+- [[https://lars.ingebrigtsen.no/2021/10/28/emacs-emojis-a-%E2%9D%A4%EF%B8%8F-story/][Official emoji support in Emacs 28.1]], Lars Ingebrigtsen
+- New package: [[https://protesilaos.com/codelog/2021-10-22-emacs-mct-demo/][mct.el]] by Protesilaos Stavrou
+- New package: [[https://karthinks.com/software/elmo-embark-live-mode-for-emacs/][elmo]] by Karthik Chikmagalur
+- Article: [[https://karthinks.com/software/avy-can-do-anything/][Avy can do anything]] by Karthik Chikmagalur
+- New package: [[https://elpa.gnu.org/packages/vertico-posframe.html][vertico-posframe]] by tumashu
+- New package: [[https://github.com/artawower/blamer.el][blamer.el]] - Inline git blame annotations by Artawower
+- New package: [[https://github.com/SqrtMinusOne/pomm.el/][pomm.el]] - Another package for Pomodoros by Pavel Korytov
+- New package: [[https://repo.or.cz/emacs-capf-autosuggest.git][capf-autosuggest]] - Automatically suggestion command history in eshell and comint buffers
+
+** Other Links
+
+- https://github.com/elken/eshell-p10k
+- https://dthompson.us/projects/chickadee.html
+
+** The configuration
+
+#+begin_src emacs-lisp
+
+  (straight-use-package '(mct :repo "protesilaos/mct"
+                              :host gitlab))
+  (setq mct-remove-shadowed-file-names t) ; works when `file-name-shadow-mode' is enabled
+  (setq mct-hide-completion-mode-line t)
+  (setq mct-show-completion-line-numbers nil)
+  (setq mct-apply-completion-stripes t)
+  (setq mct-minimum-input 3)
+  (setq mct-live-update-delay 0)
+
+  (straight-use-package '(elmo :repo "karthink/elmo" :host github))
+
+  (straight-use-package '(vertico-posframe :repo "tumashu/vertico-posframe" :host github))
+
+  (use-package blamer
+    :straight '(blamer :repo "Artawower/blamer.el" :host github)
+    :custom
+    (blamer-idle-time 0.3)
+    (blamer-min-offset 70)
+    :custom-face
+    (blamer-face ((t :foreground "#7a88cf"
+                      :background nil
+                      :height 220
+                      :italic t)))
+    :config
+    (global-blamer-mode 1))
+
+  (use-package pomm
+    :straight (:host github :repo "SqrtMinusOne/pomm.el")
+    :commands (pomm)
+    :config
+    (add-to-list 'mode-line-misc-info '(:eval pomm-current-mode-line-string))
+    (add-hook 'pomm-on-tick-hook 'pomm-update-mode-line-string)
+    (add-hook 'pomm-on-tick-hook 'force-mode-line-update)
+    (add-hook 'pomm-on-status-changed-hook 'pomm-update-mode-line-string)
+    (add-hook 'pomm-on-status-changed-hook 'force-mode-line-update))
+
+  (straight-use-package 'capf-autosuggest)
+
+#+end_src
