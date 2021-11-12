@@ -1,0 +1,100 @@
+#+title: System Crafters Live! - November 12, 2021
+
+[[https://youtu.be/dB4ydMQgmNk][Watch the recording]] on YouTube!
+
+* Editor Popularity: Does it matter?
+
+Articles and forum threads with concern about Emacs' perceived lack of popularity keep appearing every year or two.
+
+- [[https://lwn.net/Articles/819452/][Making Emacs Popular Again]]
+- [[https://news.ycombinator.com/item?id=29105032][Recent Hacker News discussion]]
+
+Today we're going to discuss the topic of popularity as it relates to text editors:
+
+- Does popularity matter?
+- What happens when an editor starts to lose popularity
+
+The goal of this conversation is for us to try answer the following questions:
+
+** Which text editors have been popular in the last 10-15 years?
+
+- [[https://trends.google.com/trends/explore?date=all&geo=US&q=%2Fm%2F01yp0m,%2Fm%2F07zh7,%2Fm%2F09gl10,%2Fm%2F0b6h18n,%2Fm%2F0134xwrk][Compare Emacs, Vim, TextMate, Sublime Text, VS Code]]
+- [[https://insights.stackoverflow.com/survey/2021#integrated-development-environment][StackOverflow 2021 IDE Results]]
+- https://blog.robenkleene.com/2020/09/21/the-era-of-visual-studio-code/
+
+- [ ] GNU Emacs
+- [X] Sublime Text
+- [X] Atom
+- [X] TextMate
+- [X] Brackets
+- [ ] Notepad++
+- [ ] XEmacs
+- [ ] BBEdit
+- [ ] Vim / Neovim
+- VS Code
+
+- Netbeans
+- LightTable
+- IntelliJ / JetBrains Editor
+- Kakoune
+- code:blocks
+
+
+** What are some examples of editors losing popularity and why did it happen?
+
+*** TextMate
+
+Other more extensible and featureful editors came along despite TextMate being very influential.
+
+Also no UTF-8 support
+
+DHH stopped using it?
+
+*** Brackets
+
+Potentially unseated by Atom because it had more broad scope and extensibility.
+
+*** Sublime Text
+
+There were no new updates to Sublime Text 2 and 3 for a long time and then VS Code came long.
+
+No built in package manager, extensibility wasn't as good as other editors.
+
+Not open source, single developer (or small team at least) and proprietary code.
+
+*** Atom
+
+VS Code appeared, lots of hype after it was released, took attention away from Atom
+
+*** Emacs
+
+More options appearing over time that are more appealing to different types of users
+
+** What happens when an editor loses popularity?
+
+- Less people contributing to the project
+- No new features being added to stay competitive with newer editors
+- Code rot, bugs and security issue
+- Less people creating and maintaining community packages
+- Less blog posts, videos, etc educating people on how to learn it
+- Not as much discussion about it on forums or chat
+- Might not be packaged anymore in Linux distributions
+- Not as many new users coming in can have a compounding effect on user loss
+
+** How much popularity is enough to keep an editor alive?
+
+What are the signs that there is *enough* popularity?
+
+- Do people still care enough to set up conferences about the editor
+- Plenty of different places where users congregate and chat (Reddit, IRC, Discord, etc)
+- A healthy stream of blog posts or videos that explain how to use it or at least provide perspectives
+- Users that can't stop talking about it, even to people who don't want to hear it
+
+** So, does popularity really matter?
+
+Yes and no, but an editor does not need to be the most popular editor to survive.  It only needs dedicated users who care enough to keep moving things forward.
+
+** Other points
+
+- The type of users can also help keep the editor alive if they can contribute to the project; Emacs users have much more understanding of how to contribute to Emacs as they get better at config hacking and writing packages
+- Emacs hacking scales from simple tweaks to building full packages and even contributing to the core
