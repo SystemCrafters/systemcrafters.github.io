@@ -4,6 +4,7 @@ We stream every Friday at 9 am Pacific time!
 
 * Episodes
 
+- [[november-19-2021/][November 19, 2021]]: Tools for Building a Lisp-Focused System
 - [[november-12-2021/][November 12, 2021]]: Editor Popularity: Does It Matter?
 - [[november-5-2021/][November 5, 2021]]: Catching Up With Emacs
 - [[october-15-2021/][October 15, 2021]]: The Many Uses of Embark

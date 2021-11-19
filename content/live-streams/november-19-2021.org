@@ -1,0 +1,72 @@
+#+title: System Crafters Live! - November 19, 2021
+
+[[https://youtu.be/MbZ2iK3U8y0][Watch the recording]] on YouTube!
+
+* Updates
+
+- EmacsConf is next weekend! https://emacsconf.org/2021/schedule/
+- Next week is Black Friday: https://store.systemcrafters.net
+
+*  Tools for Building a Lisp-Focused System
+
+** Window Manager
+
+- EXWM: Emacs X Window Manager
+- StumpWM: written with Common Lisp ([[https://config.phundrak.com/stumpwm.html][Phundrak's config]])
+- [[https://github.com/stumpwm/mahogany][Mahogany]]: Stump-like for Wayland
+- AwesomeWM: Lisp-style config with Fennel
+- [[https://en.wikipedia.org/wiki/Sawfish_(window_manager)][Sawfish]]: configured in a Lisp-style language
+- [[https://github.com/mwitmer/guile-wm][Guile-WM]]: a window manager "toolkit" for Guile Scheme
+- [[https://common-lisp.net/project/clfswm/][CLFSWM]]: Common Lisp FullScreen Window Manager
+- [[https://www.cliki.net/window%20manager][Others on the Common Lisp wiki]]
+
+** Config Management
+
+- GNU Guix, both system and home directory
+- Org Mode
+
+** Shell
+
+- [[https://clisp.sourceforge.io/clash.html][CLASH: CLisp as Shell]]
+- [[https://github.com/SquircleSpace/shcl][shcl]] - SH in Common Lisp
+- [[https://docs.racket-lang.org/rash/][rash]] - A shell written in Racket
+- [[https://github.com/dundalek/closh][closh]] - Bash-like shell based on Clojure
+- [[https://github.com/babashka/babashka][babashka]] - Clojure-based shell scripting
+- [[https://www.cliki.net/cl-launch][cl-launch]] - Shell scripting with Common Lisp
+- [[https://scsh.net/][scsh]] - Scheme Shell
+- [[https://www.gnu.org/software/emacs/manual/eshell.html][eshell]] - Emacs Shell
+- [[http://lush.sourceforge.net/][lush]] - Lisp Universal Shell
+- [[https://ambrevar.xyz/lisp-repl-shell/][Ambrevar, using a Lisp REPL as shell]]
+
+** Service Daemon
+
+- [[https://www.gnu.org/software/shepherd/][GNU Shepherd]] - Guile Scheme based service/init system
+- [[https://github.com/a-schaefers/systemE][systemE]] - Manage services with Emacs for the memes
+
+** Cron Jobs
+
+- [[https://www.gnu.org/software/mcron/manual/][GNU mcron]]
+- [[https://quickref.common-lisp.net/cl-cron.html][cl-cron]]
+- Maybe also in Emacs Lisp with =run-at-time=?
+
+** Status Bars
+
+- [[https://github.com/aloussase/bliss][bliss]] - Common Lisp status bar for dwm
+- [[https://stumpwm.github.io/git/stumpwm-git_7.html][StumpWM modeline]] - Useful if you use StumpWM
+- [[https://reposhub.com/cpp/miscellaneous/jollm-exlybar.html][exlybar]] - Emacs-based status bar
+
+** Key Bindings
+
+- [[https://github.com/kmonad/kmonad][kmonad]] - Advanced keybinding manager with Lisp-style config ([[https://www.youtube.com/watch?v=Dhj1eauljwU][Gavin's KMonad video]])
+- [[https://www.nongnu.org/xbindkeys/][xbindkeys]] - Another key mapping tool configured with Guile Scheme ([[https://www.nongnu.org/xbindkeys/xbindkeysrc.scm.html][example]])
+
+** Web Browser
+
+- [[https://nyxt.atlas.engineer/][Nyxt]] - Common Lisp-based web browser, super powerful
+- [[https://github.com/mrosset/nomad][nomad]] - Browser written with Guile Scheme
+- [[https://github.com/emacs-eaf/eaf-browser][eaf-browser]] - Emacs Application Framework browser
+- eww - Emacs Web Wowser, text based browser built into Emacs
+
+** Lisp Machines
+
+- [[https://interlisp.org/]]
