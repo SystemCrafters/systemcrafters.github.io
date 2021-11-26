@@ -1,0 +1,69 @@
+#+title: System Crafters Live! - November 26, 2021
+
+[[https://www.youtube.com/watch?v=2VpHr6sfLy0][Watch the recording]] on YouTube!
+
+* Updates
+
+- System Crafters Store Holiday Sale! https://store.systemcrafters.net/discount/HOLIDAY
+- EmacsConf 2021 this weekend!
+
+* EmacsConf 2021 - My Suggestions
+
+Here are some cool talks you might want to check out!
+
+*Saturday*
+
+- [[https://emacsconf.org/2021/talks/news][Emacs News Highlights]] - Sacha Chua
+- [[https://emacsconf.org/2021/talks/frownies][The True Frownies are the Friends We Made Along the Way: An Anecdote of Emacs's Malleability]] - Case Duckworth
+- [[https://emacsconf.org/2021/talks/unix][GNU's Not UNIX: Why Emacs Demonstrates The UNIX Philosophy Isn't Always The Only Answer]] - Daniel Rose
+- [[https://emacsconf.org/2021/talks/freedom][How Emacs Made Me Appreciate Software Freedom]] - Protesilaos Stavrou
+- [[https://emacsconf.org/2021/talks/janitor/][A day in the life of a janitor]] - Stefan Monnier
+- [[https://emacsconf.org/2021/talks/exec/][Org as an executable format]] - Tom Gillespie
+- [[https://emacsconf.org/2021/talks/tech/][Creating technical API documentation and presentations using org-babel, restclient, and org-treeslide]] - Jan Ypma
+- [[https://emacsconf.org/2021/talks/org-outside/][The use of Org Mode syntax outside of Emacs]] - Karl Voit
+- [[https://emacsconf.org/2021/talks/project/][Budgeting, Project Monitoring and Invoicing with Org Mode]] - Adolfo Villafiorita
+- [[https://emacsconf.org/2021/talks/nyxt/][Emacs with Nyxt: extend your editor with the power of a Lisp browser]] - Andrea
+- [[https://emacsconf.org/2021/talks/dev-update/][Emacs development update]] - John Wiegley
+- [[https://emacsconf.org/2021/talks/design/][On the design of text editors]] - Nicolas Rougier
+- CANCELLED! +[[https://emacsconf.org/2021/talks/devel/][Don't write that package! or: How I learned to stop worrying and love emacs-devel]] - Stefan Kangas+
+
+*Sunday*
+
+- [[https://emacsconf.org/2021/talks/model/][Extending the model of Emacs to other applications]] - Laszlo Krajnikovszkij
+- [[https://emacsconf.org/2021/talks/native/][Emacs Lisp native compiler, current status and future developments]] - Andrea Corallo
+- [[https://emacsconf.org/2021/talks/eaf/][Emacs Application Framework: 2021 Update]] - Matthew Zeng
+- [[https://emacsconf.org/2021/talks/maintainers/][How to help Emacs maintainers?]] - Bastien Guerry
+- [[https://emacsconf.org/2021/talks/build/][How to build an Emacs]] - Fermin MF
+- [[https://emacsconf.org/2021/talks/forever/][M-x Forever: Why Emacs will outlast text editor trends]] - Me! (It's me!)
+
+* I'm Rewriting My Configuration Again
+
+Next year will be interesting!  I've got some ambitious plans for my personal projects and I've been thinking a lot about what changes I need to make to my personal configuration and my streaming setup.
+
+** What are my plans and how do they affect how I use my computer(s)?
+
+Starting a new channel to focus on building audio/visual tools from scratch and making things with them!
+
+Need to have multiple desktop environment configurations for different use cases:
+
+- EXWM from System Crafters videos/streams
+- Another window manager for A/V tool hacking streams (dwm, i3, StumpWM, Guile-WM, bspwm/herbsluftwm)
+- Multi-PC streaming setup to ensure that nothing I do kills the stream
+- Maybe use a different Linux distribution for the media machine
+
+** Cleaning up and presenting my configuration more effectively
+
+- Maybe setting up a shared base configuration (bare-emacs, needs a better name) and build on that
+- Invest more in converting to Guix Home
+- However, try to find the balance between Guix Home and normal config files
+- Creating a better configuration website and presentation
+
+** Improving the quality of streams and videos
+
+- Visual demonstrations with graphics
+- Having a more interesting screen layout (experiment with OBS)
+- More/better music for System Crafters videos and streams
+- Multiple cameras
+- Synchronizing activity between machines for streaming and recording
+
+The new YouTube channel I was talking about: https://www.youtube.com/channel/UCZ4HO8or08HUGUzA0w8Tagw
