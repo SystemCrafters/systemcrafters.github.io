@@ -111,42 +111,37 @@
 
 (defun dw/site-header (info)
   (let* ((file (plist-get info :output-file)))
-    (concat
-     (sxml-to-xml
-      `(div (div (@ (class "blog-header"))
-                 (div (@ (class "container"))
-                      (div (@ (class "row align-items-center justify-content-between"))
-                           (div (@ (class "col-sm-12 col-md-8"))
-                                (div (@ (class "blog-title"))
-                                     ,dw/site-title))
-                           (div (@ (class "col-sm col-md"))
-                                (div (@ (class "blog-description text-sm-left text-md-right text-lg-right text-xl-right"))
-                                     ,dw/site-tagline)))))
+    `(div (div (@ (class "blog-header"))
+               (div (@ (class "container"))
+                    (div (@ (class "row align-items-center justify-content-between"))
+                         (div (@ (class "col-sm-12 col-md-8"))
+                              (div (@ (class "blog-title"))
+                                   ,dw/site-title))
+                         (div (@ (class "col-sm col-md"))
+                              (div (@ (class "blog-description text-sm-left text-md-right text-lg-right text-xl-right"))
+                                   ,dw/site-tagline)))))
 
-            (div (@ (class "blog-masthead"))
-                 (div (@ (class "container"))
-                      (div (@ (class "row align-items-center justify-content-between"))
-                           (div (@ (class "col-sm-12 col-md-12"))
-                                (nav (@ (class "nav"))
-                                     (a (@ (class "nav-link") (href "/")) "Home") " "
-                                     ;; (a (@ (class "nav-link") (href "/articles")) "Articles")
-                                     (a (@ (class "nav-link") (href "/videos")) "Videos") " "
-                                     (a (@ (class "nav-link") (href "https://wiki.systemcrafters.net")) "Wiki") " "
-                                     (a (@ (class "nav-link") (href "https://store.systemcrafters.net?utm_source=sc-site-nav")) "Merch Store") " "
-                                     (a (@ (class "nav-link") (href "/support-the-channel")) "Support The Channel")))))))))))
+          (div (@ (class "blog-masthead"))
+               (div (@ (class "container"))
+                    (div (@ (class "row align-items-center justify-content-between"))
+                         (div (@ (class "col-sm-12 col-md-12"))
+                              (nav (@ (class "nav"))
+                                   (a (@ (class "nav-link") (href "/")) "Home") " "
+                                   ;; (a (@ (class "nav-link") (href "/articles")) "Articles")
+                                   (a (@ (class "nav-link") (href "/videos")) "Videos") " "
+                                   (a (@ (class "nav-link") (href "https://wiki.systemcrafters.net")) "Wiki") " "
+                                   (a (@ (class "nav-link") (href "https://store.systemcrafters.net?utm_source=sc-site-nav")) "Merch Store") " "
+                                   (a (@ (class "nav-link") (href "/support-the-channel")) "Support The Channel")))))))))
 
 (defun dw/site-footer (info)
-  (concat
-   ;; "</div></div>"
-   (sxml-to-xml
-    `(footer (@ (class "blog-footer"))
-      (div (@ (class "container"))
-           (div (@ (class "row"))
-                (div (@ (class "col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"))
-                     (p "Made with " ,(plist-get info :creator))
-                     (p (a (@ (href ,(concat dw/site-url "/privacy-policy/"))) "Privacy Policy")))))))
-   (sxml-to-xml
-    `(script (@ (src "/js/bootstrap.bundle.min.js"))))))
+  (list
+   `(footer (@ (class "blog-footer"))
+            (div (@ (class "container"))
+                 (div (@ (class "row"))
+                      (div (@ (class "col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"))
+                           (p "Made with " ,(plist-get info :creator))
+                           (p (a (@ (href ,(concat dw/site-url "/privacy-policy/"))) "Privacy Policy"))))))
+   `(script (@ (src "/js/bootstrap.bundle.min.js")))))
 
 (defun get-article-output-path (org-file pub-dir)
   (let ((article-dir (concat pub-dir
@@ -190,7 +185,7 @@
                     "")
             (title ,(concat (org-export-data (plist-get info :title) info) " - System Crafters")))
            (body
-             ,(dw/site-header info)
+             ,@(dw/site-header info)
              (div (@ (class "container"))
                   (div (@ (class "row"))
                        (div (@ (class "col-sm-12 blog-main"))
@@ -220,7 +215,7 @@
                                               async>
                                      </script>")))))
 
-             ,(dw/site-footer info))))))
+             ,@(dw/site-footer info))))))
 
 ;; Thanks Ashraz!
 (defun dw/org-html-link (link contents info)
