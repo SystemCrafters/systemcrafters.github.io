@@ -1,157 +1,157 @@
-<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Build Your Own IDE with lsp-mode - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Build Your Own IDE with lsp-mode</h1><p class="blog-post-meta"></p><div><ul><li><a href="https://youtu.be/E-NAM9U5JYE">Watch the video</a> on YouTube!</li>
-<li>Check out the <a href="https://github.com/daviwil/emacs-from-scratch/tree/6d078217a41134cc667f969430d150c50d03f448">final code</a> on GitHub</li>
-<li>Episode 8 of the <a href="../">Emacs From Scratch</a> series</li>
-<li>Episode 1 of the <a href="../../emacs-ide/">Emacs IDE</a> series</li>
-</ul>
+<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Build Your Own IDE with lsp-mode - System Crafters</title></head><body>&lt;div&gt;&lt;div class=&quot;blog-header&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-8&quot;&gt;&lt;div class=&quot;blog-title&quot;&gt;System Crafters&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-sm col-md&quot;&gt;&lt;div class=&quot;blog-description text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;blog-masthead&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-12&quot;&gt;&lt;nav class=&quot;nav&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;/&quot;&gt;Home&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/videos&quot;&gt;Videos&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://wiki.systemcrafters.net&quot;&gt;Wiki&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://store.systemcrafters.net?utm_source=sc-site-nav&quot;&gt;Merch Store&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/support-the-channel&quot;&gt;Support The Channel&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;<div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Build Your Own IDE with lsp-mode</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://youtu.be/E-NAM9U5JYE&quot;&gt;Watch the video&lt;/a&gt; on YouTube!&lt;/li&gt;
+&lt;li&gt;Check out the &lt;a href=&quot;https://github.com/daviwil/emacs-from-scratch/tree/6d078217a41134cc667f969430d150c50d03f448&quot;&gt;final code&lt;/a&gt; on GitHub&lt;/li&gt;
+&lt;li&gt;Episode 8 of the &lt;a href=&quot;../&quot;&gt;Emacs From Scratch&lt;/a&gt; series&lt;/li&gt;
+&lt;li&gt;Episode 1 of the &lt;a href=&quot;../../emacs-ide/&quot;&gt;Emacs IDE&lt;/a&gt; series&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2><a id="what-is-lsp-mode" class="anchor" href="#what-is-lsp-mode">¶</a>What is lsp-mode?</h2><ul><li><a href="https://emacs-lsp.github.io/lsp-mode/">Documentation</a></li>
-<li><a href="https://emacs-lsp.github.io/lsp-mode/page/languages/">Supported language servers</a></li>
-</ul>
+&lt;h2&gt;&lt;a id=&quot;what-is-lsp-mode&quot; class=&quot;anchor&quot; href=&quot;#what-is-lsp-mode&quot;&gt;¶&lt;/a&gt;What is lsp-mode?&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://emacs-lsp.github.io/lsp-mode/&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://emacs-lsp.github.io/lsp-mode/page/languages/&quot;&gt;Supported language servers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2><a id="initial-configuration" class="anchor" href="#initial-configuration">¶</a>Initial Configuration</h2><pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">lsp-mode</span>
-  <span class="org-builtin">:commands</span> (lsp lsp-deferred)
-  <span class="org-builtin">:init</span>
-  (<span class="org-keyword">setq</span> lsp-keymap-prefix <span class="org-string">"C-c l"</span>)  <span class="org-comment-delimiter">;; </span><span class="org-comment">Or 'C-l', 's-l'</span>
-  <span class="org-builtin">:config</span>
+&lt;h2&gt;&lt;a id=&quot;initial-configuration&quot; class=&quot;anchor&quot; href=&quot;#initial-configuration&quot;&gt;¶&lt;/a&gt;Initial Configuration&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;lsp-mode&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:commands&lt;/span&gt; (lsp lsp-deferred)
+  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; lsp-keymap-prefix &lt;span class=&quot;org-string&quot;&gt;&quot;C-c l&quot;&lt;/span&gt;)  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Or &apos;C-l&apos;, &apos;s-l&apos;&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:config&lt;/span&gt;
   (lsp-enable-which-key-integration t))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h3><a id="basic-completions" class="anchor" href="#basic-completions">¶</a>Basic Completions</h3><ul><li><kbd>completion-at-point</kbd> for completions</li>
-<li>Signatures when writing methods (<kbd>C-n</kbd>, <kbd>C-p</kbd> to cycle signatures)</li>
-</ul>
+&lt;h3&gt;&lt;a id=&quot;basic-completions&quot; class=&quot;anchor&quot; href=&quot;#basic-completions&quot;&gt;¶&lt;/a&gt;Basic Completions&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;completion-at-point&lt;/kbd&gt; for completions&lt;/li&gt;
+&lt;li&gt;Signatures when writing methods (&lt;kbd&gt;C-n&lt;/kbd&gt;, &lt;kbd&gt;C-p&lt;/kbd&gt; to cycle signatures)&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3><a id="hover" class="anchor" href="#hover">¶</a>Hover</h3>
+&lt;h3&gt;&lt;a id=&quot;hover&quot; class=&quot;anchor&quot; href=&quot;#hover&quot;&gt;¶&lt;/a&gt;Hover&lt;/h3&gt;
 
-<h3><a id="find-definitions-and-references" class="anchor" href="#find-definitions-and-references">¶</a>Find Definitions and References</h3><ul><li><kbd>lsp-find-definition</kbd>: <kbd>C-c l g r</kbd></li>
-<li><kbd>lsp-find-references</kbd>:  <kbd>C-c l g g</kbd></li>
-</ul>
+&lt;h3&gt;&lt;a id=&quot;find-definitions-and-references&quot; class=&quot;anchor&quot; href=&quot;#find-definitions-and-references&quot;&gt;¶&lt;/a&gt;Find Definitions and References&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;lsp-find-definition&lt;/kbd&gt;: &lt;kbd&gt;C-c l g r&lt;/kbd&gt;&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;lsp-find-references&lt;/kbd&gt;:  &lt;kbd&gt;C-c l g g&lt;/kbd&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3><a id="rename-symbol" class="anchor" href="#rename-symbol">¶</a>Rename Symbol</h3><ul><li><kbd>lsp-rename</kbd>: <kbd>C-c l r r</kbd></li>
-</ul>
+&lt;h3&gt;&lt;a id=&quot;rename-symbol&quot; class=&quot;anchor&quot; href=&quot;#rename-symbol&quot;&gt;¶&lt;/a&gt;Rename Symbol&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;lsp-rename&lt;/kbd&gt;: &lt;kbd&gt;C-c l r r&lt;/kbd&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3><a id="diagnostics" class="anchor" href="#diagnostics">¶</a>Diagnostics</h3><ul><li><kbd>flymake-show-diagnostics-buffer</kbd> to show diagnostics</li>
-</ul>
+&lt;h3&gt;&lt;a id=&quot;diagnostics&quot; class=&quot;anchor&quot; href=&quot;#diagnostics&quot;&gt;¶&lt;/a&gt;Diagnostics&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;flymake-show-diagnostics-buffer&lt;/kbd&gt; to show diagnostics&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3><a id="code-actions" class="anchor" href="#code-actions">¶</a>Code Actions</h3>
+&lt;h3&gt;&lt;a id=&quot;code-actions&quot; class=&quot;anchor&quot; href=&quot;#code-actions&quot;&gt;¶&lt;/a&gt;Code Actions&lt;/h3&gt;
 
-<h3><a id="code-formatting" class="anchor" href="#code-formatting">¶</a>Code Formatting</h3><ul><li><kbd>lsp-format-buffer</kbd>: <kbd>C-c l =</kbd> ==</li>
-</ul>
+&lt;h3&gt;&lt;a id=&quot;code-formatting&quot; class=&quot;anchor&quot; href=&quot;#code-formatting&quot;&gt;¶&lt;/a&gt;Code Formatting&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;lsp-format-buffer&lt;/kbd&gt;: &lt;kbd&gt;C-c l =&lt;/kbd&gt; ==&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Configure formatting options for some languages with <kbd>lsp-&lt;language&gt;-format-</kbd> variables
-</p>
+&lt;p&gt;Configure formatting options for some languages with &lt;kbd&gt;lsp-&amp;lt;language&amp;gt;-format-&lt;/kbd&gt; variables
+&lt;/p&gt;
 
-<h3><a id="header-breadcrumb" class="anchor" href="#header-breadcrumb">¶</a>Header Breadcrumb</h3><pre><code class="emacs-lisp">
-(<span class="org-keyword">defun</span> <span class="org-function-name">efs/lsp-mode-setup</span> ()
-  (<span class="org-keyword">setq</span> lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+&lt;h3&gt;&lt;a id=&quot;header-breadcrumb&quot; class=&quot;anchor&quot; href=&quot;#header-breadcrumb&quot;&gt;¶&lt;/a&gt;Header Breadcrumb&lt;/h3&gt;&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;efs/lsp-mode-setup&lt;/span&gt; ()
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; lsp-headerline-breadcrumb-segments &apos;(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
-  <span class="org-builtin">:hook</span> (lsp-mode . efs/lsp-mode-setup)
+  &lt;span class=&quot;org-builtin&quot;&gt;:hook&lt;/span&gt; (lsp-mode . efs/lsp-mode-setup)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="better-completions-with-company-mode" class="anchor" href="#better-completions-with-company-mode">¶</a>Better Completions with company-mode</h2><pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">company</span>
-  <span class="org-builtin">:after</span> lsp-mode
-  <span class="org-builtin">:hook</span> (prog-mode . company-mode)
-  <span class="org-builtin">:bind</span> (<span class="org-builtin">:map</span> company-active-map
-         (<span class="org-string">"&lt;tab&gt;"</span> . company-complete-selection))
-        (<span class="org-builtin">:map</span> lsp-mode-map
-         (<span class="org-string">"&lt;tab&gt;"</span> . company-indent-or-complete-common))
-  <span class="org-builtin">:custom</span>
+&lt;h2&gt;&lt;a id=&quot;better-completions-with-company-mode&quot; class=&quot;anchor&quot; href=&quot;#better-completions-with-company-mode&quot;&gt;¶&lt;/a&gt;Better Completions with company-mode&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;company&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:after&lt;/span&gt; lsp-mode
+  &lt;span class=&quot;org-builtin&quot;&gt;:hook&lt;/span&gt; (prog-mode . company-mode)
+  &lt;span class=&quot;org-builtin&quot;&gt;:bind&lt;/span&gt; (&lt;span class=&quot;org-builtin&quot;&gt;:map&lt;/span&gt; company-active-map
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;&amp;lt;tab&amp;gt;&quot;&lt;/span&gt; . company-complete-selection))
+        (&lt;span class=&quot;org-builtin&quot;&gt;:map&lt;/span&gt; lsp-mode-map
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;&amp;lt;tab&amp;gt;&quot;&lt;/span&gt; . company-indent-or-complete-common))
+  &lt;span class=&quot;org-builtin&quot;&gt;:custom&lt;/span&gt;
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
 
-(<span class="org-keyword">use-package</span> <span class="org-constant">company-box</span>
-  <span class="org-builtin">:hook</span> (company-mode . company-box-mode))
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;company-box&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:hook&lt;/span&gt; (company-mode . company-box-mode))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="more-ui-enhancements-lsp-ui-mode" class="anchor" href="#more-ui-enhancements-lsp-ui-mode">¶</a>More UI Enhancements lsp-ui-mode</h2><p><a href="https://emacs-lsp.github.io/lsp-ui/">lsp-ui Documentation</a>
-</p>
+&lt;h2&gt;&lt;a id=&quot;more-ui-enhancements-lsp-ui-mode&quot; class=&quot;anchor&quot; href=&quot;#more-ui-enhancements-lsp-ui-mode&quot;&gt;¶&lt;/a&gt;More UI Enhancements lsp-ui-mode&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://emacs-lsp.github.io/lsp-ui/&quot;&gt;lsp-ui Documentation&lt;/a&gt;
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">lsp-ui</span>
-  <span class="org-builtin">:hook</span> (lsp-mode . lsp-ui-mode))
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;lsp-ui&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:hook&lt;/span&gt; (lsp-mode . lsp-ui-mode))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h3><a id="documentation" class="anchor" href="#documentation">¶</a>Documentation</h3><ul><li><kbd>lsp-ui-doc-focus-frame</kbd> to enter the documentation frame to navigate and search around</li>
-<li><kbd>lsp-ui-doc-unfocus-frame</kbd> to leave documentation frame</li>
-</ul>
+&lt;h3&gt;&lt;a id=&quot;documentation&quot; class=&quot;anchor&quot; href=&quot;#documentation&quot;&gt;¶&lt;/a&gt;Documentation&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;lsp-ui-doc-focus-frame&lt;/kbd&gt; to enter the documentation frame to navigate and search around&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;lsp-ui-doc-unfocus-frame&lt;/kbd&gt; to leave documentation frame&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">setq</span> lsp-ui-doc-position 'bottom)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; lsp-ui-doc-position &apos;bottom)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h3><a id="sideline" class="anchor" href="#sideline">¶</a>Sideline</h3><p><a href="https://emacs-lsp.github.io/lsp-ui/#lsp-ui-sideline">lsp-sideline configuration</a>
-</p>
+&lt;h3&gt;&lt;a id=&quot;sideline&quot; class=&quot;anchor&quot; href=&quot;#sideline&quot;&gt;¶&lt;/a&gt;Sideline&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://emacs-lsp.github.io/lsp-ui/#lsp-ui-sideline&quot;&gt;lsp-sideline configuration&lt;/a&gt;
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">setq</span> lsp-ui-sideline-enable nil)
-(<span class="org-keyword">setq</span> lsp-ui-sideline-show-hover nil)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; lsp-ui-sideline-enable nil)
+(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; lsp-ui-sideline-show-hover nil)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h3><a id="peek" class="anchor" href="#peek">¶</a>Peek</h3><ul><li><kbd>lsp-ui-peek-find-references</kbd> to show references inline (<kbd>M-n</kbd>, <kbd>M-p</kbd> to cycle)</li>
-</ul>
+&lt;h3&gt;&lt;a id=&quot;peek&quot; class=&quot;anchor&quot; href=&quot;#peek&quot;&gt;¶&lt;/a&gt;Peek&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;lsp-ui-peek-find-references&lt;/kbd&gt; to show references inline (&lt;kbd&gt;M-n&lt;/kbd&gt;, &lt;kbd&gt;M-p&lt;/kbd&gt; to cycle)&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2><a id="lsp-treemacs" class="anchor" href="#lsp-treemacs">¶</a>lsp-treemacs</h2><p>Provides an even nicer UI on top of lsp-mode using Treemacs
-</p>
+&lt;h2&gt;&lt;a id=&quot;lsp-treemacs&quot; class=&quot;anchor&quot; href=&quot;#lsp-treemacs&quot;&gt;¶&lt;/a&gt;lsp-treemacs&lt;/h2&gt;&lt;p&gt;Provides an even nicer UI on top of lsp-mode using Treemacs
+&lt;/p&gt;
 
-<ul><li><kbd>lsp-treemacs-symbols</kbd> - Show a tree view of the symbols in the current file</li>
-<li><kbd>lsp-treemacs-references</kbd> - Show a tree view for the references of the symbol under the cursor</li>
-<li><kbd>lsp-treemacs-error-list</kbd> - Show a tree view for the diagnostic messages in the project</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;lsp-treemacs-symbols&lt;/kbd&gt; - Show a tree view of the symbols in the current file&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;lsp-treemacs-references&lt;/kbd&gt; - Show a tree view for the references of the symbol under the cursor&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;lsp-treemacs-error-list&lt;/kbd&gt; - Show a tree view for the diagnostic messages in the project&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">lsp-treemacs</span>
-  <span class="org-builtin">:after</span> lsp)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;lsp-treemacs&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:after&lt;/span&gt; lsp)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="quicker-symbol-searching-with-lsp-ivy" class="anchor" href="#quicker-symbol-searching-with-lsp-ivy">¶</a>Quicker symbol searching with lsp-ivy</h2><pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">lsp-ivy</span>)
+&lt;h2&gt;&lt;a id=&quot;quicker-symbol-searching-with-lsp-ivy&quot; class=&quot;anchor&quot; href=&quot;#quicker-symbol-searching-with-lsp-ivy&quot;&gt;¶&lt;/a&gt;Quicker symbol searching with lsp-ivy&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;lsp-ivy&lt;/span&gt;)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="typescript" class="anchor" href="#typescript">¶</a>TypeScript</h2><pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">typescript-mode</span>
-  <span class="org-builtin">:mode</span> <span class="org-string">"\\.ts\\'"</span>
-  <span class="org-builtin">:hook</span> (typescript-mode . lsp-deferred)
-  <span class="org-builtin">:config</span>
-  (<span class="org-keyword">setq</span> typescript-indent-level 2))
+&lt;h2&gt;&lt;a id=&quot;typescript&quot; class=&quot;anchor&quot; href=&quot;#typescript&quot;&gt;¶&lt;/a&gt;TypeScript&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;typescript-mode&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:mode&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;\\.ts\\&apos;&quot;&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:hook&lt;/span&gt; (typescript-mode . lsp-deferred)
+  &lt;span class=&quot;org-builtin&quot;&gt;:config&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; typescript-indent-level 2))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>Install the <kbd>typescript-language-server</kbd>:
-</p>
+&lt;p&gt;Install the &lt;kbd&gt;typescript-language-server&lt;/kbd&gt;:
+&lt;/p&gt;
 
-<pre><code class="sh">
+&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
 npm install -g typescript-language-server
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="c" class="anchor" href="#c">¶</a>C</h2><p>Install the <kbd>ccls</kbd> language server.
-</p>
+&lt;h2&gt;&lt;a id=&quot;c&quot; class=&quot;anchor&quot; href=&quot;#c&quot;&gt;¶&lt;/a&gt;C&lt;/h2&gt;&lt;p&gt;Install the &lt;kbd&gt;ccls&lt;/kbd&gt; language server.
+&lt;/p&gt;
 
-<h2><a id="bonus-commenting-lines" class="anchor" href="#bonus-commenting-lines">¶</a>Bonus: Commenting lines</h2><p><kbd>M-;</kbd> does comment, but the behavior sometimes isn't exactly what you'd expect.
-</p>
+&lt;h2&gt;&lt;a id=&quot;bonus-commenting-lines&quot; class=&quot;anchor&quot; href=&quot;#bonus-commenting-lines&quot;&gt;¶&lt;/a&gt;Bonus: Commenting lines&lt;/h2&gt;&lt;p&gt;&lt;kbd&gt;M-;&lt;/kbd&gt; does comment, but the behavior sometimes isn&apos;t exactly what you&apos;d expect.
+&lt;/p&gt;
 
-<p><a href="https://github.com/redguardtoo/evil-nerd-commenter">evil-nerd-commenter</a> on GitHub
-</p>
+&lt;p&gt;&lt;a href=&quot;https://github.com/redguardtoo/evil-nerd-commenter&quot;&gt;evil-nerd-commenter&lt;/a&gt; on GitHub
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">evil-nerd-commenter</span>
-  <span class="org-builtin">:bind</span> (<span class="org-string">"M-/"</span> . evilnc-comment-or-uncomment-lines))
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;evil-nerd-commenter&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:bind&lt;/span&gt; (&lt;span class=&quot;org-string&quot;&gt;&quot;M-/&quot;&lt;/span&gt; . evilnc-comment-or-uncomment-lines))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="theres-more-to-talk-about-later" class="anchor" href="#theres-more-to-talk-about-later">¶</a>There's more to talk about later!</h2><ul><li>dap-mode for debugging</li>
-<li>yasnippet</li>
-<li>running compilers and unit test tools</li>
-<li>language-specific videos</li>
-</ul>
-</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+&lt;h2&gt;&lt;a id=&quot;theres-more-to-talk-about-later&quot; class=&quot;anchor&quot; href=&quot;#theres-more-to-talk-about-later&quot;&gt;¶&lt;/a&gt;There&apos;s more to talk about later!&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;dap-mode for debugging&lt;/li&gt;
+&lt;li&gt;yasnippet&lt;/li&gt;
+&lt;li&gt;running compilers and unit test tools&lt;/li&gt;
+&lt;li&gt;language-specific videos&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</div></div></div></div>&lt;footer class=&quot;blog-footer&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;p&gt;Made with Emacs 27.2 (Org mode 9.4.4)&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://systemcrafters.net/privacy-policy/&quot;&gt;Privacy Policy&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/footer&gt;&lt;script src=&quot;/js/bootstrap.bundle.min.js&quot;/&gt;</body></html>

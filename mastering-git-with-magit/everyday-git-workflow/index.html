@@ -1,279 +1,279 @@
-<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Everyday Git Workflow in Emacs with Magit - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Everyday Git Workflow in Emacs with Magit</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/qPfJoeQCIvA">Watch the video</a> on YouTube!
-</p>
+<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Everyday Git Workflow in Emacs with Magit - System Crafters</title></head><body>&lt;div&gt;&lt;div class=&quot;blog-header&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-8&quot;&gt;&lt;div class=&quot;blog-title&quot;&gt;System Crafters&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-sm col-md&quot;&gt;&lt;div class=&quot;blog-description text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;blog-masthead&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-12&quot;&gt;&lt;nav class=&quot;nav&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;/&quot;&gt;Home&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/videos&quot;&gt;Videos&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://wiki.systemcrafters.net&quot;&gt;Wiki&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://store.systemcrafters.net?utm_source=sc-site-nav&quot;&gt;Merch Store&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/support-the-channel&quot;&gt;Support The Channel&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;<div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Everyday Git Workflow in Emacs with Magit</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://youtu.be/qPfJoeQCIvA&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
+&lt;/p&gt;
 
-<h2><a id="what-will-we-learn" class="anchor" href="#what-will-we-learn">¶</a>What will we learn?</h2><p>In this video, I'm going to show how you can use Magit to perform your day to day Git operations much more efficiently than what you might do with <kbd>git</kbd> on the command line.
-</p>
+&lt;h2&gt;&lt;a id=&quot;what-will-we-learn&quot; class=&quot;anchor&quot; href=&quot;#what-will-we-learn&quot;&gt;¶&lt;/a&gt;What will we learn?&lt;/h2&gt;&lt;p&gt;In this video, I&apos;m going to show how you can use Magit to perform your day to day Git operations much more efficiently than what you might do with &lt;kbd&gt;git&lt;/kbd&gt; on the command line.
+&lt;/p&gt;
 
-<p>This is Part 2 of the <a href="https://www.youtube.com/watch?v=_zfvQkJsYwI&list=PLEoMzSkcN8oMc34dTjyFmTUWbXTKrNfZA">Mastering Git with Magit</a> series, so be sure to watch the first one if you haven't seen it yet!
-</p>
+&lt;p&gt;This is Part 2 of the &lt;a href=&quot;https://www.youtube.com/watch?v=_zfvQkJsYwI&amp;list=PLEoMzSkcN8oMc34dTjyFmTUWbXTKrNfZA&quot;&gt;Mastering Git with Magit&lt;/a&gt; series, so be sure to watch the first one if you haven&apos;t seen it yet!
+&lt;/p&gt;
 
-<p>Instead of covering every Magit feature exhaustively, I'm going to use a scenario-driven approach to show you how to accomplish specific tasks that I use Magit for every day, both when managing my dotfiles repository and working on larger projects where I have to collaborate with others.
-</p>
+&lt;p&gt;Instead of covering every Magit feature exhaustively, I&apos;m going to use a scenario-driven approach to show you how to accomplish specific tasks that I use Magit for every day, both when managing my dotfiles repository and working on larger projects where I have to collaborate with others.
+&lt;/p&gt;
 
-<p>Let me know in the comments if there's anything you'd like to see covered in more detail and I'll do that in future videos of this series!
-</p>
+&lt;p&gt;Let me know in the comments if there&apos;s anything you&apos;d like to see covered in more detail and I&apos;ll do that in future videos of this series!
+&lt;/p&gt;
 
-<h2><a id="cloning-a-repository" class="anchor" href="#cloning-a-repository">¶</a>Cloning a repository</h2><p>While it's not something you might do every day, you will eventually need to clone a Git repository from a remote location, typically a collaboration site like GitHub, GitLab, or Sourcehut.
-</p>
+&lt;h2&gt;&lt;a id=&quot;cloning-a-repository&quot; class=&quot;anchor&quot; href=&quot;#cloning-a-repository&quot;&gt;¶&lt;/a&gt;Cloning a repository&lt;/h2&gt;&lt;p&gt;While it&apos;s not something you might do every day, you will eventually need to clone a Git repository from a remote location, typically a collaboration site like GitHub, GitLab, or Sourcehut.
+&lt;/p&gt;
 
-<p>The easiest way to do this is from anywhere in Emacs is to run <kbd>M-x magit-clone</kbd>.  You will be prompted for which type of input you'd like to use to identify the repo.  We'll choose <kbd>u</kbd> for "url or name" because we want to clone a repo from GitHub.
-</p>
+&lt;p&gt;The easiest way to do this is from anywhere in Emacs is to run &lt;kbd&gt;M-x magit-clone&lt;/kbd&gt;.  You will be prompted for which type of input you&apos;d like to use to identify the repo.  We&apos;ll choose &lt;kbd&gt;u&lt;/kbd&gt; for &quot;url or name&quot; because we want to clone a repo from GitHub.
+&lt;/p&gt;
 
-<p>One interesting thing here is that you don't need to specify a full URL if you're just cloning a repository from GitHub; Magit will assume the repo is from GitHub if you merely enter <kbd>username/reponame</kbd>, for example: <kbd>daviwil/dotfiles</kbd>.
-</p>
+&lt;p&gt;One interesting thing here is that you don&apos;t need to specify a full URL if you&apos;re just cloning a repository from GitHub; Magit will assume the repo is from GitHub if you merely enter &lt;kbd&gt;username/reponame&lt;/kbd&gt;, for example: &lt;kbd&gt;daviwil/dotfiles&lt;/kbd&gt;.
+&lt;/p&gt;
 
-<p>You can also use a prefix to indicate the host, like <kbd>gitlab:user/reponame</kbd> or <kbd>gl:user/reponame</kbd> to clone a repository from GitLab.  Check <kbd>magit-clone-name-alist</kbd> for the known name prefixes or add your own!
-</p>
+&lt;p&gt;You can also use a prefix to indicate the host, like &lt;kbd&gt;gitlab:user/reponame&lt;/kbd&gt; or &lt;kbd&gt;gl:user/reponame&lt;/kbd&gt; to clone a repository from GitLab.  Check &lt;kbd&gt;magit-clone-name-alist&lt;/kbd&gt; for the known name prefixes or add your own!
+&lt;/p&gt;
 
-<p>Once you confirm the repo URL, you will be asked for the path in which the repo will be cloned.  Magit will then ask you if you want to set the "pushRemote" to <kbd>origin</kbd>, it's generally a good idea to respond <kbd>y</kbd> to this so you can push branches to your repo afterward.
-</p>
+&lt;p&gt;Once you confirm the repo URL, you will be asked for the path in which the repo will be cloned.  Magit will then ask you if you want to set the &quot;pushRemote&quot; to &lt;kbd&gt;origin&lt;/kbd&gt;, it&apos;s generally a good idea to respond &lt;kbd&gt;y&lt;/kbd&gt; to this so you can push branches to your repo afterward.
+&lt;/p&gt;
 
-<p>After the repository has finished cloning, the <kbd>magit-status</kbd> buffer will be opened so that you can run Git operations there!
-</p>
+&lt;p&gt;After the repository has finished cloning, the &lt;kbd&gt;magit-status&lt;/kbd&gt; buffer will be opened so that you can run Git operations there!
+&lt;/p&gt;
 
-<h3><a id="preparing-for-later-examples" class="anchor" href="#preparing-for-later-examples">¶</a>Preparing for later examples</h3><pre><code class="emacs-lisp">
-(<span class="org-keyword">let</span> ((default-directory (expand-file-name <span class="org-string">"~/Projects/Code/dotfiles"</span>)))
-  (magit-reset-hard <span class="org-string">"1e0fa45a5e7fd9fd45c2d385b5970d7de53eb205"</span>)
-  (copy-file <span class="org-string">"../Emacs-edit.org"</span> <span class="org-string">"./Emacs.org"</span> t)
-  (find-file-noselect <span class="org-string">"Emacs.org"</span>))
+&lt;h3&gt;&lt;a id=&quot;preparing-for-later-examples&quot; class=&quot;anchor&quot; href=&quot;#preparing-for-later-examples&quot;&gt;¶&lt;/a&gt;Preparing for later examples&lt;/h3&gt;&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;let&lt;/span&gt; ((default-directory (expand-file-name &lt;span class=&quot;org-string&quot;&gt;&quot;~/Projects/Code/dotfiles&quot;&lt;/span&gt;)))
+  (magit-reset-hard &lt;span class=&quot;org-string&quot;&gt;&quot;1e0fa45a5e7fd9fd45c2d385b5970d7de53eb205&quot;&lt;/span&gt;)
+  (copy-file &lt;span class=&quot;org-string&quot;&gt;&quot;../Emacs-edit.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;./Emacs.org&quot;&lt;/span&gt; t)
+  (find-file-noselect &lt;span class=&quot;org-string&quot;&gt;&quot;Emacs.org&quot;&lt;/span&gt;))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="looking-at-the-commit-history" class="anchor" href="#looking-at-the-commit-history">¶</a>Looking at the commit history</h2><p>Before we get into the more interesting and useful features of Magit, let's take a look at how you can view the commit history of your Git repository.
-</p>
+&lt;h2&gt;&lt;a id=&quot;looking-at-the-commit-history&quot; class=&quot;anchor&quot; href=&quot;#looking-at-the-commit-history&quot;&gt;¶&lt;/a&gt;Looking at the commit history&lt;/h2&gt;&lt;p&gt;Before we get into the more interesting and useful features of Magit, let&apos;s take a look at how you can view the commit history of your Git repository.
+&lt;/p&gt;
 
-<p>Other Magit operations like cherry-picking and rebasing will use this commit log view, so it's helpful to be familiar with it!
-</p>
+&lt;p&gt;Other Magit operations like cherry-picking and rebasing will use this commit log view, so it&apos;s helpful to be familiar with it!
+&lt;/p&gt;
 
-<h3><a id="viewing-commits-from-the-current-branch" class="anchor" href="#viewing-commits-from-the-current-branch">¶</a>Viewing commits from the current branch</h3><p>The most obvious thing you might want to do is view the commit history for the current branch.  You can view the log for the current branch using one of these entrypoints:
-</p>
+&lt;h3&gt;&lt;a id=&quot;viewing-commits-from-the-current-branch&quot; class=&quot;anchor&quot; href=&quot;#viewing-commits-from-the-current-branch&quot;&gt;¶&lt;/a&gt;Viewing commits from the current branch&lt;/h3&gt;&lt;p&gt;The most obvious thing you might want to do is view the commit history for the current branch.  You can view the log for the current branch using one of these entrypoints:
+&lt;/p&gt;
 
-<ul><li><strong>Direct command</strong>: <kbd>M-x magit-log-current</kbd></li>
-<li><strong>Status buffer</strong>: <kbd>l l</kbd> (lower-cased 'l' twice)</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Direct command&lt;/strong&gt;: &lt;kbd&gt;M-x magit-log-current&lt;/kbd&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Status buffer&lt;/strong&gt;: &lt;kbd&gt;l l&lt;/kbd&gt; (lower-cased &apos;l&apos; twice)&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>This view shows every commit in reverse-chronological order, giving you the commit hash, description, author, and a relative timestamp for when it was created.
-</p>
+&lt;p&gt;This view shows every commit in reverse-chronological order, giving you the commit hash, description, author, and a relative timestamp for when it was created.
+&lt;/p&gt;
 
-<p>You can use the normal movement keys and press <kbd>RET</kbd> (Enter) on any line to see more details about the commit, including the diff.  Pressing lower-cased <kbd>q</kbd> will exit the commit details view and pressing it again will also allow you to exit the log view.
-</p>
+&lt;p&gt;You can use the normal movement keys and press &lt;kbd&gt;RET&lt;/kbd&gt; (Enter) on any line to see more details about the commit, including the diff.  Pressing lower-cased &lt;kbd&gt;q&lt;/kbd&gt; will exit the commit details view and pressing it again will also allow you to exit the log view.
+&lt;/p&gt;
 
-<p>One useful feature of this view is that you can use any buffer-searching functionality you like (Swiper, <kbd>consult-line</kbd>, <kbd>isearch</kbd>, etc) to search across the commits by their log message.
-</p>
+&lt;p&gt;One useful feature of this view is that you can use any buffer-searching functionality you like (Swiper, &lt;kbd&gt;consult-line&lt;/kbd&gt;, &lt;kbd&gt;isearch&lt;/kbd&gt;, etc) to search across the commits by their log message.
+&lt;/p&gt;
 
-<p>By default, only a limited number of commits will be displayed, but you can press the <kbd>+</kbd> (plus sign) key at any time to load more commits for the current log.
-</p>
+&lt;p&gt;By default, only a limited number of commits will be displayed, but you can press the &lt;kbd&gt;+&lt;/kbd&gt; (plus sign) key at any time to load more commits for the current log.
+&lt;/p&gt;
 
-<h3><a id="viewing-commits-from-a-specific-branch" class="anchor" href="#viewing-commits-from-a-specific-branch">¶</a>Viewing commits from a specific branch</h3><p>This path will ask you for a branch using the prompt "Log rev,s" which isn't very clear, but you can type in the name of any branch here, either local or remote.  You can also press the <kbd>TAB</kbd> key to get a completion list of all the branch names.
-</p>
+&lt;h3&gt;&lt;a id=&quot;viewing-commits-from-a-specific-branch&quot; class=&quot;anchor&quot; href=&quot;#viewing-commits-from-a-specific-branch&quot;&gt;¶&lt;/a&gt;Viewing commits from a specific branch&lt;/h3&gt;&lt;p&gt;This path will ask you for a branch using the prompt &quot;Log rev,s&quot; which isn&apos;t very clear, but you can type in the name of any branch here, either local or remote.  You can also press the &lt;kbd&gt;TAB&lt;/kbd&gt; key to get a completion list of all the branch names.
+&lt;/p&gt;
 
-<p>Once you select a branch to be listed, the commit listing for that branch will be displayed.
-</p>
+&lt;p&gt;Once you select a branch to be listed, the commit listing for that branch will be displayed.
+&lt;/p&gt;
 
-<ul><li><strong>Direct command</strong>: <kbd>M-x magit-log-other</kbd></li>
-<li><strong>Status buffer</strong>: <kbd>l o</kbd> (lower-cased 'L' then lower-cased 'o')</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Direct command&lt;/strong&gt;: &lt;kbd&gt;M-x magit-log-other&lt;/kbd&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Status buffer&lt;/strong&gt;: &lt;kbd&gt;l o&lt;/kbd&gt; (lower-cased &apos;L&apos; then lower-cased &apos;o&apos;)&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2><a id="commiting-only-one-section-of-a-modified-file" class="anchor" href="#commiting-only-one-section-of-a-modified-file">¶</a>Commiting only one section of a modified file</h2><p>If you've been using Git for a little while, you're probably familiar with staging whole files to be committed using <kbd>git add filename</kbd>.
-</p>
+&lt;h2&gt;&lt;a id=&quot;commiting-only-one-section-of-a-modified-file&quot; class=&quot;anchor&quot; href=&quot;#commiting-only-one-section-of-a-modified-file&quot;&gt;¶&lt;/a&gt;Commiting only one section of a modified file&lt;/h2&gt;&lt;p&gt;If you&apos;ve been using Git for a little while, you&apos;re probably familiar with staging whole files to be committed using &lt;kbd&gt;git add filename&lt;/kbd&gt;.
+&lt;/p&gt;
 
-<p>Magit's status buffer (<kbd>M-x magit-status</kbd>, or <kbd>C-x g</kbd>) enables you to stage whole files by using the lower-cased <kbd>s</kbd> key when the cursor is on the filename in the <strong>Unstaged Changes</strong> section of the status buffer.
-</p>
+&lt;p&gt;Magit&apos;s status buffer (&lt;kbd&gt;M-x magit-status&lt;/kbd&gt;, or &lt;kbd&gt;C-x g&lt;/kbd&gt;) enables you to stage whole files by using the lower-cased &lt;kbd&gt;s&lt;/kbd&gt; key when the cursor is on the filename in the &lt;strong&gt;Unstaged Changes&lt;/strong&gt; section of the status buffer.
+&lt;/p&gt;
 
-<p>But what if you want to stage only one part of the modified file?  Magit makes this very easy!
-</p>
+&lt;p&gt;But what if you want to stage only one part of the modified file?  Magit makes this very easy!
+&lt;/p&gt;
 
-<p>Put your cursor on the entry for the modified file, press <kbd>TAB</kbd> to expand it, then move your cursor into the "hunk" containing the change.  Now press lower-cased <kbd>s</kbd> and that hunk will be staged!
-</p>
+&lt;p&gt;Put your cursor on the entry for the modified file, press &lt;kbd&gt;TAB&lt;/kbd&gt; to expand it, then move your cursor into the &quot;hunk&quot; containing the change.  Now press lower-cased &lt;kbd&gt;s&lt;/kbd&gt; and that hunk will be staged!
+&lt;/p&gt;
 
-<p>You can also stage individual lines by selecting them using the normal Emacs (or Evil) key bindings and then press <kbd>s</kbd> in the same way, just make sure that you include the "removal" lines that correspond to any additions you are staging!
-</p>
+&lt;p&gt;You can also stage individual lines by selecting them using the normal Emacs (or Evil) key bindings and then press &lt;kbd&gt;s&lt;/kbd&gt; in the same way, just make sure that you include the &quot;removal&quot; lines that correspond to any additions you are staging!
+&lt;/p&gt;
 
-<p>You can similarly unstage hunks and lines in the <strong>Staged Changes</strong> section using the lower-cased <kbd>u</kbd> key.
-</p>
+&lt;p&gt;You can similarly unstage hunks and lines in the &lt;strong&gt;Staged Changes&lt;/strong&gt; section using the lower-cased &lt;kbd&gt;u&lt;/kbd&gt; key.
+&lt;/p&gt;
 
-<p>I'll perform a commit with these changes now using lower-cased <kbd>c c</kbd> (Commit -&gt; Create) in the status buffer.
-</p>
+&lt;p&gt;I&apos;ll perform a commit with these changes now using lower-cased &lt;kbd&gt;c c&lt;/kbd&gt; (Commit -&amp;gt; Create) in the status buffer.
+&lt;/p&gt;
 
-<p>I use this functionality very frequently, both for my dotfiles repository and the various code projects I contribute to!
-</p>
+&lt;p&gt;I use this functionality very frequently, both for my dotfiles repository and the various code projects I contribute to!
+&lt;/p&gt;
 
-<h2><a id="adding-a-file-or-change-to-the-most-recent-commit" class="anchor" href="#adding-a-file-or-change-to-the-most-recent-commit">¶</a>Adding a file or change to the most recent commit</h2><p>So what if we forgot some lines that we wanted to add to this commit?  Magit makes it really easy to "extend" your most recent commit with additional changes.
-</p>
+&lt;h2&gt;&lt;a id=&quot;adding-a-file-or-change-to-the-most-recent-commit&quot; class=&quot;anchor&quot; href=&quot;#adding-a-file-or-change-to-the-most-recent-commit&quot;&gt;¶&lt;/a&gt;Adding a file or change to the most recent commit&lt;/h2&gt;&lt;p&gt;So what if we forgot some lines that we wanted to add to this commit?  Magit makes it really easy to &quot;extend&quot; your most recent commit with additional changes.
+&lt;/p&gt;
 
-<p>First, stage the changes that you want to add to the commit, then press <kbd>c e</kbd> (Commit -&gt; Extend).  Magit will "amend" the commit with those changes without asking you to edit the commit message!
-</p>
+&lt;p&gt;First, stage the changes that you want to add to the commit, then press &lt;kbd&gt;c e&lt;/kbd&gt; (Commit -&amp;gt; Extend).  Magit will &quot;amend&quot; the commit with those changes without asking you to edit the commit message!
+&lt;/p&gt;
 
-<p>If you <em>do</em> want to edit the commit message when adding the new files, you can do this by pressing <kbd>c a</kbd> (Commit -&gt; Amend).  The commit message editor will appear with the contents of the original commit message so that you can edit it.  Press <kbd>C-c C-c</kbd> to confirm the changes or <kbd>C-c C-k</kbd> to abort the edit.
-</p>
+&lt;p&gt;If you &lt;em&gt;do&lt;/em&gt; want to edit the commit message when adding the new files, you can do this by pressing &lt;kbd&gt;c a&lt;/kbd&gt; (Commit -&amp;gt; Amend).  The commit message editor will appear with the contents of the original commit message so that you can edit it.  Press &lt;kbd&gt;C-c C-c&lt;/kbd&gt; to confirm the changes or &lt;kbd&gt;C-c C-k&lt;/kbd&gt; to abort the edit.
+&lt;/p&gt;
 
-<p>If you only want to edit the commit message without adding any staged changes, use <kbd>c w</kbd> (Commit -&gt; Reword).
-</p>
+&lt;p&gt;If you only want to edit the commit message without adding any staged changes, use &lt;kbd&gt;c w&lt;/kbd&gt; (Commit -&amp;gt; Reword).
+&lt;/p&gt;
 
-<p><strong>NOTE:</strong> If you've already pushed the original commit to a remote branch, you'll have to force-push the branch the next time because the commit histories won't match!  I'll show you how to do this in a bit.
-</p>
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you&apos;ve already pushed the original commit to a remote branch, you&apos;ll have to force-push the branch the next time because the commit histories won&apos;t match!  I&apos;ll show you how to do this in a bit.
+&lt;/p&gt;
 
-<h2><a id="adding-a-file-or-change-to-a-specific-commit" class="anchor" href="#adding-a-file-or-change-to-a-specific-commit">¶</a>Adding a file or change to a specific commit</h2><p>Maybe you've already made other commits after the commit you need to edit, how can you add new changes to the earlier commit?
-</p>
+&lt;h2&gt;&lt;a id=&quot;adding-a-file-or-change-to-a-specific-commit&quot; class=&quot;anchor&quot; href=&quot;#adding-a-file-or-change-to-a-specific-commit&quot;&gt;¶&lt;/a&gt;Adding a file or change to a specific commit&lt;/h2&gt;&lt;p&gt;Maybe you&apos;ve already made other commits after the commit you need to edit, how can you add new changes to the earlier commit?
+&lt;/p&gt;
 
-<p>On the command line, you would normally use <kbd>git rebase</kbd> to accomplish this, which is generally considered to be a more advanced Git technique.
-</p>
+&lt;p&gt;On the command line, you would normally use &lt;kbd&gt;git rebase&lt;/kbd&gt; to accomplish this, which is generally considered to be a more advanced Git technique.
+&lt;/p&gt;
 
-<p>Luckily Magit makes this specific operation much simpler with the "Instant Fixup" feature!
-</p>
+&lt;p&gt;Luckily Magit makes this specific operation much simpler with the &quot;Instant Fixup&quot; feature!
+&lt;/p&gt;
 
-<p>To add changes to an earlier commit, just stage them like you normally would and then press <kbd>c F</kbd> (Commit -&gt; Instant Fixup).
-</p>
+&lt;p&gt;To add changes to an earlier commit, just stage them like you normally would and then press &lt;kbd&gt;c F&lt;/kbd&gt; (Commit -&amp;gt; Instant Fixup).
+&lt;/p&gt;
 
-<p>You'll be presented with Magit's commit log view which shows the current branch's commits with the newest commits sorted first.  Just move your cursor to the line of the commit you want to edit and press <kbd>C-c C-c</kbd> and the changes will be added to this commit!
-</p>
+&lt;p&gt;You&apos;ll be presented with Magit&apos;s commit log view which shows the current branch&apos;s commits with the newest commits sorted first.  Just move your cursor to the line of the commit you want to edit and press &lt;kbd&gt;C-c C-c&lt;/kbd&gt; and the changes will be added to this commit!
+&lt;/p&gt;
 
-<p><strong>NOTE:</strong> Like we talked about before, any operation that changes an existing commit will require you to force-push the branch!
-</p>
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Like we talked about before, any operation that changes an existing commit will require you to force-push the branch!
+&lt;/p&gt;
 
-<h2><a id="create-a-new-branch-from-the-changes-of-the-current-branch" class="anchor" href="#create-a-new-branch-from-the-changes-of-the-current-branch">¶</a>Create a new branch from the changes of the current branch</h2><p>Magit has a really convenient interface for creating branches through <kbd>M-x magit-branch</kbd> or the <kbd>b</kbd> key in the <kbd>magit-status</kbd> buffer.
-</p>
+&lt;h2&gt;&lt;a id=&quot;create-a-new-branch-from-the-changes-of-the-current-branch&quot; class=&quot;anchor&quot; href=&quot;#create-a-new-branch-from-the-changes-of-the-current-branch&quot;&gt;¶&lt;/a&gt;Create a new branch from the changes of the current branch&lt;/h2&gt;&lt;p&gt;Magit has a really convenient interface for creating branches through &lt;kbd&gt;M-x magit-branch&lt;/kbd&gt; or the &lt;kbd&gt;b&lt;/kbd&gt; key in the &lt;kbd&gt;magit-status&lt;/kbd&gt; buffer.
+&lt;/p&gt;
 
-<p>One of my favorite Magit features is here: it allows you to create a new branch with the changes you already committed to the current branch while putting the original branch back to the commit where it started.
-</p>
+&lt;p&gt;One of my favorite Magit features is here: it allows you to create a new branch with the changes you already committed to the current branch while putting the original branch back to the commit where it started.
+&lt;/p&gt;
 
-<p>Imagine this scenario: you've been working on some changes for a while, making commits without really thinking about where you've been committing them.  It turns out you've been committing them to the <kbd>main/master</kbd> branch all along!
-</p>
+&lt;p&gt;Imagine this scenario: you&apos;ve been working on some changes for a while, making commits without really thinking about where you&apos;ve been committing them.  It turns out you&apos;ve been committing them to the &lt;kbd&gt;main/master&lt;/kbd&gt; branch all along!
+&lt;/p&gt;
 
-<p>To create a new branch with all these commits while putting the original branch back to its previous state, you can run <kbd>M-x magit-branch-spinoff</kbd> or press lower-cased <kbd>b s</kbd> inside of the status buffer.  It will ask you for the name of the new branch and then create it, resetting <kbd>master</kbd> back to the commit before your new commits were added.
-</p>
+&lt;p&gt;To create a new branch with all these commits while putting the original branch back to its previous state, you can run &lt;kbd&gt;M-x magit-branch-spinoff&lt;/kbd&gt; or press lower-cased &lt;kbd&gt;b s&lt;/kbd&gt; inside of the status buffer.  It will ask you for the name of the new branch and then create it, resetting &lt;kbd&gt;master&lt;/kbd&gt; back to the commit before your new commits were added.
+&lt;/p&gt;
 
-<p><strong>NOTE:</strong> This only works when the branch you're starting from has been pushed to the remote!
-</p>
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; This only works when the branch you&apos;re starting from has been pushed to the remote!
+&lt;/p&gt;
 
-<p>We can then use <kbd>b b</kbd> in the status buffer to switch back to <kbd>master</kbd> to confirm that it has been rolled back to the original commit!  Once we're satisfied with that, we can use <kbd>b b</kbd> again to select the new branch we created.
-</p>
+&lt;p&gt;We can then use &lt;kbd&gt;b b&lt;/kbd&gt; in the status buffer to switch back to &lt;kbd&gt;master&lt;/kbd&gt; to confirm that it has been rolled back to the original commit!  Once we&apos;re satisfied with that, we can use &lt;kbd&gt;b b&lt;/kbd&gt; again to select the new branch we created.
+&lt;/p&gt;
 
-<h2><a id="pushing-a-local-branch-to-a-remote" class="anchor" href="#pushing-a-local-branch-to-a-remote">¶</a>Pushing a local branch to a remote</h2><p>Once you've made a few commits to a branch, you'll eventually need to push those commits to a remote location (like GitHub) so that you can share or collarborate with others.
-</p>
+&lt;h2&gt;&lt;a id=&quot;pushing-a-local-branch-to-a-remote&quot; class=&quot;anchor&quot; href=&quot;#pushing-a-local-branch-to-a-remote&quot;&gt;¶&lt;/a&gt;Pushing a local branch to a remote&lt;/h2&gt;&lt;p&gt;Once you&apos;ve made a few commits to a branch, you&apos;ll eventually need to push those commits to a remote location (like GitHub) so that you can share or collarborate with others.
+&lt;/p&gt;
 
-<p>Magit has a very convenient interface for this which enables you to do all the things you might do on the command line with just a few key presses:
-</p>
+&lt;p&gt;Magit has a very convenient interface for this which enables you to do all the things you might do on the command line with just a few key presses:
+&lt;/p&gt;
 
-<h3><a id="pushing-a-new-local-branch-to-a-remote" class="anchor" href="#pushing-a-new-local-branch-to-a-remote">¶</a>Pushing a new local branch to a remote</h3><p>Usually when you create a new branch, there won't be a matching branch on the remote repository yet.
-</p>
+&lt;h3&gt;&lt;a id=&quot;pushing-a-new-local-branch-to-a-remote&quot; class=&quot;anchor&quot; href=&quot;#pushing-a-new-local-branch-to-a-remote&quot;&gt;¶&lt;/a&gt;Pushing a new local branch to a remote&lt;/h3&gt;&lt;p&gt;Usually when you create a new branch, there won&apos;t be a matching branch on the remote repository yet.
+&lt;/p&gt;
 
-<p>To push the new branch we created, we can press <kbd>P p</kbd> (upper-cased 'P' then lower-cased 'p') while in the <kbd>magit-status</kbd> buffer.
-</p>
+&lt;p&gt;To push the new branch we created, we can press &lt;kbd&gt;P p&lt;/kbd&gt; (upper-cased &apos;P&apos; then lower-cased &apos;p&apos;) while in the &lt;kbd&gt;magit-status&lt;/kbd&gt; buffer.
+&lt;/p&gt;
 
-<p>This will create the branch on the remote called <kbd>origin</kbd> and push the commits from the local branch to this new remote branch.
-</p>
+&lt;p&gt;This will create the branch on the remote called &lt;kbd&gt;origin&lt;/kbd&gt; and push the commits from the local branch to this new remote branch.
+&lt;/p&gt;
 
-<p>You can also see that the "Push:" entry in the repo status section at the top of the status buffer now mentions the remote branch!
-</p>
+&lt;p&gt;You can also see that the &quot;Push:&quot; entry in the repo status section at the top of the status buffer now mentions the remote branch!
+&lt;/p&gt;
 
-<h3><a id="pushing-new-changes-to-an-existing-branch" class="anchor" href="#pushing-new-changes-to-an-existing-branch">¶</a>Pushing new changes to an existing branch</h3><p>If you make a new commit on the current branch, you can push it to the same remote branch by pressing <kbd>P p</kbd> in the status buffer again.
-</p>
+&lt;h3&gt;&lt;a id=&quot;pushing-new-changes-to-an-existing-branch&quot; class=&quot;anchor&quot; href=&quot;#pushing-new-changes-to-an-existing-branch&quot;&gt;¶&lt;/a&gt;Pushing new changes to an existing branch&lt;/h3&gt;&lt;p&gt;If you make a new commit on the current branch, you can push it to the same remote branch by pressing &lt;kbd&gt;P p&lt;/kbd&gt; in the status buffer again.
+&lt;/p&gt;
 
-<p>Magit remembers the branch that you pushed to the last time so you can always use <kbd>P p</kbd> to push there again!
-</p>
+&lt;p&gt;Magit remembers the branch that you pushed to the last time so you can always use &lt;kbd&gt;P p&lt;/kbd&gt; to push there again!
+&lt;/p&gt;
 
-<h3><a id="pushing-a-branch-that-has-had-its-commits-modified" class="anchor" href="#pushing-a-branch-that-has-had-its-commits-modified">¶</a>Pushing a branch that has had its commits modified</h3><p>In a couple of examples before, I showed how you can edit existing commits by adding more changes or rewording the commit message.
-</p>
+&lt;h3&gt;&lt;a id=&quot;pushing-a-branch-that-has-had-its-commits-modified&quot; class=&quot;anchor&quot; href=&quot;#pushing-a-branch-that-has-had-its-commits-modified&quot;&gt;¶&lt;/a&gt;Pushing a branch that has had its commits modified&lt;/h3&gt;&lt;p&gt;In a couple of examples before, I showed how you can edit existing commits by adding more changes or rewording the commit message.
+&lt;/p&gt;
 
-<p>If you've done this, the only way to push those changes to the same branch is to use the <kbd>-f</kbd> argument when you launch the <em>Push</em> panel with <kbd>P</kbd>!
-</p>
+&lt;p&gt;If you&apos;ve done this, the only way to push those changes to the same branch is to use the &lt;kbd&gt;-f&lt;/kbd&gt; argument when you launch the &lt;em&gt;Push&lt;/em&gt; panel with &lt;kbd&gt;P&lt;/kbd&gt;!
+&lt;/p&gt;
 
-<p><strong>NOTE:</strong> Enabling this option will <strong>overwrite</strong> the remote branch with the commits in the local branch, so make sure you are only force-pushing to a branch that is not <kbd>main</kbd> or <kbd>master</kbd>!  Changing the commit history makes it really difficult for collaborators to pull your changes.
-</p>
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Enabling this option will &lt;strong&gt;overwrite&lt;/strong&gt; the remote branch with the commits in the local branch, so make sure you are only force-pushing to a branch that is not &lt;kbd&gt;main&lt;/kbd&gt; or &lt;kbd&gt;master&lt;/kbd&gt;!  Changing the commit history makes it really difficult for collaborators to pull your changes.
+&lt;/p&gt;
 
-<h2><a id="saving-local-changes-for-later" class="anchor" href="#saving-local-changes-for-later">¶</a>Saving local changes for later</h2><p>There will be times where you'll need to move uncommitted local changes out of the way so that you can perform some other Git operation like a pull or rebase.
-</p>
+&lt;h2&gt;&lt;a id=&quot;saving-local-changes-for-later&quot; class=&quot;anchor&quot; href=&quot;#saving-local-changes-for-later&quot;&gt;¶&lt;/a&gt;Saving local changes for later&lt;/h2&gt;&lt;p&gt;There will be times where you&apos;ll need to move uncommitted local changes out of the way so that you can perform some other Git operation like a pull or rebase.
+&lt;/p&gt;
 
-<p>Git provides a command for this called <kbd>git stash</kbd>, it basically saves your uncommitted changes and clears them from your local folder so that they don't show up in <kbd>git status</kbd> any longer.
-</p>
+&lt;p&gt;Git provides a command for this called &lt;kbd&gt;git stash&lt;/kbd&gt;, it basically saves your uncommitted changes and clears them from your local folder so that they don&apos;t show up in &lt;kbd&gt;git status&lt;/kbd&gt; any longer.
+&lt;/p&gt;
 
-<p>In Magit, you can stash changes from the <kbd>magit-status</kbd> buffer by pressing <kbd>z z</kbd> (Stash -&gt; Both).  This will create a local stash entry for those changes after prompting you for a description for the stash.
-</p>
+&lt;p&gt;In Magit, you can stash changes from the &lt;kbd&gt;magit-status&lt;/kbd&gt; buffer by pressing &lt;kbd&gt;z z&lt;/kbd&gt; (Stash -&amp;gt; Both).  This will create a local stash entry for those changes after prompting you for a description for the stash.
+&lt;/p&gt;
 
-<p>You can now view the stashed changes by expanding the <strong>Stashes</strong> list on the status buffer.
-</p>
+&lt;p&gt;You can now view the stashed changes by expanding the &lt;strong&gt;Stashes&lt;/strong&gt; list on the status buffer.
+&lt;/p&gt;
 
-<p>You can restore the latest stash by running <kbd>z p</kbd> (Stash -&gt; Pop) which will restore the stashed changes and delete the stash entry.  If you want to keep the stash entry around you can use <kbd>z a</kbd> (Stash -&gt; Apply) instead!
-</p>
+&lt;p&gt;You can restore the latest stash by running &lt;kbd&gt;z p&lt;/kbd&gt; (Stash -&amp;gt; Pop) which will restore the stashed changes and delete the stash entry.  If you want to keep the stash entry around you can use &lt;kbd&gt;z a&lt;/kbd&gt; (Stash -&amp;gt; Apply) instead!
+&lt;/p&gt;
 
-<h2><a id="pulling-new-commits-from-a-remote-into-a-local-branch" class="anchor" href="#pulling-new-commits-from-a-remote-into-a-local-branch">¶</a>Pulling new commits from a remote into a local branch</h2><p>Regardless of whether you're working on your dotfiles repo or collaborating with others on a project, you'll eventually need to pull commits from a remote repository.
-</p>
+&lt;h2&gt;&lt;a id=&quot;pulling-new-commits-from-a-remote-into-a-local-branch&quot; class=&quot;anchor&quot; href=&quot;#pulling-new-commits-from-a-remote-into-a-local-branch&quot;&gt;¶&lt;/a&gt;Pulling new commits from a remote into a local branch&lt;/h2&gt;&lt;p&gt;Regardless of whether you&apos;re working on your dotfiles repo or collaborating with others on a project, you&apos;ll eventually need to pull commits from a remote repository.
+&lt;/p&gt;
 
-<p>From the <kbd>magit-status</kbd> buffer, you can press the <kbd>F</kbd> key to open the <strong>Pull</strong> panel.
-</p>
+&lt;p&gt;From the &lt;kbd&gt;magit-status&lt;/kbd&gt; buffer, you can press the &lt;kbd&gt;F&lt;/kbd&gt; key to open the &lt;strong&gt;Pull&lt;/strong&gt; panel.
+&lt;/p&gt;
 
-<p>To pull any new changes from the remote version of the current local branch, you can press <kbd>p</kbd> (or <kbd>F p</kbd> from the status buffer) to pull the latest commits from the remote.
-</p>
+&lt;p&gt;To pull any new changes from the remote version of the current local branch, you can press &lt;kbd&gt;p&lt;/kbd&gt; (or &lt;kbd&gt;F p&lt;/kbd&gt; from the status buffer) to pull the latest commits from the remote.
+&lt;/p&gt;
 
-<p>This will fetch the latest commits from the selected remote and then attempt to pull them into the current branch!
-</p>
+&lt;p&gt;This will fetch the latest commits from the selected remote and then attempt to pull them into the current branch!
+&lt;/p&gt;
 
-<p>If you receive an error saying that there are uncommitted local changes, use the <kbd>z z</kbd> (stash) command we talked about before to stash those local changes before pulling the remote changes!
-</p>
+&lt;p&gt;If you receive an error saying that there are uncommitted local changes, use the &lt;kbd&gt;z z&lt;/kbd&gt; (stash) command we talked about before to stash those local changes before pulling the remote changes!
+&lt;/p&gt;
 
-<h3><a id="pulling-new-changes-from-another-branch" class="anchor" href="#pulling-new-changes-from-another-branch">¶</a>Pulling new changes from another branch</h3><p>The option I use more often when working on a branch is <kbd>F u</kbd> which enables you to pull from an "upstream" branch, local or remote, for example <kbd>origin/main</kbd> or <kbd>origin/master</kbd>.
-</p>
+&lt;h3&gt;&lt;a id=&quot;pulling-new-changes-from-another-branch&quot; class=&quot;anchor&quot; href=&quot;#pulling-new-changes-from-another-branch&quot;&gt;¶&lt;/a&gt;Pulling new changes from another branch&lt;/h3&gt;&lt;p&gt;The option I use more often when working on a branch is &lt;kbd&gt;F u&lt;/kbd&gt; which enables you to pull from an &quot;upstream&quot; branch, local or remote, for example &lt;kbd&gt;origin/main&lt;/kbd&gt; or &lt;kbd&gt;origin/master&lt;/kbd&gt;.
+&lt;/p&gt;
 
-<p>You can also use <kbd>F e</kbd> to choose any local or remote branch without saving it as your upstream!
-</p>
+&lt;p&gt;You can also use &lt;kbd&gt;F e&lt;/kbd&gt; to choose any local or remote branch without saving it as your upstream!
+&lt;/p&gt;
 
-<h3><a id="rebasing-local-changes-onto-the-new-commits" class="anchor" href="#rebasing-local-changes-onto-the-new-commits">¶</a>Rebasing local changes onto the new commits</h3><p>You'll inevitably need to pull new commits from another branch (like <kbd>main</kbd> or <kbd>master</kbd>) into your current branch before you can merge it back into the main branch.
-</p>
+&lt;h3&gt;&lt;a id=&quot;rebasing-local-changes-onto-the-new-commits&quot; class=&quot;anchor&quot; href=&quot;#rebasing-local-changes-onto-the-new-commits&quot;&gt;¶&lt;/a&gt;Rebasing local changes onto the new commits&lt;/h3&gt;&lt;p&gt;You&apos;ll inevitably need to pull new commits from another branch (like &lt;kbd&gt;main&lt;/kbd&gt; or &lt;kbd&gt;master&lt;/kbd&gt;) into your current branch before you can merge it back into the main branch.
+&lt;/p&gt;
 
-<p>You can easily do this by turning on the <strong>rebase</strong> option in the <strong>Pull</strong> panel by pressing the <kbd>r</kbd> key: <kbd>F r</kbd>.  Now when you pull this branch, the commits you've made will be replayed on top of the branch you are pulling from.
-</p>
+&lt;p&gt;You can easily do this by turning on the &lt;strong&gt;rebase&lt;/strong&gt; option in the &lt;strong&gt;Pull&lt;/strong&gt; panel by pressing the &lt;kbd&gt;r&lt;/kbd&gt; key: &lt;kbd&gt;F r&lt;/kbd&gt;.  Now when you pull this branch, the commits you&apos;ve made will be replayed on top of the branch you are pulling from.
+&lt;/p&gt;
 
-<p>If your changes apply cleanly to the changes you're pulling from the remote branch, everything should finish smoothly!  However if there are merge conflicts with the new commits, you will need to make edits to fix those before you can proceed with the rebase.
-</p>
+&lt;p&gt;If your changes apply cleanly to the changes you&apos;re pulling from the remote branch, everything should finish smoothly!  However if there are merge conflicts with the new commits, you will need to make edits to fix those before you can proceed with the rebase.
+&lt;/p&gt;
 
-<p>After all merge markers have been cleaned up and all files are staged, you can press <kbd>r r</kbd> to continue the rebase operation and <kbd>C-c C-c</kbd> to confirm the updated commit.
-</p>
+&lt;p&gt;After all merge markers have been cleaned up and all files are staged, you can press &lt;kbd&gt;r r&lt;/kbd&gt; to continue the rebase operation and &lt;kbd&gt;C-c C-c&lt;/kbd&gt; to confirm the updated commit.
+&lt;/p&gt;
 
-<p>We'll cover how you can deal with merge conflicts in the next episode of this series!  I'll also describe <kbd>git rebase</kbd> in more detail since this is only a very brief introduction to it.
-</p>
+&lt;p&gt;We&apos;ll cover how you can deal with merge conflicts in the next episode of this series!  I&apos;ll also describe &lt;kbd&gt;git rebase&lt;/kbd&gt; in more detail since this is only a very brief introduction to it.
+&lt;/p&gt;
 
-<h3><a id="fetching-without-pulling-changes" class="anchor" href="#fetching-without-pulling-changes">¶</a>Fetching without pulling changes</h3><p>If you merely want to fetch the latest branches and commits from the remote repository without pulling them into your local branch, you can follow a different path:
-</p>
+&lt;h3&gt;&lt;a id=&quot;fetching-without-pulling-changes&quot; class=&quot;anchor&quot; href=&quot;#fetching-without-pulling-changes&quot;&gt;¶&lt;/a&gt;Fetching without pulling changes&lt;/h3&gt;&lt;p&gt;If you merely want to fetch the latest branches and commits from the remote repository without pulling them into your local branch, you can follow a different path:
+&lt;/p&gt;
 
-<p>Open <kbd>magit-status</kbd> and press <kbd>f p</kbd> to fetch the <kbd>origin</kbd> repository or <kbd>f u</kbd> to fetch from the configured <kbd>upstream</kbd> repository.  You will now be able to check out branches or list commits from the remote!
-</p>
+&lt;p&gt;Open &lt;kbd&gt;magit-status&lt;/kbd&gt; and press &lt;kbd&gt;f p&lt;/kbd&gt; to fetch the &lt;kbd&gt;origin&lt;/kbd&gt; repository or &lt;kbd&gt;f u&lt;/kbd&gt; to fetch from the configured &lt;kbd&gt;upstream&lt;/kbd&gt; repository.  You will now be able to check out branches or list commits from the remote!
+&lt;/p&gt;
 
-<h2><a id="discarding-unwanted-changes" class="anchor" href="#discarding-unwanted-changes">¶</a>Discarding unwanted changes</h2><p>Let's say you've been making changes in your repo that you later decide that you no longer need.  Instead of going back to those files to undo the changes, you can use the <strong>Discard</strong> action of the status buffer to get rid of them!
-</p>
+&lt;h2&gt;&lt;a id=&quot;discarding-unwanted-changes&quot; class=&quot;anchor&quot; href=&quot;#discarding-unwanted-changes&quot;&gt;¶&lt;/a&gt;Discarding unwanted changes&lt;/h2&gt;&lt;p&gt;Let&apos;s say you&apos;ve been making changes in your repo that you later decide that you no longer need.  Instead of going back to those files to undo the changes, you can use the &lt;strong&gt;Discard&lt;/strong&gt; action of the status buffer to get rid of them!
+&lt;/p&gt;
 
-<p>In the status buffer, you can put your cursor on any file, hunk, or line and press <kbd>k</kbd> to discard the change.  Typically you will be prompted to confirm before it actually gets discarded.
-</p>
+&lt;p&gt;In the status buffer, you can put your cursor on any file, hunk, or line and press &lt;kbd&gt;k&lt;/kbd&gt; to discard the change.  Typically you will be prompted to confirm before it actually gets discarded.
+&lt;/p&gt;
 
-<p><strong>NOTE:</strong> If you're using <kbd>evil-collection</kbd> with <kbd>evil-mode</kbd>, the key will be <kbd>x</kbd> instead!
-</p>
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you&apos;re using &lt;kbd&gt;evil-collection&lt;/kbd&gt; with &lt;kbd&gt;evil-mode&lt;/kbd&gt;, the key will be &lt;kbd&gt;x&lt;/kbd&gt; instead!
+&lt;/p&gt;
 
-<p>This also works for untracked files!  This is usually faster than going to the command line to delete the unwanted files.
-</p>
+&lt;p&gt;This also works for untracked files!  This is usually faster than going to the command line to delete the unwanted files.
+&lt;/p&gt;
 
-<h2><a id="adding-a-file-to-gitignore" class="anchor" href="#adding-a-file-to-gitignore">¶</a>Adding a file to .gitignore</h2><p>Perhaps you've got a file in the repository that you never want to see in the <strong>Untracked Files</strong> section because it doesn't belong in the repository.  Normally you'd add that to your <kbd>.gitignore</kbd> file in the repo.
-</p>
+&lt;h2&gt;&lt;a id=&quot;adding-a-file-to-gitignore&quot; class=&quot;anchor&quot; href=&quot;#adding-a-file-to-gitignore&quot;&gt;¶&lt;/a&gt;Adding a file to .gitignore&lt;/h2&gt;&lt;p&gt;Perhaps you&apos;ve got a file in the repository that you never want to see in the &lt;strong&gt;Untracked Files&lt;/strong&gt; section because it doesn&apos;t belong in the repository.  Normally you&apos;d add that to your &lt;kbd&gt;.gitignore&lt;/kbd&gt; file in the repo.
+&lt;/p&gt;
 
-<p>Magit can help with this!  Put your cursor on the file and press <kbd>i</kbd> to raise the <strong>Gitignore</strong> panel which has 3 options:
-</p>
+&lt;p&gt;Magit can help with this!  Put your cursor on the file and press &lt;kbd&gt;i&lt;/kbd&gt; to raise the &lt;strong&gt;Gitignore&lt;/strong&gt; panel which has 3 options:
+&lt;/p&gt;
 
-<ul><li><kbd>t</kbd>: Add the file to the repo-level <kbd>.gitignore</kbd> file</li>
-<li><kbd>s</kbd>: Add the file to a <kbd>.gitignore</kbd> file in the folder where the file lives</li>
-<li><kbd>p</kbd>: Ignore the file "privately" in your local clone of the repo without editing <kbd>.gitignore</kbd></li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;t&lt;/kbd&gt;: Add the file to the repo-level &lt;kbd&gt;.gitignore&lt;/kbd&gt; file&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;s&lt;/kbd&gt;: Add the file to a &lt;kbd&gt;.gitignore&lt;/kbd&gt; file in the folder where the file lives&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;p&lt;/kbd&gt;: Ignore the file &quot;privately&quot; in your local clone of the repo without editing &lt;kbd&gt;.gitignore&lt;/kbd&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Upon pressing any of these keys, you'll be prompted for the actual file pattern to add to the ignore file, usually the first suggestion is the one you should use!
-</p>
+&lt;p&gt;Upon pressing any of these keys, you&apos;ll be prompted for the actual file pattern to add to the ignore file, usually the first suggestion is the one you should use!
+&lt;/p&gt;
 
-<p>Magit will now create the <kbd>.gitignore</kbd> file if it doesn't exist and then add it to <strong>Staged Changes</strong> for you.  Just commit the file to make the change permanent!
-</p>
+&lt;p&gt;Magit will now create the &lt;kbd&gt;.gitignore&lt;/kbd&gt; file if it doesn&apos;t exist and then add it to &lt;strong&gt;Staged Changes&lt;/strong&gt; for you.  Just commit the file to make the change permanent!
+&lt;/p&gt;
 
-<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>In the next video, I'll show you how to do even more advanced Git operations like rebasing, cherry picking, and managing the reflog.  If you're a programmer that uses Git to collaborate with others on a daily basis, Magit will make your life a lot easier!
-</p>
+&lt;h2&gt;&lt;a id=&quot;whats-next&quot; class=&quot;anchor&quot; href=&quot;#whats-next&quot;&gt;¶&lt;/a&gt;What&apos;s next?&lt;/h2&gt;&lt;p&gt;In the next video, I&apos;ll show you how to do even more advanced Git operations like rebasing, cherry picking, and managing the reflog.  If you&apos;re a programmer that uses Git to collaborate with others on a daily basis, Magit will make your life a lot easier!
+&lt;/p&gt;
 
-<p>If you have any questions about what we covered today, leave a note in the comments!
-</p>
+&lt;p&gt;If you have any questions about what we covered today, leave a note in the comments!
+&lt;/p&gt;
 
-<p>Support Jonas on GitHub sponsors: <a href="https://github.com/sponsors/tarsius">https://github.com/sponsors/tarsius</a>
-</p>
-</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+&lt;p&gt;Support Jonas on GitHub sponsors: &lt;a href=&quot;https://github.com/sponsors/tarsius&quot;&gt;https://github.com/sponsors/tarsius&lt;/a&gt;
+&lt;/p&gt;
+&lt;/div&gt;</div></div></div></div>&lt;footer class=&quot;blog-footer&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;p&gt;Made with Emacs 27.2 (Org mode 9.4.4)&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://systemcrafters.net/privacy-policy/&quot;&gt;Privacy Policy&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/footer&gt;&lt;script src=&quot;/js/bootstrap.bundle.min.js&quot;/&gt;</body></html>

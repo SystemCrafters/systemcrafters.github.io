@@ -1,92 +1,92 @@
-<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Projectile and Magit - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Projectile and Magit</h1><p class="blog-post-meta"></p><div><ul><li><a href="https://youtu.be/INTu30BHZGk">Watch the video</a> on YouTube!</li>
-<li>Check out the <a href="https://github.com/daviwil/emacs-from-scratch/tree/500370fa06889dad313e60473d73090fcfbe106d">final code</a> on GitHub</li>
-<li>Episode 4 of the <a href="../">Emacs From Scratch</a> series</li>
-</ul>
+<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Projectile and Magit - System Crafters</title></head><body>&lt;div&gt;&lt;div class=&quot;blog-header&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-8&quot;&gt;&lt;div class=&quot;blog-title&quot;&gt;System Crafters&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-sm col-md&quot;&gt;&lt;div class=&quot;blog-description text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;blog-masthead&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-12&quot;&gt;&lt;nav class=&quot;nav&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;/&quot;&gt;Home&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/videos&quot;&gt;Videos&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://wiki.systemcrafters.net&quot;&gt;Wiki&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://store.systemcrafters.net?utm_source=sc-site-nav&quot;&gt;Merch Store&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/support-the-channel&quot;&gt;Support The Channel&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;<div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Projectile and Magit</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://youtu.be/INTu30BHZGk&quot;&gt;Watch the video&lt;/a&gt; on YouTube!&lt;/li&gt;
+&lt;li&gt;Check out the &lt;a href=&quot;https://github.com/daviwil/emacs-from-scratch/tree/500370fa06889dad313e60473d73090fcfbe106d&quot;&gt;final code&lt;/a&gt; on GitHub&lt;/li&gt;
+&lt;li&gt;Episode 4 of the &lt;a href=&quot;../&quot;&gt;Emacs From Scratch&lt;/a&gt; series&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2><a id="projectile" class="anchor" href="#projectile">¶</a>Projectile</h2><pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">projectile</span>
-  <span class="org-builtin">:diminish</span> projectile-mode
-  <span class="org-builtin">:config</span> (projectile-mode)
-  <span class="org-builtin">:bind-keymap</span>
-  (<span class="org-string">"C-c p"</span> . projectile-command-map)
-  <span class="org-builtin">:init</span>
-  (<span class="org-keyword">when</span> (file-directory-p <span class="org-string">"~/Projects/Code"</span>)
-    (<span class="org-keyword">setq</span> projectile-project-search-path '(<span class="org-string">"~/Projects/Code"</span>)))
-  (<span class="org-keyword">setq</span> projectile-switch-project-action #'projectile-dired))
+&lt;h2&gt;&lt;a id=&quot;projectile&quot; class=&quot;anchor&quot; href=&quot;#projectile&quot;&gt;¶&lt;/a&gt;Projectile&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;projectile&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:diminish&lt;/span&gt; projectile-mode
+  &lt;span class=&quot;org-builtin&quot;&gt;:config&lt;/span&gt; (projectile-mode)
+  &lt;span class=&quot;org-builtin&quot;&gt;:bind-keymap&lt;/span&gt;
+  (&lt;span class=&quot;org-string&quot;&gt;&quot;C-c p&quot;&lt;/span&gt; . projectile-command-map)
+  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;when&lt;/span&gt; (file-directory-p &lt;span class=&quot;org-string&quot;&gt;&quot;~/Projects/Code&quot;&lt;/span&gt;)
+    (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; projectile-project-search-path &apos;(&lt;span class=&quot;org-string&quot;&gt;&quot;~/Projects/Code&quot;&lt;/span&gt;)))
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; projectile-switch-project-action #&apos;projectile-dired))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p><a href="https://github.com/bbatsov/projectile">Projectile</a> on GitHub
-<a href="https://docs.projectile.mx/projectile/index.html">Projectile Manual</a>
-<a href="https://docs.projectile.mx/projectile/projects.html#storing-project-settings">Projectile Manual - Project Settings</a>
-<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-Variables.html">Emacs Manual: Directory-Local Variables</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://github.com/bbatsov/projectile&quot;&gt;Projectile&lt;/a&gt; on GitHub
+&lt;a href=&quot;https://docs.projectile.mx/projectile/index.html&quot;&gt;Projectile Manual&lt;/a&gt;
+&lt;a href=&quot;https://docs.projectile.mx/projectile/projects.html#storing-project-settings&quot;&gt;Projectile Manual - Project Settings&lt;/a&gt;
+&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-Variables.html&quot;&gt;Emacs Manual: Directory-Local Variables&lt;/a&gt;
+&lt;/p&gt;
 
-<ul><li>Run project <kbd>C-c p u</kbd></li>
-<li>Run tests: <kbd>C-c p P</kbd></li>
-<li>Edit dir-locals: <kbd>C-c p E</kbd> (reload with <kbd>hack-dir-local-variables-non-file-buffer</kbd>)</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Run project &lt;kbd&gt;C-c p u&lt;/kbd&gt;&lt;/li&gt;
+&lt;li&gt;Run tests: &lt;kbd&gt;C-c p P&lt;/kbd&gt;&lt;/li&gt;
+&lt;li&gt;Edit dir-locals: &lt;kbd&gt;C-c p E&lt;/kbd&gt; (reload with &lt;kbd&gt;hack-dir-local-variables-non-file-buffer&lt;/kbd&gt;)&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3><a id="counsel-projectile" class="anchor" href="#counsel-projectile">¶</a>counsel-projectile</h3><p><a href="https://github.com/ericdanan/counsel-projectile">counsel-projectile</a> on GitHub
-</p>
+&lt;h3&gt;&lt;a id=&quot;counsel-projectile&quot; class=&quot;anchor&quot; href=&quot;#counsel-projectile&quot;&gt;¶&lt;/a&gt;counsel-projectile&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/ericdanan/counsel-projectile&quot;&gt;counsel-projectile&lt;/a&gt; on GitHub
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">counsel-projectile</span>
- <span class="org-builtin">:after</span> projectile
- <span class="org-builtin">:config</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;counsel-projectile&lt;/span&gt;
+ &lt;span class=&quot;org-builtin&quot;&gt;:after&lt;/span&gt; projectile
+ &lt;span class=&quot;org-builtin&quot;&gt;:config&lt;/span&gt;
  (counsel-projectile-mode 1))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<ul><li>Advanced project switching: <kbd>C-c p p</kbd></li>
-<li>Quick searching with <kbd>counsel-projectile-rg</kbd> - <kbd>C-c p s r</kbd>
-<ul><li>Results to buffer with <kbd>C-c C-o</kbd></li>
-</ul></li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Advanced project switching: &lt;kbd&gt;C-c p p&lt;/kbd&gt;&lt;/li&gt;
+&lt;li&gt;Quick searching with &lt;kbd&gt;counsel-projectile-rg&lt;/kbd&gt; - &lt;kbd&gt;C-c p s r&lt;/kbd&gt;
+&lt;ul&gt;&lt;li&gt;Results to buffer with &lt;kbd&gt;C-c C-o&lt;/kbd&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2><a id="magit" class="anchor" href="#magit">¶</a>Magit</h2><p><a href="https://github.com/magit/magit">Magit</a> on GitHub
-<a href="https://magit.vc/">Magit Official Site</a>
-<a href="https://magit.vc/manual/magit/">Magit Manual</a>
-</p>
+&lt;h2&gt;&lt;a id=&quot;magit&quot; class=&quot;anchor&quot; href=&quot;#magit&quot;&gt;¶&lt;/a&gt;Magit&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/magit/magit&quot;&gt;Magit&lt;/a&gt; on GitHub
+&lt;a href=&quot;https://magit.vc/&quot;&gt;Magit Official Site&lt;/a&gt;
+&lt;a href=&quot;https://magit.vc/manual/magit/&quot;&gt;Magit Manual&lt;/a&gt;
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">magit</span>
-  <span class="org-builtin">:commands</span> (magit-status magit-get-current-branch)
-  <span class="org-builtin">:custom</span>
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;magit&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:commands&lt;/span&gt; (magit-status magit-get-current-branch)
+  &lt;span class=&quot;org-builtin&quot;&gt;:custom&lt;/span&gt;
+  (magit-display-buffer-function #&apos;magit-display-buffer-same-window-except-diff-v1))
 
-(<span class="org-keyword">use-package</span> <span class="org-constant">evil-magit</span>
-  <span class="org-builtin">:after</span> magit)
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;evil-magit&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:after&lt;/span&gt; magit)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p><strong>Operations</strong>
-</p>
+&lt;p&gt;&lt;strong&gt;Operations&lt;/strong&gt;
+&lt;/p&gt;
 
-<p>Run <kbd>magit-status</kbd> in buffer from Git repo, press <kbd>?</kbd> for command panel.
-</p>
+&lt;p&gt;Run &lt;kbd&gt;magit-status&lt;/kbd&gt; in buffer from Git repo, press &lt;kbd&gt;?&lt;/kbd&gt; for command panel.
+&lt;/p&gt;
 
-<p>Refresh buffer with <kbd>g r</kbd>
-</p>
+&lt;p&gt;Refresh buffer with &lt;kbd&gt;g r&lt;/kbd&gt;
+&lt;/p&gt;
 
-<ul><li>Diffs</li>
-<li>Commit log</li>
-<li>Blame</li>
-<li>Stashes</li>
-<li>Branches</li>
-<li>Rebase</li>
-<li>Pull/push</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Diffs&lt;/li&gt;
+&lt;li&gt;Commit log&lt;/li&gt;
+&lt;li&gt;Blame&lt;/li&gt;
+&lt;li&gt;Stashes&lt;/li&gt;
+&lt;li&gt;Branches&lt;/li&gt;
+&lt;li&gt;Rebase&lt;/li&gt;
+&lt;li&gt;Pull/push&lt;/li&gt;
+&lt;/ul&gt;
 
-<h3><a id="forge" class="anchor" href="#forge">¶</a>Forge</h3><p><a href="https://github.com/magit/forge">Forge</a> on GitHub
-<a href="https://magit.vc/manual/forge">Forge Manual</a>
-</p>
+&lt;h3&gt;&lt;a id=&quot;forge&quot; class=&quot;anchor&quot; href=&quot;#forge&quot;&gt;¶&lt;/a&gt;Forge&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/magit/forge&quot;&gt;Forge&lt;/a&gt; on GitHub
+&lt;a href=&quot;https://magit.vc/manual/forge&quot;&gt;Forge Manual&lt;/a&gt;
+&lt;/p&gt;
 
-<p>Important: <a href="https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started">Instructions to set up your GitHub token</a>
-</p>
+&lt;p&gt;Important: &lt;a href=&quot;https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started&quot;&gt;Instructions to set up your GitHub token&lt;/a&gt;
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">forge</span>)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;forge&lt;/span&gt;)
 
-</code></pre>
-</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</div></div></div></div>&lt;footer class=&quot;blog-footer&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;p&gt;Made with Emacs 27.2 (Org mode 9.4.4)&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://systemcrafters.net/privacy-policy/&quot;&gt;Privacy Policy&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/footer&gt;&lt;script src=&quot;/js/bootstrap.bundle.min.js&quot;/&gt;</body></html>

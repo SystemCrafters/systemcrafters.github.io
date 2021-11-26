@@ -1,200 +1,200 @@
-<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Learn to Love the Terminal Modes - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Learn to Love the Terminal Modes</h1><p class="blog-post-meta"></p><div><ul><li><a href="https://youtu.be/wa_wZIuT9Vw">Watch the video</a> on YouTube!</li>
-<li>Check out the <a href="https://github.com/daviwil/emacs-from-scratch/tree/bbfbc77b3afab0c14149e07d0ab08d275d4ba575">final code</a> on GitHub</li>
-<li>Episode 9 of the <a href="../">Emacs From Scratch</a> series</li>
-</ul>
+<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Learn to Love the Terminal Modes - System Crafters</title></head><body>&lt;div&gt;&lt;div class=&quot;blog-header&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-8&quot;&gt;&lt;div class=&quot;blog-title&quot;&gt;System Crafters&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-sm col-md&quot;&gt;&lt;div class=&quot;blog-description text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;blog-masthead&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-12&quot;&gt;&lt;nav class=&quot;nav&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;/&quot;&gt;Home&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/videos&quot;&gt;Videos&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://wiki.systemcrafters.net&quot;&gt;Wiki&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://store.systemcrafters.net?utm_source=sc-site-nav&quot;&gt;Merch Store&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/support-the-channel&quot;&gt;Support The Channel&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;<div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Learn to Love the Terminal Modes</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://youtu.be/wa_wZIuT9Vw&quot;&gt;Watch the video&lt;/a&gt; on YouTube!&lt;/li&gt;
+&lt;li&gt;Check out the &lt;a href=&quot;https://github.com/daviwil/emacs-from-scratch/tree/bbfbc77b3afab0c14149e07d0ab08d275d4ba575&quot;&gt;final code&lt;/a&gt; on GitHub&lt;/li&gt;
+&lt;li&gt;Episode 9 of the &lt;a href=&quot;../&quot;&gt;Emacs From Scratch&lt;/a&gt; series&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2><a id="term-mode" class="anchor" href="#term-mode">¶</a>term-mode</h2><pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">term</span>
-  <span class="org-builtin">:config</span>
-  (<span class="org-keyword">setq</span> explicit-shell-file-name <span class="org-string">"bash"</span>)
-  <span class="org-comment-delimiter">;;</span><span class="org-comment">(setq explicit-zsh-args '())</span>
-  (<span class="org-keyword">setq</span> term-prompt-regexp <span class="org-string">"^[</span><span class="org-string"><span class="org-negation-char">^</span></span><span class="org-string">#$%&gt;\n]*[#$%&gt;] *"</span>))
+&lt;h2&gt;&lt;a id=&quot;term-mode&quot; class=&quot;anchor&quot; href=&quot;#term-mode&quot;&gt;¶&lt;/a&gt;term-mode&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;term&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:config&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; explicit-shell-file-name &lt;span class=&quot;org-string&quot;&gt;&quot;bash&quot;&lt;/span&gt;)
+  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;;&lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;(setq explicit-zsh-args &apos;())&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; term-prompt-regexp &lt;span class=&quot;org-string&quot;&gt;&quot;^[&lt;/span&gt;&lt;span class=&quot;org-string&quot;&gt;&lt;span class=&quot;org-negation-char&quot;&gt;^&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;org-string&quot;&gt;#$%&amp;gt;\n]*[#$%&amp;gt;] *&quot;&lt;/span&gt;))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<ul><li><kbd>C-c C-p</kbd> / <kbd>C-c C-n</kbd> - go back and forward in the buffer's prompts (also <kbd>[[</kbd> and <kbd>]]</kbd> with evil-mode)</li>
-<li><kbd>C-c C-k</kbd> - Enter char-mode</li>
-<li><kbd>C-c C-j</kbd> - Return to line-mode</li>
-<li>If you have <kbd>evil-collection</kbd> installed, <kbd>term-mode</kbd> will enter char mode when you use Evil's Insert mode</li>
-<li>Caveat - editing the input line with Evil motions doesn't work</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C-c C-p&lt;/kbd&gt; / &lt;kbd&gt;C-c C-n&lt;/kbd&gt; - go back and forward in the buffer&apos;s prompts (also &lt;kbd&gt;[[&lt;/kbd&gt; and &lt;kbd&gt;]]&lt;/kbd&gt; with evil-mode)&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;C-c C-k&lt;/kbd&gt; - Enter char-mode&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;C-c C-j&lt;/kbd&gt; - Return to line-mode&lt;/li&gt;
+&lt;li&gt;If you have &lt;kbd&gt;evil-collection&lt;/kbd&gt; installed, &lt;kbd&gt;term-mode&lt;/kbd&gt; will enter char mode when you use Evil&apos;s Insert mode&lt;/li&gt;
+&lt;li&gt;Caveat - editing the input line with Evil motions doesn&apos;t work&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>NOTE: term-mode doesn't work on Windows: "Spawning child process: invalid argument"
-</p>
+&lt;p&gt;NOTE: term-mode doesn&apos;t work on Windows: &quot;Spawning child process: invalid argument&quot;
+&lt;/p&gt;
 
-<h3><a id="for-better-color-support" class="anchor" href="#for-better-color-support">¶</a>For better color support</h3><p>Make sure the <kbd>tic</kbd> program is available on your machine (could be part of <kbd>ncurses</kbd> package).
-</p>
+&lt;h3&gt;&lt;a id=&quot;for-better-color-support&quot; class=&quot;anchor&quot; href=&quot;#for-better-color-support&quot;&gt;¶&lt;/a&gt;For better color support&lt;/h3&gt;&lt;p&gt;Make sure the &lt;kbd&gt;tic&lt;/kbd&gt; program is available on your machine (could be part of &lt;kbd&gt;ncurses&lt;/kbd&gt; package).
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">eterm-256color</span>
-  <span class="org-builtin">:hook</span> (term-mode . eterm-256color-mode))
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;eterm-256color&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:hook&lt;/span&gt; (term-mode . eterm-256color-mode))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<pre><code class="shell">
-<span class="org-builtin">echo</span> <span class="org-string">"Hello System Crafters!"</span> | cowsay | lolcat -h 0.7
+&lt;pre&gt;&lt;code class=&quot;shell&quot;&gt;
+&lt;span class=&quot;org-builtin&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;Hello System Crafters!&quot;&lt;/span&gt; | cowsay | lolcat -h 0.7
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h3><a id="ansi-term" class="anchor" href="#ansi-term">¶</a>ansi-term</h3><p><kbd>ansi-term</kbd> is a specialization of <kbd>term-mode.</kbd>
-</p>
+&lt;h3&gt;&lt;a id=&quot;ansi-term&quot; class=&quot;anchor&quot; href=&quot;#ansi-term&quot;&gt;¶&lt;/a&gt;ansi-term&lt;/h3&gt;&lt;p&gt;&lt;kbd&gt;ansi-term&lt;/kbd&gt; is a specialization of &lt;kbd&gt;term-mode.&lt;/kbd&gt;
+&lt;/p&gt;
 
-<p>Minor differences:
-</p>
-<ul><li>C-x is prefix key instead of C-c</li>
-<li>Buffers are managed slightly differently</li>
-</ul>
+&lt;p&gt;Minor differences:
+&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;C-x is prefix key instead of C-c&lt;/li&gt;
+&lt;li&gt;Buffers are managed slightly differently&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Same caveats for Windows still apply.
-</p>
+&lt;p&gt;Same caveats for Windows still apply.
+&lt;/p&gt;
 
-<h2><a id="vterm-emacs-libvterm" class="anchor" href="#vterm-emacs-libvterm">¶</a>vterm (emacs-libvterm)</h2><p><a href="https://github.com/akermu/emacs-libvterm/">vterm</a> on GitHub
-</p>
+&lt;h2&gt;&lt;a id=&quot;vterm-emacs-libvterm&quot; class=&quot;anchor&quot; href=&quot;#vterm-emacs-libvterm&quot;&gt;¶&lt;/a&gt;vterm (emacs-libvterm)&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/akermu/emacs-libvterm/&quot;&gt;vterm&lt;/a&gt; on GitHub
+&lt;/p&gt;
 
-<p>NOTE: This one needs to compile a native library, make sure to install its dependencies!
-</p>
+&lt;p&gt;NOTE: This one needs to compile a native library, make sure to install its dependencies!
+&lt;/p&gt;
 
-<p>Differences to <kbd>term</kbd>:
-</p>
+&lt;p&gt;Differences to &lt;kbd&gt;term&lt;/kbd&gt;:
+&lt;/p&gt;
 
-<ul><li>Written in native code, much faster and better emulation</li>
-<li>There is no <kbd>line-mode</kbd> / <kbd>char-mode</kbd> split</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Written in native code, much faster and better emulation&lt;/li&gt;
+&lt;li&gt;There is no &lt;kbd&gt;line-mode&lt;/kbd&gt; / &lt;kbd&gt;char-mode&lt;/kbd&gt; split&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">vterm</span>
-  <span class="org-builtin">:commands</span> vterm
-  <span class="org-builtin">:config</span>
-  (<span class="org-keyword">setq</span> term-prompt-regexp <span class="org-string">"^[</span><span class="org-string"><span class="org-negation-char">^</span></span><span class="org-string">#$%&gt;\n]*[#$%&gt;] *"</span>)
-  <span class="org-comment-delimiter">;;</span><span class="org-comment">(setq vterm-shell "zsh")</span>
-  (<span class="org-keyword">setq</span> vterm-max-scrollback 10000))
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;vterm&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:commands&lt;/span&gt; vterm
+  &lt;span class=&quot;org-builtin&quot;&gt;:config&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; term-prompt-regexp &lt;span class=&quot;org-string&quot;&gt;&quot;^[&lt;/span&gt;&lt;span class=&quot;org-string&quot;&gt;&lt;span class=&quot;org-negation-char&quot;&gt;^&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;org-string&quot;&gt;#$%&amp;gt;\n]*[#$%&amp;gt;] *&quot;&lt;/span&gt;)
+  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;;&lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;(setq vterm-shell &quot;zsh&quot;)&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; vterm-max-scrollback 10000))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<ul><li>Read docs on <kbd>vterm-use-vterm-prompt-detection-method</kbd> for prompt detection</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Read docs on &lt;kbd&gt;vterm-use-vterm-prompt-detection-method&lt;/kbd&gt; for prompt detection&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><a href="https://github.com/akermu/emacs-libvterm/tree/01a1332ebb11daca5408f7fcb8a08454b0176e79#shell-side-configuration">vterm: Shell-side configuration</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://github.com/akermu/emacs-libvterm/tree/01a1332ebb11daca5408f7fcb8a08454b0176e79#shell-side-configuration&quot;&gt;vterm: Shell-side configuration&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="shell-mode" class="anchor" href="#shell-mode">¶</a>shell-mode</h2><p>Runs a shell program on your computer in a more controlled buffer.  Does not operate as a terminal emulator.
-</p>
+&lt;h2&gt;&lt;a id=&quot;shell-mode&quot; class=&quot;anchor&quot; href=&quot;#shell-mode&quot;&gt;¶&lt;/a&gt;shell-mode&lt;/h2&gt;&lt;p&gt;Runs a shell program on your computer in a more controlled buffer.  Does not operate as a terminal emulator.
+&lt;/p&gt;
 
-<ul><li><kbd>C-c C-p</kbd> / <kbd>C-c C-n</kbd> - go back and forward in the buffer's prompts</li>
-<li><kbd>M-p</kbd> / <kbd>M-n</kbd> - go back and forward in the input history</li>
-<li><kbd>C-c C-u</kbd> - delete the current input string backwards up to the cursor</li>
-<li><kbd>counsel-shell-history</kbd> - A searchable history of commands typed into the shell</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C-c C-p&lt;/kbd&gt; / &lt;kbd&gt;C-c C-n&lt;/kbd&gt; - go back and forward in the buffer&apos;s prompts&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;M-p&lt;/kbd&gt; / &lt;kbd&gt;M-n&lt;/kbd&gt; - go back and forward in the input history&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;C-c C-u&lt;/kbd&gt; - delete the current input string backwards up to the cursor&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;counsel-shell-history&lt;/kbd&gt; - A searchable history of commands typed into the shell&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Pros/Cons
-</p>
+&lt;p&gt;Pros/Cons
+&lt;/p&gt;
 
-<p>Better colors:
-</p>
+&lt;p&gt;Better colors:
+&lt;/p&gt;
 
-<p><a href="https://github.com/atomontage/xterm-color">xterm-color</a> on GitHub
-</p>
+&lt;p&gt;&lt;a href=&quot;https://github.com/atomontage/xterm-color&quot;&gt;xterm-color&lt;/a&gt; on GitHub
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">setq</span> comint-output-filter-functions
-      (remove 'ansi-color-process-output comint-output-filter-functions))
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; comint-output-filter-functions
+      (remove &apos;ansi-color-process-output comint-output-filter-functions))
 
-(add-hook 'shell-mode-hook
-          (<span class="org-keyword">lambda</span> ()
-            <span class="org-comment-delimiter">;; </span><span class="org-comment">Disable font-locking in this buffer to improve performance</span>
+(add-hook &apos;shell-mode-hook
+          (&lt;span class=&quot;org-keyword&quot;&gt;lambda&lt;/span&gt; ()
+            &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Disable font-locking in this buffer to improve performance&lt;/span&gt;
             (font-lock-mode -1)
-            <span class="org-comment-delimiter">;; </span><span class="org-comment">Prevent font-locking from being re-enabled in this buffer</span>
-            (make-local-variable 'font-lock-function)
-            (<span class="org-keyword">setq</span> font-lock-function (<span class="org-keyword">lambda</span> (_) nil))
-            (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter nil t)))
+            &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Prevent font-locking from being re-enabled in this buffer&lt;/span&gt;
+            (make-local-variable &apos;font-lock-function)
+            (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; font-lock-function (&lt;span class=&quot;org-keyword&quot;&gt;lambda&lt;/span&gt; (_) nil))
+            (add-hook &apos;comint-preoutput-filter-functions &apos;xterm-color-filter nil t)))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>In Windows if you like PowerShell you can use this config:
-</p>
+&lt;p&gt;In Windows if you like PowerShell you can use this config:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Kudos to Jeffrey Snover: https://docs.microsoft.com/en-us/archive/blogs/dotnetinterop/run-powershell-as-a-shell-within-emacs</span>
-(<span class="org-keyword">setq</span> explicit-shell-file-name <span class="org-string">"powershell.exe"</span>)
-(<span class="org-keyword">setq</span> explicit-powershell.exe-args '())
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Kudos to Jeffrey Snover: https://docs.microsoft.com/en-us/archive/blogs/dotnetinterop/run-powershell-as-a-shell-within-emacs&lt;/span&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; explicit-shell-file-name &lt;span class=&quot;org-string&quot;&gt;&quot;powershell.exe&quot;&lt;/span&gt;)
+(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; explicit-powershell.exe-args &apos;())
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="eshell" class="anchor" href="#eshell">¶</a>Eshell</h2><pre><code class="emacs-lisp">
-(<span class="org-keyword">defun</span> <span class="org-function-name">efs/configure-eshell</span> ()
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">Save command history when commands are entered</span>
-  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+&lt;h2&gt;&lt;a id=&quot;eshell&quot; class=&quot;anchor&quot; href=&quot;#eshell&quot;&gt;¶&lt;/a&gt;Eshell&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;efs/configure-eshell&lt;/span&gt; ()
+  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Save command history when commands are entered&lt;/span&gt;
+  (add-hook &apos;eshell-pre-command-hook &apos;eshell-save-some-history)
 
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">Truncate buffer for performance</span>
-  (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Truncate buffer for performance&lt;/span&gt;
+  (add-to-list &apos;eshell-output-filter-functions &apos;eshell-truncate-buffer)
 
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">Bind some useful keys for evil-mode</span>
-  (evil-define-key '(normal insert visual) eshell-mode-map (kbd <span class="org-string">"C-r"</span>) 'counsel-esh-history)
-  (evil-define-key '(normal insert visual) eshell-mode-map (kbd <span class="org-string">"&lt;home&gt;"</span>) 'eshell-bol)
+  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Bind some useful keys for evil-mode&lt;/span&gt;
+  (evil-define-key &apos;(normal insert visual) eshell-mode-map (kbd &lt;span class=&quot;org-string&quot;&gt;&quot;C-r&quot;&lt;/span&gt;) &apos;counsel-esh-history)
+  (evil-define-key &apos;(normal insert visual) eshell-mode-map (kbd &lt;span class=&quot;org-string&quot;&gt;&quot;&amp;lt;home&amp;gt;&quot;&lt;/span&gt;) &apos;eshell-bol)
   (evil-normalize-keymaps)
 
-  (<span class="org-keyword">setq</span> eshell-history-size         10000
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; eshell-history-size         10000
         eshell-buffer-maximum-lines 10000
         eshell-hist-ignoredups t
         eshell-scroll-to-bottom-on-input t))
 
-(<span class="org-keyword">use-package</span> <span class="org-constant">eshell</span>
-  <span class="org-builtin">:hook</span> (eshell-first-time-mode . efs/configure-eshell))
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;eshell&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:hook&lt;/span&gt; (eshell-first-time-mode . efs/configure-eshell))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<ul><li><kbd>counsel-eshell-history</kbd> - A searchable history of commands typed into the shell</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;counsel-eshell-history&lt;/kbd&gt; - A searchable history of commands typed into the shell&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">eshell-git-prompt</span>)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;eshell-git-prompt&lt;/span&gt;)
 
-<span class="org-builtin">:config</span>
-(eshell-git-prompt-use-theme 'powerline))
+&lt;span class=&quot;org-builtin&quot;&gt;:config&lt;/span&gt;
+(eshell-git-prompt-use-theme &apos;powerline))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>Running programs in a term-mode buffer:
-</p>
+&lt;p&gt;Running programs in a term-mode buffer:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">with-eval-after-load</span> 'esh-opt
-  (<span class="org-keyword">setq</span> eshell-destroy-buffer-when-process-dies t)
-  (<span class="org-keyword">setq</span> eshell-visual-commands '(<span class="org-string">"htop"</span> <span class="org-string">"zsh"</span> <span class="org-string">"vim"</span>)))
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;with-eval-after-load&lt;/span&gt; &apos;esh-opt
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; eshell-destroy-buffer-when-process-dies t)
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; eshell-visual-commands &apos;(&lt;span class=&quot;org-string&quot;&gt;&quot;htop&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;zsh&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;vim&quot;&lt;/span&gt;)))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>Pros:
-</p>
+&lt;p&gt;Pros:
+&lt;/p&gt;
 
-<ul><li>Replicates Bash with cross-platform elisp functions</li>
-<li>Consistent shell experience across all OSes</li>
-<li>You can run Emacs commands and arbitrary Emacs Lisp in the shell</li>
-<li>You can pipe output of commands directly into an Emacs buffer</li>
-<li>Supports TRAMP!</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Replicates Bash with cross-platform elisp functions&lt;/li&gt;
+&lt;li&gt;Consistent shell experience across all OSes&lt;/li&gt;
+&lt;li&gt;You can run Emacs commands and arbitrary Emacs Lisp in the shell&lt;/li&gt;
+&lt;li&gt;You can pipe output of commands directly into an Emacs buffer&lt;/li&gt;
+&lt;li&gt;Supports TRAMP!&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Cons:
-</p>
+&lt;p&gt;Cons:
+&lt;/p&gt;
 
-<ul><li>Completions are not great out of the box compared to Bash</li>
-<li>Eshell commands can be very slow compared to the real programs</li>
-<li>Piping is much less functional than in "real" shells</li>
-<li>Subshell syntax is a bit different - <kbd>${}</kbd> instead of <kbd>$()</kbd></li>
-<li>Programs that read input (like language REPLs) can operate strangely</li>
-<li>Tools that depend on setting shell environment (<kbd>nvm</kbd>, <kbd>virtualenv</kbd>, etc) don't work</li>
-<li>Can be a little slow on Windows</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Completions are not great out of the box compared to Bash&lt;/li&gt;
+&lt;li&gt;Eshell commands can be very slow compared to the real programs&lt;/li&gt;
+&lt;li&gt;Piping is much less functional than in &quot;real&quot; shells&lt;/li&gt;
+&lt;li&gt;Subshell syntax is a bit different - &lt;kbd&gt;${}&lt;/kbd&gt; instead of &lt;kbd&gt;$()&lt;/kbd&gt;&lt;/li&gt;
+&lt;li&gt;Programs that read input (like language REPLs) can operate strangely&lt;/li&gt;
+&lt;li&gt;Tools that depend on setting shell environment (&lt;kbd&gt;nvm&lt;/kbd&gt;, &lt;kbd&gt;virtualenv&lt;/kbd&gt;, etc) don&apos;t work&lt;/li&gt;
+&lt;li&gt;Can be a little slow on Windows&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Interesting articles:
-</p>
-<ul><li><a href="https://ambrevar.xyz/emacs-eshell/index.html">Ambrevar's article on eshell</a></li>
-<li><a href="https://ambrevar.xyz/emacs-eshell-versus-shell/index.html">Ambrevar's article on eshell vs shell</a></li>
-</ul>
+&lt;p&gt;Interesting articles:
+&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://ambrevar.xyz/emacs-eshell/index.html&quot;&gt;Ambrevar&apos;s article on eshell&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://ambrevar.xyz/emacs-eshell-versus-shell/index.html&quot;&gt;Ambrevar&apos;s article on eshell vs shell&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2><a id="recommendations" class="anchor" href="#recommendations">¶</a>Recommendations</h2><ul><li>Use <kbd>term</kbd> or <kbd>ansi-term</kbd> if you're on Linux / macOS and don't care as much about output speed</li>
-<li>Use <kbd>vterm</kbd> if you're on Linux / macOS and want faster output and better terminal emulation</li>
-<li>Use <kbd>shell</kbd> on Windows if you want to use PowerShell, Bash, or WSL</li>
-<li>Use <kbd>eshell</kbd> on any OS if you want a consistent shell experience everywhere with Lisp superpowers full Emacs integration</li>
-</ul>
-</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+&lt;h2&gt;&lt;a id=&quot;recommendations&quot; class=&quot;anchor&quot; href=&quot;#recommendations&quot;&gt;¶&lt;/a&gt;Recommendations&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Use &lt;kbd&gt;term&lt;/kbd&gt; or &lt;kbd&gt;ansi-term&lt;/kbd&gt; if you&apos;re on Linux / macOS and don&apos;t care as much about output speed&lt;/li&gt;
+&lt;li&gt;Use &lt;kbd&gt;vterm&lt;/kbd&gt; if you&apos;re on Linux / macOS and want faster output and better terminal emulation&lt;/li&gt;
+&lt;li&gt;Use &lt;kbd&gt;shell&lt;/kbd&gt; on Windows if you want to use PowerShell, Bash, or WSL&lt;/li&gt;
+&lt;li&gt;Use &lt;kbd&gt;eshell&lt;/kbd&gt; on any OS if you want a consistent shell experience everywhere with Lisp superpowers full Emacs integration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;</div></div></div></div>&lt;footer class=&quot;blog-footer&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;p&gt;Made with Emacs 27.2 (Org mode 9.4.4)&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://systemcrafters.net/privacy-policy/&quot;&gt;Privacy Policy&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/footer&gt;&lt;script src=&quot;/js/bootstrap.bundle.min.js&quot;/&gt;</body></html>

@@ -1,95 +1,95 @@
-<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Managing Files and Directories in Practice - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Managing Files and Directories in Practice</h1><p class="blog-post-meta"></p><div><p>This is Part 6 of the <a href="/learning-emacs-lisp">Learning Emacs Lisp</a> series!
-</p>
+<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Managing Files and Directories in Practice - System Crafters</title></head><body>&lt;div&gt;&lt;div class=&quot;blog-header&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-8&quot;&gt;&lt;div class=&quot;blog-title&quot;&gt;System Crafters&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-sm col-md&quot;&gt;&lt;div class=&quot;blog-description text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;blog-masthead&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-12&quot;&gt;&lt;nav class=&quot;nav&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;/&quot;&gt;Home&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/videos&quot;&gt;Videos&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://wiki.systemcrafters.net&quot;&gt;Wiki&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://store.systemcrafters.net?utm_source=sc-site-nav&quot;&gt;Merch Store&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/support-the-channel&quot;&gt;Support The Channel&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;<div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Managing Files and Directories in Practice</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;This is Part 6 of the &lt;a href=&quot;/learning-emacs-lisp&quot;&gt;Learning Emacs Lisp&lt;/a&gt; series!
+&lt;/p&gt;
 
-<p>Watch the video on YouTube: <a href="https://youtu.be/nq-gqNGmayI">https://youtu.be/nq-gqNGmayI</a>
-</p>
+&lt;p&gt;Watch the video on YouTube: &lt;a href=&quot;https://youtu.be/nq-gqNGmayI&quot;&gt;https://youtu.be/nq-gqNGmayI&lt;/a&gt;
+&lt;/p&gt;
 
-<p>The final code from this episode can be found <a href="https://github.com/daviwil/dotcrafter.el/blob/8589c71e64b60f9395b418c09b60815a86c7da8f/dotcrafter.el">on GitHub</a>.
-</p>
+&lt;p&gt;The final code from this episode can be found &lt;a href=&quot;https://github.com/daviwil/dotcrafter.el/blob/8589c71e64b60f9395b418c09b60815a86c7da8f/dotcrafter.el&quot;&gt;on GitHub&lt;/a&gt;.
+&lt;/p&gt;
 
-<h2><a id="what-will-we-cover" class="anchor" href="#what-will-we-cover">¶</a>What will we cover?</h2><p>Today we're going to talk about the many ways you can interact with files and directories using Emacs Lisp!
-</p>
+&lt;h2&gt;&lt;a id=&quot;what-will-we-cover&quot; class=&quot;anchor&quot; href=&quot;#what-will-we-cover&quot;&gt;¶&lt;/a&gt;What will we cover?&lt;/h2&gt;&lt;p&gt;Today we&apos;re going to talk about the many ways you can interact with files and directories using Emacs Lisp!
+&lt;/p&gt;
 
-<p>There are a few different ways to do this with user-facing Emacs functionality (<kbd>find-file</kbd>, <kbd>eshell</kbd>, Dired, etc), but at some point you will want to automate some of these tasks with Emacs Lisp code.
-</p>
+&lt;p&gt;There are a few different ways to do this with user-facing Emacs functionality (&lt;kbd&gt;find-file&lt;/kbd&gt;, &lt;kbd&gt;eshell&lt;/kbd&gt;, Dired, etc), but at some point you will want to automate some of these tasks with Emacs Lisp code.
+&lt;/p&gt;
 
-<p>Today I'll show you a wide range of the functions you have at your disposal and then use them in real code examples!
-</p>
+&lt;p&gt;Today I&apos;ll show you a wide range of the functions you have at your disposal and then use them in real code examples!
+&lt;/p&gt;
 
-<h3><a id="explaining-symbolic-links" class="anchor" href="#explaining-symbolic-links">¶</a>Explaining symbolic links</h3><p>But first, what is a symbolic link?
-</p>
+&lt;h3&gt;&lt;a id=&quot;explaining-symbolic-links&quot; class=&quot;anchor&quot; href=&quot;#explaining-symbolic-links&quot;&gt;¶&lt;/a&gt;Explaining symbolic links&lt;/h3&gt;&lt;p&gt;But first, what is a symbolic link?
+&lt;/p&gt;
 
-<p>It is an entry in the file system that points to a file or directory somewhere else in the file system.  It is used to make it appear like a directory exists at <kbd>~/.emacs.d</kbd> when it actually exists at <kbd>~/.dotfiles/.emacs.d</kbd>!
-</p>
+&lt;p&gt;It is an entry in the file system that points to a file or directory somewhere else in the file system.  It is used to make it appear like a directory exists at &lt;kbd&gt;~/.emacs.d&lt;/kbd&gt; when it actually exists at &lt;kbd&gt;~/.dotfiles/.emacs.d&lt;/kbd&gt;!
+&lt;/p&gt;
 
-<h3><a id="our-project-dotcrafterel" class="anchor" href="#our-project-dotcrafterel">¶</a>Our project: dotcrafter.el</h3><p>As we talked about in previous videos in this series, we are working on a dotfiles management package for Emacs.
-</p>
+&lt;h3&gt;&lt;a id=&quot;our-project-dotcrafterel&quot; class=&quot;anchor&quot; href=&quot;#our-project-dotcrafterel&quot;&gt;¶&lt;/a&gt;Our project: dotcrafter.el&lt;/h3&gt;&lt;p&gt;As we talked about in previous videos in this series, we are working on a dotfiles management package for Emacs.
+&lt;/p&gt;
 
-<p>In this video we're going to add functionality to create symbolic links for your configuration files into the real locations where they belong in the home directory!
-</p>
+&lt;p&gt;In this video we&apos;re going to add functionality to create symbolic links for your configuration files into the real locations where they belong in the home directory!
+&lt;/p&gt;
 
-<p>Some context:
-</p>
-<ul><li>We've been focused on dotfiles generated from Org Mode files</li>
-<li>You'll probably also have configuration files that don't belong in Org files!</li>
-<li>We need a way to automatically link those configuration files into the home directory</li>
-<li>We will implement code to "mirror" your configuration files into the home directory using symbolic links</li>
-</ul>
+&lt;p&gt;Some context:
+&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;We&apos;ve been focused on dotfiles generated from Org Mode files&lt;/li&gt;
+&lt;li&gt;You&apos;ll probably also have configuration files that don&apos;t belong in Org files!&lt;/li&gt;
+&lt;li&gt;We need a way to automatically link those configuration files into the home directory&lt;/li&gt;
+&lt;li&gt;We will implement code to &quot;mirror&quot; your configuration files into the home directory using symbolic links&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>By the end of this episode, we'll have a fully working dotfiles management package!
-</p>
+&lt;p&gt;By the end of this episode, we&apos;ll have a fully working dotfiles management package!
+&lt;/p&gt;
 
-<p>We'll commit improvements made in this video to the GitHub repository: <a href="https://github.com/daviwil/dotcrafter.el">https://github.com/daviwil/dotcrafter.el</a>
-</p>
+&lt;p&gt;We&apos;ll commit improvements made in this video to the GitHub repository: &lt;a href=&quot;https://github.com/daviwil/dotcrafter.el&quot;&gt;https://github.com/daviwil/dotcrafter.el&lt;/a&gt;
+&lt;/p&gt;
 
-<p>The starting point of the examples in this episode is <a href="https://github.com/daviwil/dotcrafter.el/blob/0374d5a1ad1e5ecadcdfbdf07e0ae428946b0138/dotcrafter.el">this version of dotcrafter.el</a> from the repository.
-</p>
+&lt;p&gt;The starting point of the examples in this episode is &lt;a href=&quot;https://github.com/daviwil/dotcrafter.el/blob/0374d5a1ad1e5ecadcdfbdf07e0ae428946b0138/dotcrafter.el&quot;&gt;this version of dotcrafter.el&lt;/a&gt; from the repository.
+&lt;/p&gt;
 
-<h2><a id="getting-the-current-directory" class="anchor" href="#getting-the-current-directory">¶</a>Getting the current directory</h2><p>Emacs will resolve most file paths relative to the current directory which is determine by the variable <kbd>default-directory</kbd>.  This buffer-local variable will be different for each buffer you open.
-</p>
+&lt;h2&gt;&lt;a id=&quot;getting-the-current-directory&quot; class=&quot;anchor&quot; href=&quot;#getting-the-current-directory&quot;&gt;¶&lt;/a&gt;Getting the current directory&lt;/h2&gt;&lt;p&gt;Emacs will resolve most file paths relative to the current directory which is determine by the variable &lt;kbd&gt;default-directory&lt;/kbd&gt;.  This buffer-local variable will be different for each buffer you open.
+&lt;/p&gt;
 
-<p>For file buffers, it will contain the directory where the buffer's file lives:
-</p>
+&lt;p&gt;For file buffers, it will contain the directory where the buffer&apos;s file lives:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
 default-directory
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>What about the <kbd>*scratch*</kbd> buffer?  It <em>probably</em> returns the directory where Emacs was launched from!
-</p>
+&lt;p&gt;What about the &lt;kbd&gt;*scratch*&lt;/kbd&gt; buffer?  It &lt;em&gt;probably&lt;/em&gt; returns the directory where Emacs was launched from!
+&lt;/p&gt;
 
-<p>You can also change <kbd>default-directory</kbd> if necessary!
-</p>
+&lt;p&gt;You can also change &lt;kbd&gt;default-directory&lt;/kbd&gt; if necessary!
+&lt;/p&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/File-Names.html">Emacs Manual: File Names</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/File-Names.html&quot;&gt;Emacs Manual: File Names&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="manipulating-file-paths" class="anchor" href="#manipulating-file-paths">¶</a>Manipulating file paths</h2><p>When you want to automate file operations in Emacs, you'll often need to grab different parts of a path so that you can build new paths.  There are a few functions for this purpose!
-</p>
+&lt;h2&gt;&lt;a id=&quot;manipulating-file-paths&quot; class=&quot;anchor&quot; href=&quot;#manipulating-file-paths&quot;&gt;¶&lt;/a&gt;Manipulating file paths&lt;/h2&gt;&lt;p&gt;When you want to automate file operations in Emacs, you&apos;ll often need to grab different parts of a path so that you can build new paths.  There are a few functions for this purpose!
+&lt;/p&gt;
 
-<p>In Emacs, file paths are considered to have two parts:
-</p>
+&lt;p&gt;In Emacs, file paths are considered to have two parts:
+&lt;/p&gt;
 
-<ul><li>The directory part</li>
-<li>The non-directory part, i.e. the file name and its extension</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;The directory part&lt;/li&gt;
+&lt;li&gt;The non-directory part, i.e. the file name and its extension&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>The functions you will want to use for this purpose are all prefixed with <kbd>file-name</kbd>!
-</p>
+&lt;p&gt;The functions you will want to use for this purpose are all prefixed with &lt;kbd&gt;file-name&lt;/kbd&gt;!
+&lt;/p&gt;
 
-<ul><li><kbd>file-name-directory</kbd>: Get the directory part of a file path</li>
-<li><kbd>file-name-nondirectory</kbd>: Get the filename (non-directory) part of a file path</li>
-<li><kbd>file-name-extension</kbd>: Get the extension of the file (without the leading period <kbd>.</kbd>)</li>
-<li><kbd>file-name-sans-extension</kbd>: Get the path without the file extension</li>
-<li><kbd>file-name-base</kbd>: Get the base file name without path or extension</li>
-<li><kbd>file-name-as-directory</kbd>: Turn the file name into a directory name</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;file-name-directory&lt;/kbd&gt;: Get the directory part of a file path&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;file-name-nondirectory&lt;/kbd&gt;: Get the filename (non-directory) part of a file path&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;file-name-extension&lt;/kbd&gt;: Get the extension of the file (without the leading period &lt;kbd&gt;.&lt;/kbd&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;file-name-sans-extension&lt;/kbd&gt;: Get the path without the file extension&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;file-name-base&lt;/kbd&gt;: Get the base file name without path or extension&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;file-name-as-directory&lt;/kbd&gt;: Turn the file name into a directory name&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>NOTE: The file paths you pass to these functions do not have to exist!
-</p>
+&lt;p&gt;NOTE: The file paths you pass to these functions do not have to exist!
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
 (file-name-directory (buffer-file-name))
 
 (file-name-nondirectory (buffer-file-name))
@@ -105,487 +105,487 @@ default-directory
 (file-name-as-directory
  (file-name-sans-extension (buffer-file-name)))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Names.html#File-Names">Emacs Lisp Manual: File Names</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Names.html#File-Names&quot;&gt;Emacs Lisp Manual: File Names&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="resolving-file-paths" class="anchor" href="#resolving-file-paths">¶</a>Resolving file paths</h2><p>It is a good idea to resolve file paths any time you use them to ensure they are being used for the location you expect!
-</p>
+&lt;h2&gt;&lt;a id=&quot;resolving-file-paths&quot; class=&quot;anchor&quot; href=&quot;#resolving-file-paths&quot;&gt;¶&lt;/a&gt;Resolving file paths&lt;/h2&gt;&lt;p&gt;It is a good idea to resolve file paths any time you use them to ensure they are being used for the location you expect!
+&lt;/p&gt;
 
-<ul><li><kbd>file-name-absolute-p</kbd> will tell you whether a file name is "absolute": it contains a complete file system path</li>
-<li><kbd>file-relative-name</kbd> with give you the path of a file relative to another path</li>
-<li><kbd>expand-file-name</kbd> will return an absolute path for a file under a specified directory</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;file-name-absolute-p&lt;/kbd&gt; will tell you whether a file name is &quot;absolute&quot;: it contains a complete file system path&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;file-relative-name&lt;/kbd&gt; with give you the path of a file relative to another path&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;expand-file-name&lt;/kbd&gt; will return an absolute path for a file under a specified directory&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-(file-name-absolute-p (buffer-file-name))      <span class="org-comment-delimiter">;; </span><span class="org-comment">t</span>
-(file-name-absolute-p <span class="org-string">"Emacs-Lisp-06.org"</span>)     <span class="org-comment-delimiter">;; </span><span class="org-comment">nil</span>
-(file-name-absolute-p <span class="org-string">"dir/Emacs-Lisp-06.org"</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">nil</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(file-name-absolute-p (buffer-file-name))      &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;t&lt;/span&gt;
+(file-name-absolute-p &lt;span class=&quot;org-string&quot;&gt;&quot;Emacs-Lisp-06.org&quot;&lt;/span&gt;)     &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;nil&lt;/span&gt;
+(file-name-absolute-p &lt;span class=&quot;org-string&quot;&gt;&quot;dir/Emacs-Lisp-06.org&quot;&lt;/span&gt;) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;nil&lt;/span&gt;
 
-(file-relative-name (buffer-file-name) <span class="org-string">"~/Notes"</span>)     <span class="org-comment-delimiter">;; </span><span class="org-comment">Streams/Emacs-Lisp-06.org</span>
-(file-relative-name (buffer-file-name) <span class="org-string">"~/.dotfiles"</span>)
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">../Notes/Streams/Emacs-Lisp-06.org</span>
+(file-relative-name (buffer-file-name) &lt;span class=&quot;org-string&quot;&gt;&quot;~/Notes&quot;&lt;/span&gt;)     &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Streams/Emacs-Lisp-06.org&lt;/span&gt;
+(file-relative-name (buffer-file-name) &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles&quot;&lt;/span&gt;)
+    &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;../Notes/Streams/Emacs-Lisp-06.org&lt;/span&gt;
 
-(expand-file-name <span class="org-string">"Emacs-Lisp-06.org"</span>)
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">/home/daviwil/Notes/Streams/Emacs-Lisp-06.org</span>
+(expand-file-name &lt;span class=&quot;org-string&quot;&gt;&quot;Emacs-Lisp-06.org&quot;&lt;/span&gt;)
+    &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;/home/daviwil/Notes/Streams/Emacs-Lisp-06.org&lt;/span&gt;
 
-<span class="org-comment-delimiter">;; </span><span class="org-comment">The file doesn't have to exist!</span>
-(expand-file-name <span class="org-string">"Emacs-Lisp-06.org"</span> <span class="org-string">"~/.dotfiles"</span>)
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">/home/daviwil/.dotfiles/Emacs-Lisp-06.org</span>
+&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;The file doesn&apos;t have to exist!&lt;/span&gt;
+(expand-file-name &lt;span class=&quot;org-string&quot;&gt;&quot;Emacs-Lisp-06.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles&quot;&lt;/span&gt;)
+    &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;/home/daviwil/.dotfiles/Emacs-Lisp-06.org&lt;/span&gt;
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>What about resolving paths containing environment variables?
-</p>
+&lt;p&gt;What about resolving paths containing environment variables?
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(expand-file-name <span class="org-string">"$HOME/.emacs.d"</span>)
-(substitute-in-file-name <span class="org-string">"$HOME/.emacs.d"</span>)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(expand-file-name &lt;span class=&quot;org-string&quot;&gt;&quot;$HOME/.emacs.d&quot;&lt;/span&gt;)
+(substitute-in-file-name &lt;span class=&quot;org-string&quot;&gt;&quot;$HOME/.emacs.d&quot;&lt;/span&gt;)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Relative-File-Names.html#Relative-File-Names">Emacs Lisp Manual: Absolute and Relative File Names</a>
-<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Expansion.html">Emacs Lisp Manual: Functions that Expand Filenames</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/Relative-File-Names.html#Relative-File-Names&quot;&gt;Emacs Lisp Manual: Absolute and Relative File Names&lt;/a&gt;
+&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/File-Name-Expansion.html&quot;&gt;Emacs Lisp Manual: Functions that Expand Filenames&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="example-resolving-the-destination-path-of-a-configuration-file" class="anchor" href="#example-resolving-the-destination-path-of-a-configuration-file">¶</a>Example: Resolving the destination path of a configuration file</h2><p>We can use a few of the functions we just discussed to find where a file inside of the dotfiles folder should be linked in the home directory!
-</p>
+&lt;h2&gt;&lt;a id=&quot;example-resolving-the-destination-path-of-a-configuration-file&quot; class=&quot;anchor&quot; href=&quot;#example-resolving-the-destination-path-of-a-configuration-file&quot;&gt;¶&lt;/a&gt;Example: Resolving the destination path of a configuration file&lt;/h2&gt;&lt;p&gt;We can use a few of the functions we just discussed to find where a file inside of the dotfiles folder should be linked in the home directory!
+&lt;/p&gt;
 
-<p>Here's what we need to do:
-</p>
+&lt;p&gt;Here&apos;s what we need to do:
+&lt;/p&gt;
 
-<ul><li>Resolve the relative path of a file under the dotfiles folder relative to the dotfiles folder</li>
-<li>Resolve that relative path against the home directory (or more specifically the output directory)</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Resolve the relative path of a file under the dotfiles folder relative to the dotfiles folder&lt;/li&gt;
+&lt;li&gt;Resolve that relative path against the home directory (or more specifically the output directory)&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>For example:
-</p>
+&lt;p&gt;For example:
+&lt;/p&gt;
 
-<pre><code class="sh">
+&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
 ~/.dotfiles/.files/
 
 ~/.dotfiles/.files/.local/share/applications/Emacs.desktop
 
-  Resolve to --&gt;   .local/share/applications/Emacs.desktop
-  Resolve to --&gt; ~/.local/share/applications/Emacs.desktop
+  Resolve to --&amp;gt;   .local/share/applications/Emacs.desktop
+  Resolve to --&amp;gt; ~/.local/share/applications/Emacs.desktop
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>We're also going to define a variable that holds the specific subpath of the dotfiles folder where these linked configuration files should live so that they're easier to manage.
-</p>
+&lt;p&gt;We&apos;re also going to define a variable that holds the specific subpath of the dotfiles folder where these linked configuration files should live so that they&apos;re easier to manage.
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">defcustom</span> <span class="org-variable-name">dotcrafter-dotfiles-folder</span> <span class="org-string">"~/.dotfiles"</span>
-  <span class="org-doc">"The folder where dotfiles and org-mode configuration files are stored."</span>
-  <span class="org-builtin">:type</span> 'string
-  <span class="org-builtin">:group</span> 'dotfiles)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;defcustom&lt;/span&gt; &lt;span class=&quot;org-variable-name&quot;&gt;dotcrafter-dotfiles-folder&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles&quot;&lt;/span&gt;
+  &lt;span class=&quot;org-doc&quot;&gt;&quot;The folder where dotfiles and org-mode configuration files are stored.&quot;&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:type&lt;/span&gt; &apos;string
+  &lt;span class=&quot;org-builtin&quot;&gt;:group&lt;/span&gt; &apos;dotfiles)
 
-(<span class="org-keyword">defcustom</span> <span class="org-variable-name">dotcrafter-output-directory</span> <span class="org-string">"~"</span>
-  <span class="org-doc">"The directory where dotcrafter.el will write out your dotfiles.</span>
-<span class="org-doc">This is typically set to the home directory but can be changed</span>
-<span class="org-doc">for testing purposes."</span>
-  <span class="org-builtin">:type</span> 'string
-  <span class="org-builtin">:group</span> 'dotfiles)
+(&lt;span class=&quot;org-keyword&quot;&gt;defcustom&lt;/span&gt; &lt;span class=&quot;org-variable-name&quot;&gt;dotcrafter-output-directory&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;~&quot;&lt;/span&gt;
+  &lt;span class=&quot;org-doc&quot;&gt;&quot;The directory where dotcrafter.el will write out your dotfiles.&lt;/span&gt;
+&lt;span class=&quot;org-doc&quot;&gt;This is typically set to the home directory but can be changed&lt;/span&gt;
+&lt;span class=&quot;org-doc&quot;&gt;for testing purposes.&quot;&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:type&lt;/span&gt; &apos;string
+  &lt;span class=&quot;org-builtin&quot;&gt;:group&lt;/span&gt; &apos;dotfiles)
 
-(<span class="org-keyword">defcustom</span> <span class="org-variable-name">dotcrafter-config-files-directory</span> <span class="org-string">".files"</span>
-  <span class="org-doc">"The directory path inside of `</span><span class="org-doc"><span class="org-constant">dotcrafter-dotfiles-folder</span></span><span class="org-doc">' where</span>
-<span class="org-doc">configuration files that should be symbolically linked are stored."</span>
-  <span class="org-builtin">:type</span> 'string
-  <span class="org-builtin">:group</span> 'dotfiles)
+(&lt;span class=&quot;org-keyword&quot;&gt;defcustom&lt;/span&gt; &lt;span class=&quot;org-variable-name&quot;&gt;dotcrafter-config-files-directory&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;.files&quot;&lt;/span&gt;
+  &lt;span class=&quot;org-doc&quot;&gt;&quot;The directory path inside of `&lt;/span&gt;&lt;span class=&quot;org-doc&quot;&gt;&lt;span class=&quot;org-constant&quot;&gt;dotcrafter-dotfiles-folder&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;org-doc&quot;&gt;&apos; where&lt;/span&gt;
+&lt;span class=&quot;org-doc&quot;&gt;configuration files that should be symbolically linked are stored.&quot;&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:type&lt;/span&gt; &apos;string
+  &lt;span class=&quot;org-builtin&quot;&gt;:group&lt;/span&gt; &apos;dotfiles)
 
-(<span class="org-keyword">setq</span> dotcrafter-dotfiles-folder <span class="org-string">"~/Projects/Code/dotcrafter.el/example"</span>)
-(<span class="org-keyword">setq</span> dotcrafter-output-directory <span class="org-string">"~/Projects/Code/dotcrafter.el/demo-output"</span>)
+(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; dotcrafter-dotfiles-folder &lt;span class=&quot;org-string&quot;&gt;&quot;~/Projects/Code/dotcrafter.el/example&quot;&lt;/span&gt;)
+(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; dotcrafter-output-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/Projects/Code/dotcrafter.el/demo-output&quot;&lt;/span&gt;)
 
-(<span class="org-keyword">defun</span> <span class="org-function-name">dotcrafter--resolve-config-files-path</span> ()
+(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;dotcrafter--resolve-config-files-path&lt;/span&gt; ()
   (expand-file-name dotcrafter-config-files-directory
                     dotcrafter-dotfiles-folder))
 
-(<span class="org-keyword">defun</span> <span class="org-function-name">example--resolve-config-file-target</span> (config-file)
+(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;example--resolve-config-file-target&lt;/span&gt; (config-file)
   (expand-file-name
    (file-relative-name
     (expand-file-name config-file)
     (dotcrafter--resolve-config-files-path))
    dotcrafter-output-directory))
 
-(example--resolve-config-file-target <span class="org-string">"~/Projects/Code/dotcrafter/example/.files/.emacs.d/init.el"</span>)
+(example--resolve-config-file-target &lt;span class=&quot;org-string&quot;&gt;&quot;~/Projects/Code/dotcrafter/example/.files/.emacs.d/init.el&quot;&lt;/span&gt;)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="checking-if-files-and-directories-exist" class="anchor" href="#checking-if-files-and-directories-exist">¶</a>Checking if files and directories exist</h2><p>The <kbd>file-exists-p</kbd> function returns <kbd>t</kbd> if a file or directory exists or <kbd>nil</kbd> otherwise:
-</p>
+&lt;h2&gt;&lt;a id=&quot;checking-if-files-and-directories-exist&quot; class=&quot;anchor&quot; href=&quot;#checking-if-files-and-directories-exist&quot;&gt;¶&lt;/a&gt;Checking if files and directories exist&lt;/h2&gt;&lt;p&gt;The &lt;kbd&gt;file-exists-p&lt;/kbd&gt; function returns &lt;kbd&gt;t&lt;/kbd&gt; if a file or directory exists or &lt;kbd&gt;nil&lt;/kbd&gt; otherwise:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(file-exists-p <span class="org-string">"~/.dotfiles/.emacs.d"</span>)  <span class="org-comment-delimiter">;; </span><span class="org-comment">t</span>
-(file-exists-p <span class="org-string">"~/.dotfiles/foobar"</span>)    <span class="org-comment-delimiter">;; </span><span class="org-comment">nil</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(file-exists-p &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles/.emacs.d&quot;&lt;/span&gt;)  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;t&lt;/span&gt;
+(file-exists-p &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles/foobar&quot;&lt;/span&gt;)    &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;nil&lt;/span&gt;
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>There are a few more functions that you can use to check if the user has access to a file, whether its writable or executable, etc:
-</p>
+&lt;p&gt;There are a few more functions that you can use to check if the user has access to a file, whether its writable or executable, etc:
+&lt;/p&gt;
 
-<ul><li><kbd>file-readable-p</kbd></li>
-<li><kbd>file-executable-p</kbd></li>
-<li><kbd>file-writable-p</kbd></li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;file-readable-p&lt;/kbd&gt;&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;file-executable-p&lt;/kbd&gt;&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;file-writable-p&lt;/kbd&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Testing-Accessibility.html">Emacs Lisp Manual: Testing Accessibility</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/Testing-Accessibility.html&quot;&gt;Emacs Lisp Manual: Testing Accessibility&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="creating-directories" class="anchor" href="#creating-directories">¶</a>Creating directories</h2><p>You can easily create a directory with the <kbd>make-directory</kbd> command.
-</p>
+&lt;h2&gt;&lt;a id=&quot;creating-directories&quot; class=&quot;anchor&quot; href=&quot;#creating-directories&quot;&gt;¶&lt;/a&gt;Creating directories&lt;/h2&gt;&lt;p&gt;You can easily create a directory with the &lt;kbd&gt;make-directory&lt;/kbd&gt; command.
+&lt;/p&gt;
 
-<p>The first parameter is the path to the directory to be created and the second is an optional boolean (<kbd>t</kbd> or <kbd>nil</kbd>) which determines whether any missing parent directories in the path should also be created.
-</p>
+&lt;p&gt;The first parameter is the path to the directory to be created and the second is an optional boolean (&lt;kbd&gt;t&lt;/kbd&gt; or &lt;kbd&gt;nil&lt;/kbd&gt;) which determines whether any missing parent directories in the path should also be created.
+&lt;/p&gt;
 
-<p>You can also set the second parameter to <kbd>t</kbd> to ensure that <kbd>make-directory</kbd> won't throw an error if the directory already exists!
-</p>
+&lt;p&gt;You can also set the second parameter to &lt;kbd&gt;t&lt;/kbd&gt; to ensure that &lt;kbd&gt;make-directory&lt;/kbd&gt; won&apos;t throw an error if the directory already exists!
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(make-directory <span class="org-string">"~/.local/share/foobar"</span>)
-(make-directory <span class="org-string">"~/.local/share/foobar"</span>)   <span class="org-comment-delimiter">;; </span><span class="org-comment">throws an error</span>
-(make-directory <span class="org-string">"~/.local/share/foobar"</span> t) <span class="org-comment-delimiter">;; </span><span class="org-comment">no error!</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(make-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/.local/share/foobar&quot;&lt;/span&gt;)
+(make-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/.local/share/foobar&quot;&lt;/span&gt;)   &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;throws an error&lt;/span&gt;
+(make-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/.local/share/foobar&quot;&lt;/span&gt; t) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;no error!&lt;/span&gt;
 
-(make-directory <span class="org-string">"~/.local/share/hello/system/crafters"</span>)   <span class="org-comment-delimiter">;; </span><span class="org-comment">error</span>
-(make-directory <span class="org-string">"~/.local/share/hello/system/crafters"</span> t) <span class="org-comment-delimiter">;; </span><span class="org-comment">success!</span>
+(make-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/.local/share/hello/system/crafters&quot;&lt;/span&gt;)   &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;error&lt;/span&gt;
+(make-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/.local/share/hello/system/crafters&quot;&lt;/span&gt; t) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;success!&lt;/span&gt;
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Create_002fDelete-Dirs.html">Emacs Lisp Manual: Creating, Copying, and Deleting Directories</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/Create_002fDelete-Dirs.html&quot;&gt;Emacs Lisp Manual: Creating, Copying, and Deleting Directories&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="example-creating-expected-directories-before-linking" class="anchor" href="#example-creating-expected-directories-before-linking">¶</a>Example: Creating expected directories before linking</h2><p>When we begin creating symbolic links into the home directory, one thing we will need to be careful of is creating symbolic links too close to the home directory for commonly-used folders like <kbd>~/.config</kbd> or <kbd>~/.local/share</kbd>.
-</p>
+&lt;h2&gt;&lt;a id=&quot;example-creating-expected-directories-before-linking&quot; class=&quot;anchor&quot; href=&quot;#example-creating-expected-directories-before-linking&quot;&gt;¶&lt;/a&gt;Example: Creating expected directories before linking&lt;/h2&gt;&lt;p&gt;When we begin creating symbolic links into the home directory, one thing we will need to be careful of is creating symbolic links too close to the home directory for commonly-used folders like &lt;kbd&gt;~/.config&lt;/kbd&gt; or &lt;kbd&gt;~/.local/share&lt;/kbd&gt;.
+&lt;/p&gt;
 
-<p>What we want to avoid is creating a symlink for these folders to our dotfiles folder and then having a bunch of unwanted files show up there that we must add to our <kbd>.gitignore</kbd>!
-</p>
+&lt;p&gt;What we want to avoid is creating a symlink for these folders to our dotfiles folder and then having a bunch of unwanted files show up there that we must add to our &lt;kbd&gt;.gitignore&lt;/kbd&gt;!
+&lt;/p&gt;
 
-<p>The solution here is to make sure that these directories already exist so that the algorithm we will write later won't try to create symbolic links instead.  To accomplish this, we will create a new variable to hold the list of directories to be pre-created and then create those directories before we start the linking process:
-</p>
+&lt;p&gt;The solution here is to make sure that these directories already exist so that the algorithm we will write later won&apos;t try to create symbolic links instead.  To accomplish this, we will create a new variable to hold the list of directories to be pre-created and then create those directories before we start the linking process:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">defcustom</span> <span class="org-variable-name">dotcrafter-ensure-output-directories</span> '(<span class="org-string">".config"</span> <span class="org-string">".local/share"</span>)
-  <span class="org-doc">"List of directories in the output folder that should be created</span>
-<span class="org-doc">before linking configuration files."</span>
-  <span class="org-builtin">:type</span>  '(list string)
-  <span class="org-builtin">:group</span> 'dotfiles)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;defcustom&lt;/span&gt; &lt;span class=&quot;org-variable-name&quot;&gt;dotcrafter-ensure-output-directories&lt;/span&gt; &apos;(&lt;span class=&quot;org-string&quot;&gt;&quot;.config&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;.local/share&quot;&lt;/span&gt;)
+  &lt;span class=&quot;org-doc&quot;&gt;&quot;List of directories in the output folder that should be created&lt;/span&gt;
+&lt;span class=&quot;org-doc&quot;&gt;before linking configuration files.&quot;&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:type&lt;/span&gt;  &apos;(list string)
+  &lt;span class=&quot;org-builtin&quot;&gt;:group&lt;/span&gt; &apos;dotfiles)
 
-(<span class="org-keyword">defun</span> <span class="org-function-name">example--ensure-output-directories</span> ()
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">Ensure that the expected output directories are already</span>
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">created so that links will be created inside</span>
-  (<span class="org-keyword">dolist</span> (dir dotcrafter-ensure-output-directories)
+(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;example--ensure-output-directories&lt;/span&gt; ()
+  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Ensure that the expected output directories are already&lt;/span&gt;
+  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;created so that links will be created inside&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;dolist&lt;/span&gt; (dir dotcrafter-ensure-output-directories)
     (make-directory (expand-file-name dir dotcrafter-output-directory) t)))
 
 (example--ensure-output-directories)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="listing-files-in-directories" class="anchor" href="#listing-files-in-directories">¶</a>Listing files in directories</h2><p>One thing you will probably want to do at some point is get a list of files in a given directory, possibly even for all child directories under that path as well.
-</p>
+&lt;h2&gt;&lt;a id=&quot;listing-files-in-directories&quot; class=&quot;anchor&quot; href=&quot;#listing-files-in-directories&quot;&gt;¶&lt;/a&gt;Listing files in directories&lt;/h2&gt;&lt;p&gt;One thing you will probably want to do at some point is get a list of files in a given directory, possibly even for all child directories under that path as well.
+&lt;/p&gt;
 
-<p>The <kbd>directory-files</kbd> and <kbd>directory-files-recursively</kbd> functions are great for this purpose!
-</p>
+&lt;p&gt;The &lt;kbd&gt;directory-files&lt;/kbd&gt; and &lt;kbd&gt;directory-files-recursively&lt;/kbd&gt; functions are great for this purpose!
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(directory-files <span class="org-string">"~/.dotfiles"</span>)
-(directory-files <span class="org-string">"~/.dotfiles"</span> t)          <span class="org-comment-delimiter">;; </span><span class="org-comment">Return full file paths</span>
-(directory-files <span class="org-string">"~/.dotfiles"</span> t <span class="org-string">".org"</span>)   <span class="org-comment-delimiter">;; </span><span class="org-comment">Get all file containing ".org"</span>
-(directory-files <span class="org-string">"~/.dotfiles"</span> t <span class="org-string">""</span> t)     <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't sort results</span>
-(directory-files <span class="org-string">"~/.dotfiles"</span> t <span class="org-string">""</span> nil 3) <span class="org-comment-delimiter">;; </span><span class="org-comment">Maximum 3 results</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(directory-files &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles&quot;&lt;/span&gt;)
+(directory-files &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles&quot;&lt;/span&gt; t)          &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Return full file paths&lt;/span&gt;
+(directory-files &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles&quot;&lt;/span&gt; t &lt;span class=&quot;org-string&quot;&gt;&quot;.org&quot;&lt;/span&gt;)   &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Get all file containing &quot;.org&quot;&lt;/span&gt;
+(directory-files &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles&quot;&lt;/span&gt; t &lt;span class=&quot;org-string&quot;&gt;&quot;&quot;&lt;/span&gt; t)     &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Don&apos;t sort results&lt;/span&gt;
+(directory-files &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles&quot;&lt;/span&gt; t &lt;span class=&quot;org-string&quot;&gt;&quot;&quot;&lt;/span&gt; nil 3) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Maximum 3 results&lt;/span&gt;
 
-(directory-files-recursively <span class="org-string">"~/.dotfiles"</span> <span class="org-string">"\\.el$"</span>)
-(directory-files-recursively dotcrafter-output-directory <span class="org-string">""</span>)
-(directory-files-recursively dotcrafter-output-directory <span class="org-string">""</span> t)
+(directory-files-recursively &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;\\.el$&quot;&lt;/span&gt;)
+(directory-files-recursively dotcrafter-output-directory &lt;span class=&quot;org-string&quot;&gt;&quot;&quot;&lt;/span&gt;)
+(directory-files-recursively dotcrafter-output-directory &lt;span class=&quot;org-string&quot;&gt;&quot;&quot;&lt;/span&gt; t)
 
-<span class="org-comment-delimiter">;; </span><span class="org-comment">The fourth parameter can be a function that determines whether</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">a path can be traversed using any logic!</span>
-(directory-files-recursively <span class="org-string">"~/.emacs.d"</span> <span class="org-string">""</span> nil
-                             (<span class="org-keyword">lambda</span> (dir)
-                               (string-equal dir <span class="org-string">"~/.emacs.d/lisp"</span>)))
+&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;The fourth parameter can be a function that determines whether&lt;/span&gt;
+&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;a path can be traversed using any logic!&lt;/span&gt;
+(directory-files-recursively &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;&quot;&lt;/span&gt; nil
+                             (&lt;span class=&quot;org-keyword&quot;&gt;lambda&lt;/span&gt; (dir)
+                               (string-equal dir &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/lisp&quot;&lt;/span&gt;)))
 
-(directory-files-recursively <span class="org-string">"~/.config"</span> <span class="org-string">"\\.scm"</span> t nil nil) <span class="org-comment-delimiter">;; </span><span class="org-comment">Doesn't follow symlinks</span>
-(directory-files-recursively <span class="org-string">"~/.config"</span> <span class="org-string">"\\.scm"</span> t nil t)   <span class="org-comment-delimiter">;; </span><span class="org-comment">Follows symlinks!</span>
+(directory-files-recursively &lt;span class=&quot;org-string&quot;&gt;&quot;~/.config&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;\\.scm&quot;&lt;/span&gt; t nil nil) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Doesn&apos;t follow symlinks&lt;/span&gt;
+(directory-files-recursively &lt;span class=&quot;org-string&quot;&gt;&quot;~/.config&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;\\.scm&quot;&lt;/span&gt; t nil t)   &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Follows symlinks!&lt;/span&gt;
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Contents-of-Directories.html#Contents-of-Directories">Emacs Lisp Manual: Contents of Directories</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/Contents-of-Directories.html#Contents-of-Directories&quot;&gt;Emacs Lisp Manual: Contents of Directories&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="example-finding-the-list-of-all-configuration-files-to-be-linked" class="anchor" href="#example-finding-the-list-of-all-configuration-files-to-be-linked">¶</a>Example: Finding the list of all configuration files to be linked</h2><p>As we talked about earlier, the goal of what we're doing today is to produce some code that will mirror a folder of configuration files in your dotfiles folder into the home folder using symbolic links.
-</p>
+&lt;h2&gt;&lt;a id=&quot;example-finding-the-list-of-all-configuration-files-to-be-linked&quot; class=&quot;anchor&quot; href=&quot;#example-finding-the-list-of-all-configuration-files-to-be-linked&quot;&gt;¶&lt;/a&gt;Example: Finding the list of all configuration files to be linked&lt;/h2&gt;&lt;p&gt;As we talked about earlier, the goal of what we&apos;re doing today is to produce some code that will mirror a folder of configuration files in your dotfiles folder into the home folder using symbolic links.
+&lt;/p&gt;
 
-<p>We'll use the <kbd>directory-files-recursively</kbd> function to list all of the linkable files under the dotfiles path and then resolve them relative to the output path!
-</p>
+&lt;p&gt;We&apos;ll use the &lt;kbd&gt;directory-files-recursively&lt;/kbd&gt; function to list all of the linkable files under the dotfiles path and then resolve them relative to the output path!
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">defun</span> <span class="org-function-name">example--find-all-files-to-link</span> ()
-  (<span class="org-keyword">let</span> ((files-to-link
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;example--find-all-files-to-link&lt;/span&gt; ()
+  (&lt;span class=&quot;org-keyword&quot;&gt;let&lt;/span&gt; ((files-to-link
          (directory-files-recursively
           (dotcrafter--resolve-config-files-path)
-          <span class="org-string">""</span>)))
-    (<span class="org-keyword">dolist</span> (file files-to-link)
-      (message <span class="org-string">"File: %s\n   - %s"</span> file (example--resolve-config-file-target file)))))
+          &lt;span class=&quot;org-string&quot;&gt;&quot;&quot;&lt;/span&gt;)))
+    (&lt;span class=&quot;org-keyword&quot;&gt;dolist&lt;/span&gt; (file files-to-link)
+      (message &lt;span class=&quot;org-string&quot;&gt;&quot;File: %s\n   - %s&quot;&lt;/span&gt; file (example--resolve-config-file-target file)))))
 
 (example--find-all-files-to-link)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="copying-moving-and-deleting-files-and-directories" class="anchor" href="#copying-moving-and-deleting-files-and-directories">¶</a>Copying, moving, and deleting files and directories</h2><p>You can perform common file management tasks like copying, moving, and deleting files and directories with a few different Emacs Lisp functions.
-</p>
+&lt;h2&gt;&lt;a id=&quot;copying-moving-and-deleting-files-and-directories&quot; class=&quot;anchor&quot; href=&quot;#copying-moving-and-deleting-files-and-directories&quot;&gt;¶&lt;/a&gt;Copying, moving, and deleting files and directories&lt;/h2&gt;&lt;p&gt;You can perform common file management tasks like copying, moving, and deleting files and directories with a few different Emacs Lisp functions.
+&lt;/p&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Copying-and-Naming.html">Emacs Lisp Manual: Copying, Naming, and Renaming Files</a>
-<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Create_002fDelete-Dirs.html">Emacs Lisp Manual: Creating, Copying, and Deleting Directories</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Copying-and-Naming.html&quot;&gt;Emacs Lisp Manual: Copying, Naming, and Renaming Files&lt;/a&gt;
+&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/Create_002fDelete-Dirs.html&quot;&gt;Emacs Lisp Manual: Creating, Copying, and Deleting Directories&lt;/a&gt;
+&lt;/p&gt;
 
-<h3><a id="copying" class="anchor" href="#copying">¶</a>Copying</h3><ul><li><kbd>copy-file</kbd>: Copy the contents of one file to another</li>
-<li><kbd>copy-directory</kbd>: Copy the contents of one directory to another, including all subdirectories</li>
-</ul>
+&lt;h3&gt;&lt;a id=&quot;copying&quot; class=&quot;anchor&quot; href=&quot;#copying&quot;&gt;¶&lt;/a&gt;Copying&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;copy-file&lt;/kbd&gt;: Copy the contents of one file to another&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;copy-directory&lt;/kbd&gt;: Copy the contents of one directory to another, including all subdirectories&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-(copy-file <span class="org-string">"~/.emacs.d/init.el"</span> <span class="org-string">"/tmp"</span>)  <span class="org-comment-delimiter">;; </span><span class="org-comment">Must end in a slash!</span>
-(copy-file <span class="org-string">"~/.emacs.d/init.el"</span> <span class="org-string">"/tmp/"</span>)   <span class="org-comment-delimiter">;; </span><span class="org-comment">Copied to /tmp</span>
-(copy-file <span class="org-string">"~/.emacs.d/init.el"</span> <span class="org-string">"/tmp/"</span>)   <span class="org-comment-delimiter">;; </span><span class="org-comment">Error, already exists!</span>
-(copy-file <span class="org-string">"~/.emacs.d/init.el"</span> <span class="org-string">"/tmp/"</span> t) <span class="org-comment-delimiter">;; </span><span class="org-comment">No error!</span>
-<span class="org-comment-delimiter">;; </span><span class="org-comment">The remaining parameters are all about preserving file metadata</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(copy-file &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/init.el&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp&quot;&lt;/span&gt;)  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Must end in a slash!&lt;/span&gt;
+(copy-file &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/init.el&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/&quot;&lt;/span&gt;)   &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Copied to /tmp&lt;/span&gt;
+(copy-file &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/init.el&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/&quot;&lt;/span&gt;)   &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Error, already exists!&lt;/span&gt;
+(copy-file &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/init.el&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/&quot;&lt;/span&gt; t) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;No error!&lt;/span&gt;
+&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;The remaining parameters are all about preserving file metadata&lt;/span&gt;
 
-(copy-directory <span class="org-string">"~/.emacs.d/lisp"</span> <span class="org-string">"/tmp"</span>)  <span class="org-comment-delimiter">;; </span><span class="org-comment">Must end in a slash!</span>
-(copy-directory <span class="org-string">"~/.emacs.d/lisp"</span> <span class="org-string">"/tmp/"</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">Copied to /tmp/lisp</span>
+(copy-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/lisp&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp&quot;&lt;/span&gt;)  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Must end in a slash!&lt;/span&gt;
+(copy-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/lisp&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/&quot;&lt;/span&gt;) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Copied to /tmp/lisp&lt;/span&gt;
 
-<span class="org-comment-delimiter">;; </span><span class="org-comment">To copy the contents of the directory without the enclosing directory:</span>
-(copy-directory <span class="org-string">"~/.emacs.d/eshell"</span> <span class="org-string">"/tmp/lisp"</span> t t nil)
-(copy-directory <span class="org-string">"~/.emacs.d/eshell"</span> <span class="org-string">"/tmp/lisp"</span> t t t)
+&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;To copy the contents of the directory without the enclosing directory:&lt;/span&gt;
+(copy-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/eshell&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/lisp&quot;&lt;/span&gt; t t nil)
+(copy-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/eshell&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/lisp&quot;&lt;/span&gt; t t t)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h3><a id="renaming--moving" class="anchor" href="#renaming--moving">¶</a>Renaming / Moving</h3><ul><li><kbd>rename-file</kbd>: Rename a file or directory</li>
-</ul>
+&lt;h3&gt;&lt;a id=&quot;renaming--moving&quot; class=&quot;anchor&quot; href=&quot;#renaming--moving&quot;&gt;¶&lt;/a&gt;Renaming / Moving&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;rename-file&lt;/kbd&gt;: Rename a file or directory&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-(rename-file <span class="org-string">"/tmp/init.el"</span> <span class="org-string">"/tmp/init-new.el"</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">Rename file in same folder</span>
-(rename-file <span class="org-string">"/tmp/init-new.el"</span> <span class="org-string">"~/.emacs.d/"</span>)  <span class="org-comment-delimiter">;; </span><span class="org-comment">Move file to different folder</span>
-(rename-file <span class="org-string">"~/.emacs.d/init-new.el"</span> <span class="org-string">"~/.emacs.d/init.el"</span>)   <span class="org-comment-delimiter">;; </span><span class="org-comment">Error!</span>
-(rename-file <span class="org-string">"~/.emacs.d/init-new.el"</span> <span class="org-string">"~/.emacs.d/init.el"</span> t) <span class="org-comment-delimiter">;; </span><span class="org-comment">OK</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(rename-file &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/init.el&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/init-new.el&quot;&lt;/span&gt;) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Rename file in same folder&lt;/span&gt;
+(rename-file &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/init-new.el&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/&quot;&lt;/span&gt;)  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Move file to different folder&lt;/span&gt;
+(rename-file &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/init-new.el&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/init.el&quot;&lt;/span&gt;)   &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Error!&lt;/span&gt;
+(rename-file &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/init-new.el&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/init.el&quot;&lt;/span&gt; t) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;OK&lt;/span&gt;
 
-<span class="org-comment-delimiter">;; </span><span class="org-comment">It can also rename or move directories!</span>
-(rename-file <span class="org-string">"/tmp/lisp"</span> <span class="org-string">"/tmp/lisp-two"</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">OK</span>
-(rename-file <span class="org-string">"/tmp/lisp-two"</span> <span class="org-string">"/tmp/lisp"</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">OK</span>
+&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;It can also rename or move directories!&lt;/span&gt;
+(rename-file &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/lisp&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/lisp-two&quot;&lt;/span&gt;) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;OK&lt;/span&gt;
+(rename-file &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/lisp-two&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/lisp&quot;&lt;/span&gt;) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;OK&lt;/span&gt;
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h3><a id="deleting" class="anchor" href="#deleting">¶</a>Deleting</h3><ul><li><kbd>delete-file</kbd>: Delete a file, optionally moving it to the trash folder</li>
-<li><kbd>delete-directory</kbd>: Deletes a directory, including files if desired</li>
-</ul>
+&lt;h3&gt;&lt;a id=&quot;deleting&quot; class=&quot;anchor&quot; href=&quot;#deleting&quot;&gt;¶&lt;/a&gt;Deleting&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;delete-file&lt;/kbd&gt;: Delete a file, optionally moving it to the trash folder&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;delete-directory&lt;/kbd&gt;: Deletes a directory, including files if desired&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-(delete-file <span class="org-string">"/tmp/lisp/dw-desktop.el"</span>)
-(delete-file <span class="org-string">"~/.npmrc"</span> t)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(delete-file &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/lisp/dw-desktop.el&quot;&lt;/span&gt;)
+(delete-file &lt;span class=&quot;org-string&quot;&gt;&quot;~/.npmrc&quot;&lt;/span&gt; t)
 
-(delete-directory <span class="org-string">"/tmp/lisp"</span>)
-(delete-directory <span class="org-string">"/tmp/lisp"</span> t)
+(delete-directory &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/lisp&quot;&lt;/span&gt;)
+(delete-directory &lt;span class=&quot;org-string&quot;&gt;&quot;/tmp/lisp&quot;&lt;/span&gt; t)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="example-migrating-configuration-files-to-the-dotfiles-folder" class="anchor" href="#example-migrating-configuration-files-to-the-dotfiles-folder">¶</a>Example: Migrating configuration files to the dotfiles folder</h2><p>As we continue building our configurations, it's likely that we'll want to migrate a configuration folder into our dotfiles repository.  Let's define a function that will make this really easy for the user:
-</p>
+&lt;h2&gt;&lt;a id=&quot;example-migrating-configuration-files-to-the-dotfiles-folder&quot; class=&quot;anchor&quot; href=&quot;#example-migrating-configuration-files-to-the-dotfiles-folder&quot;&gt;¶&lt;/a&gt;Example: Migrating configuration files to the dotfiles folder&lt;/h2&gt;&lt;p&gt;As we continue building our configurations, it&apos;s likely that we&apos;ll want to migrate a configuration folder into our dotfiles repository.  Let&apos;s define a function that will make this really easy for the user:
+&lt;/p&gt;
 
-<ul><li>The user chooses a folder to move into their dotfiles configuration</li>
-<li>We ensure that the chosen file is located under the home directory (<kbd>dotcrafter-output-directory</kbd>)</li>
-<li>If so, move the file to the corresponding location under the config path</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;The user chooses a folder to move into their dotfiles configuration&lt;/li&gt;
+&lt;li&gt;We ensure that the chosen file is located under the home directory (&lt;kbd&gt;dotcrafter-output-directory&lt;/kbd&gt;)&lt;/li&gt;
+&lt;li&gt;If so, move the file to the corresponding location under the config path&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-<span class="org-comment-delimiter">;; </span><span class="org-comment">Run this to feed the demo!</span>
-(copy-directory <span class="org-string">"~/.dotfiles/.config/guix"</span>
-                (file-name-as-directory (expand-file-name <span class="org-string">".config"</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Run this to feed the demo!&lt;/span&gt;
+(copy-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles/.config/guix&quot;&lt;/span&gt;
+                (file-name-as-directory (expand-file-name &lt;span class=&quot;org-string&quot;&gt;&quot;.config&quot;&lt;/span&gt;
                                                           dotcrafter-output-directory)))
-(copy-file <span class="org-string">"~/.dotfiles/.bash_profile"</span>
+(copy-file &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles/.bash_profile&quot;&lt;/span&gt;
            (file-name-as-directory dotcrafter-output-directory))
 
-(<span class="org-keyword">defun</span> <span class="org-function-name">dotcrafter-move-to-config-files</span> (source-path)
-  <span class="org-doc">"Move a file from the output path to the configuration path."</span>
-  (<span class="org-keyword">interactive</span> <span class="org-string">"FConfiguration path to move: "</span>)
-  (<span class="org-keyword">let*</span> ((relative-path (file-relative-name (expand-file-name source-path)
+(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;dotcrafter-move-to-config-files&lt;/span&gt; (source-path)
+  &lt;span class=&quot;org-doc&quot;&gt;&quot;Move a file from the output path to the configuration path.&quot;&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;interactive&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;FConfiguration path to move: &quot;&lt;/span&gt;)
+  (&lt;span class=&quot;org-keyword&quot;&gt;let*&lt;/span&gt; ((relative-path (file-relative-name (expand-file-name source-path)
                                             dotcrafter-output-directory))
          (dest-path (expand-file-name relative-path
                                       (dotcrafter--resolve-config-files-path)))
-         <span class="org-comment-delimiter">;; </span><span class="org-comment">Strip any trailing slash so that we can treat the directory as file</span>
-         (dest-path (<span class="org-keyword">if</span> (string-suffix-p <span class="org-string">"/"</span> dest-path)
+         &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Strip any trailing slash so that we can treat the directory as file&lt;/span&gt;
+         (dest-path (&lt;span class=&quot;org-keyword&quot;&gt;if&lt;/span&gt; (string-suffix-p &lt;span class=&quot;org-string&quot;&gt;&quot;/&quot;&lt;/span&gt; dest-path)
                         (substring dest-path 0 -1)
                       dest-path)))
-         <span class="org-comment-delimiter">;; </span><span class="org-comment">Make sure that the path is under the output directory and that it</span>
-         <span class="org-comment-delimiter">;; </span><span class="org-comment">doesn't already exist</span>
-         (<span class="org-keyword">when</span> (string-prefix-p <span class="org-string">".."</span> relative-path)
-           (<span class="org-warning">error</span> <span class="org-string">"Copied path is not inside of config output directory: %s"</span> dotcrafter-output-directory))
-         (<span class="org-keyword">when</span> (file-exists-p dest-path)
-           (<span class="org-warning">error</span> <span class="org-string">"Can't copy path because it already exists in the configuration directory: %s"</span> dest-path))
+         &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Make sure that the path is under the output directory and that it&lt;/span&gt;
+         &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;doesn&apos;t already exist&lt;/span&gt;
+         (&lt;span class=&quot;org-keyword&quot;&gt;when&lt;/span&gt; (string-prefix-p &lt;span class=&quot;org-string&quot;&gt;&quot;..&quot;&lt;/span&gt; relative-path)
+           (&lt;span class=&quot;org-warning&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;Copied path is not inside of config output directory: %s&quot;&lt;/span&gt; dotcrafter-output-directory))
+         (&lt;span class=&quot;org-keyword&quot;&gt;when&lt;/span&gt; (file-exists-p dest-path)
+           (&lt;span class=&quot;org-warning&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;Can&apos;t copy path because it already exists in the configuration directory: %s&quot;&lt;/span&gt; dest-path))
 
-         <span class="org-comment-delimiter">;; </span><span class="org-comment">Ensure that parent directories exist and then move the file!</span>
+         &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Ensure that parent directories exist and then move the file!&lt;/span&gt;
          (make-directory (file-name-directory dest-path) t)
          (rename-file source-path dest-path)))
 
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">TODO: Link this path back into the dotcrafter-output-directory</span>
+    &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;TODO: Link this path back into the dotcrafter-output-directory&lt;/span&gt;
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="creating-symbolic-links" class="anchor" href="#creating-symbolic-links">¶</a>Creating symbolic links</h2><p>Using symbolic links, we're able to keep our configuration files in a local Git repository and then make them appear in our home folder.
-</p>
+&lt;h2&gt;&lt;a id=&quot;creating-symbolic-links&quot; class=&quot;anchor&quot; href=&quot;#creating-symbolic-links&quot;&gt;¶&lt;/a&gt;Creating symbolic links&lt;/h2&gt;&lt;p&gt;Using symbolic links, we&apos;re able to keep our configuration files in a local Git repository and then make them appear in our home folder.
+&lt;/p&gt;
 
-<p>Creating symbolic links is very easy in Emacs with the <kbd>make-symbolic-link</kbd> function:
-</p>
+&lt;p&gt;Creating symbolic links is very easy in Emacs with the &lt;kbd&gt;make-symbolic-link&lt;/kbd&gt; function:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(make-symbolic-link <span class="org-string">"~/.dotfiles/.config/guix"</span> <span class="org-string">"~/.config/guix"</span>)   <span class="org-comment-delimiter">;; </span><span class="org-comment">Error if exists</span>
-(make-symbolic-link <span class="org-string">"~/.dotfiles/.config/guix"</span> <span class="org-string">"~/.config/guix"</span> t) <span class="org-comment-delimiter">;; </span><span class="org-comment">No error!</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(make-symbolic-link &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles/.config/guix&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;~/.config/guix&quot;&lt;/span&gt;)   &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Error if exists&lt;/span&gt;
+(make-symbolic-link &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles/.config/guix&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;~/.config/guix&quot;&lt;/span&gt; t) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;No error!&lt;/span&gt;
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>However, this doesn't work exactly the same on Windows!  You might need to run Emacs with elevation for it to work.
-</p>
+&lt;p&gt;However, this doesn&apos;t work exactly the same on Windows!  You might need to run Emacs with elevation for it to work.
+&lt;/p&gt;
 
-<p>You can also check if a file is a symbolic link using <kbd>file-symlink-p</kbd> and get the path it points to using <kbd>file-truename</kbd>:
-</p>
+&lt;p&gt;You can also check if a file is a symbolic link using &lt;kbd&gt;file-symlink-p&lt;/kbd&gt; and get the path it points to using &lt;kbd&gt;file-truename&lt;/kbd&gt;:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(file-symlink-p <span class="org-string">"~/.emacs.d"</span>)         <span class="org-comment-delimiter">;; </span><span class="org-comment">.dotfiles/.emacs.d</span>
-(file-symlink-p <span class="org-string">"~/.emacs.d/init.el"</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">nil</span>
-(file-truename <span class="org-string">"~/.emacs.d/init.el"</span>)  <span class="org-comment-delimiter">;; </span><span class="org-comment">/home/daviwil/.dotfiles/.emacs.d/init.el</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(file-symlink-p &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d&quot;&lt;/span&gt;)         &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;.dotfiles/.emacs.d&lt;/span&gt;
+(file-symlink-p &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/init.el&quot;&lt;/span&gt;) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;nil&lt;/span&gt;
+(file-truename &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/init.el&quot;&lt;/span&gt;)  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;/home/daviwil/.dotfiles/.emacs.d/init.el&lt;/span&gt;
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Copying-and-Naming.html">Emacs Lisp Manual: Copying, Naming, and Renaming Files</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Copying-and-Naming.html&quot;&gt;Emacs Lisp Manual: Copying, Naming, and Renaming Files&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="example-creating-symbolic-links-for-all-configuration-files" class="anchor" href="#example-creating-symbolic-links-for-all-configuration-files">¶</a>Example: Creating symbolic links for all configuration files</h2><p>Here's where everything in this episode finally comes together!
-</p>
+&lt;h2&gt;&lt;a id=&quot;example-creating-symbolic-links-for-all-configuration-files&quot; class=&quot;anchor&quot; href=&quot;#example-creating-symbolic-links-for-all-configuration-files&quot;&gt;¶&lt;/a&gt;Example: Creating symbolic links for all configuration files&lt;/h2&gt;&lt;p&gt;Here&apos;s where everything in this episode finally comes together!
+&lt;/p&gt;
 
-<p>We're going to implement a more elaborate algorithm that will create symbolic links at the optimal level in the home directory so that we don't need to create a link for every single file.
-</p>
+&lt;p&gt;We&apos;re going to implement a more elaborate algorithm that will create symbolic links at the optimal level in the home directory so that we don&apos;t need to create a link for every single file.
+&lt;/p&gt;
 
-<p>If you've ever used GNU Stow, this will look pretty familiar!
-</p>
+&lt;p&gt;If you&apos;ve ever used GNU Stow, this will look pretty familiar!
+&lt;/p&gt;
 
-<h3><a id="the-process" class="anchor" href="#the-process">¶</a>The Process</h3><p>This is what we'll do:
-</p>
+&lt;h3&gt;&lt;a id=&quot;the-process&quot; class=&quot;anchor&quot; href=&quot;#the-process&quot;&gt;¶&lt;/a&gt;The Process&lt;/h3&gt;&lt;p&gt;This is what we&apos;ll do:
+&lt;/p&gt;
 
-<ul><li>Loop over all files in <kbd>dotcrafter-config-files-directory</kbd></li>
-<li>For each file, break the path into pieces for each directory up to the filename</li>
-<li>For each piece of the file's path, check if the folder exists</li>
-<li>If it exists, check if it's a symbolic link that points to the matching directory in the config folder</li>
-<li>If it doesn't exist, create the symlink there</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Loop over all files in &lt;kbd&gt;dotcrafter-config-files-directory&lt;/kbd&gt;&lt;/li&gt;
+&lt;li&gt;For each file, break the path into pieces for each directory up to the filename&lt;/li&gt;
+&lt;li&gt;For each piece of the file&apos;s path, check if the folder exists&lt;/li&gt;
+&lt;li&gt;If it exists, check if it&apos;s a symbolic link that points to the matching directory in the config folder&lt;/li&gt;
+&lt;li&gt;If it doesn&apos;t exist, create the symlink there&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Here's a clearer depicton of what this means:
-</p>
+&lt;p&gt;Here&apos;s a clearer depicton of what this means:
+&lt;/p&gt;
 
-<pre><code class="sh">
+&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
 ~/.dotfiles/.files/.local/share/applications/Emacs.desktop
                  ~/.local/share/applications/Emacs.desktop
                   L .local exists? YES
                          L share exists? YES
                                L applications exists? NO, create link!
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h3><a id="the-code" class="anchor" href="#the-code">¶</a>The Code</h3><p>Let's walk through the code line by line before running it!
-</p>
+&lt;h3&gt;&lt;a id=&quot;the-code&quot; class=&quot;anchor&quot; href=&quot;#the-code&quot;&gt;¶&lt;/a&gt;The Code&lt;/h3&gt;&lt;p&gt;Let&apos;s walk through the code line by line before running it!
+&lt;/p&gt;
 
-<ul><li><kbd>dotcrafter-link-config-files</kbd>: The user-facing function that links the whole config directory</li>
-<li><kbd>dotcrafter-link-config-file</kbd>: The "internal" function that handles linking a single file</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;dotcrafter-link-config-files&lt;/kbd&gt;: The user-facing function that links the whole config directory&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;dotcrafter-link-config-file&lt;/kbd&gt;: The &quot;internal&quot; function that handles linking a single file&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">defun</span> <span class="org-function-name">dotcrafter--link-config-file</span> (config-file)
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">Get the "path parts", basically the name of each directory and file in the</span>
-  <span class="org-comment-delimiter">;; </span><span class="org-comment">path of config-file</span>
-  (<span class="org-keyword">let*</span> ((path-parts
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;dotcrafter--link-config-file&lt;/span&gt; (config-file)
+  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Get the &quot;path parts&quot;, basically the name of each directory and file in the&lt;/span&gt;
+  &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;path of config-file&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;let*&lt;/span&gt; ((path-parts
           (split-string (file-relative-name (expand-file-name config-file)
                                             (dotcrafter--resolve-config-files-path))
-                        <span class="org-string">"/"</span> t))
+                        &lt;span class=&quot;org-string&quot;&gt;&quot;/&quot;&lt;/span&gt; t))
          (current-path nil))
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">Check each "part" of the path to find the right place to create the symlink.</span>
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">Whenever path-parts is nil, stop looping!</span>
-    (<span class="org-keyword">while</span> path-parts
-      <span class="org-comment-delimiter">;; </span><span class="org-comment">Create the current path using the first part and remove it from the</span>
-      <span class="org-comment-delimiter">;; </span><span class="org-comment">front of the list for future iterations</span>
-      (<span class="org-keyword">setq</span> current-path (<span class="org-keyword">if</span> current-path
-                             (concat current-path <span class="org-string">"/"</span> (car path-parts))
+    &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Check each &quot;part&quot; of the path to find the right place to create the symlink.&lt;/span&gt;
+    &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Whenever path-parts is nil, stop looping!&lt;/span&gt;
+    (&lt;span class=&quot;org-keyword&quot;&gt;while&lt;/span&gt; path-parts
+      &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Create the current path using the first part and remove it from the&lt;/span&gt;
+      &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;front of the list for future iterations&lt;/span&gt;
+      (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; current-path (&lt;span class=&quot;org-keyword&quot;&gt;if&lt;/span&gt; current-path
+                             (concat current-path &lt;span class=&quot;org-string&quot;&gt;&quot;/&quot;&lt;/span&gt; (car path-parts))
                            (car path-parts)))
-      (<span class="org-keyword">setq</span> path-parts (cdr path-parts))
+      (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; path-parts (cdr path-parts))
 
-      <span class="org-comment-delimiter">;; </span><span class="org-comment">Figure out whether the current source path can be linked to the target path</span>
-      (<span class="org-keyword">let</span> ((source-path (expand-file-name (concat dotcrafter-config-files-directory <span class="org-string">"/"</span> current-path)
+      &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Figure out whether the current source path can be linked to the target path&lt;/span&gt;
+      (&lt;span class=&quot;org-keyword&quot;&gt;let&lt;/span&gt; ((source-path (expand-file-name (concat dotcrafter-config-files-directory &lt;span class=&quot;org-string&quot;&gt;&quot;/&quot;&lt;/span&gt; current-path)
                                            dotcrafter-dotfiles-folder))
             (target-path (expand-file-name current-path dotcrafter-output-directory)))
-        <span class="org-comment-delimiter">;; </span><span class="org-comment">If the file or directory exists, is it a symbolic link?</span>
-        (<span class="org-keyword">if</span> (file-symlink-p target-path)
-            <span class="org-comment-delimiter">;; </span><span class="org-comment">If the symbolic link exists, does it point to the source-path?</span>
-            (<span class="org-keyword">if</span> (string-equal source-path (file-truename target-path))
-                <span class="org-comment-delimiter">;; </span><span class="org-comment">Clear path-parts to stop looping</span>
-                (<span class="org-keyword">setq</span> path-parts '())
-              (<span class="org-warning">error</span> <span class="org-string">"Path already exists with different symlink! %s"</span> target-path))
-          <span class="org-comment-delimiter">;; </span><span class="org-comment">If the target path is an existing directory, we need to keep</span>
-          <span class="org-comment-delimiter">;; </span><span class="org-comment">looping, otherwise we can create a symlink here!</span>
-          <span class="org-comment-delimiter">;; </span><span class="org-comment">Otherwise, the file is probably a directory so keep looping</span>
-          (<span class="org-keyword">when</span> (not (file-directory-p target-path))
-            <span class="org-comment-delimiter">;; </span><span class="org-comment">Create a symbolic link to the source-path and</span>
-            <span class="org-comment-delimiter">;; </span><span class="org-comment">clear the path-parts so that we stop looping</span>
+        &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;If the file or directory exists, is it a symbolic link?&lt;/span&gt;
+        (&lt;span class=&quot;org-keyword&quot;&gt;if&lt;/span&gt; (file-symlink-p target-path)
+            &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;If the symbolic link exists, does it point to the source-path?&lt;/span&gt;
+            (&lt;span class=&quot;org-keyword&quot;&gt;if&lt;/span&gt; (string-equal source-path (file-truename target-path))
+                &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Clear path-parts to stop looping&lt;/span&gt;
+                (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; path-parts &apos;())
+              (&lt;span class=&quot;org-warning&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;Path already exists with different symlink! %s&quot;&lt;/span&gt; target-path))
+          &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;If the target path is an existing directory, we need to keep&lt;/span&gt;
+          &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;looping, otherwise we can create a symlink here!&lt;/span&gt;
+          &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Otherwise, the file is probably a directory so keep looping&lt;/span&gt;
+          (&lt;span class=&quot;org-keyword&quot;&gt;when&lt;/span&gt; (not (file-directory-p target-path))
+            &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Create a symbolic link to the source-path and&lt;/span&gt;
+            &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;clear the path-parts so that we stop looping&lt;/span&gt;
             (make-symbolic-link source-path target-path)
-            (<span class="org-keyword">setq</span> path-parts '())))))))
+            (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; path-parts &apos;())))))))
 
-(<span class="org-keyword">defun</span> <span class="org-function-name">dotcrafter-link-config-files</span> ()
-  (<span class="org-keyword">interactive</span>)
-  (<span class="org-keyword">let</span> ((config-files
+(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;dotcrafter-link-config-files&lt;/span&gt; ()
+  (&lt;span class=&quot;org-keyword&quot;&gt;interactive&lt;/span&gt;)
+  (&lt;span class=&quot;org-keyword&quot;&gt;let&lt;/span&gt; ((config-files
          (directory-files-recursively
           (dotcrafter--resolve-config-files-path)
-          <span class="org-string">""</span>)))
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">Ensure that the expected output directories are already</span>
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">created so that links will be created inside</span>
-    (<span class="org-keyword">dolist</span> (dir dotcrafter-ensure-output-directories)
+          &lt;span class=&quot;org-string&quot;&gt;&quot;&quot;&lt;/span&gt;)))
+    &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Ensure that the expected output directories are already&lt;/span&gt;
+    &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;created so that links will be created inside&lt;/span&gt;
+    (&lt;span class=&quot;org-keyword&quot;&gt;dolist&lt;/span&gt; (dir dotcrafter-ensure-output-directories)
       (make-directory (expand-file-name dir dotcrafter-output-directory) t))
 
-    <span class="org-comment-delimiter">;; </span><span class="org-comment">Link all of the source config files to the output path</span>
-    (<span class="org-keyword">dolist</span> (file config-files)
+    &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Link all of the source config files to the output path&lt;/span&gt;
+    (&lt;span class=&quot;org-keyword&quot;&gt;dolist&lt;/span&gt; (file config-files)
       (dotcrafter--link-config-file file))))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h2><a id="the-final-code-in-action" class="anchor" href="#the-final-code-in-action">¶</a>The final code in action</h2><p>One last piece will bring together everything we've done in the past few episodes is this function:
-</p>
+&lt;h2&gt;&lt;a id=&quot;the-final-code-in-action&quot; class=&quot;anchor&quot; href=&quot;#the-final-code-in-action&quot;&gt;¶&lt;/a&gt;The final code in action&lt;/h2&gt;&lt;p&gt;One last piece will bring together everything we&apos;ve done in the past few episodes is this function:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">defun</span> <span class="org-function-name">dotcrafter-update-dotfiles</span> ()
-  <span class="org-doc">"Generate and link configuration files to the output directory.</span>
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;dotcrafter-update-dotfiles&lt;/span&gt; ()
+  &lt;span class=&quot;org-doc&quot;&gt;&quot;Generate and link configuration files to the output directory.&lt;/span&gt;
 
-<span class="org-doc">This command handles the full process of \"tangling\" Org Mode</span>
-<span class="org-doc">files containing configuration blocks and creating symbolic links</span>
-<span class="org-doc">to those configuration files in the output directory, typically</span>
-<span class="org-doc">the user's home directory."</span>
-  (<span class="org-keyword">interactive</span>)
+&lt;span class=&quot;org-doc&quot;&gt;This command handles the full process of \&quot;tangling\&quot; Org Mode&lt;/span&gt;
+&lt;span class=&quot;org-doc&quot;&gt;files containing configuration blocks and creating symbolic links&lt;/span&gt;
+&lt;span class=&quot;org-doc&quot;&gt;to those configuration files in the output directory, typically&lt;/span&gt;
+&lt;span class=&quot;org-doc&quot;&gt;the user&apos;s home directory.&quot;&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;interactive&lt;/span&gt;)
   (dotcrafter-tangle-org-files)
   (dotcrafter-link-config-files)
   (dotcrafter--update-gitignore))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>This will tangle all of our Org configuration files, link all output files to the home directory, and update the <kbd>.gitignore</kbd> to ignore any of the generated files in the repo.
-</p>
+&lt;p&gt;This will tangle all of our Org configuration files, link all output files to the home directory, and update the &lt;kbd&gt;.gitignore&lt;/kbd&gt; to ignore any of the generated files in the repo.
+&lt;/p&gt;
 
-<p>Let's try it all out!
-</p>
+&lt;p&gt;Let&apos;s try it all out!
+&lt;/p&gt;
 
-<pre><code class="sh">
+&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
 emacs -Q --batch -l demo.el
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>We can also run this function multiple times and it will work just fine!
-</p>
+&lt;p&gt;We can also run this function multiple times and it will work just fine!
+&lt;/p&gt;
 
-<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>Now that we've got a functioning package, it's time to take things to the next level by creating major and minor modes for it!
-</p>
+&lt;h2&gt;&lt;a id=&quot;whats-next&quot; class=&quot;anchor&quot; href=&quot;#whats-next&quot;&gt;¶&lt;/a&gt;What&apos;s next?&lt;/h2&gt;&lt;p&gt;Now that we&apos;ve got a functioning package, it&apos;s time to take things to the next level by creating major and minor modes for it!
+&lt;/p&gt;
 
-<p>In the next episode, I'll show you how to create a minor mode to gracefully handle automatic Org file tangling.
-</p>
+&lt;p&gt;In the next episode, I&apos;ll show you how to create a minor mode to gracefully handle automatic Org file tangling.
+&lt;/p&gt;
 
-<p>In the following episodes, we'll create a major mode that provides a user interface for the package and then start polishing it up to be published on MELPA!
-</p>
-</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+&lt;p&gt;In the following episodes, we&apos;ll create a major mode that provides a user interface for the package and then start polishing it up to be published on MELPA!
+&lt;/p&gt;
+&lt;/div&gt;</div></div></div></div>&lt;footer class=&quot;blog-footer&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;p&gt;Made with Emacs 27.2 (Org mode 9.4.4)&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://systemcrafters.net/privacy-policy/&quot;&gt;Privacy Policy&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/footer&gt;&lt;script src=&quot;/js/bootstrap.bundle.min.js&quot;/&gt;</body></html>

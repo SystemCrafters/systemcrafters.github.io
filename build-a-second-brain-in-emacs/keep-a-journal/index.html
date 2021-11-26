@@ -1,169 +1,169 @@
-<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Keep a Journal in Emacs with Org Roam - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Keep a Journal in Emacs with Org Roam</h1><p class="blog-post-meta"></p><div><p><a href="https://www.youtube.com/watch?v=3-sLBaJAtew">Watch the video</a> on YouTube!
-</p>
+<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Keep a Journal in Emacs with Org Roam - System Crafters</title></head><body>&lt;div&gt;&lt;div class=&quot;blog-header&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-8&quot;&gt;&lt;div class=&quot;blog-title&quot;&gt;System Crafters&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-sm col-md&quot;&gt;&lt;div class=&quot;blog-description text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;blog-masthead&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-12&quot;&gt;&lt;nav class=&quot;nav&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;/&quot;&gt;Home&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/videos&quot;&gt;Videos&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://wiki.systemcrafters.net&quot;&gt;Wiki&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://store.systemcrafters.net?utm_source=sc-site-nav&quot;&gt;Merch Store&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/support-the-channel&quot;&gt;Support The Channel&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;<div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Keep a Journal in Emacs with Org Roam</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=3-sLBaJAtew&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
+&lt;/p&gt;
 
-<h2><a id="intro" class="anchor" href="#intro">¶</a>Intro</h2><p>One of the best ways to think and work through problems is to have a written dialogue with yourself.  By the end of this video, you'll know how to log your thoughts from the day, link them to existing notes, and easily review the notes for any day, all with Org Roam.
-</p>
+&lt;h2&gt;&lt;a id=&quot;intro&quot; class=&quot;anchor&quot; href=&quot;#intro&quot;&gt;¶&lt;/a&gt;Intro&lt;/h2&gt;&lt;p&gt;One of the best ways to think and work through problems is to have a written dialogue with yourself.  By the end of this video, you&apos;ll know how to log your thoughts from the day, link them to existing notes, and easily review the notes for any day, all with Org Roam.
+&lt;/p&gt;
 
-<h2><a id="the-starting-configuration" class="anchor" href="#the-starting-configuration">¶</a>The starting configuration</h2><p>Before we start, make sure you've got Org Roam set up already.
-</p>
+&lt;h2&gt;&lt;a id=&quot;the-starting-configuration&quot; class=&quot;anchor&quot; href=&quot;#the-starting-configuration&quot;&gt;¶&lt;/a&gt;The starting configuration&lt;/h2&gt;&lt;p&gt;Before we start, make sure you&apos;ve got Org Roam set up already.
+&lt;/p&gt;
 
-<p>You can get started quickly by copying the configuration below, but you'll learn more if you watch the two previous videos in the Org Roam series first:
-</p>
+&lt;p&gt;You can get started quickly by copying the configuration below, but you&apos;ll learn more if you watch the two previous videos in the Org Roam series first:
+&lt;/p&gt;
 
-<ul><li><a href="https://youtu.be/AyhPmypHDEw">Getting Started with Org Roam</a></li>
-<li><a href="https://youtu.be/YxgA5z2R08I">Capturing Notes Efficiently with Org Roam</a></li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://youtu.be/AyhPmypHDEw&quot;&gt;Getting Started with Org Roam&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://youtu.be/YxgA5z2R08I&quot;&gt;Capturing Notes Efficiently with Org Roam&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">org-roam</span>
-  <span class="org-builtin">:ensure</span> t
-  <span class="org-builtin">:init</span>
-  (<span class="org-keyword">setq</span> org-roam-v2-ack t)
-  <span class="org-builtin">:custom</span>
-  (org-roam-directory <span class="org-string">"~/RoamNotes"</span>)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;org-roam&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:ensure&lt;/span&gt; t
+  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; org-roam-v2-ack t)
+  &lt;span class=&quot;org-builtin&quot;&gt;:custom&lt;/span&gt;
+  (org-roam-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/RoamNotes&quot;&lt;/span&gt;)
   (org-roam-completion-everywhere t)
-  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-c n l"</span> . org-roam-buffer-toggle)
-         (<span class="org-string">"C-c n f"</span> . org-roam-node-find)
-         (<span class="org-string">"C-c n i"</span> . org-roam-node-insert)
-         <span class="org-builtin">:map</span> org-mode-map
-         (<span class="org-string">"C-M-i"</span> . completion-at-point)
-         <span class="org-builtin">:map</span> org-roam-dailies-map
-         (<span class="org-string">"Y"</span> . org-roam-dailies-capture-yesterday)
-         (<span class="org-string">"T"</span> . org-roam-dailies-capture-tomorrow))
-  <span class="org-builtin">:bind-keymap</span>
-  (<span class="org-string">"C-c n d"</span> . org-roam-dailies-map)
-  <span class="org-builtin">:config</span>
-  (<span class="org-keyword">require</span> '<span class="org-constant">org-roam-dailies</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">Ensure the keymap is available</span>
+  &lt;span class=&quot;org-builtin&quot;&gt;:bind&lt;/span&gt; ((&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n l&quot;&lt;/span&gt; . org-roam-buffer-toggle)
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n f&quot;&lt;/span&gt; . org-roam-node-find)
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n i&quot;&lt;/span&gt; . org-roam-node-insert)
+         &lt;span class=&quot;org-builtin&quot;&gt;:map&lt;/span&gt; org-mode-map
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-M-i&quot;&lt;/span&gt; . completion-at-point)
+         &lt;span class=&quot;org-builtin&quot;&gt;:map&lt;/span&gt; org-roam-dailies-map
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;Y&quot;&lt;/span&gt; . org-roam-dailies-capture-yesterday)
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;T&quot;&lt;/span&gt; . org-roam-dailies-capture-tomorrow))
+  &lt;span class=&quot;org-builtin&quot;&gt;:bind-keymap&lt;/span&gt;
+  (&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n d&quot;&lt;/span&gt; . org-roam-dailies-map)
+  &lt;span class=&quot;org-builtin&quot;&gt;:config&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;require&lt;/span&gt; &apos;&lt;span class=&quot;org-constant&quot;&gt;org-roam-dailies&lt;/span&gt;) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Ensure the keymap is available&lt;/span&gt;
   (org-roam-db-autosync-mode))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<h3><a id="configuration-notes" class="anchor" href="#configuration-notes">¶</a>Configuration Notes</h3><ul><li>Make sure to update the value of <kbd>org-roam-directory</kbd> to the path where you'd like your Org Roam files to be stored.  Create the directory before loading the configuration!</li>
+&lt;h3&gt;&lt;a id=&quot;configuration-notes&quot; class=&quot;anchor&quot; href=&quot;#configuration-notes&quot;&gt;¶&lt;/a&gt;Configuration Notes&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;Make sure to update the value of &lt;kbd&gt;org-roam-directory&lt;/kbd&gt; to the path where you&apos;d like your Org Roam files to be stored.  Create the directory before loading the configuration!&lt;/li&gt;
 
-<li>There is one slight difference with this configuration from the one in the previous episodes, the function <kbd>org-roam-setup</kbd> was renamed to <kbd>org-roam-db-autosync-mode</kbd></li>
-</ul>
+&lt;li&gt;There is one slight difference with this configuration from the one in the previous episodes, the function &lt;kbd&gt;org-roam-setup&lt;/kbd&gt; was renamed to &lt;kbd&gt;org-roam-db-autosync-mode&lt;/kbd&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 
-<h2><a id="creating-the-folder-for-journal-entries" class="anchor" href="#creating-the-folder-for-journal-entries">¶</a>Creating the folder for journal entries</h2><p>Before we can create and view journal entries, we first need to make sure the folder exists.
-</p>
+&lt;h2&gt;&lt;a id=&quot;creating-the-folder-for-journal-entries&quot; class=&quot;anchor&quot; href=&quot;#creating-the-folder-for-journal-entries&quot;&gt;¶&lt;/a&gt;Creating the folder for journal entries&lt;/h2&gt;&lt;p&gt;Before we can create and view journal entries, we first need to make sure the folder exists.
+&lt;/p&gt;
 
-<p>By default, Org Roam will create daily files under the <kbd>daily/</kbd> subfolder of your <kbd>org-roam-directory</kbd>.  Let's create that folder!
-</p>
+&lt;p&gt;By default, Org Roam will create daily files under the &lt;kbd&gt;daily/&lt;/kbd&gt; subfolder of your &lt;kbd&gt;org-roam-directory&lt;/kbd&gt;.  Let&apos;s create that folder!
+&lt;/p&gt;
 
-<p>If you'd like to change this folder to a different path, you can set the <kbd>org-roam-dailies-directory</kbd> like so:
-</p>
+&lt;p&gt;If you&apos;d like to change this folder to a different path, you can set the &lt;kbd&gt;org-roam-dailies-directory&lt;/kbd&gt; like so:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">setq</span> org-roam-dailies-directory <span class="org-string">"journal/"</span>)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; org-roam-dailies-directory &lt;span class=&quot;org-string&quot;&gt;&quot;journal/&quot;&lt;/span&gt;)
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>This path must be relative to <kbd>org-roam-directory</kbd>!
-</p>
+&lt;p&gt;This path must be relative to &lt;kbd&gt;org-roam-directory&lt;/kbd&gt;!
+&lt;/p&gt;
 
-<h2><a id="creating-a-journal-entry-for-today" class="anchor" href="#creating-a-journal-entry-for-today">¶</a>Creating a journal entry for today</h2><p>Once you've got Org Roam configured, you can run the command <kbd>org-roam-dailies-capture-today</kbd> which we've bound to <kbd>C-c n d n</kbd>.
-</p>
+&lt;h2&gt;&lt;a id=&quot;creating-a-journal-entry-for-today&quot; class=&quot;anchor&quot; href=&quot;#creating-a-journal-entry-for-today&quot;&gt;¶&lt;/a&gt;Creating a journal entry for today&lt;/h2&gt;&lt;p&gt;Once you&apos;ve got Org Roam configured, you can run the command &lt;kbd&gt;org-roam-dailies-capture-today&lt;/kbd&gt; which we&apos;ve bound to &lt;kbd&gt;C-c n d n&lt;/kbd&gt;.
+&lt;/p&gt;
 
-<p>We're using the existing <kbd>org-roam-dailies-map</kbd> for key bindings!
-</p>
+&lt;p&gt;We&apos;re using the existing &lt;kbd&gt;org-roam-dailies-map&lt;/kbd&gt; for key bindings!
+&lt;/p&gt;
 
-<p>When you run that command, a capture window will appear for a file named with the current date.  Here, you can write whatever you like and then press <kbd>C-c C-c</kbd> to save the entry or <kbd>C-c C-k</kbd> to cancel the capture without saving it.
-</p>
+&lt;p&gt;When you run that command, a capture window will appear for a file named with the current date.  Here, you can write whatever you like and then press &lt;kbd&gt;C-c C-c&lt;/kbd&gt; to save the entry or &lt;kbd&gt;C-c C-k&lt;/kbd&gt; to cancel the capture without saving it.
+&lt;/p&gt;
 
-<p>The nice thing about this command is that you can run it again to capture another entry, basically allowing you to create entries across the entire day.  Let's try it!
-</p>
+&lt;p&gt;The nice thing about this command is that you can run it again to capture another entry, basically allowing you to create entries across the entire day.  Let&apos;s try it!
+&lt;/p&gt;
 
-<p>One major benefit of using Org Roam for your journal (instead of something like <a href="https://github.com/bastibe/org-journal">org-journal</a>) is that you can link to any other note in your Org Roam database.  We can use <kbd>C-c n i</kbd> to insert a link to the <kbd>Scheme</kbd> entry that we created in a previous episode.
-</p>
+&lt;p&gt;One major benefit of using Org Roam for your journal (instead of something like &lt;a href=&quot;https://github.com/bastibe/org-journal&quot;&gt;org-journal&lt;/a&gt;) is that you can link to any other note in your Org Roam database.  We can use &lt;kbd&gt;C-c n i&lt;/kbd&gt; to insert a link to the &lt;kbd&gt;Scheme&lt;/kbd&gt; entry that we created in a previous episode.
+&lt;/p&gt;
 
-<h2><a id="reviewing-todays-journal-entries" class="anchor" href="#reviewing-todays-journal-entries">¶</a>Reviewing today's journal entries</h2><p>Perhaps you want to take a look at the journal entries you've already written for today.  To do this, you can run the command <kbd>org-roam-dailies-goto-today</kbd> which we've bound to <kbd>C-c n d d</kbd>.
-</p>
+&lt;h2&gt;&lt;a id=&quot;reviewing-todays-journal-entries&quot; class=&quot;anchor&quot; href=&quot;#reviewing-todays-journal-entries&quot;&gt;¶&lt;/a&gt;Reviewing today&apos;s journal entries&lt;/h2&gt;&lt;p&gt;Perhaps you want to take a look at the journal entries you&apos;ve already written for today.  To do this, you can run the command &lt;kbd&gt;org-roam-dailies-goto-today&lt;/kbd&gt; which we&apos;ve bound to &lt;kbd&gt;C-c n d d&lt;/kbd&gt;.
+&lt;/p&gt;
 
-<p>When you run this command, the journal file for today will be opened so that you can read it and make any edits you like.
-</p>
+&lt;p&gt;When you run this command, the journal file for today will be opened so that you can read it and make any edits you like.
+&lt;/p&gt;
 
-<p>This file is set up like any other Org Roam note.  You can also use <kbd>C-c n f</kbd> to navigate to it and even insert a link to it in other note files!
-</p>
+&lt;p&gt;This file is set up like any other Org Roam note.  You can also use &lt;kbd&gt;C-c n f&lt;/kbd&gt; to navigate to it and even insert a link to it in other note files!
+&lt;/p&gt;
 
-<h2><a id="creating-and-viewing-entries-for-yesterday-or-tomorrow" class="anchor" href="#creating-and-viewing-entries-for-yesterday-or-tomorrow">¶</a>Creating and viewing entries for yesterday or tomorrow</h2><p>You can also create entries for the previous or next day from today:
-</p>
+&lt;h2&gt;&lt;a id=&quot;creating-and-viewing-entries-for-yesterday-or-tomorrow&quot; class=&quot;anchor&quot; href=&quot;#creating-and-viewing-entries-for-yesterday-or-tomorrow&quot;&gt;¶&lt;/a&gt;Creating and viewing entries for yesterday or tomorrow&lt;/h2&gt;&lt;p&gt;You can also create entries for the previous or next day from today:
+&lt;/p&gt;
 
-<ul><li>Capture a note for yesterday with <kbd>org-roam-dailies-capture-yesterday</kbd> (<kbd>C-c n d Y</kbd>)</li>
-<li>Capture a note for tomorrow with <kbd>org-roam-dailies-capture-tomorrow</kbd> (<kbd>C-c n d T</kbd>)</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Capture a note for yesterday with &lt;kbd&gt;org-roam-dailies-capture-yesterday&lt;/kbd&gt; (&lt;kbd&gt;C-c n d Y&lt;/kbd&gt;)&lt;/li&gt;
+&lt;li&gt;Capture a note for tomorrow with &lt;kbd&gt;org-roam-dailies-capture-tomorrow&lt;/kbd&gt; (&lt;kbd&gt;C-c n d T&lt;/kbd&gt;)&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>These commands can be useful for writing concluding thoughts for the previous day or leaving notes for yourself for tomorrow!
-</p>
+&lt;p&gt;These commands can be useful for writing concluding thoughts for the previous day or leaving notes for yourself for tomorrow!
+&lt;/p&gt;
 
-<p>There are also commands to navigate to the entries for these days:
-</p>
+&lt;p&gt;There are also commands to navigate to the entries for these days:
+&lt;/p&gt;
 
-<ul><li>Go to the file for yesterday with <kbd>org-roam-dailies-goto-yesterday</kbd> (<kbd>C-c n d y</kbd>)</li>
-<li>Go to the file for tomorrow with <kbd>org-roam-dailies-goto-tomorrow</kbd> (<kbd>C-c n d t</kbd>)</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Go to the file for yesterday with &lt;kbd&gt;org-roam-dailies-goto-yesterday&lt;/kbd&gt; (&lt;kbd&gt;C-c n d y&lt;/kbd&gt;)&lt;/li&gt;
+&lt;li&gt;Go to the file for tomorrow with &lt;kbd&gt;org-roam-dailies-goto-tomorrow&lt;/kbd&gt; (&lt;kbd&gt;C-c n d t&lt;/kbd&gt;)&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2><a id="creating-and-viewing-entries-for-a-specific-date" class="anchor" href="#creating-and-viewing-entries-for-a-specific-date">¶</a>Creating and viewing entries for a specific date</h2><p>You can create or view notes for a specific day with the following commands:
-</p>
+&lt;h2&gt;&lt;a id=&quot;creating-and-viewing-entries-for-a-specific-date&quot; class=&quot;anchor&quot; href=&quot;#creating-and-viewing-entries-for-a-specific-date&quot;&gt;¶&lt;/a&gt;Creating and viewing entries for a specific date&lt;/h2&gt;&lt;p&gt;You can create or view notes for a specific day with the following commands:
+&lt;/p&gt;
 
-<ul><li>Capture a note for a specific date with <kbd>org-roam-dailies-capture-date</kbd> (<kbd>C-c n d v</kbd>)</li>
-<li>Go to the file for a specific date with <kbd>org-roam-dailies-goto-date</kbd> (<kbd>C-c n d c</kbd>)</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Capture a note for a specific date with &lt;kbd&gt;org-roam-dailies-capture-date&lt;/kbd&gt; (&lt;kbd&gt;C-c n d v&lt;/kbd&gt;)&lt;/li&gt;
+&lt;li&gt;Go to the file for a specific date with &lt;kbd&gt;org-roam-dailies-goto-date&lt;/kbd&gt; (&lt;kbd&gt;C-c n d c&lt;/kbd&gt;)&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>When you run either of these commands, you'll be shown a calendar which lets you pick the date to view or create entries.  Just hold shift and use the arrow keys to move around in the calendar!
-</p>
+&lt;p&gt;When you run either of these commands, you&apos;ll be shown a calendar which lets you pick the date to view or create entries.  Just hold shift and use the arrow keys to move around in the calendar!
+&lt;/p&gt;
 
-<p>You can also navigate forward or backward in time from the date of the file you're currently viewing:
-</p>
+&lt;p&gt;You can also navigate forward or backward in time from the date of the file you&apos;re currently viewing:
+&lt;/p&gt;
 
-<ul><li>Go back one existing date file with <kbd>org-roam-dailies-goto-next-note</kbd> (<kbd>C-c n d b</kbd>)</li>
-<li>Go forward one existing date file with <kbd>org-roam-dailies-goto-previous-note</kbd> (<kbd>C-c n d f</kbd>)</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;Go back one existing date file with &lt;kbd&gt;org-roam-dailies-goto-next-note&lt;/kbd&gt; (&lt;kbd&gt;C-c n d b&lt;/kbd&gt;)&lt;/li&gt;
+&lt;li&gt;Go forward one existing date file with &lt;kbd&gt;org-roam-dailies-goto-previous-note&lt;/kbd&gt; (&lt;kbd&gt;C-c n d f&lt;/kbd&gt;)&lt;/li&gt;
+&lt;/ul&gt;
 
-<h2><a id="adding-the-time-to-each-entry" class="anchor" href="#adding-the-time-to-each-entry">¶</a>Adding the time to each entry</h2><p>If you want to add some more information to the entries that you capture, you can customize the default capture template:
-</p>
+&lt;h2&gt;&lt;a id=&quot;adding-the-time-to-each-entry&quot; class=&quot;anchor&quot; href=&quot;#adding-the-time-to-each-entry&quot;&gt;¶&lt;/a&gt;Adding the time to each entry&lt;/h2&gt;&lt;p&gt;If you want to add some more information to the entries that you capture, you can customize the default capture template:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">setq</span> org-roam-dailies-capture-templates
-      '((<span class="org-string">"d"</span> <span class="org-string">"default"</span> entry <span class="org-string">"* %&lt;%I:%M %p&gt;: %?"</span>
-         <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y-%m-%d&gt;.org"</span> <span class="org-string">"#+title: %&lt;%Y-%m-%d&gt;\n"</span>))))
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; org-roam-dailies-capture-templates
+      &apos;((&lt;span class=&quot;org-string&quot;&gt;&quot;d&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;default&quot;&lt;/span&gt; entry &lt;span class=&quot;org-string&quot;&gt;&quot;* %&amp;lt;%I:%M %p&amp;gt;: %?&quot;&lt;/span&gt;
+         &lt;span class=&quot;org-builtin&quot;&gt;:if-new&lt;/span&gt; (file+head &lt;span class=&quot;org-string&quot;&gt;&quot;%&amp;lt;%Y-%m-%d&amp;gt;.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;#+title: %&amp;lt;%Y-%m-%d&amp;gt;\n&quot;&lt;/span&gt;))))
 
-</code></pre>
+&lt;/code&gt;&lt;/pre&gt;
 
-<p>More information on the format can be found in the documentation for <kbd>format-time-string</kbd>.
-</p>
+&lt;p&gt;More information on the format can be found in the documentation for &lt;kbd&gt;format-time-string&lt;/kbd&gt;.
+&lt;/p&gt;
 
-<p>Now when we create a new daily entry, the date will be captured in the heading.
-</p>
+&lt;p&gt;Now when we create a new daily entry, the date will be captured in the heading.
+&lt;/p&gt;
 
-<p>You can create more capture templates for daily entries!  I'll give some more examples on how to use this in another video.
-</p>
-<h2><a id="the-final-configuration" class="anchor" href="#the-final-configuration">¶</a>The final configuration</h2><p>Here's the final configuration for everything you saw in the video:
-</p>
+&lt;p&gt;You can create more capture templates for daily entries!  I&apos;ll give some more examples on how to use this in another video.
+&lt;/p&gt;
+&lt;h2&gt;&lt;a id=&quot;the-final-configuration&quot; class=&quot;anchor&quot; href=&quot;#the-final-configuration&quot;&gt;¶&lt;/a&gt;The final configuration&lt;/h2&gt;&lt;p&gt;Here&apos;s the final configuration for everything you saw in the video:
+&lt;/p&gt;
 
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">use-package</span> <span class="org-constant">org-roam</span>
-  <span class="org-builtin">:ensure</span> t
-  <span class="org-builtin">:init</span>
-  (<span class="org-keyword">setq</span> org-roam-v2-ack t)
-  <span class="org-builtin">:custom</span>
-  (org-roam-directory <span class="org-string">"~/RoamNotes"</span>)
+&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;org-roam&lt;/span&gt;
+  &lt;span class=&quot;org-builtin&quot;&gt;:ensure&lt;/span&gt; t
+  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; org-roam-v2-ack t)
+  &lt;span class=&quot;org-builtin&quot;&gt;:custom&lt;/span&gt;
+  (org-roam-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/RoamNotes&quot;&lt;/span&gt;)
   (org-roam-completion-everywhere t)
   (org-roam-dailies-capture-templates
-    '((<span class="org-string">"d"</span> <span class="org-string">"default"</span> entry <span class="org-string">"* %&lt;%I:%M %p&gt;: %?"</span>
-       <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y-%m-%d&gt;.org"</span> <span class="org-string">"#+title: %&lt;%Y-%m-%d&gt;\n"</span>))))
-  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-c n l"</span> . org-roam-buffer-toggle)
-         (<span class="org-string">"C-c n f"</span> . org-roam-node-find)
-         (<span class="org-string">"C-c n i"</span> . org-roam-node-insert)
-         <span class="org-builtin">:map</span> org-mode-map
-         (<span class="org-string">"C-M-i"</span> . completion-at-point)
-         <span class="org-builtin">:map</span> org-roam-dailies-map
-         (<span class="org-string">"Y"</span> . org-roam-dailies-capture-yesterday)
-         (<span class="org-string">"T"</span> . org-roam-dailies-capture-tomorrow))
-  <span class="org-builtin">:bind-keymap</span>
-  (<span class="org-string">"C-c n d"</span> . org-roam-dailies-map)
-  <span class="org-builtin">:config</span>
-  (<span class="org-keyword">require</span> '<span class="org-constant">org-roam-dailies</span>) <span class="org-comment-delimiter">;; </span><span class="org-comment">Ensure the keymap is available</span>
+    &apos;((&lt;span class=&quot;org-string&quot;&gt;&quot;d&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;default&quot;&lt;/span&gt; entry &lt;span class=&quot;org-string&quot;&gt;&quot;* %&amp;lt;%I:%M %p&amp;gt;: %?&quot;&lt;/span&gt;
+       &lt;span class=&quot;org-builtin&quot;&gt;:if-new&lt;/span&gt; (file+head &lt;span class=&quot;org-string&quot;&gt;&quot;%&amp;lt;%Y-%m-%d&amp;gt;.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;#+title: %&amp;lt;%Y-%m-%d&amp;gt;\n&quot;&lt;/span&gt;))))
+  &lt;span class=&quot;org-builtin&quot;&gt;:bind&lt;/span&gt; ((&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n l&quot;&lt;/span&gt; . org-roam-buffer-toggle)
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n f&quot;&lt;/span&gt; . org-roam-node-find)
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n i&quot;&lt;/span&gt; . org-roam-node-insert)
+         &lt;span class=&quot;org-builtin&quot;&gt;:map&lt;/span&gt; org-mode-map
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-M-i&quot;&lt;/span&gt; . completion-at-point)
+         &lt;span class=&quot;org-builtin&quot;&gt;:map&lt;/span&gt; org-roam-dailies-map
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;Y&quot;&lt;/span&gt; . org-roam-dailies-capture-yesterday)
+         (&lt;span class=&quot;org-string&quot;&gt;&quot;T&quot;&lt;/span&gt; . org-roam-dailies-capture-tomorrow))
+  &lt;span class=&quot;org-builtin&quot;&gt;:bind-keymap&lt;/span&gt;
+  (&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n d&quot;&lt;/span&gt; . org-roam-dailies-map)
+  &lt;span class=&quot;org-builtin&quot;&gt;:config&lt;/span&gt;
+  (&lt;span class=&quot;org-keyword&quot;&gt;require&lt;/span&gt; &apos;&lt;span class=&quot;org-constant&quot;&gt;org-roam-dailies&lt;/span&gt;) &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Ensure the keymap is available&lt;/span&gt;
   (org-roam-db-autosync-mode))
 
-</code></pre>
-</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</div></div></div></div>&lt;footer class=&quot;blog-footer&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;p&gt;Made with Emacs 27.2 (Org mode 9.4.4)&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://systemcrafters.net/privacy-policy/&quot;&gt;Privacy Policy&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/footer&gt;&lt;script src=&quot;/js/bootstrap.bundle.min.js&quot;/&gt;</body></html>

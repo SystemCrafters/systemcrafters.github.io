@@ -1,185 +1,185 @@
-<!DOCTYPE html><html lang="en"><head><!--  --><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Efficient Movement with Emacs - System Crafters</title></head><body><div><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Efficient Movement with Emacs</h1><p class="blog-post-meta"></p><div><p><a href="https://www.youtube.com/watch?v=wT_jUtEGfeg">Watch the video</a> on YouTube!
-</p>
+<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Efficient Movement with Emacs - System Crafters</title></head><body>&lt;div&gt;&lt;div class=&quot;blog-header&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-8&quot;&gt;&lt;div class=&quot;blog-title&quot;&gt;System Crafters&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;col-sm col-md&quot;&gt;&lt;div class=&quot;blog-description text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;blog-masthead&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row align-items-center justify-content-between&quot;&gt;&lt;div class=&quot;col-sm-12 col-md-12&quot;&gt;&lt;nav class=&quot;nav&quot;&gt;&lt;a class=&quot;nav-link&quot; href=&quot;/&quot;&gt;Home&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/videos&quot;&gt;Videos&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://wiki.systemcrafters.net&quot;&gt;Wiki&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;https://store.systemcrafters.net?utm_source=sc-site-nav&quot;&gt;Merch Store&lt;/a&gt; &lt;a class=&quot;nav-link&quot; href=&quot;/support-the-channel&quot;&gt;Support The Channel&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;<div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Efficient Movement with Emacs</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=wT_jUtEGfeg&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
+&lt;/p&gt;
 
-<h2><a id="what-will-we-learn" class="anchor" href="#what-will-we-learn">¶</a>What will we learn?</h2><p>We covered the basics of using Emacs in The Absolute Beginners' Guide to Emacs but we didn't really get a chance to talk about the key bindings you might want to use to navigate around file buffers.
-</p>
+&lt;h2&gt;&lt;a id=&quot;what-will-we-learn&quot; class=&quot;anchor&quot; href=&quot;#what-will-we-learn&quot;&gt;¶&lt;/a&gt;What will we learn?&lt;/h2&gt;&lt;p&gt;We covered the basics of using Emacs in The Absolute Beginners&apos; Guide to Emacs but we didn&apos;t really get a chance to talk about the key bindings you might want to use to navigate around file buffers.
+&lt;/p&gt;
 
-<p>In this video I'll show you the built-in bindings you can use to move around in a file very efficiently without moving your fingers from the letter keys!
-</p>
+&lt;p&gt;In this video I&apos;ll show you the built-in bindings you can use to move around in a file very efficiently without moving your fingers from the letter keys!
+&lt;/p&gt;
 
-<p>I will also tell you the exact Emacs commands that these keys bind to so that you can bind them to new keys if you like or even use them directly in Emacs Lisp code!
-</p>
+&lt;p&gt;I will also tell you the exact Emacs commands that these keys bind to so that you can bind them to new keys if you like or even use them directly in Emacs Lisp code!
+&lt;/p&gt;
 
-<p>I recommend opening a text buffer in Emacs while watching this episode so that you can try these bindings and follow along.
-</p>
+&lt;p&gt;I recommend opening a text buffer in Emacs while watching this episode so that you can try these bindings and follow along.
+&lt;/p&gt;
 
-<h2><a id="moving-the-point" class="anchor" href="#moving-the-point">¶</a>Moving the Point</h2><p>In Emacs, the term "point" refers to the location of the cursor in a given buffer.  The point is the place where text will be inserted when you type and its location can be changed using movement keys.
-</p>
+&lt;h2&gt;&lt;a id=&quot;moving-the-point&quot; class=&quot;anchor&quot; href=&quot;#moving-the-point&quot;&gt;¶&lt;/a&gt;Moving the Point&lt;/h2&gt;&lt;p&gt;In Emacs, the term &quot;point&quot; refers to the location of the cursor in a given buffer.  The point is the place where text will be inserted when you type and its location can be changed using movement keys.
+&lt;/p&gt;
 
-<p>Emacs allows you to use the arrow keys to move the point just like in many typical text editors.
-</p>
+&lt;p&gt;Emacs allows you to use the arrow keys to move the point just like in many typical text editors.
+&lt;/p&gt;
 
-<p>In addition to the arrow keys, Emacs also provides a set of movement keys using alphabetical letters.  The interesting thing is that these keys are chosen because of the words they map to so that they are easy to remember!
-</p>
+&lt;p&gt;In addition to the arrow keys, Emacs also provides a set of movement keys using alphabetical letters.  The interesting thing is that these keys are chosen because of the words they map to so that they are easy to remember!
+&lt;/p&gt;
 
-<ul><li>The letter <kbd>f</kbd> stands for "forward"</li>
-<li>The letter <kbd>b</kbd> stands for "backward"</li>
-<li>The letter <kbd>n</kbd> stands for "next"</li>
-<li>The letter <kbd>p</kbd> stands for "previous"</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;The letter &lt;kbd&gt;f&lt;/kbd&gt; stands for &quot;forward&quot;&lt;/li&gt;
+&lt;li&gt;The letter &lt;kbd&gt;b&lt;/kbd&gt; stands for &quot;backward&quot;&lt;/li&gt;
+&lt;li&gt;The letter &lt;kbd&gt;n&lt;/kbd&gt; stands for &quot;next&quot;&lt;/li&gt;
+&lt;li&gt;The letter &lt;kbd&gt;p&lt;/kbd&gt; stands for &quot;previous&quot;&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html">Emacs Manual: Changing the Location of Point</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html&quot;&gt;Emacs Manual: Changing the Location of Point&lt;/a&gt;
+&lt;/p&gt;
 
-<h3><a id="basic-movements" class="anchor" href="#basic-movements">¶</a>Basic Movements</h3><p>Basic point movements are done using the keys I mentioned above in combination with the CTRL key:
-</p>
+&lt;h3&gt;&lt;a id=&quot;basic-movements&quot; class=&quot;anchor&quot; href=&quot;#basic-movements&quot;&gt;¶&lt;/a&gt;Basic Movements&lt;/h3&gt;&lt;p&gt;Basic point movements are done using the keys I mentioned above in combination with the CTRL key:
+&lt;/p&gt;
 
-<ul><li><kbd>C-f</kbd> executes <kbd>forward-char</kbd> to move the point forward by one character</li>
-<li><kbd>C-b</kbd> executes <kbd>backward-char</kbd> to move the point backward by one character</li>
-<li><kbd>C-n</kbd> executes <kbd>next-line</kbd> to move the point forward by one line, keeping horizontal position</li>
-<li><kbd>C-p</kbd> executes <kbd>previous-line</kbd> to move the point backward by one line, keeping horizontal position</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C-f&lt;/kbd&gt; executes &lt;kbd&gt;forward-char&lt;/kbd&gt; to move the point forward by one character&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;C-b&lt;/kbd&gt; executes &lt;kbd&gt;backward-char&lt;/kbd&gt; to move the point backward by one character&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;C-n&lt;/kbd&gt; executes &lt;kbd&gt;next-line&lt;/kbd&gt; to move the point forward by one line, keeping horizontal position&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;C-p&lt;/kbd&gt; executes &lt;kbd&gt;previous-line&lt;/kbd&gt; to move the point backward by one line, keeping horizontal position&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>The benefit of these bindings is that they are closer to where your fingers already rest on the keyboard.  No more moving your right hand to the arrow keys just to navigate around the buffer!
-</p>
+&lt;p&gt;The benefit of these bindings is that they are closer to where your fingers already rest on the keyboard.  No more moving your right hand to the arrow keys just to navigate around the buffer!
+&lt;/p&gt;
 
-<p>The <kbd>&lt;LEFT&gt;</kbd> and <kbd>&lt;RIGHT&gt;</kbd> arrow keys are slightly different in that they call <kbd>left-char</kbd> and <kbd>right-char</kbd> which properly respect the direction right-to-left text!
-</p>
+&lt;p&gt;The &lt;kbd&gt;&amp;lt;LEFT&amp;gt;&lt;/kbd&gt; and &lt;kbd&gt;&amp;lt;RIGHT&amp;gt;&lt;/kbd&gt; arrow keys are slightly different in that they call &lt;kbd&gt;left-char&lt;/kbd&gt; and &lt;kbd&gt;right-char&lt;/kbd&gt; which properly respect the direction right-to-left text!
+&lt;/p&gt;
 
-<h2><a id="moving-to-beginning-and-end-of-line" class="anchor" href="#moving-to-beginning-and-end-of-line">¶</a>Moving to Beginning and End of Line</h2><p>It's very common to want to move to the beginning or end of a line of text!
-</p>
+&lt;h2&gt;&lt;a id=&quot;moving-to-beginning-and-end-of-line&quot; class=&quot;anchor&quot; href=&quot;#moving-to-beginning-and-end-of-line&quot;&gt;¶&lt;/a&gt;Moving to Beginning and End of Line&lt;/h2&gt;&lt;p&gt;It&apos;s very common to want to move to the beginning or end of a line of text!
+&lt;/p&gt;
 
-<ul><li><kbd>C-a</kbd> executes <kbd>move-beginning-of-line</kbd> which moves the point to the beginning of the line</li>
-<li><kbd>C-e</kbd> executes <kbd>move-end-of-line</kbd> which moves the point to the end of the line</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C-a&lt;/kbd&gt; executes &lt;kbd&gt;move-beginning-of-line&lt;/kbd&gt; which moves the point to the beginning of the line&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;C-e&lt;/kbd&gt; executes &lt;kbd&gt;move-end-of-line&lt;/kbd&gt; which moves the point to the end of the line&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>You can think of this like:
-</p>
+&lt;p&gt;You can think of this like:
+&lt;/p&gt;
 
-<ul><li><kbd>a</kbd> is the <em>beginning</em> of the English alphabet</li>
-<li><kbd>e</kbd> stands for <em>end</em> of line</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;a&lt;/kbd&gt; is the &lt;em&gt;beginning&lt;/em&gt; of the English alphabet&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;e&lt;/kbd&gt; stands for &lt;em&gt;end&lt;/em&gt; of line&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html">Emacs Manual: Changing the Location of Point</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html&quot;&gt;Emacs Manual: Changing the Location of Point&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="moving-to-beginning-and-end-of-buffer" class="anchor" href="#moving-to-beginning-and-end-of-buffer">¶</a>Moving to Beginning and End of Buffer</h2><p>Sometimes you want to jump to the beginning or end of the buffer quickly!
-</p>
+&lt;h2&gt;&lt;a id=&quot;moving-to-beginning-and-end-of-buffer&quot; class=&quot;anchor&quot; href=&quot;#moving-to-beginning-and-end-of-buffer&quot;&gt;¶&lt;/a&gt;Moving to Beginning and End of Buffer&lt;/h2&gt;&lt;p&gt;Sometimes you want to jump to the beginning or end of the buffer quickly!
+&lt;/p&gt;
 
-<ul><li><kbd>M-&lt;</kbd> executes <kbd>beginning-of-buffer</kbd> to move the point to the beginning of the buffer</li>
-<li><kbd>M-&gt;</kbd> executes <kbd>end-of-buffer</kbd> to move the point to the end of the buffer.</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;M-&amp;lt;&lt;/kbd&gt; executes &lt;kbd&gt;beginning-of-buffer&lt;/kbd&gt; to move the point to the beginning of the buffer&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;M-&amp;gt;&lt;/kbd&gt; executes &lt;kbd&gt;end-of-buffer&lt;/kbd&gt; to move the point to the end of the buffer.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>If you're using the GUI version of Emacs (not in the terminal) you can also press <kbd>C-&lt;HOME&gt;</kbd> and <kbd>C-&lt;END&gt;</kbd> to accomplish the same thing!
-</p>
+&lt;p&gt;If you&apos;re using the GUI version of Emacs (not in the terminal) you can also press &lt;kbd&gt;C-&amp;lt;HOME&amp;gt;&lt;/kbd&gt; and &lt;kbd&gt;C-&amp;lt;END&amp;gt;&lt;/kbd&gt; to accomplish the same thing!
+&lt;/p&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html">Emacs Manual: Changing the Location of Point</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html&quot;&gt;Emacs Manual: Changing the Location of Point&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="moving-to-a-specific-line-or-column" class="anchor" href="#moving-to-a-specific-line-or-column">¶</a>Moving to a Specific Line or Column</h2><p>When a compiler tells you an error is on a specific line number, you'll want to know how to get there quickly!
-</p>
+&lt;h2&gt;&lt;a id=&quot;moving-to-a-specific-line-or-column&quot; class=&quot;anchor&quot; href=&quot;#moving-to-a-specific-line-or-column&quot;&gt;¶&lt;/a&gt;Moving to a Specific Line or Column&lt;/h2&gt;&lt;p&gt;When a compiler tells you an error is on a specific line number, you&apos;ll want to know how to get there quickly!
+&lt;/p&gt;
 
-<ul><li><kbd>M-g M-g</kbd> (press Alt+g twice!) executes <kbd>goto-line</kbd> which prompts you for the line number</li>
-<li><kbd>M-g &lt;TAB&gt;</kbd> executes <kbd>move-to-column</kbd> which prompts you for the column number</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;M-g M-g&lt;/kbd&gt; (press Alt+g twice!) executes &lt;kbd&gt;goto-line&lt;/kbd&gt; which prompts you for the line number&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;M-g &amp;lt;TAB&amp;gt;&lt;/kbd&gt; executes &lt;kbd&gt;move-to-column&lt;/kbd&gt; which prompts you for the column number&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><strong>TIP:</strong> you can easily show line numbers in a buffer by running <kbd>M-x display-line-numbers-mode</kbd>!
-</p>
+&lt;p&gt;&lt;strong&gt;TIP:&lt;/strong&gt; you can easily show line numbers in a buffer by running &lt;kbd&gt;M-x display-line-numbers-mode&lt;/kbd&gt;!
+&lt;/p&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html">Emacs Manual: Changing the Location of Point</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html&quot;&gt;Emacs Manual: Changing the Location of Point&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="moving-by-words-sentences-and-paragraphs" class="anchor" href="#moving-by-words-sentences-and-paragraphs">¶</a>Moving by Words, Sentences, and Paragraphs</h2><p>There are other bindings that move in larger steps in the buffer, usually corresponding to units that you understand like words, sentences, and paragraphs.
-</p>
+&lt;h2&gt;&lt;a id=&quot;moving-by-words-sentences-and-paragraphs&quot; class=&quot;anchor&quot; href=&quot;#moving-by-words-sentences-and-paragraphs&quot;&gt;¶&lt;/a&gt;Moving by Words, Sentences, and Paragraphs&lt;/h2&gt;&lt;p&gt;There are other bindings that move in larger steps in the buffer, usually corresponding to units that you understand like words, sentences, and paragraphs.
+&lt;/p&gt;
 
-<h3><a id="words" class="anchor" href="#words">¶</a>Words</h3><p>To move forward and backward by words using the same keys, use ALT (Meta):
-</p>
+&lt;h3&gt;&lt;a id=&quot;words&quot; class=&quot;anchor&quot; href=&quot;#words&quot;&gt;¶&lt;/a&gt;Words&lt;/h3&gt;&lt;p&gt;To move forward and backward by words using the same keys, use ALT (Meta):
+&lt;/p&gt;
 
-<ul><li><kbd>M-f</kbd> executes <kbd>forward-word</kbd> to move the point forward by one word</li>
-<li><kbd>M-b</kbd> executes <kbd>backward-word</kbd> to move the point backward by one word</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;M-f&lt;/kbd&gt; executes &lt;kbd&gt;forward-word&lt;/kbd&gt; to move the point forward by one word&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;M-b&lt;/kbd&gt; executes &lt;kbd&gt;backward-word&lt;/kbd&gt; to move the point backward by one word&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>Note that there is no equivalent for <kbd>C-n</kbd> and <kbd>C-p</kbd>!
-</p>
+&lt;p&gt;Note that there is no equivalent for &lt;kbd&gt;C-n&lt;/kbd&gt; and &lt;kbd&gt;C-p&lt;/kbd&gt;!
+&lt;/p&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html">Emacs Manual: Words</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html&quot;&gt;Emacs Manual: Words&lt;/a&gt;
+&lt;/p&gt;
 
-<h3><a id="paragraphs" class="anchor" href="#paragraphs">¶</a>Paragraphs</h3><p>You can move between paragraphs using the following keys:
-</p>
+&lt;h3&gt;&lt;a id=&quot;paragraphs&quot; class=&quot;anchor&quot; href=&quot;#paragraphs&quot;&gt;¶&lt;/a&gt;Paragraphs&lt;/h3&gt;&lt;p&gt;You can move between paragraphs using the following keys:
+&lt;/p&gt;
 
-<ul><li><kbd>M-}</kbd> executes <kbd>forward-paragraph</kbd> to move the point forward by one paragraph</li>
-<li><kbd>M-{</kbd> executes <kbd>backward-paragraph</kbd> to move the point backward by one paragraph</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;M-}&lt;/kbd&gt; executes &lt;kbd&gt;forward-paragraph&lt;/kbd&gt; to move the point forward by one paragraph&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;M-{&lt;/kbd&gt; executes &lt;kbd&gt;backward-paragraph&lt;/kbd&gt; to move the point backward by one paragraph&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>These keys can also be used in code!  The definition of a "paragraph" is basically any section of text that is separated by blank lines (see documentation for the <kbd>paragraph-start</kbd> variable).
-</p>
+&lt;p&gt;These keys can also be used in code!  The definition of a &quot;paragraph&quot; is basically any section of text that is separated by blank lines (see documentation for the &lt;kbd&gt;paragraph-start&lt;/kbd&gt; variable).
+&lt;/p&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Paragraphs.html">Emacs Manual: Paragraphs</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Paragraphs.html&quot;&gt;Emacs Manual: Paragraphs&lt;/a&gt;
+&lt;/p&gt;
 
-<h3><a id="sentences" class="anchor" href="#sentences">¶</a>Sentences</h3><p>You can move between sentences using keys similar to jumping to beginning or end of the line:
-</p>
+&lt;h3&gt;&lt;a id=&quot;sentences&quot; class=&quot;anchor&quot; href=&quot;#sentences&quot;&gt;¶&lt;/a&gt;Sentences&lt;/h3&gt;&lt;p&gt;You can move between sentences using keys similar to jumping to beginning or end of the line:
+&lt;/p&gt;
 
-<ul><li><kbd>M-e</kbd> executes <kbd>forward-sentence</kbd> to move the point forward to the end of the sentence or the next sentence</li>
-<li><kbd>M-a</kbd> executes <kbd>backward-sentence</kbd> to move the point backward to the beginning of the sentence or the preceding sentence</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;M-e&lt;/kbd&gt; executes &lt;kbd&gt;forward-sentence&lt;/kbd&gt; to move the point forward to the end of the sentence or the next sentence&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;M-a&lt;/kbd&gt; executes &lt;kbd&gt;backward-sentence&lt;/kbd&gt; to move the point backward to the beginning of the sentence or the preceding sentence&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>What qualifies as a sentence is a bit more complex (see documentation for the <kbd>sentence-end</kbd> function).  If the normal sentence patterns aren't found, it defaults to following paragraph boundaries, so it works in code too!
-</p>
+&lt;p&gt;What qualifies as a sentence is a bit more complex (see documentation for the &lt;kbd&gt;sentence-end&lt;/kbd&gt; function).  If the normal sentence patterns aren&apos;t found, it defaults to following paragraph boundaries, so it works in code too!
+&lt;/p&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Sentences.html">Emacs Manual: Sentences</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Sentences.html&quot;&gt;Emacs Manual: Sentences&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="scrolling-the-window" class="anchor" href="#scrolling-the-window">¶</a>Scrolling the Window</h2><p>Aside from using the expected <kbd>&lt;PageUp&gt;</kbd> and <kbd>&lt;PageDown&gt;</kbd> keys for scrolling the window, you can also use these keys:
-</p>
+&lt;h2&gt;&lt;a id=&quot;scrolling-the-window&quot; class=&quot;anchor&quot; href=&quot;#scrolling-the-window&quot;&gt;¶&lt;/a&gt;Scrolling the Window&lt;/h2&gt;&lt;p&gt;Aside from using the expected &lt;kbd&gt;&amp;lt;PageUp&amp;gt;&lt;/kbd&gt; and &lt;kbd&gt;&amp;lt;PageDown&amp;gt;&lt;/kbd&gt; keys for scrolling the window, you can also use these keys:
+&lt;/p&gt;
 
-<ul><li><kbd>C-v</kbd> executes <kbd>scroll-up-command</kbd> to move the window to the next page of content in the buffer</li>
-<li><kbd>M-v</kbd> executes <kbd>scroll-down-command</kbd> to move the window to the previous page of content in the buffer</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C-v&lt;/kbd&gt; executes &lt;kbd&gt;scroll-up-command&lt;/kbd&gt; to move the window to the next page of content in the buffer&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;M-v&lt;/kbd&gt; executes &lt;kbd&gt;scroll-down-command&lt;/kbd&gt; to move the window to the previous page of content in the buffer&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>The reversed up/down terminology is a little confusing, but it's a more literal description of the direction the buffer contents are moving.
-</p>
+&lt;p&gt;The reversed up/down terminology is a little confusing, but it&apos;s a more literal description of the direction the buffer contents are moving.
+&lt;/p&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Scrolling.html">Emacs Manual: Scrolling</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Scrolling.html&quot;&gt;Emacs Manual: Scrolling&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="centering-the-window" class="anchor" href="#centering-the-window">¶</a>"Centering" the Window</h2><p>These key bindings can be helpful to move the scroll position to give you context above and below the current line:
-</p>
+&lt;h2&gt;&lt;a id=&quot;centering-the-window&quot; class=&quot;anchor&quot; href=&quot;#centering-the-window&quot;&gt;¶&lt;/a&gt;&quot;Centering&quot; the Window&lt;/h2&gt;&lt;p&gt;These key bindings can be helpful to move the scroll position to give you context above and below the current line:
+&lt;/p&gt;
 
-<ul><li><kbd>C-l</kbd> executes <kbd>recenter-top-bottom</kbd> which scrolls the buffer so that the line where the point is positioned in the center of the window.  If you press it repeatedly it will cycle so that the current line will show at the top of the window, then the bottom of the window, then at the center again!</li>
-<li><kbd>C-M-l</kbd> executes <kbd>reposition-window</kbd> which will attempt to scroll the screen to fit as much of the current "thing" as possible in the window (current paragraph, current function definition, etc)</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C-l&lt;/kbd&gt; executes &lt;kbd&gt;recenter-top-bottom&lt;/kbd&gt; which scrolls the buffer so that the line where the point is positioned in the center of the window.  If you press it repeatedly it will cycle so that the current line will show at the top of the window, then the bottom of the window, then at the center again!&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;C-M-l&lt;/kbd&gt; executes &lt;kbd&gt;reposition-window&lt;/kbd&gt; which will attempt to scroll the screen to fit as much of the current &quot;thing&quot; as possible in the window (current paragraph, current function definition, etc)&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Recentering.html">Emacs Manual: Recentering</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Recentering.html&quot;&gt;Emacs Manual: Recentering&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="searching-for-text" class="anchor" href="#searching-for-text">¶</a>Searching for Text</h2><p>You can easily move around in the buffer by searching for text with the following bindings:
-</p>
+&lt;h2&gt;&lt;a id=&quot;searching-for-text&quot; class=&quot;anchor&quot; href=&quot;#searching-for-text&quot;&gt;¶&lt;/a&gt;Searching for Text&lt;/h2&gt;&lt;p&gt;You can easily move around in the buffer by searching for text with the following bindings:
+&lt;/p&gt;
 
-<ul><li><kbd>C-s</kbd> executes <kbd>isearch-forward</kbd> which prompts for the search term and places the cursor after the occurrence found after the point position after you press <kbd>&lt;RET&gt;</kbd> (Enter)</li>
-<li><kbd>C-r</kbd> executes <kbd>isearch-backward</kbd> which prompts for the search term and places the cursor before the occurrence found before the point position after you press <kbd>&lt;RET&gt;</kbd></li>
-</ul>
+&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C-s&lt;/kbd&gt; executes &lt;kbd&gt;isearch-forward&lt;/kbd&gt; which prompts for the search term and places the cursor after the occurrence found after the point position after you press &lt;kbd&gt;&amp;lt;RET&amp;gt;&lt;/kbd&gt; (Enter)&lt;/li&gt;
+&lt;li&gt;&lt;kbd&gt;C-r&lt;/kbd&gt; executes &lt;kbd&gt;isearch-backward&lt;/kbd&gt; which prompts for the search term and places the cursor before the occurrence found before the point position after you press &lt;kbd&gt;&amp;lt;RET&amp;gt;&lt;/kbd&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-<p>These commands are incremental which means that you see the results as you type!
-</p>
+&lt;p&gt;These commands are incremental which means that you see the results as you type!
+&lt;/p&gt;
 
-<p>If you keep the prompt open (without pressing <kbd>&lt;RET&gt;</kbd>), you can keep pressing the <kbd>C-s</kbd> and <kbd>C-r</kbd> keys to navigate forward and backward in all the results for this string in the same buffer!
-</p>
+&lt;p&gt;If you keep the prompt open (without pressing &lt;kbd&gt;&amp;lt;RET&amp;gt;&lt;/kbd&gt;), you can keep pressing the &lt;kbd&gt;C-s&lt;/kbd&gt; and &lt;kbd&gt;C-r&lt;/kbd&gt; keys to navigate forward and backward in all the results for this string in the same buffer!
+&lt;/p&gt;
 
-<p><strong>Tips</strong>:
-</p>
+&lt;p&gt;&lt;strong&gt;Tips&lt;/strong&gt;:
+&lt;/p&gt;
 
-<ul><li>These commands can be useful to just jump forward or backward to a specific character or string on the same line!</li>
-<li>You can also set a mark just before searching to make it easy to select a specific region.</li>
-</ul>
+&lt;ul&gt;&lt;li&gt;These commands can be useful to just jump forward or backward to a specific character or string on the same line!&lt;/li&gt;
+&lt;li&gt;You can also set a mark just before searching to make it easy to select a specific region.&lt;/li&gt;
+&lt;/ul&gt;
 
-<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Basic-Isearch.html">Emacs Manual: Basics of Incremental Search</a>
-</p>
+&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Basic-Isearch.html&quot;&gt;Emacs Manual: Basics of Incremental Search&lt;/a&gt;
+&lt;/p&gt;
 
-<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>In the next video, we'll talk about how you can select regions of text using Emacs' "mark" commands!
-</p>
+&lt;h2&gt;&lt;a id=&quot;whats-next&quot; class=&quot;anchor&quot; href=&quot;#whats-next&quot;&gt;¶&lt;/a&gt;What&apos;s next?&lt;/h2&gt;&lt;p&gt;In the next video, we&apos;ll talk about how you can select regions of text using Emacs&apos; &quot;mark&quot; commands!
+&lt;/p&gt;
 
-<p>After that, we'll continue covering the fundamental key bindings for editing and manipulating text.
-</p>
-</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+&lt;p&gt;After that, we&apos;ll continue covering the fundamental key bindings for editing and manipulating text.
+&lt;/p&gt;
+&lt;/div&gt;</div></div></div></div>&lt;footer class=&quot;blog-footer&quot;&gt;&lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right&quot;&gt;&lt;p&gt;Made with Emacs 27.2 (Org mode 9.4.4)&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://systemcrafters.net/privacy-policy/&quot;&gt;Privacy Policy&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/footer&gt;&lt;script src=&quot;/js/bootstrap.bundle.min.js&quot;/&gt;</body></html>
