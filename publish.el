@@ -43,6 +43,7 @@
 (setq package-user-dir (expand-file-name "./.packages"))
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("melpa-stable" . "https://stable.melpa.org/packages/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
 ;; Initialize the package system
@@ -60,6 +61,7 @@
 
 ;; Install other dependencies
 (use-package esxml
+  :pin melpa-stable
   :ensure t)
 
 (use-package ox-gemini
@@ -159,11 +161,11 @@
 
 (defun dw/org-html-template (contents info)
   (concat
+   "<!-- " ,(org-export-data (org-export-get-date info "%Y-%m-%d") info) " -->\n"
    "<!DOCTYPE html>"
    (sxml-to-xml
     `(html (@ (lang "en"))
            (head
-            "<!-- " ,(org-export-data (org-export-get-date info "%Y-%m-%d") info) " -->"
             (meta (@ (charset "utf-8")))
             (meta (@ (author "David Wilson")))
             (meta (@ (name "viewport")
@@ -185,28 +187,28 @@
                     "")
             (title ,(concat (org-export-data (plist-get info :title) info) " - System Crafters")))
            (body
-             ,@(dw/site-header info)
-             (div (@ (class "container"))
-                  (div (@ (class "row"))
-                       (div (@ (class "col-sm-12 blog-main"))
-                            (div (@ (class "blog-post"))
-                                 (h1 (@ (class "blog-post-title"))
-                                     ,(org-export-data (plist-get info :title) info))
-                                 (p (@ (class "blog-post-meta"))
-                                    ,(org-export-data (org-export-get-date info "%B %e, %Y") info))
-                                 ,contents
-                                 ,(let ((tags (plist-get info :filetags)))
-                                    (when (and tags (> (list-length tags) 0))
-                                      `(p (@ (class "blog-post-tags"))
-                                          "Tags: "
-                                          ,(mapconcat (lambda (tag) tag)
-                                                        ;; TODO: We don't have tag pages yet
-                                                        ;; (format "<a href=\"/tags/%s/\">%s</a>" tag tag))
-                                                      (plist-get info :filetags)
-                                                      ", "))))
-                                 ,(when (equal "article" (plist-get info :page-type))
-                                    ;; TODO: Link to mailing list
-                                    "<script src=\"https://utteranc.es/client.js\"
+            ,@(dw/site-header info)
+            (div (@ (class "container"))
+                 (div (@ (class "row"))
+                      (div (@ (class "col-sm-12 blog-main"))
+                           (div (@ (class "blog-post"))
+                                (h1 (@ (class "blog-post-title"))
+                                    ,(org-export-data (plist-get info :title) info))
+                                (p (@ (class "blog-post-meta"))
+                                   ,(org-export-data (org-export-get-date info "%B %e, %Y") info))
+                                ,contents
+                                ,(let ((tags (plist-get info :filetags)))
+                                   (when (and tags (> (list-length tags) 0))
+                                     `(p (@ (class "blog-post-tags"))
+                                         "Tags: "
+                                         ,(mapconcat (lambda (tag) tag)
+                                                     ;; TODO: We don't have tag pages yet
+                                                     ;; (format "<a href=\"/tags/%s/\">%s</a>" tag tag))
+                                                     (plist-get info :filetags)
+                                                     ", "))))
+                                ,(when (equal "article" (plist-get info :page-type))
+                                   ;; TODO: Link to mailing list
+                                   "<script src=\"https://utteranc.es/client.js\"
                                               repo=\"daviwil/harmonicschemes.com\"
                                               issue-term=\"title\"
                                               label=\"comments\"
@@ -215,7 +217,7 @@
                                               async>
                                      </script>")))))
 
-             ,@(dw/site-footer info))))))
+            ,@(dw/site-footer info))))))
 
 ;; Thanks Ashraz!
 (defun dw/org-html-link (link contents info)
