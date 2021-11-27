@@ -1,101 +1,102 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>How to Cut Emacs Startup Time in Half - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">How to Cut Emacs Startup Time in Half</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://youtu.be/9i_9hse_Y08&quot;&gt;Watch the video&lt;/a&gt; on YouTube!&lt;/li&gt;
-&lt;li&gt;Check out the &lt;a href=&quot;https://github.com/daviwil/emacs-from-scratch/blob/d23348b4a52dde97f4f7cbcd66a519b5fd0a143c/Emacs.org&quot;&gt;final code&lt;/a&gt; on GitHub&lt;/li&gt;
-&lt;li&gt;Episode 12 of the &lt;a href=&quot;../&quot;&gt;Emacs From Scratch&lt;/a&gt; series&lt;/li&gt;
-&lt;/ul&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>How to Cut Emacs Startup Time in Half - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">How to Cut Emacs Startup Time in Half</h1><p class="blog-post-meta"></p><div><ul><li><a href="https://youtu.be/9i_9hse_Y08">Watch the video</a> on YouTube!</li>
+<li>Check out the <a href="https://github.com/daviwil/emacs-from-scratch/blob/d23348b4a52dde97f4f7cbcd66a519b5fd0a143c/Emacs.org">final code</a> on GitHub</li>
+<li>Episode 12 of the <a href="../">Emacs From Scratch</a> series</li>
+</ul>
 
-&lt;h2&gt;&lt;a id=&quot;why-is-emacs-so-slow-to-start-up&quot; class=&quot;anchor&quot; href=&quot;#why-is-emacs-so-slow-to-start-up&quot;&gt;¶&lt;/a&gt;Why is Emacs so slow to start up?&lt;/h2&gt;&lt;p&gt;Is it actually slow with no config? Run &lt;kbd&gt;emacs -Q&lt;/kbd&gt; to find out!
-&lt;/p&gt;
+<h2><a id="why-is-emacs-so-slow-to-start-up" class="anchor" href="#why-is-emacs-so-slow-to-start-up">¶</a>Why is Emacs so slow to start up?</h2><p>Is it actually slow with no config? Run <kbd>emacs -Q</kbd> to find out!
+</p>
 
-&lt;p&gt;So why is it so much slower with our configuration?
-&lt;/p&gt;
+<p>So why is it so much slower with our configuration?
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;lets-find-out-how-long-its-taking&quot; class=&quot;anchor&quot; href=&quot;#lets-find-out-how-long-its-taking&quot;&gt;¶&lt;/a&gt;Let&apos;s find out how long it&apos;s taking!&lt;/h2&gt;&lt;p&gt;Add a function to &lt;kbd&gt;emacs-startup-hook&lt;/kbd&gt; to print out the duration of Emacs startup:
-&lt;/p&gt;
+<h2><a id="lets-find-out-how-long-its-taking" class="anchor" href="#lets-find-out-how-long-its-taking">¶</a>Let's find out how long it's taking!</h2><p>Add a function to <kbd>emacs-startup-hook</kbd> to print out the duration of Emacs startup:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;efs/display-startup-time&lt;/span&gt; ()
-  (message &lt;span class=&quot;org-string&quot;&gt;&quot;Emacs loaded in %s with %d garbage collections.&quot;&lt;/span&gt;
-           (format &lt;span class=&quot;org-string&quot;&gt;&quot;%.2f seconds&quot;&lt;/span&gt;
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">efs/display-startup-time</span> ()
+  (message <span class="org-string">"Emacs loaded in %s with %d garbage collections."</span>
+           (format <span class="org-string">"%.2f seconds"</span>
                    (float-time
                    (time-subtract after-init-time before-init-time)))
            gcs-done))
 
-(add-hook &apos;emacs-startup-hook #&apos;efs/display-startup-time)
+(add-hook 'emacs-startup-hook #'efs/display-startup-time)
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;All startup behavior is happening in the &lt;kbd&gt;normal-top-level&lt;/kbd&gt; function!
-&lt;/p&gt;
+<p>All startup behavior is happening in the <kbd>normal-top-level</kbd> function!
+</p>
 
-&lt;p&gt;A helpful manual page is &lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/Startup-Summary.html&quot;&gt;Summary: Sequence of Actions at Startup&lt;/a&gt;.
-&lt;/p&gt;
+<p>A helpful manual page is <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Startup-Summary.html">Summary: Sequence of Actions at Startup</a>.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-most-important-tip-dont-load-any-packages&quot; class=&quot;anchor&quot; href=&quot;#the-most-important-tip-dont-load-any-packages&quot;&gt;¶&lt;/a&gt;The most important tip: don&apos;t load any packages!&lt;/h2&gt;&lt;p&gt;&lt;kbd&gt;use-package&lt;/kbd&gt; gives you a few different ways to defer package loading:
-&lt;/p&gt;
+<h2><a id="the-most-important-tip-dont-load-any-packages" class="anchor" href="#the-most-important-tip-dont-load-any-packages">¶</a>The most important tip: don't load any packages!</h2><p><kbd>use-package</kbd> gives you a few different ways to defer package loading:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;:hook&lt;/kbd&gt; - Package will be loaded the first time one of the hooks is invoked&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:bind&lt;/kbd&gt; - Package will be loaded the first time one of the key bindings is used&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:commands&lt;/kbd&gt; - Package will be loaded when one of the commands are used&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:mode&lt;/kbd&gt; - Package will be loaded the first time a file with a particular extension is opened&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:after&lt;/kbd&gt; - Load this package after other specific packages are loaded&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:defer&lt;/kbd&gt; - If you don&apos;t use any of the other options, this one will defer loading until after startup&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>:hook</kbd> - Package will be loaded the first time one of the hooks is invoked</li>
+<li><kbd>:bind</kbd> - Package will be loaded the first time one of the key bindings is used</li>
+<li><kbd>:commands</kbd> - Package will be loaded when one of the commands are used</li>
+<li><kbd>:mode</kbd> - Package will be loaded the first time a file with a particular extension is opened</li>
+<li><kbd>:after</kbd> - Load this package after other specific packages are loaded</li>
+<li><kbd>:defer</kbd> - If you don't use any of the other options, this one will defer loading until after startup</li>
+</ul>
 
-&lt;p&gt;There are a &lt;a href=&quot;https://github.com/jwiegley/use-package#getting-started&quot;&gt;few other options&lt;/a&gt; &lt;kbd&gt;use-package&lt;/kbd&gt; provides, but these are all the most likely ones you would use.
-&lt;/p&gt;
+<p>There are a <a href="https://github.com/jwiegley/use-package#getting-started">few other options</a> <kbd>use-package</kbd> provides, but these are all the most likely ones you would use.
+</p>
 
-&lt;p&gt;The strategy is to look at all of your &lt;kbd&gt;use-package&lt;/kbd&gt; expressions and decide whether it &lt;strong&gt;really&lt;/strong&gt; needs to be loaded immediately at startup!
-&lt;/p&gt;
+<p>The strategy is to look at all of your <kbd>use-package</kbd> expressions and decide whether it <strong>really</strong> needs to be loaded immediately at startup!
+</p>
 
-&lt;p&gt;If you want to make sure a package gets loaded at startup despite the use of any of the options above, use &lt;kbd&gt;:demand t&lt;/kbd&gt;.
-&lt;/p&gt;
+<p>If you want to make sure a package gets loaded at startup despite the use of any of the options above, use <kbd>:demand t</kbd>.
+</p>
 
-&lt;p&gt;Let&apos;s try it!
-&lt;/p&gt;
+<p>Let's try it!
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-&lt;span class=&quot;org-string&quot;&gt;&quot;fde&quot;&lt;/span&gt; &apos;(lambda () (&lt;span class=&quot;org-keyword&quot;&gt;interactive&lt;/span&gt;) (find-file (expand-file-name &lt;span class=&quot;org-string&quot;&gt;&quot;~/.emacs.d/Emacs.org&quot;&lt;/span&gt;)))
+<pre><code class="emacs-lisp">
+<span class="org-string">"fde"</span> '(lambda () (<span class="org-keyword">interactive</span>) (find-file (expand-file-name <span class="org-string">"~/.emacs.d/Emacs.org"</span>)))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h2&gt;&lt;a id=&quot;with-eval-after-load-can-be-useful&quot; class=&quot;anchor&quot; href=&quot;#with-eval-after-load-can-be-useful&quot;&gt;¶&lt;/a&gt;with-eval-after-load can be useful!&lt;/h2&gt;&lt;p&gt;&lt;kbd&gt;with-eval-after-load&lt;/kbd&gt; is a macro that causes a section of code to be executed only after a particular package gets loaded.
-&lt;/p&gt;
+<h2><a id="with-eval-after-load-can-be-useful" class="anchor" href="#with-eval-after-load-can-be-useful">¶</a>with-eval-after-load can be useful!</h2><p><kbd>with-eval-after-load</kbd> is a macro that causes a section of code to be executed only after a particular package gets loaded.
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;with-eval-after-load&lt;/span&gt; &apos;org
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">with-eval-after-load</span> 'org
   (org-babel-do-load-languages
-      &apos;org-babel-load-languages
-      &apos;((emacs-lisp . t)
+      'org-babel-load-languages
+      '((emacs-lisp . t)
       (python . t)))
 
-  (&lt;span class=&quot;org-keyword&quot;&gt;push&lt;/span&gt; &apos;(&lt;span class=&quot;org-string&quot;&gt;&quot;conf-unix&quot;&lt;/span&gt; . conf-unix) org-src-lang-modes))
+  (<span class="org-keyword">push</span> '(<span class="org-string">"conf-unix"</span> . conf-unix) org-src-lang-modes))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;If you need to split up your configuration into multiple sections, this is one way to ensure you don&apos;t accidentally cause a package to load too early!
-&lt;/p&gt;
+<p>If you need to split up your configuration into multiple sections, this is one way to ensure you don't accidentally cause a package to load too early!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;tweaking-the-garbage-collector&quot; class=&quot;anchor&quot; href=&quot;#tweaking-the-garbage-collector&quot;&gt;¶&lt;/a&gt;Tweaking the garbage collector&lt;/h2&gt;&lt;p&gt;One other common performance trick is to reduce the number of times the garbage collector will run during the startup process.
-&lt;/p&gt;
+<h2><a id="tweaking-the-garbage-collector" class="anchor" href="#tweaking-the-garbage-collector">¶</a>Tweaking the garbage collector</h2><p>One other common performance trick is to reduce the number of times the garbage collector will run during the startup process.
+</p>
 
-&lt;p&gt;Set the &lt;kbd&gt;gc-cons-threshold&lt;/kbd&gt; high at the beginning of your &lt;kbd&gt;init.el&lt;/kbd&gt;:
-&lt;/p&gt;
+<p>Set the <kbd>gc-cons-threshold</kbd> high at the beginning of your <kbd>init.el</kbd>:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;The default is 800 kilobytes.  Measured in bytes.&lt;/span&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; gc-cons-threshold (* 50 1000 1000))
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">The default is 800 kilobytes.  Measured in bytes.</span>
+(<span class="org-keyword">setq</span> gc-cons-threshold (* 50 1000 1000))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Then bring it back down at the end of your &lt;kbd&gt;init.el&lt;/kbd&gt;:
-&lt;/p&gt;
+<p>Then bring it back down at the end of your <kbd>init.el</kbd>:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Make gc pauses faster by decreasing the threshold.&lt;/span&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; gc-cons-threshold (* 2 1000 1000))
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Make gc pauses faster by decreasing the threshold.</span>
+(<span class="org-keyword">setq</span> gc-cons-threshold (* 2 1000 1000))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Another option is to use Andrea Corrallo&apos;s &lt;a href=&quot;https://gitlab.com/koral/gcmh/&quot;&gt;gcmh package&lt;/a&gt; to manage it automatically.
-&lt;/p&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<p>Another option is to use Andrea Corrallo's <a href="https://gitlab.com/koral/gcmh/">gcmh package</a> to manage it automatically.
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

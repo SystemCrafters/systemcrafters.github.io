@@ -1,230 +1,231 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Everyday Package Management with GNU Guix - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Everyday Package Management with GNU Guix</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://youtu.be/Xy0YgnXFt1M&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Everyday Package Management with GNU Guix - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Everyday Package Management with GNU Guix</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/Xy0YgnXFt1M">Watch the video</a> on YouTube!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;what-will-we-learn&quot; class=&quot;anchor&quot; href=&quot;#what-will-we-learn&quot;&gt;¶&lt;/a&gt;What will we learn?&lt;/h2&gt;&lt;p&gt;In the last video I showed how you can install GNU Guix as an alternative package manager on your existing Linux distribution but I didn&apos;t go into much detail about how you can use it.
-&lt;/p&gt;
+<h2><a id="what-will-we-learn" class="anchor" href="#what-will-we-learn">¶</a>What will we learn?</h2><p>In the last video I showed how you can install GNU Guix as an alternative package manager on your existing Linux distribution but I didn't go into much detail about how you can use it.
+</p>
 
-&lt;p&gt;In this video I&apos;m going to show you how you can use Guix for your day to day package management needs and also show you one of the really useful things it can do that most other package managers can&apos;t!  What I cover today will apply to both using Guix as a package manager on your current Linux distro as well as with the full Guix system when we finally talk about how to set that up.
-&lt;/p&gt;
+<p>In this video I'm going to show you how you can use Guix for your day to day package management needs and also show you one of the really useful things it can do that most other package managers can't!  What I cover today will apply to both using Guix as a package manager on your current Linux distro as well as with the full Guix system when we finally talk about how to set that up.
+</p>
 
-&lt;p&gt;By the end of this video, you&apos;ll know how to install and update the packages you use on a daily basis, and more importantly, how to deal with any package updates that cause problems for your system.
-&lt;/p&gt;
+<p>By the end of this video, you'll know how to install and update the packages you use on a daily basis, and more importantly, how to deal with any package updates that cause problems for your system.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;searching-for-packages&quot; class=&quot;anchor&quot; href=&quot;#searching-for-packages&quot;&gt;¶&lt;/a&gt;Searching for Packages&lt;/h2&gt;&lt;p&gt;When you start using Guix, you&apos;ll probably want to figure out what packages are available to install.  Guix provides a search command that can be useful for this purpose:
-&lt;/p&gt;
+<h2><a id="searching-for-packages" class="anchor" href="#searching-for-packages">¶</a>Searching for Packages</h2><p>When you start using Guix, you'll probably want to figure out what packages are available to install.  Guix provides a search command that can be useful for this purpose:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix search emacs org-mode
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;When you invoke &lt;kbd&gt;guix search&lt;/kbd&gt;, you pass it a list of search terms, each of which can be a regular expression. The results that are returned must include all of the search terms you mention, so it can be useful for refining your search if too many results are returned.
-&lt;/p&gt;
+<p>When you invoke <kbd>guix search</kbd>, you pass it a list of search terms, each of which can be a regular expression. The results that are returned must include all of the search terms you mention, so it can be useful for refining your search if too many results are returned.
+</p>
 
-&lt;p&gt;Here&apos;s another example:
-&lt;/p&gt;
+<p>Here's another example:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-guix search emacs &lt;span class=&quot;org-string&quot;&gt;&quot;(evil|vim)&quot;&lt;/span&gt;
+<pre><code class="sh">
+guix search emacs <span class="org-string">"(evil|vim)"</span>
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Because Guix uses regular expressions for searching the names and descriptions of packages, your searches may return a lot of packages that aren&apos;t what you&apos;re looking for.  You can be more specific using typical regular expression syntax to avoid this problem:
-&lt;/p&gt;
+<p>Because Guix uses regular expressions for searching the names and descriptions of packages, your searches may return a lot of packages that aren't what you're looking for.  You can be more specific using typical regular expression syntax to avoid this problem:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix search sqlite
 guix search ^sqlite$
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;&lt;a href=&quot;https://guix.gnu.org/manual/en/guix.html#Getting-Started&quot;&gt;Guix Manual: Getting Started&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://guix.gnu.org/manual/en/guix.html#Getting-Started">Guix Manual: Getting Started</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;installing-packages&quot; class=&quot;anchor&quot; href=&quot;#installing-packages&quot;&gt;¶&lt;/a&gt;Installing Packages&lt;/h2&gt;&lt;p&gt;When you&apos;ve found a package that you&apos;d like to install, you can use the &lt;kbd&gt;guix install&lt;/kbd&gt; command.  This command will install the specified package (or list of packages) into your default user profile.
-&lt;/p&gt;
+<h2><a id="installing-packages" class="anchor" href="#installing-packages">¶</a>Installing Packages</h2><p>When you've found a package that you'd like to install, you can use the <kbd>guix install</kbd> command.  This command will install the specified package (or list of packages) into your default user profile.
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix install emacs-evil emacs-org-roam
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;One thing that may surprise you is that you don&apos;t need to use &lt;kbd&gt;sudo&lt;/kbd&gt; when running this command!  Guix allows each user of a system to have their own separate sets of packages installed.  In a future video I&apos;ll explain how this works.
-&lt;/p&gt;
+<p>One thing that may surprise you is that you don't need to use <kbd>sudo</kbd> when running this command!  Guix allows each user of a system to have their own separate sets of packages installed.  In a future video I'll explain how this works.
+</p>
 
-&lt;p&gt;If a particular package provides multiple versions, you can install a specific version with the &lt;kbd&gt;package-name@version&lt;/kbd&gt; syntax.  Here&apos;s an example:
-&lt;/p&gt;
+<p>If a particular package provides multiple versions, you can install a specific version with the <kbd>package-name@version</kbd> syntax.  Here's an example:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-guix install &lt;span class=&quot;org-string&quot;&gt;&quot;sqlite@3.31.1&quot;&lt;/span&gt;
+<pre><code class="sh">
+guix install <span class="org-string">"sqlite@3.31.1"</span>
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Some packages may have multiple &quot;outputs&quot; which you can install using the &lt;kbd&gt;package:output&lt;/kbd&gt; syntax.  For example, the &lt;kbd&gt;gtk+&lt;/kbd&gt; package has a &lt;kbd&gt;bin&lt;/kbd&gt; output which can be used to install commands for working with GTK+:
-&lt;/p&gt;
+<p>Some packages may have multiple "outputs" which you can install using the <kbd>package:output</kbd> syntax.  For example, the <kbd>gtk+</kbd> package has a <kbd>bin</kbd> output which can be used to install commands for working with GTK+:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-guix search &lt;span class=&quot;org-string&quot;&gt;&quot;gtk\+&quot;&lt;/span&gt;
-guix install &lt;span class=&quot;org-string&quot;&gt;&quot;gtk+:bin&quot;&lt;/span&gt;
+<pre><code class="sh">
+guix search <span class="org-string">"gtk\+"</span>
+guix install <span class="org-string">"gtk+:bin"</span>
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Typically the output named &lt;kbd&gt;out&lt;/kbd&gt; is the default output.  In the case of this package, &lt;kbd&gt;out&lt;/kbd&gt; is for the usual GTK libraries without installing the associated commands.  The only way to get the commands is to explicitly install the &lt;kbd&gt;bin&lt;/kbd&gt; output!
-&lt;/p&gt;
+<p>Typically the output named <kbd>out</kbd> is the default output.  In the case of this package, <kbd>out</kbd> is for the usual GTK libraries without installing the associated commands.  The only way to get the commands is to explicitly install the <kbd>bin</kbd> output!
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://guix.gnu.org/manual/en/guix.html#Packages-with-Multiple-Outputs&quot;&gt;Guix Manual: Packages with Multiple Outputs&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://guix.gnu.org/manual/en/guix.html#Packages-with-Multiple-Outputs">Guix Manual: Packages with Multiple Outputs</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;upgrading-packages&quot; class=&quot;anchor&quot; href=&quot;#upgrading-packages&quot;&gt;¶&lt;/a&gt;Upgrading Packages&lt;/h2&gt;&lt;p&gt;After you&apos;ve installed a few packages, you will probably want to upgrade them to a newer version at some point.  Before you can upgrade, you&apos;ll have to sync the latest package definitions from the main Guix repository and any other package sources you might be using.  You can use the following command to do this:
-&lt;/p&gt;
+<h2><a id="upgrading-packages" class="anchor" href="#upgrading-packages">¶</a>Upgrading Packages</h2><p>After you've installed a few packages, you will probably want to upgrade them to a newer version at some point.  Before you can upgrade, you'll have to sync the latest package definitions from the main Guix repository and any other package sources you might be using.  You can use the following command to do this:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix pull
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Since Guix package definitions are stored in Git repositories, this command pulls the latest commits of all your configured package sources and builds the package definitions so that they can be used in future package commands.  We&apos;ll discuss what this means in more detail in a later video.
-&lt;/p&gt;
+<p>Since Guix package definitions are stored in Git repositories, this command pulls the latest commits of all your configured package sources and builds the package definitions so that they can be used in future package commands.  We'll discuss what this means in more detail in a later video.
+</p>
 
-&lt;p&gt;Once the operation is completed, it prints out an abbreviated list of everything that is new or updated since your last &lt;kbd&gt;pull&lt;/kbd&gt;.
-&lt;/p&gt;
+<p>Once the operation is completed, it prints out an abbreviated list of everything that is new or updated since your last <kbd>pull</kbd>.
+</p>
 
-&lt;p&gt;To see the full list of updates, run:
-&lt;/p&gt;
+<p>To see the full list of updates, run:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix pull --news
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;I find this very useful as a way to learn about all of the new packages I might want to try!
-&lt;/p&gt;
+<p>I find this very useful as a way to learn about all of the new packages I might want to try!
+</p>
 
-&lt;p&gt;Keep in mind that this doesn&apos;t mean all of these packages are installed on your system!  It is informing you about the packages that are added or updated in the package repositories that you are currently using (the main Guix channel by default).
-&lt;/p&gt;
+<p>Keep in mind that this doesn't mean all of these packages are installed on your system!  It is informing you about the packages that are added or updated in the package repositories that you are currently using (the main Guix channel by default).
+</p>
 
-&lt;p&gt;After pulling, you can update all of the packages you have installed by running:
-&lt;/p&gt;
+<p>After pulling, you can update all of the packages you have installed by running:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix upgrade
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;You can also upgrade individual packages by passing the package name to &lt;kbd&gt;guix upgrade&lt;/kbd&gt;:
-&lt;/p&gt;
+<p>You can also upgrade individual packages by passing the package name to <kbd>guix upgrade</kbd>:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix upgrade emacs
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;&lt;a href=&quot;https://guix.gnu.org/manual/en/guix.html#Invoking-guix-pull&quot;&gt;Guix Manual: Invoking guix pull&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://guix.gnu.org/manual/en/guix.html#Invoking-guix-pull">Guix Manual: Invoking guix pull</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;listing-installed-packages&quot; class=&quot;anchor&quot; href=&quot;#listing-installed-packages&quot;&gt;¶&lt;/a&gt;Listing Installed Packages&lt;/h2&gt;&lt;p&gt;To see a list of all the packages you&apos;ve installed you can run this command:
-&lt;/p&gt;
+<h2><a id="listing-installed-packages" class="anchor" href="#listing-installed-packages">¶</a>Listing Installed Packages</h2><p>To see a list of all the packages you've installed you can run this command:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix package --list-installed
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;The output will tell you the names of packages, the installed version, the output used, and the path to the package in the store:
-&lt;/p&gt;
+<p>The output will tell you the names of packages, the installed version, the output used, and the path to the package in the store:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 nethack 3.6.6   out     /gnu/store/r7if10kgajw3wccdj5ci9figydk1k73x-nethack-3.6.6
 nyxt    2-pre-release-5 out     /gnu/store/z1yfwmwh5bz4nnvp8a17mr99ksa1pa4i-nyxt-2-pre-release-5
 clojure 1.10.0  out     /gnu/store/s8x9r7qgy5d0mapw9xsgf9xr3jz794zr-clojure-1.10.0
 sqlite  3.32.3  out     /gnu/store/g9gf1ndxryjc15mrjiy41w162lx8j6cv-sqlite-3.32.3
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h2&gt;&lt;a id=&quot;removing-packages&quot; class=&quot;anchor&quot; href=&quot;#removing-packages&quot;&gt;¶&lt;/a&gt;Removing Packages&lt;/h2&gt;&lt;p&gt;You can remove any package you&apos;ve already installed using the following command:
-&lt;/p&gt;
+<h2><a id="removing-packages" class="anchor" href="#removing-packages">¶</a>Removing Packages</h2><p>You can remove any package you've already installed using the following command:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix remove sqlite
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;This doesn&apos;t remove the package from your system, only from your user profile!  Since there can be other Guix profiles and generations on your system, Guix won&apos;t delete the package files that were downloaded.  We can verify this by installing the sqlite package again:
-&lt;/p&gt;
+<p>This doesn't remove the package from your system, only from your user profile!  Since there can be other Guix profiles and generations on your system, Guix won't delete the package files that were downloaded.  We can verify this by installing the sqlite package again:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix install sqlite
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;It didn&apos;t have to download anything new!  The installation process only built a new profile generation that includes this package again.
-&lt;/p&gt;
+<p>It didn't have to download anything new!  The installation process only built a new profile generation that includes this package again.
+</p>
 
-&lt;p&gt;You&apos;re probably thinking &quot;well I don&apos;t want a bunch of unused programs sitting around on my computer!&quot;  Guix has a command called &lt;kbd&gt;guix gc&lt;/kbd&gt; that enables you to clean up your system in a variety of ways, we&apos;ll cover it in a future video!
-&lt;/p&gt;
+<p>You're probably thinking "well I don't want a bunch of unused programs sitting around on my computer!"  Guix has a command called <kbd>guix gc</kbd> that enables you to clean up your system in a variety of ways, we'll cover it in a future video!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;rolling-back&quot; class=&quot;anchor&quot; href=&quot;#rolling-back&quot;&gt;¶&lt;/a&gt;Rolling Back&lt;/h2&gt;&lt;p&gt;One of the great features of Guix is the ability to roll back to a previous configuration if something that you do breaks your system.  The package manager can even do this for the packages that you&apos;ve installed!
-&lt;/p&gt;
+<h2><a id="rolling-back" class="anchor" href="#rolling-back">¶</a>Rolling Back</h2><p>One of the great features of Guix is the ability to roll back to a previous configuration if something that you do breaks your system.  The package manager can even do this for the packages that you've installed!
+</p>
 
-&lt;p&gt;Imagine that you updated to the latest version of a program and for some reason it has a bug where it crashes constantly on your machine.  Instead of removing the package, you can roll back that latest package operation (the upgrade) using the following command:
-&lt;/p&gt;
+<p>Imagine that you updated to the latest version of a program and for some reason it has a bug where it crashes constantly on your machine.  Instead of removing the package, you can roll back that latest package operation (the upgrade) using the following command:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix package --roll-back
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;The surprising thing here is that it didn&apos;t actually have to uninstall the current version and reinstall the old version of the package.  Both versions are still on your system!
-&lt;/p&gt;
+<p>The surprising thing here is that it didn't actually have to uninstall the current version and reinstall the old version of the package.  Both versions are still on your system!
+</p>
 
-&lt;p&gt;All this command did is select the previous &quot;generation&quot; of your user profile.  This means that the next time you log in, you&apos;ll be back to using whatever set of packages were present in that previous generation of your user profile.
-&lt;/p&gt;
+<p>All this command did is select the previous "generation" of your user profile.  This means that the next time you log in, you'll be back to using whatever set of packages were present in that previous generation of your user profile.
+</p>
 
-&lt;p&gt;You can take a look at all of the generations in your user profile by using this command:
-&lt;/p&gt;
+<p>You can take a look at all of the generations in your user profile by using this command:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix package --list-generations
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;If you&apos;ve been using your system for a while, you might see a lot of generations!  One gets created for every package operation that changes your user profile: installation, upgrades, and removals.
-&lt;/p&gt;
+<p>If you've been using your system for a while, you might see a lot of generations!  One gets created for every package operation that changes your user profile: installation, upgrades, and removals.
+</p>
 
-&lt;p&gt;If you want to switch to a specific generation based on its ID, you can use the &lt;kbd&gt;--switch-generation&lt;/kbd&gt; parameter:
-&lt;/p&gt;
+<p>If you want to switch to a specific generation based on its ID, you can use the <kbd>--switch-generation</kbd> parameter:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix package --switch-generation=3
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;When you switch to a previous generation, the newer generations don&apos;t get deleted!  You can even roll &lt;em&gt;forward&lt;/em&gt; again using this command:
-&lt;/p&gt;
+<p>When you switch to a previous generation, the newer generations don't get deleted!  You can even roll <em>forward</em> again using this command:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix package --switch-generation=4
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Keep in mind that you may need to run a terminal instance with a new login shell or log out of your session and log back in again before the roll back takes effect!
-&lt;/p&gt;
+<p>Keep in mind that you may need to run a terminal instance with a new login shell or log out of your session and log back in again before the roll back takes effect!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;avoiding-package-compilation&quot; class=&quot;anchor&quot; href=&quot;#avoiding-package-compilation&quot;&gt;¶&lt;/a&gt;Avoiding Package Compilation&lt;/h2&gt;&lt;p&gt;If Guix has been configured to download &quot;substitutes&quot; (usually it is) then the package you install may contained precompiled binaries that come from Guix&apos;s build servers.  However, sometimes the build servers won&apos;t have a build for your package yet, especially if it is a big one like &lt;kbd&gt;ungoogled-chromium&lt;/kbd&gt; or &lt;kbd&gt;firefox&lt;/kbd&gt;.
-&lt;/p&gt;
+<h2><a id="avoiding-package-compilation" class="anchor" href="#avoiding-package-compilation">¶</a>Avoiding Package Compilation</h2><p>If Guix has been configured to download "substitutes" (usually it is) then the package you install may contained precompiled binaries that come from Guix's build servers.  However, sometimes the build servers won't have a build for your package yet, especially if it is a big one like <kbd>ungoogled-chromium</kbd> or <kbd>firefox</kbd>.
+</p>
 
-&lt;p&gt;When you try to install these packages before substitutes are available, Guix will try to build them from source.  This can take a really long time! To avoid this, you can use the &lt;kbd&gt;guix weather&lt;/kbd&gt; command:
-&lt;/p&gt;
+<p>When you try to install these packages before substitutes are available, Guix will try to build them from source.  This can take a really long time! To avoid this, you can use the <kbd>guix weather</kbd> command:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix weather ungoogled-chromium
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;If a substitute is available, you&apos;ll see some output like this:
-&lt;/p&gt;
+<p>If a substitute is available, you'll see some output like this:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;nil&quot;&gt;
+<pre><code class="nil">
 computing 1 package derivations for x86_64-linux...
 looking for 1 store items on https://ci.guix.gnu.org...
 https://ci.guix.gnu.org
@@ -232,20 +233,20 @@ https://ci.guix.gnu.org
   at least 266.2 MiB of nars (compressed)
   351.3 MiB on disk (uncompressed)
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;If it says &lt;kbd&gt;0.0% substitutes available (0 out of 1)&lt;/kbd&gt; then you might want to install the package later!  You should also check this command before attempting to upgrade your packages.
-&lt;/p&gt;
+<p>If it says <kbd>0.0% substitutes available (0 out of 1)</kbd> then you might want to install the package later!  You should also check this command before attempting to upgrade your packages.
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://guix.gnu.org/manual/en/guix.html#Invoking-guix-weather&quot;&gt;Guix Manual: Invoking guix weather&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://guix.gnu.org/manual/en/guix.html#Invoking-guix-weather">Guix Manual: Invoking guix weather</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;whats-next&quot; class=&quot;anchor&quot; href=&quot;#whats-next&quot;&gt;¶&lt;/a&gt;What&apos;s next?&lt;/h2&gt;&lt;p&gt;In the next video, I&apos;m going to show you how you can use Guix &quot;channels&quot; to install packages that aren&apos;t a part of the main Guix package repository so that you can get software and drivers that aren&apos;t allowed there.
-&lt;/p&gt;
+<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>In the next video, I'm going to show you how you can use Guix "channels" to install packages that aren't a part of the main Guix package repository so that you can get software and drivers that aren't allowed there.
+</p>
 
-&lt;p&gt;I&apos;ll also show you how to use the channel configuration to lock your installed packages and system configuration to a particular version so that its reproducible across multiple machines!
-&lt;/p&gt;
+<p>I'll also show you how to use the channel configuration to lock your installed packages and system configuration to a particular version so that its reproducible across multiple machines!
+</p>
 
-&lt;p&gt;To those of you waiting for the video on a full Guix system install, we&apos;ll get to that right after the next video :)
-&lt;/p&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<p>To those of you waiting for the video on a full Guix system install, we'll get to that right after the next video :)
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

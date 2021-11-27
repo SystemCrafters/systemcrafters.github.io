@@ -1,367 +1,368 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Installing Guix as a Complete GNU/Linux System - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Installing Guix as a Complete GNU/Linux System</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://youtu.be/oSy-TmoxG_Y&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Installing Guix as a Complete GNU/Linux System - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Installing Guix as a Complete GNU/Linux System</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/oSy-TmoxG_Y">Watch the video</a> on YouTube!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-time-has-come&quot; class=&quot;anchor&quot; href=&quot;#the-time-has-come&quot;&gt;¶&lt;/a&gt;The time has come!&lt;/h2&gt;&lt;p&gt;Today we&apos;re finally going to learn how to install GNU Guix as a full Linux distribution.  My goal here is to make the installation process as smooth as possible for first-time Guix installers, particularly when you&apos;re installing on a machine that has hardware which isn&apos;t supported by the Linux kernel that comes with the official Guix installation image.
-&lt;/p&gt;
+<h2><a id="the-time-has-come" class="anchor" href="#the-time-has-come">¶</a>The time has come!</h2><p>Today we're finally going to learn how to install GNU Guix as a full Linux distribution.  My goal here is to make the installation process as smooth as possible for first-time Guix installers, particularly when you're installing on a machine that has hardware which isn't supported by the Linux kernel that comes with the official Guix installation image.
+</p>
 
-&lt;p&gt;By the end of this video, we&apos;ll have Guix installed with the GNOME desktop environment and working WiFi, and I&apos;ll also show you how to update your system so that you can keep things up to date!
-&lt;/p&gt;
+<p>By the end of this video, we'll have Guix installed with the GNOME desktop environment and working WiFi, and I'll also show you how to update your system so that you can keep things up to date!
+</p>
 
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you&apos;re watching this video a month or later after it has been released, please check the show notes linked in the description just in case any corrections are needed for the steps we take today!  Guix is constantly changing so there&apos;s a chance the instructions will be updated over time.
-&lt;/p&gt;
+<p><strong>NOTE:</strong> If you're watching this video a month or later after it has been released, please check the show notes linked in the description just in case any corrections are needed for the steps we take today!  Guix is constantly changing so there's a chance the instructions will be updated over time.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;assumptions&quot; class=&quot;anchor&quot; href=&quot;#assumptions&quot;&gt;¶&lt;/a&gt;Assumptions&lt;/h2&gt;&lt;p&gt;I&apos;m going to make a few assumptions in this video:
-&lt;/p&gt;
+<h2><a id="assumptions" class="anchor" href="#assumptions">¶</a>Assumptions</h2><p>I'm going to make a few assumptions in this video:
+</p>
 
-&lt;ul&gt;&lt;li&gt;You haven&apos;t installed GNU Guix before, but you&apos;ve probably installed Linux before&lt;/li&gt;
-&lt;li&gt;You don&apos;t have a pre-existing Guix system configuration&lt;/li&gt;
-&lt;li&gt;You are installing Guix on a machine that requires nonfree firmware and drivers, most likely a laptop that only has WiFi for Internet access&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>You haven't installed GNU Guix before, but you've probably installed Linux before</li>
+<li>You don't have a pre-existing Guix system configuration</li>
+<li>You are installing Guix on a machine that requires nonfree firmware and drivers, most likely a laptop that only has WiFi for Internet access</li>
+</ul>
 
-&lt;p&gt;I want to make sure I point out that this is a customized Guix installation image, so some of the steps I tell you to follow here don&apos;t apply to the installer you will find on the main Guix website!
-&lt;/p&gt;
+<p>I want to make sure I point out that this is a customized Guix installation image, so some of the steps I tell you to follow here don't apply to the installer you will find on the main Guix website!
+</p>
 
-&lt;p&gt;I&apos;ll point out any deviations from the official installer when we reach them.
-&lt;/p&gt;
+<p>I'll point out any deviations from the official installer when we reach them.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;preparing-the-installer&quot; class=&quot;anchor&quot; href=&quot;#preparing-the-installer&quot;&gt;¶&lt;/a&gt;Preparing the installer&lt;/h2&gt;&lt;p&gt;First of all, you&apos;ll need to download the &lt;kbd&gt;.iso&lt;/kbd&gt; file for the latest release on this GitHub repository:
-&lt;/p&gt;
+<h2><a id="preparing-the-installer" class="anchor" href="#preparing-the-installer">¶</a>Preparing the installer</h2><p>First of all, you'll need to download the <kbd>.iso</kbd> file for the latest release on this GitHub repository:
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/SystemCrafters/guix-installer/releases/latest&quot;&gt;https://github.com/SystemCrafters/guix-installer/releases/latest&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://github.com/SystemCrafters/guix-installer/releases/latest">https://github.com/SystemCrafters/guix-installer/releases/latest</a>
+</p>
 
-&lt;p&gt;I&apos;ll be using &lt;a href=&quot;https://github.com/SystemCrafters/guix-installer/releases/tag/v202106122242&quot;&gt;this release&lt;/a&gt; of the installer today but it&apos;s probably better to try the latest version first and then use the one I&apos;m using if you run into any trouble with the newest one.
-&lt;/p&gt;
+<p>I'll be using <a href="https://github.com/SystemCrafters/guix-installer/releases/tag/v202106122242">this release</a> of the installer today but it's probably better to try the latest version first and then use the one I'm using if you run into any trouble with the newest one.
+</p>
 
-&lt;p&gt;You&apos;ll then need to burn the ISO onto either a DVD or USB stick.  You can follow the instructions in the GNU Guix manual for how to burn the ISO once you&apos;ve downloaded it (just don&apos;t download the ISO that they recommend!)
-&lt;/p&gt;
+<p>You'll then need to burn the ISO onto either a DVD or USB stick.  You can follow the instructions in the GNU Guix manual for how to burn the ISO once you've downloaded it (just don't download the ISO that they recommend!)
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://guix.gnu.org/manual/en/guix.html#USB-Stick-and-DVD-Installation&quot;&gt;GNU Guix Manual: USB Stick and DVD Installation&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://guix.gnu.org/manual/en/guix.html#USB-Stick-and-DVD-Installation">GNU Guix Manual: USB Stick and DVD Installation</a>
+</p>
 
-&lt;p&gt;An example:
-&lt;/p&gt;
+<p>An example:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-$ sudo dd &lt;span class=&quot;org-variable-name&quot;&gt;if&lt;/span&gt;=guix-installer-&amp;lt;date number&amp;gt;.iso &lt;span class=&quot;org-variable-name&quot;&gt;of&lt;/span&gt;=/dev/sdX &lt;span class=&quot;org-variable-name&quot;&gt;status&lt;/span&gt;=progress
+<pre><code class="sh">
+$ sudo dd <span class="org-variable-name">if</span>=guix-installer-&lt;date number&gt;.iso <span class="org-variable-name">of</span>=/dev/sdX <span class="org-variable-name">status</span>=progress
 $ sync
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Make sure to update the &lt;kbd&gt;.iso&lt;/kbd&gt; path and the target drive path in the command above!
-&lt;/p&gt;
+<p>Make sure to update the <kbd>.iso</kbd> path and the target drive path in the command above!
+</p>
 
-&lt;p&gt;If you&apos;re on Windows, the program Rufus can be helpful for putting the image on a USB stick:
-&lt;/p&gt;
+<p>If you're on Windows, the program Rufus can be helpful for putting the image on a USB stick:
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://rufus.ie/en_US/&quot;&gt;https://rufus.ie/en_US/&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://rufus.ie/en_US/">https://rufus.ie/en_US/</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;prepare-your-hard-drive&quot; class=&quot;anchor&quot; href=&quot;#prepare-your-hard-drive&quot;&gt;¶&lt;/a&gt;Prepare your hard drive&lt;/h2&gt;&lt;p&gt;The last prerequisite is to make sure you&apos;ve prepared your hard drive and partitions before you start the installation process.
-&lt;/p&gt;
+<h2><a id="prepare-your-hard-drive" class="anchor" href="#prepare-your-hard-drive">¶</a>Prepare your hard drive</h2><p>The last prerequisite is to make sure you've prepared your hard drive and partitions before you start the installation process.
+</p>
 
-&lt;p&gt;First of all, back up your important files, just in case!  If you accidentally delete an important partition while going through the Guix process, you&apos;ll want to have that backup around.
-&lt;/p&gt;
+<p>First of all, back up your important files, just in case!  If you accidentally delete an important partition while going through the Guix process, you'll want to have that backup around.
+</p>
 
-&lt;p&gt;You&apos;ll also need to make sure you have enough free space to create a new partition for Guix.  You have two options:
-&lt;/p&gt;
+<p>You'll also need to make sure you have enough free space to create a new partition for Guix.  You have two options:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Let the Guix installer delete all your partitions and create from scratch (slightly risky, but OK if you don&apos;t use this computer for anything else)&lt;/li&gt;
-&lt;li&gt;Resize the partition of your main operating system to make space for Guix.  If you&apos;re using Windows, you can launch the &quot;Disk Manager&quot; application, right click on your Windows partition, and click &quot;Shrink Volume&quot; to make space for a new partition.&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>Let the Guix installer delete all your partitions and create from scratch (slightly risky, but OK if you don't use this computer for anything else)</li>
+<li>Resize the partition of your main operating system to make space for Guix.  If you're using Windows, you can launch the "Disk Manager" application, right click on your Windows partition, and click "Shrink Volume" to make space for a new partition.</li>
+</ul>
 
-&lt;h2&gt;&lt;a id=&quot;booting-the-installer&quot; class=&quot;anchor&quot; href=&quot;#booting-the-installer&quot;&gt;¶&lt;/a&gt;Booting the Installer&lt;/h2&gt;&lt;p&gt;Let&apos;s boot with the installation media!  When you plug in the USB stick (or DVD) you may need to press a key to get to the boot menu and select the device with the installer on it.
-&lt;/p&gt;
+<h2><a id="booting-the-installer" class="anchor" href="#booting-the-installer">¶</a>Booting the Installer</h2><p>Let's boot with the installation media!  When you plug in the USB stick (or DVD) you may need to press a key to get to the boot menu and select the device with the installer on it.
+</p>
 
-&lt;p&gt;Once booting completes, you&apos;ll see a blue and red screen with a menu.  You&apos;ll first need to select the language and territory for the installation process.
-&lt;/p&gt;
+<p>Once booting completes, you'll see a blue and red screen with a menu.  You'll first need to select the language and territory for the installation process.
+</p>
 
-&lt;p&gt;You will then be presented with a choice to use the &quot;graphical&quot; installer or the &quot;shell-based&quot; process.  We&apos;re going to pick the &quot;graphical&quot; installation process because we don&apos;t have an existing Guix system configuration.
-&lt;/p&gt;
+<p>You will then be presented with a choice to use the "graphical" installer or the "shell-based" process.  We're going to pick the "graphical" installation process because we don't have an existing Guix system configuration.
+</p>
 
-&lt;p&gt;If you have an existing configuration, I still recommend starting with the graphical installer because it can help you connect to WiFi a little more easily than on the console!
-&lt;/p&gt;
+<p>If you have an existing configuration, I still recommend starting with the graphical installer because it can help you connect to WiFi a little more easily than on the console!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;using-the-graphical-installer&quot; class=&quot;anchor&quot; href=&quot;#using-the-graphical-installer&quot;&gt;¶&lt;/a&gt;Using the graphical installer&lt;/h2&gt;&lt;p&gt;We&apos;re now going to proceed through the installation &quot;wizard&quot; which will ask us to fill in some information about the system we will be installing.
-&lt;/p&gt;
+<h2><a id="using-the-graphical-installer" class="anchor" href="#using-the-graphical-installer">¶</a>Using the graphical installer</h2><p>We're now going to proceed through the installation "wizard" which will ask us to fill in some information about the system we will be installing.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;choosing-basic-system-details&quot; class=&quot;anchor&quot; href=&quot;#choosing-basic-system-details&quot;&gt;¶&lt;/a&gt;Choosing basic system details&lt;/h3&gt;&lt;p&gt;The first question is to choose the appropriate timezone for where you are in the world.  You will then be asked about the keyboard layout you use.  There are lots of options for keyboard layouts, so take a moment to look through them!
-&lt;/p&gt;
+<h3><a id="choosing-basic-system-details" class="anchor" href="#choosing-basic-system-details">¶</a>Choosing basic system details</h3><p>The first question is to choose the appropriate timezone for where you are in the world.  You will then be asked about the keyboard layout you use.  There are lots of options for keyboard layouts, so take a moment to look through them!
+</p>
 
-&lt;p&gt;Next you will be asked for the hostname of the system.  Enter something fun here!
-&lt;/p&gt;
+<p>Next you will be asked for the hostname of the system.  Enter something fun here!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;network-setup&quot; class=&quot;anchor&quot; href=&quot;#network-setup&quot;&gt;¶&lt;/a&gt;Network setup&lt;/h3&gt;&lt;p&gt;If you&apos;re installing on a laptop or a device with a WiFi adapter, select &quot;WiFi&quot; in the list and press Enter.  It will try to power on your WiFi antenna to find available access points.  If for some reason no access points are returned the first time, press Tab to select &quot;Scan&quot; and then Enter and then you may get a list of results.
-&lt;/p&gt;
+<h3><a id="network-setup" class="anchor" href="#network-setup">¶</a>Network setup</h3><p>If you're installing on a laptop or a device with a WiFi adapter, select "WiFi" in the list and press Enter.  It will try to power on your WiFi antenna to find available access points.  If for some reason no access points are returned the first time, press Tab to select "Scan" and then Enter and then you may get a list of results.
+</p>
 
-&lt;p&gt;Select the network you want to connect to and enter the password in the next dialog that appears.  Once you authenticate, the installer will try to access the Internet.  I&apos;ve seen this dialog report that the Internet isn&apos;t accessible, so just select the same network again and it might work the second try!
-&lt;/p&gt;
+<p>Select the network you want to connect to and enter the password in the next dialog that appears.  Once you authenticate, the installer will try to access the Internet.  I've seen this dialog report that the Internet isn't accessible, so just select the same network again and it might work the second try!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;enable-substitute-servers&quot; class=&quot;anchor&quot; href=&quot;#enable-substitute-servers&quot;&gt;¶&lt;/a&gt;Enable substitute servers&lt;/h3&gt;&lt;p&gt;Now you&apos;ll be asked if you want to turn on substitute server discovery.  I highly recommend choosing &quot;Enable&quot; here or you will be building the source for all your packages from scratch!
-&lt;/p&gt;
+<h3><a id="enable-substitute-servers" class="anchor" href="#enable-substitute-servers">¶</a>Enable substitute servers</h3><p>Now you'll be asked if you want to turn on substitute server discovery.  I highly recommend choosing "Enable" here or you will be building the source for all your packages from scratch!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;choose-a-root-password&quot; class=&quot;anchor&quot; href=&quot;#choose-a-root-password&quot;&gt;¶&lt;/a&gt;Choose a root password&lt;/h3&gt;&lt;p&gt;Enter a root password for the machine in the next prompt.  It doesn&apos;t matter what you enter here because we won&apos;t finish installation using the graphical installer!
-&lt;/p&gt;
+<h3><a id="choose-a-root-password" class="anchor" href="#choose-a-root-password">¶</a>Choose a root password</h3><p>Enter a root password for the machine in the next prompt.  It doesn't matter what you enter here because we won't finish installation using the graphical installer!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;create-a-user&quot; class=&quot;anchor&quot; href=&quot;#create-a-user&quot;&gt;¶&lt;/a&gt;Create a user&lt;/h3&gt;&lt;p&gt;On the &quot;User creation&quot; dialog, press Enter to raise the dialog to add a user.
-&lt;/p&gt;
+<h3><a id="create-a-user" class="anchor" href="#create-a-user">¶</a>Create a user</h3><p>On the "User creation" dialog, press Enter to raise the dialog to add a user.
+</p>
 
-&lt;p&gt;Enter the name and details for the user (leave the password field blank!) then use TAB to reach the OK button and press Enter.
-&lt;/p&gt;
+<p>Enter the name and details for the user (leave the password field blank!) then use TAB to reach the OK button and press Enter.
+</p>
 
-&lt;p&gt;The cursor should now be on the OK button, so if you don&apos;t need to add more users, just press Enter!
-&lt;/p&gt;
+<p>The cursor should now be on the OK button, so if you don't need to add more users, just press Enter!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;choosing-a-desktop-environment&quot; class=&quot;anchor&quot; href=&quot;#choosing-a-desktop-environment&quot;&gt;¶&lt;/a&gt;Choosing a desktop environment&lt;/h3&gt;&lt;p&gt;Here&apos;s the fun part!  At this point you can choose what your initial desktop environment will be.  You can also select multiple environments if you want to try different ones in your new system!
-&lt;/p&gt;
+<h3><a id="choosing-a-desktop-environment" class="anchor" href="#choosing-a-desktop-environment">¶</a>Choosing a desktop environment</h3><p>Here's the fun part!  At this point you can choose what your initial desktop environment will be.  You can also select multiple environments if you want to try different ones in your new system!
+</p>
 
-&lt;p&gt;I know that since we&apos;re on the System Crafters channel that &quot;Emacs EXWM&quot; option is going to be tempting, but I recommend picking a more conventional option in addition to that you have an easier time setting things up after installation.
-&lt;/p&gt;
+<p>I know that since we're on the System Crafters channel that "Emacs EXWM" option is going to be tempting, but I recommend picking a more conventional option in addition to that you have an easier time setting things up after installation.
+</p>
 
-&lt;p&gt;Use the arrow keys to select &quot;Emacs EXWM&quot; and press Enter, then use TAB and Enter to confirm the dialog.
-&lt;/p&gt;
+<p>Use the arrow keys to select "Emacs EXWM" and press Enter, then use TAB and Enter to confirm the dialog.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;service-selection&quot; class=&quot;anchor&quot; href=&quot;#service-selection&quot;&gt;¶&lt;/a&gt;Service selection&lt;/h3&gt;&lt;p&gt;In the next screen you can choose services to add to your system.  The NSS certificate service will be selected by default (don&apos;t uncheck it!) and you can add either of the following services by selecting them with the arrow keys and pressing Enter:
-&lt;/p&gt;
+<h3><a id="service-selection" class="anchor" href="#service-selection">¶</a>Service selection</h3><p>In the next screen you can choose services to add to your system.  The NSS certificate service will be selected by default (don't uncheck it!) and you can add either of the following services by selecting them with the arrow keys and pressing Enter:
+</p>
 
-&lt;ul&gt;&lt;li&gt;OpenSSH: Enables SSH access to this machine&lt;/li&gt;
-&lt;li&gt;Tor: Enables you to access the Tor network&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>OpenSSH: Enables SSH access to this machine</li>
+<li>Tor: Enables you to access the Tor network</li>
+</ul>
 
-&lt;p&gt;Once you&apos;ve made your selections, use Tab and Enter to choose OK.
-&lt;/p&gt;
+<p>Once you've made your selections, use Tab and Enter to choose OK.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;partitioning-the-disk&quot; class=&quot;anchor&quot; href=&quot;#partitioning-the-disk&quot;&gt;¶&lt;/a&gt;Partitioning the disk&lt;/h3&gt;&lt;p&gt;On this screen, we can choose how we want to partition the disks in our system.  We can either have the installer guide us through the partitioning process or do the work manually.
-&lt;/p&gt;
+<h3><a id="partitioning-the-disk" class="anchor" href="#partitioning-the-disk">¶</a>Partitioning the disk</h3><p>On this screen, we can choose how we want to partition the disks in our system.  We can either have the installer guide us through the partitioning process or do the work manually.
+</p>
 
-&lt;p&gt;Partitioning is probably the trickiest part of the installation if you already have another operating system installed that you need to use (like Windows)!
-&lt;/p&gt;
+<p>Partitioning is probably the trickiest part of the installation if you already have another operating system installed that you need to use (like Windows)!
+</p>
 
-&lt;p&gt;&lt;strong&gt;Guided Partitioning&lt;/strong&gt;
-&lt;/p&gt;
+<p><strong>Guided Partitioning</strong>
+</p>
 
-&lt;p&gt;We&apos;ll select the option &quot;Guided - using the entire disk with encryption&quot; with the Enter key to install Guix into an encrypted file system.  In the next screen you&apos;ll be asked which disk to partition.  Select that disk with the arrow keys and press Enter to continue.
-&lt;/p&gt;
+<p>We'll select the option "Guided - using the entire disk with encryption" with the Enter key to install Guix into an encrypted file system.  In the next screen you'll be asked which disk to partition.  Select that disk with the arrow keys and press Enter to continue.
+</p>
 
-&lt;p&gt;You&apos;ll also be asked for the partition table type and the options presented will depend on the type of system you are installing to.  We will chose &quot;gpt&quot; here and press Enter.
-&lt;/p&gt;
+<p>You'll also be asked for the partition table type and the options presented will depend on the type of system you are installing to.  We will chose "gpt" here and press Enter.
+</p>
 
-&lt;p&gt;Now you&apos;ll be asked if you want a separate home partition.  This can be useful if you&apos;d like to reinstall your Guix system at some point later, but due to the nature of Guix you should never have to reinstall!  For the sake of simplicity we will choose &quot;Everything is one partition&quot; and press Enter.
-&lt;/p&gt;
+<p>Now you'll be asked if you want a separate home partition.  This can be useful if you'd like to reinstall your Guix system at some point later, but due to the nature of Guix you should never have to reinstall!  For the sake of simplicity we will choose "Everything is one partition" and press Enter.
+</p>
 
-&lt;p&gt;We will now be asked to confirm the proposed partitioning.  Verify that everything looks good and then use Tab then Enter to select &quot;OK&quot; to continue.
-&lt;/p&gt;
+<p>We will now be asked to confirm the proposed partitioning.  Verify that everything looks good and then use Tab then Enter to select "OK" to continue.
+</p>
 
-&lt;p&gt;Since we chose an encrypted volume, we&apos;ll now be asked for the password.  Choose something relatively strong but memorable for this!  A series of words of 20 characters or longer is usually sufficient for this purpose.  After you enter the password and choose OK you will be asked to confirm the password one more time.
-&lt;/p&gt;
+<p>Since we chose an encrypted volume, we'll now be asked for the password.  Choose something relatively strong but memorable for this!  A series of words of 20 characters or longer is usually sufficient for this purpose.  After you enter the password and choose OK you will be asked to confirm the password one more time.
+</p>
 
-&lt;p&gt;Now we will be asked to continue with formatting the disk.  Press Enter to continue if everything looks good!  The partitions of the disk will now be formatted and prepared for installation.
-&lt;/p&gt;
+<p>Now we will be asked to continue with formatting the disk.  Press Enter to continue if everything looks good!  The partitions of the disk will now be formatted and prepared for installation.
+</p>
 
-&lt;p&gt;&lt;strong&gt;Manual Partitioning&lt;/strong&gt;
-&lt;/p&gt;
+<p><strong>Manual Partitioning</strong>
+</p>
 
-&lt;p&gt;If you select the &quot;Manual&quot; option in this screen, you will be shown a list of existing partitions on your hard drive(s).
-&lt;/p&gt;
+<p>If you select the "Manual" option in this screen, you will be shown a list of existing partitions on your hard drive(s).
+</p>
 
-&lt;p&gt;If you&apos;ve already made space for Guix on your drive, you may see an entry in the list that says &quot;Free space&quot;.  If you select that item and press Enter it will allow you to create a new partition!  You can leave the type and size settings as they are and enable encryption if desired.  You should also set the mount point to &lt;kbd&gt;/&lt;/kbd&gt; for the root partition!
-&lt;/p&gt;
+<p>If you've already made space for Guix on your drive, you may see an entry in the list that says "Free space".  If you select that item and press Enter it will allow you to create a new partition!  You can leave the type and size settings as they are and enable encryption if desired.  You should also set the mount point to <kbd>/</kbd> for the root partition!
+</p>
 
-&lt;p&gt;You can also delete a selected partition to make space using the Delete key!
-&lt;/p&gt;
+<p>You can also delete a selected partition to make space using the Delete key!
+</p>
 
-&lt;p&gt;If you want to reuse an existing partition, select it using the arrow keys and press Enter.  You can change the partition type, select it for formatting, and enable encryption if you want.
-&lt;/p&gt;
+<p>If you want to reuse an existing partition, select it using the arrow keys and press Enter.  You can change the partition type, select it for formatting, and enable encryption if you want.
+</p>
 
-&lt;p&gt;No matter what you do here, the important thing is to make sure you&apos;ve set the mount point of &lt;kbd&gt;/&lt;/kbd&gt; for the partition where you want to install Guix!
-&lt;/p&gt;
+<p>No matter what you do here, the important thing is to make sure you've set the mount point of <kbd>/</kbd> for the partition where you want to install Guix!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;editing-the-generated-configuration&quot; class=&quot;anchor&quot; href=&quot;#editing-the-generated-configuration&quot;&gt;¶&lt;/a&gt;Editing the generated configuration&lt;/h3&gt;&lt;p&gt;We&apos;ll now be shown a screen with the final configuration that was generated for our system install.  This is actually the last page we will use on the graphical installer!  We&apos;ll use this generated configuration to finish the installation process manually.
-&lt;/p&gt;
+<h3><a id="editing-the-generated-configuration" class="anchor" href="#editing-the-generated-configuration">¶</a>Editing the generated configuration</h3><p>We'll now be shown a screen with the final configuration that was generated for our system install.  This is actually the last page we will use on the graphical installer!  We'll use this generated configuration to finish the installation process manually.
+</p>
 
-&lt;p&gt;Since we want to install the full Linux kernel, we need to make some tweaks to the config before continuing.  Instead of choosing &quot;OK&quot; or &quot;Edit&quot; here, we will actually switch to a different TTY using &lt;kbd&gt;Ctrl+Alt+F3&lt;/kbd&gt;. Once you switch to this TTY, press Enter to get to the shell.
-&lt;/p&gt;
+<p>Since we want to install the full Linux kernel, we need to make some tweaks to the config before continuing.  Instead of choosing "OK" or "Edit" here, we will actually switch to a different TTY using <kbd>Ctrl+Alt+F3</kbd>. Once you switch to this TTY, press Enter to get to the shell.
+</p>
 
-&lt;p&gt;Now we can edit the generated configuration file to add the parts we need to install with the full Linux kernel.  Open up the file &lt;kbd&gt;/mnt/etc/config.scm&lt;/kbd&gt; in either Emacs or Vim (both are installed already).  I&apos;ll open the file in Emacs:
-&lt;/p&gt;
+<p>Now we can edit the generated configuration file to add the parts we need to install with the full Linux kernel.  Open up the file <kbd>/mnt/etc/config.scm</kbd> in either Emacs or Vim (both are installed already).  I'll open the file in Emacs:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 emacs /mnt/etc/config.scm
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;The first edit will be on the first &lt;kbd&gt;use-modules&lt;/kbd&gt; line (line 4), replace it with the following:
-&lt;/p&gt;
+<p>The first edit will be on the first <kbd>use-modules</kbd> line (line 4), replace it with the following:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;scheme&quot;&gt;
+<pre><code class="scheme">
 (use-modules (gnu) (nongnu packages linux))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;The next section of the file (line 7) starts with &lt;kbd&gt;(operating-system&lt;/kbd&gt;, we need to insert a couple lines just after that line:
-&lt;/p&gt;
+<p>The next section of the file (line 7) starts with <kbd>(operating-system</kbd>, we need to insert a couple lines just after that line:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;scheme&quot;&gt;
+<pre><code class="scheme">
 (kernel linux)
-(firmware (list linux-firmware))  &lt;span class=&quot;org-comment-delimiter&quot;&gt;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Don&apos;t forget the second parentheses at the end!&lt;/span&gt;
+(firmware (list linux-firmware))  <span class="org-comment-delimiter">; </span><span class="org-comment">Don't forget the second parentheses at the end!</span>
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;These two lines will set up the full Linux kernel and firmware in the installed system.
-&lt;/p&gt;
+<p>These two lines will set up the full Linux kernel and firmware in the installed system.
+</p>
 
-&lt;p&gt;That&apos;s it!  Save the file (&lt;kbd&gt;C-x C-s&lt;/kbd&gt; in Emacs) and then exit (&lt;kbd&gt;C-x C-c&lt;/kbd&gt;).
-&lt;/p&gt;
+<p>That's it!  Save the file (<kbd>C-x C-s</kbd> in Emacs) and then exit (<kbd>C-x C-c</kbd>).
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;installing-the-system&quot; class=&quot;anchor&quot; href=&quot;#installing-the-system&quot;&gt;¶&lt;/a&gt;Installing the system&lt;/h2&gt;&lt;p&gt;Now we can start the system installation!
-&lt;/p&gt;
+<h2><a id="installing-the-system" class="anchor" href="#installing-the-system">¶</a>Installing the system</h2><p>Now we can start the system installation!
+</p>
 
-&lt;p&gt;First we need to set up the Guix build daemon to target the new system partition by running this command:
-&lt;/p&gt;
+<p>First we need to set up the Guix build daemon to target the new system partition by running this command:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 herd start cow-store /mnt
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;We also want to save the channel configuration that was used to produce the installer image onto our new machine, so we will copy it over now:
-&lt;/p&gt;
+<p>We also want to save the channel configuration that was used to produce the installer image onto our new machine, so we will copy it over now:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 cp /etc/channels.scm /mnt/etc/
 chmod +w /mnt/etc/channels.scm
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;The following command will install your system configuration using the included &lt;kbd&gt;channels.scm&lt;/kbd&gt; file so that you get both the main Guix channel and the Nonguix channel which contains the full Linux kernel:
-&lt;/p&gt;
+<p>The following command will install your system configuration using the included <kbd>channels.scm</kbd> file so that you get both the main Guix channel and the Nonguix channel which contains the full Linux kernel:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix time-machine -C /mnt/etc/channels.scm -- system init /mnt/etc/config.scm /mnt
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Installation can take a while here because many packages will need to be downloaded for the base system install.  If the installation process ever seems to hang, you can just use &lt;kbd&gt;Ctrl+C&lt;/kbd&gt; to cancel it and then run the same &lt;kbd&gt;guix time-machine&lt;/kbd&gt; command again to continue!
-&lt;/p&gt;
+<p>Installation can take a while here because many packages will need to be downloaded for the base system install.  If the installation process ever seems to hang, you can just use <kbd>Ctrl+C</kbd> to cancel it and then run the same <kbd>guix time-machine</kbd> command again to continue!
+</p>
 
-&lt;p&gt;Once everything is done, type the following command to restart the computer:
-&lt;/p&gt;
+<p>Once everything is done, type the following command to restart the computer:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 reboot
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;While the reboot is going on, remove the installation media so that it doesn&apos;t try to boot the installer again!
-&lt;/p&gt;
+<p>While the reboot is going on, remove the installation media so that it doesn't try to boot the installer again!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;booting-your-new-system&quot; class=&quot;anchor&quot; href=&quot;#booting-your-new-system&quot;&gt;¶&lt;/a&gt;Booting your new system&lt;/h2&gt;&lt;p&gt;Your new system should be installed now!  If you created encrypted partitions, the first thing you will have to do is type in your passphrase before you will reach the Guix boot screen.  It will take a few seconds before booting proceeds after you enter the password.
-&lt;/p&gt;
+<h2><a id="booting-your-new-system" class="anchor" href="#booting-your-new-system">¶</a>Booting your new system</h2><p>Your new system should be installed now!  If you created encrypted partitions, the first thing you will have to do is type in your passphrase before you will reach the Guix boot screen.  It will take a few seconds before booting proceeds after you enter the password.
+</p>
 
-&lt;p&gt;Now you will get the Guix boot screen and can press Enter to proceed.  You will receive a second prompt for your passphrase if the root partition is encrypted!
-&lt;/p&gt;
+<p>Now you will get the Guix boot screen and can press Enter to proceed.  You will receive a second prompt for your passphrase if the root partition is encrypted!
+</p>
 
-&lt;p&gt;Once booting completes you will be at the login screen for your desktop environment.  You can&apos;t log in yet though because no password has been set!
-&lt;/p&gt;
+<p>Once booting completes you will be at the login screen for your desktop environment.  You can't log in yet though because no password has been set!
+</p>
 
-&lt;p&gt;Use &lt;kbd&gt;Ctrl+Alt+F5&lt;/kbd&gt; to switch to another virtual terminal and log in as &lt;kbd&gt;root&lt;/kbd&gt;.  Now you need to set passwords for both &lt;kbd&gt;root&lt;/kbd&gt; and the user(s) you created!
-&lt;/p&gt;
+<p>Use <kbd>Ctrl+Alt+F5</kbd> to switch to another virtual terminal and log in as <kbd>root</kbd>.  Now you need to set passwords for both <kbd>root</kbd> and the user(s) you created!
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;# &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Change the root password&lt;/span&gt;
+<pre><code class="sh">
+<span class="org-comment-delimiter"># </span><span class="org-comment">Change the root password</span>
 passwd
 
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;# &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Change your user account password&lt;/span&gt;
+<span class="org-comment-delimiter"># </span><span class="org-comment">Change your user account password</span>
 passwd daviwil
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Once you&apos;ve changed the passwords, type &lt;kbd&gt;exit&lt;/kbd&gt; to log out from the &lt;kbd&gt;root&lt;/kbd&gt; shell and then press &lt;kbd&gt;Ctrl+Alt+F7&lt;/kbd&gt; to go back to the desktop environment log in screen.
-&lt;/p&gt;
+<p>Once you've changed the passwords, type <kbd>exit</kbd> to log out from the <kbd>root</kbd> shell and then press <kbd>Ctrl+Alt+F7</kbd> to go back to the desktop environment log in screen.
+</p>
 
-&lt;p&gt;You can now log in successfully!
-&lt;/p&gt;
+<p>You can now log in successfully!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;saving-your-configuration&quot; class=&quot;anchor&quot; href=&quot;#saving-your-configuration&quot;&gt;¶&lt;/a&gt;Saving your configuration&lt;/h2&gt;&lt;p&gt;Now that we&apos;ve booted into our new system and logged in, we need to copy over the channel and configuration files that we used during installation.  This is important, these files won&apos;t exist after we update the system!
-&lt;/p&gt;
+<h2><a id="saving-your-configuration" class="anchor" href="#saving-your-configuration">¶</a>Saving your configuration</h2><p>Now that we've booted into our new system and logged in, we need to copy over the channel and configuration files that we used during installation.  This is important, these files won't exist after we update the system!
+</p>
 
-&lt;p&gt;You can save these files with the following commands:
-&lt;/p&gt;
+<p>You can save these files with the following commands:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 mkdir -p ~/.config/guix
-&lt;span class=&quot;org-builtin&quot;&gt;cd&lt;/span&gt; ~/.config/guix
+<span class="org-builtin">cd</span> ~/.config/guix
 cp /etc/channels.scm .
 cp /etc/config.scm ./system.scm
 chmod +w channels.scm
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Next we need to edit the &lt;kbd&gt;channels.scm&lt;/kbd&gt; file so that we&apos;re not pinned to specific commits anymore.  Open up &lt;kbd&gt;~/.config/guix/channels.scm&lt;/kbd&gt; in Emacs or Vim and remove the lines containing &lt;kbd&gt;(commit ...)&lt;/kbd&gt;.
-&lt;/p&gt;
+<p>Next we need to edit the <kbd>channels.scm</kbd> file so that we're not pinned to specific commits anymore.  Open up <kbd>~/.config/guix/channels.scm</kbd> in Emacs or Vim and remove the lines containing <kbd>(commit ...)</kbd>.
+</p>
 
-&lt;p&gt;The file should now look like this:
-&lt;/p&gt;
+<p>The file should now look like this:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;scheme&quot;&gt;
+<pre><code class="scheme">
 (list (channel
-        (name &apos;guix)
-        (url &lt;span class=&quot;org-string&quot;&gt;&quot;https://git.savannah.gnu.org/git/guix.git&quot;&lt;/span&gt;)
+        (name 'guix)
+        (url <span class="org-string">"https://git.savannah.gnu.org/git/guix.git"</span>)
         (introduction
           (make-channel-introduction
-            &lt;span class=&quot;org-string&quot;&gt;&quot;9edb3f66fd807b096b48283debdcddccfea34bad&quot;&lt;/span&gt;
+            <span class="org-string">"9edb3f66fd807b096b48283debdcddccfea34bad"</span>
             (openpgp-fingerprint
-              &lt;span class=&quot;org-string&quot;&gt;&quot;BBB0 2DDF 2CEA F6A8 0D1D  E643 A2A0 6DF2 A33A 54FA&quot;&lt;/span&gt;))))
+              <span class="org-string">"BBB0 2DDF 2CEA F6A8 0D1D  E643 A2A0 6DF2 A33A 54FA"</span>))))
       (channel
-        (name &apos;nonguix)
-        (url &lt;span class=&quot;org-string&quot;&gt;&quot;https://gitlab.com/nonguix/nonguix&quot;&lt;/span&gt;)
+        (name 'nonguix)
+        (url <span class="org-string">"https://gitlab.com/nonguix/nonguix"</span>)
         (introduction
           (make-channel-introduction
-            &lt;span class=&quot;org-string&quot;&gt;&quot;897c1a470da759236cc11798f4e0a5f7d4d59fbc&quot;&lt;/span&gt;
+            <span class="org-string">"897c1a470da759236cc11798f4e0a5f7d4d59fbc"</span>
             (openpgp-fingerprint
-              &lt;span class=&quot;org-string&quot;&gt;&quot;2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5&quot;&lt;/span&gt;)))))
+              <span class="org-string">"2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"</span>)))))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h2&gt;&lt;a id=&quot;updating-the-system&quot; class=&quot;anchor&quot; href=&quot;#updating-the-system&quot;&gt;¶&lt;/a&gt;Updating the system&lt;/h2&gt;&lt;p&gt;One last thing you&apos;ll want to know how to do is update your system!  Before we can do that, though, make sure to connect to WiFi!
-&lt;/p&gt;
+<h2><a id="updating-the-system" class="anchor" href="#updating-the-system">¶</a>Updating the system</h2><p>One last thing you'll want to know how to do is update your system!  Before we can do that, though, make sure to connect to WiFi!
+</p>
 
-&lt;p&gt;You can update your Guix system by running the following commands:
-&lt;/p&gt;
+<p>You can update your Guix system by running the following commands:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 guix pull
 sudo -E guix system reconfigure ~/.config/guix/system.scm
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;This may take some time depending on how many changes were made to Guix since your installer image was generated.  Once the &lt;kbd&gt;guix system reconfigure&lt;/kbd&gt; command is done, you can reboot to use your updated system!
-&lt;/p&gt;
+<p>This may take some time depending on how many changes were made to Guix since your installer image was generated.  Once the <kbd>guix system reconfigure</kbd> command is done, you can reboot to use your updated system!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;usage-tips&quot; class=&quot;anchor&quot; href=&quot;#usage-tips&quot;&gt;¶&lt;/a&gt;Usage tips&lt;/h2&gt;&lt;ol&gt;&lt;li&gt;Don&apos;t use your &lt;kbd&gt;system.scm&lt;/kbd&gt; to install packages you want to use day to day, use &lt;kbd&gt;guix install&lt;/kbd&gt; instead!&lt;/li&gt;
-&lt;li&gt;You don&apos;t really need to update the full system very often (especially to avoid kernel recompiles)&lt;/li&gt;
-&lt;/ol&gt;
+<h2><a id="usage-tips" class="anchor" href="#usage-tips">¶</a>Usage tips</h2><ol><li>Don't use your <kbd>system.scm</kbd> to install packages you want to use day to day, use <kbd>guix install</kbd> instead!</li>
+<li>You don't really need to update the full system very often (especially to avoid kernel recompiles)</li>
+</ol>
 
-&lt;p&gt;Watch my video &lt;a href=&quot;https://www.youtube.com/watch?v=Xy0YgnXFt1M&quot;&gt;Everyday Package Management with GNU Guix&lt;/a&gt; to learn how you can use Guix to manage user-level packages!
-&lt;/p&gt;
+<p>Watch my video <a href="https://www.youtube.com/watch?v=Xy0YgnXFt1M">Everyday Package Management with GNU Guix</a> to learn how you can use Guix to manage user-level packages!
+</p>
 
-&lt;p&gt;Becoming acclimated with the Guix system takes time, so be patient!  The usage patterns for Guix are very different than other Linux distributions you may be familiar with.
-&lt;/p&gt;
+<p>Becoming acclimated with the Guix system takes time, so be patient!  The usage patterns for Guix are very different than other Linux distributions you may be familiar with.
+</p>
 
-&lt;p&gt;Have fun with your new Guix system!
-&lt;/p&gt;
+<p>Have fun with your new Guix system!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;whats-next&quot; class=&quot;anchor&quot; href=&quot;#whats-next&quot;&gt;¶&lt;/a&gt;What&apos;s next?&lt;/h2&gt;&lt;p&gt;I&apos;m planning to make more videos to show you how to use Guix as your daily driver Linux distribution!  Here are some topics we will cover:
-&lt;/p&gt;
+<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>I'm planning to make more videos to show you how to use Guix as your daily driver Linux distribution!  Here are some topics we will cover:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Improving your system configuration to remove unneeded packages&lt;/li&gt;
-&lt;li&gt;Sharing a base system configuration between multiple machines&lt;/li&gt;
-&lt;li&gt;How to manage user-level packages and profiles&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>Improving your system configuration to remove unneeded packages</li>
+<li>Sharing a base system configuration between multiple machines</li>
+<li>How to manage user-level packages and profiles</li>
+</ul>
 
-&lt;p&gt;In the meantime, you can learn more helpful things from the &lt;a href=&quot;https://guix.gnu.org/manual/en/guix.html&quot;&gt;GNU Guix Manual&lt;/a&gt; and also in the &lt;a href=&quot;https://wiki.systemcrafters.cc/community/chat-with-us/&quot;&gt;System Crafters Discord or IRC chat&lt;/a&gt; where you can ask questions share tips!
-&lt;/p&gt;
+<p>In the meantime, you can learn more helpful things from the <a href="https://guix.gnu.org/manual/en/guix.html">GNU Guix Manual</a> and also in the <a href="https://wiki.systemcrafters.cc/community/chat-with-us/">System Crafters Discord or IRC chat</a> where you can ask questions share tips!
+</p>
 
-&lt;p&gt;I also recommend checking out the &lt;a href=&quot;https://wiki.systemcrafters.cc/guix&quot;&gt;Guix section&lt;/a&gt; of the &lt;a href=&quot;https://wiki.systemcrafters.cc/&quot;&gt;System Crafters Wiki&lt;/a&gt; to find more tips about how to use the system.  Please feel free to &lt;a href=&quot;https://wiki.systemcrafters.cc/community/getting-involved/&quot;&gt;contribute&lt;/a&gt; if you learn anything useful!
-&lt;/p&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<p>I also recommend checking out the <a href="https://wiki.systemcrafters.cc/guix">Guix section</a> of the <a href="https://wiki.systemcrafters.cc/">System Crafters Wiki</a> to find more tips about how to use the system.  Please feel free to <a href="https://wiki.systemcrafters.cc/community/getting-involved/">contribute</a> if you learn anything useful!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

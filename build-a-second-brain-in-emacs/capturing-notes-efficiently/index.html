@@ -1,208 +1,209 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Capturing Notes Efficiently with Org Roam - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Capturing Notes Efficiently with Org Roam</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://youtu.be/YxgA5z2R08I&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Capturing Notes Efficiently with Org Roam - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Capturing Notes Efficiently with Org Roam</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/YxgA5z2R08I">Watch the video</a> on YouTube!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;intro&quot; class=&quot;anchor&quot; href=&quot;#intro&quot;&gt;¶&lt;/a&gt;Intro&lt;/h2&gt;&lt;p&gt;When building a personal knowledge system, one of the most important things you can do is create an efficient workflow for capturing new information.
-&lt;/p&gt;
+<h2><a id="intro" class="anchor" href="#intro">¶</a>Intro</h2><p>When building a personal knowledge system, one of the most important things you can do is create an efficient workflow for capturing new information.
+</p>
 
-&lt;p&gt;By the end of video you&apos;ll know how to create custom templates for capturing notes and project details into your Org Roam files.
-&lt;/p&gt;
+<p>By the end of video you'll know how to create custom templates for capturing notes and project details into your Org Roam files.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-need-for-a-good-capture-workflow&quot; class=&quot;anchor&quot; href=&quot;#the-need-for-a-good-capture-workflow&quot;&gt;¶&lt;/a&gt;The need for a good capture workflow&lt;/h2&gt;&lt;p&gt;In the previous video, I gave an overview of using a package called Org Roam to build a personal knowledgebase in Org Mode.
-&lt;/p&gt;
+<h2><a id="the-need-for-a-good-capture-workflow" class="anchor" href="#the-need-for-a-good-capture-workflow">¶</a>The need for a good capture workflow</h2><p>In the previous video, I gave an overview of using a package called Org Roam to build a personal knowledgebase in Org Mode.
+</p>
 
-&lt;p&gt;As you start to use Org Roam to store notes and information, it&apos;s useful to figure out the common details that you usually fill in for the things you capture and then create templates to streamline the process.
-&lt;/p&gt;
+<p>As you start to use Org Roam to store notes and information, it's useful to figure out the common details that you usually fill in for the things you capture and then create templates to streamline the process.
+</p>
 
-&lt;p&gt;For example, if you often capture detail about books or research papers, there&apos;s probably a few different types of information that you&apos;ll want to include when you create a new note:
-&lt;/p&gt;
+<p>For example, if you often capture detail about books or research papers, there's probably a few different types of information that you'll want to include when you create a new note:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Summary of the content&lt;/li&gt;
-&lt;li&gt;Bibliographic information&lt;/li&gt;
-&lt;li&gt;Quotes you might want to use&lt;/li&gt;
-&lt;li&gt;Links to topic notes where you expand on ideas you gained&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>Summary of the content</li>
+<li>Bibliographic information</li>
+<li>Quotes you might want to use</li>
+<li>Links to topic notes where you expand on ideas you gained</li>
+</ul>
 
-&lt;p&gt;Org Roam provides a way to define templates for the information you capture so that you&apos;ll never forget the useful things you need to include in a new note.
-&lt;/p&gt;
+<p>Org Roam provides a way to define templates for the information you capture so that you'll never forget the useful things you need to include in a new note.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;how-org-roam-note-templates-work&quot; class=&quot;anchor&quot; href=&quot;#how-org-roam-note-templates-work&quot;&gt;¶&lt;/a&gt;How Org Roam note templates work&lt;/h2&gt;&lt;p&gt;Org Roam includes its own specialization of Org Mode capture templates.  If you&apos;ve never used capture templates before, don&apos;t worry, creating and using Org Roam templates is pretty straightforward.
-&lt;/p&gt;
+<h2><a id="how-org-roam-note-templates-work" class="anchor" href="#how-org-roam-note-templates-work">¶</a>How Org Roam note templates work</h2><p>Org Roam includes its own specialization of Org Mode capture templates.  If you've never used capture templates before, don't worry, creating and using Org Roam templates is pretty straightforward.
+</p>
 
-&lt;p&gt;The thing to understand about Org Roam&apos;s templates is that they&apos;re used when you create a new note.  In the last video I showed you how to create a new note with the &lt;kbd&gt;org-roam-node-find&lt;/kbd&gt; command which we bound to &lt;kbd&gt;C-c n f&lt;/kbd&gt;.
-&lt;/p&gt;
+<p>The thing to understand about Org Roam's templates is that they're used when you create a new note.  In the last video I showed you how to create a new note with the <kbd>org-roam-node-find</kbd> command which we bound to <kbd>C-c n f</kbd>.
+</p>
 
-&lt;p&gt;By default when you create a new note with this command, Org Roam will automatically create a &lt;kbd&gt;.org&lt;/kbd&gt; file with a title and some metadata but nothing else in it.
-&lt;/p&gt;
+<p>By default when you create a new note with this command, Org Roam will automatically create a <kbd>.org</kbd> file with a title and some metadata but nothing else in it.
+</p>
 
-&lt;p&gt;But after you define your own custom note templates, you will be prompted for which template to use when you create a new note.  This is how you can decide what type of note will be created and the initial content that it contains!
-&lt;/p&gt;
+<p>But after you define your own custom note templates, you will be prompted for which template to use when you create a new note.  This is how you can decide what type of note will be created and the initial content that it contains!
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.orgroam.com/manual.html#The-Templating-System&quot;&gt;Org Roam Manual: The Templating System&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.orgroam.com/manual.html#The-Templating-System">Org Roam Manual: The Templating System</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;understanding-the-default-template&quot; class=&quot;anchor&quot; href=&quot;#understanding-the-default-template&quot;&gt;¶&lt;/a&gt;Understanding the default template&lt;/h2&gt;&lt;p&gt;To understand Org Roam templates, let&apos;s start by looking at the default capture template.  We&apos;ll do this by setting the &lt;kbd&gt;org-roam-capture-templates&lt;/kbd&gt; variable in the Org Roam configuration that we built in the last video.
-&lt;/p&gt;
+<h2><a id="understanding-the-default-template" class="anchor" href="#understanding-the-default-template">¶</a>Understanding the default template</h2><p>To understand Org Roam templates, let's start by looking at the default capture template.  We'll do this by setting the <kbd>org-roam-capture-templates</kbd> variable in the Org Roam configuration that we built in the last video.
+</p>
 
-&lt;p&gt;This variable stores the list of capture templates that are used when a new note is created.  If you set this variable, you&apos;ll have to copy over the default template, otherwise it won&apos;t be available anymore.  Read its documentation for more details about the format!
-&lt;/p&gt;
+<p>This variable stores the list of capture templates that are used when a new note is created.  If you set this variable, you'll have to copy over the default template, otherwise it won't be available anymore.  Read its documentation for more details about the format!
+</p>
 
-&lt;p&gt;Here&apos;s what the default template looks like:
-&lt;/p&gt;
+<p>Here's what the default template looks like:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-&apos;((&lt;span class=&quot;org-string&quot;&gt;&quot;d&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;default&quot;&lt;/span&gt; plain
-   &lt;span class=&quot;org-string&quot;&gt;&quot;%?&quot;&lt;/span&gt;
-   &lt;span class=&quot;org-builtin&quot;&gt;:if-new&lt;/span&gt; (file+head &lt;span class=&quot;org-string&quot;&gt;&quot;%&amp;lt;%Y%m%d%H%M%S&amp;gt;-${slug}.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;#+title: ${title}\n&quot;&lt;/span&gt;)
-   &lt;span class=&quot;org-builtin&quot;&gt;:unnarrowed&lt;/span&gt; t))
+<pre><code class="emacs-lisp">
+'((<span class="org-string">"d"</span> <span class="org-string">"default"</span> plain
+   <span class="org-string">"%?"</span>
+   <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span> <span class="org-string">"#+title: ${title}\n"</span>)
+   <span class="org-builtin">:unnarrowed</span> t))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Here&apos;s what it contains:
-&lt;/p&gt;
+<p>Here's what it contains:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;&quot;d&quot;&lt;/kbd&gt;: The &quot;key&quot;, a letter that you press to choose the template&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;&quot;default&quot;&lt;/kbd&gt;: The full name of the template&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;plain&lt;/kbd&gt;: The type of text being inserted, always this value for note templates&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;&quot;%?&quot;&lt;/kbd&gt;: This is the text that will be inserted into the new note, can be anything!&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:if-new&lt;/kbd&gt; : The list that follows this describes how the note file will be created&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:unnarrowed t&lt;/kbd&gt; : Ensures that the full file will be displayed when captured (an Org thing)&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>"d"</kbd>: The "key", a letter that you press to choose the template</li>
+<li><kbd>"default"</kbd>: The full name of the template</li>
+<li><kbd>plain</kbd>: The type of text being inserted, always this value for note templates</li>
+<li><kbd>"%?"</kbd>: This is the text that will be inserted into the new note, can be anything!</li>
+<li><kbd>:if-new</kbd> : The list that follows this describes how the note file will be created</li>
+<li><kbd>:unnarrowed t</kbd> : Ensures that the full file will be displayed when captured (an Org thing)</li>
+</ul>
 
-&lt;p&gt;Aside from the template key and name, the two things you might be interested to change are the initial note text and the format of the filename that gets created, though I don&apos;t recommend changing the filename format!
-&lt;/p&gt;
+<p>Aside from the template key and name, the two things you might be interested to change are the initial note text and the format of the filename that gets created, though I don't recommend changing the filename format!
+</p>
 
-&lt;p&gt;The initial note text has its own special format which can be read about in the Org Mode documentation:
-&lt;/p&gt;
+<p>The initial note text has its own special format which can be read about in the Org Mode documentation:
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://orgmode.org/manual/Template-expansion.html#Template-expansion&quot;&gt;Org Mode Manual: Template Expansion&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://orgmode.org/manual/Template-expansion.html#Template-expansion">Org Mode Manual: Template Expansion</a>
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;the-complete-starting-configuration&quot; class=&quot;anchor&quot; href=&quot;#the-complete-starting-configuration&quot;&gt;¶&lt;/a&gt;The complete starting configuration&lt;/h3&gt;&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;org-roam&lt;/span&gt;
-  &lt;span class=&quot;org-builtin&quot;&gt;:ensure&lt;/span&gt; t
-  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
-  (&lt;span class=&quot;org-keyword&quot;&gt;setq&lt;/span&gt; org-roam-v2-ack t)
-  &lt;span class=&quot;org-builtin&quot;&gt;:custom&lt;/span&gt;
-  (org-roam-directory &lt;span class=&quot;org-string&quot;&gt;&quot;~/RoamNotes&quot;&lt;/span&gt;)
+<h3><a id="the-complete-starting-configuration" class="anchor" href="#the-complete-starting-configuration">¶</a>The complete starting configuration</h3><pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">org-roam</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> org-roam-v2-ack t)
+  <span class="org-builtin">:custom</span>
+  (org-roam-directory <span class="org-string">"~/RoamNotes"</span>)
   (org-roam-completion-everywhere t)
   (org-roam-capture-templates
-   &apos;((&lt;span class=&quot;org-string&quot;&gt;&quot;d&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;default&quot;&lt;/span&gt; plain
-      &lt;span class=&quot;org-string&quot;&gt;&quot;%?&quot;&lt;/span&gt;
-      &lt;span class=&quot;org-builtin&quot;&gt;:if-new&lt;/span&gt; (file+head &lt;span class=&quot;org-string&quot;&gt;&quot;%&amp;lt;%Y%m%d%H%M%S&amp;gt;-${slug}.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;#+title: ${title}\n&quot;&lt;/span&gt;)
-      &lt;span class=&quot;org-builtin&quot;&gt;:unnarrowed&lt;/span&gt; t)))
-  &lt;span class=&quot;org-builtin&quot;&gt;:bind&lt;/span&gt; ((&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n l&quot;&lt;/span&gt; . org-roam-buffer-toggle)
-         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n f&quot;&lt;/span&gt; . org-roam-node-find)
-         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-c n i&quot;&lt;/span&gt; . org-roam-node-insert)
-         &lt;span class=&quot;org-builtin&quot;&gt;:map&lt;/span&gt; org-mode-map
-         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-M-i&quot;&lt;/span&gt; . completion-at-point))
-  &lt;span class=&quot;org-builtin&quot;&gt;:config&lt;/span&gt;
+   '((<span class="org-string">"d"</span> <span class="org-string">"default"</span> plain
+      <span class="org-string">"%?"</span>
+      <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span> <span class="org-string">"#+title: ${title}\n"</span>)
+      <span class="org-builtin">:unnarrowed</span> t)))
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-c n l"</span> . org-roam-buffer-toggle)
+         (<span class="org-string">"C-c n f"</span> . org-roam-node-find)
+         (<span class="org-string">"C-c n i"</span> . org-roam-node-insert)
+         <span class="org-builtin">:map</span> org-mode-map
+         (<span class="org-string">"C-M-i"</span> . completion-at-point))
+  <span class="org-builtin">:config</span>
   (org-roam-setup))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h2&gt;&lt;a id=&quot;creating-a-topic-specific-template&quot; class=&quot;anchor&quot; href=&quot;#creating-a-topic-specific-template&quot;&gt;¶&lt;/a&gt;Creating a topic-specific template&lt;/h2&gt;&lt;p&gt;Let&apos;s take a look at a simple example of how to create a new template.  We&apos;re going to continue with the notes we were using in the previous Org Roam video and add a template for capturing details about a programming language.
-&lt;/p&gt;
+<h2><a id="creating-a-topic-specific-template" class="anchor" href="#creating-a-topic-specific-template">¶</a>Creating a topic-specific template</h2><p>Let's take a look at a simple example of how to create a new template.  We're going to continue with the notes we were using in the previous Org Roam video and add a template for capturing details about a programming language.
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-string&quot;&gt;&quot;l&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;programming language&quot;&lt;/span&gt; plain
- &lt;span class=&quot;org-string&quot;&gt;&quot;* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n&quot;&lt;/span&gt;
- &lt;span class=&quot;org-builtin&quot;&gt;:if-new&lt;/span&gt; (file+head &lt;span class=&quot;org-string&quot;&gt;&quot;%&amp;lt;%Y%m%d%H%M%S&amp;gt;-${slug}.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;#+title: ${title}\n&quot;&lt;/span&gt;)
- &lt;span class=&quot;org-builtin&quot;&gt;:unnarrowed&lt;/span&gt; t)
+<pre><code class="emacs-lisp">
+(<span class="org-string">"l"</span> <span class="org-string">"programming language"</span> plain
+ <span class="org-string">"* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"</span>
+ <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span> <span class="org-string">"#+title: ${title}\n"</span>)
+ <span class="org-builtin">:unnarrowed</span> t)
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Now let&apos;s try creating a new node for &quot;JavaScript&quot; and select our new template.
-&lt;/p&gt;
+<p>Now let's try creating a new node for "JavaScript" and select our new template.
+</p>
 
-&lt;p&gt;The capture window that appears is filled with the format that we entered into the string!  We can type in all the details and save the note with &lt;kbd&gt;C-c C-c&lt;/kbd&gt;.
-&lt;/p&gt;
+<p>The capture window that appears is filled with the format that we entered into the string!  We can type in all the details and save the note with <kbd>C-c C-c</kbd>.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;creating-a-literature-reference-template&quot; class=&quot;anchor&quot; href=&quot;#creating-a-literature-reference-template&quot;&gt;¶&lt;/a&gt;Creating a literature reference template&lt;/h2&gt;&lt;p&gt;We can add even more structure to our data entry by using Org Mode&apos;s template expansion syntax.
-&lt;/p&gt;
+<h2><a id="creating-a-literature-reference-template" class="anchor" href="#creating-a-literature-reference-template">¶</a>Creating a literature reference template</h2><p>We can add even more structure to our data entry by using Org Mode's template expansion syntax.
+</p>
 
-&lt;p&gt;The first example of a template we talked about in this video is one to capture details about literature material you read like a book.
-&lt;/p&gt;
+<p>The first example of a template we talked about in this video is one to capture details about literature material you read like a book.
+</p>
 
-&lt;p&gt;Let&apos;s create a template to capture some of the things we mentioned before.  This time, we&apos;re going to add custom prompts for certain details we want to fill in like the author and the year the book was published.
-&lt;/p&gt;
+<p>Let's create a template to capture some of the things we mentioned before.  This time, we're going to add custom prompts for certain details we want to fill in like the author and the year the book was published.
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-string&quot;&gt;&quot;b&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;book notes&quot;&lt;/span&gt; plain
- &lt;span class=&quot;org-string&quot;&gt;&quot;\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?&quot;&lt;/span&gt;
- &lt;span class=&quot;org-builtin&quot;&gt;:if-new&lt;/span&gt; (file+head &lt;span class=&quot;org-string&quot;&gt;&quot;%&amp;lt;%Y%m%d%H%M%S&amp;gt;-${slug}.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;#+title: ${title}\n&quot;&lt;/span&gt;)
- &lt;span class=&quot;org-builtin&quot;&gt;:unnarrowed&lt;/span&gt; t)
+<pre><code class="emacs-lisp">
+(<span class="org-string">"b"</span> <span class="org-string">"book notes"</span> plain
+ <span class="org-string">"\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?"</span>
+ <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span> <span class="org-string">"#+title: ${title}\n"</span>)
+ <span class="org-builtin">:unnarrowed</span> t)
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Let&apos;s create a new note for &quot;Dune&quot; using this template.  We&apos;ll be prompted for Author and Year which will be inserted in the capture buffer along with the title of the note that we typed in already!  The cursor will then jump into the Summary section so that we can type our notes about the book.
-&lt;/p&gt;
+<p>Let's create a new note for "Dune" using this template.  We'll be prompted for Author and Year which will be inserted in the capture buffer along with the title of the note that we typed in already!  The cursor will then jump into the Summary section so that we can type our notes about the book.
+</p>
 
-&lt;p&gt;There are other interesting things you can do with template expansion prompts, so be sure to visit the Org Mode manual to see what else you might be able to use.
-&lt;/p&gt;
+<p>There are other interesting things you can do with template expansion prompts, so be sure to visit the Org Mode manual to see what else you might be able to use.
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://orgmode.org/manual/Template-expansion.html#Template-expansion&quot;&gt;Org Mode Manual: Template Expansion&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://orgmode.org/manual/Template-expansion.html#Template-expansion">Org Mode Manual: Template Expansion</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;creating-a-project-template&quot; class=&quot;anchor&quot; href=&quot;#creating-a-project-template&quot;&gt;¶&lt;/a&gt;Creating a project template&lt;/h2&gt;&lt;p&gt;Another useful template you might want to create is for capturing details about a new project that you&apos;ve started, particularly the tasks, goals, and any important dates you might need to remember.
-&lt;/p&gt;
+<h2><a id="creating-a-project-template" class="anchor" href="#creating-a-project-template">¶</a>Creating a project template</h2><p>Another useful template you might want to create is for capturing details about a new project that you've started, particularly the tasks, goals, and any important dates you might need to remember.
+</p>
 
-&lt;p&gt;Here&apos;s a template which sets up a new project file:
-&lt;/p&gt;
+<p>Here's a template which sets up a new project file:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-string&quot;&gt;&quot;p&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;project&quot;&lt;/span&gt; plain &lt;span class=&quot;org-string&quot;&gt;&quot;* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n&quot;&lt;/span&gt;
- &lt;span class=&quot;org-builtin&quot;&gt;:if-new&lt;/span&gt; (file+head &lt;span class=&quot;org-string&quot;&gt;&quot;%&amp;lt;%Y%m%d%H%M%S&amp;gt;-${slug}.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;#+title: ${title}\n#+filetags: Project&quot;&lt;/span&gt;)
- &lt;span class=&quot;org-builtin&quot;&gt;:unnarrowed&lt;/span&gt; t)
+<pre><code class="emacs-lisp">
+(<span class="org-string">"p"</span> <span class="org-string">"project"</span> plain <span class="org-string">"* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"</span>
+ <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span> <span class="org-string">"#+title: ${title}\n#+filetags: Project"</span>)
+ <span class="org-builtin">:unnarrowed</span> t)
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;The new thing we&apos;ve added this time is the &lt;kbd&gt;#+filetags: Project&lt;/kbd&gt; configuration inside of the &lt;kbd&gt;file+head&lt;/kbd&gt; section.  This part defines what information gets inserted in the header lines of the new file.
-&lt;/p&gt;
+<p>The new thing we've added this time is the <kbd>#+filetags: Project</kbd> configuration inside of the <kbd>file+head</kbd> section.  This part defines what information gets inserted in the header lines of the new file.
+</p>
 
-&lt;p&gt;What we&apos;ve done here is add a &lt;kbd&gt;Project&lt;/kbd&gt; tag to the file.  Tagging your note files gives you some extra benefits when you start using the Org Roam DB API to query your notes.  The tag may also show up in your completion list if you&apos;re using Vertico and Marginalia, &lt;a href=&quot;https://www.youtube.com/watch?v=J0OaRy85MOo&quot;&gt;check out my video on Vertico&lt;/a&gt; if you haven&apos;t seen it yet.
-&lt;/p&gt;
+<p>What we've done here is add a <kbd>Project</kbd> tag to the file.  Tagging your note files gives you some extra benefits when you start using the Org Roam DB API to query your notes.  The tag may also show up in your completion list if you're using Vertico and Marginalia, <a href="https://www.youtube.com/watch?v=J0OaRy85MOo">check out my video on Vertico</a> if you haven't seen it yet.
+</p>
 
-&lt;p&gt;An example I&apos;ll show you in a later video is how you can look up all your project notes using this tag and automatically build your Org Agenda list from that set of files!
-&lt;/p&gt;
+<p>An example I'll show you in a later video is how you can look up all your project notes using this tag and automatically build your Org Agenda list from that set of files!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;storing-templates-in-org-files&quot; class=&quot;anchor&quot; href=&quot;#storing-templates-in-org-files&quot;&gt;¶&lt;/a&gt;Storing templates in Org files&lt;/h2&gt;&lt;p&gt;Let&apos;s talk about how you can write your capture templates in real Org files so that you don&apos;t have to edit strings inside of your Emacs configuration.
-&lt;/p&gt;
+<h2><a id="storing-templates-in-org-files" class="anchor" href="#storing-templates-in-org-files">¶</a>Storing templates in Org files</h2><p>Let's talk about how you can write your capture templates in real Org files so that you don't have to edit strings inside of your Emacs configuration.
+</p>
 
-&lt;p&gt;It&apos;s actually pretty easy to do this!  Just create a new &lt;kbd&gt;.org&lt;/kbd&gt; file containing the contents of the template string we created before and then clean it up so that it looks like a normal file.
-&lt;/p&gt;
+<p>It's actually pretty easy to do this!  Just create a new <kbd>.org</kbd> file containing the contents of the template string we created before and then clean it up so that it looks like a normal file.
+</p>
 
-&lt;p&gt;Once you&apos;ve saved the template file, you&apos;ll have to replace the string in the capture template with a &lt;kbd&gt;file&lt;/kbd&gt; sub-list which includes the template file path.
-&lt;/p&gt;
+<p>Once you've saved the template file, you'll have to replace the string in the capture template with a <kbd>file</kbd> sub-list which includes the template file path.
+</p>
 
-&lt;p&gt;Here&apos;s how we would need to change the book notes template to refer to a template file instead:
-&lt;/p&gt;
+<p>Here's how we would need to change the book notes template to refer to a template file instead:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-string&quot;&gt;&quot;b&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;book notes&quot;&lt;/span&gt; plain (file &lt;span class=&quot;org-string&quot;&gt;&quot;~/RoamNotes/Templates/BookNoteTemplate.org&quot;&lt;/span&gt;)
- &lt;span class=&quot;org-builtin&quot;&gt;:if-new&lt;/span&gt; (file+head &lt;span class=&quot;org-string&quot;&gt;&quot;%&amp;lt;%Y%m%d%H%M%S&amp;gt;-${slug}.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;#+title: ${title}\n&quot;&lt;/span&gt;)
- &lt;span class=&quot;org-builtin&quot;&gt;:unnarrowed&lt;/span&gt; t)
+<pre><code class="emacs-lisp">
+(<span class="org-string">"b"</span> <span class="org-string">"book notes"</span> plain (file <span class="org-string">"~/RoamNotes/Templates/BookNoteTemplate.org"</span>)
+ <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span> <span class="org-string">"#+title: ${title}\n"</span>)
+ <span class="org-builtin">:unnarrowed</span> t)
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h2&gt;&lt;a id=&quot;customizing-the-default-template&quot; class=&quot;anchor&quot; href=&quot;#customizing-the-default-template&quot;&gt;¶&lt;/a&gt;Customizing the default template&lt;/h2&gt;&lt;p&gt;You can also customize the default template!
-&lt;/p&gt;
+<h2><a id="customizing-the-default-template" class="anchor" href="#customizing-the-default-template">¶</a>Customizing the default template</h2><p>You can also customize the default template!
+</p>
 
-&lt;p&gt;Let&apos;s try to insert the date when the note was created.  We can do this by adding the string &lt;kbd&gt;#+date: %U&lt;/kbd&gt; to the initial header string in the &lt;kbd&gt;file+head&lt;/kbd&gt; configuration:
-&lt;/p&gt;
+<p>Let's try to insert the date when the note was created.  We can do this by adding the string <kbd>#+date: %U</kbd> to the initial header string in the <kbd>file+head</kbd> configuration:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-string&quot;&gt;&quot;d&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;default&quot;&lt;/span&gt; plain &lt;span class=&quot;org-string&quot;&gt;&quot;%?&quot;&lt;/span&gt;
- &lt;span class=&quot;org-builtin&quot;&gt;:if-new&lt;/span&gt; (file+head &lt;span class=&quot;org-string&quot;&gt;&quot;%&amp;lt;%Y%m%d%H%M%S&amp;gt;-${slug}.org&quot;&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;#+title: ${title}\n#+date: %U\n&quot;&lt;/span&gt;)
- &lt;span class=&quot;org-builtin&quot;&gt;:unnarrowed&lt;/span&gt; t)
+<pre><code class="emacs-lisp">
+(<span class="org-string">"d"</span> <span class="org-string">"default"</span> plain <span class="org-string">"%?"</span>
+ <span class="org-builtin">:if-new</span> (file+head <span class="org-string">"%&lt;%Y%m%d%H%M%S&gt;-${slug}.org"</span> <span class="org-string">"#+title: ${title}\n#+date: %U\n"</span>)
+ <span class="org-builtin">:unnarrowed</span> t)
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;And like I mentioned earlier, you can change the naming of files Org Roam creates if you really want to, just change the first string in the &lt;kbd&gt;file+head&lt;/kbd&gt; to contain the format you want where &lt;kbd&gt;${slug}&lt;/kbd&gt; is the part of the filename that reflects the initial note title.
-&lt;/p&gt;
+<p>And like I mentioned earlier, you can change the naming of files Org Roam creates if you really want to, just change the first string in the <kbd>file+head</kbd> to contain the format you want where <kbd>${slug}</kbd> is the part of the filename that reflects the initial note title.
+</p>
 
-&lt;p&gt;Keep in mind that you&apos;ll need to replicate your &lt;kbd&gt;:if-new&lt;/kbd&gt; settings across all your templates if you want consistent file naming and header contents!
-&lt;/p&gt;
+<p>Keep in mind that you'll need to replicate your <kbd>:if-new</kbd> settings across all your templates if you want consistent file naming and header contents!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;whats-next&quot; class=&quot;anchor&quot; href=&quot;#whats-next&quot;&gt;¶&lt;/a&gt;What&apos;s next?&lt;/h2&gt;&lt;p&gt;Org Roam provides another useful feature for capturing thoughts and ideas that occur during the day called &quot;dailies&quot;.  In the next video, I&apos;ll show you how you can use this feature for keeping a journal, a daily log of your work, and for any random things you want to remember!
-&lt;/p&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>Org Roam provides another useful feature for capturing thoughts and ideas that occur during the day called "dailies".  In the next video, I'll show you how you can use this feature for keeping a journal, a daily log of your work, and for any random things you want to remember!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

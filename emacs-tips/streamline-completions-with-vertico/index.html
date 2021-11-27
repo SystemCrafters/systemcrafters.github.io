@@ -1,109 +1,110 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Streamline Your Emacs Completions with Vertico - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Streamline Your Emacs Completions with Vertico</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://youtu.be/J0OaRy85MOo&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Streamline Your Emacs Completions with Vertico - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Streamline Your Emacs Completions with Vertico</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/J0OaRy85MOo">Watch the video</a> on YouTube!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;completions-in-emacs&quot; class=&quot;anchor&quot; href=&quot;#completions-in-emacs&quot;&gt;¶&lt;/a&gt;Completions in Emacs&lt;/h2&gt;&lt;p&gt;In Emacs, one of the most important features of the user interface is the way in which the user makes selections from lists of items.  For example:
-&lt;/p&gt;
+<h2><a id="completions-in-emacs" class="anchor" href="#completions-in-emacs">¶</a>Completions in Emacs</h2><p>In Emacs, one of the most important features of the user interface is the way in which the user makes selections from lists of items.  For example:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Opening files&lt;/li&gt;
-&lt;li&gt;Switching buffers&lt;/li&gt;
-&lt;li&gt;Using &lt;kbd&gt;M-x&lt;/kbd&gt; to execute commands&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>Opening files</li>
+<li>Switching buffers</li>
+<li>Using <kbd>M-x</kbd> to execute commands</li>
+</ul>
 
-&lt;p&gt;There are a few built-in packages (ido, icomplete, etc) which provide different ways of displaying selections, but in my opinion most of them aren&apos;t very attractive.
-&lt;/p&gt;
+<p>There are a few built-in packages (ido, icomplete, etc) which provide different ways of displaying selections, but in my opinion most of them aren't very attractive.
+</p>
 
-&lt;p&gt;These days, many people use completion &quot;frameworks&quot; like Helm or Ivy which provide enhanced interfaces and special commands that provide a lot of additional behavior.
-&lt;/p&gt;
+<p>These days, many people use completion "frameworks" like Helm or Ivy which provide enhanced interfaces and special commands that provide a lot of additional behavior.
+</p>
 
-&lt;p&gt;But what if you don&apos;t use or want all of that extra functionality?  This is where a new breed of completion interfaces come in, providing a more minimal and componentized ecosystem of packages that allow you to build your own completion framework with only the parts you care about.
-&lt;/p&gt;
+<p>But what if you don't use or want all of that extra functionality?  This is where a new breed of completion interfaces come in, providing a more minimal and componentized ecosystem of packages that allow you to build your own completion framework with only the parts you care about.
+</p>
 
-&lt;p&gt;I&apos;ve been using Vertico for this purpose recently and I really like it!
-&lt;/p&gt;
+<p>I've been using Vertico for this purpose recently and I really like it!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;what-is-vertico&quot; class=&quot;anchor&quot; href=&quot;#what-is-vertico&quot;&gt;¶&lt;/a&gt;What is Vertico?&lt;/h2&gt;&lt;p&gt;Vertico is a relatively new Emacs package which provides a streamlined interface for minibuffer completions which doesn&apos;t include any of the other cruft that comes along with the more heavy-weight third party options.
-&lt;/p&gt;
+<h2><a id="what-is-vertico" class="anchor" href="#what-is-vertico">¶</a>What is Vertico?</h2><p>Vertico is a relatively new Emacs package which provides a streamlined interface for minibuffer completions which doesn't include any of the other cruft that comes along with the more heavy-weight third party options.
+</p>
 
-&lt;p&gt;One important feature is that it plugs in directly to Emacs&apos; own completion engine unlike Helm and Ivy which have their own layer on top.  This enables all existing completion commands in Emacs to use Vertico&apos;s UI with no extra configuration!
-&lt;/p&gt;
+<p>One important feature is that it plugs in directly to Emacs' own completion engine unlike Helm and Ivy which have their own layer on top.  This enables all existing completion commands in Emacs to use Vertico's UI with no extra configuration!
+</p>
 
-&lt;p&gt;Read more at the GitHub repository: &lt;a href=&quot;https://github.com/minad/vertico&quot;&gt;https://github.com/minad/vertico&lt;/a&gt;
-&lt;/p&gt;
+<p>Read more at the GitHub repository: <a href="https://github.com/minad/vertico">https://github.com/minad/vertico</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;setting-it-up&quot; class=&quot;anchor&quot; href=&quot;#setting-it-up&quot;&gt;¶&lt;/a&gt;Setting it up&lt;/h2&gt;&lt;p&gt;Getting started with Vertico is very easy!  It&apos;s on &lt;a href=&quot;http://elpa.gnu.org/packages/vertico.html&quot;&gt;GNU ELPA&lt;/a&gt; so you can install it easily with &lt;kbd&gt;package.el&lt;/kbd&gt; and &lt;kbd&gt;use-package&lt;/kbd&gt;:
-&lt;/p&gt;
+<h2><a id="setting-it-up" class="anchor" href="#setting-it-up">¶</a>Setting it up</h2><p>Getting started with Vertico is very easy!  It's on <a href="http://elpa.gnu.org/packages/vertico.html">GNU ELPA</a> so you can install it easily with <kbd>package.el</kbd> and <kbd>use-package</kbd>:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;vertico&lt;/span&gt;
-  &lt;span class=&quot;org-builtin&quot;&gt;:ensure&lt;/span&gt; t
-  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">vertico</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:init</span>
   (vertico-mode))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Once you run &lt;kbd&gt;vertico-mode&lt;/kbd&gt;, all completions will now use Vertico&apos;s completion UI!
-&lt;/p&gt;
+<p>Once you run <kbd>vertico-mode</kbd>, all completions will now use Vertico's completion UI!
+</p>
 
-&lt;p&gt;Try these out:
-&lt;/p&gt;
+<p>Try these out:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;find-file&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;switch-to-buffer&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;describe-function&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;M-x&lt;/kbd&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>find-file</kbd></li>
+<li><kbd>switch-to-buffer</kbd></li>
+<li><kbd>describe-function</kbd></li>
+<li><kbd>M-x</kbd></li>
+</ul>
 
-&lt;h2&gt;&lt;a id=&quot;improving-the-configuration&quot; class=&quot;anchor&quot; href=&quot;#improving-the-configuration&quot;&gt;¶&lt;/a&gt;Improving the configuration&lt;/h2&gt;&lt;p&gt;Now that we&apos;ve got the basic completion UI set up, let&apos;s polish it a bit.  The following configuration will add a few improvements:
-&lt;/p&gt;
+<h2><a id="improving-the-configuration" class="anchor" href="#improving-the-configuration">¶</a>Improving the configuration</h2><p>Now that we've got the basic completion UI set up, let's polish it a bit.  The following configuration will add a few improvements:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Additional key bindings for users that like Vim-style movement keys&lt;/li&gt;
-&lt;li&gt;Cycling selections when you reach the beginning/end of the list&lt;/li&gt;
-&lt;li&gt;Saving completion history, Vertico will sort items based on history!&lt;/li&gt;
-&lt;li&gt;Adding extra metadata for completions in the margins using &lt;a href=&quot;https://github.com/minad/marginalia&quot;&gt;Marginalia&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>Additional key bindings for users that like Vim-style movement keys</li>
+<li>Cycling selections when you reach the beginning/end of the list</li>
+<li>Saving completion history, Vertico will sort items based on history!</li>
+<li>Adding extra metadata for completions in the margins using <a href="https://github.com/minad/marginalia">Marginalia</a></li>
+</ul>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;vertico&lt;/span&gt;
-  &lt;span class=&quot;org-builtin&quot;&gt;:ensure&lt;/span&gt; t
-  &lt;span class=&quot;org-builtin&quot;&gt;:bind&lt;/span&gt; (&lt;span class=&quot;org-builtin&quot;&gt;:map&lt;/span&gt; vertico-map
-         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-j&quot;&lt;/span&gt; . vertico-next)
-         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-k&quot;&lt;/span&gt; . vertico-previous)
-         (&lt;span class=&quot;org-string&quot;&gt;&quot;C-f&quot;&lt;/span&gt; . vertico-exit)
-         &lt;span class=&quot;org-builtin&quot;&gt;:map&lt;/span&gt; minibuffer-local-map
-         (&lt;span class=&quot;org-string&quot;&gt;&quot;M-h&quot;&lt;/span&gt; . backward-kill-word))
-  &lt;span class=&quot;org-builtin&quot;&gt;:custom&lt;/span&gt;
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">vertico</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:bind</span> (<span class="org-builtin">:map</span> vertico-map
+         (<span class="org-string">"C-j"</span> . vertico-next)
+         (<span class="org-string">"C-k"</span> . vertico-previous)
+         (<span class="org-string">"C-f"</span> . vertico-exit)
+         <span class="org-builtin">:map</span> minibuffer-local-map
+         (<span class="org-string">"M-h"</span> . backward-kill-word))
+  <span class="org-builtin">:custom</span>
   (vertico-cycle t)
-  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
+  <span class="org-builtin">:init</span>
   (vertico-mode))
 
-(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;savehist&lt;/span&gt;
-  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
+(<span class="org-keyword">use-package</span> <span class="org-constant">savehist</span>
+  <span class="org-builtin">:init</span>
   (savehist-mode))
 
-(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;marginalia&lt;/span&gt;
-  &lt;span class=&quot;org-builtin&quot;&gt;:after&lt;/span&gt; vertico
-  &lt;span class=&quot;org-builtin&quot;&gt;:ensure&lt;/span&gt; t
-  &lt;span class=&quot;org-builtin&quot;&gt;:custom&lt;/span&gt;
-  (marginalia-annotators &apos;(marginalia-annotators-heavy marginalia-annotators-light nil))
-  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
+(<span class="org-keyword">use-package</span> <span class="org-constant">marginalia</span>
+  <span class="org-builtin">:after</span> vertico
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:custom</span>
+  (marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+  <span class="org-builtin">:init</span>
   (marginalia-mode))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h2&gt;&lt;a id=&quot;any-downsides&quot; class=&quot;anchor&quot; href=&quot;#any-downsides&quot;&gt;¶&lt;/a&gt;Any downsides?&lt;/h2&gt;&lt;p&gt;At the moment there are a small number of downsides to using Vertico:
-&lt;/p&gt;
+<h2><a id="any-downsides" class="anchor" href="#any-downsides">¶</a>Any downsides?</h2><p>At the moment there are a small number of downsides to using Vertico:
+</p>
 
-&lt;ul&gt;&lt;li&gt;You have to do a little more work to configure something that provides similar features to Ivy or Helm (but that&apos;s the point!)&lt;/li&gt;
-&lt;li&gt;It&apos;s still fairly early in development so there can be bugs, but the author is very responsive!&lt;/li&gt;
-&lt;li&gt;Performance for completions in TRAMP sessions is poor&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>You have to do a little more work to configure something that provides similar features to Ivy or Helm (but that's the point!)</li>
+<li>It's still fairly early in development so there can be bugs, but the author is very responsive!</li>
+<li>Performance for completions in TRAMP sessions is poor</li>
+</ul>
 
-&lt;h2&gt;&lt;a id=&quot;other-useful-packages&quot; class=&quot;anchor&quot; href=&quot;#other-useful-packages&quot;&gt;¶&lt;/a&gt;Other useful packages&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/minad/consult&quot;&gt;Consult&lt;/a&gt;: A collection of commands (like Counsel for Ivy) which provide additional completions&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/oantolin/embark&quot;&gt;Embark&lt;/a&gt;: Provides actions for the current selection in Vertico completion lists&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/oantolin/orderless&quot;&gt;Orderless&lt;/a&gt;: Improves searching across completions&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/raxod502/selectrum&quot;&gt;Selectrum&lt;/a&gt;: An alternative to Vertico, less minimal but follows similar principles&lt;/li&gt;
-&lt;/ul&gt;
+<h2><a id="other-useful-packages" class="anchor" href="#other-useful-packages">¶</a>Other useful packages</h2><ul><li><a href="https://github.com/minad/consult">Consult</a>: A collection of commands (like Counsel for Ivy) which provide additional completions</li>
+<li><a href="https://github.com/oantolin/embark">Embark</a>: Provides actions for the current selection in Vertico completion lists</li>
+<li><a href="https://github.com/oantolin/orderless">Orderless</a>: Improves searching across completions</li>
+<li><a href="https://github.com/raxod502/selectrum">Selectrum</a>: An alternative to Vertico, less minimal but follows similar principles</li>
+</ul>
 
-&lt;p&gt;We&apos;ll cover all of these in future videos!
-&lt;/p&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<p>We'll cover all of these in future videos!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

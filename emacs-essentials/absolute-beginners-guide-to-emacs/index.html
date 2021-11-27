@@ -1,417 +1,418 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>The Absolute Beginner&apos;s Guide to Emacs - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">The Absolute Beginner&apos;s Guide to Emacs</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://youtu.be/48JlgiBpw_I&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>The Absolute Beginner's Guide to Emacs - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">The Absolute Beginner's Guide to Emacs</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/48JlgiBpw_I">Watch the video</a> on YouTube!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;welcome&quot; class=&quot;anchor&quot; href=&quot;#welcome&quot;&gt;¶&lt;/a&gt;Welcome!&lt;/h2&gt;&lt;p&gt;If this is your first time here, this channel is about crafting your own system configuration using free and open source tools like GNU Emacs, GNU Guix, and more!
-&lt;/p&gt;
+<h2><a id="welcome" class="anchor" href="#welcome">¶</a>Welcome!</h2><p>If this is your first time here, this channel is about crafting your own system configuration using free and open source tools like GNU Emacs, GNU Guix, and more!
+</p>
 
-&lt;p&gt;I&apos;ve made about 50 videos on Emacs for this channel, but the one thing I haven&apos;t done yet is make a video that&apos;s strictly for those who have either never used Emacs or only used it very little.
-&lt;/p&gt;
+<p>I've made about 50 videos on Emacs for this channel, but the one thing I haven't done yet is make a video that's strictly for those who have either never used Emacs or only used it very little.
+</p>
 
-&lt;p&gt;In this video, I&apos;m going to give you &lt;strong&gt;exactly&lt;/strong&gt; what you need to get started using Emacs and understand the basic concepts and key bindings of the editor.  I know this video might seem long, but I&apos;ve got chapter markers in the timeline below so that you can easily jump around to different parts if you want to use it as a reference.
-&lt;/p&gt;
+<p>In this video, I'm going to give you <strong>exactly</strong> what you need to get started using Emacs and understand the basic concepts and key bindings of the editor.  I know this video might seem long, but I've got chapter markers in the timeline below so that you can easily jump around to different parts if you want to use it as a reference.
+</p>
 
-&lt;p&gt;Let&apos;s get started!
-&lt;/p&gt;
+<p>Let's get started!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;installation&quot; class=&quot;anchor&quot; href=&quot;#installation&quot;&gt;¶&lt;/a&gt;Installation&lt;/h2&gt;&lt;p&gt;Emacs can be installed on GNU/Linux, macOS and Windows.
-&lt;/p&gt;
+<h2><a id="installation" class="anchor" href="#installation">¶</a>Installation</h2><p>Emacs can be installed on GNU/Linux, macOS and Windows.
+</p>
 
-&lt;p&gt;The latest stable version is 27.1, so it&apos;s best to try and find that version for your operating system.  However, much of what I will show you should work on many previous versions of Emacs.
-&lt;/p&gt;
+<p>The latest stable version is 27.1, so it's best to try and find that version for your operating system.  However, much of what I will show you should work on many previous versions of Emacs.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;gnulinux&quot; class=&quot;anchor&quot; href=&quot;#gnulinux&quot;&gt;¶&lt;/a&gt;GNU/Linux&lt;/h3&gt;&lt;p&gt;GNU/Linux is the easiest OS for installing and using Emacs.  It is available in (pretty much) every Linux distribution&apos;s package manager, typically under the name &lt;kbd&gt;emacs&lt;/kbd&gt;, so it&apos;s easy to find!
-&lt;/p&gt;
+<h3><a id="gnulinux" class="anchor" href="#gnulinux">¶</a>GNU/Linux</h3><p>GNU/Linux is the easiest OS for installing and using Emacs.  It is available in (pretty much) every Linux distribution's package manager, typically under the name <kbd>emacs</kbd>, so it's easy to find!
+</p>
 
-&lt;p&gt;Just keep in mind that your distribution may have an older version of Emacs in their package repository (possibly version 26) so you might need to find another source to install the latest version.
-&lt;/p&gt;
+<p>Just keep in mind that your distribution may have an older version of Emacs in their package repository (possibly version 26) so you might need to find another source to install the latest version.
+</p>
 
-&lt;h4&gt;&lt;a id=&quot;gui-or-terminal&quot; class=&quot;anchor&quot; href=&quot;#gui-or-terminal&quot;&gt;¶&lt;/a&gt;GUI or Terminal?&lt;/h4&gt;&lt;p&gt;On Linux, there are often &lt;kbd&gt;emacs-no-x&lt;/kbd&gt; packages that don&apos;t include the graphical UI if you don&apos;t need it.  There are no major differences in behavior between GUI and terminal Emacs so you can use whichever you feel most comfortable with.
-&lt;/p&gt;
+<h4><a id="gui-or-terminal" class="anchor" href="#gui-or-terminal">¶</a>GUI or Terminal?</h4><p>On Linux, there are often <kbd>emacs-no-x</kbd> packages that don't include the graphical UI if you don't need it.  There are no major differences in behavior between GUI and terminal Emacs so you can use whichever you feel most comfortable with.
+</p>
 
-&lt;p&gt;One major benefit of graphical Emacs is the ability to use multiple fonts for text display and a full range of colors.  This is why my presentation looks the way it does!
-&lt;/p&gt;
+<p>One major benefit of graphical Emacs is the ability to use multiple fonts for text display and a full range of colors.  This is why my presentation looks the way it does!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;macos&quot; class=&quot;anchor&quot; href=&quot;#macos&quot;&gt;¶&lt;/a&gt;macOS&lt;/h3&gt;&lt;p&gt;Installation on &lt;kbd&gt;macOS&lt;/kbd&gt; with Homebrew is easy!  There&apos;s a default recipe called &lt;kbd&gt;emacs&lt;/kbd&gt; which can be installed with the following command:
-&lt;/p&gt;
+<h3><a id="macos" class="anchor" href="#macos">¶</a>macOS</h3><p>Installation on <kbd>macOS</kbd> with Homebrew is easy!  There's a default recipe called <kbd>emacs</kbd> which can be installed with the following command:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 brew install --cask emacs
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;An alternative recipe called &lt;a href=&quot;https://github.com/d12frosted/homebrew-emacs-plus&quot;&gt;Emacs Plus&lt;/a&gt; provides additional options for customizing your Emacs install, check out its README to learn how to use it.
-&lt;/p&gt;
+<p>An alternative recipe called <a href="https://github.com/d12frosted/homebrew-emacs-plus">Emacs Plus</a> provides additional options for customizing your Emacs install, check out its README to learn how to use it.
+</p>
 
-&lt;p&gt;You can also download a .app for Emacs from the site &lt;a href=&quot;https://emacsformacosx.com/&quot;&gt;https://emacsformacosx.com/&lt;/a&gt;
-&lt;/p&gt;
+<p>You can also download a .app for Emacs from the site <a href="https://emacsformacosx.com/">https://emacsformacosx.com/</a>
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;windows&quot; class=&quot;anchor&quot; href=&quot;#windows&quot;&gt;¶&lt;/a&gt;Windows&lt;/h3&gt;&lt;p&gt;On Windows, you can &lt;a href=&quot;http://mirror.keystealth.org/gnu/emacs/windows/emacs-27/emacs-27.1-x86_64-installer.exe&quot;&gt;download Emacs&lt;/a&gt; directly from the GNU website!
-&lt;/p&gt;
+<h3><a id="windows" class="anchor" href="#windows">¶</a>Windows</h3><p>On Windows, you can <a href="http://mirror.keystealth.org/gnu/emacs/windows/emacs-27/emacs-27.1-x86_64-installer.exe">download Emacs</a> directly from the GNU website!
+</p>
 
-&lt;p&gt;If you use MSYS2, you can install it using Pacman:
-&lt;/p&gt;
+<p>If you use MSYS2, you can install it using Pacman:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 pacman -S mingw-w64-x86_64-emacs
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;You can also install it using &lt;a href=&quot;https://chocolatey.org/&quot;&gt;Chocolatey&lt;/a&gt;:
-&lt;/p&gt;
+<p>You can also install it using <a href="https://chocolatey.org/">Chocolatey</a>:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 choco install emacs
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h2&gt;&lt;a id=&quot;basic-concepts&quot; class=&quot;anchor&quot; href=&quot;#basic-concepts&quot;&gt;¶&lt;/a&gt;Basic Concepts&lt;/h2&gt;&lt;p&gt;Let&apos;s talk about the basic things you need to understand about Emacs to use it effectively!
-&lt;/p&gt;
+<h2><a id="basic-concepts" class="anchor" href="#basic-concepts">¶</a>Basic Concepts</h2><p>Let's talk about the basic things you need to understand about Emacs to use it effectively!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-user-interface&quot; class=&quot;anchor&quot; href=&quot;#the-user-interface&quot;&gt;¶&lt;/a&gt;The User Interface&lt;/h2&gt;&lt;p&gt;Emacs has a menu and tool bar like many conventional graphical programs.  They can be useful at first to learn the functionality that is available, but I think that you won&apos;t need them for very long!
-&lt;/p&gt;
+<h2><a id="the-user-interface" class="anchor" href="#the-user-interface">¶</a>The User Interface</h2><p>Emacs has a menu and tool bar like many conventional graphical programs.  They can be useful at first to learn the functionality that is available, but I think that you won't need them for very long!
+</p>
 
-&lt;p&gt;Note that the menu bar actually is present in the terminal version of Emacs!
-&lt;/p&gt;
+<p>Note that the menu bar actually is present in the terminal version of Emacs!
+</p>
 
-&lt;p&gt;If you&apos;re coming from another IDE or editor, you might expect to see a file tree on the left side of the window.  This isn&apos;t provided by Emacs by default, but it&apos;s easy to add through community packages!  There are other ways to show files in Emacs that are even better, in my opinion.
-&lt;/p&gt;
+<p>If you're coming from another IDE or editor, you might expect to see a file tree on the left side of the window.  This isn't provided by Emacs by default, but it's easy to add through community packages!  There are other ways to show files in Emacs that are even better, in my opinion.
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Menu-Bar.html&quot;&gt;Emacs Manual: The Menu Bar&lt;/a&gt;
-&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Tool-Bars.html&quot;&gt;Emacs Manual: Tool Bars&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Menu-Bar.html">Emacs Manual: The Menu Bar</a>
+<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Tool-Bars.html">Emacs Manual: Tool Bars</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;windows-and-frames&quot; class=&quot;anchor&quot; href=&quot;#windows-and-frames&quot;&gt;¶&lt;/a&gt;Windows and Frames&lt;/h2&gt;&lt;p&gt;The concept of a &quot;window&quot; is different in Emacs than what you probably know from using graphical computing environments.  In modern desktop environments, a window is a graphical interface of a program which is managed by the window manager of the desktop environment, usually with buttons to close or minimize it.
-&lt;/p&gt;
+<h2><a id="windows-and-frames" class="anchor" href="#windows-and-frames">¶</a>Windows and Frames</h2><p>The concept of a "window" is different in Emacs than what you probably know from using graphical computing environments.  In modern desktop environments, a window is a graphical interface of a program which is managed by the window manager of the desktop environment, usually with buttons to close or minimize it.
+</p>
 
-&lt;p&gt;In Emacs, a window is more like a &quot;pane&quot; in the desktop window of Emacs.  A window in Emacs always displays a buffer.  Windows can also be split in arbitrary ways, both horizontally and vertically, so that you can create whatever window layout you like.  Each of these windows can show different buffers or even the same buffer!
-&lt;/p&gt;
+<p>In Emacs, a window is more like a "pane" in the desktop window of Emacs.  A window in Emacs always displays a buffer.  Windows can also be split in arbitrary ways, both horizontally and vertically, so that you can create whatever window layout you like.  Each of these windows can show different buffers or even the same buffer!
+</p>
 
-&lt;p&gt;What you think of as a window in typical desktop environments, Emacs calls a &quot;frame&quot;!  Emacs can display multiple frames (desktop windows) at the same time.  These frames all share the same internal state and buffers.  Some people never use more than one frame, others use many frames.  It all depends on how you prefer to use Emacs!
-&lt;/p&gt;
+<p>What you think of as a window in typical desktop environments, Emacs calls a "frame"!  Emacs can display multiple frames (desktop windows) at the same time.  These frames all share the same internal state and buffers.  Some people never use more than one frame, others use many frames.  It all depends on how you prefer to use Emacs!
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Basic-Window.html#Basic-Window&quot;&gt;Emacs Manual: Concepts of Emacs Windows&lt;/a&gt;
-&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Frames.html#Frames&quot;&gt;Emacs Manual: Frames and Graphical Displays&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Basic-Window.html#Basic-Window">Emacs Manual: Concepts of Emacs Windows</a>
+<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Frames.html#Frames">Emacs Manual: Frames and Graphical Displays</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;buffers&quot; class=&quot;anchor&quot; href=&quot;#buffers&quot;&gt;¶&lt;/a&gt;Buffers&lt;/h2&gt;&lt;p&gt;A buffer holds text and other information that is usually displayed in a window.  The most obvious example is a buffer that contains the contents of a file for the purpose of editing it.
-&lt;/p&gt;
+<h2><a id="buffers" class="anchor" href="#buffers">¶</a>Buffers</h2><p>A buffer holds text and other information that is usually displayed in a window.  The most obvious example is a buffer that contains the contents of a file for the purpose of editing it.
+</p>
 
-&lt;p&gt;However, there are many types of special buffers that are used only for displaying temporary information or user interface elements!  The Magit package provides an excellent interface for Git inside of a custom Emacs buffer.
-&lt;/p&gt;
+<p>However, there are many types of special buffers that are used only for displaying temporary information or user interface elements!  The Magit package provides an excellent interface for Git inside of a custom Emacs buffer.
+</p>
 
-&lt;p&gt;Buffers can be one of the more confusing aspects of Emacs to beginners because you don&apos;t have any indication of what buffers are open until you try to switch to another buffer.
-&lt;/p&gt;
+<p>Buffers can be one of the more confusing aspects of Emacs to beginners because you don't have any indication of what buffers are open until you try to switch to another buffer.
+</p>
 
-&lt;p&gt;Some important buffers you will definitely see when you use Emacs:
-&lt;/p&gt;
+<p>Some important buffers you will definitely see when you use Emacs:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;*scratch*&lt;/kbd&gt; - Basically like a blank sheet of paper for taking notes, writing temporary Emacs Lisp expressions, or whatever you want!&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;*Messages*&lt;/kbd&gt; - This contains log messages and all the text that gets written to the echo area at the bottom of the screen&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;*Warnings*&lt;/kbd&gt; - A list of potential errors that may be displayed from time to time&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>*scratch*</kbd> - Basically like a blank sheet of paper for taking notes, writing temporary Emacs Lisp expressions, or whatever you want!</li>
+<li><kbd>*Messages*</kbd> - This contains log messages and all the text that gets written to the echo area at the bottom of the screen</li>
+<li><kbd>*Warnings*</kbd> - A list of potential errors that may be displayed from time to time</li>
+</ul>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Buffers.html#Buffers&quot;&gt;Emacs Manual: Using Multiple Buffers&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Buffers.html#Buffers">Emacs Manual: Using Multiple Buffers</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-mode-line&quot; class=&quot;anchor&quot; href=&quot;#the-mode-line&quot;&gt;¶&lt;/a&gt;The Mode Line&lt;/h2&gt;&lt;p&gt;When coming from other editors, you might expect to see a &quot;status bar&quot; at the bottom of the main editor window that gives you information about the state of the current buffer and the editor.  Emacs also has this, but does it slightly differently!
-&lt;/p&gt;
+<h2><a id="the-mode-line" class="anchor" href="#the-mode-line">¶</a>The Mode Line</h2><p>When coming from other editors, you might expect to see a "status bar" at the bottom of the main editor window that gives you information about the state of the current buffer and the editor.  Emacs also has this, but does it slightly differently!
+</p>
 
-&lt;p&gt;The mode line is a line of text displayed at the bottom of every window (pane) in Emacs.  It displays information about the current buffer you&apos;re viewing and also global status information:
-&lt;/p&gt;
+<p>The mode line is a line of text displayed at the bottom of every window (pane) in Emacs.  It displays information about the current buffer you're viewing and also global status information:
+</p>
 
-&lt;ul&gt;&lt;li&gt;The line and column of the cursor&lt;/li&gt;
-&lt;li&gt;The major mode of the buffer&lt;/li&gt;
-&lt;li&gt;The minor modes active in the buffer (or globally in Emacs)&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>The line and column of the cursor</li>
+<li>The major mode of the buffer</li>
+<li>The minor modes active in the buffer (or globally in Emacs)</li>
+</ul>
 
-&lt;p&gt;The major difference between the mode line and the status bar is that there is a mode line under &lt;strong&gt;every&lt;/strong&gt; visible window, so when you split the window, you&apos;ll see multiple mode lines!  There are benefits to this even though it takes up extra screen space.
-&lt;/p&gt;
+<p>The major difference between the mode line and the status bar is that there is a mode line under <strong>every</strong> visible window, so when you split the window, you'll see multiple mode lines!  There are benefits to this even though it takes up extra screen space.
+</p>
 
-&lt;p&gt;The mode line is fully customizable and can be made to look very nice either through your own configuration or from community packages!
-&lt;/p&gt;
+<p>The mode line is fully customizable and can be made to look very nice either through your own configuration or from community packages!
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html&quot;&gt;Emacs Manual: The Mode Line&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html">Emacs Manual: The Mode Line</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-echo-area-and-minibuffer&quot; class=&quot;anchor&quot; href=&quot;#the-echo-area-and-minibuffer&quot;&gt;¶&lt;/a&gt;The Echo Area and Minibuffer&lt;/h2&gt;&lt;p&gt;The echo area is a line at the very bottom of the frame which displays informational text when you perform certain operations in Emacs.
-&lt;/p&gt;
+<h2><a id="the-echo-area-and-minibuffer" class="anchor" href="#the-echo-area-and-minibuffer">¶</a>The Echo Area and Minibuffer</h2><p>The echo area is a line at the very bottom of the frame which displays informational text when you perform certain operations in Emacs.
+</p>
 
-&lt;p&gt;It also turns into a prompt at times when you run a command that needs to accept user input; this prompt is called the &quot;minibuffer&quot;!  You can think of it like a temporary buffer that is used for interacting with the user.  It can also expand its height to be slightly larger than a single line when needed.
-&lt;/p&gt;
+<p>It also turns into a prompt at times when you run a command that needs to accept user input; this prompt is called the "minibuffer"!  You can think of it like a temporary buffer that is used for interacting with the user.  It can also expand its height to be slightly larger than a single line when needed.
+</p>
 
-&lt;p&gt;One example of the minibuffer in use can be seen when we attempt to run a command by name.
-&lt;/p&gt;
+<p>One example of the minibuffer in use can be seen when we attempt to run a command by name.
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Echo-Area.html&quot;&gt;Emacs Manual: The Echo Area&lt;/a&gt;
-&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer.html#Minibuffer&quot;&gt;Emacs Manual: The Minibuffer&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Echo-Area.html">Emacs Manual: The Echo Area</a>
+<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer.html#Minibuffer">Emacs Manual: The Minibuffer</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;commands&quot; class=&quot;anchor&quot; href=&quot;#commands&quot;&gt;¶&lt;/a&gt;Commands&lt;/h2&gt;&lt;p&gt;In Emacs, there are a variety of built in commands that enable a lot of interesting and useful behavior, especially things that aren&apos;t specifically for text editing!  You can think of Emacs as more of a personal productivity suite than a plain text editor.
-&lt;/p&gt;
+<h2><a id="commands" class="anchor" href="#commands">¶</a>Commands</h2><p>In Emacs, there are a variety of built in commands that enable a lot of interesting and useful behavior, especially things that aren't specifically for text editing!  You can think of Emacs as more of a personal productivity suite than a plain text editor.
+</p>
 
-&lt;p&gt;To run a command, you can press &lt;kbd&gt;Alt+x&lt;/kbd&gt; (or &lt;kbd&gt;M-x&lt;/kbd&gt; in Emacs lingo).  This will bring up a prompt where you can type in the name of the command to be run.
-&lt;/p&gt;
+<p>To run a command, you can press <kbd>Alt+x</kbd> (or <kbd>M-x</kbd> in Emacs lingo).  This will bring up a prompt where you can type in the name of the command to be run.
+</p>
 
-&lt;p&gt;This prompt features a completion system (like many prompts in Emacs) so you can press &lt;kbd&gt;TAB&lt;/kbd&gt; to show all possible commands that you can run.
-&lt;/p&gt;
+<p>This prompt features a completion system (like many prompts in Emacs) so you can press <kbd>TAB</kbd> to show all possible commands that you can run.
+</p>
 
-&lt;p&gt;Try out the following commands:
-&lt;/p&gt;
+<p>Try out the following commands:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;dired&lt;/kbd&gt; (&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html#Dired&quot;&gt;Manual&lt;/a&gt;) - Check out my video about Dired&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;calendar&lt;/kbd&gt; (&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Calendar_002fDiary.html#Calendar_002fDiary&quot;&gt;Manual&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;eshell&lt;/kbd&gt; (&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_mono/eshell.html&quot;&gt;Manual&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;tetris&lt;/kbd&gt; :) (&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html#Amusements&quot;&gt;Manual&lt;/a&gt;)&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>dired</kbd> (<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html#Dired">Manual</a>) - Check out my video about Dired</li>
+<li><kbd>calendar</kbd> (<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Calendar_002fDiary.html#Calendar_002fDiary">Manual</a>)</li>
+<li><kbd>eshell</kbd> (<a href="https://www.gnu.org/software/emacs/manual/html_mono/eshell.html">Manual</a>)</li>
+<li><kbd>tetris</kbd> :) (<a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Amusements.html#Amusements">Manual</a>)</li>
+</ul>
 
-&lt;p&gt;New commands can be installed into Emacs using community packages, and you can also write your own!  We&apos;ll cover this in another video.
-&lt;/p&gt;
+<p>New commands can be installed into Emacs using community packages, and you can also write your own!  We'll cover this in another video.
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Commands.html&quot;&gt;Emacs Manual: Keys and Commands&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Commands.html">Emacs Manual: Keys and Commands</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;major-and-minor-modes&quot; class=&quot;anchor&quot; href=&quot;#major-and-minor-modes&quot;&gt;¶&lt;/a&gt;Major and Minor Modes&lt;/h2&gt;&lt;p&gt;In other editors, there is usually functionality that gets enabled for files with a particular extension, e.g. Python programming functionality for &lt;kbd&gt;.py&lt;/kbd&gt; files.
-&lt;/p&gt;
+<h2><a id="major-and-minor-modes" class="anchor" href="#major-and-minor-modes">¶</a>Major and Minor Modes</h2><p>In other editors, there is usually functionality that gets enabled for files with a particular extension, e.g. Python programming functionality for <kbd>.py</kbd> files.
+</p>
 
-&lt;p&gt;Emacs also has this!  This functionality is provided through something called a &quot;major mode.&quot;  A major mode provides the primary functionality for a particular buffer and it is usually activated based on the extension of a file you open in that buffer.
-&lt;/p&gt;
+<p>Emacs also has this!  This functionality is provided through something called a "major mode."  A major mode provides the primary functionality for a particular buffer and it is usually activated based on the extension of a file you open in that buffer.
+</p>
 
-&lt;p&gt;As we&apos;ve seen before, some buffers are not files and have special functionality!  This functionality also comes from custom major modes.  In this case, the major mode is being activated using a command, typically with the name of the mode.
-&lt;/p&gt;
+<p>As we've seen before, some buffers are not files and have special functionality!  This functionality also comes from custom major modes.  In this case, the major mode is being activated using a command, typically with the name of the mode.
+</p>
 
-&lt;p&gt;The major mode is what we see down in the mode line which indicates what type of buffer we are looking it.
-&lt;/p&gt;
+<p>The major mode is what we see down in the mode line which indicates what type of buffer we are looking it.
+</p>
 
-&lt;p&gt;There can only be one major mode active in a buffer at once!
-&lt;/p&gt;
+<p>There can only be one major mode active in a buffer at once!
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Modes.html&quot;&gt;Emacs Manual: Major and Minor Modes&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Modes.html">Emacs Manual: Major and Minor Modes</a>
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;minor-modes&quot; class=&quot;anchor&quot; href=&quot;#minor-modes&quot;&gt;¶&lt;/a&gt;Minor Modes&lt;/h3&gt;&lt;p&gt;Minor modes are different in that many minor modes can be active in a single buffer, and even globally across Emacs.
-&lt;/p&gt;
+<h3><a id="minor-modes" class="anchor" href="#minor-modes">¶</a>Minor Modes</h3><p>Minor modes are different in that many minor modes can be active in a single buffer, and even globally across Emacs.
+</p>
 
-&lt;p&gt;Minor modes typically provide helpful functionality that isn&apos;t specific to the major mode of the current buffer, but things you might need to customize your workflow or even change the display of things in Emacs.
-&lt;/p&gt;
+<p>Minor modes typically provide helpful functionality that isn't specific to the major mode of the current buffer, but things you might need to customize your workflow or even change the display of things in Emacs.
+</p>
 
-&lt;p&gt;Try out &lt;kbd&gt;hl-line-mode&lt;/kbd&gt; and &lt;kbd&gt;global-hl-line-mode&lt;/kbd&gt; as an example of local and global minor modes!
-&lt;/p&gt;
+<p>Try out <kbd>hl-line-mode</kbd> and <kbd>global-hl-line-mode</kbd> as an example of local and global minor modes!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;basic-key-bindings&quot; class=&quot;anchor&quot; href=&quot;#basic-key-bindings&quot;&gt;¶&lt;/a&gt;Basic Key Bindings&lt;/h2&gt;&lt;p&gt;Emacs is most efficient and productive when you focus on keyboard-based control.  The key binding system in Emacs is one of the most flexible and customizable I&apos;ve ever seen; once you start customizing Emacs&apos; bindings for your own personal workflow, you&apos;ll see how limited other programs are by comparison.
-&lt;/p&gt;
+<h2><a id="basic-key-bindings" class="anchor" href="#basic-key-bindings">¶</a>Basic Key Bindings</h2><p>Emacs is most efficient and productive when you focus on keyboard-based control.  The key binding system in Emacs is one of the most flexible and customizable I've ever seen; once you start customizing Emacs' bindings for your own personal workflow, you'll see how limited other programs are by comparison.
+</p>
 
-&lt;p&gt;I&apos;m going to cover some basic keybindings that you&apos;ll want to learn for basic everyday use.  In future videos I&apos;ll go much more in depth about Emacs&apos; own special keybindings that you can use to make text editing and your general workflow a lot more efficient!
-&lt;/p&gt;
+<p>I'm going to cover some basic keybindings that you'll want to learn for basic everyday use.  In future videos I'll go much more in depth about Emacs' own special keybindings that you can use to make text editing and your general workflow a lot more efficient!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;understanding-emacs-key-bindings&quot; class=&quot;anchor&quot; href=&quot;#understanding-emacs-key-bindings&quot;&gt;¶&lt;/a&gt;Understanding Emacs Key Bindings&lt;/h3&gt;&lt;p&gt;You will often see people write out the key bindings in a specific format when explaining things.  Let&apos;s quickly cover what everything means since you will see it often!
-&lt;/p&gt;
+<h3><a id="understanding-emacs-key-bindings" class="anchor" href="#understanding-emacs-key-bindings">¶</a>Understanding Emacs Key Bindings</h3><p>You will often see people write out the key bindings in a specific format when explaining things.  Let's quickly cover what everything means since you will see it often!
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C-c&lt;/kbd&gt; - hold the Ctrl key and press the letter &apos;c&apos;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;C-x C-s&lt;/kbd&gt; - hold the Ctrl key and press the letters &apos;x&apos; then &apos;s&apos; while still holding Ctrl&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;C-x b&lt;/kbd&gt; - hold the Ctrl key and press &apos;x&apos;, then release Ctrl and press &apos;b&apos;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;M-x&lt;/kbd&gt; - hold the Alt key and press &apos;x&apos; (you will see this often like &lt;kbd&gt;M-x find-file&lt;/kbd&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;M-g C-s&lt;/kbd&gt; - hold the Alt key and press the letter &apos;g&apos;, release Alt, hold Ctrl and press &apos;s&apos;&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>C-c</kbd> - hold the Ctrl key and press the letter 'c'</li>
+<li><kbd>C-x C-s</kbd> - hold the Ctrl key and press the letters 'x' then 's' while still holding Ctrl</li>
+<li><kbd>C-x b</kbd> - hold the Ctrl key and press 'x', then release Ctrl and press 'b'</li>
+<li><kbd>M-x</kbd> - hold the Alt key and press 'x' (you will see this often like <kbd>M-x find-file</kbd>)</li>
+<li><kbd>M-g C-s</kbd> - hold the Alt key and press the letter 'g', release Alt, hold Ctrl and press 's'</li>
+</ul>
 
-&lt;p&gt;These single-letters can be interpreted as follows:
-&lt;/p&gt;
+<p>These single-letters can be interpreted as follows:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C&lt;/kbd&gt; - Ctrl&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;M&lt;/kbd&gt; - Alt (Meta in Emacs lingo)&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;S&lt;/kbd&gt; - Shift&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;s&lt;/kbd&gt; - Super (Windows key)&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>C</kbd> - Ctrl</li>
+<li><kbd>M</kbd> - Alt (Meta in Emacs lingo)</li>
+<li><kbd>S</kbd> - Shift</li>
+<li><kbd>s</kbd> - Super (Windows key)</li>
+</ul>
 
-&lt;p&gt;Generally when you see a capital &lt;kbd&gt;C&lt;/kbd&gt;, &lt;kbd&gt;M&lt;/kbd&gt;, or &lt;kbd&gt;S&lt;/kbd&gt; hyphened together with another key, those should all be pressed together, i.e. &lt;kbd&gt;C-M-s&lt;/kbd&gt; or &lt;kbd&gt;M-S-d&lt;/kbd&gt;.
-&lt;/p&gt;
+<p>Generally when you see a capital <kbd>C</kbd>, <kbd>M</kbd>, or <kbd>S</kbd> hyphened together with another key, those should all be pressed together, i.e. <kbd>C-M-s</kbd> or <kbd>M-S-d</kbd>.
+</p>
 
-&lt;p&gt;One last important thing to mention are the two main key prefixes that have special meaning:
-&lt;/p&gt;
+<p>One last important thing to mention are the two main key prefixes that have special meaning:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C-x&lt;/kbd&gt; - This is a prefix for all of Emacs&apos; primary key bindings like &lt;kbd&gt;C-x C-f&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;C-c&lt;/kbd&gt; - This is considered to be a combination of bindings created by active major and minor modes or by the user!&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>C-x</kbd> - This is a prefix for all of Emacs' primary key bindings like <kbd>C-x C-f</kbd></li>
+<li><kbd>C-c</kbd> - This is considered to be a combination of bindings created by active major and minor modes or by the user!</li>
+</ul>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Sequences.html&quot;&gt;Emacs Manual: Key Sequences&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Key-Sequences.html">Emacs Manual: Key Sequences</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;opening-and-saving-files&quot; class=&quot;anchor&quot; href=&quot;#opening-and-saving-files&quot;&gt;¶&lt;/a&gt;Opening and Saving Files&lt;/h2&gt;&lt;p&gt;To open a file in Emacs, press &lt;kbd&gt;C-x C-f&lt;/kbd&gt; (&lt;kbd&gt;find-file&lt;/kbd&gt;).  This will bring up a prompt in the minibuffer so that you can type in the file name.
-&lt;/p&gt;
+<h2><a id="opening-and-saving-files" class="anchor" href="#opening-and-saving-files">¶</a>Opening and Saving Files</h2><p>To open a file in Emacs, press <kbd>C-x C-f</kbd> (<kbd>find-file</kbd>).  This will bring up a prompt in the minibuffer so that you can type in the file name.
+</p>
 
-&lt;p&gt;You can also navigate through directories by deleting the directory path and using &lt;kbd&gt;TAB&lt;/kbd&gt; to complete parts of directory and file names!
-&lt;/p&gt;
+<p>You can also navigate through directories by deleting the directory path and using <kbd>TAB</kbd> to complete parts of directory and file names!
+</p>
 
-&lt;p&gt;When you&apos;ve opened a file into a buffer, you can make edits to it and then save the file with &lt;kbd&gt;C-x C-s&lt;/kbd&gt; (&lt;kbd&gt;save-buffer&lt;/kbd&gt;).
-&lt;/p&gt;
+<p>When you've opened a file into a buffer, you can make edits to it and then save the file with <kbd>C-x C-s</kbd> (<kbd>save-buffer</kbd>).
+</p>
 
-&lt;p&gt;You can also save the buffer to a different file (&quot;Save as&quot; in other editors) with &lt;kbd&gt;C-x C-w&lt;/kbd&gt; (&lt;kbd&gt;write-file&lt;/kbd&gt;).
-&lt;/p&gt;
+<p>You can also save the buffer to a different file ("Save as" in other editors) with <kbd>C-x C-w</kbd> (<kbd>write-file</kbd>).
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/Visiting-Files.html#Visiting-Files&quot;&gt;Emacs Manual: Visiting Files&lt;/a&gt;
-&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/elisp/Saving-Buffers.html#Saving-Buffers&quot;&gt;Emacs Manual: Saving Buffers&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Visiting-Files.html#Visiting-Files">Emacs Manual: Visiting Files</a>
+<a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Saving-Buffers.html#Saving-Buffers">Emacs Manual: Saving Buffers</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;switching-buffers&quot; class=&quot;anchor&quot; href=&quot;#switching-buffers&quot;&gt;¶&lt;/a&gt;Switching Buffers&lt;/h2&gt;&lt;p&gt;As we talked about before, Emacs can have many buffers open at the same time but you will only see the buffers that are currently open in a window.
-&lt;/p&gt;
+<h2><a id="switching-buffers" class="anchor" href="#switching-buffers">¶</a>Switching Buffers</h2><p>As we talked about before, Emacs can have many buffers open at the same time but you will only see the buffers that are currently open in a window.
+</p>
 
-&lt;p&gt;If you want to switch between buffers, you can use the &lt;kbd&gt;C-x b&lt;/kbd&gt; (&lt;kbd&gt;switch-to-buffer&lt;/kbd&gt;) binding to be prompted for a buffer to switch to.  This prompt features completions, so press &lt;kbd&gt;TAB&lt;/kbd&gt; at any time to see the possible buffers based on the current text you&apos;ve entered.
-&lt;/p&gt;
+<p>If you want to switch between buffers, you can use the <kbd>C-x b</kbd> (<kbd>switch-to-buffer</kbd>) binding to be prompted for a buffer to switch to.  This prompt features completions, so press <kbd>TAB</kbd> at any time to see the possible buffers based on the current text you've entered.
+</p>
 
-&lt;p&gt;There&apos;s also &lt;kbd&gt;C-x C-b&lt;/kbd&gt; (&lt;kbd&gt;list-buffers&lt;/kbd&gt;) which will show you a full listing of all the buffers that are open in Emacs.
-&lt;/p&gt;
+<p>There's also <kbd>C-x C-b</kbd> (<kbd>list-buffers</kbd>) which will show you a full listing of all the buffers that are open in Emacs.
+</p>
 
-&lt;p&gt;Once you start customizing Emacs, there are a variety of packages that make this even easier and enable you to customize it for your workflow!
-&lt;/p&gt;
+<p>Once you start customizing Emacs, there are a variety of packages that make this even easier and enable you to customize it for your workflow!
+</p>
 
-&lt;p&gt;You can also easily move between buffers using the &lt;kbd&gt;C-x &amp;lt;left arrow&amp;gt;&lt;/kbd&gt; and &lt;kbd&gt;C x &amp;lt;right arrow&amp;gt;&lt;/kbd&gt; keys!
-&lt;/p&gt;
+<p>You can also easily move between buffers using the <kbd>C-x &lt;left arrow&gt;</kbd> and <kbd>C x &lt;right arrow&gt;</kbd> keys!
+</p>
 
-&lt;p&gt;(See, I remembered :)
-&lt;/p&gt;
+<p>(See, I remembered :)
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/List-Buffers.html#List-Buffers&quot;&gt;Emacs Manual: Listing Existing Buffers&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/List-Buffers.html#List-Buffers">Emacs Manual: Listing Existing Buffers</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;cutting-and-copying-text&quot; class=&quot;anchor&quot; href=&quot;#cutting-and-copying-text&quot;&gt;¶&lt;/a&gt;Cutting and Copying Text&lt;/h2&gt;&lt;p&gt;This is an area which always confuses new Emacs users!  Many programs across Linux and Windows use &lt;kbd&gt;C-c&lt;/kbd&gt; to copy text and &lt;kbd&gt;C-x&lt;/kbd&gt; to copy and delete the selected text (cut).
-&lt;/p&gt;
+<h2><a id="cutting-and-copying-text" class="anchor" href="#cutting-and-copying-text">¶</a>Cutting and Copying Text</h2><p>This is an area which always confuses new Emacs users!  Many programs across Linux and Windows use <kbd>C-c</kbd> to copy text and <kbd>C-x</kbd> to copy and delete the selected text (cut).
+</p>
 
-&lt;p&gt;This is not the case in Emacs!  As we mentioned before, these two key bindings are actually special key prefixes in Emacs so they aren&apos;t used for cut and copy.
-&lt;/p&gt;
+<p>This is not the case in Emacs!  As we mentioned before, these two key bindings are actually special key prefixes in Emacs so they aren't used for cut and copy.
+</p>
 
-&lt;p&gt;In Emacs, to &quot;kill&quot; text means to &quot;cut&quot; it, basically copy it and delete it.  The most common thing you will do is to kill a region, either to just delete the text or to cut it to be pasted somewhere else.
-&lt;/p&gt;
+<p>In Emacs, to "kill" text means to "cut" it, basically copy it and delete it.  The most common thing you will do is to kill a region, either to just delete the text or to cut it to be pasted somewhere else.
+</p>
 
-&lt;p&gt;But to kill a region, you first need to select one!  You can begin marking a region using &lt;kbd&gt;C-SPC&lt;/kbd&gt; (&lt;kbd&gt;set-mark-command&lt;/kbd&gt;) then use the arrow keys to move the cursor to expand or shrink the selection.
-&lt;/p&gt;
+<p>But to kill a region, you first need to select one!  You can begin marking a region using <kbd>C-SPC</kbd> (<kbd>set-mark-command</kbd>) then use the arrow keys to move the cursor to expand or shrink the selection.
+</p>
 
-&lt;p&gt;Now that you have a region selected, you can use &lt;kbd&gt;C-w&lt;/kbd&gt; (&lt;kbd&gt;kill-region&lt;/kbd&gt;) to cut the text or &lt;kbd&gt;M-w&lt;/kbd&gt; (&lt;kbd&gt;kill-ring-save&lt;/kbd&gt;) to copy it.
-&lt;/p&gt;
+<p>Now that you have a region selected, you can use <kbd>C-w</kbd> (<kbd>kill-region</kbd>) to cut the text or <kbd>M-w</kbd> (<kbd>kill-ring-save</kbd>) to copy it.
+</p>
 
-&lt;p&gt;One interesting aspect of killing text is that it gets stored in the &quot;kill ring&quot; to be used later.  We will discuss this in a future episode!
-&lt;/p&gt;
+<p>One interesting aspect of killing text is that it gets stored in the "kill ring" to be used later.  We will discuss this in a future episode!
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Killing.html&quot;&gt;Emacs Manual: Killing and Moving Text&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Killing.html">Emacs Manual: Killing and Moving Text</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;pasting-text&quot; class=&quot;anchor&quot; href=&quot;#pasting-text&quot;&gt;¶&lt;/a&gt;Pasting Text&lt;/h2&gt;&lt;p&gt;In typical Emacs style, the concept of &quot;pasting&quot; text has a different name: &quot;yank.&quot;
-&lt;/p&gt;
+<h2><a id="pasting-text" class="anchor" href="#pasting-text">¶</a>Pasting Text</h2><p>In typical Emacs style, the concept of "pasting" text has a different name: "yank."
+</p>
 
-&lt;p&gt;You can press &lt;kbd&gt;C-y&lt;/kbd&gt; to yank (paste) the most recent text from the kill ring back into this buffer.
-&lt;/p&gt;
+<p>You can press <kbd>C-y</kbd> to yank (paste) the most recent text from the kill ring back into this buffer.
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Yanking.html#Yanking&quot;&gt;Emacs Manual: Yanking&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Yanking.html#Yanking">Emacs Manual: Yanking</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;cua-mode&quot; class=&quot;anchor&quot; href=&quot;#cua-mode&quot;&gt;¶&lt;/a&gt;CUA Mode&lt;/h2&gt;&lt;p&gt;If you &lt;strong&gt;must&lt;/strong&gt; have the old &lt;kbd&gt;C-c&lt;/kbd&gt; (copy) &lt;kbd&gt;C-x&lt;/kbd&gt; (cut) and &lt;kbd&gt;C-v&lt;/kbd&gt; (paste) behavior that you&apos;re familiar with, you can turn on the CUA mode using the menu item &quot;Options -&amp;gt; Cut/Paste with C-x/C-c/C-v (CUA Mode)&quot;.
-&lt;/p&gt;
+<h2><a id="cua-mode" class="anchor" href="#cua-mode">¶</a>CUA Mode</h2><p>If you <strong>must</strong> have the old <kbd>C-c</kbd> (copy) <kbd>C-x</kbd> (cut) and <kbd>C-v</kbd> (paste) behavior that you're familiar with, you can turn on the CUA mode using the menu item "Options -&gt; Cut/Paste with C-x/C-c/C-v (CUA Mode)".
+</p>
 
-&lt;p&gt;This will make the cut and copy key bindings work when you&apos;ve selected a region of text with the mouse or keyboard.  It will also turn &lt;kbd&gt;C-v&lt;/kbd&gt; into a Paste keybinding which will do what you expect!
-&lt;/p&gt;
+<p>This will make the cut and copy key bindings work when you've selected a region of text with the mouse or keyboard.  It will also turn <kbd>C-v</kbd> into a Paste keybinding which will do what you expect!
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/CUA-Bindings.html#CUA-Bindings&quot;&gt;Emacs Manual: CUA Bindings&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/CUA-Bindings.html#CUA-Bindings">Emacs Manual: CUA Bindings</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;undo-and-redo&quot; class=&quot;anchor&quot; href=&quot;#undo-and-redo&quot;&gt;¶&lt;/a&gt;Undo and Redo&lt;/h2&gt;&lt;p&gt;You can undo changes to a buffer by pressing &lt;kbd&gt;C-_&lt;/kbd&gt; (Ctrl+underscore) to run the &lt;kbd&gt;undo&lt;/kbd&gt; command.  An alternative binding which is easier to press is &lt;kbd&gt;C-/&lt;/kbd&gt;
-&lt;/p&gt;
+<h2><a id="undo-and-redo" class="anchor" href="#undo-and-redo">¶</a>Undo and Redo</h2><p>You can undo changes to a buffer by pressing <kbd>C-_</kbd> (Ctrl+underscore) to run the <kbd>undo</kbd> command.  An alternative binding which is easier to press is <kbd>C-/</kbd>
+</p>
 
-&lt;p&gt;To redo something that you deleted with undo, press &lt;kbd&gt;C-g C-_&lt;/kbd&gt;, but note that pressing &lt;kbd&gt;C-_&lt;/kbd&gt; again right after this will keep redoing things that you&apos;ve undo&apos;ed!  It will then cycle back to undoing once you&apos;ve reached the end of your redo history.
-&lt;/p&gt;
+<p>To redo something that you deleted with undo, press <kbd>C-g C-_</kbd>, but note that pressing <kbd>C-_</kbd> again right after this will keep redoing things that you've undo'ed!  It will then cycle back to undoing once you've reached the end of your redo history.
+</p>
 
-&lt;p&gt;As you can see, Emacs&apos; undo system operates differently than what you&apos;re used to!  There are packages that can replace this with more understood behavior; we will talk about them in another video.
-&lt;/p&gt;
+<p>As you can see, Emacs' undo system operates differently than what you're used to!  There are packages that can replace this with more understood behavior; we will talk about them in another video.
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://www.gnu.org/software/emacs/manual/html_node/emacs/Undo.html&quot;&gt;Emacs Manual: Undo&lt;/a&gt;
-&lt;a href=&quot;https://stackoverflow.com/a/3529243&quot;&gt;StackOverflow answer about how to undo and redo&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Undo.html">Emacs Manual: Undo</a>
+<a href="https://stackoverflow.com/a/3529243">StackOverflow answer about how to undo and redo</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;cancelling-operations&quot; class=&quot;anchor&quot; href=&quot;#cancelling-operations&quot;&gt;¶&lt;/a&gt;Cancelling Operations&lt;/h2&gt;&lt;p&gt;Sometimes you might run a command that you want to cancel before it completes.  For this you can press &lt;kbd&gt;C-g&lt;/kbd&gt; (Ctrl+g).  This interrupts any active command and brings you back to a normal state in Emacs.
-&lt;/p&gt;
+<h2><a id="cancelling-operations" class="anchor" href="#cancelling-operations">¶</a>Cancelling Operations</h2><p>Sometimes you might run a command that you want to cancel before it completes.  For this you can press <kbd>C-g</kbd> (Ctrl+g).  This interrupts any active command and brings you back to a normal state in Emacs.
+</p>
 
-&lt;p&gt;One example is showing any prompt, like the one for the (&lt;kbd&gt;find-file&lt;/kbd&gt;) command.  If you decide you want to cancel that prompt, just press &lt;kbd&gt;C-g&lt;/kbd&gt;.
-&lt;/p&gt;
+<p>One example is showing any prompt, like the one for the (<kbd>find-file</kbd>) command.  If you decide you want to cancel that prompt, just press <kbd>C-g</kbd>.
+</p>
 
-&lt;p&gt;Sometimes you might need to press it repeatedly before you can fully get back to normal!
-&lt;/p&gt;
+<p>Sometimes you might need to press it repeatedly before you can fully get back to normal!
+</p>
 
-&lt;p&gt;If Emacs ever seems to be hung, try this key binding first before killing the process.
-&lt;/p&gt;
+<p>If Emacs ever seems to be hung, try this key binding first before killing the process.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;learning-more-key-bindings&quot; class=&quot;anchor&quot; href=&quot;#learning-more-key-bindings&quot;&gt;¶&lt;/a&gt;Learning More Key Bindings&lt;/h2&gt;&lt;p&gt;There are two ways to figure out more key bindings for Emacs, especially when editing different types of files:
-&lt;/p&gt;
+<h2><a id="learning-more-key-bindings" class="anchor" href="#learning-more-key-bindings">¶</a>Learning More Key Bindings</h2><p>There are two ways to figure out more key bindings for Emacs, especially when editing different types of files:
+</p>
 
-&lt;ul&gt;&lt;li&gt;As we talked about before, look at the menu bar for common commands and their keys&lt;/li&gt;
-&lt;li&gt;Run the command &lt;kbd&gt;describe-bindings&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;Run the command &lt;kbd&gt;describe-key&lt;/kbd&gt; (&lt;kbd&gt;C-h k&lt;/kbd&gt;) to learn what command is bound to a specific key combination!&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>As we talked about before, look at the menu bar for common commands and their keys</li>
+<li>Run the command <kbd>describe-bindings</kbd></li>
+<li>Run the command <kbd>describe-key</kbd> (<kbd>C-h k</kbd>) to learn what command is bound to a specific key combination!</li>
+</ul>
 
-&lt;h2&gt;&lt;a id=&quot;the-help-system&quot; class=&quot;anchor&quot; href=&quot;#the-help-system&quot;&gt;¶&lt;/a&gt;The Help System&lt;/h2&gt;&lt;p&gt;We&apos;ll cover this in detail in another video, but the whole Emacs manual is built in to Emacs and you can find help on any function or variable in Emacs using the &lt;kbd&gt;describe-*&lt;/kbd&gt; functions!
-&lt;/p&gt;
+<h2><a id="the-help-system" class="anchor" href="#the-help-system">¶</a>The Help System</h2><p>We'll cover this in detail in another video, but the whole Emacs manual is built in to Emacs and you can find help on any function or variable in Emacs using the <kbd>describe-*</kbd> functions!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;configuring-emacs&quot; class=&quot;anchor&quot; href=&quot;#configuring-emacs&quot;&gt;¶&lt;/a&gt;Configuring Emacs&lt;/h2&gt;&lt;p&gt;There are two ways to configure Emacs to customize its behavior.  We won&apos;t go in depth on either of these in this video, I just want to point them out to you since it will be an obvious question you might have!
-&lt;/p&gt;
+<h2><a id="configuring-emacs" class="anchor" href="#configuring-emacs">¶</a>Configuring Emacs</h2><p>There are two ways to configure Emacs to customize its behavior.  We won't go in depth on either of these in this video, I just want to point them out to you since it will be an obvious question you might have!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;the-customization-ui&quot; class=&quot;anchor&quot; href=&quot;#the-customization-ui&quot;&gt;¶&lt;/a&gt;The Customization UI&lt;/h3&gt;&lt;p&gt;Emacs provides a full user interface for customizing all options in the editor.  To access it, run the command &lt;kbd&gt;customize&lt;/kbd&gt;.
-&lt;/p&gt;
+<h3><a id="the-customization-ui" class="anchor" href="#the-customization-ui">¶</a>The Customization UI</h3><p>Emacs provides a full user interface for customizing all options in the editor.  To access it, run the command <kbd>customize</kbd>.
+</p>
 
-&lt;p&gt;You can either navigate through the settings hierarchy to see what is available or put your cursor in the search box, type a term, then press &lt;kbd&gt;ENTER&lt;/kbd&gt;.
-&lt;/p&gt;
+<p>You can either navigate through the settings hierarchy to see what is available or put your cursor in the search box, type a term, then press <kbd>ENTER</kbd>.
+</p>
 
-&lt;p&gt;Each setting will have an input field of some kind that you can change by putting your cursor in the box and editing the value.  Once you&apos;re finished editing, you can click the &quot;Apply&quot; button to save the changes.
-&lt;/p&gt;
+<p>Each setting will have an input field of some kind that you can change by putting your cursor in the box and editing the value.  Once you're finished editing, you can click the "Apply" button to save the changes.
+</p>
 
-&lt;p&gt;Try searching for &quot;tab width&quot; in the search box!
-&lt;/p&gt;
+<p>Try searching for "tab width" in the search box!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;the-kbdinitelkbd-file&quot; class=&quot;anchor&quot; href=&quot;#the-kbdinitelkbd-file&quot;&gt;¶&lt;/a&gt;The &lt;kbd&gt;init.el&lt;/kbd&gt; file&lt;/h3&gt;&lt;p&gt;Once you&apos;ve become sufficiently comfortable with Emacs, you&apos;ll want to investigate how to configure Emacs using the &lt;kbd&gt;init.el&lt;/kbd&gt; file.  Emacs can be completely configured and extended using Lisp code!
-&lt;/p&gt;
+<h3><a id="the-kbdinitelkbd-file" class="anchor" href="#the-kbdinitelkbd-file">¶</a>The <kbd>init.el</kbd> file</h3><p>Once you've become sufficiently comfortable with Emacs, you'll want to investigate how to configure Emacs using the <kbd>init.el</kbd> file.  Emacs can be completely configured and extended using Lisp code!
+</p>
 
-&lt;p&gt;In your configuration file, you can write your own functions and commands to add new behavior to Emacs.  This is where a lot of the true power of Emacs comes into play!
-&lt;/p&gt;
+<p>In your configuration file, you can write your own functions and commands to add new behavior to Emacs.  This is where a lot of the true power of Emacs comes into play!
+</p>
 
-&lt;p&gt;Check out my series &lt;a href=&quot;https://www.youtube.com/watch?v=74zOY-vgkyw&amp;list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ&quot;&gt;Emacs From Scratch&lt;/a&gt; if you want to learn how to build up a modern Emacs configuration from scratch using the &lt;kbd&gt;init.el&lt;/kbd&gt; file and a bunch of community packages.
-&lt;/p&gt;
+<p>Check out my series <a href="https://www.youtube.com/watch?v=74zOY-vgkyw&list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ">Emacs From Scratch</a> if you want to learn how to build up a modern Emacs configuration from scratch using the <kbd>init.el</kbd> file and a bunch of community packages.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;whats-next&quot; class=&quot;anchor&quot; href=&quot;#whats-next&quot;&gt;¶&lt;/a&gt;What&apos;s next?&lt;/h2&gt;&lt;p&gt;This video should give you much of what you need to know to start using Emacs!  However, we weren&apos;t able to cover many things in depth.
-&lt;/p&gt;
+<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>This video should give you much of what you need to know to start using Emacs!  However, we weren't able to cover many things in depth.
+</p>
 
-&lt;p&gt;I&apos;m going to start making more videos in a new series called Emacs Essentials which will cover many of these topics at a deeper level so that you can go from being a beginner at Emacs to an advanced user by the end of it.
-&lt;/p&gt;
+<p>I'm going to start making more videos in a new series called Emacs Essentials which will cover many of these topics at a deeper level so that you can go from being a beginner at Emacs to an advanced user by the end of it.
+</p>
 
-&lt;p&gt;I&apos;ve already been making a ton of other videos about Emacs on this channel, so you should definitely check out my playlists if you want to learn a lot more while I&apos;m building out the Emacs Essentials series:
-&lt;/p&gt;
+<p>I've already been making a ton of other videos about Emacs on this channel, so you should definitely check out my playlists if you want to learn a lot more while I'm building out the Emacs Essentials series:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=74zOY-vgkyw&amp;list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ&quot;&gt;Emacs From Scratch&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=wKTKmE1wLyw&amp;list=PLEoMzSkcN8oMHJ6Xil1YdnYtlWd5hHZql&quot;&gt;Emacs Tips&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=f7xB2fFk1tQ&amp;list=PLEoMzSkcN8oNPbEMYEtswOVTvq7CVddCS&quot;&gt;Emacs Desktop Environment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=E-NAM9U5JYE&amp;list=PLEoMzSkcN8oNvsrtk_iZSb94krGRofFjN&quot;&gt;Emacs IDE&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=yZRyEhi4y44&amp;list=PLEoMzSkcN8oM-kA19xOQc8s0gr0PpFGJQ&quot;&gt;Emacs Mail&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=RQK_DaaX34Q&amp;list=PLEoMzSkcN8oPQtn7FQEF3D7sroZbXuPZ7&quot;&gt;Learning Emacs Lisp&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><a href="https://www.youtube.com/watch?v=74zOY-vgkyw&list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ">Emacs From Scratch</a></li>
+<li><a href="https://www.youtube.com/watch?v=wKTKmE1wLyw&list=PLEoMzSkcN8oMHJ6Xil1YdnYtlWd5hHZql">Emacs Tips</a></li>
+<li><a href="https://www.youtube.com/watch?v=f7xB2fFk1tQ&list=PLEoMzSkcN8oNPbEMYEtswOVTvq7CVddCS">Emacs Desktop Environment</a></li>
+<li><a href="https://www.youtube.com/watch?v=E-NAM9U5JYE&list=PLEoMzSkcN8oNvsrtk_iZSb94krGRofFjN">Emacs IDE</a></li>
+<li><a href="https://www.youtube.com/watch?v=yZRyEhi4y44&list=PLEoMzSkcN8oM-kA19xOQc8s0gr0PpFGJQ">Emacs Mail</a></li>
+<li><a href="https://www.youtube.com/watch?v=RQK_DaaX34Q&list=PLEoMzSkcN8oPQtn7FQEF3D7sroZbXuPZ7">Learning Emacs Lisp</a></li>
+</ul>
 
-&lt;p&gt;Also, if you want to know a little more about what Emacs is capable of, check out my video &lt;a href=&quot;https://youtu.be/bEfYm8sAaQg&quot;&gt;5 Reasons to Learn Emacs in 2021&lt;/a&gt;!
-&lt;/p&gt;
+<p>Also, if you want to know a little more about what Emacs is capable of, check out my video <a href="https://youtu.be/bEfYm8sAaQg">5 Reasons to Learn Emacs in 2021</a>!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;demo-configuration&quot; class=&quot;anchor&quot; href=&quot;#demo-configuration&quot;&gt;¶&lt;/a&gt;Demo Configuration&lt;/h2&gt;&lt;p&gt;This configuration is not intended to be used!  However, if you&apos;re curious:
-&lt;/p&gt;
+<h2><a id="demo-configuration" class="anchor" href="#demo-configuration">¶</a>Demo Configuration</h2><p>This configuration is not intended to be used!  However, if you're curious:
+</p>
 
-&lt;p&gt;Put this text in a file called &lt;kbd&gt;demo.el&lt;/kbd&gt;:
-&lt;/p&gt;
+<p>Put this text in a file called <kbd>demo.el</kbd>:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Make the colors and text less eye-strainy&lt;/span&gt;
-(load-theme &apos;tango-dark t)
-(set-face-attribute &apos;default nil &lt;span class=&quot;org-builtin&quot;&gt;:height&lt;/span&gt; 200)
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Make the colors and text less eye-strainy</span>
+(load-theme 'tango-dark t)
+(set-face-attribute 'default nil <span class="org-builtin">:height</span> 200)
 
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;I mindlessly press ESC, so stop me from wreaking havoc&lt;/span&gt;
-(global-set-key (kbd &lt;span class=&quot;org-string&quot;&gt;&quot;&amp;lt;escape&amp;gt;&quot;&lt;/span&gt;) &apos;keyboard-escape-quit)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">I mindlessly press ESC, so stop me from wreaking havoc</span>
+(global-set-key (kbd <span class="org-string">"&lt;escape&gt;"</span>) 'keyboard-escape-quit)
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Run Emacs with the configuration:
-&lt;/p&gt;
+<p>Run Emacs with the configuration:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
+<pre><code class="emacs-lisp">
 emacs -Q -l demo.el
 
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

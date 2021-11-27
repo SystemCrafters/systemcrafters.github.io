@@ -1,73 +1,74 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - May 21, 2021 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - May 21, 2021</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=UtqE-lR2HCA&quot;&gt;Watch the recording&lt;/a&gt; on YouTube!
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - May 21, 2021 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - May 21, 2021</h1><p class="blog-post-meta"></p><div><p><a href="https://www.youtube.com/watch?v=UtqE-lR2HCA">Watch the recording</a> on YouTube!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;replacing-ivy-and-counsel-with-vertico-and-consult&quot; class=&quot;anchor&quot; href=&quot;#replacing-ivy-and-counsel-with-vertico-and-consult&quot;&gt;¶&lt;/a&gt;Replacing Ivy and Counsel with Vertico and Consult&lt;/h2&gt;&lt;p&gt;If you tried out Vertico after the video on Monday, you probably wondered how you can get back to the level of functionality you had with Ivy.
-&lt;/p&gt;
+<h2><a id="replacing-ivy-and-counsel-with-vertico-and-consult" class="anchor" href="#replacing-ivy-and-counsel-with-vertico-and-consult">¶</a>Replacing Ivy and Counsel with Vertico and Consult</h2><p>If you tried out Vertico after the video on Monday, you probably wondered how you can get back to the level of functionality you had with Ivy.
+</p>
 
-&lt;p&gt;Today we&apos;re going to survey the set of commands that come with the Consult package to figure out which will be useful for the transition away from Ivy.
-&lt;/p&gt;
+<p>Today we're going to survey the set of commands that come with the Consult package to figure out which will be useful for the transition away from Ivy.
+</p>
 
-&lt;p&gt;I&apos;ll be making a video on this soon, but today we&apos;ll be figuring it out together!
-&lt;/p&gt;
+<p>I'll be making a video on this soon, but today we'll be figuring it out together!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;mapping-ivyswipercounsel-to-consult&quot; class=&quot;anchor&quot; href=&quot;#mapping-ivyswipercounsel-to-consult&quot;&gt;¶&lt;/a&gt;Mapping Ivy/Swiper/Counsel to Consult&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;swiper&lt;/kbd&gt; -&amp;gt; &lt;kbd&gt;consult-line&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;counsel-rg&lt;/kbd&gt; -&amp;gt; &lt;kbd&gt;consult-ripgrep&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;counsel-switch-buffer&lt;/kbd&gt; -&amp;gt; &lt;kbd&gt;consult-buffer&lt;/kbd&gt;.  Annotations are better for &lt;kbd&gt;switch-to-buffer&lt;/kbd&gt;?&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;counsel-org-goto&lt;/kbd&gt; -&amp;gt; &lt;kbd&gt;consult-imenu&lt;/kbd&gt; or &lt;kbd&gt;consult-org-heading&lt;/kbd&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<h3><a id="mapping-ivyswipercounsel-to-consult" class="anchor" href="#mapping-ivyswipercounsel-to-consult">¶</a>Mapping Ivy/Swiper/Counsel to Consult</h3><ul><li><kbd>swiper</kbd> -&gt; <kbd>consult-line</kbd></li>
+<li><kbd>counsel-rg</kbd> -&gt; <kbd>consult-ripgrep</kbd></li>
+<li><kbd>counsel-switch-buffer</kbd> -&gt; <kbd>consult-buffer</kbd>.  Annotations are better for <kbd>switch-to-buffer</kbd>?</li>
+<li><kbd>counsel-org-goto</kbd> -&gt; <kbd>consult-imenu</kbd> or <kbd>consult-org-heading</kbd></li>
+</ul>
 
-&lt;p&gt;&lt;strong&gt;TIP:&lt;/strong&gt; You should set &lt;kbd&gt;consult-project-root-function&lt;/kbd&gt; to something like this if you use Projectile:
-&lt;/p&gt;
+<p><strong>TIP:</strong> You should set <kbd>consult-project-root-function</kbd> to something like this if you use Projectile:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;dw/get-project-root&lt;/span&gt; ()
-  (&lt;span class=&quot;org-keyword&quot;&gt;when&lt;/span&gt; (fboundp &apos;projectile-project-root)
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/get-project-root</span> ()
+  (<span class="org-keyword">when</span> (fboundp 'projectile-project-root)
     (projectile-project-root)))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h3&gt;&lt;a id=&quot;other-useful-commands&quot; class=&quot;anchor&quot; href=&quot;#other-useful-commands&quot;&gt;¶&lt;/a&gt;Other useful commands&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;consult-mark&lt;/kbd&gt;: Show a list of previous mark locations&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;consult-outline&lt;/kbd&gt;: Show a list of headings in the current file depending on type&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;consult-minor-mode-menu&lt;/kbd&gt;: Show a list of all minor modes, press &lt;kbd&gt;i SPC&lt;/kbd&gt; to narrow to active modes&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;consult-history&lt;/kbd&gt;: History for current minibuffer, also works for terminal modes&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;consult-file-externally&lt;/kbd&gt;: Open a file in an external program&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;consult-preview-mode&lt;/kbd&gt;: Preview selections for various commands&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;consult-completion-in-region&lt;/kbd&gt;: Can be used with the &lt;kbd&gt;completion-in-region-function&lt;/kbd&gt; variable to do in-buffer completions using Vertico&lt;/li&gt;
-&lt;/ul&gt;
+<h3><a id="other-useful-commands" class="anchor" href="#other-useful-commands">¶</a>Other useful commands</h3><ul><li><kbd>consult-mark</kbd>: Show a list of previous mark locations</li>
+<li><kbd>consult-outline</kbd>: Show a list of headings in the current file depending on type</li>
+<li><kbd>consult-minor-mode-menu</kbd>: Show a list of all minor modes, press <kbd>i SPC</kbd> to narrow to active modes</li>
+<li><kbd>consult-history</kbd>: History for current minibuffer, also works for terminal modes</li>
+<li><kbd>consult-file-externally</kbd>: Open a file in an external program</li>
+<li><kbd>consult-preview-mode</kbd>: Preview selections for various commands</li>
+<li><kbd>consult-completion-in-region</kbd>: Can be used with the <kbd>completion-in-region-function</kbd> variable to do in-buffer completions using Vertico</li>
+</ul>
 
-&lt;h3&gt;&lt;a id=&quot;going-up-a-directory-in-kbdfind-filekbd&quot; class=&quot;anchor&quot; href=&quot;#going-up-a-directory-in-kbdfind-filekbd&quot;&gt;¶&lt;/a&gt;Going up a directory in &lt;kbd&gt;find-file&lt;/kbd&gt;&lt;/h3&gt;&lt;p&gt;One bit of functionality I got used to in Ivy was how the &lt;kbd&gt;counsel-find-file&lt;/kbd&gt; command would go up a directory whenever I pressed Backspace.  Here&apos;s how to replicate it in Vertico!
-&lt;/p&gt;
+<h3><a id="going-up-a-directory-in-kbdfind-filekbd" class="anchor" href="#going-up-a-directory-in-kbdfind-filekbd">¶</a>Going up a directory in <kbd>find-file</kbd></h3><p>One bit of functionality I got used to in Ivy was how the <kbd>counsel-find-file</kbd> command would go up a directory whenever I pressed Backspace.  Here's how to replicate it in Vertico!
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;org-function-name&quot;&gt;dw/minibuffer-backward-kill&lt;/span&gt; (arg)
-  &lt;span class=&quot;org-doc&quot;&gt;&quot;When minibuffer is completing a file name delete up to parent&lt;/span&gt;
-&lt;span class=&quot;org-doc&quot;&gt;folder, otherwise delete a character backward&quot;&lt;/span&gt;
-  (&lt;span class=&quot;org-keyword&quot;&gt;interactive&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&quot;p&quot;&lt;/span&gt;)
-  (&lt;span class=&quot;org-keyword&quot;&gt;if&lt;/span&gt; minibuffer-completing-file-name
-      &lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608&lt;/span&gt;
-      (&lt;span class=&quot;org-keyword&quot;&gt;if&lt;/span&gt; (string-match-p &lt;span class=&quot;org-string&quot;&gt;&quot;/.&quot;&lt;/span&gt; (minibuffer-contents))
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/minibuffer-backward-kill</span> (arg)
+  <span class="org-doc">"When minibuffer is completing a file name delete up to parent</span>
+<span class="org-doc">folder, otherwise delete a character backward"</span>
+  (<span class="org-keyword">interactive</span> <span class="org-string">"p"</span>)
+  (<span class="org-keyword">if</span> minibuffer-completing-file-name
+      <span class="org-comment-delimiter">;; </span><span class="org-comment">Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608</span>
+      (<span class="org-keyword">if</span> (string-match-p <span class="org-string">"/."</span> (minibuffer-contents))
           (zap-up-to-char (- arg) ?/)
         (delete-minibuffer-contents))
       (delete-backward-char arg)))
 
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;This is not a full config, just an example of the :bind!&lt;/span&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;vertico&lt;/span&gt;
-  &lt;span class=&quot;org-builtin&quot;&gt;:bind&lt;/span&gt; (&lt;span class=&quot;org-builtin&quot;&gt;:map&lt;/span&gt; minibuffer-local-map
-         (&lt;span class=&quot;org-string&quot;&gt;&quot;&amp;lt;backspace&amp;gt;&quot;&lt;/span&gt; . dw/minibuffer-backward-kill)))
+<span class="org-comment-delimiter">;; </span><span class="org-comment">This is not a full config, just an example of the :bind!</span>
+(<span class="org-keyword">use-package</span> <span class="org-constant">vertico</span>
+  <span class="org-builtin">:bind</span> (<span class="org-builtin">:map</span> minibuffer-local-map
+         (<span class="org-string">"&lt;backspace&gt;"</span> . dw/minibuffer-backward-kill)))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h3&gt;&lt;a id=&quot;other-consult-packages&quot; class=&quot;anchor&quot; href=&quot;#other-consult-packages&quot;&gt;¶&lt;/a&gt;Other Consult packages&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/gagbo/consult-lsp&quot;&gt;lsp-mode interface for Consult&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/SebastienWae/app-launcher&quot;&gt;App launching like counsel-linux-app with app-launcher&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<h3><a id="other-consult-packages" class="anchor" href="#other-consult-packages">¶</a>Other Consult packages</h3><ul><li><a href="https://github.com/gagbo/consult-lsp">lsp-mode interface for Consult</a></li>
+<li><a href="https://github.com/SebastienWae/app-launcher">App launching like counsel-linux-app with app-launcher</a></li>
+</ul>
 
-&lt;h3&gt;&lt;a id=&quot;other-resources&quot; class=&quot;anchor&quot; href=&quot;#other-resources&quot;&gt;¶&lt;/a&gt;Other resources&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/minad/consult/wiki&quot;&gt;The Consult wiki&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/minad/consult/issues/6&quot;&gt;Consult command wishlist&lt;/a&gt; - has some good pointers on where to find replacement functionality&lt;/li&gt;
-&lt;/ul&gt;
+<h3><a id="other-resources" class="anchor" href="#other-resources">¶</a>Other resources</h3><ul><li><a href="https://github.com/minad/consult/wiki">The Consult wiki</a></li>
+<li><a href="https://github.com/minad/consult/issues/6">Consult command wishlist</a> - has some good pointers on where to find replacement functionality</li>
+</ul>
 
-&lt;h2&gt;&lt;a id=&quot;emacs-news&quot; class=&quot;anchor&quot; href=&quot;#emacs-news&quot;&gt;¶&lt;/a&gt;Emacs News&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/minad/affe&quot;&gt;New package: minad/affe&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.reddit.com/r/emacs/comments/n9ts4j/gccemacs_prebuilt_package_on_windows_10/&quot;&gt;Prebuilt Emacs 28 package for Windows with native compilation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.philnewton.net/blog/bug-reference-config-org-mode/&quot;&gt;Configuring bug-reference-mode from within org-mode&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://nyxt.atlas.engineer/article/release-2.0.0.org&quot;&gt;Nyxt 2.0 released&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<h2><a id="emacs-news" class="anchor" href="#emacs-news">¶</a>Emacs News</h2><ul><li><a href="https://github.com/minad/affe">New package: minad/affe</a></li>
+<li><a href="https://www.reddit.com/r/emacs/comments/n9ts4j/gccemacs_prebuilt_package_on_windows_10/">Prebuilt Emacs 28 package for Windows with native compilation</a></li>
+<li><a href="https://www.philnewton.net/blog/bug-reference-config-org-mode/">Configuring bug-reference-mode from within org-mode</a></li>
+<li><a href="https://nyxt.atlas.engineer/article/release-2.0.0.org">Nyxt 2.0 released</a></li>
+</ul>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

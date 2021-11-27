@@ -1,72 +1,73 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - July 16, 2021 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - July 16, 2021</h1><p class="blog-post-meta"></p>&lt;div&gt;
-&lt;h2&gt;&lt;a id=&quot;do-we-really-need-use-package&quot; class=&quot;anchor&quot; href=&quot;#do-we-really-need-use-package&quot;&gt;¶&lt;/a&gt;Do we really need use-package?&lt;/h2&gt;&lt;p&gt;&lt;kbd&gt;use-package&lt;/kbd&gt; is a (very?) commonly used package for writing one&apos;s Emacs configuration in a more &quot;concise&quot; way.  It provides a macro called &lt;kbd&gt;use-package&lt;/kbd&gt; which removes some boilerplate needed in Emacs configs.
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - July 16, 2021 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - July 16, 2021</h1><p class="blog-post-meta"></p><div>
+<h2><a id="do-we-really-need-use-package" class="anchor" href="#do-we-really-need-use-package">¶</a>Do we really need use-package?</h2><p><kbd>use-package</kbd> is a (very?) commonly used package for writing one's Emacs configuration in a more "concise" way.  It provides a macro called <kbd>use-package</kbd> which removes some boilerplate needed in Emacs configs.
+</p>
 
-&lt;p&gt;If you followed my Emacs From Scratch series, you&apos;re probably using it!
-&lt;/p&gt;
+<p>If you followed my Emacs From Scratch series, you're probably using it!
+</p>
 
-&lt;p&gt;I&apos;ve been experimenting with a new configuration lately which doesn&apos;t use &lt;kbd&gt;use-package&lt;/kbd&gt;.  Why?
-&lt;/p&gt;
+<p>I've been experimenting with a new configuration lately which doesn't use <kbd>use-package</kbd>.  Why?
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-value-of-use-package&quot; class=&quot;anchor&quot; href=&quot;#the-value-of-use-package&quot;&gt;¶&lt;/a&gt;The value of use-package&lt;/h2&gt;&lt;p&gt;&lt;kbd&gt;use-package&lt;/kbd&gt; certainly provides some useful features:
-&lt;/p&gt;
+<h2><a id="the-value-of-use-package" class="anchor" href="#the-value-of-use-package">¶</a>The value of use-package</h2><p><kbd>use-package</kbd> certainly provides some useful features:
+</p>
 
-&lt;ul&gt;&lt;li&gt;It can make your configuration &lt;strong&gt;appear&lt;/strong&gt; more concise and well-organized&lt;/li&gt;
-&lt;li&gt;Installs external packages when necessary&lt;/li&gt;
-&lt;li&gt;Streamlined configuration of key bindings, hooks, faces, and custom variables&lt;/li&gt;
-&lt;li&gt;Can set up &quot;autoloads&quot; for commands that don&apos;t already have them&lt;/li&gt;
-&lt;li&gt;Makes &lt;kbd&gt;init.el&lt;/kbd&gt; look more like a configuration file syntax instead of code, more beginner friendly?&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>It can make your configuration <strong>appear</strong> more concise and well-organized</li>
+<li>Installs external packages when necessary</li>
+<li>Streamlined configuration of key bindings, hooks, faces, and custom variables</li>
+<li>Can set up "autoloads" for commands that don't already have them</li>
+<li>Makes <kbd>init.el</kbd> look more like a configuration file syntax instead of code, more beginner friendly?</li>
+</ul>
 
-&lt;p&gt;What else?
-&lt;/p&gt;
+<p>What else?
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-downsides-of-use-package&quot; class=&quot;anchor&quot; href=&quot;#the-downsides-of-use-package&quot;&gt;¶&lt;/a&gt;The downsides of use-package&lt;/h2&gt;&lt;p&gt;In my opinion, there are a few downsides to using &lt;kbd&gt;use-package&lt;/kbd&gt;, especially for new Emacs users:
-&lt;/p&gt;
+<h2><a id="the-downsides-of-use-package" class="anchor" href="#the-downsides-of-use-package">¶</a>The downsides of use-package</h2><p>In my opinion, there are a few downsides to using <kbd>use-package</kbd>, especially for new Emacs users:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Obscures the underlying Emacs Lisp code for configuration by providing a different syntax that must be learned&lt;/li&gt;
-&lt;li&gt;Encourages you to cram all the config for a package inside of one expression&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:init&lt;/kbd&gt; vs &lt;kbd&gt;:config&lt;/kbd&gt; is confusing to new users&lt;/li&gt;
-&lt;li&gt;Harder to really understand when packages will be loaded&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>Obscures the underlying Emacs Lisp code for configuration by providing a different syntax that must be learned</li>
+<li>Encourages you to cram all the config for a package inside of one expression</li>
+<li><kbd>:init</kbd> vs <kbd>:config</kbd> is confusing to new users</li>
+<li>Harder to really understand when packages will be loaded</li>
+</ul>
 
-&lt;p&gt;With all that said, I&apos;m not recommending that people get rid of &lt;kbd&gt;use-package&lt;/kbd&gt;!
-&lt;/p&gt;
+<p>With all that said, I'm not recommending that people get rid of <kbd>use-package</kbd>!
+</p>
 
-&lt;p&gt;This conversation is mainly an exercise to make us think critically about what it provides and look at that the equivalent Emacs Lisp would be.
-&lt;/p&gt;
+<p>This conversation is mainly an exercise to make us think critically about what it provides and look at that the equivalent Emacs Lisp would be.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;what-does-use-package-really-do&quot; class=&quot;anchor&quot; href=&quot;#what-does-use-package-really-do&quot;&gt;¶&lt;/a&gt;What does use-package really do?&lt;/h2&gt;&lt;p&gt;I mentioned before that &lt;kbd&gt;use-package&lt;/kbd&gt; is a macro, but what does that mean?
-&lt;/p&gt;
+<h2><a id="what-does-use-package-really-do" class="anchor" href="#what-does-use-package-really-do">¶</a>What does use-package really do?</h2><p>I mentioned before that <kbd>use-package</kbd> is a macro, but what does that mean?
+</p>
 
-&lt;p&gt;In Lisp languages, a macro can be thought of like a &quot;code template&quot; which is defined like a function but operates slightly differently.
-&lt;/p&gt;
+<p>In Lisp languages, a macro can be thought of like a "code template" which is defined like a function but operates slightly differently.
+</p>
 
-&lt;p&gt;Instead of the arguments to the macro &quot;function&quot; being evaluated and then passed in, the arguments are &lt;strong&gt;not&lt;/strong&gt; evaluated.  The body of the macro &quot;function&quot; returns the &lt;em&gt;real&lt;/em&gt; code that should be executed instead!
-&lt;/p&gt;
+<p>Instead of the arguments to the macro "function" being evaluated and then passed in, the arguments are <strong>not</strong> evaluated.  The body of the macro "function" returns the <em>real</em> code that should be executed instead!
+</p>
 
-&lt;p&gt;We can use &lt;kbd&gt;M-x emacs-lisp-macroexpand&lt;/kbd&gt; with the cursor before a macro call to expand it into the resulting forms.  We&apos;ll use this in the Emacs From Scratch configuration to understand what &lt;kbd&gt;use-package&lt;/kbd&gt; does and then convert it to plain Emacs Lisp!
-&lt;/p&gt;
+<p>We can use <kbd>M-x emacs-lisp-macroexpand</kbd> with the cursor before a macro call to expand it into the resulting forms.  We'll use this in the Emacs From Scratch configuration to understand what <kbd>use-package</kbd> does and then convert it to plain Emacs Lisp!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;features-to-investigate&quot; class=&quot;anchor&quot; href=&quot;#features-to-investigate&quot;&gt;¶&lt;/a&gt;Features to investigate&lt;/h3&gt;&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;:ensure t&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:after&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:config&lt;/kbd&gt; and &lt;kbd&gt;:init&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:custom&lt;/kbd&gt; (use &lt;kbd&gt;custom-set-variables&lt;/kbd&gt;?)&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:defer&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:bind&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:hook&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:commands&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;:mode&lt;/kbd&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<h3><a id="features-to-investigate" class="anchor" href="#features-to-investigate">¶</a>Features to investigate</h3><ul><li><kbd>:ensure t</kbd></li>
+<li><kbd>:after</kbd></li>
+<li><kbd>:config</kbd> and <kbd>:init</kbd></li>
+<li><kbd>:custom</kbd> (use <kbd>custom-set-variables</kbd>?)</li>
+<li><kbd>:defer</kbd></li>
+<li><kbd>:bind</kbd></li>
+<li><kbd>:hook</kbd></li>
+<li><kbd>:commands</kbd></li>
+<li><kbd>:mode</kbd></li>
+</ul>
 
-&lt;h2&gt;&lt;a id=&quot;what-would-we-need-in-emacs&quot; class=&quot;anchor&quot; href=&quot;#what-would-we-need-in-emacs&quot;&gt;¶&lt;/a&gt;What would we need in Emacs?&lt;/h2&gt;&lt;p&gt;I think that with some additional built-in helpers in Emacs, packages like &lt;kbd&gt;use-package&lt;/kbd&gt; would be less necessary:
-&lt;/p&gt;
+<h2><a id="what-would-we-need-in-emacs" class="anchor" href="#what-would-we-need-in-emacs">¶</a>What would we need in Emacs?</h2><p>I think that with some additional built-in helpers in Emacs, packages like <kbd>use-package</kbd> would be less necessary:
+</p>
 
-&lt;ul&gt;&lt;li&gt;A macro for defining multiple keys more easily&lt;/li&gt;
-&lt;li&gt;A macro (or optional args to &lt;kbd&gt;add-hook&lt;/kbd&gt;) for adding multiple hooks more easily&lt;/li&gt;
-&lt;li&gt;A macro for setting custom variables&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>A macro for defining multiple keys more easily</li>
+<li>A macro (or optional args to <kbd>add-hook</kbd>) for adding multiple hooks more easily</li>
+<li>A macro for setting custom variables</li>
+</ul>
 
-&lt;p&gt;Take a look at leaf: &lt;a href=&quot;https://github.com/conao3/leaf.el&quot;&gt;https://github.com/conao3/leaf.el&lt;/a&gt;
-&lt;/p&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<p>Take a look at leaf: <a href="https://github.com/conao3/leaf.el">https://github.com/conao3/leaf.el</a>
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

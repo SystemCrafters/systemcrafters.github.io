@@ -1,165 +1,166 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Automated Org Mode Website Publishing with GitHub or SourceHut - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Automated Org Mode Website Publishing with GitHub or SourceHut</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://youtu.be/za99DwdZEyg&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Automated Org Mode Website Publishing with GitHub or SourceHut - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Automated Org Mode Website Publishing with GitHub or SourceHut</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/za99DwdZEyg">Watch the video</a> on YouTube!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;intro&quot; class=&quot;anchor&quot; href=&quot;#intro&quot;&gt;¶&lt;/a&gt;Intro&lt;/h2&gt;&lt;p&gt;Once you start generating a static website using Org Mode&apos;s publishing system, the next thing you&apos;ll probably want to know is how to publish the site so that other people can check it out.
-&lt;/p&gt;
+<h2><a id="intro" class="anchor" href="#intro">¶</a>Intro</h2><p>Once you start generating a static website using Org Mode's publishing system, the next thing you'll probably want to know is how to publish the site so that other people can check it out.
+</p>
 
-&lt;p&gt;In this video, you&apos;ll learn how to set up automatic publishing of your Org Mode website every time you push a commit to your Git repository.
-&lt;/p&gt;
+<p>In this video, you'll learn how to set up automatic publishing of your Org Mode website every time you push a commit to your Git repository.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;getting-started&quot; class=&quot;anchor&quot; href=&quot;#getting-started&quot;&gt;¶&lt;/a&gt;Getting started&lt;/h2&gt;&lt;p&gt;To get started, make sure you have an account on one of the websites we&apos;ll talk about today: GitHub or SourceHut.
-&lt;/p&gt;
+<h2><a id="getting-started" class="anchor" href="#getting-started">¶</a>Getting started</h2><p>To get started, make sure you have an account on one of the websites we'll talk about today: GitHub or SourceHut.
+</p>
 
-&lt;p&gt;On GitHub, it&apos;s free to create an account and do everything that we&apos;ll talk about in this video.  You can create an account here:
-&lt;/p&gt;
+<p>On GitHub, it's free to create an account and do everything that we'll talk about in this video.  You can create an account here:
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/join&quot;&gt;https://github.com/join&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://github.com/join">https://github.com/join</a>
+</p>
 
-&lt;p&gt;It&apos;s also free to create an account on SourceHut but they&apos;ve &lt;a href=&quot;https://man.sr.ht/ops/builds.sr.ht-migration.md&quot;&gt;recently had to require payment&lt;/a&gt; to use their build service because crypto miners ruined the party for everyone.  Fortunately you can sign up with a &quot;maintainer&quot; account for as little as $2 per month:
-&lt;/p&gt;
+<p>It's also free to create an account on SourceHut but they've <a href="https://man.sr.ht/ops/builds.sr.ht-migration.md">recently had to require payment</a> to use their build service because crypto miners ruined the party for everyone.  Fortunately you can sign up with a "maintainer" account for as little as $2 per month:
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://meta.sr.ht/register/step2&quot;&gt;https://meta.sr.ht/register/step2&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://meta.sr.ht/register/step2">https://meta.sr.ht/register/step2</a>
+</p>
 
-&lt;p&gt;There are other ways you can get free service on SourceHut, check out &lt;a href=&quot;https://man.sr.ht/billing-faq.md#i-dont-think-i-can-pay-for-it&quot;&gt;this entry&lt;/a&gt; in the Billing FAQ.
-&lt;/p&gt;
+<p>There are other ways you can get free service on SourceHut, check out <a href="https://man.sr.ht/billing-faq.md#i-dont-think-i-can-pay-for-it">this entry</a> in the Billing FAQ.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;which-one-should-i-choose&quot; class=&quot;anchor&quot; href=&quot;#which-one-should-i-choose&quot;&gt;¶&lt;/a&gt;Which one should I choose?&lt;/h3&gt;&lt;p&gt;Both are great options and it will be similarly easy to publish sites on each.
-&lt;/p&gt;
+<h3><a id="which-one-should-i-choose" class="anchor" href="#which-one-should-i-choose">¶</a>Which one should I choose?</h3><p>Both are great options and it will be similarly easy to publish sites on each.
+</p>
 
-&lt;p&gt;GitHub is the well-known mainstream option, doesn&apos;t hurt to have an account there.
-&lt;/p&gt;
+<p>GitHub is the well-known mainstream option, doesn't hurt to have an account there.
+</p>
 
-&lt;p&gt;SourceHut is a more hacker-focused site with a totally different philosophy that you might appreciate.  You can learn more about it by checking out their website at &lt;a href=&quot;https://sourcehut.org/&quot;&gt;sourcehut.org&lt;/a&gt;.  Be aware, there are &lt;a href=&quot;https://srht.site/limitations&quot;&gt;some restrictions&lt;/a&gt; about what kind of content you can publish on SourceHut pages!
-&lt;/p&gt;
+<p>SourceHut is a more hacker-focused site with a totally different philosophy that you might appreciate.  You can learn more about it by checking out their website at <a href="https://sourcehut.org/">sourcehut.org</a>.  Be aware, there are <a href="https://srht.site/limitations">some restrictions</a> about what kind of content you can publish on SourceHut pages!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;preparing-a-local-repository-for-your-site&quot; class=&quot;anchor&quot; href=&quot;#preparing-a-local-repository-for-your-site&quot;&gt;¶&lt;/a&gt;Preparing a local repository for your site&lt;/h2&gt;&lt;p&gt;On either hosting site, you&apos;ll need a repository where you store your Org Mode website&apos;s content files and the build script that we created in the previous video of this series.  If you haven&apos;t seen that yet, check it out here:
-&lt;/p&gt;
+<h2><a id="preparing-a-local-repository-for-your-site" class="anchor" href="#preparing-a-local-repository-for-your-site">¶</a>Preparing a local repository for your site</h2><p>On either hosting site, you'll need a repository where you store your Org Mode website's content files and the build script that we created in the previous video of this series.  If you haven't seen that yet, check it out here:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://youtu.be/AfkrzFodoNw&quot;&gt;Build Your Website with Org Mode&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><a href="https://youtu.be/AfkrzFodoNw">Build Your Website with Org Mode</a></li>
+</ul>
 
-&lt;p&gt;We&apos;ll be starting from the code in the &lt;a href=&quot;https://github.com/SystemCrafters/org-website-example&quot;&gt;org-website-example repository&lt;/a&gt; from that video, so you might want to clone that repo, create a new folder on your filesystem, and copy those site files into it as a starting point.
-&lt;/p&gt;
+<p>We'll be starting from the code in the <a href="https://github.com/SystemCrafters/org-website-example">org-website-example repository</a> from that video, so you might want to clone that repo, create a new folder on your filesystem, and copy those site files into it as a starting point.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;quick-repo-setup&quot; class=&quot;anchor&quot; href=&quot;#quick-repo-setup&quot;&gt;¶&lt;/a&gt;Quick Repo Setup&lt;/h3&gt;&lt;p&gt;I won&apos;t be going into depth about how to use Git in this episode, but I&apos;ll give a brief rundown of the commands you need to know to turn your site files into a Git repository and &quot;commit&quot; the changes:
-&lt;/p&gt;
+<h3><a id="quick-repo-setup" class="anchor" href="#quick-repo-setup">¶</a>Quick Repo Setup</h3><p>I won't be going into depth about how to use Git in this episode, but I'll give a brief rundown of the commands you need to know to turn your site files into a Git repository and "commit" the changes:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;# &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Copy the starting point files&lt;/span&gt;
+<pre><code class="sh">
+<span class="org-comment-delimiter"># </span><span class="org-comment">Copy the starting point files</span>
 git clone https://github.com/SystemCrafters/org-website-example
 
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;# &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Create the folder for the local repo&lt;/span&gt;
+<span class="org-comment-delimiter"># </span><span class="org-comment">Create the folder for the local repo</span>
 mkdir my-org-site
-&lt;span class=&quot;org-builtin&quot;&gt;cd&lt;/span&gt; my-org-site
+<span class="org-builtin">cd</span> my-org-site
 cp -R ../org-website-example/* .
 
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;# &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;Initialize the Git repository and make your first commit&lt;/span&gt;
+<span class="org-comment-delimiter"># </span><span class="org-comment">Initialize the Git repository and make your first commit</span>
 git init
 git add -A
-git commit -m &lt;span class=&quot;org-string&quot;&gt;&quot;My first commit!&quot;&lt;/span&gt;
+git commit -m <span class="org-string">"My first commit!"</span>
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Now every time you make changes to your site, you can go to your &lt;kbd&gt;my-org-site&lt;/kbd&gt; folder and run the following commands:
-&lt;/p&gt;
+<p>Now every time you make changes to your site, you can go to your <kbd>my-org-site</kbd> folder and run the following commands:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 git add -A
-git commit -m &lt;span class=&quot;org-string&quot;&gt;&quot;Updating website files&quot;&lt;/span&gt;
+git commit -m <span class="org-string">"Updating website files"</span>
 
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;# &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;We will talk about this step in a bit&lt;/span&gt;
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;# &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;git push origin master&lt;/span&gt;
+<span class="org-comment-delimiter"># </span><span class="org-comment">We will talk about this step in a bit</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">git push origin master</span>
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;I recommend reading the &lt;a href=&quot;https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository&quot;&gt;Git Book&lt;/a&gt; if you&apos;re a beginner to Git and want to learn more about how to use it.
-&lt;/p&gt;
+<p>I recommend reading the <a href="https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository">Git Book</a> if you're a beginner to Git and want to learn more about how to use it.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;creating-a-hosted-repository-for-website-publishing&quot; class=&quot;anchor&quot; href=&quot;#creating-a-hosted-repository-for-website-publishing&quot;&gt;¶&lt;/a&gt;Creating a hosted repository for website publishing&lt;/h2&gt;&lt;h3&gt;&lt;a id=&quot;github&quot; class=&quot;anchor&quot; href=&quot;#github&quot;&gt;¶&lt;/a&gt;GitHub&lt;/h3&gt;&lt;p&gt;To publish a website with GitHub Pages, you&apos;ll need to create a repository with a specific name:
-&lt;/p&gt;
+<h2><a id="creating-a-hosted-repository-for-website-publishing" class="anchor" href="#creating-a-hosted-repository-for-website-publishing">¶</a>Creating a hosted repository for website publishing</h2><h3><a id="github" class="anchor" href="#github">¶</a>GitHub</h3><p>To publish a website with GitHub Pages, you'll need to create a repository with a specific name:
+</p>
 
-&lt;p&gt;&lt;kbd&gt;yourusername.github.io&lt;/kbd&gt;
-&lt;/p&gt;
+<p><kbd>yourusername.github.io</kbd>
+</p>
 
-&lt;p&gt;You can go to &lt;a href=&quot;https://github.com/new&quot;&gt;https://github.com/new&lt;/a&gt; and create a public repository with this name, making sure to use your actual GitHub username!  Don&apos;t select any of the checkboxes, we will push our own repository once the GitHub repo is created.
-&lt;/p&gt;
+<p>You can go to <a href="https://github.com/new">https://github.com/new</a> and create a public repository with this name, making sure to use your actual GitHub username!  Don't select any of the checkboxes, we will push our own repository once the GitHub repo is created.
+</p>
 
-&lt;p&gt;Now that the repo is created, you can copy the link that they give you so that you can configure your local repository to push there:
-&lt;/p&gt;
+<p>Now that the repo is created, you can copy the link that they give you so that you can configure your local repository to push there:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;# &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;To use HTTPS&lt;/span&gt;
+<pre><code class="sh">
+<span class="org-comment-delimiter"># </span><span class="org-comment">To use HTTPS</span>
 git remote add origin https://github.com/yourusername/yourusername.github.io.git
 
-&lt;span class=&quot;org-comment-delimiter&quot;&gt;# &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;To use SSH if you&apos;ve set up a public key&lt;/span&gt;
+<span class="org-comment-delimiter"># </span><span class="org-comment">To use SSH if you've set up a public key</span>
 git remote add origin git@github.com:yourusername/yourusername.github.io.git
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Authenticating to GitHub can be a little tricky if you&apos;ve never done it before, consult this documentation page for more details!
-&lt;/p&gt;
+<p>Authenticating to GitHub can be a little tricky if you've never done it before, consult this documentation page for more details!
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#authenticating-with-the-command-line&quot;&gt;https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#authenticating-with-the-command-line&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#authenticating-with-the-command-line">https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-authentication-to-github#authenticating-with-the-command-line</a>
+</p>
 
-&lt;p&gt;Once you&apos;ve created the repository, you can push your local repository there using &lt;kbd&gt;git push&lt;/kbd&gt;:
-&lt;/p&gt;
+<p>Once you've created the repository, you can push your local repository there using <kbd>git push</kbd>:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 git push origin master
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;You&apos;ll need to run this after every commit you make so that the changes go to the hosted repository!
-&lt;/p&gt;
+<p>You'll need to run this after every commit you make so that the changes go to the hosted repository!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;sourcehut&quot; class=&quot;anchor&quot; href=&quot;#sourcehut&quot;&gt;¶&lt;/a&gt;SourceHut&lt;/h3&gt;&lt;p&gt;On SourceHut, you can create a new repository by heading to the following link.  It does not require a specific name!
-&lt;/p&gt;
+<h3><a id="sourcehut" class="anchor" href="#sourcehut">¶</a>SourceHut</h3><p>On SourceHut, you can create a new repository by heading to the following link.  It does not require a specific name!
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://git.sr.ht/create&quot;&gt;https://git.sr.ht/create&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://git.sr.ht/create">https://git.sr.ht/create</a>
+</p>
 
-&lt;p&gt;Just make sure you set up your &lt;a href=&quot;https://man.sr.ht/meta.sr.ht/#keys&quot;&gt;SSH key&lt;/a&gt; first since this is the only way to authenticate to &lt;kbd&gt;git.sr.ht&lt;/kbd&gt;.
-&lt;/p&gt;
+<p>Just make sure you set up your <a href="https://man.sr.ht/meta.sr.ht/#keys">SSH key</a> first since this is the only way to authenticate to <kbd>git.sr.ht</kbd>.
+</p>
 
-&lt;p&gt;Once the repository is created, you can configure it as a remote for your local repository:
-&lt;/p&gt;
+<p>Once the repository is created, you can configure it as a remote for your local repository:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 git remote add origin git@git.sr.ht:~yourusername/my-org-site
 git push origin master
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;SourceHut allows you to publish pages for a personal site (&lt;kbd&gt;yourusername.srht.site&lt;/kbd&gt;) or any custom domain you choose using a simple HTTP-based API.
-&lt;/p&gt;
+<p>SourceHut allows you to publish pages for a personal site (<kbd>yourusername.srht.site</kbd>) or any custom domain you choose using a simple HTTP-based API.
+</p>
 
-&lt;p&gt;More details can be found in the &lt;a href=&quot;https://srht.site/quickstart&quot;&gt;quickstart instructions&lt;/a&gt; and &lt;a href=&quot;https://srht.site/&quot;&gt;documentation&lt;/a&gt;.
-&lt;/p&gt;
+<p>More details can be found in the <a href="https://srht.site/quickstart">quickstart instructions</a> and <a href="https://srht.site/">documentation</a>.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;crafting-a-build-configuration&quot; class=&quot;anchor&quot; href=&quot;#crafting-a-build-configuration&quot;&gt;¶&lt;/a&gt;Crafting a build configuration&lt;/h2&gt;&lt;p&gt;Now we can set up a build configuration that will automatically publish your website every time you push a commit to its repository!
-&lt;/p&gt;
+<h2><a id="crafting-a-build-configuration" class="anchor" href="#crafting-a-build-configuration">¶</a>Crafting a build configuration</h2><p>Now we can set up a build configuration that will automatically publish your website every time you push a commit to its repository!
+</p>
 
-&lt;p&gt;This is possible by using a &quot;continuous integration&quot; service like &lt;a href=&quot;https://github.com/features/actions&quot;&gt;GitHub Actions&lt;/a&gt; or &lt;a href=&quot;https://man.sr.ht/builds.sr.ht/&quot;&gt;SourceHut Builds&lt;/a&gt;.  This type of service enables you to run a build script for your repository on a machine in the cloud so that you can do things like run tests on code or publish a website.
-&lt;/p&gt;
+<p>This is possible by using a "continuous integration" service like <a href="https://github.com/features/actions">GitHub Actions</a> or <a href="https://man.sr.ht/builds.sr.ht/">SourceHut Builds</a>.  This type of service enables you to run a build script for your repository on a machine in the cloud so that you can do things like run tests on code or publish a website.
+</p>
 
-&lt;p&gt;I&apos;ll show you example build configurations for both GitHub and SourceHut that you can copy and paste to get started, only with a couple of small tweaks if you decide to use SourceHut.
-&lt;/p&gt;
+<p>I'll show you example build configurations for both GitHub and SourceHut that you can copy and paste to get started, only with a couple of small tweaks if you decide to use SourceHut.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;github-actions&quot; class=&quot;anchor&quot; href=&quot;#github-actions&quot;&gt;¶&lt;/a&gt;GitHub Actions&lt;/h3&gt;&lt;p&gt;This file should be placed in your repository at &lt;kbd&gt;.github/workflows/publish.yml&lt;/kbd&gt;.  Here&apos;s what it does:
-&lt;/p&gt;
+<h3><a id="github-actions" class="anchor" href="#github-actions">¶</a>GitHub Actions</h3><p>This file should be placed in your repository at <kbd>.github/workflows/publish.yml</kbd>.  Here's what it does:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Configures the build to trigger on commits to the &lt;kbd&gt;master&lt;/kbd&gt; branch (change branch name if yours is &lt;kbd&gt;main&lt;/kbd&gt;)!&lt;/li&gt;
-&lt;li&gt;Sets up an Ubuntu VM to run the build&lt;/li&gt;
-&lt;li&gt;Checks out the code for this repo&lt;/li&gt;
-&lt;li&gt;Installs &lt;kbd&gt;emacs-nox&lt;/kbd&gt; (without the graphical interface) - 26.3 at the time of this video&lt;/li&gt;
-&lt;li&gt;Runs our &lt;kbd&gt;build.sh&lt;/kbd&gt; script to build the site&lt;/li&gt;
-&lt;li&gt;Uses a custom action to publish the site to the &lt;kbd&gt;gh-pages&lt;/kbd&gt; branch&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>Configures the build to trigger on commits to the <kbd>master</kbd> branch (change branch name if yours is <kbd>main</kbd>)!</li>
+<li>Sets up an Ubuntu VM to run the build</li>
+<li>Checks out the code for this repo</li>
+<li>Installs <kbd>emacs-nox</kbd> (without the graphical interface) - 26.3 at the time of this video</li>
+<li>Runs our <kbd>build.sh</kbd> script to build the site</li>
+<li>Uses a custom action to publish the site to the <kbd>gh-pages</kbd> branch</li>
+</ul>
 
-&lt;pre&gt;&lt;code class=&quot;yaml&quot;&gt;
+<pre><code class="yaml">
 name: Publish to GitHub Pages
 
 on:
@@ -186,39 +187,39 @@ jobs:
           branch: gh-pages
           folder: public
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Add this file to your repository folder, commit it, and push it to your GitHub repository using the commands I showed you before.
-&lt;/p&gt;
+<p>Add this file to your repository folder, commit it, and push it to your GitHub repository using the commands I showed you before.
+</p>
 
-&lt;p&gt;You can watch the progress of the &quot;Publish to GitHub Pages&quot; action from the &lt;strong&gt;Actions&lt;/strong&gt; tab on your repository.
-&lt;/p&gt;
+<p>You can watch the progress of the "Publish to GitHub Pages" action from the <strong>Actions</strong> tab on your repository.
+</p>
 
-&lt;p&gt;After it completes, the site still won&apos;t be published because we need to take one final step to configure your site!  Click the &lt;strong&gt;Settings&lt;/strong&gt; tab on your repo, click the &lt;strong&gt;Pages&lt;/strong&gt; tab on the left side of the Settings page, then change the Source Branch to &lt;kbd&gt;gh-pages&lt;/kbd&gt; and click &lt;strong&gt;Save&lt;/strong&gt;.
-&lt;/p&gt;
+<p>After it completes, the site still won't be published because we need to take one final step to configure your site!  Click the <strong>Settings</strong> tab on your repo, click the <strong>Pages</strong> tab on the left side of the Settings page, then change the Source Branch to <kbd>gh-pages</kbd> and click <strong>Save</strong>.
+</p>
 
-&lt;p&gt;After a minute or two your site will now be live!
-&lt;/p&gt;
+<p>After a minute or two your site will now be live!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;buildssrht&quot; class=&quot;anchor&quot; href=&quot;#buildssrht&quot;&gt;¶&lt;/a&gt;builds.sr.ht&lt;/h3&gt;&lt;p&gt;This file should be placed in your repository at &lt;kbd&gt;.build.yml&lt;/kbd&gt;.  Here&apos;s what it does:
-&lt;/p&gt;
+<h3><a id="buildssrht" class="anchor" href="#buildssrht">¶</a>builds.sr.ht</h3><p>This file should be placed in your repository at <kbd>.build.yml</kbd>.  Here's what it does:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Sets up an Arch Linux VM to run the build&lt;/li&gt;
-&lt;li&gt;Installs the &lt;kbd&gt;emacs-nox&lt;/kbd&gt; package after the VM is running&lt;/li&gt;
-&lt;li&gt;Uses the &lt;kbd&gt;oauth&lt;/kbd&gt; field to automatically grab a token for publishing the site&lt;/li&gt;
-&lt;li&gt;Specifies the source repositories to be cloned (can be multiple)&lt;/li&gt;
-&lt;li&gt;Sets an environment variable containing the site name&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>Sets up an Arch Linux VM to run the build</li>
+<li>Installs the <kbd>emacs-nox</kbd> package after the VM is running</li>
+<li>Uses the <kbd>oauth</kbd> field to automatically grab a token for publishing the site</li>
+<li>Specifies the source repositories to be cloned (can be multiple)</li>
+<li>Sets an environment variable containing the site name</li>
+</ul>
 
-&lt;p&gt;&lt;strong&gt;YOU MUST CHANGE THESE THINGS:&lt;/strong&gt;
-&lt;/p&gt;
+<p><strong>YOU MUST CHANGE THESE THINGS:</strong>
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;sources&lt;/kbd&gt;: Use the correct URL for your repo&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;site:&lt;/kbd&gt; Update the URL to use your username&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;build:&lt;/kbd&gt; Update the &lt;kbd&gt;cd my-org-site&lt;/kbd&gt; to refer to the name of your repo&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>sources</kbd>: Use the correct URL for your repo</li>
+<li><kbd>site:</kbd> Update the URL to use your username</li>
+<li><kbd>build:</kbd> Update the <kbd>cd my-org-site</kbd> to refer to the name of your repo</li>
+</ul>
 
-&lt;pre&gt;&lt;code class=&quot;yaml&quot;&gt;
+<pre><code class="yaml">
 image: archlinux
 packages:
   - emacs-nox
@@ -240,36 +241,36 @@ tasks:
       tar -ztvf html.tar.gz
       acurl --fail-with-body https://pages.sr.ht/publish/$site -Fcontent=@html.tar.gz
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;After committing and pushing this file to your SourceHut repository, you can monitor the build by going to the builds page for your account:
-&lt;/p&gt;
+<p>After committing and pushing this file to your SourceHut repository, you can monitor the build by going to the builds page for your account:
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://builds.sr.ht&quot;&gt;https://builds.sr.ht&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://builds.sr.ht">https://builds.sr.ht</a>
+</p>
 
-&lt;p&gt;Once the build has completed you can visit your site at &lt;a href=&quot;https://yourusername.srht.site&quot;&gt;https://yourusername.srht.site&lt;/a&gt;!  It may take a minute or so before it shows up.
-&lt;/p&gt;
+<p>Once the build has completed you can visit your site at <a href="https://yourusername.srht.site">https://yourusername.srht.site</a>!  It may take a minute or so before it shows up.
+</p>
 
-&lt;p&gt;If the build fails, double-check all of the information in your &lt;kbd&gt;.build.yml&lt;/kbd&gt; file to ensure that you didn&apos;t miss anything!
-&lt;/p&gt;
+<p>If the build fails, double-check all of the information in your <kbd>.build.yml</kbd> file to ensure that you didn't miss anything!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;setting-up-a-custom-domain-for-your-site&quot; class=&quot;anchor&quot; href=&quot;#setting-up-a-custom-domain-for-your-site&quot;&gt;¶&lt;/a&gt;Setting up a custom domain for your site&lt;/h2&gt;&lt;p&gt;I won&apos;t go into too many details here because the documentation pages for both GitHub and SourceHut cover this pretty well.
-&lt;/p&gt;
+<h2><a id="setting-up-a-custom-domain-for-your-site" class="anchor" href="#setting-up-a-custom-domain-for-your-site">¶</a>Setting up a custom domain for your site</h2><p>I won't go into too many details here because the documentation pages for both GitHub and SourceHut cover this pretty well.
+</p>
 
-&lt;p&gt;It is possible to set up a custom domain to point to your website on either of these platforms!
-&lt;/p&gt;
+<p>It is possible to set up a custom domain to point to your website on either of these platforms!
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site&quot;&gt;Instructions for GitHub Pages&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://srht.site/custom-domains&quot;&gt;Instructions for SourceHut&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">Instructions for GitHub Pages</a></li>
+<li><a href="https://srht.site/custom-domains">Instructions for SourceHut</a></li>
+</ul>
 
-&lt;p&gt;If you don&apos;t have a domain for your website yet, you can get one and support the channel at the same time by using my &lt;a href=&quot;https://namecheap.pxf.io/NK0yXK&quot;&gt;Namecheap affiliate link&lt;/a&gt;!
-&lt;/p&gt;
+<p>If you don't have a domain for your website yet, you can get one and support the channel at the same time by using my <a href="https://namecheap.pxf.io/NK0yXK">Namecheap affiliate link</a>!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;enjoy-your-new-site&quot; class=&quot;anchor&quot; href=&quot;#enjoy-your-new-site&quot;&gt;¶&lt;/a&gt;Enjoy your new site!&lt;/h2&gt;&lt;p&gt;Hopefully these instructions helped you get a new site running using Emacs, Org Mode, and Git.
-&lt;/p&gt;
+<h2><a id="enjoy-your-new-site" class="anchor" href="#enjoy-your-new-site">¶</a>Enjoy your new site!</h2><p>Hopefully these instructions helped you get a new site running using Emacs, Org Mode, and Git.
+</p>
 
-&lt;p&gt;In future videos of this series, we&apos;ll learn how to customize the style of Org Mode sites and also add useful features like RSS feeds and site maps!
-&lt;/p&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<p>In future videos of this series, we'll learn how to customize the style of Org Mode sites and also add useful features like RSS feeds and site maps!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

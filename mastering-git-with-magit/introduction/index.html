@@ -1,221 +1,222 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Mastering Git with Magit - Getting Started - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Mastering Git with Magit - Getting Started</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://youtu.be/_zfvQkJsYwI&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Mastering Git with Magit - Getting Started - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Mastering Git with Magit - Getting Started</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/_zfvQkJsYwI">Watch the video</a> on YouTube!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;what-will-we-learn&quot; class=&quot;anchor&quot; href=&quot;#what-will-we-learn&quot;&gt;¶&lt;/a&gt;What will we learn?&lt;/h2&gt;&lt;p&gt;In this episode I&apos;m going to show you the basics of how to use the preeminent Git interface for Emacs called Magit!
-&lt;/p&gt;
+<h2><a id="what-will-we-learn" class="anchor" href="#what-will-we-learn">¶</a>What will we learn?</h2><p>In this episode I'm going to show you the basics of how to use the preeminent Git interface for Emacs called Magit!
+</p>
 
-&lt;p&gt;We&apos;ll set it up in a basic Emacs configuration and then take a tour of the main user interface to see what functionality we have at our disposal.
-&lt;/p&gt;
+<p>We'll set it up in a basic Emacs configuration and then take a tour of the main user interface to see what functionality we have at our disposal.
+</p>
 
-&lt;p&gt;This is the first video in a series about Magit where I&apos;ll show you how to do all important source control tasks through its highly efficient interface.  Once you learn Magit, you&apos;ll never want to use Git on the command line again!
-&lt;/p&gt;
+<p>This is the first video in a series about Magit where I'll show you how to do all important source control tasks through its highly efficient interface.  Once you learn Magit, you'll never want to use Git on the command line again!
+</p>
 
-&lt;p&gt;The only expectation in this series is that you have a basic understanding of how to use Git to create commits and use branches.  If you are a beginner to Git, let me know in the comments and I&apos;ll consider making a video series covering the basics of using it!
-&lt;/p&gt;
+<p>The only expectation in this series is that you have a basic understanding of how to use Git to create commits and use branches.  If you are a beginner to Git, let me know in the comments and I'll consider making a video series covering the basics of using it!
+</p>
 
-&lt;p&gt;Let&apos;s get started!
-&lt;/p&gt;
+<p>Let's get started!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;what-is-magit&quot; class=&quot;anchor&quot; href=&quot;#what-is-magit&quot;&gt;¶&lt;/a&gt;What is Magit?&lt;/h2&gt;&lt;p&gt;Magit is a Git &quot;porcelain&quot;, or in other words it&apos;s a user-friendly interface for the Git source control tool.
-&lt;/p&gt;
+<h2><a id="what-is-magit" class="anchor" href="#what-is-magit">¶</a>What is Magit?</h2><p>Magit is a Git "porcelain", or in other words it's a user-friendly interface for the Git source control tool.
+</p>
 
-&lt;p&gt;It provides helpful interfaces for many operations you might want to do with Git, both common and advanced:
-&lt;/p&gt;
+<p>It provides helpful interfaces for many operations you might want to do with Git, both common and advanced:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Creating and amending commits&lt;/li&gt;
-&lt;li&gt;Managing and merging branches&lt;/li&gt;
-&lt;li&gt;Pulling from and pushing to remotes&lt;/li&gt;
-&lt;li&gt;Reading commit logs and &quot;blaming&quot; source files&lt;/li&gt;
-&lt;li&gt;Cherry-picking&lt;/li&gt;
-&lt;li&gt;Rebasing&lt;/li&gt;
-&lt;li&gt;Using the reflog&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>Creating and amending commits</li>
+<li>Managing and merging branches</li>
+<li>Pulling from and pushing to remotes</li>
+<li>Reading commit logs and "blaming" source files</li>
+<li>Cherry-picking</li>
+<li>Rebasing</li>
+<li>Using the reflog</li>
+</ul>
 
-&lt;p&gt;...and much more!
-&lt;/p&gt;
+<p>...and much more!
+</p>
 
-&lt;p&gt;No matter whether you are a beginner or advanced user of Git, Magit is going to make your workflow a lot more efficient and enjoyable!
-&lt;/p&gt;
+<p>No matter whether you are a beginner or advanced user of Git, Magit is going to make your workflow a lot more efficient and enjoyable!
+</p>
 
-&lt;p&gt;Check out the &lt;a href=&quot;https://magit.vc/manual/magit/index.html#Top&quot;&gt;Magit manual&lt;/a&gt; for more information.
-&lt;/p&gt;
+<p>Check out the <a href="https://magit.vc/manual/magit/index.html#Top">Magit manual</a> for more information.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;installing-magit&quot; class=&quot;anchor&quot; href=&quot;#installing-magit&quot;&gt;¶&lt;/a&gt;Installing Magit&lt;/h2&gt;&lt;p&gt;The easiest way to install Magit is with &lt;kbd&gt;use-package&lt;/kbd&gt; and &lt;kbd&gt;package.el&lt;/kbd&gt;.  If you have &lt;kbd&gt;use-package&lt;/kbd&gt; set up, you merely need to include this in your Emacs configuration:
-&lt;/p&gt;
+<h2><a id="installing-magit" class="anchor" href="#installing-magit">¶</a>Installing Magit</h2><p>The easiest way to install Magit is with <kbd>use-package</kbd> and <kbd>package.el</kbd>.  If you have <kbd>use-package</kbd> set up, you merely need to include this in your Emacs configuration:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;magit&lt;/span&gt;
-  &lt;span class=&quot;org-builtin&quot;&gt;:ensure&lt;/span&gt; t)
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">magit</span>
+  <span class="org-builtin">:ensure</span> t)
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Other installation approaches are covered in the &lt;a href=&quot;https://magit.vc/manual/magit/Installation.html#Installation&quot;&gt;Magit manual&apos;s Installation section&lt;/a&gt;.
-&lt;/p&gt;
+<p>Other installation approaches are covered in the <a href="https://magit.vc/manual/magit/Installation.html#Installation">Magit manual's Installation section</a>.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;evil-integration&quot; class=&quot;anchor&quot; href=&quot;#evil-integration&quot;&gt;¶&lt;/a&gt;Evil Integration&lt;/h3&gt;&lt;p&gt;If you want to use Vim-style keybindings with Magit, all you need is evil-collection and this bit of configuration:
-&lt;/p&gt;
+<h3><a id="evil-integration" class="anchor" href="#evil-integration">¶</a>Evil Integration</h3><p>If you want to use Vim-style keybindings with Magit, all you need is evil-collection and this bit of configuration:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;evil-collection&lt;/span&gt;
-  &lt;span class=&quot;org-builtin&quot;&gt;:ensure&lt;/span&gt; t
-  &lt;span class=&quot;org-builtin&quot;&gt;:after&lt;/span&gt; evil
-  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">evil-collection</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:after</span> evil
+  <span class="org-builtin">:init</span>
   (evil-collection-init))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h2&gt;&lt;a id=&quot;the-status-interface&quot; class=&quot;anchor&quot; href=&quot;#the-status-interface&quot;&gt;¶&lt;/a&gt;The Status Interface&lt;/h2&gt;&lt;p&gt;The primary interface you will use to interact with Git repositories is the status interface.  It gives you an overview of the current state of your repository and provides key bindings for quickly launching all of the operations you might want to perform.
-&lt;/p&gt;
+<h2><a id="the-status-interface" class="anchor" href="#the-status-interface">¶</a>The Status Interface</h2><p>The primary interface you will use to interact with Git repositories is the status interface.  It gives you an overview of the current state of your repository and provides key bindings for quickly launching all of the operations you might want to perform.
+</p>
 
-&lt;p&gt;You can launch the status interface with the &lt;kbd&gt;magit-status&lt;/kbd&gt; command which we&apos;ve bound to &lt;kbd&gt;C-x g&lt;/kbd&gt; in the configuration snippet above.
-&lt;/p&gt;
+<p>You can launch the status interface with the <kbd>magit-status</kbd> command which we've bound to <kbd>C-x g</kbd> in the configuration snippet above.
+</p>
 
-&lt;p&gt;When you launch this command, it will look for a Git repository associated with the current value of &lt;kbd&gt;default-directory&lt;/kbd&gt; which is typically the directory containing the file that the selected buffer is associated with.  This makes it really fast to get a status view for the Git repository for the project you&apos;re currently working on!
-&lt;/p&gt;
+<p>When you launch this command, it will look for a Git repository associated with the current value of <kbd>default-directory</kbd> which is typically the directory containing the file that the selected buffer is associated with.  This makes it really fast to get a status view for the Git repository for the project you're currently working on!
+</p>
 
-&lt;p&gt;If a Git directory can&apos;t be identified, you will be prompted for a path to a directory containing a Git repository.
-&lt;/p&gt;
+<p>If a Git directory can't be identified, you will be prompted for a path to a directory containing a Git repository.
+</p>
 
-&lt;p&gt;The status buffer can be closed with the &lt;kbd&gt;q&lt;/kbd&gt; key.  Typically you should close it once you&apos;re done viewing it, but if you happen to switch to another buffer and make changes to a file, the status buffer might not reflect the new state of the repository.
-&lt;/p&gt;
+<p>The status buffer can be closed with the <kbd>q</kbd> key.  Typically you should close it once you're done viewing it, but if you happen to switch to another buffer and make changes to a file, the status buffer might not reflect the new state of the repository.
+</p>
 
-&lt;p&gt;In this case you can press the &lt;kbd&gt;g&lt;/kbd&gt; key when you switch back to the status buffer to run &lt;kbd&gt;magit-refresh&lt;/kbd&gt; so that all sections are up to date!
-&lt;/p&gt;
+<p>In this case you can press the <kbd>g</kbd> key when you switch back to the status buffer to run <kbd>magit-refresh</kbd> so that all sections are up to date!
+</p>
 
-&lt;p&gt;&lt;a href=&quot;https://magit.vc/manual/magit.html#Status-Buffer&quot;&gt;Magit Manual: Status Buffer&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://magit.vc/manual/magit.html#Status-Buffer">Magit Manual: Status Buffer</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;status-sections&quot; class=&quot;anchor&quot; href=&quot;#status-sections&quot;&gt;¶&lt;/a&gt;Status Sections&lt;/h2&gt;&lt;p&gt;The &lt;kbd&gt;magit-status&lt;/kbd&gt; interface is composed of a number of sections that display information about the Git repository:
-&lt;/p&gt;
+<h2><a id="status-sections" class="anchor" href="#status-sections">¶</a>Status Sections</h2><p>The <kbd>magit-status</kbd> interface is composed of a number of sections that display information about the Git repository:
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;repository-status&quot; class=&quot;anchor&quot; href=&quot;#repository-status&quot;&gt;¶&lt;/a&gt;Repository Status&lt;/h3&gt;&lt;p&gt;This section tells you which commit is currently the &quot;HEAD&quot; of 3 important locations:
-&lt;/p&gt;
+<h3><a id="repository-status" class="anchor" href="#repository-status">¶</a>Repository Status</h3><p>This section tells you which commit is currently the "HEAD" of 3 important locations:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;strong&gt;Head:&lt;/strong&gt; The current local branch&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Merge / Rebase:&lt;/strong&gt; The branch/remote where changes are usually pulled from (the prefix depends on whether you merged or rebased from this location last)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Push:&lt;/strong&gt; The branch/remote where changes are usually being pushed to&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><strong>Head:</strong> The current local branch</li>
+<li><strong>Merge / Rebase:</strong> The branch/remote where changes are usually pulled from (the prefix depends on whether you merged or rebased from this location last)</li>
+<li><strong>Push:</strong> The branch/remote where changes are usually being pushed to</li>
+</ul>
 
-&lt;p&gt;It also gives you information on the following:
-&lt;/p&gt;
+<p>It also gives you information on the following:
+</p>
 
-&lt;ul&gt;&lt;li&gt;The latest tag created and the number of commits between that and &lt;kbd&gt;HEAD&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;Errors from the previous Git operation, usually when there are issues during a pull or push&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>The latest tag created and the number of commits between that and <kbd>HEAD</kbd></li>
+<li>Errors from the previous Git operation, usually when there are issues during a pull or push</li>
+</ul>
 
-&lt;p&gt;&lt;a href=&quot;https://magit.vc/manual/magit.html#Status-Header-Sections&quot;&gt;Magit Manual: Status Header Sections&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://magit.vc/manual/magit.html#Status-Header-Sections">Magit Manual: Status Header Sections</a>
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;untracked-files&quot; class=&quot;anchor&quot; href=&quot;#untracked-files&quot;&gt;¶&lt;/a&gt;Untracked Files&lt;/h3&gt;&lt;p&gt;This section displays the list of files under the repository directory that are not checked in to source control.  This section is useful for 2 purposes:
-&lt;/p&gt;
+<h3><a id="untracked-files" class="anchor" href="#untracked-files">¶</a>Untracked Files</h3><p>This section displays the list of files under the repository directory that are not checked in to source control.  This section is useful for 2 purposes:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Discovering any new files that you need to add to your commit&lt;/li&gt;
+<ul><li>Discovering any new files that you need to add to your commit</li>
 
-&lt;li&gt;Identifying files that need to be added to your &lt;kbd&gt;.gitignore&lt;/kbd&gt; file&lt;/li&gt;
-&lt;/ul&gt;
+<li>Identifying files that need to be added to your <kbd>.gitignore</kbd> file</li>
+</ul>
 
-&lt;p&gt;Keep in mind that if you edit your &lt;kbd&gt;.gitignore&lt;/kbd&gt; file without closing the status buffer first, you might need to refresh it with &lt;kbd&gt;g&lt;/kbd&gt; / &lt;kbd&gt;magit-refresh&lt;/kbd&gt; before the unwanted files are removed from this list!
-&lt;/p&gt;
+<p>Keep in mind that if you edit your <kbd>.gitignore</kbd> file without closing the status buffer first, you might need to refresh it with <kbd>g</kbd> / <kbd>magit-refresh</kbd> before the unwanted files are removed from this list!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;unstaged-changes&quot; class=&quot;anchor&quot; href=&quot;#unstaged-changes&quot;&gt;¶&lt;/a&gt;Unstaged Changes&lt;/h3&gt;&lt;p&gt;This section displays the list of tracked files which have been changed since the last commit.
-&lt;/p&gt;
+<h3><a id="unstaged-changes" class="anchor" href="#unstaged-changes">¶</a>Unstaged Changes</h3><p>This section displays the list of tracked files which have been changed since the last commit.
+</p>
 
-&lt;p&gt;You can expand a file to view the changes it contains using the &lt;kbd&gt;TAB&lt;/kbd&gt; key (&lt;kbd&gt;magit-section-toggle&lt;/kbd&gt;).  The changes will be displayed in a diff style to show the previous and new state of the changed lines.  You can also open/close the individual diff sections using &lt;kbd&gt;TAB&lt;/kbd&gt;.
-&lt;/p&gt;
+<p>You can expand a file to view the changes it contains using the <kbd>TAB</kbd> key (<kbd>magit-section-toggle</kbd>).  The changes will be displayed in a diff style to show the previous and new state of the changed lines.  You can also open/close the individual diff sections using <kbd>TAB</kbd>.
+</p>
 
-&lt;p&gt;This section may also show parts of your code with merge conflicts when you are running a merge operation.  We&apos;ll talk more about this in a later video.
-&lt;/p&gt;
+<p>This section may also show parts of your code with merge conflicts when you are running a merge operation.  We'll talk more about this in a later video.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;staged-changes&quot; class=&quot;anchor&quot; href=&quot;#staged-changes&quot;&gt;¶&lt;/a&gt;Staged Changes&lt;/h3&gt;&lt;p&gt;This section displays the list of tracked files with changes that have been &quot;staged&quot;, meaning that they&apos;re marked for inclusion into the next commit that the user creates.
-&lt;/p&gt;
+<h3><a id="staged-changes" class="anchor" href="#staged-changes">¶</a>Staged Changes</h3><p>This section displays the list of tracked files with changes that have been "staged", meaning that they're marked for inclusion into the next commit that the user creates.
+</p>
 
-&lt;p&gt;Like the unstaged changes view, you can press &lt;kbd&gt;TAB&lt;/kbd&gt; to expand/collapse the files and their diff &quot;hunks&quot;.
-&lt;/p&gt;
+<p>Like the unstaged changes view, you can press <kbd>TAB</kbd> to expand/collapse the files and their diff "hunks".
+</p>
 
-&lt;p&gt;Keep in mind that when you&apos;ve staged a change, the associated hunk will move from the unstaged changes view to the staged changes view, you won&apos;t see the same change in both!
-&lt;/p&gt;
+<p>Keep in mind that when you've staged a change, the associated hunk will move from the unstaged changes view to the staged changes view, you won't see the same change in both!
+</p>
 
-&lt;p&gt;Note that we&apos;re not going to talk about staging/unstaging changes yet in this video, we will discuss it in the next video where we talk about creating commits!
-&lt;/p&gt;
+<p>Note that we're not going to talk about staging/unstaging changes yet in this video, we will discuss it in the next video where we talk about creating commits!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;stashes&quot; class=&quot;anchor&quot; href=&quot;#stashes&quot;&gt;¶&lt;/a&gt;Stashes&lt;/h3&gt;&lt;p&gt;This section displays the list of &quot;stashes&quot; created with the &lt;kbd&gt;git stash&lt;/kbd&gt; command.  These are basically just diffs of changes that are saved to be used later without being committed to the repository.
-&lt;/p&gt;
+<h3><a id="stashes" class="anchor" href="#stashes">¶</a>Stashes</h3><p>This section displays the list of "stashes" created with the <kbd>git stash</kbd> command.  These are basically just diffs of changes that are saved to be used later without being committed to the repository.
+</p>
 
-&lt;p&gt;Unfortunately stashes can&apos;t be expanded with &lt;kbd&gt;TAB&lt;/kbd&gt; but you can press &lt;kbd&gt;Enter&lt;/kbd&gt; on a stash entry to take a look at the list of changes that it contains.
-&lt;/p&gt;
+<p>Unfortunately stashes can't be expanded with <kbd>TAB</kbd> but you can press <kbd>Enter</kbd> on a stash entry to take a look at the list of changes that it contains.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;unpushed-changes&quot; class=&quot;anchor&quot; href=&quot;#unpushed-changes&quot;&gt;¶&lt;/a&gt;Unpushed Changes&lt;/h3&gt;&lt;p&gt;This section displays the list of commits in the local branch that haven&apos;t been pushed to the usual remote branch.  It&apos;s very useful for keeping track of the work you&apos;ve been doing which hasn&apos;t been merged yet!
-&lt;/p&gt;
+<h3><a id="unpushed-changes" class="anchor" href="#unpushed-changes">¶</a>Unpushed Changes</h3><p>This section displays the list of commits in the local branch that haven't been pushed to the usual remote branch.  It's very useful for keeping track of the work you've been doing which hasn't been merged yet!
+</p>
 
-&lt;p&gt;You might not see this section if you haven&apos;t pushed the local branch anywhere yet!
-&lt;/p&gt;
+<p>You might not see this section if you haven't pushed the local branch anywhere yet!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;unmerged-changes&quot; class=&quot;anchor&quot; href=&quot;#unmerged-changes&quot;&gt;¶&lt;/a&gt;Unmerged Changes&lt;/h3&gt;&lt;p&gt;This section displays changes from the remote branch which haven&apos;t been merged or rebased into the local branch.  This section will usually be populated when you fetch the latest commits from the remote branch and Git detects that there is a deviation in the commit histories that needs to be merged.
-&lt;/p&gt;
+<h3><a id="unmerged-changes" class="anchor" href="#unmerged-changes">¶</a>Unmerged Changes</h3><p>This section displays changes from the remote branch which haven't been merged or rebased into the local branch.  This section will usually be populated when you fetch the latest commits from the remote branch and Git detects that there is a deviation in the commit histories that needs to be merged.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;unpulled-changes&quot; class=&quot;anchor&quot; href=&quot;#unpulled-changes&quot;&gt;¶&lt;/a&gt;Unpulled Changes&lt;/h3&gt;&lt;p&gt;This section displays changes from the remote branch which haven&apos;t been pulled into the local branch.  This indicates that there are new commits that can be pulled cleanly into the local branch without merging.
-&lt;/p&gt;
+<h3><a id="unpulled-changes" class="anchor" href="#unpulled-changes">¶</a>Unpulled Changes</h3><p>This section displays changes from the remote branch which haven't been pulled into the local branch.  This indicates that there are new commits that can be pulled cleanly into the local branch without merging.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;other-sections&quot; class=&quot;anchor&quot; href=&quot;#other-sections&quot;&gt;¶&lt;/a&gt;Other Sections&lt;/h3&gt;&lt;p&gt;Other sections may appear in the status buffer depending on whether you have packages like &lt;a href=&quot;https://magit.vc/manual/forge/&quot;&gt;Forge&lt;/a&gt; or &lt;a href=&quot;https://github.com/alphapapa/magit-todos&quot;&gt;Magit Todos&lt;/a&gt; installed!
-&lt;/p&gt;
+<h3><a id="other-sections" class="anchor" href="#other-sections">¶</a>Other Sections</h3><p>Other sections may appear in the status buffer depending on whether you have packages like <a href="https://magit.vc/manual/forge/">Forge</a> or <a href="https://github.com/alphapapa/magit-todos">Magit Todos</a> installed!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;navigating-sections&quot; class=&quot;anchor&quot; href=&quot;#navigating-sections&quot;&gt;¶&lt;/a&gt;Navigating Sections&lt;/h2&gt;&lt;p&gt;Magit has some very efficient movement key bindings set up by default:
-&lt;/p&gt;
+<h2><a id="navigating-sections" class="anchor" href="#navigating-sections">¶</a>Navigating Sections</h2><p>Magit has some very efficient movement key bindings set up by default:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;C-n&lt;/kbd&gt; and &lt;kbd&gt;C-p&lt;/kbd&gt;: Move forward and backward by line (&lt;kbd&gt;magit-next-line&lt;/kbd&gt; and &lt;kbd&gt;magit-previous-line&lt;/kbd&gt;)
+<ul><li><kbd>C-n</kbd> and <kbd>C-p</kbd>: Move forward and backward by line (<kbd>magit-next-line</kbd> and <kbd>magit-previous-line</kbd>)
 
-&lt;p&gt;These bindings should come as no surprise as they mirror the default line movement key bindings in Emacs
-&lt;/p&gt;&lt;/li&gt;
+<p>These bindings should come as no surprise as they mirror the default line movement key bindings in Emacs
+</p></li>
 
-&lt;li&gt;&lt;kbd&gt;n&lt;/kbd&gt; and &lt;kbd&gt;p&lt;/kbd&gt;: Move forward and backward by visible section (&lt;kbd&gt;magit-section-forward&lt;/kbd&gt; and &lt;kbd&gt;magit-section-backward&lt;/kbd&gt;)
+<li><kbd>n</kbd> and <kbd>p</kbd>: Move forward and backward by visible section (<kbd>magit-section-forward</kbd> and <kbd>magit-section-backward</kbd>)
 
-&lt;p&gt;These bindings are useful
-&lt;/p&gt;&lt;/li&gt;
+<p>These bindings are useful
+</p></li>
 
-&lt;li&gt;&lt;kbd&gt;M-n&lt;/kbd&gt; and &lt;kbd&gt;M-p&lt;/kbd&gt;: Move forward and backward by section &quot;sibling&quot; (&lt;kbd&gt;magit-section-forward-sibling&lt;/kbd&gt; and &lt;kbd&gt;magit-section-backward-sibling&lt;/kbd&gt;)&lt;/li&gt;
+<li><kbd>M-n</kbd> and <kbd>M-p</kbd>: Move forward and backward by section "sibling" (<kbd>magit-section-forward-sibling</kbd> and <kbd>magit-section-backward-sibling</kbd>)</li>
 
-&lt;li&gt;&lt;kbd&gt;^&lt;/kbd&gt;: Move to the parent of the current section (&lt;kbd&gt;magit-section-up&lt;/kbd&gt;)&lt;/li&gt;
-&lt;/ul&gt;
+<li><kbd>^</kbd>: Move to the parent of the current section (<kbd>magit-section-up</kbd>)</li>
+</ul>
 
-&lt;p&gt;&lt;a href=&quot;https://magit.vc/manual/magit.html#Section-Movement&quot;&gt;Magit Manual: Section Movement&lt;/a&gt;
-&lt;/p&gt;
+<p><a href="https://magit.vc/manual/magit.html#Section-Movement">Magit Manual: Section Movement</a>
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-command-panel&quot; class=&quot;anchor&quot; href=&quot;#the-command-panel&quot;&gt;¶&lt;/a&gt;The Command Panel&lt;/h2&gt;&lt;p&gt;In the status buffer, there are many quick command bindings that you will want to learn to make your day-to-day Git operations incredibly efficient.
-&lt;/p&gt;
+<h2><a id="the-command-panel" class="anchor" href="#the-command-panel">¶</a>The Command Panel</h2><p>In the status buffer, there are many quick command bindings that you will want to learn to make your day-to-day Git operations incredibly efficient.
+</p>
 
-&lt;p&gt;The easiest way to learn these bindings is to open Magit&apos;s Transient panel by pressing &lt;kbd&gt;?&lt;/kbd&gt; (question mark).
-&lt;/p&gt;
+<p>The easiest way to learn these bindings is to open Magit's Transient panel by pressing <kbd>?</kbd> (question mark).
+</p>
 
-&lt;p&gt;This panel lists all of the operations you can perform and the prefix keys that you can press to invoke them.
-&lt;/p&gt;
+<p>This panel lists all of the operations you can perform and the prefix keys that you can press to invoke them.
+</p>
 
-&lt;p&gt;Usually when you press one of the letters listed here, another sub-panel will pop up with more command prefixes and also options which can be configured starting with the &lt;kbd&gt;-&lt;/kbd&gt; (hyphen) key.
-&lt;/p&gt;
+<p>Usually when you press one of the letters listed here, another sub-panel will pop up with more command prefixes and also options which can be configured starting with the <kbd>-</kbd> (hyphen) key.
+</p>
 
-&lt;p&gt;Any of these panels can be cancelled with &lt;kbd&gt;C-g&lt;/kbd&gt;!
-&lt;/p&gt;
+<p>Any of these panels can be cancelled with <kbd>C-g</kbd>!
+</p>
 
-&lt;p&gt;Keep in mind that if you use &lt;kbd&gt;evil-collection&lt;/kbd&gt; to enable Vim-style keybindings, the prefix keys for some of these commands might be changed from the defaults!
-&lt;/p&gt;
+<p>Keep in mind that if you use <kbd>evil-collection</kbd> to enable Vim-style keybindings, the prefix keys for some of these commands might be changed from the defaults!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;our-first-commit&quot; class=&quot;anchor&quot; href=&quot;#our-first-commit&quot;&gt;¶&lt;/a&gt;Our First Commit!&lt;/h2&gt;&lt;p&gt;Since I want to make sure you come away from this episode with something actionable to use, I&apos;m going to jump ahead a bit and show you how to make your first commit with Magit!
-&lt;/p&gt;
+<h2><a id="our-first-commit" class="anchor" href="#our-first-commit">¶</a>Our First Commit!</h2><p>Since I want to make sure you come away from this episode with something actionable to use, I'm going to jump ahead a bit and show you how to make your first commit with Magit!
+</p>
 
-&lt;p&gt;In this example, we&apos;ve already got an existing repository cloned locally so all we need to do is run &lt;kbd&gt;M-x magit-status&lt;/kbd&gt; from within a buffer inside of that repository to call up the status interface that we talked about before.
-&lt;/p&gt;
+<p>In this example, we've already got an existing repository cloned locally so all we need to do is run <kbd>M-x magit-status</kbd> from within a buffer inside of that repository to call up the status interface that we talked about before.
+</p>
 
-&lt;p&gt;Since we&apos;ve already got a file with unstaged changes, we can move our cursor to the line that represents the changed file and then press the &lt;kbd&gt;s&lt;/kbd&gt; key (lower-case &apos;s&apos;) to stage it.  Once we do that, we can see that this file has now been added to the &quot;Staged Changes&quot; section which means it&apos;s ready to be committed.  At this point we could add more files to be committed if wanted to, but we&apos;ll just go with this one for now.
-&lt;/p&gt;
+<p>Since we've already got a file with unstaged changes, we can move our cursor to the line that represents the changed file and then press the <kbd>s</kbd> key (lower-case 's') to stage it.  Once we do that, we can see that this file has now been added to the "Staged Changes" section which means it's ready to be committed.  At this point we could add more files to be committed if wanted to, but we'll just go with this one for now.
+</p>
 
-&lt;p&gt;We can now create a commit in our repository by pressing &lt;kbd&gt;c&lt;/kbd&gt; (lower-case &apos;c&apos;) raise the &quot;Commit&quot; panel and then &lt;kbd&gt;c&lt;/kbd&gt; one more time to choose the &quot;Commit&quot; action.
-&lt;/p&gt;
+<p>We can now create a commit in our repository by pressing <kbd>c</kbd> (lower-case 'c') raise the "Commit" panel and then <kbd>c</kbd> one more time to choose the "Commit" action.
+</p>
 
-&lt;p&gt;Two panes appear, but we&apos;re only going to focus on one of them right now: the commit message editor.  In this pane, we can write a quick message about the changes that we&apos;re commiting in this box.  You can write as many lines as you like before the commentd lines with &lt;kbd&gt;#&lt;/kbd&gt; (hash) characters and they will all be included in the commit.
-&lt;/p&gt;
+<p>Two panes appear, but we're only going to focus on one of them right now: the commit message editor.  In this pane, we can write a quick message about the changes that we're commiting in this box.  You can write as many lines as you like before the commentd lines with <kbd>#</kbd> (hash) characters and they will all be included in the commit.
+</p>
 
-&lt;p&gt;Once you&apos;re finished writing your commit message, press &lt;kbd&gt;C-c C-c&lt;/kbd&gt; and the commit will be created!
-&lt;/p&gt;
+<p>Once you're finished writing your commit message, press <kbd>C-c C-c</kbd> and the commit will be created!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;whats-next&quot; class=&quot;anchor&quot; href=&quot;#whats-next&quot;&gt;¶&lt;/a&gt;What&apos;s next?&lt;/h2&gt;&lt;p&gt;In the next video I&apos;ll go more in depth on the workflow for using Magit for everyday source control tasks like creating branches, making commits, and pushing those commits to a remote repository.  We&apos;ll also learn how to extend and amend our commits to fix them if we made mistakes or forgot to include changes.
-&lt;/p&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>In the next video I'll go more in depth on the workflow for using Magit for everyday source control tasks like creating branches, making commits, and pushing those commits to a remote repository.  We'll also learn how to extend and amend our commits to fix them if we made mistakes or forgot to include changes.
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

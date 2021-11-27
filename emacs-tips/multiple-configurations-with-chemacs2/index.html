@@ -1,189 +1,190 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Using Multiple Emacs Configurations with Chemacs2 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Using Multiple Emacs Configurations with Chemacs2</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=hHdM2wVM1PI&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Using Multiple Emacs Configurations with Chemacs2 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Using Multiple Emacs Configurations with Chemacs2</h1><p class="blog-post-meta"></p><div><p><a href="https://www.youtube.com/watch?v=hHdM2wVM1PI">Watch the video</a> on YouTube!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-challenge-of-multiple-emacs-configurations&quot; class=&quot;anchor&quot; href=&quot;#the-challenge-of-multiple-emacs-configurations&quot;&gt;¶&lt;/a&gt;The challenge of multiple Emacs configurations&lt;/h2&gt;&lt;p&gt;When you start using Emacs, you typically either build up your own configuration from scratch little by little or adopt one of the many pre-built configurations like Doom Emacs, Spacemacs, or Prelude.
-&lt;/p&gt;
+<h2><a id="the-challenge-of-multiple-emacs-configurations" class="anchor" href="#the-challenge-of-multiple-emacs-configurations">¶</a>The challenge of multiple Emacs configurations</h2><p>When you start using Emacs, you typically either build up your own configuration from scratch little by little or adopt one of the many pre-built configurations like Doom Emacs, Spacemacs, or Prelude.
+</p>
 
-&lt;p&gt;But what if you want to experiment with other Emacs configurations or even rebuild your existing config from scratch?
-&lt;/p&gt;
+<p>But what if you want to experiment with other Emacs configurations or even rebuild your existing config from scratch?
+</p>
 
-&lt;p&gt;Emacs doesn&apos;t make it very easy to use multiple Emacs configurations at the same time.  Since there is a well-defined set of locations where Emacs looks for your configuration, your only option to try a new configuration is to move the old one out of the way, move the new one into its place, and restart Emacs.
-&lt;/p&gt;
+<p>Emacs doesn't make it very easy to use multiple Emacs configurations at the same time.  Since there is a well-defined set of locations where Emacs looks for your configuration, your only option to try a new configuration is to move the old one out of the way, move the new one into its place, and restart Emacs.
+</p>
 
-&lt;p&gt;This is a pain to deal with, especially if you want to use multiple configurations at the same time in separate Emacs windows.  I have this problem all the time when running my own configuration and showing off the Emacs From Scratch configuration or someone else&apos;s config at the same time!
-&lt;/p&gt;
+<p>This is a pain to deal with, especially if you want to use multiple configurations at the same time in separate Emacs windows.  I have this problem all the time when running my own configuration and showing off the Emacs From Scratch configuration or someone else's config at the same time!
+</p>
 
-&lt;p&gt;There must be a better way to solve this problem...
-&lt;/p&gt;
+<p>There must be a better way to solve this problem...
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;enter-chemacs2&quot; class=&quot;anchor&quot; href=&quot;#enter-chemacs2&quot;&gt;¶&lt;/a&gt;Enter Chemacs2&lt;/h2&gt;&lt;p&gt;Chemacs2 is a very small Emacs configuration &quot;shim&quot; which allows you to set up multiple Emacs configuration profiles so that you can easily switch between them or use them all simultaneously!
-&lt;/p&gt;
+<h2><a id="enter-chemacs2" class="anchor" href="#enter-chemacs2">¶</a>Enter Chemacs2</h2><p>Chemacs2 is a very small Emacs configuration "shim" which allows you to set up multiple Emacs configuration profiles so that you can easily switch between them or use them all simultaneously!
+</p>
 
-&lt;p&gt;You can find Chemacs2 on GitHub: &lt;a href=&quot;https://github.com/plexus/chemacs2&quot;&gt;https://github.com/plexus/chemacs2&lt;/a&gt;
-&lt;/p&gt;
+<p>You can find Chemacs2 on GitHub: <a href="https://github.com/plexus/chemacs2">https://github.com/plexus/chemacs2</a>
+</p>
 
-&lt;p&gt;With Chemacs, you can:
-&lt;/p&gt;
+<p>With Chemacs, you can:
+</p>
 
-&lt;ul&gt;&lt;li&gt;Use both Doom Emacs and Spacemacs simultaneously&lt;/li&gt;
-&lt;li&gt;Use Doom or Spacemacs while building your own Emacs config from scratch&lt;/li&gt;
-&lt;li&gt;Try out the Emacs configurations of others very easily&lt;/li&gt;
-&lt;li&gt;Redesign your Emacs configuration while still using your current one for productivity&lt;/li&gt;
-&lt;li&gt;Run the same Emacs configuration with different settings for different purposes&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>Use both Doom Emacs and Spacemacs simultaneously</li>
+<li>Use Doom or Spacemacs while building your own Emacs config from scratch</li>
+<li>Try out the Emacs configurations of others very easily</li>
+<li>Redesign your Emacs configuration while still using your current one for productivity</li>
+<li>Run the same Emacs configuration with different settings for different purposes</li>
+</ul>
 
-&lt;p&gt;It&apos;s called Chemacs2 because it&apos;s the successor to the original Chemacs, both written by Arne Brasseur.  The main benefit of Chemacs2 over Chemacs is that it supports the new &lt;kbd&gt;early-init.el&lt;/kbd&gt; config file from Emacs 27 (used by Doom Emacs and others).
-&lt;/p&gt;
+<p>It's called Chemacs2 because it's the successor to the original Chemacs, both written by Arne Brasseur.  The main benefit of Chemacs2 over Chemacs is that it supports the new <kbd>early-init.el</kbd> config file from Emacs 27 (used by Doom Emacs and others).
+</p>
 
-&lt;p&gt;&lt;strong&gt;Windows users&lt;/strong&gt;, I&apos;ve personally verified that Chemacs2 works perfectly there too!  It actually made my personal Emacs configuration easier to manage because I no longer needed to create a symbolic link from my dotfiles repo to the &lt;kbd&gt;~/.emacs.d&lt;/kbd&gt; path!
-&lt;/p&gt;
+<p><strong>Windows users</strong>, I've personally verified that Chemacs2 works perfectly there too!  It actually made my personal Emacs configuration easier to manage because I no longer needed to create a symbolic link from my dotfiles repo to the <kbd>~/.emacs.d</kbd> path!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;setting-it-up&quot; class=&quot;anchor&quot; href=&quot;#setting-it-up&quot;&gt;¶&lt;/a&gt;Setting it up&lt;/h2&gt;&lt;p&gt;To set up Chemacs2, you first need to move your existing Emacs configuration out of the way.  Typically your Emacs configuration folder would be in one of two places:
-&lt;/p&gt;
+<h2><a id="setting-it-up" class="anchor" href="#setting-it-up">¶</a>Setting it up</h2><p>To set up Chemacs2, you first need to move your existing Emacs configuration out of the way.  Typically your Emacs configuration folder would be in one of two places:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;$HOME/.emacs.d&lt;/kbd&gt;&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;$HOME/.config/emacs&lt;/kbd&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>$HOME/.emacs.d</kbd></li>
+<li><kbd>$HOME/.config/emacs</kbd></li>
+</ul>
 
-&lt;p&gt;Wherever you store your Emacs configuration, you should move it to a new location to make room for the Chemacs config.  I recommend a path like &lt;kbd&gt;~/.my-emacs&lt;/kbd&gt; or &lt;kbd&gt;~/.config/my-emacs&lt;/kbd&gt; but it can be whatever path you like!
-&lt;/p&gt;
+<p>Wherever you store your Emacs configuration, you should move it to a new location to make room for the Chemacs config.  I recommend a path like <kbd>~/.my-emacs</kbd> or <kbd>~/.config/my-emacs</kbd> but it can be whatever path you like!
+</p>
 
-&lt;p&gt;So let&apos;s try this now:
-&lt;/p&gt;
+<p>So let's try this now:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 mv ~/.emacs.d ~/.my-emacs
 git clone https://github.com/plexus/chemacs2 ~/.emacs.d
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;This merely sets up the Chemacs configuration shim so that it gets loaded first when you start Emacs.  To load your own configuration with it, you have to create a profile configuration!
-&lt;/p&gt;
+<p>This merely sets up the Chemacs configuration shim so that it gets loaded first when you start Emacs.  To load your own configuration with it, you have to create a profile configuration!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;managing-your-emacs-profiles&quot; class=&quot;anchor&quot; href=&quot;#managing-your-emacs-profiles&quot;&gt;¶&lt;/a&gt;Managing your Emacs profiles&lt;/h2&gt;&lt;p&gt;To tell Chemacs2 where to get your Emacs configuration, create a file in your home directory called &lt;kbd&gt;~/.emacs-profiles.el&lt;/kbd&gt; and populate it with this line:
-&lt;/p&gt;
+<h2><a id="managing-your-emacs-profiles" class="anchor" href="#managing-your-emacs-profiles">¶</a>Managing your Emacs profiles</h2><p>To tell Chemacs2 where to get your Emacs configuration, create a file in your home directory called <kbd>~/.emacs-profiles.el</kbd> and populate it with this line:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-((&lt;span class=&quot;org-string&quot;&gt;&quot;myconfig&quot;&lt;/span&gt; . ((user-emacs-directory . &lt;span class=&quot;org-string&quot;&gt;&quot;~/.my-emacs&quot;&lt;/span&gt;))))
+<pre><code class="emacs-lisp">
+((<span class="org-string">"myconfig"</span> . ((user-emacs-directory . <span class="org-string">"~/.my-emacs"</span>))))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;This defines a single Emacs configuration profile called &quot;myconfig&quot; that configures the &lt;kbd&gt;user-emacs-directory&lt;/kbd&gt; to point at the &lt;kbd&gt;~/.my-emacs&lt;/kbd&gt; folder we moved our configuration to before!
-&lt;/p&gt;
+<p>This defines a single Emacs configuration profile called "myconfig" that configures the <kbd>user-emacs-directory</kbd> to point at the <kbd>~/.my-emacs</kbd> folder we moved our configuration to before!
+</p>
 
-&lt;p&gt;Now that we have this file in place, let&apos;s start Emacs to verify that it works.
-&lt;/p&gt;
+<p>Now that we have this file in place, let's start Emacs to verify that it works.
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;adding-a-profile&quot; class=&quot;anchor&quot; href=&quot;#adding-a-profile&quot;&gt;¶&lt;/a&gt;Adding a profile&lt;/h3&gt;&lt;p&gt;Let&apos;s imagine that we wanted to create a new configuration to run alongside the current one.  This is just as easy as adding a new entry to the &lt;kbd&gt;~/.emacs-profiles.el&lt;/kbd&gt; file:
-&lt;/p&gt;
+<h3><a id="adding-a-profile" class="anchor" href="#adding-a-profile">¶</a>Adding a profile</h3><p>Let's imagine that we wanted to create a new configuration to run alongside the current one.  This is just as easy as adding a new entry to the <kbd>~/.emacs-profiles.el</kbd> file:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-((&lt;span class=&quot;org-string&quot;&gt;&quot;myconfig&quot;&lt;/span&gt; .  ((user-emacs-directory . &lt;span class=&quot;org-string&quot;&gt;&quot;~/.my-emacs&quot;&lt;/span&gt;)))
- (&lt;span class=&quot;org-string&quot;&gt;&quot;newconfig&quot;&lt;/span&gt; . ((user-emacs-directory . &lt;span class=&quot;org-string&quot;&gt;&quot;~/.my-new-emacs&quot;&lt;/span&gt;))))
+<pre><code class="emacs-lisp">
+((<span class="org-string">"myconfig"</span> .  ((user-emacs-directory . <span class="org-string">"~/.my-emacs"</span>)))
+ (<span class="org-string">"newconfig"</span> . ((user-emacs-directory . <span class="org-string">"~/.my-new-emacs"</span>))))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h3&gt;&lt;a id=&quot;setting-the-default-profile&quot; class=&quot;anchor&quot; href=&quot;#setting-the-default-profile&quot;&gt;¶&lt;/a&gt;Setting the default profile&lt;/h3&gt;&lt;p&gt;When you have multiple profiles set up in this way, you can easily specify which one gets chosen as the default by creating the file &lt;kbd&gt;~/.emacs-profile&lt;/kbd&gt; and writing the name of the default profile there:
-&lt;/p&gt;
+<h3><a id="setting-the-default-profile" class="anchor" href="#setting-the-default-profile">¶</a>Setting the default profile</h3><p>When you have multiple profiles set up in this way, you can easily specify which one gets chosen as the default by creating the file <kbd>~/.emacs-profile</kbd> and writing the name of the default profile there:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-&lt;span class=&quot;org-builtin&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;org-string&quot;&gt;&apos;myconfig&apos;&lt;/span&gt; &amp;gt; ~/.emacs-profile
+<pre><code class="sh">
+<span class="org-builtin">echo</span> <span class="org-string">'myconfig'</span> &gt; ~/.emacs-profile
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;h2&gt;&lt;a id=&quot;a-real-example&quot; class=&quot;anchor&quot; href=&quot;#a-real-example&quot;&gt;¶&lt;/a&gt;A real example!&lt;/h2&gt;&lt;p&gt;Here&apos;s an example of using Chemacs2 to use 4 different Emacs configurations:
-&lt;/p&gt;
+<h2><a id="a-real-example" class="anchor" href="#a-real-example">¶</a>A real example!</h2><p>Here's an example of using Chemacs2 to use 4 different Emacs configurations:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-((&lt;span class=&quot;org-string&quot;&gt;&quot;default&quot;&lt;/span&gt;   . ((user-emacs-directory   . &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles/.emacs.d&quot;&lt;/span&gt;)))
- (&lt;span class=&quot;org-string&quot;&gt;&quot;doom&quot;&lt;/span&gt;      . ((user-emacs-directory   . &lt;span class=&quot;org-string&quot;&gt;&quot;~/emacs-configs/doom-emacs&quot;&lt;/span&gt;)
-                 (env . ((&lt;span class=&quot;org-string&quot;&gt;&quot;DOOMDIR&quot;&lt;/span&gt;      . &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles/.doom.d&quot;&lt;/span&gt;)))))
- (&lt;span class=&quot;org-string&quot;&gt;&quot;spacemacs&quot;&lt;/span&gt; . ((user-emacs-directory   . &lt;span class=&quot;org-string&quot;&gt;&quot;~/emacs-configs/spacemacs&quot;&lt;/span&gt;)
-                 (env . ((&lt;span class=&quot;org-string&quot;&gt;&quot;SPACEMACSDIR&quot;&lt;/span&gt; . &lt;span class=&quot;org-string&quot;&gt;&quot;~/.dotfiles/.spacemacs.d&quot;&lt;/span&gt;)))))
- (&lt;span class=&quot;org-string&quot;&gt;&quot;efs&quot;&lt;/span&gt;       . ((user-emacs-directory   . &lt;span class=&quot;org-string&quot;&gt;&quot;~/emacs-configs/emacs-from-scratch&quot;&lt;/span&gt;))))
+<pre><code class="emacs-lisp">
+((<span class="org-string">"default"</span>   . ((user-emacs-directory   . <span class="org-string">"~/.dotfiles/.emacs.d"</span>)))
+ (<span class="org-string">"doom"</span>      . ((user-emacs-directory   . <span class="org-string">"~/emacs-configs/doom-emacs"</span>)
+                 (env . ((<span class="org-string">"DOOMDIR"</span>      . <span class="org-string">"~/.dotfiles/.doom.d"</span>)))))
+ (<span class="org-string">"spacemacs"</span> . ((user-emacs-directory   . <span class="org-string">"~/emacs-configs/spacemacs"</span>)
+                 (env . ((<span class="org-string">"SPACEMACSDIR"</span> . <span class="org-string">"~/.dotfiles/.spacemacs.d"</span>)))))
+ (<span class="org-string">"efs"</span>       . ((user-emacs-directory   . <span class="org-string">"~/emacs-configs/emacs-from-scratch"</span>))))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; The &lt;kbd&gt;env&lt;/kbd&gt; lines aren&apos;t necessary if your Doom or Spacemacs personal config folders are in their default locations!
-&lt;/p&gt;
+<p><strong>NOTE:</strong> The <kbd>env</kbd> lines aren't necessary if your Doom or Spacemacs personal config folders are in their default locations!
+</p>
 
-&lt;p&gt;We can now launch Emacs with any of these configurattions &lt;em&gt;at the same time&lt;/em&gt; using the following command:
-&lt;/p&gt;
+<p>We can now launch Emacs with any of these configurattions <em>at the same time</em> using the following command:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
+<pre><code class="sh">
 emacs --with-profile=profilename
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;So if we wanted to run both Doom and Spacemacs at the same time, we can run:
-&lt;/p&gt;
+<p>So if we wanted to run both Doom and Spacemacs at the same time, we can run:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-emacs --with-profile=doom &amp;amp;
-emacs --with-profile=spacemacs &amp;amp;
+<pre><code class="sh">
+emacs --with-profile=doom &amp;
+emacs --with-profile=spacemacs &amp;
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Also note that we have a a profile named &lt;kbd&gt;default&lt;/kbd&gt;, this will automatically make that profile the default when you run Emacs without specifying a profile, but you can still override the default by setting up &lt;kbd&gt;.emacs-profile&lt;/kbd&gt;!
-&lt;/p&gt;
+<p>Also note that we have a a profile named <kbd>default</kbd>, this will automatically make that profile the default when you run Emacs without specifying a profile, but you can still override the default by setting up <kbd>.emacs-profile</kbd>!
+</p>
 
-&lt;h3&gt;&lt;a id=&quot;doom-emacs-tip&quot; class=&quot;anchor&quot; href=&quot;#doom-emacs-tip&quot;&gt;¶&lt;/a&gt;Doom Emacs Tip&lt;/h3&gt;&lt;p&gt;If you originally cloned Doom Emacs to the &lt;kbd&gt;~/.emacs.d&lt;/kbd&gt; folder and you now had to move it to make room for Chemacs, you might need to do one of two things to ensure that the configuration works!
-&lt;/p&gt;
+<h3><a id="doom-emacs-tip" class="anchor" href="#doom-emacs-tip">¶</a>Doom Emacs Tip</h3><p>If you originally cloned Doom Emacs to the <kbd>~/.emacs.d</kbd> folder and you now had to move it to make room for Chemacs, you might need to do one of two things to ensure that the configuration works!
+</p>
 
-&lt;p&gt;The first thing to try is to run &lt;kbd&gt;doom sync&lt;/kbd&gt; in the new folder location:
-&lt;/p&gt;
+<p>The first thing to try is to run <kbd>doom sync</kbd> in the new folder location:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-$ &amp;lt;new doom location&amp;gt;/bin/doom sync
+<pre><code class="emacs-lisp">
+$ &lt;new doom location&gt;/bin/doom sync
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;If that doesn&apos;t work, you will need to delete the Doom config repo folder and re-clone it into the new location!  This will also require running &lt;kbd&gt;bin/doom install&lt;/kbd&gt; again.
-&lt;/p&gt;
+<p>If that doesn't work, you will need to delete the Doom config repo folder and re-clone it into the new location!  This will also require running <kbd>bin/doom install</kbd> again.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;using-chemacs2-in-your-dotfiles-repository&quot; class=&quot;anchor&quot; href=&quot;#using-chemacs2-in-your-dotfiles-repository&quot;&gt;¶&lt;/a&gt;Using Chemacs2 in your dotfiles repository&lt;/h2&gt;&lt;p&gt;If you have a dotfiles repository (you should!), you can make the Chemacs2 repo a submodule of your dotfiles repository so that you can replicate your multi-Emacs configuration setup on any of your machines.
-&lt;/p&gt;
+<h2><a id="using-chemacs2-in-your-dotfiles-repository" class="anchor" href="#using-chemacs2-in-your-dotfiles-repository">¶</a>Using Chemacs2 in your dotfiles repository</h2><p>If you have a dotfiles repository (you should!), you can make the Chemacs2 repo a submodule of your dotfiles repository so that you can replicate your multi-Emacs configuration setup on any of your machines.
+</p>
 
-&lt;p&gt;The first step is to initialize the Chemacs2 repository as a submodule wherever you previously kept your &lt;kbd&gt;.emacs.d&lt;/kbd&gt; folder in your dotfiles repo:
-&lt;/p&gt;
+<p>The first step is to initialize the Chemacs2 repository as a submodule wherever you previously kept your <kbd>.emacs.d</kbd> folder in your dotfiles repo:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-&lt;span class=&quot;org-builtin&quot;&gt;cd&lt;/span&gt; ~/.dotfiles
+<pre><code class="sh">
+<span class="org-builtin">cd</span> ~/.dotfiles
 git submodule add https://github.com/plexus/chemacs2 .emacs.d
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;If you are using a tool like &lt;a href=&quot;https://www.gnu.org/software/stow/&quot;&gt;GNU Stow&lt;/a&gt; or &lt;a href=&quot;https://github.com/daviwil/dotcrafter.el&quot;&gt;dotcrafter.el&lt;/a&gt; to automatically link files from your dotfiles folder to your home folder, make sure to clone the submodule into the folder that you create your symbolic links from.
-&lt;/p&gt;
+<p>If you are using a tool like <a href="https://www.gnu.org/software/stow/">GNU Stow</a> or <a href="https://github.com/daviwil/dotcrafter.el">dotcrafter.el</a> to automatically link files from your dotfiles folder to your home folder, make sure to clone the submodule into the folder that you create your symbolic links from.
+</p>
 
-&lt;p&gt;Keep in mind that you will need to clone your dotfiles repo with the &lt;kbd&gt;--recursive&lt;/kbd&gt; option from now on:
-&lt;/p&gt;
+<p>Keep in mind that you will need to clone your dotfiles repo with the <kbd>--recursive</kbd> option from now on:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;
-git clone &amp;lt;URL-of-dotfiles-repo&amp;gt; --recursive
+<pre><code class="sh">
+git clone &lt;URL-of-dotfiles-repo&gt; --recursive
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;This will both your dotfiles repository and also any submodule repositories that are needed.
-&lt;/p&gt;
+<p>This will both your dotfiles repository and also any submodule repositories that are needed.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;setting-the-kbdeln-cachekbd-path-correctly&quot; class=&quot;anchor&quot; href=&quot;#setting-the-kbdeln-cachekbd-path-correctly&quot;&gt;¶&lt;/a&gt;Setting the &lt;kbd&gt;eln-cache&lt;/kbd&gt; path correctly&lt;/h2&gt;&lt;p&gt;One thing I noticed while using Chemacs2 with Emacs 28 and native compilation functionality turned on: the compiler output files were being sent to Chemacs&apos; config folder instead of the real folder where my personal configuration lives.  To send those files to the right location, add this line to your configuration:
-&lt;/p&gt;
+<h2><a id="setting-the-kbdeln-cachekbd-path-correctly" class="anchor" href="#setting-the-kbdeln-cachekbd-path-correctly">¶</a>Setting the <kbd>eln-cache</kbd> path correctly</h2><p>One thing I noticed while using Chemacs2 with Emacs 28 and native compilation functionality turned on: the compiler output files were being sent to Chemacs' config folder instead of the real folder where my personal configuration lives.  To send those files to the right location, add this line to your configuration:
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(add-to-list &apos;comp-eln-load-path (expand-file-name &lt;span class=&quot;org-string&quot;&gt;&quot;eln-cache/&quot;&lt;/span&gt; user-emacs-directory))
+<pre><code class="emacs-lisp">
+(add-to-list 'comp-eln-load-path (expand-file-name <span class="org-string">"eln-cache/"</span> user-emacs-directory))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;Doom Emacs seems to have adjusted for this but I can&apos;t see it done in Spacemacs, might be needed there too!
-&lt;/p&gt;
+<p>Doom Emacs seems to have adjusted for this but I can't see it done in Spacemacs, might be needed there too!
+</p>
 
-&lt;p&gt;&lt;strong&gt;IMPORTANT NOTE:&lt;/strong&gt; As of &lt;a href=&quot;http://git.savannah.gnu.org/cgit/emacs.git/commit/?id=fbbcbed10ee89e0865bbddc6683ff626ec488ee9&quot;&gt;this commit&lt;/a&gt; to Emacs 28 &lt;kbd&gt;master&lt;/kbd&gt; branch, this variable has been renamed to &lt;kbd&gt;native-comp-eln-load-path&lt;/kbd&gt;!
-&lt;/p&gt;
+<p><strong>IMPORTANT NOTE:</strong> As of <a href="http://git.savannah.gnu.org/cgit/emacs.git/commit/?id=fbbcbed10ee89e0865bbddc6683ff626ec488ee9">this commit</a> to Emacs 28 <kbd>master</kbd> branch, this variable has been renamed to <kbd>native-comp-eln-load-path</kbd>!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;what-will-you-use-chemacs2-for&quot; class=&quot;anchor&quot; href=&quot;#what-will-you-use-chemacs2-for&quot;&gt;¶&lt;/a&gt;What will you use Chemacs2 for?&lt;/h2&gt;&lt;p&gt;Hopefully this gives you some interesing ideas for how you can use Chemacs2 for managing your Emacs configurations!
-&lt;/p&gt;
+<h2><a id="what-will-you-use-chemacs2-for" class="anchor" href="#what-will-you-use-chemacs2-for">¶</a>What will you use Chemacs2 for?</h2><p>Hopefully this gives you some interesing ideas for how you can use Chemacs2 for managing your Emacs configurations!
+</p>
 
-&lt;p&gt;I&apos;m curious to hear how you can imagine yourself using it, so please leave a comment on the video and let me know!
-&lt;/p&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<p>I'm curious to hear how you can imagine yourself using it, so please leave a comment on the video and let me know!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

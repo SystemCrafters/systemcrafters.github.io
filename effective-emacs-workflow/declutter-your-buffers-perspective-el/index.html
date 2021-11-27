@@ -1,129 +1,130 @@
-<!DOCTYPE html><html lang="en"><head>&lt;!--  --&gt;<meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Declutter Your Emacs Buffers with Perspective.el - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Declutter Your Emacs Buffers with Perspective.el</h1><p class="blog-post-meta"></p>&lt;div&gt;&lt;p&gt;&lt;a href=&quot;https://youtu.be/uyMdDzjQFMU&quot;&gt;Watch the video&lt;/a&gt; on YouTube!
-&lt;/p&gt;
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Declutter Your Emacs Buffers with Perspective.el - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Declutter Your Emacs Buffers with Perspective.el</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/uyMdDzjQFMU">Watch the video</a> on YouTube!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;what-is-perspectiveel&quot; class=&quot;anchor&quot; href=&quot;#what-is-perspectiveel&quot;&gt;¶&lt;/a&gt;What is Perspective.el?&lt;/h2&gt;&lt;p&gt;There&apos;s a question I see pretty often in the &lt;a href=&quot;http://systemcrafters.chat&quot;&gt;System Crafters Discord&lt;/a&gt;:
-&lt;/p&gt;
+<h2><a id="what-is-perspectiveel" class="anchor" href="#what-is-perspectiveel">¶</a>What is Perspective.el?</h2><p>There's a question I see pretty often in the <a href="http://systemcrafters.chat">System Crafters Discord</a>:
+</p>
 
-&lt;p&gt;&lt;strong&gt;&quot;How do I get a buffer list for only the files or buffers I want to see?&quot;&lt;/strong&gt;
-&lt;/p&gt;
+<p><strong>"How do I get a buffer list for only the files or buffers I want to see?"</strong>
+</p>
 
-&lt;p&gt;In Emacs, running &lt;kbd&gt;switch-to-buffer&lt;/kbd&gt; or &lt;kbd&gt;ibuffer&lt;/kbd&gt; shows you every single buffer that is open in Emacs which can be a little overwhelming in long-running Emacs sessions.
-&lt;/p&gt;
+<p>In Emacs, running <kbd>switch-to-buffer</kbd> or <kbd>ibuffer</kbd> shows you every single buffer that is open in Emacs which can be a little overwhelming in long-running Emacs sessions.
+</p>
 
-&lt;p&gt;The &lt;strong&gt;perspective.el&lt;/strong&gt; package provides a convenient way to define individual &quot;perspectives&quot; for managing separate sets of buffers and windows.  You can think of perspectives like the &quot;workspace&quot; concept you see in some window managers.
-&lt;/p&gt;
+<p>The <strong>perspective.el</strong> package provides a convenient way to define individual "perspectives" for managing separate sets of buffers and windows.  You can think of perspectives like the "workspace" concept you see in some window managers.
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://github.com/nex3/perspective-el&quot;&gt;https://github.com/nex3/perspective-el&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><a href="https://github.com/nex3/perspective-el">https://github.com/nex3/perspective-el</a></li>
+</ul>
 
-&lt;p&gt;There are other alternatives to this package that have a different take on the workspace concept, we may cover them in future videos.
-&lt;/p&gt;
+<p>There are other alternatives to this package that have a different take on the workspace concept, we may cover them in future videos.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;benefits-of-perspectiveel&quot; class=&quot;anchor&quot; href=&quot;#benefits-of-perspectiveel&quot;&gt;¶&lt;/a&gt;Benefits of perspective.el&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Each perspective keeps its own buffer list and window layout&lt;/li&gt;
-&lt;li&gt;Perspectives are attached to specific frames&lt;/li&gt;
-&lt;li&gt;It works pretty seamlessly with EXWM if you use that too&lt;/li&gt;
-&lt;li&gt;Provides functionality for saving perspectives to use in future sessions&lt;/li&gt;
-&lt;li&gt;You can write Emacs Lisp code to automate perspective creation&lt;/li&gt;
-&lt;/ul&gt;
+<h2><a id="benefits-of-perspectiveel" class="anchor" href="#benefits-of-perspectiveel">¶</a>Benefits of perspective.el</h2><ul><li>Each perspective keeps its own buffer list and window layout</li>
+<li>Perspectives are attached to specific frames</li>
+<li>It works pretty seamlessly with EXWM if you use that too</li>
+<li>Provides functionality for saving perspectives to use in future sessions</li>
+<li>You can write Emacs Lisp code to automate perspective creation</li>
+</ul>
 
-&lt;p&gt;I&apos;ve been using perspective.el for a few months now and it has become an important part of my workflow!
-&lt;/p&gt;
+<p>I've been using perspective.el for a few months now and it has become an important part of my workflow!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;basic-configuration&quot; class=&quot;anchor&quot; href=&quot;#basic-configuration&quot;&gt;¶&lt;/a&gt;Basic configuration&lt;/h2&gt;&lt;p&gt;If you use &lt;kbd&gt;use-package&lt;/kbd&gt; with &lt;kbd&gt;package.el&lt;/kbd&gt;, you can copy the following Emacs Lisp into your &lt;kbd&gt;init.el&lt;/kbd&gt; file and execute it for the first time with &lt;kbd&gt;C-M-x&lt;/kbd&gt;.
-&lt;/p&gt;
+<h2><a id="basic-configuration" class="anchor" href="#basic-configuration">¶</a>Basic configuration</h2><p>If you use <kbd>use-package</kbd> with <kbd>package.el</kbd>, you can copy the following Emacs Lisp into your <kbd>init.el</kbd> file and execute it for the first time with <kbd>C-M-x</kbd>.
+</p>
 
-&lt;pre&gt;&lt;code class=&quot;emacs-lisp&quot;&gt;
-(&lt;span class=&quot;org-keyword&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;org-constant&quot;&gt;perspective&lt;/span&gt;
-  &lt;span class=&quot;org-builtin&quot;&gt;:ensure&lt;/span&gt; t  &lt;span class=&quot;org-comment-delimiter&quot;&gt;; &lt;/span&gt;&lt;span class=&quot;org-comment&quot;&gt;use `:straight t` if using straight.el!&lt;/span&gt;
-  &lt;span class=&quot;org-builtin&quot;&gt;:bind&lt;/span&gt; ((&lt;span class=&quot;org-string&quot;&gt;&quot;C-x k&quot;&lt;/span&gt; . persp-kill-buffer*))
-  &lt;span class=&quot;org-builtin&quot;&gt;:init&lt;/span&gt;
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">use-package</span> <span class="org-constant">perspective</span>
+  <span class="org-builtin">:ensure</span> t  <span class="org-comment-delimiter">; </span><span class="org-comment">use `:straight t` if using straight.el!</span>
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-x k"</span> . persp-kill-buffer*))
+  <span class="org-builtin">:init</span>
   (persp-mode))
 
-&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
 
-&lt;p&gt;This will install the package and enable it immediately when Emacs starts up.
-&lt;/p&gt;
+<p>This will install the package and enable it immediately when Emacs starts up.
+</p>
 
-&lt;p&gt;&lt;strong&gt;TIP:&lt;/strong&gt; By default the prefix for perspective.el bindings is &lt;kbd&gt;C-x x&lt;/kbd&gt; but you can change it by setting the variable &lt;kbd&gt;persp-mode-prefix-key&lt;/kbd&gt;.
-&lt;/p&gt;
+<p><strong>TIP:</strong> By default the prefix for perspective.el bindings is <kbd>C-x x</kbd> but you can change it by setting the variable <kbd>persp-mode-prefix-key</kbd>.
+</p>
 
-&lt;p&gt;We&apos;ll try out perspective.el in a basic Emacs configuration so that we can learn how to use it!
-&lt;/p&gt;
+<p>We'll try out perspective.el in a basic Emacs configuration so that we can learn how to use it!
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;the-main-perspective&quot; class=&quot;anchor&quot; href=&quot;#the-main-perspective&quot;&gt;¶&lt;/a&gt;The &quot;main&quot; perspective&lt;/h2&gt;&lt;p&gt;By default, &lt;kbd&gt;perspective.el&lt;/kbd&gt; will create a perspective called &quot;main&quot; in every frame that Emacs creates.  In the very first frame, all of Emacs&apos; starting buffers will be in the &quot;main&quot; perspective of that frame.
-&lt;/p&gt;
+<h2><a id="the-main-perspective" class="anchor" href="#the-main-perspective">¶</a>The "main" perspective</h2><p>By default, <kbd>perspective.el</kbd> will create a perspective called "main" in every frame that Emacs creates.  In the very first frame, all of Emacs' starting buffers will be in the "main" perspective of that frame.
+</p>
 
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; When you create a new frame, a new &quot;main&quot; perspective will be created but it is &lt;strong&gt;NOT&lt;/strong&gt; the same as the &quot;main&quot; perspective in other frames!  They have the same name but they are actually different.
-&lt;/p&gt;
+<p><strong>NOTE:</strong> When you create a new frame, a new "main" perspective will be created but it is <strong>NOT</strong> the same as the "main" perspective in other frames!  They have the same name but they are actually different.
+</p>
 
-&lt;p&gt;Whenever you open a file or some other buffer inside of a perspective, the buffer then becomes attached to that perspective and won&apos;t show up in other perspectives unless it is explicitly added to them.
-&lt;/p&gt;
+<p>Whenever you open a file or some other buffer inside of a perspective, the buffer then becomes attached to that perspective and won't show up in other perspectives unless it is explicitly added to them.
+</p>
 
-&lt;p&gt;&lt;strong&gt;TIP:&lt;/strong&gt; The name of the default perspective can be customized with the variable &lt;kbd&gt;persp-initial-frame-name&lt;/kbd&gt;.
-&lt;/p&gt;
+<p><strong>TIP:</strong> The name of the default perspective can be customized with the variable <kbd>persp-initial-frame-name</kbd>.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;listing-buffers-in-the-perspective&quot; class=&quot;anchor&quot; href=&quot;#listing-buffers-in-the-perspective&quot;&gt;¶&lt;/a&gt;Listing buffers in the perspective&lt;/h2&gt;&lt;p&gt;To list all buffers in the current perspective, use the normal &lt;kbd&gt;switch-to-buffer&lt;/kbd&gt; command!  This should work great with Emacs&apos; built-in completion systems, Helm, and Vertico.
-&lt;/p&gt;
+<h2><a id="listing-buffers-in-the-perspective" class="anchor" href="#listing-buffers-in-the-perspective">¶</a>Listing buffers in the perspective</h2><p>To list all buffers in the current perspective, use the normal <kbd>switch-to-buffer</kbd> command!  This should work great with Emacs' built-in completion systems, Helm, and Vertico.
+</p>
 
-&lt;ul&gt;&lt;li&gt;If you use Ivy, you might want to use &lt;kbd&gt;persp-ivy-switch-buffer&lt;/kbd&gt; or &lt;kbd&gt;persp-counsel-switch-buffer&lt;/kbd&gt; for better integration&lt;/li&gt;
-&lt;li&gt;If you use Selectrum, you might want &lt;kbd&gt;persp-switch-to-buffer*&lt;/kbd&gt; for better integration&lt;/li&gt;
-&lt;li&gt;If you prefer an &lt;kbd&gt;ibuffer&lt;/kbd&gt;-style interface you can use &lt;kbd&gt;persp-ibuffer&lt;/kbd&gt;.&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li>If you use Ivy, you might want to use <kbd>persp-ivy-switch-buffer</kbd> or <kbd>persp-counsel-switch-buffer</kbd> for better integration</li>
+<li>If you use Selectrum, you might want <kbd>persp-switch-to-buffer*</kbd> for better integration</li>
+<li>If you prefer an <kbd>ibuffer</kbd>-style interface you can use <kbd>persp-ibuffer</kbd>.</li>
+</ul>
 
-&lt;p&gt;You can also choose from all open buffers and automatically switch to the perspective that &quot;owns&quot; the buffer with &lt;kbd&gt;persp-switch-to-buffer&lt;/kbd&gt; (&lt;kbd&gt;C-x x b&lt;/kbd&gt;).
-&lt;/p&gt;
+<p>You can also choose from all open buffers and automatically switch to the perspective that "owns" the buffer with <kbd>persp-switch-to-buffer</kbd> (<kbd>C-x x b</kbd>).
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;creating-a-perspective&quot; class=&quot;anchor&quot; href=&quot;#creating-a-perspective&quot;&gt;¶&lt;/a&gt;Creating a perspective&lt;/h2&gt;&lt;p&gt;Having only one perspective isn&apos;t very useful, though, so let&apos;s create another!
-&lt;/p&gt;
+<h2><a id="creating-a-perspective" class="anchor" href="#creating-a-perspective">¶</a>Creating a perspective</h2><p>Having only one perspective isn't very useful, though, so let's create another!
+</p>
 
-&lt;p&gt;The &lt;kbd&gt;persp-switch&lt;/kbd&gt; command (&lt;kbd&gt;C-x x s&lt;/kbd&gt;) will prompt you for the name of a perspective to switch to.  If you enter a name for a perspective that doesn&apos;t exist yet, it will be created.
-&lt;/p&gt;
+<p>The <kbd>persp-switch</kbd> command (<kbd>C-x x s</kbd>) will prompt you for the name of a perspective to switch to.  If you enter a name for a perspective that doesn't exist yet, it will be created.
+</p>
 
-&lt;p&gt;We can now list the buffers of this new perspective using &lt;kbd&gt;switch-to-buffer&lt;/kbd&gt; or any of the commands mentioned before.
-&lt;/p&gt;
+<p>We can now list the buffers of this new perspective using <kbd>switch-to-buffer</kbd> or any of the commands mentioned before.
+</p>
 
-&lt;p&gt;&lt;strong&gt;TIP:&lt;/strong&gt; All perspectives get their own &lt;kbd&gt;*scratch*&lt;/kbd&gt; buffer!  This can be useful for keeping temporary notes within a specific workspace.
-&lt;/p&gt;
+<p><strong>TIP:</strong> All perspectives get their own <kbd>*scratch*</kbd> buffer!  This can be useful for keeping temporary notes within a specific workspace.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;switching-perspectives&quot; class=&quot;anchor&quot; href=&quot;#switching-perspectives&quot;&gt;¶&lt;/a&gt;Switching perspectives&lt;/h2&gt;&lt;p&gt;You can select from a list of all perspectives for the current frame using the &lt;kbd&gt;persp-switch&lt;/kbd&gt; command (&lt;kbd&gt;C-x x s&lt;/kbd&gt;).
-&lt;/p&gt;
+<h2><a id="switching-perspectives" class="anchor" href="#switching-perspectives">¶</a>Switching perspectives</h2><p>You can select from a list of all perspectives for the current frame using the <kbd>persp-switch</kbd> command (<kbd>C-x x s</kbd>).
+</p>
 
-&lt;p&gt;There are also a couple of helpful commands for cycling between perspectives:
-&lt;/p&gt;
+<p>There are also a couple of helpful commands for cycling between perspectives:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;persp-next&lt;/kbd&gt; (&lt;kbd&gt;C-x x n&lt;/kbd&gt; or &lt;kbd&gt;C-x x &amp;lt;right&amp;gt;&lt;/kbd&gt;): switch to the next perspective&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;persp-prev&lt;/kbd&gt; (&lt;kbd&gt;C-x x p&lt;/kbd&gt; or &lt;kbd&gt;C-x x &amp;lt;left&amp;gt;&lt;/kbd&gt;): switch to the previous perspective&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>persp-next</kbd> (<kbd>C-x x n</kbd> or <kbd>C-x x &lt;right&gt;</kbd>): switch to the next perspective</li>
+<li><kbd>persp-prev</kbd> (<kbd>C-x x p</kbd> or <kbd>C-x x &lt;left&gt;</kbd>): switch to the previous perspective</li>
+</ul>
 
-&lt;p&gt;This is a good time to point out that the list of perspectives for the current frame are displayed in the mode line!
-&lt;/p&gt;
+<p>This is a good time to point out that the list of perspectives for the current frame are displayed in the mode line!
+</p>
 
-&lt;p&gt;You can also select between perspectives using the number row keys with &lt;kbd&gt;C-x x 1&lt;/kbd&gt; through &lt;kbd&gt;C-x x 0&lt;/kbd&gt; (10).
-&lt;/p&gt;
+<p>You can also select between perspectives using the number row keys with <kbd>C-x x 1</kbd> through <kbd>C-x x 0</kbd> (10).
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;adding-an-existing-buffer-to-a-perspective&quot; class=&quot;anchor&quot; href=&quot;#adding-an-existing-buffer-to-a-perspective&quot;&gt;¶&lt;/a&gt;Adding an existing buffer to a perspective&lt;/h2&gt;&lt;p&gt;Sometimes you&apos;ll end up in this situation: you open a file in a perspective and then realize that you should have opened it in a more appropriate perspective.
-&lt;/p&gt;
+<h2><a id="adding-an-existing-buffer-to-a-perspective" class="anchor" href="#adding-an-existing-buffer-to-a-perspective">¶</a>Adding an existing buffer to a perspective</h2><p>Sometimes you'll end up in this situation: you open a file in a perspective and then realize that you should have opened it in a more appropriate perspective.
+</p>
 
-&lt;p&gt;There are a few ways to get that buffer into the desired perspective:
-&lt;/p&gt;
+<p>There are a few ways to get that buffer into the desired perspective:
+</p>
 
-&lt;ul&gt;&lt;li&gt;&lt;kbd&gt;persp-add-buffer&lt;/kbd&gt; (&lt;kbd&gt;C-x x a&lt;/kbd&gt;) will prompt you for the buffer to add to the &lt;strong&gt;current&lt;/strong&gt; perspective (but it won&apos;t switch to that buffer)&lt;/li&gt;
-&lt;li&gt;&lt;kbd&gt;persp-set-buffer&lt;/kbd&gt; (&lt;kbd&gt;C-x x A&lt;/kbd&gt;) will prompt for a buffer to move to the current perspective and remove from all others!&lt;/li&gt;
-&lt;li&gt;Use the universal argument key &lt;kbd&gt;C-u&lt;/kbd&gt; before running &lt;kbd&gt;switch-to-buffer&lt;/kbd&gt; and select the desired buffer&lt;/li&gt;
-&lt;/ul&gt;
+<ul><li><kbd>persp-add-buffer</kbd> (<kbd>C-x x a</kbd>) will prompt you for the buffer to add to the <strong>current</strong> perspective (but it won't switch to that buffer)</li>
+<li><kbd>persp-set-buffer</kbd> (<kbd>C-x x A</kbd>) will prompt for a buffer to move to the current perspective and remove from all others!</li>
+<li>Use the universal argument key <kbd>C-u</kbd> before running <kbd>switch-to-buffer</kbd> and select the desired buffer</li>
+</ul>
 
-&lt;h2&gt;&lt;a id=&quot;removing-a-buffer-from-a-perspective&quot; class=&quot;anchor&quot; href=&quot;#removing-a-buffer-from-a-perspective&quot;&gt;¶&lt;/a&gt;Removing a buffer from a perspective&lt;/h2&gt;&lt;p&gt;If you want to remove a buffer from a perspective, you can use the &lt;kbd&gt;persp-remove&lt;/kbd&gt; (&lt;kbd&gt;C-x x k&lt;/kbd&gt;) command.  Once you select a buffer, it will only be removed from the current perspective.
-&lt;/p&gt;
+<h2><a id="removing-a-buffer-from-a-perspective" class="anchor" href="#removing-a-buffer-from-a-perspective">¶</a>Removing a buffer from a perspective</h2><p>If you want to remove a buffer from a perspective, you can use the <kbd>persp-remove</kbd> (<kbd>C-x x k</kbd>) command.  Once you select a buffer, it will only be removed from the current perspective.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;killing-perspectives&quot; class=&quot;anchor&quot; href=&quot;#killing-perspectives&quot;&gt;¶&lt;/a&gt;Killing perspectives&lt;/h2&gt;&lt;p&gt;If you&apos;re done with a particular perspective, you can &quot;kill&quot; it using &lt;kbd&gt;persp-kill&lt;/kbd&gt; (&lt;kbd&gt;C-x x c&lt;/kbd&gt;).
-&lt;/p&gt;
+<h2><a id="killing-perspectives" class="anchor" href="#killing-perspectives">¶</a>Killing perspectives</h2><p>If you're done with a particular perspective, you can "kill" it using <kbd>persp-kill</kbd> (<kbd>C-x x c</kbd>).
+</p>
 
-&lt;p&gt;The documentation for &lt;kbd&gt;persp-kill&lt;/kbd&gt; says that only buffers associated with the killed perspective and no others will be killed.  That hasn&apos;t been true in my experience, they all seem to remain active, just not visible in other perspectives!
-&lt;/p&gt;
+<p>The documentation for <kbd>persp-kill</kbd> says that only buffers associated with the killed perspective and no others will be killed.  That hasn't been true in my experience, they all seem to remain active, just not visible in other perspectives!
+</p>
 
-&lt;p&gt;In a very recent commit a new command named &lt;kbd&gt;persp-kill-others&lt;/kbd&gt; was added for quickly killing all perspectives in the frame except the current one.
-&lt;/p&gt;
+<p>In a very recent commit a new command named <kbd>persp-kill-others</kbd> was added for quickly killing all perspectives in the frame except the current one.
+</p>
 
-&lt;h2&gt;&lt;a id=&quot;whats-next&quot; class=&quot;anchor&quot; href=&quot;#whats-next&quot;&gt;¶&lt;/a&gt;What&apos;s next?&lt;/h2&gt;&lt;p&gt;That was just a brief overview of the &lt;kbd&gt;perspective.el&lt;/kbd&gt; package to get you started!  In future videos we&apos;ll cover more ways to customize the your perspective workflow and also how to integrate it with EXWM and Projectile!
-&lt;/p&gt;
-&lt;/div&gt;</div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
+<h2><a id="whats-next" class="anchor" href="#whats-next">¶</a>What's next?</h2><p>That was just a brief overview of the <kbd>perspective.el</kbd> package to get you started!  In future videos we'll cover more ways to customize the your perspective workflow and also how to integrate it with EXWM and Projectile!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
