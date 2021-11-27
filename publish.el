@@ -161,7 +161,7 @@
 
 (defun dw/org-html-template (contents info)
   (concat
-   "<!-- " ,(org-export-data (org-export-get-date info "%Y-%m-%d") info) " -->\n"
+   "<!-- " (org-export-data (org-export-get-date info "%Y-%m-%d") info) " -->\n"
    "<!DOCTYPE html>"
    (sxml-to-xml
     `(html (@ (lang "en"))
