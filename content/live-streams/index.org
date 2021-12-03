@@ -4,6 +4,7 @@ We stream every Friday at 8 am Pacific time!
 
 * Episodes
 
+- [[december-3-2021/][December 3, 2021]]: Can StumpWM Replace EXWM?
 - [[november-26-2021/][November 26, 2021]]: I'm Rewriting My Configuration (Again)
 - [[november-19-2021/][November 19, 2021]]: Tools for Building a Lisp-Focused System
 - [[november-12-2021/][November 12, 2021]]: Editor Popularity: Does It Matter?

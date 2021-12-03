@@ -1,0 +1,219 @@
+#+title: System Crafters Live! - December 3, 2021
+
+[[https://youtu.be/g_0raRhGLXs][Watch the recording]] on YouTube!
+
+* Updates
+
+- EmacsConf 2021 was great!
+- [[https://lists.gnu.org/archive/html/emacs-devel/2021-12/msg00217.html][Emacs 28.0.90]] (release candidate) has been announced
+- This is the first SC stream using [[https://pipewire.org/][PipeWire]]!
+- Today is the last day of the holiday sale on the [[https://store.systemcrafters.net][System Crafters Store]]! (code: *HOLIDAY*)
+
+* Can StumpWM Replace EXWM?
+
+Today we're going to experiment with a well-known Common Lisp window manager called StumpWM!
+
+I want to try and replicate some of my EXWM workflow or find suitable/better replacements:
+
+- Single Emacs frame per workspace, each with its own Perspectives (automate creation)
+- Launching programs with =app-launcher= package
+- Specific X programs appearing on specific workspaces
+- Managing browser windows
+
+There are a few other things I want to figure out:
+
+- Interactive configuration hacking workflow
+- Understanding how floating frames work (pin window, movement, switching focus between floating and tiled)
+- Managing multiple Emacs frames smoothly
+- Controlling where new windows are displayed (group, floating or tiled, etc)
+- Communication/automation between Emacs and StumpWM
+- Using Emacs as a Rofi-like launcher for programs
+- Mode line customization
+
+** Interactive REPL Notes
+
+To start the REPL:
+
+#+begin_src emacs-lisp
+
+  (require :slynk)
+  (slynk:create-server :dont-close t)
+
+#+end_src
+
+Install Sly, use =M-x sly-connect=, use the default arguments.
+
+- =C-c C-d C-d=: look up autodoc/documentation for symbol at cursor
+- =C-M-x= / =C-c C-c=: eval form
+
+** Resources
+
+- https://www.emacswiki.org/emacs/StumpWM
+- [[https://www.youtube.com/watch?v=TdQdBQu3fFM][Gavin Freeborn's StumpWM Video]]
+- [[https://config.phundrak.com/stumpwm.html][Phundrak's StumpWM config]]
+
+* Final Configuration
+
+You can check out my latest StumpWM config here:
+
+https://github.com/daviwil/dotfiles/blob/guix-home/Stump.org
+
+Here is the config we ended up with by the end of the stream:
+
+*~/.emacs.d/init.el*
+
+#+begin_src emacs-lisp
+
+  (defun dw/stumpwm-send-command (command)
+    (start-process-shell-command "stumpish" nil (concat  "stumpish " command)))
+
+  (defun dw/init-stumpwm-workspaces ()
+    (require 'stumpwm-mode)
+    (set-frame-parameter (selected-frame) 'name "Emacs")
+    (select-frame (make-frame '((name . "Chat"))))
+    (persp-switch "Chat")
+    (persp-kill "Main")
+    (select-frame-by-name "Emacs"))
+
+  (add-hook 'after-init-hook #'dw/init-stumpwm-workspaces)
+
+#+end_src
+
+*~/.config/stumpwm/config:*
+
+#+begin_export lisp
+
+(in-package :stumpwm)
+
+;;; -- Add StumpWM module paths --
+
+(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-swm-gaps")
+(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-ttf-fonts")
+(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-stumptray")
+(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-kbd-layouts")
+
+;;; -- Environment setup --
+
+;; Set up workspaces
+(run-commands
+  "gnewbg chat"
+  "gnew dev"
+  "gnewbg web"
+  "gnewbg comm"
+  "gnewbg media"
+  "gnewbg-float mpv")
+
+;; Change the prefix key to Super-d
+(set-prefix-key (kbd "s-d"))
+
+;; Mouse click should focus the window
+(setf *mouse-focus-policy* :click)
+
+;; Show messages in the center
+(setq *message-window-gravity* :center)
+
+;;; -- Key Bindings --
+
+;; Enable multiple keyboard layouts (English and Greek)
+(load-module "kbd-layouts")
+(kbd-layouts:keyboard-layout-list "us" "gr")
+(setf kbd-layouts:*caps-lock-behavior* :ctrl)
+
+;; Run xmodmap to remap keys
+(run-shell-command "xmodmap ~/.dotfiles/.config/i3/Xmodmap")
+
+;; Set some super key bindings
+(define-key *top-map* (kbd "s-h") "move-focus left")
+(define-key *top-map* (kbd "s-l") "move-focus right")
+(define-key *top-map* (kbd "s-j") "move-focus down")
+(define-key *top-map* (kbd "s-k") "move-focus up")
+
+(define-key *top-map* (kbd "s-C-h") "move-window left")
+(define-key *top-map* (kbd "s-C-l") "move-window right")
+(define-key *top-map* (kbd "s-C-j") "move-window down")
+(define-key *top-map* (kbd "s-C-k") "move-window up")
+
+(define-key *top-map* (kbd "s-f") "fullscreen")
+(define-key *top-map* (kbd "s-r") "iresize")
+(define-key *top-map* (kbd "s-q") "delete")
+(define-key *top-map* (kbd "s-SPC") "run-shell-command emacsclient -e \"(call-interactively #'app-launcher-run-app)\"")
+(define-key *top-map* (kbd "C-s-SPC") "switch-keyboard-layout")
+(define-key *top-map* (kbd "C-s-l") "run-shell-command slock")
+
+(define-key *top-map* (kbd "s-TAB") "next-in-frame")
+(define-key *top-map* (kbd "s-S-TAB") "prev-in-frame")
+
+(define-key *top-map* (kbd "s-`") "gselect chat")
+(define-key *top-map* (kbd "s-1") "gselect dev")
+(define-key *top-map* (kbd "s-2") "gselect web")
+(define-key *top-map* (kbd "s-3") "gselect comm")
+(define-key *top-map* (kbd "s-4") "gselect media")
+
+(define-key *top-map* (kbd "C-s-`") "gmove chat")
+(define-key *top-map* (kbd "C-s-1") "gmove dev")
+(define-key *top-map* (kbd "C-s-2") "gmove web")
+(define-key *top-map* (kbd "C-s-3") "gmove comm")
+(define-key *top-map* (kbd "C-s-4") "gmove media")
+
+;;; -- Visual Enhancements --
+
+;; Get gapped
+(load-module "swm-gaps")
+(setf swm-gaps:*inner-gaps-size* 3)
+;(run-commands "toggle-gaps-on")
+
+;; Enable TTF fonts
+(load-module "ttf-fonts")
+(setf xft:*font-dirs* '("/home/daviwil/.guix-home/profile/share/fonts/"))
+(setf clx-truetype:+font-cache-filename+ "/home/daviwil/.local/share/fonts/font-cache.sexp")
+(xft:cache-fonts)
+
+(set-font (make-instance 'xft:font :family "JetBrains Mono" :subfamily "Regular" :size 16))
+
+;;; -- Mode line --
+
+;; Set mode line colors
+(setf *mode-line-background-color* "#232635")
+(setf *mode-line-foreground-color* "#A6Accd")
+
+;; Start the mode line
+(run-commands "mode-line")
+
+;; Add the system tray module
+(load-module "stumptray")
+(stumptray:stumptray)
+
+;;; -- Window Placement Rules --
+
+(define-frame-preference "chat"
+  (0 nil T :title "Chat"))
+
+(define-frame-preference "dev"
+  (0 T T :class "Emacs"))
+
+(define-frame-preference "mpv"
+  (0 T T :class "mpv"))
+
+(define-frame-preference "web"
+  (0 T T :class "qutebrowser")
+  (0 T T :class "Nightly"))
+
+(define-frame-preference "media"
+  (0 T T :class "Spotify"))
+
+;;; -- Start initial applications --
+
+;(run-shell-command "polybar panel")
+(run-shell-command "feh --bg-scale ~/.dotfiles/backgrounds/samuel-ferrara-uOi3lg8fGl4-unsplash.jpg")
+(run-shell-command "dunst")
+(run-shell-command "nm-applet")
+(run-shell-command "syncthing-gtk --minimized")
+(run-shell-command "redshift -l 37.983810:23.727539 -t 6500:3500")
+(run-shell-command "emacs")
+
+;;; -- Start the REPL --
+
+(require :slynk)
+(slynk:create-server :dont-close t)
+
+#+end_export
