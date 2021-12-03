@@ -1,0 +1,220 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - December 3, 2021 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - December 3, 2021</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/g_0raRhGLXs">Watch the recording</a> on YouTube!
+</p>
+
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>EmacsConf 2021 was great!</li>
+<li><a href="https://lists.gnu.org/archive/html/emacs-devel/2021-12/msg00217.html">Emacs 28.0.90</a> (release candidate) has been announced</li>
+<li>This is the first SC stream using <a href="https://pipewire.org/">PipeWire</a>!</li>
+<li>Today is the last day of the holiday sale on the <a href="https://store.systemcrafters.net">System Crafters Store</a>! (code: <strong>HOLIDAY</strong>)</li>
+</ul>
+
+<h2><a id="can-stumpwm-replace-exwm" class="anchor" href="#can-stumpwm-replace-exwm">¶</a>Can StumpWM Replace EXWM?</h2><p>Today we're going to experiment with a well-known Common Lisp window manager called StumpWM!
+</p>
+
+<p>I want to try and replicate some of my EXWM workflow or find suitable/better replacements:
+</p>
+
+<ul><li>Single Emacs frame per workspace, each with its own Perspectives (automate creation)</li>
+<li>Launching programs with <kbd>app-launcher</kbd> package</li>
+<li>Specific X programs appearing on specific workspaces</li>
+<li>Managing browser windows</li>
+</ul>
+
+<p>There are a few other things I want to figure out:
+</p>
+
+<ul><li>Interactive configuration hacking workflow</li>
+<li>Understanding how floating frames work (pin window, movement, switching focus between floating and tiled)</li>
+<li>Managing multiple Emacs frames smoothly</li>
+<li>Controlling where new windows are displayed (group, floating or tiled, etc)</li>
+<li>Communication/automation between Emacs and StumpWM</li>
+<li>Using Emacs as a Rofi-like launcher for programs</li>
+<li>Mode line customization</li>
+</ul>
+
+<h3><a id="interactive-repl-notes" class="anchor" href="#interactive-repl-notes">¶</a>Interactive REPL Notes</h3><p>To start the REPL:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">require</span> <span class="org-constant">:slynk</span>)
+(slynk:create-server <span class="org-builtin">:dont-close</span> t)
+
+</code></pre>
+
+<p>Install Sly, use <kbd>M-x sly-connect</kbd>, use the default arguments.
+</p>
+
+<ul><li><kbd>C-c C-d C-d</kbd>: look up autodoc/documentation for symbol at cursor</li>
+<li><kbd>C-M-x</kbd> / <kbd>C-c C-c</kbd>: eval form</li>
+</ul>
+
+<h3><a id="resources" class="anchor" href="#resources">¶</a>Resources</h3><ul><li><a href="https://www.emacswiki.org/emacs/StumpWM">https://www.emacswiki.org/emacs/StumpWM</a></li>
+<li><a href="https://www.youtube.com/watch?v=TdQdBQu3fFM">Gavin Freeborn's StumpWM Video</a></li>
+<li><a href="https://config.phundrak.com/stumpwm.html">Phundrak's StumpWM config</a></li>
+</ul>
+
+<h2><a id="final-configuration" class="anchor" href="#final-configuration">¶</a>Final Configuration</h2><p>You can check out my latest StumpWM config here:
+</p>
+
+<p><a href="https://github.com/daviwil/dotfiles/blob/guix-home/Stump.org">https://github.com/daviwil/dotfiles/blob/guix-home/Stump.org</a>
+</p>
+
+<p>Here is the config we ended up with by the end of the stream:
+</p>
+
+<p><strong>~/.emacs.d/init.el</strong>
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/stumpwm-send-command</span> (command)
+  (start-process-shell-command <span class="org-string">"stumpish"</span> nil (concat  <span class="org-string">"stumpish "</span> command)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/init-stumpwm-workspaces</span> ()
+  (<span class="org-keyword">require</span> '<span class="org-constant">stumpwm-mode</span>)
+  (set-frame-parameter (selected-frame) 'name <span class="org-string">"Emacs"</span>)
+  (select-frame (make-frame '((name . <span class="org-string">"Chat"</span>))))
+  (persp-switch <span class="org-string">"Chat"</span>)
+  (persp-kill <span class="org-string">"Main"</span>)
+  (select-frame-by-name <span class="org-string">"Emacs"</span>))
+
+(add-hook 'after-init-hook #'dw/init-stumpwm-workspaces)
+
+</code></pre>
+
+<p><strong>~/.config/stumpwm/config:</strong>
+</p>
+
+
+(in-package :stumpwm)
+
+;;; -- Add StumpWM module paths --
+
+(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-swm-gaps")
+(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-ttf-fonts")
+(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-stumptray")
+(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-kbd-layouts")
+
+;;; -- Environment setup --
+
+;; Set up workspaces
+(run-commands
+  "gnewbg chat"
+  "gnew dev"
+  "gnewbg web"
+  "gnewbg comm"
+  "gnewbg media"
+  "gnewbg-float mpv")
+
+;; Change the prefix key to Super-d
+(set-prefix-key (kbd "s-d"))
+
+;; Mouse click should focus the window
+(setf *mouse-focus-policy* :click)
+
+;; Show messages in the center
+(setq *message-window-gravity* :center)
+
+;;; -- Key Bindings --
+
+;; Enable multiple keyboard layouts (English and Greek)
+(load-module "kbd-layouts")
+(kbd-layouts:keyboard-layout-list "us" "gr")
+(setf kbd-layouts:*caps-lock-behavior* :ctrl)
+
+;; Run xmodmap to remap keys
+(run-shell-command "xmodmap ~/.dotfiles/.config/i3/Xmodmap")
+
+;; Set some super key bindings
+(define-key *top-map* (kbd "s-h") "move-focus left")
+(define-key *top-map* (kbd "s-l") "move-focus right")
+(define-key *top-map* (kbd "s-j") "move-focus down")
+(define-key *top-map* (kbd "s-k") "move-focus up")
+
+(define-key *top-map* (kbd "s-C-h") "move-window left")
+(define-key *top-map* (kbd "s-C-l") "move-window right")
+(define-key *top-map* (kbd "s-C-j") "move-window down")
+(define-key *top-map* (kbd "s-C-k") "move-window up")
+
+(define-key *top-map* (kbd "s-f") "fullscreen")
+(define-key *top-map* (kbd "s-r") "iresize")
+(define-key *top-map* (kbd "s-q") "delete")
+(define-key *top-map* (kbd "s-SPC") "run-shell-command emacsclient -e \"(call-interactively #'app-launcher-run-app)\"")
+(define-key *top-map* (kbd "C-s-SPC") "switch-keyboard-layout")
+(define-key *top-map* (kbd "C-s-l") "run-shell-command slock")
+
+(define-key *top-map* (kbd "s-TAB") "next-in-frame")
+(define-key *top-map* (kbd "s-S-TAB") "prev-in-frame")
+
+(define-key *top-map* (kbd "s-`") "gselect chat")
+(define-key *top-map* (kbd "s-1") "gselect dev")
+(define-key *top-map* (kbd "s-2") "gselect web")
+(define-key *top-map* (kbd "s-3") "gselect comm")
+(define-key *top-map* (kbd "s-4") "gselect media")
+
+(define-key *top-map* (kbd "C-s-`") "gmove chat")
+(define-key *top-map* (kbd "C-s-1") "gmove dev")
+(define-key *top-map* (kbd "C-s-2") "gmove web")
+(define-key *top-map* (kbd "C-s-3") "gmove comm")
+(define-key *top-map* (kbd "C-s-4") "gmove media")
+
+;;; -- Visual Enhancements --
+
+;; Get gapped
+(load-module "swm-gaps")
+(setf swm-gaps:*inner-gaps-size* 3)
+;(run-commands "toggle-gaps-on")
+
+;; Enable TTF fonts
+(load-module "ttf-fonts")
+(setf xft:*font-dirs* '("/home/daviwil/.guix-home/profile/share/fonts/"))
+(setf clx-truetype:+font-cache-filename+ "/home/daviwil/.local/share/fonts/font-cache.sexp")
+(xft:cache-fonts)
+
+(set-font (make-instance 'xft:font :family "JetBrains Mono" :subfamily "Regular" :size 16))
+
+;;; -- Mode line --
+
+;; Set mode line colors
+(setf *mode-line-background-color* "#232635")
+(setf *mode-line-foreground-color* "#A6Accd")
+
+;; Start the mode line
+(run-commands "mode-line")
+
+;; Add the system tray module
+(load-module "stumptray")
+(stumptray:stumptray)
+
+;;; -- Window Placement Rules --
+
+(define-frame-preference "chat"
+  (0 nil T :title "Chat"))
+
+(define-frame-preference "dev"
+  (0 T T :class "Emacs"))
+
+(define-frame-preference "mpv"
+  (0 T T :class "mpv"))
+
+(define-frame-preference "web"
+  (0 T T :class "qutebrowser")
+  (0 T T :class "Nightly"))
+
+(define-frame-preference "media"
+  (0 T T :class "Spotify"))
+
+;;; -- Start initial applications --
+
+;(run-shell-command "polybar panel")
+(run-shell-command "feh --bg-scale ~/.dotfiles/backgrounds/samuel-ferrara-uOi3lg8fGl4-unsplash.jpg")
+(run-shell-command "dunst")
+(run-shell-command "nm-applet")
+(run-shell-command "syncthing-gtk --minimized")
+(run-shell-command "redshift -l 37.983810:23.727539 -t 6500:3500")
+(run-shell-command "emacs")
+
+;;; -- Start the REPL --
+
+(require :slynk)
+(slynk:create-server :dont-close t)
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
