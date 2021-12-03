@@ -84,137 +84,139 @@
 <p><strong>~/.config/stumpwm/config:</strong>
 </p>
 
+<pre><code class="lisp">
+(<span class="org-keyword">in-package</span> <span class="org-builtin">:stumpwm</span>)
 
-(in-package :stumpwm)
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">-- Add StumpWM module paths --</span>
 
-;;; -- Add StumpWM module paths --
+(stumpwm:add-to-load-path <span class="org-string">"~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-swm-gaps"</span>)
+(stumpwm:add-to-load-path <span class="org-string">"~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-ttf-fonts"</span>)
+(stumpwm:add-to-load-path <span class="org-string">"~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-stumptray"</span>)
+(stumpwm:add-to-load-path <span class="org-string">"~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-kbd-layouts"</span>)
 
-(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-swm-gaps")
-(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-ttf-fonts")
-(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-stumptray")
-(stumpwm:add-to-load-path "~/.guix-home/profile/share/common-lisp/sbcl/stumpwm-kbd-layouts")
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">-- Environment setup --</span>
 
-;;; -- Environment setup --
-
-;; Set up workspaces
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set up workspaces</span>
 (run-commands
-  "gnewbg chat"
-  "gnew dev"
-  "gnewbg web"
-  "gnewbg comm"
-  "gnewbg media"
-  "gnewbg-float mpv")
+  <span class="org-string">"gnewbg chat"</span>
+  <span class="org-string">"gnew dev"</span>
+  <span class="org-string">"gnewbg web"</span>
+  <span class="org-string">"gnewbg comm"</span>
+  <span class="org-string">"gnewbg media"</span>
+  <span class="org-string">"gnewbg-float mpv"</span>)
 
-;; Change the prefix key to Super-d
-(set-prefix-key (kbd "s-d"))
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Change the prefix key to Super-d</span>
+(set-prefix-key (kbd <span class="org-string">"s-d"</span>))
 
-;; Mouse click should focus the window
-(setf *mouse-focus-policy* :click)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Mouse click should focus the window</span>
+(setf *mouse-focus-policy* <span class="org-builtin">:click</span>)
 
-;; Show messages in the center
-(setq *message-window-gravity* :center)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Show messages in the center</span>
+(setq *message-window-gravity* <span class="org-builtin">:center</span>)
 
-;;; -- Key Bindings --
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">-- Key Bindings --</span>
 
-;; Enable multiple keyboard layouts (English and Greek)
-(load-module "kbd-layouts")
-(kbd-layouts:keyboard-layout-list "us" "gr")
-(setf kbd-layouts:*caps-lock-behavior* :ctrl)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Enable multiple keyboard layouts (English and Greek)</span>
+(load-module <span class="org-string">"kbd-layouts"</span>)
+(kbd-layouts:keyboard-layout-list <span class="org-string">"us"</span> <span class="org-string">"gr"</span>)
+(setf kbd-layouts:*caps-lock-behavior* <span class="org-builtin">:ctrl</span>)
 
-;; Run xmodmap to remap keys
-(run-shell-command "xmodmap ~/.dotfiles/.config/i3/Xmodmap")
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Run xmodmap to remap keys</span>
+(run-shell-command <span class="org-string">"xmodmap ~/.dotfiles/.config/i3/Xmodmap"</span>)
 
-;; Set some super key bindings
-(define-key *top-map* (kbd "s-h") "move-focus left")
-(define-key *top-map* (kbd "s-l") "move-focus right")
-(define-key *top-map* (kbd "s-j") "move-focus down")
-(define-key *top-map* (kbd "s-k") "move-focus up")
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set some super key bindings</span>
+(define-key *top-map* (kbd <span class="org-string">"s-h"</span>) <span class="org-string">"move-focus left"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-l"</span>) <span class="org-string">"move-focus right"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-j"</span>) <span class="org-string">"move-focus down"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-k"</span>) <span class="org-string">"move-focus up"</span>)
 
-(define-key *top-map* (kbd "s-C-h") "move-window left")
-(define-key *top-map* (kbd "s-C-l") "move-window right")
-(define-key *top-map* (kbd "s-C-j") "move-window down")
-(define-key *top-map* (kbd "s-C-k") "move-window up")
+(define-key *top-map* (kbd <span class="org-string">"s-C-h"</span>) <span class="org-string">"move-window left"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-C-l"</span>) <span class="org-string">"move-window right"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-C-j"</span>) <span class="org-string">"move-window down"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-C-k"</span>) <span class="org-string">"move-window up"</span>)
 
-(define-key *top-map* (kbd "s-f") "fullscreen")
-(define-key *top-map* (kbd "s-r") "iresize")
-(define-key *top-map* (kbd "s-q") "delete")
-(define-key *top-map* (kbd "s-SPC") "run-shell-command emacsclient -e \"(call-interactively #'app-launcher-run-app)\"")
-(define-key *top-map* (kbd "C-s-SPC") "switch-keyboard-layout")
-(define-key *top-map* (kbd "C-s-l") "run-shell-command slock")
+(define-key *top-map* (kbd <span class="org-string">"s-f"</span>) <span class="org-string">"fullscreen"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-r"</span>) <span class="org-string">"iresize"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-q"</span>) <span class="org-string">"delete"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-SPC"</span>) <span class="org-string">"run-shell-command emacsclient -e \"(call-interactively #'app-launcher-run-app)\""</span>)
+(define-key *top-map* (kbd <span class="org-string">"C-s-SPC"</span>) <span class="org-string">"switch-keyboard-layout"</span>)
+(define-key *top-map* (kbd <span class="org-string">"C-s-l"</span>) <span class="org-string">"run-shell-command slock"</span>)
 
-(define-key *top-map* (kbd "s-TAB") "next-in-frame")
-(define-key *top-map* (kbd "s-S-TAB") "prev-in-frame")
+(define-key *top-map* (kbd <span class="org-string">"s-TAB"</span>) <span class="org-string">"next-in-frame"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-S-TAB"</span>) <span class="org-string">"prev-in-frame"</span>)
 
-(define-key *top-map* (kbd "s-`") "gselect chat")
-(define-key *top-map* (kbd "s-1") "gselect dev")
-(define-key *top-map* (kbd "s-2") "gselect web")
-(define-key *top-map* (kbd "s-3") "gselect comm")
-(define-key *top-map* (kbd "s-4") "gselect media")
+(define-key *top-map* (kbd <span class="org-string">"s-`"</span>) <span class="org-string">"gselect chat"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-1"</span>) <span class="org-string">"gselect dev"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-2"</span>) <span class="org-string">"gselect web"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-3"</span>) <span class="org-string">"gselect comm"</span>)
+(define-key *top-map* (kbd <span class="org-string">"s-4"</span>) <span class="org-string">"gselect media"</span>)
 
-(define-key *top-map* (kbd "C-s-`") "gmove chat")
-(define-key *top-map* (kbd "C-s-1") "gmove dev")
-(define-key *top-map* (kbd "C-s-2") "gmove web")
-(define-key *top-map* (kbd "C-s-3") "gmove comm")
-(define-key *top-map* (kbd "C-s-4") "gmove media")
+(define-key *top-map* (kbd <span class="org-string">"C-s-`"</span>) <span class="org-string">"gmove chat"</span>)
+(define-key *top-map* (kbd <span class="org-string">"C-s-1"</span>) <span class="org-string">"gmove dev"</span>)
+(define-key *top-map* (kbd <span class="org-string">"C-s-2"</span>) <span class="org-string">"gmove web"</span>)
+(define-key *top-map* (kbd <span class="org-string">"C-s-3"</span>) <span class="org-string">"gmove comm"</span>)
+(define-key *top-map* (kbd <span class="org-string">"C-s-4"</span>) <span class="org-string">"gmove media"</span>)
 
-;;; -- Visual Enhancements --
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">-- Visual Enhancements --</span>
 
-;; Get gapped
-(load-module "swm-gaps")
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Get gapped</span>
+(load-module <span class="org-string">"swm-gaps"</span>)
 (setf swm-gaps:*inner-gaps-size* 3)
-;(run-commands "toggle-gaps-on")
+<span class="org-comment-delimiter">;</span><span class="org-comment">(run-commands "toggle-gaps-on")</span>
 
-;; Enable TTF fonts
-(load-module "ttf-fonts")
-(setf xft:*font-dirs* '("/home/daviwil/.guix-home/profile/share/fonts/"))
-(setf clx-truetype:+font-cache-filename+ "/home/daviwil/.local/share/fonts/font-cache.sexp")
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Enable TTF fonts</span>
+(load-module <span class="org-string">"ttf-fonts"</span>)
+(setf xft:*font-dirs* '(<span class="org-string">"/home/daviwil/.guix-home/profile/share/fonts/"</span>))
+(setf clx-truetype:+font-cache-filename+ <span class="org-string">"/home/daviwil/.local/share/fonts/font-cache.sexp"</span>)
 (xft:cache-fonts)
 
-(set-font (make-instance 'xft:font :family "JetBrains Mono" :subfamily "Regular" :size 16))
+(set-font (make-instance 'xft:font <span class="org-builtin">:family</span> <span class="org-string">"JetBrains Mono"</span> <span class="org-builtin">:subfamily</span> <span class="org-string">"Regular"</span> <span class="org-builtin">:size</span> 16))
 
-;;; -- Mode line --
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">-- Mode line --</span>
 
-;; Set mode line colors
-(setf *mode-line-background-color* "#232635")
-(setf *mode-line-foreground-color* "#A6Accd")
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set mode line colors</span>
+(setf *mode-line-background-color* <span class="org-string">"#232635"</span>)
+(setf *mode-line-foreground-color* <span class="org-string">"#A6Accd"</span>)
 
-;; Start the mode line
-(run-commands "mode-line")
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Start the mode line</span>
+(run-commands <span class="org-string">"mode-line"</span>)
 
-;; Add the system tray module
-(load-module "stumptray")
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Add the system tray module</span>
+(load-module <span class="org-string">"stumptray"</span>)
 (stumptray:stumptray)
 
-;;; -- Window Placement Rules --
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">-- Window Placement Rules --</span>
 
-(define-frame-preference "chat"
-  (0 nil T :title "Chat"))
+(define-frame-preference <span class="org-string">"chat"</span>
+  (0 nil T <span class="org-builtin">:title</span> <span class="org-string">"Chat"</span>))
 
-(define-frame-preference "dev"
-  (0 T T :class "Emacs"))
+(define-frame-preference <span class="org-string">"dev"</span>
+  (0 T T <span class="org-builtin">:class</span> <span class="org-string">"Emacs"</span>))
 
-(define-frame-preference "mpv"
-  (0 T T :class "mpv"))
+(define-frame-preference <span class="org-string">"mpv"</span>
+  (0 T T <span class="org-builtin">:class</span> <span class="org-string">"mpv"</span>))
 
-(define-frame-preference "web"
-  (0 T T :class "qutebrowser")
-  (0 T T :class "Nightly"))
+(define-frame-preference <span class="org-string">"web"</span>
+  (0 T T <span class="org-builtin">:class</span> <span class="org-string">"qutebrowser"</span>)
+  (0 T T <span class="org-builtin">:class</span> <span class="org-string">"Nightly"</span>))
 
-(define-frame-preference "media"
-  (0 T T :class "Spotify"))
+(define-frame-preference <span class="org-string">"media"</span>
+  (0 T T <span class="org-builtin">:class</span> <span class="org-string">"Spotify"</span>))
 
-;;; -- Start initial applications --
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">-- Start initial applications --</span>
 
-;(run-shell-command "polybar panel")
-(run-shell-command "feh --bg-scale ~/.dotfiles/backgrounds/samuel-ferrara-uOi3lg8fGl4-unsplash.jpg")
-(run-shell-command "dunst")
-(run-shell-command "nm-applet")
-(run-shell-command "syncthing-gtk --minimized")
-(run-shell-command "redshift -l 37.983810:23.727539 -t 6500:3500")
-(run-shell-command "emacs")
+<span class="org-comment-delimiter">;</span><span class="org-comment">(run-shell-command "polybar panel")</span>
+(run-shell-command <span class="org-string">"feh --bg-scale ~/.dotfiles/backgrounds/samuel-ferrara-uOi3lg8fGl4-unsplash.jpg"</span>)
+(run-shell-command <span class="org-string">"dunst"</span>)
+(run-shell-command <span class="org-string">"nm-applet"</span>)
+(run-shell-command <span class="org-string">"syncthing-gtk --minimized"</span>)
+(run-shell-command <span class="org-string">"redshift -l 37.983810:23.727539 -t 6500:3500"</span>)
+(run-shell-command <span class="org-string">"emacs"</span>)
 
-;;; -- Start the REPL --
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">-- Start the REPL --</span>
 
-(require :slynk)
-(slynk:create-server :dont-close t)
+(<span class="org-keyword">require</span> <span class="org-constant">:slynk</span>)
+(slynk:create-server <span class="org-builtin">:dont-close</span> t)
+
+</code></pre>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
