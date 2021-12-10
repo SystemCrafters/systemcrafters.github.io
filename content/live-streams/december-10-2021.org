@@ -1,0 +1,40 @@
+#+title: System Crafters Live! - December 10, 2021
+
+Watch the recordings on YouTube:
+
+- https://youtu.be/7E-6j6VTZgM
+- https://youtu.be/pH-LcIdB9eY (part 2 after stream crash :( )
+
+* Updates
+
+- Stream with Prot /soon/
+- Started planning video series for 2022
+
+* Community Chat and Config Hacking
+
+There's no agenda for today, so feel free to ask questions, share links, and bring up topics for discussion!
+
+In the meantime, I'll be doing some light configuration hacking for a couple of projects relating to the channel.
+
+** Links from Discussion
+
+- https://github.com/rougier/emacs-svg-icon
+- https://github.com/rougier/nano-emacs
+- https://github.com/rougier/notebook-mode
+- [[https://github.com/m00natic/vlfi][Emacs very large file mode]]
+  - [[https://tecosaur.github.io/emacs-config/config.html#very-large-files][tecosaur's large file config]]
+- https://github.com/meow-edit/meow
+- https://emacs-ng.github.io/emacs-ng/
+- https://github.com/massemanet/distel
+- https://github.com/xahlee/xah-fly-keys
+- https://www.nerdfonts.com/
+- https://vlang.io/
+- https://ziglang.org/
+- http://odin-lang.org/
+  - https://en.wikipedia.org/wiki/Data-oriented_design
+  - https://media.handmade-seattle.com/practical-data-oriented-design/
+- https://drewdevault.com/2021/10/05/Reflection.html
+- [[https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html][SICP]]
+  - [[https://www.youtube.com/playlist?list=PLB63C06FAF154F047][SICP YouTube Playlist]]
+- https://github.com/fritzgrabo/project-tab-groups
+- [[https://www.youtube.com/playlist?list=PLB63C06FAF154F047][My second YouTube channel]]
