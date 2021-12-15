@@ -37,4 +37,4 @@ In the meantime, I'll be doing some light configuration hacking for a couple of 
 - [[https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html][SICP]]
   - [[https://www.youtube.com/playlist?list=PLB63C06FAF154F047][SICP YouTube Playlist]]
 - https://github.com/fritzgrabo/project-tab-groups
-- [[https://www.youtube.com/playlist?list=PLB63C06FAF154F047][My second YouTube channel]]
+- [[https://www.youtube.com/channel/UCZ4HO8or08HUGUzA0w8Tagw][My second YouTube channel]]
