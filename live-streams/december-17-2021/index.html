@@ -1,0 +1,97 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - December 17, 2021 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - December 17, 2021</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/wqdT0xKMQT8">Watch the recording</a> on YouTube!
+</p>
+
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>The <a href="https://www.youtube.com/channel/UCZ4HO8or08HUGUzA0w8Tagw/">Flux Harmonic</a> channel is now live!</li>
+<li>First stream is next Tuesday, December 21, from 1PM to 4PM UTC</li>
+</ul>
+
+<p><a href="https://www.youtube.com/channel/UCZ4HO8or08HUGUzA0w8Tagw">https://www.youtube.com/channel/UCZ4HO8or08HUGUzA0w8Tagw</a>
+</p>
+
+<h2><a id="the-hidden-value-of-emacs-tab-bar" class="anchor" href="#the-hidden-value-of-emacs-tab-bar">¶</a>The Hidden Value of Emacs' Tab Bar</h2><p>Today we're going to work on customizing Emacs' <kbd>tab-bar-mode</kbd> to see if it can be used as a replacement for other workspace packages like Perspective.el.
+</p>
+
+<p>Lots of new things have been added for it in Emacs 28, so let's try it out!
+</p>
+
+<p><strong>The Plan</strong>
+</p>
+
+<ul><li>Customizing tab display to show selection better (font, color, emoji?)</li>
+<li>Experiment with tab groups</li>
+<li>Setting the <kbd>tab-bar-format</kbd>, a better status panel?</li>
+<li>Open <kbd>project.el</kbd> projects in new tabs</li>
+<li>Writing a function to show only desired buffers for a given tab</li>
+<li>Does it work with <kbd>desktop-save-mode</kbd>?</li>
+</ul>
+
+<p>Using tab-bar solely as a global mode line: <a href="http://ruzkuku.com/texts/emacs-global.html">http://ruzkuku.com/texts/emacs-global.html</a>
+</p>
+
+<h2><a id="the-final-code" class="anchor" href="#the-final-code">¶</a>The final code</h2><pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Inherit the face of `doom-modeline-panel` for better appearance</span>
+(set-face-attribute 'tab-bar-tab nil <span class="org-builtin">:inherit</span> 'doom-modeline-panel <span class="org-builtin">:foreground</span> nil <span class="org-builtin">:background</span> nil)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Totally customize the format of the tab bar name</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/tab-bar-format</span> (tab i)
+  (propertize
+   (format
+    (concat
+      (<span class="org-keyword">if</span> (eq (car tab) 'current-tab)
+          <span class="org-string">"&#128293; "</span> <span class="org-string">""</span>)
+      <span class="org-string">"%s"</span>)
+    (alist-get 'name tab))
+   'face (list (append
+                  '(<span class="org-builtin">:foreground</span> <span class="org-string">"#FFFFFF"</span>)
+                  (<span class="org-keyword">if</span> (eq (car tab) 'current-tab)
+                      '(<span class="org-builtin">:box</span> t)
+                      '())))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Replace the default tab bar function</span>
+(<span class="org-keyword">setq</span> tab-bar-tab-name-format-function #'my/tab-bar-format)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/tab-bar-tab-name-function</span> ()
+  (<span class="org-keyword">let</span> ((project (project-current)))
+    (<span class="org-keyword">if</span> project
+        (project-root project)
+        (tab-bar-tab-name-current))))
+
+(<span class="org-keyword">setq</span> tab-bar-tab-name-function #'my/tab-bar-tab-name-function)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Only show the tab bar if there are 2 or more tabs</span>
+(<span class="org-keyword">setq</span> tab-bar-show 1)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/tab-bar-string</span> () <span class="org-doc">"HELLO"</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Customize the tab bar format to add the global mode line string</span>
+(<span class="org-keyword">setq</span> tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
+
+(add-to-list 'global-mode-string <span class="org-string">"HELLO"</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Make sure mode line text in the tab bar can be read</span>
+(set-face-attribute 'tab-bar nil <span class="org-builtin">:foreground</span> <span class="org-string">"#FFFFFF"</span>)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/project-create-tab</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (tab-bar-new-tab)
+  (magit-status))
+
+(<span class="org-keyword">setq</span> project-switch-commands #'my/project-create-tab)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/switch-to-tab-buffer</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">if</span> (project-current)
+      (call-interactively #'project-switch-to-buffer)
+    (call-interactively #'switch-to-buffer)))
+
+(global-set-key (kbd <span class="org-string">"C-x b"</span>) #'my/switch-to-tab-buffer)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Turn on tab bar mode after startup</span>
+(tab-bar-mode 1)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Save the desktop session</span>
+(desktop-save-mode 1)
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
