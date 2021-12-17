@@ -1,0 +1,96 @@
+#+title: System Crafters Live! - December 17, 2021
+
+[[https://youtu.be/wqdT0xKMQT8][Watch the recording]] on YouTube!
+
+* Updates
+
+- The [[https://www.youtube.com/channel/UCZ4HO8or08HUGUzA0w8Tagw/][Flux Harmonic]] channel is now live!
+- First stream is next Tuesday, December 21, from 1PM to 4PM UTC
+
+https://www.youtube.com/channel/UCZ4HO8or08HUGUzA0w8Tagw
+
+* The Hidden Value of Emacs' Tab Bar
+
+Today we're going to work on customizing Emacs' =tab-bar-mode= to see if it can be used as a replacement for other workspace packages like Perspective.el.
+
+Lots of new things have been added for it in Emacs 28, so let's try it out!
+
+*The Plan*
+
+- Customizing tab display to show selection better (font, color, emoji?)
+- Experiment with tab groups
+- Setting the =tab-bar-format=, a better status panel?
+- Open =project.el= projects in new tabs
+- Writing a function to show only desired buffers for a given tab
+- Does it work with =desktop-save-mode=?
+
+Using tab-bar solely as a global mode line: http://ruzkuku.com/texts/emacs-global.html
+
+* The final code
+
+#+begin_src emacs-lisp
+
+  ;; Inherit the face of `doom-modeline-panel` for better appearance
+  (set-face-attribute 'tab-bar-tab nil :inherit 'doom-modeline-panel :foreground nil :background nil)
+
+  ;; Totally customize the format of the tab bar name
+  (defun my/tab-bar-format (tab i)
+    (propertize
+     (format
+      (concat
+        (if (eq (car tab) 'current-tab)
+            "🔥 " "")
+        "%s")
+      (alist-get 'name tab))
+     'face (list (append
+                    '(:foreground "#FFFFFF")
+                    (if (eq (car tab) 'current-tab)
+                        '(:box t)
+                        '())))))
+
+  ;; Replace the default tab bar function
+  (setq tab-bar-tab-name-format-function #'my/tab-bar-format)
+
+  (defun my/tab-bar-tab-name-function ()
+    (let ((project (project-current)))
+      (if project
+          (project-root project)
+          (tab-bar-tab-name-current))))
+
+  (setq tab-bar-tab-name-function #'my/tab-bar-tab-name-function)
+
+  ;; Only show the tab bar if there are 2 or more tabs
+  (setq tab-bar-show 1)
+
+  (defun my/tab-bar-string () "HELLO")
+
+  ;; Customize the tab bar format to add the global mode line string
+  (setq tab-bar-format '(tab-bar-format-tabs tab-bar-separator tab-bar-format-align-right tab-bar-format-global))
+
+  (add-to-list 'global-mode-string "HELLO")
+
+  ;; Make sure mode line text in the tab bar can be read
+  (set-face-attribute 'tab-bar nil :foreground "#FFFFFF")
+
+  (defun my/project-create-tab ()
+    (interactive)
+    (tab-bar-new-tab)
+    (magit-status))
+
+  (setq project-switch-commands #'my/project-create-tab)
+
+  (defun my/switch-to-tab-buffer ()
+    (interactive)
+    (if (project-current)
+        (call-interactively #'project-switch-to-buffer)
+      (call-interactively #'switch-to-buffer)))
+
+  (global-set-key (kbd "C-x b") #'my/switch-to-tab-buffer)
+
+  ;; Turn on tab bar mode after startup
+  (tab-bar-mode 1)
+
+  ;; Save the desktop session
+  (desktop-save-mode 1)
+
+#+end_src
