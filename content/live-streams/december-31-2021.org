@@ -1,0 +1,141 @@
+#+title: The Best of 2021!
+
+[[https://youtu.be/aUhDLuD3F_Y][Watch the recording]] on YouTube!
+
+* Updates
+
+- The first Flux Harmonic streams were a blast!  Check them out here: https://fluxharmonic.com/live-streams
+- System Crafters recorded videos are starting back up next week!
+- Coming Soon: Stream with Prot!
+
+* Thank You!
+
+- Members of the System Crafters community
+- Members of the wider Emacs and Guix communities
+- Those who have supported me!
+
+* Let's take a look back!
+
+Since today is New Year's Eve, I thought it would be fun to take a look back at the highlights of 2021 in the realm of what we talk about on this channel.
+
+The things I've listed in each section are obviously my personal opinion, but I want to hear yours too!
+
+* Best Emacs Packages
+
+These are the packages I've personally enjoyed the most in 2021!
+
+- Vertico (and also Marginalia, Consult, and Orderless)
+- Embark
+- Org Roam
+- setup.el
+- straight.el
+- org-present
+
+** Your suggestions
+
+- org-zettelkasten
+- avy
+- frowny.el
+- popper
+- lsp-mode
+- tab-bar-mode
+- Magit
+- ledger-mode
+
+* Best Emacs Improvements
+
+- native-comp and pgtk!
+- Tab Bar improvements
+- Color emoji support
+
+** Your suggestions
+
+* Best Community Content
+
+When I say "community," I mean SC community and wider Emacs community!
+
+- Karthik's blog: https://karthinks.com
+- Gavin's YouTube videos: https://www.youtube.com/channel/UCJetJ7nDNLlEzDLXv7KIo0w
+- Protesilaos' blog and videos: https://protesilaos.com/codelog/
+- pkal's (Philip Kaludercic) blog: https://ruzkuku.com/
+- SqrtMinusOne (Pavel Korytov) blog: https://sqrtminusone.xyz/posts/
+- Nicolas Rougier - https://github.com/rougier
+- Sacha Chua Emacs News - https://sachachua.com/blog/category/emacs-news/
+- EmacsConf 2021 - https://emacsconf.org/2021/
+
+** Your suggestions
+
+- Phundrak's config - https://config.phundrak.com/emacs
+- Tecosaur's config - https://tecosaur.github.io/emacs-config/config.html
+- Andrea's Moldable Emacs - https://ag91.github.io/blog/
+- Xah Lee - http://xahlee.info/emacs/emacs/blog.html
+* Best Guix Improvements
+
+- [[https://guix.gnu.org/manual/devel/en/html_node/Home-Configuration.html][Guix Home]] (and [[https://github.com/abcdw/rde][rde]]) by [[https://github.com/abcdw][Andrew Tropin]] ([[https://www.youtube.com/channel/UCuj_loxODrOPxSsXDfJmpng][YT Channel]])
+- [[https://guix.gnu.org/en/blog/2021/from-guix-environment-to-guix-shell/][guix shell]]
+- The improved [[https://guix.gnu.org/en/blog/2021/the-big-change/][package description format]]
+- [[https://guix.gnu.org/en/blog/2021/taming-the-stat-storm-with-a-loader-cache/][Quicker program startup time]]
+
+** Your suggestions
+
+* Most Popular Videos
+
+- Absolute Beginners Guide to Emacs (70k views!)
+- 5 Reasons to Learn Emacs (53k views)
+- Getting Started with Org Roam (44k views)
+- Introduction to Emacs Lisp (25k views)
+- An Introduction to GNU Guix (21k views)
+
+And by far the most viewed video is the first Emacs From Scratch stream at 87,412 views (68k this year)!
+
+** Your favorites?
+
+- Macroexpanding use-package
+
+* Best Channel Moments
+
+- "5 Reasons" video taking off
+- [[https://youtu.be/G8qSAnuOnCE?t=419][DistroTube mention]]
+- Reaching 10,000 subscribers
+- First Org Roam video taking off
+- Speaking at EmacsConf 2021
+- System Crafters Store launch
+
+** Suggestions
+
+- Figuring out Sherri was a bot (or did we?)
+
+
+* Channel Goals for 2022
+
+- Reach 35,000 YouTube subscribers
+- Reach 400 supporters
+- Make some cool merch worth wearing
+- Organize a "hackathon"!
+
+* What are your system crafting goals for 2022?
+
+Let's talk about your goals!  I'm curious to know what you've got planned.
+
+Another way to look at it: what do you want to learn in 2022?
+
+Mine:
+
+- Migrate all personal configuration to Guix Home
+- Create it with a new, modular base Emacs configuration
+- Try to create my own custom distribution of Guix
+
+** Your Goals
+
+- Building Emacs from Scratch, ditching Spacemacs
+- Supercharging Org Agenda usag
+- Using Linux full time at work
+- Literate configuration like Tecosaur
+- Creating my own programming content
+- Bringing Lisping to work
+- Writing my thesis in Org Mode
+- Improving Emacs performance and startup time
+- Get Emacs usable for work
+- Learning steno and hooking it up in Emacs
+- Generate a website from my config and org-roam notes
+- Spend /less/ time playing around in Emacs
