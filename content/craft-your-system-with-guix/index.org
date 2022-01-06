@@ -7,3 +7,4 @@
 3. [[everyday-package-management/][Everyday Package Management with GNU Guix]]
 4. [[using-package-channels/][Using Package Channels in GNU Guix]]
 5. [[full-system-install/][Installing Guix as a Complete GNU/Linux System]]
+5. [[5-reasons-to-try-guix][5 Reasons to Try GNU Guix in 2022]]
