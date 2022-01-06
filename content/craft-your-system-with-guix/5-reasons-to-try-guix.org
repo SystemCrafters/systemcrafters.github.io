@@ -1,6 +1,8 @@
 #+title: 5 Reasons to Try GNU Guix in 2022
 
-[[yt:7ZdMRLPZhFs][Watch the video on YouTube!]]
+Watch the video on YouTube!
+
+[[yt:7ZdMRLPZhFs][Video Link]]
 
 * What is GNU Guix?
 
