@@ -1,0 +1,140 @@
+#+title: System Crafters Live! - January 7, 2022
+
+[[https://youtu.be/CEnMzQ9JPtw][Watch the recording]] on YouTube!
+
+* Updates
+
+- New tab-bar setup
+- Next week: Vertico extensions
+
+* Why Geeks Don't Use Guix
+
+Yesterday I published a video titled "5 Reasons to Try Guix in 2022" to try and encourage people to give Guix a try this year since there's a lot of cool new things happening there.
+
+I asked viewers a couple of questions:
+
+- What has kept you from using Guix before?
+- If you've tried Guix, what problems did you have?
+
+Let's look at a compilation of some of the recurring themes in the answers I received and talk about what they mean and how they can be addressed!
+
+* Getting Started Issues
+
+** High learning curve
+
+
+- I agree!
+- More people need to share their experience and understanding
+
+** Hard to figure out how to install it, indimidating
+
+- Booting it is the first problem, but knowing how to configure it is the real problem
+- Need to create better learning resources to teach how to write Guix system configuration
+
+** Reading the manual can be difficult
+
+- The manual can be a little overwhelming
+- There need to be more conceptual / usage documentation
+- There is the [[https://guix.gnu.org/en/cookbook/en/guix-cookbook.html][Guix Cookbook]]
+- A resource that tells you how to do common things in Guix like in other Linux distros
+
+** There should be GUI tools to configure it
+
+- I don't really agree, it's better to know how to write the configuration
+- It's hard to write Scheme if you don't have good tools!
+- Is it possible to write a very user-friendly Lisp editor that is single-purpose for writing Guix config
+
+* Software Issues
+
+** It doesn't have software I need and it's hard to write packages
+
+- Guix doesn't have as much software packaged as other distributions
+- But that's where YOU come in!
+- You can software from other places: other Guix channels, Nix, Flatpak
+- We will cover how to write and contribute Guix packages on the channel this year!
+
+** I need to customize a package but not sure how to do it
+
+- Sometimes there's software like suckless tools where you need to apply patches or add compiler flags
+- One approach: write a package that inherits from the original package and changes only the different parts
+- You can load your own customized packages from your own Guix channel or even your dotfiles repository, you just have to set the load path correctly
+
+** Can't dual boot with Windows
+
+- It is possible, just not with GRUB (use your system's EFI bootloader)
+- You can set up Guix on WSL2: https://github.com/SystemCrafters/wiki-site/blob/main/content/guix/wsl.org
+- Alexandru says its possible to write the bootloader config yourself to boot Windows
+
+** It's hard hard to find configurations for very recent and alpha software (especially coding libraries)
+
+- This is even harder when you need to set up services, etc
+- But the same solution applies, learn how to do it and contribute it yourself!
+* Hardware Issues
+
+** My basic hardware isn't compatible, no WiFi, black screen at boot
+
+
+- This is definitely a problem, and it's why I made my installation video and the special installer image
+- Guix follows the [[https://www.gnu.org/distros/free-system-distribution-guidelines.html][Free System Distribution Guidelines]]
+- Nonguix channel has the full Linux kernel and other hardware drivers (check out their new [[https://gitlab.com/nonguix/nonguix/-/tree/master/][substitute server]])
+
+** Not easy to install drivers for graphics cards
+
+
+- The Nonguix repo has AMD and NVIDIA driver packages, but YMMV
+* Programming Language Issues
+
+** Scheme and Lisp scare me
+
+
+- Is it that the parentheses are just really confusing to look at?
+- Sometimes the problem with Lisps is that you don't really know how to accomplish specific tasks
+- We'll have a Guile Crash Course for Guix Users on the channel soonish
+
+** I don't want to learn another programming language
+
+- I think this is the basic barrier to entry for Guix
+- You should try to learn Scheme anyway, it's fun!
+
+** Lisp is not popular or used in many places
+
+- Yes, that's sort of true, but it's not a reason to not use Guix
+
+* Other Issues
+
+** The inertia of comfort with the current environment
+
+
+- Install Guix as a secondary package manager and try to use it for different things
+
+** Heavy focus on Free Software
+
+- You can use other package channels!  Nonguix is a great one, and there are other new ones being create all the time (like [[https://git.sr.ht/~whereiseveryone/guixrus][guixrus]])
+* Miscellaneous Hot Takes
+
+** "Lisp for configs, really?" / "I /shouldn't have to/ learn Lisp to configure my system"
+
+- I disagree :)
+- Lisp is designed for creating "domain specific languages", just like Guix' own configuration syntax!
+- Look at Emacs as an example for why this wrong :)
+
+** "We don't need another package manager"
+
+- This is just a plain misunderstanding
+- There are new package managers all the time.  What about all the AUR package managers for Arch?  There's a new every 20 days!
+
+** "I don't see anything new here"
+
+- There's plenty new, you're just not looking at it right
+
+** "Almost nonexistent community"
+
+- Guix IRC, mailing lists, System Crafters community, there are plenty of places and people!
+
+** "No support for a very complex system"
+
+- Go to the Guix IRC, the maintainers are there answering questions all day
+
+** "I don't like the big abstraction layer on top of the Linux system"
+
+- That layer is the whole point of Guix and where all the value is derived!

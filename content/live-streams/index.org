@@ -4,6 +4,7 @@ We stream every Friday at 8 am Pacific time!
 
 * Episodes
 
+- [[january-7-2022/][January 7, 2022]]: Why Geeks Don't Use Guix
 - [[december-31-2021/][December 31, 2021]]: The Best of 2021!
 - [[december-17-2021/][December 17, 2021]]: The Hidden Value of Emacs' Tab Bar
 - [[december-10-2021/][December 10, 2021]]: Community Chat and Config Hacking
