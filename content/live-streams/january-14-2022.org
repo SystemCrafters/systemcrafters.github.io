@@ -1,0 +1,38 @@
+#+title: System Crafters Live! - January 14, 2022
+
+[[yt:L4NaIUqx8fw]]
+
+* Updates
+
+- I didn't make the Vertico Extensions video yet... because [[https://www.youtube.com/watch?v=hPwDbx--Waw][Karthik just posted one]]!
+- I'm working on a couple of other video ideas, will post one next week
+- On Flux Harmonic, I started writing a [[https://fluxharmonic.com/live-streams/2022-01-13/][custom scripting language]] inspired by Scheme
+- The *Guix Days* online conference is looking for presenters: https://guix.gnu.org/en/blog/2022/online-guix-days-2022-announcement-1/
+
+* Building the WORST Emacs Configuration
+
+Today we're going to do the unthinkable...
+
+I've already been getting some suggestions from Reddit and System Crafters IRC but I haven't captured them all yet.  I want your suggestions!
+
+YouTube makes it difficult to paste links in chat, so submit your code suggestions as issues to the GitHub repository:
+
+https://github.com/daviwil/emacs-from-hell
+
+* Pillars of Evil
+
+Let's define the categories under which we will torment the user of this infernal configuration.  Suggest more!
+
+Ground rules: it shouldn't destroy the user's system, though it can terrorize the Emacs session.
+
+** Sensory Harassment
+
+It needs a horrible appearance.  It should also sound really annoying.
+
+** User Imprisonment
+
+The FSF and GNU project are *wrong* about "user freedom," they deserve to be imprisoned
+
+** Cursed Behavior
+
+The Haunting of GNU Emacs

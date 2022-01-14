@@ -4,6 +4,7 @@ We stream every Friday at 8 am Pacific time!
 
 * Episodes
 
+- [[january-14-2022/][January 14, 2022]]: Building the WORST Emacs Configuration
 - [[january-7-2022/][January 7, 2022]]: Why Geeks Don't Use Guix
 - [[december-31-2021/][December 31, 2021]]: The Best of 2021!
 - [[december-17-2021/][December 17, 2021]]: The Hidden Value of Emacs' Tab Bar
