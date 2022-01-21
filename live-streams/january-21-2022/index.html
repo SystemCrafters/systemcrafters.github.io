@@ -1,7 +1,5 @@
 <!--  -->
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - January 21, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - January 21, 2022</h1><p class="blog-post-meta"></p><div>
-<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2>
-
 <h2><a id="planning-the-new-emacs-from-scratch" class="anchor" href="#planning-the-new-emacs-from-scratch">¶</a>Planning the New Emacs From Scratch</h2><p>I've been foreshadowing this for a while, but now it's finally time:
 </p>
 
@@ -14,8 +12,27 @@
 <p>Today I'd like your help in deciding what features of Emacs we can cover and potentially what order we should cover them in.
 </p>
 
-<h2><a id="configuration-topics" class="anchor" href="#configuration-topics">¶</a>Configuration Topics</h2><h3><a id="configuration-fundamentals" class="anchor" href="#configuration-fundamentals">¶</a>Configuration Fundamentals</h3><ul><li>Where init.el lives</li>
+<h2><a id="why-do-it-over-again" class="anchor" href="#why-do-it-over-again">¶</a>Why do it over again?</h2><p>Last time I made a few mistakes:
+</p>
+
+<ul><li>Copying and pasting from my own config without much testing</li>
+<li>Not preparing adequate show notes</li>
+<li>Not really showing how Emacs configuration actually works</li>
+</ul>
+
+<p>I also recorded all episodes as live streams which were around 1 hour each!
+</p>
+
+<h2><a id="configuration-topics" class="anchor" href="#configuration-topics">¶</a>Configuration Topics</h2><p>Let's discuss the topics to cover in this series.
+</p>
+
+<p>I'm particularly interested to hear the parts of configuring Emacs that weren't so clear to you at first so that I can make sure to cover them!
+</p>
+
+<h3><a id="configuration-fundamentals" class="anchor" href="#configuration-fundamentals">¶</a>Configuration Fundamentals</h3><ul><li>Where init.el lives</li>
 <li>How to re-evaluate configuration snippets as you write them</li>
+<li>How to get help (maybe info system, definitely describe-* functions</li>
+<li>check-parens</li>
 </ul>
 
 <h3><a id="basic-appearance" class="anchor" href="#basic-appearance">¶</a>Basic Appearance</h3><ul><li>Theme</li>
@@ -23,13 +40,73 @@
 <li>Turning off or improving various UI elements</li>
 </ul>
 
-<h3><a id="configuring-the-mode-line" class="anchor" href="#configuring-the-mode-line">¶</a>Configuring the Mode Line</h3>
-
-<h3><a id="improving-completions--selections" class="anchor" href="#improving-completions--selections">¶</a>Improving Completions / Selections</h3>
-
-<h3><a id="configuring-a-shell" class="anchor" href="#configuring-a-shell">¶</a>Configuring a Shell</h3><p><kbd>term-mode</kbd> and/or <kbd>eshell</kbd>?
+<h3><a id="configuring-the-mode-line" class="anchor" href="#configuring-the-mode-line">¶</a>Configuring the Mode Line</h3><p>It's not very hard to make the mode line look better!
 </p>
+<ul><li>Minimal presentation</li>
+<li>Maybe icons for modes (emoji)</li>
+</ul>
+
+<h3><a id="how-to-set-keybindings" class="anchor" href="#how-to-set-keybindings">¶</a>How to set keybindings</h3><ul><li>global-set-key, define-key</li>
+<li>cua-mode</li>
+</ul>
+
+<h3><a id="configuring-editor-settings" class="anchor" href="#configuring-editor-settings">¶</a>Configuring editor settings</h3><ul><li>indentation / tabs</li>
+<li>smart tabs</li>
+<li>completion-in-region (maybe)</li>
+<li>electric-pair-mode</li>
+<li>auto-indent</li>
+<li>dabbrev, hippie-expand, skeletons</li>
+<li>per-file type settings</li>
+<li>hooks (configuring a buffer when a mode is loaded) -- also writing functions for hooks</li>
+<li>dir-locals</li>
+<li>spell checking / flyspell</li>
+<li>flymake</li>
+<li>etags / tags files</li>
+<li>xref</li>
+</ul>
+
+<h3><a id="improving-completions--selections" class="anchor" href="#improving-completions--selections">¶</a>Improving Completions / Selections</h3><ul><li>Pick a better completion system</li>
+<li>Look into <kbd>completion-styles</kbd></li>
+</ul>
+
+<h3><a id="configuring-a-shell" class="anchor" href="#configuring-a-shell">¶</a>Configuring a Shell</h3><p><kbd>term-mode</kbd> / <kbd>ansi-term</kbd> and/or <kbd>eshell</kbd>?
+</p>
+<ul><li>eshell as primary, term or ansi as secondary if needed</li>
+<li>configure prompt, history, aliases</li>
+<li>configuring visual commands for eshell for automatic term-mode invocation</li>
+<li>eshell on Windows (shell-mode Windows shells)</li>
+</ul>
 
 <h3><a id="org-mode" class="anchor" href="#org-mode">¶</a>Org Mode</h3><p>Is there anything we can talk about regarding Org Mode or should I make an entire series on that to go really in depth?
 </p>
+
+<ul><li>Improving Org Mode file appearance with in-the-box config</li>
+</ul>
+
+<h3><a id="debugging--profiling-the-config" class="anchor" href="#debugging--profiling-the-config">¶</a>Debugging / Profiling the config</h3><p>What happens when things go wrong?
+</p>
+
+<h3><a id="advanced-configuration" class="anchor" href="#advanced-configuration">¶</a>Advanced Configuration</h3><p>OK, I know how to config, now what does a well-organized config look like?
+</p>
+
+<ul><li>outline-minor-mode?</li>
+<li>Making your configuration work across multiple machines / OSes</li>
+<li>Having a private.el</li>
+<li>Startup performance (loading packages only at the right time, measuring startup performance, etc)</li>
+<li>Compiling your Emacs config to bytecode (even native?) for faster startup (on save hooks?)</li>
+<li>popup management (display-buffer-alist?)</li>
+</ul>
+
+<h3><a id="what-else" class="anchor" href="#what-else">¶</a>What else?</h3><ul><li>tab-bar-mode</li>
+<li>desktop-save-mode (session management)</li>
+</ul>
+
+<h3><a id="videos-for-other-series" class="anchor" href="#videos-for-other-series">¶</a>Videos for other series'</h3><ul><li>M-x compile (ansi colors, recompile, functions to call after compile)</li>
+<li>Using gdb within Emacs</li>
+<li>direnv with guix shell</li>
+<li>crdt.el on live stream?</li>
+<li>regular expressions in Emacs (especially <kbd>rx</kbd>)</li>
+<li>search and replace</li>
+<li>rectangle editing</li>
+</ul>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
