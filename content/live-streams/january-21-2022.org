@@ -1,5 +1,7 @@
 #+title: System Crafters Live! - January 21, 2022
 
+[[yt:NlP3EDS6WGE][Watch the recording on YouTube!]]
+
 * Planning the New Emacs From Scratch
 
 I've been foreshadowing this for a while, but now it's finally time:

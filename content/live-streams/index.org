@@ -4,6 +4,7 @@ We stream every Friday at 8 am Pacific time!
 
 * Episodes
 
+- [[january-21-2022/][January 21, 2022]]: Planning the New Emacs From Scratch
 - [[january-14-2022/][January 14, 2022]]: Building the WORST Emacs Configuration
 - [[january-7-2022/][January 7, 2022]]: Why Geeks Don't Use Guix
 - [[december-31-2021/][December 31, 2021]]: The Best of 2021!
