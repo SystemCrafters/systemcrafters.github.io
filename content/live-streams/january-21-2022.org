@@ -1,0 +1,38 @@
+#+title: System Crafters Live! - January 21, 2022
+
+* Updates
+
+* Planning the New Emacs From Scratch
+
+I've been foreshadowing this for a while, but now it's finally time:
+
+I'm going to create a new Emacs From Scratch series to focus on configuring Emacs using only what comes "in the box" while also teaching Emacs Lisp!
+
+The goal here is to show how much better you can make Emacs without even pulling in any community packages (including =use-package=).  Once you learn enough about configuring Emacs using the things that come with it, you'll be in a much better position to decide whether community packages are worth using!
+
+Today I'd like your help in deciding what features of Emacs we can cover and potentially what order we should cover them in.
+
+* Configuration Topics
+
+** Configuration Fundamentals
+
+- Where init.el lives
+- How to re-evaluate configuration snippets as you write them
+
+** Basic Appearance
+
+- Theme
+- Fonts
+- Turning off or improving various UI elements
+
+** Configuring the Mode Line
+
+** Improving Completions / Selections
+
+** Configuring a Shell
+
+=term-mode= and/or =eshell=?
+
+** Org Mode
+
+Is there anything we can talk about regarding Org Mode or should I make an entire series on that to go really in depth?
