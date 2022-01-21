@@ -1,7 +1,5 @@
 #+title: System Crafters Live! - January 21, 2022
 
-* Updates
-
 * Planning the New Emacs From Scratch
 
 I've been foreshadowing this for a while, but now it's finally time:
@@ -12,12 +10,28 @@ The goal here is to show how much better you can make Emacs without even pulling
 
 Today I'd like your help in deciding what features of Emacs we can cover and potentially what order we should cover them in.
 
+* Why do it over again?
+
+Last time I made a few mistakes:
+
+- Copying and pasting from my own config without much testing
+- Not preparing adequate show notes
+- Not really showing how Emacs configuration actually works
+
+I also recorded all episodes as live streams which were around 1 hour each!
+
 * Configuration Topics
+
+Let's discuss the topics to cover in this series.
+
+I'm particularly interested to hear the parts of configuring Emacs that weren't so clear to you at first so that I can make sure to cover them!
 
 ** Configuration Fundamentals
 
 - Where init.el lives
 - How to re-evaluate configuration snippets as you write them
+- How to get help (maybe info system, definitely describe-* functions
+- check-parens
 
 ** Basic Appearance
 
@@ -27,12 +41,76 @@ Today I'd like your help in deciding what features of Emacs we can cover and pot
 
 ** Configuring the Mode Line
 
+It's not very hard to make the mode line look better!
+- Minimal presentation
+- Maybe icons for modes (emoji)
+
+** How to set keybindings
+
+- global-set-key, define-key
+- cua-mode
+
+** Configuring editor settings
+
+- indentation / tabs
+- smart tabs
+- completion-in-region (maybe)
+- electric-pair-mode
+- auto-indent
+- dabbrev, hippie-expand, skeletons
+- per-file type settings
+- hooks (configuring a buffer when a mode is loaded) -- also writing functions for hooks
+- dir-locals
+- spell checking / flyspell
+- flymake
+- etags / tags files
+- xref
+
 ** Improving Completions / Selections
+
+- Pick a better completion system
+- Look into =completion-styles=
 
 ** Configuring a Shell
 
-=term-mode= and/or =eshell=?
+=term-mode= / =ansi-term= and/or =eshell=?
+- eshell as primary, term or ansi as secondary if needed
+- configure prompt, history, aliases
+- configuring visual commands for eshell for automatic term-mode invocation
+- eshell on Windows (shell-mode Windows shells)
 
 ** Org Mode
 
 Is there anything we can talk about regarding Org Mode or should I make an entire series on that to go really in depth?
+
+- Improving Org Mode file appearance with in-the-box config
+
+** Debugging / Profiling the config
+
+What happens when things go wrong?
+
+** Advanced Configuration
+
+OK, I know how to config, now what does a well-organized config look like?
+
+- outline-minor-mode?
+- Making your configuration work across multiple machines / OSes
+- Having a private.el
+- Startup performance (loading packages only at the right time, measuring startup performance, etc)
+- Compiling your Emacs config to bytecode (even native?) for faster startup (on save hooks?)
+- popup management (display-buffer-alist?)
+
+** What else?
+
+- tab-bar-mode
+- desktop-save-mode (session management)
+
+** Videos for other series'
+
+- M-x compile (ansi colors, recompile, functions to call after compile)
+- Using gdb within Emacs
+- direnv with guix shell
+- crdt.el on live stream?
+- regular expressions in Emacs (especially =rx=)
+- search and replace
+- rectangle editing
