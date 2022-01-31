@@ -23,6 +23,14 @@ If you can't find a recent build of Emacs 28 for your operating system or Linux 
 
 As we go, I'll also give pointers on alternative ways to get some of the same functionality for earlier Emacs versions.
 
+** Finding Emacs 28
+
+Here are some pointers to find or build Emacs 28 on your operating system.  If you have trouble getting it, leave a note in the comments or come find us in the [[http://systemcrafters.chat][Discord or IRC]].
+
+- On Linux, follow the instructions in the INSTALL file: https://git.savannah.gnu.org/cgit/emacs.git/tree/INSTALL
+- On Windows, these instructions /should/ still work: https://gist.github.com/nauhygon/f3b44f51b34e89bc54f8
+- On macOS, install the =emacs-plus= package: =brew install emacs-plus@28=
+
 * Where is the configuration?
 
 The primary way to configure Emacs is to edit its configuration file which is written in a language called Emacs Lisp.  This means that your Emacs configuration is actually code!  Don't worry, I'll explain everything.
