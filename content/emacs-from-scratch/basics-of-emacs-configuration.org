@@ -1,4 +1,4 @@
-#+title: The Basics of Emacs Customization
+#+title: The Basics of Emacs Configuration
 #+date: [2022-01-31]
 
 [[yt:OaF-N-FuGtc][Watch the video on YouTube!]]
@@ -123,7 +123,7 @@ Some modes are enabled by default in Emacs and others must be turned on explicit
 
 Now that we've added this code to our configuration and saved it with ~C-x C-s~, these changes will be applied every time we start up Emacs!
 
-* Setting the Theme
+* Setting the theme
 
 Another way to configure certain parts of Emacs is by calling individual functions.  There are a ton of functions you can call in Emacs!
 
