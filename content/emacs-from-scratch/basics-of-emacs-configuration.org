@@ -1,0 +1,189 @@
+#+title: The Basics of Emacs Customization
+#+date: [2022-01-31]
+
+[[yt:OaF-N-FuGtc][Watch the video on YouTube!]]
+
+* Intro
+
+The most valuable aspect of Emacs is the ability it gives you to customize your environment and workflow perfectly for whatever it is you want to do.
+
+This is the first video in a series where I'll show you how to build a complete Emacs configuration while also teaching you what you need to know about Emacs Lisp, the language used to configure Emacs.
+
+Let's take a look at how you can quickly get started customizing Emacs using the functionality that comes "in the box"!
+
+Click like 👍 on the video if you're excited to get started!
+
+* Getting started
+
+In this video I won't show you how to install or use Emacs!  If you are a new Emacs user, check out my video [[https://youtu.be/48JlgiBpw_I][The Absolute Beginner's Guide To Emacs]] where I give a very thorough introduction for how you can get started.
+
+I'm going to assume you've already got Emacs installed and you're using at least Emacs 27 which was released last year.  However, much of what I'll show in this series is using features in Emacs 28 which isn't fully released at the time of this video.
+
+If you can't find a recent build of Emacs 28 for your operating system or Linux distribution, check out the link to the show notes in the description to find more details on how to build your own copy of Emacs 28.
+
+As we go, I'll also give pointers on alternative ways to get some of the same functionality for earlier Emacs versions.
+
+* Where is the configuration?
+
+The primary way to configure Emacs is to edit its configuration file which is written in a language called Emacs Lisp.  This means that your Emacs configuration is actually code!  Don't worry, I'll explain everything.
+
+Here are the places where you might find the main configuration file:
+
+- =~/.emacs=  or =~/.emacs.el= - The old location for the configuration file (not recommended!)
+- =~/.emacs.d/init.el= - The main configuration file in the Emacs config folder (recommended on macOS and Windows)
+- =~/.config/emacs/init.el= - Follows Linux desktop environment guidlines (recommended on Linux!)
+
+Emacs will look for a configuration file in each of these locations every time it starts up!
+
+This file typically does not exist by default, so you will probably have to create it!  We'll use ~C-x C-f~ (Ctrl+X then Ctrl+F) to open this file for editing.
+
+Be aware that I'm editing my =init.el= from a different folder than the default!  That's because I'm isolating it from my own Emacs configuration.  Your =init.el= should go in one of the places I mentioned above!
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html][Emacs Manual: The Emacs Initialization File]]
+
+* The basics of configuration
+
+Now that we're in our =init.el= file, let's learn how you can actually configure Emacs with it!
+
+The two most common things you will do in your =init.el= file:
+
+- Configure features by setting variables
+- Enable or disable features by calling functions
+
+* Setting configuration variables
+
+Let's take a look at how you would set a configuration variable and then we'll break down the syntax to understand Emacs Lisp a little better:
+
+#+begin_src emacs-lisp
+
+  ;; Don't show the splash screen
+  (setq inhibit-startup-message t)  ; Comment at end of line!
+
+#+end_src
+
+This is a /list expression/ (wrapped in parentheses) that represents a "call" to a function named =setq=.
+
+An expression is an unit of code that can be evaluated to produce a result.  A list is an ordered collection of expressions: symbols, values, or lists.
+
+A function is a higher-level unit of code that has a name and accepts a certain number of inputs.  When you call a function by name and provide inputs, the code in that function executes and applies some kind of change in Emacs.
+
+=setq= is the name of the "function" to be called in this expression and the remaining two items are the inputs to the function.  =inhibit-startup-message= is the name of the configuration variable we are setting.
+
+The second parameter is =t=, a value that means "true".  There is also a value =nil= which means "false".  You will see these two values a lot in configuration!
+
+Variable and function names in Emacs are typically of the form =some-variable-name= where multiple lower-cased words are separated with the hyphen (=-=) character.
+
+The line starting with =;;= is a comment, a non-evaluated line that is used for writing notes in the code.  A single =;= also works, can be used at end of any line.
+
+What this expression says is that we want to /turn on/ the setting to prevent the startup screen from being displayed.
+
+Let's try it out!  Add this line to your =init.el= file, save it with ~C-x C-s~ (Ctrl+X then Ctrl+S) and then restart Emacs.
+
+* Setting variables without restarting Emacs
+
+It wouldn't be great if you had to restart Emacs every time you changed your configuration file.  Luckily you can evaluate parts of your configuration while Emacs is running!
+
+Let's set another variable to test this out.  While we do this, I'll show you another detail about the =setq= function: you can set more than one variable in the same call!
+
+#+begin_src emacs-lisp
+
+  (setq inhibit-startup-message t  ; Don't show the splash screen
+        visible-bell t)            ; Flash when the bell rings
+
+  ;; This could also be:
+
+  (setq inhibit-startup-message t) ; Don't show the splash screen
+  (setq visible-bell t)            ; Flash when the bell rings
+
+#+end_src
+
+Instead of restarting Emacs to test out this behavior, let's use a key binding that will evaluate the configuration expression under the cursor to apply it immediately:
+
+Place your cursor somewhere inside of the open and close parentheses of the =setq= call and press ~C-M-x~ (Ctrl+Alt+X).  Now try to use the UP arrow key to move the cursor before the beginning line of the file and it Emacs should blink!
+
+If you don't like the flashing behavior of =visual-bell= then leave it out, it's your configuration!
+
+* Enabling or disabling features
+
+Many features of Emacs are controlled by something called a "mode."  A mode is basically a collection of functionality that can be applied either to a single Emacs buffer or to the entire editor.
+
+Some modes are enabled by default in Emacs and others must be turned on explicitly.  You can turn modes on or off at any time by calling the mode's function and passing the value =-1= to disable the mode or =1= to enable the mode:
+
+#+begin_src emacs-lisp
+
+  ;; Turn off some unneeded UI elements
+  (menu-bar-mode -1)  ; Leave this one on if you're a beginner!
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+
+  ;; Display line numbers in every buffer
+  (global-display-line-numbers-mode 1)
+
+#+end_src
+
+Now that we've added this code to our configuration and saved it with ~C-x C-s~, these changes will be applied every time we start up Emacs!
+
+* Setting the Theme
+
+Another way to configure certain parts of Emacs is by calling individual functions.  There are a ton of functions you can call in Emacs!
+
+One function you'll definitely want to call is =load-theme= which allows you to... load a color theme!
+
+#+begin_src emacs-lisp
+
+  ;; Load the Modus Vivendi dark theme
+  (load-theme 'modus-vivendi t)
+
+  ;; If you're using Emacs 27, either install Modus themes or use this one!
+  (load-theme 'deeper-blue t)
+
+#+end_src
+
+We'll talk about visual customization more in a later video.
+
+- How to [[https://protesilaos.com/emacs/modus-themes#h:1af85373-7f81-4c35-af25-afcef490c111][install the Modus themes]] on Emacs 27 and lower (it's built-in with Emacs 28!)
+- [[https://protesilaos.com/emacs/modus-themes#h:bf1c82f2-46c7-4eb2-ad00-dd11fdd8b53f][Customizing the Modus themes]] - this is a good way to practice!
+- [[https://www.youtube.com/channel/UC0uTPqBCFIpZxlz_Lv1tk_g][Prot's YouTube channel]]
+
+* How to find more things to configure
+
+The two most useful functions in Emacs when you're learning how to configure it are:
+
+- =describe-variable= (~C-h v~ / Ctrl+H then V) - Shows documentation for any variable in Emacs
+- =describe-function= (~C-h f~ / Ctrl+H then F) - Shows documentation for any function in Emacs
+- The best of both worlds: =describe-symbol= (~C-h o~ / Ctrl+H then O)!
+
+When you run these functions, the prompt will be filled automatically with the name of the variable or function where your cursor is in the current file, so just press Enter!  You can also type the name of any variable or function you'd like to know about.
+
+Another useful property of these functions is that you can press =TAB= inside the prompt to get suggestions for variable and function names using the prefix you've already typed!  This can be very useful for discovering new things to configure.
+
+You can also get suggestions for variable and function names right in your =init.el= buffer by using the key binding ~C-M-i~ (Ctrl+Alt+i).  Let's type "=scroll=" and press this key binding right after it!
+
+* Try it out!
+
+Now it's your turn to experiment with what you've learned in this video!
+
+- Try =hl-line-mode= and =blink-cursor-mode=
+- Explore variables and functions: type a particular word (like "=indent=") and use ~C-M-i~ to see what shows up
+- Use =describe-function= and =describe-variable= to see documentation interesting things you find
+- If you have Modus themes installed, try setting some of the customization variables to make the theme look more to your taste.  I'll show you a better configuration for it in a later video!
+
+When you try what I showed in this video, let me know in the comments how it went for you!
+
+* Bonus: My Emacs demo launcher
+
+If you're curious, here's the command I'm using in my own Emacs configuration to quickly launch my demo Emacs session!
+
+#+begin_src emacs-lisp
+
+  (defun efs/launch-demo-emacs ()
+    (interactive)
+    (let ((default-directory "~/Projects/Code/emacs-from-scratch")
+          (existing-emacs (get-buffer "Emacs")))
+      (if existing-emacs
+          (switch-to-buffer existing-emacs)
+        (start-process-shell-command "Emacs" nil "./.tools/run-emacs.sh"))))
+
+  (local-set-key (kbd "C-c e") #'efs/launch-demo-emacs)
+
+#+end_src

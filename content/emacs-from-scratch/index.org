@@ -4,6 +4,12 @@ You can find the complete [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH
 
 * Episodes
 
+1. [[basics-of-emacs-configuration/][The Basics of Emacs Configuration]]
+
+* Old Series
+
+Here are the notes form episodes of the previous [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][Emacs From Scratch]] playlist created in 2020:
+
 1. [[getting-started/][Getting Started with a Basic Configuration]]
 2. [[helpful-ui-improvements/][Adding Helpful UI Improvements]]
 3. [[key-bindings-and-evil/][Key Bindings and Evil]]
