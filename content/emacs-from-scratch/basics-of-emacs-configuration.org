@@ -29,7 +29,14 @@ Here are some pointers to find or build Emacs 28 on your operating system.  If y
 
 - On Linux, follow the instructions in the INSTALL file: https://git.savannah.gnu.org/cgit/emacs.git/tree/INSTALL
 - On Windows, these instructions /should/ still work: https://gist.github.com/nauhygon/f3b44f51b34e89bc54f8
-- On macOS, install the =emacs-plus= package: =brew install emacs-plus@28=
+- On macOS, install the =emacs-plus= package ([[https://github.com/d12frosted/homebrew-emacs-plus][see documentation]])
+
+#+begin_src sh
+
+  brew tap d12frosted/emacs-plus
+  brew install emacs-plus@28
+
+#+end_src
 
 * Where is the configuration?
 
