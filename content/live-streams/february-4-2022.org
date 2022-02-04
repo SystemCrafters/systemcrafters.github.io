@@ -1,0 +1,112 @@
+#+title: System Crafters Live! - February 4, 2022
+
+[[yt:76jp8qkLZC8][Watch the recording on YouTube!]]
+
+* Updates
+
+- I'll be shutting down the System Crafters Store next week (it will be back!)
+- Slackware 15 released: http://www.slackware.com/announce/15.0.php
+
+* I'd love your opinion!
+
+I'm interested to try and publish a eBook on a topic that you all would find valuable, something related to what we talk about on this channel.
+
+What would you be interested to read about in an eBook?
+
+- Emacs
+- Programming
+- Workflow / productivity
+- Building "crafting" skills
+
+What format?
+
+- epub
+- pdf
+- info
+* Using the Customize UI to Build an Emacs Configuration
+
+Mickey Petersen of Mastering Emacs fame wrote a blog post recently titled "Bad Emacs Advice":
+
+https://www.masteringemacs.org/article/bad-emacs-advice
+
+Today we're going to experiment with =M-x customize= and see if we how much of Emacs we can configure using the UI alone!
+
+We'll start from a blank configuration and build up from there.
+
+We'll also take a look at the resulting configuration file to see what it contains!
+
+** Configuration Goals
+
+- Set theme and font
+- Add hooks to configure modes
+- Tweak some Org Mode settings
+- Set up the tab bar
+- Customizing the mode line
+- Install and set up evil-mode
+- Install and configure community packages like Vertico and Marginalia
+- Test that the configuration can successfully initialize a new Emacs install
+
+What else?
+
+** Conclusions
+
+- Customize system can write out your init.el file to be loaded again on future sessions
+- You can add custom elisp inside of the file
+- You can move the generated customization code into another file by setting the =custom-file= variable, just make sure to call =load= on that file!
+- Not sure how to load a package by default so that it gets activated correctly (i.e. Vertico)
+
+* The final configuration
+
+*init.el:*
+
+#+begin_src emacs-lisp
+
+  (setq custom-file (expand-file-name (concat user-emacs-directory "custom.el")))
+  (load custom-file)
+
+  (message "Config is loaded!")
+
+#+end_src
+
+*custom.el:*
+
+#+begin_src emacs-lisp
+
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(after-save-hook
+    '(rmail-after-save-hook cvs-mark-buffer-changed
+                    (lambda nil
+                      (message "You saved!"))))
+   '(custom-enabled-themes '(modus-vivendi))
+   '(custom-theme-directory "~/.config/emacs/")
+   '(display-time-mode t)
+   '(evil-mode t)
+   '(marginalia-mode t)
+   '(modus-themes-bold-constructs t)
+   '(modus-themes-completions 'opinionated)
+   '(modus-themes-headings '((1 background)))
+   '(org-todo-keywords '((sequence "TODO" "NOWAY" "|" "MAYBE" "DONE")))
+   '(package-selected-packages '(embark evil marginalia vertico))
+   '(tab-bar-close-button-show 'selected)
+   '(tab-bar-format
+    '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator tab-bar-format-add-tab tab-bar-format-align-right tab-bar-format-global))
+   '(tab-bar-mode t)
+   '(tab-width 3)
+   '(vertico-count 7)
+   '(vertico-cycle t)
+   '(vertico-grid-mode nil)
+   '(vertico-mode t))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(default ((t (:inherit nil :extend nil :stipple nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 200 :width normal :foundry "PfEd" :family "JetBrains Mono"))))
+   '(tab-bar ((t (:inherit nil :background "RoyalBlue1"))))
+   '(tab-bar-tab ((t (:inherit bold :background "sky blue" :box (:line-width (2 . 2) :color "#0e0e0e"))))))
+
+#+end_src
