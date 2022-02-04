@@ -1,0 +1,115 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - February 4, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - February 4, 2022</h1><p class="blog-post-meta"></p><div><p><div class="embed-responsive embed-responsive-16by9"> <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/76jp8qkLZC8" allowfullscreen></iframe> </div>
+</p>
+
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>I'll be shutting down the System Crafters Store next week (it will be back!)</li>
+<li>Slackware 15 released: <a href="http://www.slackware.com/announce/15.0.php">http://www.slackware.com/announce/15.0.php</a></li>
+</ul>
+
+<h2><a id="id-love-your-opinion" class="anchor" href="#id-love-your-opinion">¶</a>I'd love your opinion!</h2><p>I'm interested to try and publish a eBook on a topic that you all would find valuable, something related to what we talk about on this channel.
+</p>
+
+<p>What would you be interested to read about in an eBook?
+</p>
+
+<ul><li>Emacs</li>
+<li>Programming</li>
+<li>Workflow / productivity</li>
+<li>Building "crafting" skills</li>
+</ul>
+
+<p>What format?
+</p>
+
+<ul><li>epub</li>
+<li>pdf</li>
+<li>info</li>
+</ul>
+<h2><a id="using-the-customize-ui-to-build-an-emacs-configuration" class="anchor" href="#using-the-customize-ui-to-build-an-emacs-configuration">¶</a>Using the Customize UI to Build an Emacs Configuration</h2><p>Mickey Petersen of Mastering Emacs fame wrote a blog post recently titled "Bad Emacs Advice":
+</p>
+
+<p><a href="https://www.masteringemacs.org/article/bad-emacs-advice">https://www.masteringemacs.org/article/bad-emacs-advice</a>
+</p>
+
+<p>Today we're going to experiment with <kbd>M-x customize</kbd> and see if we how much of Emacs we can configure using the UI alone!
+</p>
+
+<p>We'll start from a blank configuration and build up from there.
+</p>
+
+<p>We'll also take a look at the resulting configuration file to see what it contains!
+</p>
+
+<h3><a id="configuration-goals" class="anchor" href="#configuration-goals">¶</a>Configuration Goals</h3><ul><li>Set theme and font</li>
+<li>Add hooks to configure modes</li>
+<li>Tweak some Org Mode settings</li>
+<li>Set up the tab bar</li>
+<li>Customizing the mode line</li>
+<li>Install and set up evil-mode</li>
+<li>Install and configure community packages like Vertico and Marginalia</li>
+<li>Test that the configuration can successfully initialize a new Emacs install</li>
+</ul>
+
+<p>What else?
+</p>
+
+<h3><a id="conclusions" class="anchor" href="#conclusions">¶</a>Conclusions</h3><ul><li>Customize system can write out your init.el file to be loaded again on future sessions</li>
+<li>You can add custom elisp inside of the file</li>
+<li>You can move the generated customization code into another file by setting the <kbd>custom-file</kbd> variable, just make sure to call <kbd>load</kbd> on that file!</li>
+<li>Not sure how to load a package by default so that it gets activated correctly (i.e. Vertico)</li>
+</ul>
+
+<h2><a id="the-final-configuration" class="anchor" href="#the-final-configuration">¶</a>The final configuration</h2><p><strong>init.el:</strong>
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> custom-file (expand-file-name (concat user-emacs-directory <span class="org-string">"custom.el"</span>)))
+(load custom-file)
+
+(message <span class="org-string">"Config is loaded!"</span>)
+
+</code></pre>
+
+<p><strong>custom.el:</strong>
+</p>
+
+<pre><code class="emacs-lisp">
+(custom-set-variables
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">custom-set-variables was added by Custom.</span>
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">If you edit it by hand, you could mess it up, so be careful.</span>
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">Your init file should contain only one such instance.</span>
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">If there is more than one, they won't work right.</span>
+ '(after-save-hook
+  '(rmail-after-save-hook cvs-mark-buffer-changed
+                  (<span class="org-keyword">lambda</span> nil
+                    (message <span class="org-string">"You saved!"</span>))))
+ '(custom-enabled-themes '(modus-vivendi))
+ '(custom-theme-directory <span class="org-string">"~/.config/emacs/"</span>)
+ '(display-time-mode t)
+ '(evil-mode t)
+ '(marginalia-mode t)
+ '(modus-themes-bold-constructs t)
+ '(modus-themes-completions 'opinionated)
+ '(modus-themes-headings '((1 background)))
+ '(org-todo-keywords '((sequence <span class="org-string">"TODO"</span> <span class="org-string">"NOWAY"</span> <span class="org-string">"|"</span> <span class="org-string">"MAYBE"</span> <span class="org-string">"DONE"</span>)))
+ '(package-selected-packages '(embark evil marginalia vertico))
+ '(tab-bar-close-button-show 'selected)
+ '(tab-bar-format
+  '(tab-bar-format-history tab-bar-format-tabs tab-bar-separator tab-bar-format-add-tab tab-bar-format-align-right tab-bar-format-global))
+ '(tab-bar-mode t)
+ '(tab-width 3)
+ '(vertico-count 7)
+ '(vertico-cycle t)
+ '(vertico-grid-mode nil)
+ '(vertico-mode t))
+(custom-set-faces
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">custom-set-faces was added by Custom.</span>
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">If you edit it by hand, you could mess it up, so be careful.</span>
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">Your init file should contain only one such instance.</span>
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">If there is more than one, they won't work right.</span>
+ '(default ((t (<span class="org-builtin">:inherit</span> nil <span class="org-builtin">:extend</span> nil <span class="org-builtin">:stipple</span> nil <span class="org-builtin">:box</span> nil <span class="org-builtin">:strike-through</span> nil <span class="org-builtin">:overline</span> nil <span class="org-builtin">:underline</span> nil <span class="org-builtin">:slant</span> normal <span class="org-builtin">:weight</span> normal <span class="org-builtin">:height</span> 200 <span class="org-builtin">:width</span> normal <span class="org-builtin">:foundry</span> <span class="org-string">"PfEd"</span> <span class="org-builtin">:family</span> <span class="org-string">"JetBrains Mono"</span>))))
+ '(tab-bar ((t (<span class="org-builtin">:inherit</span> nil <span class="org-builtin">:background</span> <span class="org-string">"RoyalBlue1"</span>))))
+ '(tab-bar-tab ((t (<span class="org-builtin">:inherit</span> bold <span class="org-builtin">:background</span> <span class="org-string">"sky blue"</span> <span class="org-builtin">:box</span> (<span class="org-builtin">:line-width</span> (2 . 2) <span class="org-builtin">:color</span> <span class="org-string">"#0e0e0e"</span>))))))
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
