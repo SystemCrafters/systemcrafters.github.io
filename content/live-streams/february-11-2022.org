@@ -1,0 +1,21 @@
+#+title: System Crafters Live! - February 11, 2022
+
+* Updates
+
+- System Crafters reached 20,000 subscribers on Feb 9!
+- Fresh Emacs 28 binaries for Windows!
+  - https://lists.gnu.org/archive/html/emacs-devel/2022-02/msg00153.html
+  - https://alpha.gnu.org/gnu/emacs/pretest/windows/emacs-28/?C=M;O=D
+- I've been working on a new compiler (again)...
+
+* Rational Emacs: A New Base Emacs Configuration
+
+I've been working on a new base Emacs configuration for a while now and I'm finally making it public.  Let's chat about why I decided to do this, what the goals are, and how you can help!
+
+Check out the repository at:
+
+https://github.com/SystemCrafters/rational-emacs
+
+** Ideas
+
+- =rational-publish= - maybe for publishing presentation slides and/or websites
