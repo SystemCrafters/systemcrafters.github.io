@@ -1,0 +1,38 @@
+#+title: System Crafters Live! - February 18, 2022
+
+[[yt:vS5Ykl1dNN4][Watch the recording on YouTube!]]
+
+* Updates
+
+- Video coming next week or I'll *delete my channel*
+- Lots of interest in Rational Emacs!
+
+* Community Contributions
+
+Special thanks to the following people who sent PRs in the first week of Rational Emacs!
+
+- Jeff Bowman
+- Japhir
+- Julien Tant
+- angrybacon Mathieu Marques
+- mfxarc
+- Gavin Freeborn
+- John Eastman
+- Stas Krichevsky
+- Peter Tillemans
+- Anders Jackson
+- Erik Lundstedt
+
+Let's take a look at some PRs: https://github.com/SystemCrafters/rational-emacs/pulls
+
+* Live Crafting: Rational Emacs
+
+Things to try:
+
+- New module file skeleton
+
+Here are some things we could work on.  What else?
+
+- Automatic updates
+- Tab bar / workspace config
+- EXWM config
