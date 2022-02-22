@@ -1,0 +1,116 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>The 6 Emacs Settings Every User Should Consider - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">The 6 Emacs Settings Every User Should Consider</h1><p class="blog-post-meta"></p><div><p><div class="embed-responsive embed-responsive-16by9"> <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/51eSeqcaikM" allowfullscreen></iframe> </div>
+</p>
+
+<h2><a id="emacs-has-a-lot-of-configuration-settings" class="anchor" href="#emacs-has-a-lot-of-configuration-settings">¶</a>Emacs has a lot of configuration settings!</h2><p>It can be hard to find the really useful ones without reading through the whole Emacs manual.
+</p>
+
+<p>In this video I'll give you a quick tour of 6 configuration settings you will definitely want to try when building your Emacs configuration!
+</p>
+
+<p>Please make sure to give this video a like 👍 if you learn something useful from it!
+</p>
+
+<h2><a id="remembering-recently-edited-files" class="anchor" href="#remembering-recently-edited-files">¶</a>Remembering recently edited files</h2><p>When you do a lot of work with Emacs, you will probably want to get back to files you recently edited.  Instead of using <kbd>find-file</kbd> to go hunt those files down again, you can enable <kbd>recentf-mode</kbd> to have Emacs remember the files you edited most recently:
+</p>
+
+<pre><code class="emacs-lisp">
+(recentf-mode 1)
+
+</code></pre>
+
+<p>After enabling this mode, you can use the <kbd>M-x recentf-open-files</kbd> command to be shown a list of recent files which can be selected by typing the relevant number.  This command isn't bound to a key by default, so I recommend doing that if you want to use it regularly!
+</p>
+
+<h2><a id="remembering-minibuffer-prompt-history" class="anchor" href="#remembering-minibuffer-prompt-history">¶</a>Remembering minibuffer prompt history</h2><p>One thing you will do <em>a lot</em> in Emacs is enter text into minibuffer prompts.  Everything from <kbd>M-x</kbd>, <kbd>isearch</kbd>, the <kbd>describe-*</kbd> commands, and even the shell modes will receive a lot of input from you over time.
+</p>
+
+<p>You'll quickly realize that it would be helpful for Emacs to remember the things you've entered into these prompts the next time you use them.  That's where the <kbd>savehist-mode</kbd> comes in!
+</p>
+
+<p>When you enable this mode, you will be able to use <kbd>M-n</kbd> (<kbd>next-history-element</kbd>) and <kbd>M-p</kbd> (<kbd>previous-history-element</kbd>) key bindings in almost every minibuffer (and shell) prompt to call up the inputs you used previously for the current command.
+</p>
+
+<p>I also like to set the <kbd>history-length</kbd> to a reasonable number to reduce the impact that reading these history files can have on Emacs' startup performance.
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Save what you enter into minibuffer prompts</span>
+(<span class="org-keyword">setq</span> history-length 25)
+(savehist-mode 1)
+
+</code></pre>
+
+<h2><a id="remembering-the-last-place-you-visited-in-a-file" class="anchor" href="#remembering-the-last-place-you-visited-in-a-file">¶</a>Remembering the last place you visited in a file</h2><p>Sometimes it's convenient for Emacs to remember the last location you were at when you visited a particular file.  The <kbd>save-place-mode</kbd> can help with that!
+</p>
+
+<p>Once you turn on this mode, Emacs will drop your cursor to the last visited location in any file that you open.
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Remember and restore the last cursor location of opened files</span>
+(save-place-mode 1)
+
+</code></pre>
+
+<p><a href="https://www.emacswiki.org/emacs/SavePlace">EmacsWiki: Save Place</a>
+</p>
+
+<h2><a id="changing-the-location-of-the-custom-file" class="anchor" href="#changing-the-location-of-the-custom-file">¶</a>Changing the location of the "custom file"</h2><p>If you're watching this channel, you're probably interested in writing your own Emacs configuration mostly by hand without using Emacs' customization UI.  However, even if you avoid using the customization UI, some settings may cause customization variables to be added to your <kbd>init.el</kbd> file.
+</p>
+
+<p>To avoid having Emacs place those variables into your hand-crafted configuration file, you can use this snippet:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Move customization variables to a separate file and load it</span>
+(<span class="org-keyword">setq</span> custom-file (locate-user-emacs-file <span class="org-string">"custom-vars.el"</span>))
+(load custom-file 'noerror 'nomessage)
+
+</code></pre>
+
+<p>Emacs can create a lot of file clutter in your configuration for various reasons, so check out the <a href="https://www.youtube.com/watch?v=XZjyJG-sFZI">video I made on the <kbd>no-littering</kbd> package</a> if you want an easy way to get that under control!
+</p>
+
+<h2><a id="prevent-using-ui-dialogs-for-prompts" class="anchor" href="#prevent-using-ui-dialogs-for-prompts">¶</a>Prevent using UI dialogs for prompts</h2><p>Emacs will show prompts to confirm many different types of actions, and for some of them it shows a graphical dialog box.  If you prefer to keep your Emacs workflow more keyboard-focused, you can turn off those dialog box prompts with this setting:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Don't pop up UI dialogs when prompting</span>
+(<span class="org-keyword">setq</span> use-dialog-box nil)
+
+</code></pre>
+
+<h2><a id="automatically-revert-buffers-for-changed-files" class="anchor" href="#automatically-revert-buffers-for-changed-files">¶</a>Automatically revert buffers for changed files</h2><p>One thing that can be annoying about Emacs when you first start using it is that it doesn't automatically refresh file buffers when the file on disk has been changed outside of Emacs.  This can often happen when you're using tools that generate some kind of text file output that you need to read in an Emacs buffer.
+</p>
+
+<p>The <kbd>global-auto-revert-mode</kbd> will make Emacs watch the files for all open buffers for changes on disk and it will automatically refresh those buffers if they don't have unsaved changes!
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Revert buffers when the underlying file has changed</span>
+(global-auto-revert-mode 1)
+
+</code></pre>
+
+<p>I also like adding the following setting to cause other types of buffers in Emacs to update when related files on disk have changed.
+</p>
+
+<p>The place this is most useful is when you're using Emacs' excellent Dired package! The following setting will cause Dired buffers to be automatically refreshed when files get added or deleted from the directory you are browsing:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Revert Dired and other buffers</span>
+(<span class="org-keyword">setq</span> global-auto-revert-non-file-buffers t)
+
+</code></pre>
+
+<p>Check out <a href="https://www.youtube.com/watch?v=PMWwM8QJAtU">my video on Dired</a> to learn more!
+</p>
+
+<h2><a id="what-are-your-must-have-default-settings" class="anchor" href="#what-are-your-must-have-default-settings">¶</a>What are your must-have default settings?</h2><p>Those are my must-have settings when building up a new Emacs configuration from scratch.  If you've been using Emacs for a while, leave a comment below and let me know what I might have missed!
+</p>
+
+<p>Also, if you're a newer Emacs user and there's some fundamental behavior you've been trying to replicate from another editor, leave a comment and let us know!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
