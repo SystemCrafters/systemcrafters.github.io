@@ -1,0 +1,115 @@
+#+title: The 6 Emacs Settings Every User Should Consider
+
+[[yt:51eSeqcaikM][Watch the video on YouTube!]]
+
+* Emacs has a lot of configuration settings!
+
+It can be hard to find the really useful ones without reading through the whole Emacs manual.
+
+In this video I'll give you a quick tour of 6 configuration settings you will definitely want to try when building your Emacs configuration!
+
+Please make sure to give this video a like 👍 if you learn something useful from it!
+
+* Remembering recently edited files
+
+When you do a lot of work with Emacs, you will probably want to get back to files you recently edited.  Instead of using =find-file= to go hunt those files down again, you can enable =recentf-mode= to have Emacs remember the files you edited most recently:
+
+#+begin_src emacs-lisp
+
+  (recentf-mode 1)
+
+#+end_src
+
+After enabling this mode, you can use the =M-x recentf-open-files= command to be shown a list of recent files which can be selected by typing the relevant number.  This command isn't bound to a key by default, so I recommend doing that if you want to use it regularly!
+
+* Remembering minibuffer prompt history
+
+One thing you will do /a lot/ in Emacs is enter text into minibuffer prompts.  Everything from =M-x=, =isearch=, the =describe-*= commands, and even the shell modes will receive a lot of input from you over time.
+
+You'll quickly realize that it would be helpful for Emacs to remember the things you've entered into these prompts the next time you use them.  That's where the =savehist-mode= comes in!
+
+When you enable this mode, you will be able to use ~M-n~ (=next-history-element=) and ~M-p~ (=previous-history-element=) key bindings in almost every minibuffer (and shell) prompt to call up the inputs you used previously for the current command.
+
+I also like to set the =history-length= to a reasonable number to reduce the impact that reading these history files can have on Emacs' startup performance.
+
+#+begin_src emacs-lisp
+
+  ;; Save what you enter into minibuffer prompts
+  (setq history-length 25)
+  (savehist-mode 1)
+
+#+end_src
+
+* Remembering the last place you visited in a file
+
+Sometimes it's convenient for Emacs to remember the last location you were at when you visited a particular file.  The =save-place-mode= can help with that!
+
+Once you turn on this mode, Emacs will drop your cursor to the last visited location in any file that you open.
+
+#+begin_src emacs-lisp
+
+  ;; Remember and restore the last cursor location of opened files
+  (save-place-mode 1)
+
+#+end_src
+
+[[https://www.emacswiki.org/emacs/SavePlace][EmacsWiki: Save Place]]
+
+* Changing the location of the "custom file"
+
+If you're watching this channel, you're probably interested in writing your own Emacs configuration mostly by hand without using Emacs' customization UI.  However, even if you avoid using the customization UI, some settings may cause customization variables to be added to your =init.el= file.
+
+To avoid having Emacs place those variables into your hand-crafted configuration file, you can use this snippet:
+
+#+begin_src emacs-lisp
+
+  ;; Move customization variables to a separate file and load it
+  (setq custom-file (locate-user-emacs-file "custom-vars.el"))
+  (load custom-file 'noerror 'nomessage)
+
+#+end_src
+
+Emacs can create a lot of file clutter in your configuration for various reasons, so check out the [[https://www.youtube.com/watch?v=XZjyJG-sFZI][video I made on the =no-littering= package]] if you want an easy way to get that under control!
+
+* Prevent using UI dialogs for prompts
+
+Emacs will show prompts to confirm many different types of actions, and for some of them it shows a graphical dialog box.  If you prefer to keep your Emacs workflow more keyboard-focused, you can turn off those dialog box prompts with this setting:
+
+#+begin_src emacs-lisp
+
+  ;; Don't pop up UI dialogs when prompting
+  (setq use-dialog-box nil)
+
+#+end_src
+
+* Automatically revert buffers for changed files
+
+One thing that can be annoying about Emacs when you first start using it is that it doesn't automatically refresh file buffers when the file on disk has been changed outside of Emacs.  This can often happen when you're using tools that generate some kind of text file output that you need to read in an Emacs buffer.
+
+The =global-auto-revert-mode= will make Emacs watch the files for all open buffers for changes on disk and it will automatically refresh those buffers if they don't have unsaved changes!
+
+#+begin_src emacs-lisp
+
+  ;; Revert buffers when the underlying file has changed
+  (global-auto-revert-mode 1)
+
+#+end_src
+
+I also like adding the following setting to cause other types of buffers in Emacs to update when related files on disk have changed.
+
+The place this is most useful is when you're using Emacs' excellent Dired package! The following setting will cause Dired buffers to be automatically refreshed when files get added or deleted from the directory you are browsing:
+
+#+begin_src emacs-lisp
+
+  ;; Revert Dired and other buffers
+  (setq global-auto-revert-non-file-buffers t)
+
+#+end_src
+
+Check out [[https://www.youtube.com/watch?v=PMWwM8QJAtU][my video on Dired]] to learn more!
+
+* What are your must-have default settings?
+
+Those are my must-have settings when building up a new Emacs configuration from scratch.  If you've been using Emacs for a while, leave a comment below and let me know what I might have missed!
+
+Also, if you're a newer Emacs user and there's some fundamental behavior you've been trying to replicate from another editor, leave a comment and let us know!

@@ -5,6 +5,7 @@ You can find the complete [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH
 * Episodes
 
 1. [[basics-of-emacs-configuration/][The Basics of Emacs Configuration]]
+2. [[the-best-default-settings/][The 6 Emacs Settings Every User Should Consider]]
 
 * Old Series
 
