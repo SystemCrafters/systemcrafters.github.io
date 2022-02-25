@@ -4,6 +4,7 @@ We stream every Friday at 8 am Pacific time!
 
 * Episodes
 
+- [[february-25-2022/][February 25, 2022]]: Trying New Emacs Packages by Minad
 - [[february-18-2022/][February 18, 2022]]: Live Crafting: Rational Emacs
 - [[february-11-2022/][February 11, 2022]]: Rational Emacs: A New Base Configuration
 - [[february-4-2022/][February 4, 2022]]: Customizing Emacs With Only the UI?

@@ -1,0 +1,144 @@
+#+title: System Crafters Live! - February 25, 2022
+
+* Updates
+
+- Rational Emacs has received a lot of contributions!  Will review this weekend
+- We'll be starting up some game development projects on Flux Harmonic next week!
+  - https://youtube.com/FluxHarmonicLive // https://twitch.tv/FluxHarmonicLive
+- Next EFS video: setting key bindings and creating your own prefixes
+
+* Trying New Packages by Minad
+
+Apparently Daniel Mendler (minad), creator of Vertico, Consult, and more, has been very busy creating a bunch of new packages!
+
+Let's try some out today and see if we like them:
+
+- =cape= - https://github.com/minad/cape
+- =tempel= - https://github.com/minad/tempel
+- =tab-bookmark= - https://github.com/minad/tab-bookmark
+- =goggles= - https://github.com/minad/goggles
+- =org-modern= - https://github.com/minad/org-modern
+
+If we don't get through all of these, we may try the rest in another stream soon!
+
+* The final configuration
+
+Here's what we built on stream today:
+
+#+begin_src emacs-lisp
+(use-package corfu
+  ;; Optional customizations
+  :custom
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-preview-current nil)    ;; Disable current candidate preview
+  (corfu-echo-documentation t) ;; Disable documentation in the echo area
+  (corfu-scroll-margin 5)        ;; Use scroll margin
+  :init
+  (corfu-global-mode))
+
+(use-package kind-icon
+  :ensure t
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+;; cape-file
+;; cape-keyword
+;; cape-dabbrev
+;; cape-symbol
+;; cape-line
+
+(setq-local completion-at-point-functions
+            (list (cape-super-capf #'cape-dabbrev #'cape-file #'cape-keyword #'cape-symbol)))
+
+(use-package cape
+  :ensure t
+  ;; Bind dedicated completion commands
+  :bind (("C-c p p" . completion-at-point) ;; capf
+         ("C-c p t" . complete-tag)        ;; etags
+         ("C-c p d" . cape-dabbrev)        ;; or dabbrev-completion
+         ("C-c p f" . cape-file)
+         ("C-c p k" . cape-keyword)
+         ("C-c p s" . cape-symbol)
+         ("C-c p a" . cape-abbrev)
+         ("C-c p i" . cape-ispell)
+         ("C-c p l" . cape-line)
+         ("C-c p w" . cape-dict)
+         ("C-c p \\" . cape-tex)
+         ("C-c p _" . cape-tex)
+         ("C-c p ^" . cape-tex)
+         ("C-c p &" . cape-sgml)
+         ("C-c p r" . cape-rfc1345))
+  :init
+  ;; Add `completion-at-point-functions', used by `completion-at-point'.
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  ;(add-to-list 'completion-at-point-functions #'cape-tex)
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
+  ;(add-to-list 'completion-at-point-functions #'cape-keyword)
+  ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+  ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+  ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+  ;;(add-to-list 'completion-at-point-functions #'cape-ispell)
+  ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+  ;;(add-to-list 'completion-at-point-functions #'cape-symbol)
+  ;;(add-to-list 'completion-at-point-functions #'cape-line)
+)
+
+(lambda (var)
+  (message "Hey it works!"))
+
+(defun sc-do-something (param)
+  "Here's the documentation"
+  (interactive)
+  (do something))
+
+(use-package tempel
+  :ensure t
+  :bind (("M-+" . tempel-complete) ;; Alternative tempel-expand
+         ("M-*" . tempel-insert))
+
+  :init
+
+  ;; Setup completion at point
+  (defun tempel-setup-capf ()
+    ;; Add the Tempel Capf to `completion-at-point-functions'. `tempel-expand'
+    ;; only triggers on exact matches. Alternatively use `tempel-complete' if
+    ;; you want to see all matches, but then Tempel will probably trigger too
+    ;; often when you don't expect it.
+    ;; NOTE: We add `tempel-expand' *before* the main programming mode Capf,
+    ;; such that it will be tried first.
+    (setq-local completion-at-point-functions
+                (cons #'tempel-expand
+                      completion-at-point-functions)))
+
+  (add-hook 'prog-mode-hook 'tempel-setup-capf)
+  (add-hook 'text-mode-hook 'tempel-setup-capf)
+
+  ;; Optionally make the Tempel templates available to Abbrev,
+  ;; either locally or globally. `expand-abbrev' is bound to C-x '.
+  ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
+  ;; (tempel-global-abbrev-mode)
+)
+
+(straight-use-package '(tab-bookmark :host github :repo "minad/tab-bookmark"))
+
+(use-package goggles
+  :ensure t
+  :hook ((prog-mode text-mode) . goggles-mode)
+  :config
+  (setq-default goggles-pulse t))
+
+(use-package goggles
+  :ensure t
+  :hook ((prog-mode text-mode) . goggles-mode)
+  :config
+  (setq-default goggles-pulse t))
+
+(straight-use-package '(org-modern :host github :repo "minad/org-modern"))
+
+(add-hook 'org-mode-hook #'org-modern-mode)
+
+#+end_src
