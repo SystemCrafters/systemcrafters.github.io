@@ -1,0 +1,145 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - February 25, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - February 25, 2022</h1><p class="blog-post-meta"></p><div>
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Rational Emacs has received a lot of contributions!  Will review this weekend</li>
+<li>We'll be starting up some game development projects on Flux Harmonic next week!
+<ul><li><a href="https://youtube.com/FluxHarmonicLive">https://youtube.com/FluxHarmonicLive</a> // <a href="https://twitch.tv/FluxHarmonicLive">https://twitch.tv/FluxHarmonicLive</a></li>
+</ul></li>
+<li>Next EFS video: setting key bindings and creating your own prefixes</li>
+</ul>
+
+<h2><a id="trying-new-packages-by-minad" class="anchor" href="#trying-new-packages-by-minad">¶</a>Trying New Packages by Minad</h2><p>Apparently Daniel Mendler (minad), creator of Vertico, Consult, and more, has been very busy creating a bunch of new packages!
+</p>
+
+<p>Let's try some out today and see if we like them:
+</p>
+
+<ul><li><kbd>cape</kbd> - <a href="https://github.com/minad/cape">https://github.com/minad/cape</a></li>
+<li><kbd>tempel</kbd> - <a href="https://github.com/minad/tempel">https://github.com/minad/tempel</a></li>
+<li><kbd>tab-bookmark</kbd> - <a href="https://github.com/minad/tab-bookmark">https://github.com/minad/tab-bookmark</a></li>
+<li><kbd>goggles</kbd> - <a href="https://github.com/minad/goggles">https://github.com/minad/goggles</a></li>
+<li><kbd>org-modern</kbd> - <a href="https://github.com/minad/org-modern">https://github.com/minad/org-modern</a></li>
+</ul>
+
+<p>If we don't get through all of these, we may try the rest in another stream soon!
+</p>
+
+<h2><a id="the-final-configuration" class="anchor" href="#the-final-configuration">¶</a>The final configuration</h2><p>Here's what we built on stream today:
+</p>
+
+<pre><code class="emacs-lisp">(<span class="org-keyword">use-package</span> <span class="org-constant">corfu</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Optional customizations</span>
+  <span class="org-builtin">:custom</span>
+  (corfu-cycle t)                <span class="org-comment-delimiter">;; </span><span class="org-comment">Enable cycling for `</span><span class="org-comment"><span class="org-constant">corfu-next/previous</span></span><span class="org-comment">'</span>
+  (corfu-auto t)                 <span class="org-comment-delimiter">;; </span><span class="org-comment">Enable auto completion</span>
+  (corfu-preview-current nil)    <span class="org-comment-delimiter">;; </span><span class="org-comment">Disable current candidate preview</span>
+  (corfu-echo-documentation t) <span class="org-comment-delimiter">;; </span><span class="org-comment">Disable documentation in the echo area</span>
+  (corfu-scroll-margin 5)        <span class="org-comment-delimiter">;; </span><span class="org-comment">Use scroll margin</span>
+  <span class="org-builtin">:init</span>
+  (corfu-global-mode))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">kind-icon</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:after</span> corfu
+  <span class="org-builtin">:custom</span>
+  (kind-icon-default-face 'corfu-default) <span class="org-comment-delimiter">; </span><span class="org-comment">to compute blended backgrounds correctly</span>
+  <span class="org-builtin">:config</span>
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">cape-file</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">cape-keyword</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">cape-dabbrev</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">cape-symbol</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">cape-line</span>
+
+(<span class="org-keyword">setq-local</span> completion-at-point-functions
+            (list (cape-super-capf #'cape-dabbrev #'cape-file #'cape-keyword #'cape-symbol)))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">cape</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Bind dedicated completion commands</span>
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-c p p"</span> . completion-at-point) <span class="org-comment-delimiter">;; </span><span class="org-comment">capf</span>
+         (<span class="org-string">"C-c p t"</span> . complete-tag)        <span class="org-comment-delimiter">;; </span><span class="org-comment">etags</span>
+         (<span class="org-string">"C-c p d"</span> . cape-dabbrev)        <span class="org-comment-delimiter">;; </span><span class="org-comment">or dabbrev-completion</span>
+         (<span class="org-string">"C-c p f"</span> . cape-file)
+         (<span class="org-string">"C-c p k"</span> . cape-keyword)
+         (<span class="org-string">"C-c p s"</span> . cape-symbol)
+         (<span class="org-string">"C-c p a"</span> . cape-abbrev)
+         (<span class="org-string">"C-c p i"</span> . cape-ispell)
+         (<span class="org-string">"C-c p l"</span> . cape-line)
+         (<span class="org-string">"C-c p w"</span> . cape-dict)
+         (<span class="org-string">"C-c p \\"</span> . cape-tex)
+         (<span class="org-string">"C-c p _"</span> . cape-tex)
+         (<span class="org-string">"C-c p ^"</span> . cape-tex)
+         (<span class="org-string">"C-c p &amp;"</span> . cape-sgml)
+         (<span class="org-string">"C-c p r"</span> . cape-rfc1345))
+  <span class="org-builtin">:init</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Add `</span><span class="org-comment"><span class="org-constant">completion-at-point-functions</span></span><span class="org-comment">', used by `</span><span class="org-comment"><span class="org-constant">completion-at-point</span></span><span class="org-comment">'.</span>
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  <span class="org-comment-delimiter">;</span><span class="org-comment">(add-to-list 'completion-at-point-functions #'cape-tex)</span>
+  (add-to-list 'completion-at-point-functions #'cape-abbrev)
+  <span class="org-comment-delimiter">;</span><span class="org-comment">(add-to-list 'completion-at-point-functions #'cape-keyword)</span>
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">(add-to-list 'completion-at-point-functions #'cape-sgml)</span>
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">(add-to-list 'completion-at-point-functions #'cape-rfc1345)</span>
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">(add-to-list 'completion-at-point-functions #'cape-abbrev)</span>
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">(add-to-list 'completion-at-point-functions #'cape-ispell)</span>
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">(add-to-list 'completion-at-point-functions #'cape-dict)</span>
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">(add-to-list 'completion-at-point-functions #'cape-symbol)</span>
+  <span class="org-comment-delimiter">;;</span><span class="org-comment">(add-to-list 'completion-at-point-functions #'cape-line)</span>
+)
+
+(<span class="org-keyword">lambda</span> (var)
+  (message <span class="org-string">"Hey it works!"</span>))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">sc-do-something</span> (param)
+  <span class="org-doc">"Here's the documentation"</span>
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">do</span> something))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">tempel</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"M-+"</span> . tempel-complete) <span class="org-comment-delimiter">;; </span><span class="org-comment">Alternative tempel-expand</span>
+         (<span class="org-string">"M-*"</span> . tempel-insert))
+
+  <span class="org-builtin">:init</span>
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Setup completion at point</span>
+  (<span class="org-keyword">defun</span> <span class="org-function-name">tempel-setup-capf</span> ()
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">Add the Tempel Capf to `</span><span class="org-comment"><span class="org-constant">completion-at-point-functions</span></span><span class="org-comment">'. `</span><span class="org-comment"><span class="org-constant">tempel-expand</span></span><span class="org-comment">'</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">only triggers on exact matches. Alternatively use `</span><span class="org-comment"><span class="org-constant">tempel-complete</span></span><span class="org-comment">' if</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">you want to see all matches, but then Tempel will probably trigger too</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">often when you don't expect it.</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">NOTE: We add `</span><span class="org-comment"><span class="org-constant">tempel-expand</span></span><span class="org-comment">' *before* the main programming mode Capf,</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">such that it will be tried first.</span>
+    (<span class="org-keyword">setq-local</span> completion-at-point-functions
+                (cons #'tempel-expand
+                      completion-at-point-functions)))
+
+  (add-hook 'prog-mode-hook 'tempel-setup-capf)
+  (add-hook 'text-mode-hook 'tempel-setup-capf)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Optionally make the Tempel templates available to Abbrev,</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">either locally or globally. `</span><span class="org-comment"><span class="org-constant">expand-abbrev</span></span><span class="org-comment">' is bound to C-x '.</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">(add-hook 'prog-mode-hook #'tempel-abbrev-mode)</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">(tempel-global-abbrev-mode)</span>
+)
+
+(straight-use-package '(tab-bookmark <span class="org-builtin">:host</span> github <span class="org-builtin">:repo</span> <span class="org-string">"minad/tab-bookmark"</span>))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">goggles</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:hook</span> ((prog-mode text-mode) . goggles-mode)
+  <span class="org-builtin">:config</span>
+  (<span class="org-keyword">setq-default</span> goggles-pulse t))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">goggles</span>
+  <span class="org-builtin">:ensure</span> t
+  <span class="org-builtin">:hook</span> ((prog-mode text-mode) . goggles-mode)
+  <span class="org-builtin">:config</span>
+  (<span class="org-keyword">setq-default</span> goggles-pulse t))
+
+(straight-use-package '(org-modern <span class="org-builtin">:host</span> github <span class="org-builtin">:repo</span> <span class="org-string">"minad/org-modern"</span>))
+
+(add-hook 'org-mode-hook #'org-modern-mode)
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
