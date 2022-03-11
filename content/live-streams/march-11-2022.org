@@ -6,9 +6,12 @@
 
 - Next video is coming!
 - Jeff Bowman wrote a nice blog post about Rational Emacs: https://jeffbowman.writeas.com/rational-emacs
+- I've asked Jeff Bowman and John Eastman to join the maintainers group!
 
 * Trying Out Rational Emacs PRs
 
-I've done a terrible job of keeping up with Rational Emacs PRs lately!  Let's take a look at the ones I've missed and try them out!
+I've done a terrible job of keeping up with Rational Emacs PRs lately 😢
+
+Let's take a look at the new contributions I've missed and try them out!
 
 Once we're finished with that, maybe we can hack on it a bit more.
