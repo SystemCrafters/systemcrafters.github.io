@@ -1,0 +1,14 @@
+#+title: System Crafters Live! - March 11, 2022
+
+[[yt:f8LNWLWOIXI][Watch the recording on YouTube!]]
+
+* Updates
+
+- Next video is coming!
+- Jeff Bowman wrote a nice blog post about Rational Emacs: https://jeffbowman.writeas.com/rational-emacs
+
+* Trying Out Rational Emacs PRs
+
+I've done a terrible job of keeping up with Rational Emacs PRs lately!  Let's take a look at the ones I've missed and try them out!
+
+Once we're finished with that, maybe we can hack on it a bit more.
