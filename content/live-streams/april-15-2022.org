@@ -1,0 +1,19 @@
+#+title: System Crafters Live! - April 15, 2022
+
+[[yt:yPiO0_ExeRA][Watch the recording on YouTube!]]
+
+* Updates
+
+- Emacs 28.1 has been released!
+- No stream next week! (4/28/2022)
+
+* Experimenting with Wayland Compositors
+
+Some information about the [[https://wayland.freedesktop.org/architecture.html][Wayland architecture]]
+
+A more comprehensive list on [[https://wiki.archlinux.org/title/wayland#Compositors][ArchWiki]]
+
+- Sway
+- dwl
+- cagebreak
+- Qtile
