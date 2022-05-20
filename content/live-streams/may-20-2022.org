@@ -23,13 +23,35 @@ Now let's talk about what kind of video topics you'd like to see!  I've created 
 
 - Continue Emacs From Scratch v2 (obviously)
 - More videos about individual Emacs packages we haven't covered yet
+  - Cover more of the various completion systems, especially built in ones like ido, etc
 - Org Mode and Org Roam workflow videos
-- Covering
+  - Directory-specific config for org-roam
 - Cover other window managers and what workflow benefits they might have
 - Linux audio systems like PipeWire, Pulseaudio, and JACK
 - Alternate session managers, especially console-driven ones
+  - LY, sx
 - Cover Linux in a deeper way (something like Linux From Scratch)
 - Looking at data syncing tools like Syncthing and others
+- Systems programming, especially Linux systems programming
+- More videos on websites with Org Mode
+- Video about =display-buffer-alist=
+- Cover Emacs internals, maybe how Emacs Lisp works
+- Cover how Emacs native-comp works
+- Emacs debugging, both for error handling and Emacs Lisp code
+- More details on how faces work in Emacs and knowing which ones to configure
+- Emacs on WSL2 (benefits, challenges, etc)
+- Some coverage of XMPP, hosting a server, etc
+- M-x compile
+- A full set of videos on eshell
+- Templating in Emacs, tempo.el, skeleton, tempel (kmacros?)
+- Improving eww setup (shrface?)
+- How to build latest Emacs from scratch on various OSes
+- Emacs Application Framework
+- Setting up DAP with realgud
+- Emacs/CIDER workflow for Clojure
+- Cover Guile Scheme at some point for Guix people
+- Using gdb in Emacs
+- crdt.el for collaborative editing
 
 And there's a bunch of Guix-related topics I'd love to dive into:
 
@@ -41,6 +63,8 @@ And there's a bunch of Guix-related topics I'd love to dive into:
 I'd also like to cover other interesting programs and Linux distributions, too!
 
 What else would you like to see?
+
+- Other shells like fish, zsh, nushell, xonsh
 
 ** Friday Streams
 
@@ -56,6 +80,3 @@ I'd like to change how we do our Friday streams to focus more on the community:
 
 I also want to be more active in the Discord and IRC again, I've been disconnected for a while due to everything going on recently.
 
-* What's new?
-
-With the remaining time, I want to hear about something new you've been experimenting with or learning about recently in your system crafting efforts.  I've been a little out of the loop!
