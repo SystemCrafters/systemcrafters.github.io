@@ -1,0 +1,61 @@
+#+title: System Crafters Live! - May 20, 2022
+
+* Resetting the System
+
+Today we're going to hang out and discuss some ideas I have for the channel going forward!
+
+** What Happened?
+
+Why no videos for a while?
+
+A combination of factors:
+
+- I didn't spend much time working on my own configuration
+- Flux Harmonic projects and streams took up the majority of my free time
+- System Crafters streams used up many of the video ideas I had
+- Moving to Greece and working remotely at weird hours
+
+Flux Harmonic has been postponed for now so I'm shifting focus back to experimenting with my configuration and making videos about it!
+
+** Video Topics
+
+Now let's talk about what kind of video topics you'd like to see!  I've created an initial list of ideas here but I also want to hear your ideas, especially for Emacs packages or other interesting programs I haven't covered yet.
+
+- Continue Emacs From Scratch v2 (obviously)
+- More videos about individual Emacs packages we haven't covered yet
+- Org Mode and Org Roam workflow videos
+- Covering
+- Cover other window managers and what workflow benefits they might have
+- Linux audio systems like PipeWire, Pulseaudio, and JACK
+- Alternate session managers, especially console-driven ones
+- Cover Linux in a deeper way (something like Linux From Scratch)
+- Looking at data syncing tools like Syncthing and others
+
+And there's a bunch of Guix-related topics I'd love to dive into:
+
+- Managing your dotfiles with Guix Home
+- Using =guix shell= for isolated development environments
+- How to package software, especially pre-built software for other distros
+- Deploying and managing your own cloud server with Guix
+
+I'd also like to cover other interesting programs and Linux distributions, too!
+
+What else would you like to see?
+
+** Friday Streams
+
+These Friday streams have been the primary way I've kept the channel going without making videos for a while.
+
+However, there are lots of topics we've covered over time that might have been better as pre-recorded videos!
+
+I'd like to change how we do our Friday streams to focus more on the community:
+
+- Bring back Dotfile Detective and look at others' configurations again, especially those from the community
+- Bring people on the stream to discuss topics, like Emacs package authors or other interesting people
+- Spotlight cool things that the community is doing!
+
+I also want to be more active in the Discord and IRC again, I've been disconnected for a while due to everything going on recently.
+
+* What's new?
+
+With the remaining time, I want to hear about something new you've been experimenting with or learning about recently in your system crafting efforts.  I've been a little out of the loop!
