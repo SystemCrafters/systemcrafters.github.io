@@ -1,0 +1,95 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - May 6, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - May 6, 2022</h1><p class="blog-post-meta"></p><div>
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Regular videos start back next week!</li>
+<li>I'm planning to diversify topics a bit while continuing Emacs videos</li>
+</ul>
+
+<h2><a id="is-logseq-better-than-org-roam" class="anchor" href="#is-logseq-better-than-org-roam">¶</a>Is Logseq Better than Org Roam?</h2><p>I've been experimenting with an interesting tool called Logseq for the last week, and since it has some similarities and relationship to Emacs, I thought it would be interesting for us to take a look at it!
+</p>
+
+<p>If you're new to this channel, consider subscribing!  I'll be talking more about workflow tools and knowledge management this year.
+</p>
+
+<h2><a id="what-is-logseq" class="anchor" href="#what-is-logseq">¶</a>What is Logseq?</h2><p>"A privacy-first, open-source platform for knowledge management and collaboration."
+</p>
+
+<p>Basically, it's a combination of an outliner and networked knowledge database.
+</p>
+
+<p>It's inspired by and competes with tools like Notion, Workflowy/Dynalist, Obsidian, and even Emacs, Org Mode and Org Roam to some degree.
+</p>
+
+<p>It's free software!  Licensed AGPL 3.0: <a href="https://github.com/logseq/logseq">https://github.com/logseq/logseq</a>
+</p>
+
+<p>Linux users (even Guix users!) can install easily via FlatPak: <a href="https://flathub.org/apps/details/com.logseq.Logseq">https://flathub.org/apps/details/com.logseq.Logseq</a>
+</p>
+
+<p>You can also find other desktop and mobile app builds on GitHub: <a href="https://github.com/logseq/logseq/releases/tag/0.6.7">https://github.com/logseq/logseq/releases/tag/0.6.7</a>
+</p>
+
+<p>It's got a lot of traction and high-profile users, even acquired a ton of funding (but is that necessarily good?):
+</p>
+
+<p><a href="https://blog.logseq.com/logseq-raises-4-1m-to-accelerate-growth-of-the-new-world-knowledge-graph/">https://blog.logseq.com/logseq-raises-4-1m-to-accelerate-growth-of-the-new-world-knowledge-graph/</a>
+</p>
+
+<h2><a id="interesting-features" class="anchor" href="#interesting-features">¶</a>Interesting Features</h2><p>Here are some of the features you might want to experiment with:
+</p>
+
+<ul><li>Stores notes as plain text files (Markdown by default)</li>
+<li>Supports user-authored plugins with a built-in plugin "marketplace"</li>
+<li>You can embed both pages and blocks into other pages</li>
+<li>Pages and blocks also support backlink references</li>
+<li>There's a graph view</li>
+<li>It can auto-commit your notes to Git for you and use the repo for note history</li>
+<li><strong>Can also save notes as Org Mode files!</strong></li>
+<li>Anything else I'm missing?</li>
+</ul>
+
+<p>Let's take a look!
+</p>
+
+<h2><a id="so-how-would-i-use-it" class="anchor" href="#so-how-would-i-use-it">¶</a>So how would I use it?</h2><p>Let's create an empty "graph", but make sure to set the file type to Org Mode first!
+</p>
+
+<p>Things to cover:
+</p>
+
+<ul><li>Daily logging</li>
+<li>Creating networked notes</li>
+<li>Using the graph view</li>
+</ul>
+
+<p>If you're an Emacs user, you could even use this as an alternative mobile editor to things like Orgzly.
+</p>
+
+<h2><a id="is-it-better-than-emacs-and-org-mode--org-roam" class="anchor" href="#is-it-better-than-emacs-and-org-mode--org-roam">¶</a>Is it better than Emacs and Org Mode / Org Roam?</h2><p>Depends on your use case, but it's possible that you could use them together!
+</p>
+
+<ul><li>Use Logseq to edit your Org files on the go (but it might require using only a subset of Org features)</li>
+<li>Use Logseq primarily but sometimes make edits from within Emacs</li>
+</ul>
+
+<p>To me, the downsides of Logseq are:
+</p>
+
+<ul><li>You don't get the benefit of your comfortable Emacs setup</li>
+<li>You don't get to generate agenda views from your tasks, instead you have to concoct your own task workflow (not 100% true, Logseq queries can help)</li>
+<li>Not really compatible with Org Roam if you want to use Emacs to edit notes primarily on desktop</li>
+<li>Perhaps not as easy to export your notes to a website (debatable), but it is actually possible!</li>
+<li>No Org Babel, code execution, etc (or is there?)</li>
+</ul>
+
+<p>Any other thoughts?
+</p>
+
+<h2><a id="the-bottom-line" class="anchor" href="#the-bottom-line">¶</a>The bottom line</h2><p>This tool is definitely worth checking out!  I'm going to keep using it for now because it gives me a slightly different way to think about how I manage my tasks and personal knowledgebase.
+</p>
+
+<p>It's very possible that I'll adapt some of the ideas from it back into my own Org configuration!
+</p>
+
+<h2><a id="notes" class="anchor" href="#notes">¶</a>Notes</h2><p><a href="https://github.com/llcc/org-logseq/">https://github.com/llcc/org-logseq/</a>
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
