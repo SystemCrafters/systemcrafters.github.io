@@ -1,0 +1,19 @@
+#+title: System Crafters Live! - March 18, 2022
+
+[[yt:f8LNWLWOIXI][Watch the recording on YouTube!]]
+
+* Updates
+
+- No stream next week! (3/25/2022)
+
+* Writing a command interface with Transient
+
+Today we're going to experiment with the Transient package to produce a Magit-like interface for the command line interface of my programming language Mesche:
+
+https://github.com/mesche-lang/cli
+
+I haven't written any code with it before so we'll be figuring it out together!
+
+Thanks to Pavel Korytov for pointing me to this wiki page:
+
+https://github.com/magit/transient/wiki/Developer-Quick-Start-Guide
