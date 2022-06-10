@@ -1,0 +1,336 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Improving Emacs Look with the Modus Themes - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Improving Emacs Look with the Modus Themes</h1><p class="blog-post-meta"></p><div>
+<h2><a id="tasks" class="anchor" href="#tasks">¶</a>Tasks</h2><ul><li>Open files:
+<ul><li>Mesche vm.c</li>
+<li>The source file for modus themes (M-x find-library RET modus-themes RET)</li>
+<li>README.org of Emacs From Scratch</li>
+</ul></li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">efs/launch-demo-emacs</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let</span> ((default-directory <span class="org-string">"~/Projects/Code/emacs-from-scratch"</span>)
+        (existing-emacs (get-buffer <span class="org-string">"Emacs"</span>)))
+    (<span class="org-keyword">if</span> existing-emacs
+        (switch-to-buffer existing-emacs)
+      (start-process-shell-command <span class="org-string">"Emacs"</span> nil <span class="org-string">"./.tools/run-emacs.sh"</span>))))
+
+(local-set-key (kbd <span class="org-string">"C-c e"</span>) #'efs/launch-demo-emacs)
+
+</code></pre>
+
+<h2><a id="the-modus-themes" class="anchor" href="#the-modus-themes">¶</a>The Modus Themes</h2><p>The <a href="https://protesilaos.com/emacs/modus-themes">Modus Themes</a> are an incredibly configurable pair of high-contrast color themes, one light and one dark, that can make your Emacs experience a lot more enjoyable if you spend the time to learn how to use them.
+</p>
+
+<p>They were created by <a href="https://protesilaos.com">Protesilaos Stavrou</a> (also known as Prot) with the goal of producing a set of color themes that conform to the high standards of the <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibilty Guidelines'</a> AAA color contrast rules.
+</p>
+
+<p>This means that these themes should make it easy to distinguish between important elements on screen, making them much more readable while also reducing eye strain.  The themes also provide colors for many useful packages, both built-in and community-authored.
+</p>
+
+<p>If you're looking forward to learning about these themes, click 👍 on the video, and if you've already used them before, leave a comment letting me know what you think about them!
+</p>
+
+<h2><a id="installing-the-theme" class="anchor" href="#installing-the-theme">¶</a>Installing the theme</h2><p>If you use Emacs 28, the Modus Themes are built in!
+</p>
+
+<p>Otherwise, the Modus Themes manual has a thorough <a href="https://protesilaos.com/emacs/modus-themes#h:1af85373-7f81-4c35-af25-afcef490c111">Installation section</a> which describes multiple ways that you can install it.
+</p>
+
+<p>The most straightforward way is to use the built-in <kbd>package.el</kbd> as this package is available through <a href="http://elpa.gnu.org/packages/modus-themes.html">GNU ELPA</a>:
+</p>
+
+<pre><code class="nil">
+M-x package-install RET modus-themes RET
+
+</code></pre>
+
+<h2><a id="activating-the-theme" class="anchor" href="#activating-the-theme">¶</a>Activating the theme</h2><p>The <kbd>modus-themes</kbd> package comes with two theme definitions:
+</p>
+
+<ul><li>The light theme <kbd>modus-operandi</kbd></li>
+<li>The dark theme <kbd>modus-vivendi</kbd></li>
+</ul>
+
+<p>We can load either of these themes with the <kbd>load-theme</kbd> command:
+</p>
+
+<pre><code class="nil">
+M-x load-theme RET modus-vivendi RET
+
+</code></pre>
+
+<p>If you want to make your theme selection permanent, you can open up your <kbd>init.el</kbd> file and add the following line:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Load modus-vivendi theme and confirm that it is safe</span>
+(load-theme 'modus-vivendi t)
+
+</code></pre>
+
+<p>If you need more details on how to set up your Emacs configuration file, check out my video <a href="https://systemcrafters.net/emacs-from-scratch/basics-of-emacs-configuration/">The Basics of Emacs Configuration</a>.
+</p>
+
+<p><a href="https://protesilaos.com/emacs/modus-themes#h:3f3c3728-1b34-437d-9d0c-b110f5b161a9">Modus Themes Manual: Enable and load</a>
+</p>
+
+<h2><a id="taking-a-look-at-the-theme" class="anchor" href="#taking-a-look-at-the-theme">¶</a>Taking a look at the theme</h2><p>Let's take a look at the Modus Themes by opening a few different files to see what the default styling looks like.  I'll open an Emacs Lisp file, a file with C language code, and an Org Mode file.
+</p>
+
+<p>One thing you'll notice right away is that the theme looks pretty simple!  The colors are nice, the styling is subtle, everything using a softer, pastel-like color set while still maintaining good color contrast.
+</p>
+
+<p>We can easily take a look at the light variant of the theme using the <kbd>modus-themes-toggle</kbd> command:
+</p>
+
+<pre><code class="nil">
+M-x modus-themes-toggle RET
+
+</code></pre>
+
+<p>You can use this command any time to switch to the alternate version of the theme!
+</p>
+
+<h2><a id="theme-customization" class="anchor" href="#theme-customization">¶</a>Theme customization</h2><p>As I mentioned before, the Modus Themes are highly customizable, unlike many other Emacs themes.  Now I'm going to show you how this theme customization works and how to refer to the manual so that you know what to try to find the settings that work best for you.
+</p>
+
+<p>However, I don't plan to show you the effect of every possible setting of this theme because the video would be an hour long!  I'll show you a few interesting things you can do as a starting point for your customizations.
+</p>
+
+<p>The most important thing to keep in mind is that any variables you set to customize the theme <strong>must come before the <kbd>load-theme</kbd> call in your <kbd>init.el</kbd>!</strong>  This is because the theme pulls values from those variables when it gets loaded.  It also means <strong>you need to re-load the theme after you change any variables!</strong>
+</p>
+
+<p>Learn more about the <a href="https://protesilaos.com/emacs/modus-themes#h:bf1c82f2-46c7-4eb2-ad00-dd11fdd8b53f">Customization Options</a> in the Modus Themes manual.
+</p>
+
+<h3><a id="important-compatibility-note" class="anchor" href="#important-compatibility-note">¶</a>Important compatibility note!</h3><p><strong>This is important:</strong> The settings available in the built-in version of the Modus Themes in Emacs 28.1 <strong>might be different</strong> than what you read on the manual website!  The themes are constantly being improved so some settings may be different than what I describe in this video.
+</p>
+
+<p>You have two options:
+</p>
+
+<ul><li>When a particular setting doesn't work, use <kbd>M-x describe-variable</kbd> to look at the documentation for the variable, it will tell you what values are supported</li>
+<li>Install the latest version of the package!</li>
+</ul>
+
+<h2><a id="customizing-the-ui" class="anchor" href="#customizing-the-ui">¶</a>Customizing the UI</h2><p>One of the easiest ways to make the overall Emacs UI look better is to customize how the Modus Themes styles it.
+</p>
+
+<p>Some of the things you can easily customize:
+</p>
+
+<ul><li>The mode line</li>
+<li>The tab bar</li>
+<li>Buttons (like in the Customization UI)</li>
+<li>Completion interfaces</li>
+<li>Text selections</li>
+<li>Line numbers</li>
+<li>... and a lot more</li>
+</ul>
+
+<p>We will only cover 3 of these in the interest of time!
+</p>
+
+<h3><a id="the-mode-line" class="anchor" href="#the-mode-line">¶</a>The mode line</h3><p>Let's face it, the mode line is one of the most ever-present parts of Emacs' UI, so it makes sense to improve the look of it first.
+</p>
+
+<p>The <kbd>modus-themes-mode-line</kbd> variable makes it possible to customize 3 different aspects of the mode line appearance.  Each aspect has specific symbols you use to customize its behavior:
+</p>
+
+<ul><li>The border and its appearance: <kbd>borderless</kbd>, <kbd>3d</kbd>, <kbd>moody</kbd></li>
+<li>The background color: <kbd>accented</kbd></li>
+<li>The size and padding of the text (<strong>some not in 28.1!</strong>): <kbd>height</kbd>, <kbd>padding</kbd> (or <kbd>padded</kbd> in 28.1)</li>
+</ul>
+
+<p>You can combine these settings!  Other aspects of the Modus Themes are configured in a similar way so it's important to understand how this works.
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Using a single aspect</span>
+(<span class="org-keyword">setq</span> modus-themes-mode-line '(borderless))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Using multiple aspects</span>
+<span class="org-comment-delimiter">;</span><span class="org-comment">(setq modus-themes-mode-line '(accented borderless padded))</span>
+
+</code></pre>
+
+<p>I'll test out these changes by tweaking the setting and then run <kbd>M-x eval-buffer</kbd> to re-evaluate all settings and reload the theme.
+</p>
+
+<p>Let's also take a look at the UI in the light theme!
+</p>
+
+<p><a href="https://protesilaos.com/emacs/modus-themes#h:27943af6-d950-42d0-bc23-106e43f50a24">Modus Themes Manual: Customizing the mode line</a>
+</p>
+
+<h3><a id="selection-regions" class="anchor" href="#selection-regions">¶</a>Selection regions</h3><p>When you select text in Emacs, that is called an "active region."  The Modus Themes provide a variable called <kbd>modus-themes-region</kbd> to enable you to change their appearance:
+</p>
+
+<ul><li><kbd>accented</kbd>: Use a richer background color for regions</li>
+<li><kbd>bg-only</kbd>: Don't remove foreground text highlighting inside of active region</li>
+<li><kbd>no-extend</kbd>: Don't extend the region color to the full width of the window</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> modus-themes-region '(accented))
+<span class="org-comment-delimiter">;</span><span class="org-comment">(setq modus-themes-region '(bg-only))</span>
+<span class="org-comment-delimiter">;</span><span class="org-comment">(setq modus-themes-region '(bg-only no-extend))</span>
+
+</code></pre>
+
+<p><a href="https://protesilaos.com/emacs/modus-themes#h:60798063-b4ad-45ea-b9a7-ff7b5c0ab74c">Modus Themes Manual: Option for active region</a>
+</p>
+
+<h3><a id="completion-coloring" class="anchor" href="#completion-coloring">¶</a>Completion coloring</h3><p>This is a nice option to set if you intend to turn on <kbd>icomplete-mode</kbd> for enhanced minibuffer completions or if you want to use community packages like Vertico or Selectrum.
+</p>
+
+<p>The <kbd>modus-themes-completions</kbd> variable can be used to control how completion candidates are highlighted, especially when they match part of your search term:
+</p>
+
+<ul><li><kbd>nil</kbd>: No customization</li>
+<li><kbd>moderate</kbd>: Slight customization that isn't too distracting</li>
+<li><kbd>opinionated</kbd>: Much richer colors</li>
+</ul>
+
+<p>Let's try these by turning on <kbd>icomplete-mode</kbd> to see what they look like:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> modus-themes-completions 'minimal)
+<span class="org-comment-delimiter">;</span><span class="org-comment">(setq modus-themes-completions 'opinionated)</span>
+
+</code></pre>
+
+<p>This setting actually allows you to be even more specific about which aspects of the completion UIs you are customizing, so read the manual to learn more about that!
+</p>
+
+<p><a href="https://protesilaos.com/emacs/modus-themes#h:f1c20c02-7b34-4c35-9c65-99170efb2882">Modus Themes Manual: Options for completion framework aesthetics</a>
+</p>
+
+<h2><a id="customizing-syntax-highlighting" class="anchor" href="#customizing-syntax-highlighting">¶</a>Customizing syntax highlighting</h2><p>Now let's make the text in our buffers look better too!  There are a few useful options to customize here:
+</p>
+
+<ul><li><a href="https://protesilaos.com/emacs/modus-themes#h:b25714f6-0fbe-41f6-89b5-6912d304091e">modus-themes-bold-constructs</a>: Set to <kbd>t</kbd> to increase the number of bolded syntax elements (like type names)</li>
+<li><a href="https://protesilaos.com/emacs/modus-themes#h:977c900d-0d6d-4dbb-82d9-c2aae69543d6">modus-themes-italic-constructs</a>: Set to <kbd>t</kbd> to increase the number of italicized syntax elements (like comments)</li>
+<li><a href="https://protesilaos.com/emacs/modus-themes#h:e66a7e4d-a512-4bc7-9f86-fbbb5923bf37">modus-themes-paren-match</a>: Possible values are <kbd>bold</kbd>, <kbd>intense</kbd>, <kbd>underline</kbd></li>
+<li><a href="https://protesilaos.com/emacs/modus-themes#h:c119d7b2-fcd4-4e44-890e-5e25733d5e52">modus-themes-syntax</a>: Possible values are <kbd>faint</kbd>, <kbd>yellow-comments</kbd>, <kbd>green-strings</kbd>, and <kbd>alt-syntax</kbd></li>
+</ul>
+
+<p>I won't show you the effect of all these possible values, but I will show you the effect of each of the variables so you can decide whether to use them!
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> modus-themes-bold-constructs t)
+<span class="org-comment-delimiter">;</span><span class="org-comment">(setq modus-themes-italic-constructs t)</span>
+<span class="org-comment-delimiter">;</span><span class="org-comment">(setq modus-themes-paren-match '(bold intense underline))</span>
+<span class="org-comment-delimiter">;</span><span class="org-comment">(setq modus-themes-syntax '(faint))</span>
+<span class="org-comment-delimiter">;</span><span class="org-comment">(setq modus-themes-syntax '(alt-syntax))</span>
+<span class="org-comment-delimiter">;</span><span class="org-comment">(setq modus-themes-syntax '(green-strings yellow-comments))</span>
+
+</code></pre>
+
+<p>My preference is to not set <kbd>modus-themes-syntax</kbd> but to turn on bolded and italicized sections!
+</p>
+
+<h2><a id="customizing-org-mode-files" class="anchor" href="#customizing-org-mode-files">¶</a>Customizing Org Mode files</h2><p>There are also a number of interesting ways that you can customize how Org Mode files get displayed:
+</p>
+
+<h3><a id="heading-size-and-style" class="anchor" href="#heading-size-and-style">¶</a>Heading size and style</h3><p>One of the biggest ways to make your Org Mode files look nicer is to make headings stand out from normal document text using bigger font sizes and different colors.
+</p>
+
+<p>The <kbd>modus-themes-headings</kbd> variable provides a number of ways to <a href="https://protesilaos.com/emacs/modus-themes#h:271eff19-97aa-4090-9415-a6463c2f9ae1">customize the display of headers</a> at different levels of the document:
+</p>
+
+<ul><li><kbd>background</kbd>: Sets a background color for headings</li>
+<li><kbd>overline</kbd>: Draws a line above the heading</li>
+<li><kbd>rainbow</kbd>: Makes heading text color stand out more and picks a different color per level</li>
+<li>A floating point number that controls the text scale (like 1.5 for 150% of the size of normal text)</li>
+<li>A number of font weight names like <kbd>bold</kbd>, <kbd>semibold</kbd>, <kbd>medium</kbd>, etc (see the documentation for the full list)</li>
+</ul>
+
+<p>You define the set of customizations to use for each heading level and you can also set a default that gets applied to any levels that aren't specifically configured:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> modus-themes-headings
+      '((1 . (rainbow overline background 1.4))
+        (2 . (rainbow background 1.3))
+        (3 . (rainbow bold 1.2))
+        (t . (semilight 1.1)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Important!</span>
+(<span class="org-keyword">setq</span> modus-themes-scale-headings t)
+
+</code></pre>
+
+<p><strong>NOTE:</strong> You <strong>must</strong> set <kbd>modus-themes-scale-headings</kbd> to <kbd>t</kbd> for heading scale factors to work!
+</p>
+
+<h3><a id="source-blocks" class="anchor" href="#source-blocks">¶</a>Source blocks</h3><p>Source block colorization <a href="https://protesilaos.com/emacs/modus-themes#h:b7e328c0-3034-4db7-9cdf-d5ba12081ca2">can be customized</a> using the <kbd>modus-themes-org-blocks</kbd> variable:
+</p>
+
+<ul><li><kbd>gray-background</kbd>: Use a subtle gray background for code blocks</li>
+<li><kbd>tinted-background</kbd>: Use colored backgrounds corresponding to source langauge</li>
+</ul>
+
+<p>Let's a take a look at what code blocks look like before this change and then try out the two settings:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">setq</span> modus-themes-org-blocks 'gray-background)
+<span class="org-comment-delimiter">;</span><span class="org-comment">(setq modus-themes-org-blocks 'tinted-background)</span>
+
+</code></pre>
+
+<p><strong>NOTE:</strong> For the <kbd>tinted-background</kbd> setting, we'll need to run <kbd>M-x org-mode-restart</kbd> in any Org buffers that are already open to ensure the changes get picked up!
+</p>
+
+<h2><a id="complete-color-palette-customization" class="anchor" href="#complete-color-palette-customization">¶</a>Complete color palette customization</h2><p>I won't show examples of this, but I just wanted to make you aware that it's possible to totally customize the set of colors used by the Modus Themes:
+</p>
+
+<ul><li><a href="https://protesilaos.com/emacs/modus-themes#h:307d95dd-8dbd-4ece-a543-10ae86f155a6">Overriding specific theme colors</a></li>
+<li><a href="https://protesilaos.com/emacs/modus-themes#h:4589acdc-2505-41fc-9f5e-699cfc45ab00">Override color saturation factors</a></li>
+<li><a href="https://protesilaos.com/emacs/modus-themes#h:4589acdc-2505-41fc-9f5e-699cfc45ab00">Overriding colors by blending with base colors</a></li>
+</ul>
+
+<p>Keep in mind that some of the techniques discussed in these sections are fairly advanced so I'd try to get as much mileage out of the built-in settings before you dive heavily into automated color overrides.
+</p>
+
+<p>It's also worth looking at some of the <a href="https://protesilaos.com/emacs/modus-themes#h:f4651d55-8c07-46aa-b52b-bed1e53463bb">more advanced customization options</a> to see what else you can do!
+</p>
+
+<h2><a id="a-suggested-configuration" class="anchor" href="#a-suggested-configuration">¶</a>A suggested configuration</h2><p>There's plenty more that you can customize with these themes, so do yourself a favor and check out the Modus Themes manual to learn more about all the options.
+</p>
+
+<p>If you want a quick way to get started, you can copy this configuration as a starting point!
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Configure the Modus Themes' appearance</span>
+(<span class="org-keyword">setq</span> modus-themes-mode-line '(accented borderless)
+      modus-themes-bold-constructs t
+      modus-themes-italic-constructs t
+      modus-themes-fringes 'subtle
+      modus-themes-tabs-accented t
+      modus-themes-paren-match '(bold intense)
+      modus-themes-prompts '(bold intense)
+      modus-themes-completions 'opinionated
+      modus-themes-org-blocks 'tinted-background
+      modus-themes-scale-headings t
+      modus-themes-region '(bg-only)
+      modus-themes-headings
+      '((1 . (rainbow overline background 1.4))
+        (2 . (rainbow background 1.3))
+        (3 . (rainbow bold 1.2))
+        (t . (semilight 1.1))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Load the dark theme by default</span>
+(load-theme 'modus-vivendi t)
+
+</code></pre>
+
+<p>I'd love to see the theme configurations that you come up with!  Come share them on the <a href="https://wiki.systemcrafters.net/community/chat-with-us/#discord">System Crafters Discord or IRC channel</a>! (You may have to accept the SSL certificate warning)
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
