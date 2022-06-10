@@ -1,0 +1,76 @@
+#+title: System Crafters Live! - June 10, 2022
+
+[[https://youtu.be/y7E18HpG1wU][Watch the recording on YouTube!]]
+
+* Updates
+
+- Video on Modus Themes coming out tomorrow!
+
+* Modular Emacs Configuration Strategies
+
+Today I want to discuss how to create an Emacs configuration that can satisfy a few goals:
+
+** Works well across multiple platforms (Linux, Windows, macOS, even mobile via Termux)
+
+- Use =system-type= variable to choose which configuration parts to load
+- /Maybe/ use =system-name= to do machine-specific configurations when multiple machines use the same OS
+- Standard file paths for certain things, avoiding shelling out to certain programs
+- Use eshell for all shell activity
+
+** Can be configured with Guix
+
+- All configuration modules are written in a slightly platform-agnostic way (maybe some special-casing)
+- Configuration points of these modules are exposed via =defcustom= and =defvar=
+- When configuring Emacs via Guix, the Guix Home configuration services will expose their own variables so that you can configure certain things at the Scheme level, then the corresponding Emacs Lisp will get generated and loaded as part of Emacs startup
+- The benefit of this is that you can do machine-specific configuration
+  - Certain modules can be loaded, their dependencies will only be installed on that machine
+
+Even if you don't use Guix, you could probably use standard dotfiles management tools like Chezmoi or yadm to accomplish something similar.
+
+Case's module: https://github.com/duckwork/machine.el
+
+** Enables standalone Emacs sessions
+
+- Working on multiple projects at the same time, managing all the buffers and windows in Emacs can be challenging
+- Obviously there are lots of packages for dealing with this, but it's still not perfect
+- What if you can just launch a special-purpose Emacs session that isn't connected to your main session to load only the packages needed and keep your buffer list clean
+
+Why?
+
+- If Emacs gets in a bad state, just kill it
+- Not needing to load a bunch of unnecessary tools or packages (things like =use-package= or =with-eval-after-load= make this less of a problem)
+- When you're finished working on a particular task, close everything related to it
+- Some blocking operations (like network traffic from IRC, mail, etc) can make it harder to use Emacs smoothly while working on something unrelated
+
+http://wiki.systemcrafters.net/guix/nvidia/
+
+** Things to look at
+
+- New Emacs command line option for different config directories
+
+* Modular configuration style
+
+- Like Rational Emacs, split various parts of functionality into separate Emacs Lisp modules that are part of your own configuration
+- The ideal model is to have an =init.el= file that purely just loads in the necessary modules for a given machine, plus any additional modules that are context-specific
+- The base configuration would only load the necessary things for everyday use
+- However, you might have environment variables or command line flags to enable a specific "profile" (sounds like Chemacs2, right?) (use =command-switch-alist=)
+- You could also use =.dir-locals.el= to load a specific module when entering the directory
+
+* Speculative macro syntax
+
+Something we might try to implement someday:
+
+#+begin_src emacs-lisp
+
+  (with-system
+   (all
+    (set-theme modus-vivendi)
+    (load-modules rational-ui
+                  rational-evil))
+   ((and linux "phantom")
+    (set-theme doom-palenight)
+    (load-modules rational-desktop))
+   (windows
+    (load-modules rational-powershell)))
+
+#+end_src
