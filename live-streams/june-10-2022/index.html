@@ -1,0 +1,74 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - June 10, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - June 10, 2022</h1><p class="blog-post-meta"></p><div><p><a href="https://youtu.be/y7E18HpG1wU">Watch the recording on YouTube!</a>
+</p>
+
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Video on Modus Themes coming out tomorrow!</li>
+</ul>
+
+<h2><a id="modular-emacs-configuration-strategies" class="anchor" href="#modular-emacs-configuration-strategies">¶</a>Modular Emacs Configuration Strategies</h2><p>Today I want to discuss how to create an Emacs configuration that can satisfy a few goals:
+</p>
+
+<h3><a id="works-well-across-multiple-platforms-linux-windows-macos-even-mobile-via-termux" class="anchor" href="#works-well-across-multiple-platforms-linux-windows-macos-even-mobile-via-termux">¶</a>Works well across multiple platforms (Linux, Windows, macOS, even mobile via Termux)</h3><ul><li>Use <kbd>system-type</kbd> variable to choose which configuration parts to load</li>
+<li><em>Maybe</em> use <kbd>system-name</kbd> to do machine-specific configurations when multiple machines use the same OS</li>
+<li>Standard file paths for certain things, avoiding shelling out to certain programs</li>
+<li>Use eshell for all shell activity</li>
+</ul>
+
+<h3><a id="can-be-configured-with-guix" class="anchor" href="#can-be-configured-with-guix">¶</a>Can be configured with Guix</h3><ul><li>All configuration modules are written in a slightly platform-agnostic way (maybe some special-casing)</li>
+<li>Configuration points of these modules are exposed via <kbd>defcustom</kbd> and <kbd>defvar</kbd></li>
+<li>When configuring Emacs via Guix, the Guix Home configuration services will expose their own variables so that you can configure certain things at the Scheme level, then the corresponding Emacs Lisp will get generated and loaded as part of Emacs startup</li>
+<li>The benefit of this is that you can do machine-specific configuration
+<ul><li>Certain modules can be loaded, their dependencies will only be installed on that machine</li>
+</ul></li>
+</ul>
+
+<p>Even if you don't use Guix, you could probably use standard dotfiles management tools like Chezmoi or yadm to accomplish something similar.
+</p>
+
+<p>Case's module: <a href="https://github.com/duckwork/machine.el">https://github.com/duckwork/machine.el</a>
+</p>
+
+<h3><a id="enables-standalone-emacs-sessions" class="anchor" href="#enables-standalone-emacs-sessions">¶</a>Enables standalone Emacs sessions</h3><ul><li>Working on multiple projects at the same time, managing all the buffers and windows in Emacs can be challenging</li>
+<li>Obviously there are lots of packages for dealing with this, but it's still not perfect</li>
+<li>What if you can just launch a special-purpose Emacs session that isn't connected to your main session to load only the packages needed and keep your buffer list clean</li>
+</ul>
+
+<p>Why?
+</p>
+
+<ul><li>If Emacs gets in a bad state, just kill it</li>
+<li>Not needing to load a bunch of unnecessary tools or packages (things like <kbd>use-package</kbd> or <kbd>with-eval-after-load</kbd> make this less of a problem)</li>
+<li>When you're finished working on a particular task, close everything related to it</li>
+<li>Some blocking operations (like network traffic from IRC, mail, etc) can make it harder to use Emacs smoothly while working on something unrelated</li>
+</ul>
+
+<p><a href="http://wiki.systemcrafters.net/guix/nvidia/">http://wiki.systemcrafters.net/guix/nvidia/</a>
+</p>
+
+<h3><a id="things-to-look-at" class="anchor" href="#things-to-look-at">¶</a>Things to look at</h3><ul><li>New Emacs command line option for different config directories</li>
+</ul>
+
+<h2><a id="modular-configuration-style" class="anchor" href="#modular-configuration-style">¶</a>Modular configuration style</h2><ul><li>Like Rational Emacs, split various parts of functionality into separate Emacs Lisp modules that are part of your own configuration</li>
+<li>The ideal model is to have an <kbd>init.el</kbd> file that purely just loads in the necessary modules for a given machine, plus any additional modules that are context-specific</li>
+<li>The base configuration would only load the necessary things for everyday use</li>
+<li>However, you might have environment variables or command line flags to enable a specific "profile" (sounds like Chemacs2, right?) (use <kbd>command-switch-alist</kbd>)</li>
+<li>You could also use <kbd>.dir-locals.el</kbd> to load a specific module when entering the directory</li>
+</ul>
+
+<h2><a id="speculative-macro-syntax" class="anchor" href="#speculative-macro-syntax">¶</a>Speculative macro syntax</h2><p>Something we might try to implement someday:
+</p>
+
+<pre><code class="emacs-lisp">
+(with-system
+ (all
+  (set-theme modus-vivendi)
+  (load-modules rational-ui
+                rational-evil))
+ ((<span class="org-keyword">and</span> linux <span class="org-string">"phantom"</span>)
+  (set-theme doom-palenight)
+  (load-modules rational-desktop))
+ (windows
+  (load-modules rational-powershell)))
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
