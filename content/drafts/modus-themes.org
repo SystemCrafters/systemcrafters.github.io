@@ -1,25 +1,6 @@
-#+title: Improving Emacs Look with the Modus Themes
+#+title: Style Your Emacs with the Modus Themes
 
-* TODO Tasks
-
-- Open files:
-  - Mesche vm.c
-  - The source file for modus themes (M-x find-library RET modus-themes RET)
-  - README.org of Emacs From Scratch
-
-#+begin_src emacs-lisp
-
-  (defun efs/launch-demo-emacs ()
-    (interactive)
-    (let ((default-directory "~/Projects/Code/emacs-from-scratch")
-          (existing-emacs (get-buffer "Emacs")))
-      (if existing-emacs
-          (switch-to-buffer existing-emacs)
-        (start-process-shell-command "Emacs" nil "./.tools/run-emacs.sh"))))
-
-  (local-set-key (kbd "C-c e") #'efs/launch-demo-emacs)
-
-#+end_src
+[[yt:JJPokfFxyFo][Watch the video on YouTube!]]
 
 * The Modus Themes
 
