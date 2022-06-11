@@ -1,24 +1,6 @@
 <!--  -->
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Improving Emacs Look with the Modus Themes - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Improving Emacs Look with the Modus Themes</h1><p class="blog-post-meta"></p><div>
-<h2><a id="tasks" class="anchor" href="#tasks">¶</a>Tasks</h2><ul><li>Open files:
-<ul><li>Mesche vm.c</li>
-<li>The source file for modus themes (M-x find-library RET modus-themes RET)</li>
-<li>README.org of Emacs From Scratch</li>
-</ul></li>
-</ul>
-
-<pre><code class="emacs-lisp">
-(<span class="org-keyword">defun</span> <span class="org-function-name">efs/launch-demo-emacs</span> ()
-  (<span class="org-keyword">interactive</span>)
-  (<span class="org-keyword">let</span> ((default-directory <span class="org-string">"~/Projects/Code/emacs-from-scratch"</span>)
-        (existing-emacs (get-buffer <span class="org-string">"Emacs"</span>)))
-    (<span class="org-keyword">if</span> existing-emacs
-        (switch-to-buffer existing-emacs)
-      (start-process-shell-command <span class="org-string">"Emacs"</span> nil <span class="org-string">"./.tools/run-emacs.sh"</span>))))
-
-(local-set-key (kbd <span class="org-string">"C-c e"</span>) #'efs/launch-demo-emacs)
-
-</code></pre>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>Style Your Emacs with the Modus Themes - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">Style Your Emacs with the Modus Themes</h1><p class="blog-post-meta"></p><div><p><div class="embed-responsive embed-responsive-16by9"> <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/JJPokfFxyFo" allowfullscreen></iframe> </div>
+</p>
 
 <h2><a id="the-modus-themes" class="anchor" href="#the-modus-themes">¶</a>The Modus Themes</h2><p>The <a href="https://protesilaos.com/emacs/modus-themes">Modus Themes</a> are an incredibly configurable pair of high-contrast color themes, one light and one dark, that can make your Emacs experience a lot more enjoyable if you spend the time to learn how to use them.
 </p>
