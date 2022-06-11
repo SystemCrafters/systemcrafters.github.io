@@ -6,6 +6,7 @@ You can find the complete [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH
 
 1. [[basics-of-emacs-configuration/][The Basics of Emacs Configuration]]
 2. [[the-best-default-settings/][The 6 Emacs Settings Every User Should Consider]]
+3. [[the-modus-themes/][Style Your Emacs with The Modus Themes]]
 
 * Old Series
 
