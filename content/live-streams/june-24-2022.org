@@ -1,0 +1,118 @@
+#+title: System Crafters Live! - June 24, 2022
+
+* Updates
+
+- I've replaced EXWM with HerbstluftWM in my configuration and I like it!
+- Next video will be about how I show "presentation" slides in Org Mode like in my videos
+
+* Configuring HerbstluftWM with Emacs Lisp
+
+Today we're going to try and write an Emacs Lisp package that can control the venerable [[https://herbstluftwm.org/][Herbstluft Window Manager]].
+
+This is a really fun and versatile tiling window manager which (like =bspwm=) is configured through a command line interface called =herbstclient=.
+
+An interesting implication of how you configure =herbstluftwm= is that the configuration file can be written as a script in any language you like so long as it's at the expected configuration path (=~/.config/herbstluftwm/autostart=) and properly executable.
+
+Let's build the configuration package and try to write a simple configuration script in Emacs Lisp!
+
+Here are a few of the things we'll try to script:
+
+** Changing settings variables
+
+** Setting the theme
+
+** Configuring key bindings
+
+** Workspace management
+
+** Window management
+
+* The final code
+
+#+begin_src emacs-lisp
+
+  (require 'cl-lib)
+
+  (defun herbst-run-command (command)
+    (start-process-shell-command "herbstclient"
+                                 nil
+                                 (format "herbstclient %s" command)))
+
+  (defun herbst-run-commands (&rest commands)
+    (mapcar #'herbst-run-command commands))
+
+  (defun herbst-set (setting-name value)
+    (herbst-run-command (format  "set %s %s" setting-name value)))
+
+  (herbst-set "frame_gap" 10)
+
+  (defmacro herbst-setq (&rest setting-pairs)
+    `(progn
+       ,@(cl-loop for (key val) on setting-pairs by #'cddr collect
+                  `(herbst-run-command ,(format "set %s %s"
+                                                (string-replace "-" "_" (symbol-name key))
+                                                val)))))
+
+  (defmacro herbst-set-attr (&rest attr-lists)
+    `(herbst-run-commands ,@(herbst--attr-list-to-strings "" attr-lists)))
+
+  ;; Building up the object path
+
+  (defun herbst--attr-list-to-strings (current-path current-item)
+    (if current-item
+        (if (listp (car current-item))
+            ;; This needs to loop
+            (apply #'append
+                   (mapcar (lambda (item)
+                             (herbst--attr-list-to-strings current-path item))
+                           current-item))
+          (if (keywordp (car current-item))
+              (append
+               (list (format "attr %s%s %s"
+                             current-path
+                             (string-replace "-"
+                                             "_"
+                                             (substring (symbol-name (car current-item)) 1))
+                             (cadr current-item)))
+               (herbst--attr-list-to-strings current-path (cddr current-item)))
+            (if (symbolp (car current-item))
+                (herbst--attr-list-to-strings
+                 (concat current-path
+                         (symbol-name (car current-item))
+                         ".")
+                 (cdr current-item)))))
+      '()))
+
+  ;; Speculative key binding syntax
+  ;; (herbst-define-key "S-c" "cycle"
+  ;;                    "S-i" "jumpto urgent"
+  ;;                    "S-q" "close_and_remove")
+
+  (provide 'herbstmacs)
+
+#+end_src
+
+The =autostart= file:
+
+#+begin_src emacs-lisp
+
+  #!/usr/bin/env -S emacs -Q --script
+
+  ;; TODO: Don't harcode this path!
+  (load "~/Projects/Code/herbstmacs/herbstmacs.el")
+
+  (herbst-setq frame-gap 10
+               window-gap 0
+               smart-frame-surroundings off)
+
+  (herbst-set-attr
+   (theme :title-font "'JetBrains Mono:pixelsize=32'"
+          :title-height 40
+          :title-depth 15
+          :outer-width 3
+          (floating :border-width 4
+                    :outer-width 1
+                    :outer-color black)
+          (urgent :inner-color "#9A65B0")))
+
+#+end_src
