@@ -1,4 +1,6 @@
-#+title: The Secrets of my Emacs Presentation Style
+#+title: The Secrets of My Emacs Presentation Style
+
+[[yt:SCPoF1PTZpI][Watch the video on YouTube!]]
 
 * It's not really a secret, but I'll tell you anyway
 
