@@ -1,0 +1,474 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>The Secrets of My Emacs Presentation Style - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">The Secrets of My Emacs Presentation Style</h1><p class="blog-post-meta"></p><div><p><div class="embed-responsive embed-responsive-16by9"> <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/SCPoF1PTZpI" allowfullscreen></iframe> </div>
+</p>
+
+<h2><a id="its-not-really-a-secret-but-ill-tell-you-anyway" class="anchor" href="#its-not-really-a-secret-but-ill-tell-you-anyway">¶</a>It's not really a secret, but I'll tell you anyway</h2><p>I get asked pretty regularly about how I achieve the look of the presentations I that give from within Emacs.  I made <a href="https://youtu.be/vz9aLmxYJB0">another video</a> in the past showing how to use a package called <kbd>org-tree-slide</kbd> for presentations, but I've actually been using another package called <kbd>org-present</kbd> for the last year or more.
+</p>
+
+<p>In this video, I'll show you exactly how I achieve my presentation style using <kbd>org-present</kbd> and a few other customizations.
+</p>
+
+<p>If you check the link to the show notes in the description, I provide a <strong>complete</strong> Emacs configuration that will replicate what you see here.
+</p>
+
+<p>Please make sure to give this video a like 👍 if you learn something useful from it!
+</p>
+
+<h2><a id="installing-org-present" class="anchor" href="#installing-org-present">¶</a>Installing org-present</h2><p><kbd>org-present</kbd> can be installed from either the <a href="https://elpa.nongnu.org/nongnu/org-present.html">NonGNU</a> or <a href="https://melpa.org/#/org-present">MELPA</a> package archives.  I prefer using the NonGNU archive since it's already part of the default set of package archives in Emacs 28.
+</p>
+
+<p>If you're using a version of Emacs before 28 you can add the following line to your configuration to add the NonGNU archive:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Make sure the NonGNU repo is added</span>
+(add-to-list 'package-archives '(<span class="org-string">"nongnu"</span> . <span class="org-string">"https://elpa.nongnu.org/nongnu/"</span>))
+
+</code></pre>
+
+<p><strong>NOTE:</strong> You don't need to add this archive if you're already using the MELPA archive!
+</p>
+
+<p>After adding this entry to the archives you might need to run <kbd>M-x package-refresh-contents</kbd> to pull the NonGNU package index!
+</p>
+
+<p>Now you can install the package by using <kbd>M-x package-install RET org-present</kbd> or (ideally) by adding these lines to your configuration:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install org-present if needed</span>
+(<span class="org-keyword">unless</span> (package-installed-p 'org-present)
+  (package-install 'org-present))
+
+</code></pre>
+
+<p><strong>NOTE:</strong> In this video I'll be showing Emacs Lisp snippets that don't use configuration macro packages like <kbd>use-package</kbd>, etc!
+</p>
+
+<h2><a id="the-basics-of-org-present" class="anchor" href="#the-basics-of-org-present">¶</a>The basics of org-present</h2><p>Let's take a look at what Org Present looks like without any customization!  Open up an Org Mode file and run <kbd>M-x org-present</kbd>.
+</p>
+
+<p>The presentation will be displayed like this by default:
+</p>
+
+<ul><li>The first slide is the document title followed by any text before the first heading</li>
+<li>Each subsequent slide contains the content of the next top-level heading</li>
+<li>Each slide's sub-headings can be folded or expanded</li>
+</ul>
+
+<p>Looks pretty basic, right?  That's great!  We can use everything we know about Emacs to make it look however we want.
+</p>
+
+<p>Before we do that though, let's get familiar with the essential key bindings you'll need when you use this package:
+</p>
+
+<h3><a id="key-bindings" class="anchor" href="#key-bindings">¶</a>Key Bindings</h3><p>You can also bind your own keys in the <kbd>org-present-mode-keymap</kbd>!
+</p>
+
+<h2><a id="centering-the-presentation" class="anchor" href="#centering-the-presentation">¶</a>Centering the presentation</h2><p>In my opinion, the display of <kbd>org-present</kbd> doesn't look like much of a presentation until we center it on the screen.
+</p>
+
+<p>Luckily there's a simple package called <kbd>visual-fill-column</kbd> which helps with this!  There are two ways we might want to use it:
+</p>
+
+<ul><li>Keep it enabled permanently by turning it on for every Org Mode document (using the <kbd>org-mode-hook</kbd>)</li>
+<li>Only turn it on when giving a presentation</li>
+</ul>
+
+<p>I like the way my Org documents look with <kbd>visual-fill-column</kbd> turned on so I leave it on all the time, but in this example I'll show you how to turn it on only for presentations.
+</p>
+
+<p>I've already got the package installed here so I'll run <kbd>M-x visual-fill-column-mode</kbd> so we can try it out.
+</p>
+
+<h3><a id="the-configuration" class="anchor" href="#the-configuration">¶</a>The configuration</h3><p>Let's break down what we need to do:
+</p>
+
+<ul><li>Create functions for configuring the current buffer when starting and stopping a presentation</li>
+<li>Enable centering when starting presentation, disable when presentation ends</li>
+<li>Add these functions to the <kbd>org-present-mode-hook</kbd> and <kbd>org-present-mode-quit-hook</kbd></li>
+</ul>
+
+<p>I also use <kbd>visual-line-mode</kbd> here to cause lines to be wrapped within the centered document, otherwise you will have to horizontally scroll to see them all!
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install visual-fill-column</span>
+(<span class="org-keyword">unless</span> (package-installed-p 'visual-fill-column)
+  (package-install 'visual-fill-column))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Configure fill width</span>
+(<span class="org-keyword">setq</span> visual-fill-column-width 110
+      visual-fill-column-center-text t)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/org-present-start</span> ()
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Center the presentation and wrap lines</span>
+  (visual-fill-column-mode 1)
+  (visual-line-mode 1))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/org-present-end</span> ()
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Stop centering the document</span>
+  (visual-fill-column-mode 0)
+  (visual-line-mode 0))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Register hooks with org-present</span>
+(add-hook 'org-present-mode-hook 'my/org-present-start)
+(add-hook 'org-present-mode-quit-hook 'my/org-present-end)
+
+</code></pre>
+
+<h2><a id="increasing-font-sizes" class="anchor" href="#increasing-font-sizes">¶</a>Increasing font sizes</h2><p>The next thing we'll want to do is make the text a lot bigger because it's a little unreadable at the default size!
+</p>
+
+<p>There's a very cool variable for this called <kbd>face-remapping-alist</kbd>!  It allows you to set a list of face overrides for the current buffer using <kbd>setq-local</kbd>.  You can also use relative font heights based on existing faces.
+</p>
+
+<p>We'll add the following snippet to our <kbd>my/org-present-start</kbd> function:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Tweak font sizes</span>
+(<span class="org-keyword">setq-local</span> face-remapping-alist '((default (<span class="org-builtin">:height</span> 1.5) variable-pitch)
+                                   (header-line (<span class="org-builtin">:height</span> 4.0) variable-pitch)
+                                   (org-document-title (<span class="org-builtin">:height</span> 1.75) org-document-title)
+                                   (org-code (<span class="org-builtin">:height</span> 1.55) org-code)
+                                   (org-verbatim (<span class="org-builtin">:height</span> 1.55) org-verbatim)
+                                   (org-block (<span class="org-builtin">:height</span> 1.25) org-block)
+                                   (org-block-begin-line (<span class="org-builtin">:height</span> 0.7) org-block)))
+
+</code></pre>
+
+<p><strong>NOTE:</strong> You might notice I base a couple of faces on the <kbd>variable-pitch</kbd> face.  We'll talk about that in the next slide!
+</p>
+
+<p>To reset the fonts back to their normal sizes once the presentation is complete, add the following snippet to the <kbd>my/org-present-end</kbd> function:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Reset font customizations</span>
+(<span class="org-keyword">setq-local</span> face-remapping-alist '((default variable-pitch default)))
+
+</code></pre>
+
+<p>It's important to note that we don't set <kbd>face-remapping-alist</kbd> to <kbd>nil</kbd> or an empty list because it will remove the <kbd>variable-pitch</kbd> face in our buffer if we already have it set!
+</p>
+
+<h2><a id="theme-and-fonts" class="anchor" href="#theme-and-fonts">¶</a>Theme and fonts</h2><p>The color theme and fonts you use will make a huge impact on how your presentation looks!
+</p>
+
+<p>An important aspect of the look is the use of "variable pitch" fonts for most text in Org Mode files so that your slides look more like a document than a source code file.  The <kbd>variable-pitch-mode</kbd> and the <kbd>variable-pitch</kbd> face will do a lot to help your presentation look more polished.
+</p>
+
+<p>Font and theme selection is purely a matter of personal taste, but I'll tell you exactly what I'm using so that you can use it as a starting point if you like:
+</p>
+
+<ul><li>Fixed-pitch font: <a href="https://www.jetbrains.com/lp/mono/">JetBrains Mono</a>, <kbd>light</kbd> weight</li>
+<li>Variable-pitch font: <a href="https://typeof.net/Iosevka/">Iosevka Aile</a>, <kbd>light</kbd> weight</li>
+<li>Color theme: <kbd>doom-palenight</kbd> from <a href="https://github.com/doomemacs/themes">Doom Themes</a></li>
+</ul>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install doom-themes</span>
+(<span class="org-keyword">unless</span> (package-installed-p 'doom-themes)
+  (package-install 'doom-themes))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Load up doom-palenight for the System Crafters look</span>
+(load-theme 'doom-palenight t)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">NOTE: These settings might not be ideal for your machine, tweak them as needed!</span>
+(set-face-attribute 'default nil <span class="org-builtin">:font</span> <span class="org-string">"JetBrains Mono"</span> <span class="org-builtin">:weight</span> 'light <span class="org-builtin">:height</span> 180)
+(set-face-attribute 'fixed-pitch nil <span class="org-builtin">:font</span> <span class="org-string">"JetBrains Mono"</span> <span class="org-builtin">:weight</span> 'light <span class="org-builtin">:height</span> 190)
+(set-face-attribute 'variable-pitch nil <span class="org-builtin">:font</span> <span class="org-string">"Iosevka Aile"</span> <span class="org-builtin">:weight</span> 'light <span class="org-builtin">:height</span> 1.3)
+
+</code></pre>
+
+<p>After dropping in this snippet, the slides start to look a lot more like mine!  However, there are still a few things that need to be improved to make it look really good.
+</p>
+
+<h2><a id="improving-org-mode-appearance" class="anchor" href="#improving-org-mode-appearance">¶</a>Improving Org Mode appearance</h2><p>Org Mode provides a wide variety of variables and faces for customizing its appearance.  Here's a list of the things we'll want to customize to get the best look for the slides:
+</p>
+
+<ul><li>Increase the size of heading text with <kbd>org-level-N</kbd> faces</li>
+<li>Make a few text elements like tables, <kbd>code text</kbd>, and more use a properly sized, fixed-width font</li>
+<li>Hide formatting markers for <strong>bold</strong>, <em>italic</em> and <kbd>code text</kbd> with <kbd>org-hide-emphasis-markers</kbd></li>
+<li>Ensure code blocks use a fixed-width font at the right size</li>
+<li>Make the presentation title larger</li>
+<li>Add some space between the top of the window and the slide heading (we customized <kbd>header-line</kbd> with face remapping)</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Load org-faces to make sure we can set appropriate faces</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">org-faces</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Hide emphasis markers on formatted text</span>
+(<span class="org-keyword">setq</span> org-hide-emphasis-markers t)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Resize Org headings</span>
+(<span class="org-keyword">dolist</span> (face '((org-level-1 . 1.2)
+                (org-level-2 . 1.1)
+                (org-level-3 . 1.05)
+                (org-level-4 . 1.0)
+                (org-level-5 . 1.1)
+                (org-level-6 . 1.1)
+                (org-level-7 . 1.1)
+                (org-level-8 . 1.1)))
+  (set-face-attribute (car face) nil <span class="org-builtin">:font</span> <span class="org-string">"Iosevka Aile"</span> <span class="org-builtin">:weight</span> 'medium <span class="org-builtin">:height</span> (cdr face)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Make the document title a bit bigger</span>
+(set-face-attribute 'org-document-title nil <span class="org-builtin">:font</span> <span class="org-string">"Iosevka Aile"</span> <span class="org-builtin">:weight</span> 'bold <span class="org-builtin">:height</span> 1.3)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on</span>
+(set-face-attribute 'org-block nil <span class="org-builtin">:foreground</span> nil <span class="org-builtin">:inherit</span> 'fixed-pitch)
+(set-face-attribute 'org-table nil <span class="org-builtin">:inherit</span> 'fixed-pitch)
+(set-face-attribute 'org-formula nil <span class="org-builtin">:inherit</span> 'fixed-pitch)
+(set-face-attribute 'org-code nil <span class="org-builtin">:inherit</span> '(shadow fixed-pitch))
+(set-face-attribute 'org-verbatim nil <span class="org-builtin">:inherit</span> '(shadow fixed-pitch))
+(set-face-attribute 'org-special-keyword nil <span class="org-builtin">:inherit</span> '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-meta-line nil <span class="org-builtin">:inherit</span> '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-checkbox nil <span class="org-builtin">:inherit</span> 'fixed-pitch)
+
+</code></pre>
+
+<p>One last thing we need to do is set the heading text for the presentation buffer to ensure the extra space gets added above.  We'll do this in the <kbd>my/org-present-start</kbd> function we defined:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set a blank header line string to create blank space at the top</span>
+(<span class="org-keyword">setq</span> header-line-format <span class="org-string">" "</span>)
+
+</code></pre>
+
+<p>Let's also add a matching removal of the header string in the <kbd>my/org-present-end</kbd> function:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Clear the header line format by setting to `</span><span class="org-comment"><span class="org-constant">nil</span></span><span class="org-comment">'</span>
+(<span class="org-keyword">setq</span> header-line-format nil)
+
+</code></pre>
+
+<h2><a id="making-emacs-more-minimal" class="anchor" href="#making-emacs-more-minimal">¶</a>Making Emacs more minimal</h2><p>Another thing we can do to improve the look of our presentation is get rid of unnecessary UI elements that might distract from the experience!
+</p>
+
+<p>These settings will probably be no surprise if you've watched some of my other customization videos:
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Hide unneeded UI elements (this can even be done in my/org-present-start!)</span>
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Let the desktop background show through</span>
+(set-frame-parameter (selected-frame) 'alpha '(97 . 100))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
+</code></pre>
+
+<h2><a id="initializing-slide-content" class="anchor" href="#initializing-slide-content">¶</a>Initializing slide content</h2><p>One last thing to consider: when you have a lot of content on a single slide, it might make sense to break it up into sub-headings so that it isn't all shown at the same time.
+</p>
+
+<p>However, just putting more content in sub-headings isn't enough; we also need to tell Org Present to collapse these subheadings when we enter a slide so that their contents aren't initially visible.
+</p>
+
+<p>I'll show you what I mean in the example slides.
+</p>
+
+<p>To set up a slide correctly as we enter it, we can define a new function called <kbd>my/org-present-prepare-slide</kbd> and call some standard Org Mode functions to do the following:
+</p>
+
+<ul><li>Hide everything except for top-level headings</li>
+<li>Unfold the content of the current heading (the current slide)</li>
+<li>Show the immediate children of the heading without expanding them</li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/org-present-prepare-slide</span> (buffer-name heading)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Show only top-level headlines</span>
+  (org-overview)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Unfold the current entry</span>
+  (org-show-entry)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Show only direct subheadings of the slide but don't expand them</span>
+  (org-show-children))
+
+</code></pre>
+
+<p>We'll add this function to the (surprisingly named) hook function <kbd>org-present-after-navigate-functions</kbd> so that it gets called whenever the slide changes:
+</p>
+
+<pre><code class="emacs-lisp">
+(add-hook 'org-present-after-navigate-functions 'my/org-present-prepare-slide)
+
+</code></pre>
+
+<h2><a id="now-you-can-give-nice-presentations-in-emacs" class="anchor" href="#now-you-can-give-nice-presentations-in-emacs">¶</a>Now you can give nice presentations in Emacs!</h2><p>We definitely covered a lot more than you expected in this video, but I think it's an interesting use case in seeing how a variety of Emacs features and packages can enable you to create something fully custom and surprisingly nice.
+</p>
+
+<p>So let me know in the comments:
+</p>
+
+<ul><li>Do you think you'll try giving your next presentation in Emacs?</li>
+<li>If you've done it before, what strategies or packages did you use?</li>
+</ul>
+
+<p>Don't forget to check out the final configuration on the next slide, it's a more polished version of what we put together!
+</p>
+
+<h2><a id="the-final-configuration" class="anchor" href="#the-final-configuration">¶</a>The final configuration</h2><p>Try this out with <a href="https://raw.githubusercontent.com/daviwil/emacs-from-scratch/master/show-notes/Emacs-Lisp-02.org">the Org File I showed</a> in this video!
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Configure Package Archives -----------------------------</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Initialize package sources</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">package</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">org-present is in the "nongnu" package archive.  This line isn't needed in</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Emacs 28!</span>
+(add-to-list 'package-archives '(<span class="org-string">"nongnu"</span> . <span class="org-string">"https://elpa.nongnu.org/nongnu/"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">This will be needed if you decide to use doom-themes!</span>
+(add-to-list 'package-archives '(<span class="org-string">"melpa"</span> . <span class="org-string">"https://melpa.org/packages/"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set up package.el and refresh package archives if it hasn't been done yet</span>
+(package-initialize)
+(<span class="org-keyword">unless</span> package-archive-contents
+  (package-refresh-contents))
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Basic Appearance ---------------------------------------</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">More minimal UI</span>
+(<span class="org-keyword">setq</span> inhibit-startup-screen t)
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Let the desktop background show through</span>
+(set-frame-parameter (selected-frame) 'alpha '(97 . 100))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Theme and Fonts ----------------------------------------</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install doom-themes</span>
+(<span class="org-keyword">unless</span> (package-installed-p 'doom-themes)
+  (package-install 'doom-themes))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Load up doom-palenight for the System Crafters look</span>
+(load-theme 'doom-palenight t)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set reusable font name variables</span>
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">my/fixed-width-font</span> <span class="org-string">"JetBrains Mono"</span>
+  <span class="org-doc">"The font to use for monospaced (fixed width) text."</span>)
+
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">my/variable-width-font</span> <span class="org-string">"Iosevka Aile"</span>
+  <span class="org-doc">"The font to use for variable-pitch (document) text."</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">NOTE: These settings might not be ideal for your machine, tweak them as needed!</span>
+(set-face-attribute 'default nil <span class="org-builtin">:font</span> my/fixed-width-font <span class="org-builtin">:weight</span> 'light <span class="org-builtin">:height</span> 180)
+(set-face-attribute 'fixed-pitch nil <span class="org-builtin">:font</span> my/fixed-width-font <span class="org-builtin">:weight</span> 'light <span class="org-builtin">:height</span> 190)
+(set-face-attribute 'variable-pitch nil <span class="org-builtin">:font</span> my/variable-width-font <span class="org-builtin">:weight</span> 'light <span class="org-builtin">:height</span> 1.3)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Org Mode Appearance ------------------------------------</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Load org-faces to make sure we can set appropriate faces</span>
+(<span class="org-keyword">require</span> '<span class="org-constant">org-faces</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Hide emphasis markers on formatted text</span>
+(<span class="org-keyword">setq</span> org-hide-emphasis-markers t)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Resize Org headings</span>
+(<span class="org-keyword">dolist</span> (face '((org-level-1 . 1.2)
+                (org-level-2 . 1.1)
+                (org-level-3 . 1.05)
+                (org-level-4 . 1.0)
+                (org-level-5 . 1.1)
+                (org-level-6 . 1.1)
+                (org-level-7 . 1.1)
+                (org-level-8 . 1.1)))
+  (set-face-attribute (car face) nil <span class="org-builtin">:font</span> my/variable-width-font <span class="org-builtin">:weight</span> 'medium <span class="org-builtin">:height</span> (cdr face)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Make the document title a bit bigger</span>
+(set-face-attribute 'org-document-title nil <span class="org-builtin">:font</span> my/variable-width-font <span class="org-builtin">:weight</span> 'bold <span class="org-builtin">:height</span> 1.3)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on</span>
+(set-face-attribute 'org-block nil <span class="org-builtin">:foreground</span> nil <span class="org-builtin">:inherit</span> 'fixed-pitch)
+(set-face-attribute 'org-table nil <span class="org-builtin">:inherit</span> 'fixed-pitch)
+(set-face-attribute 'org-formula nil <span class="org-builtin">:inherit</span> 'fixed-pitch)
+(set-face-attribute 'org-code nil <span class="org-builtin">:inherit</span> '(shadow fixed-pitch))
+(set-face-attribute 'org-verbatim nil <span class="org-builtin">:inherit</span> '(shadow fixed-pitch))
+(set-face-attribute 'org-special-keyword nil <span class="org-builtin">:inherit</span> '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-meta-line nil <span class="org-builtin">:inherit</span> '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-checkbox nil <span class="org-builtin">:inherit</span> 'fixed-pitch)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Centering Org Documents --------------------------------</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install visual-fill-column</span>
+(<span class="org-keyword">unless</span> (package-installed-p 'visual-fill-column)
+  (package-install 'visual-fill-column))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Configure fill width</span>
+(<span class="org-keyword">setq</span> visual-fill-column-width 110
+      visual-fill-column-center-text t)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Org Present --------------------------------------------</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install org-present if needed</span>
+(<span class="org-keyword">unless</span> (package-installed-p 'org-present)
+  (package-install 'org-present))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/org-present-prepare-slide</span> (buffer-name heading)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Show only top-level headlines</span>
+  (org-overview)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Unfold the current entry</span>
+  (org-show-entry)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Show only direct subheadings of the slide but don't expand them</span>
+  (org-show-children))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/org-present-start</span> ()
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Tweak font sizes</span>
+  (<span class="org-keyword">setq-local</span> face-remapping-alist '((default (<span class="org-builtin">:height</span> 1.5) variable-pitch)
+                                     (header-line (<span class="org-builtin">:height</span> 4.0) variable-pitch)
+                                     (org-document-title (<span class="org-builtin">:height</span> 1.75) org-document-title)
+                                     (org-code (<span class="org-builtin">:height</span> 1.55) org-code)
+                                     (org-verbatim (<span class="org-builtin">:height</span> 1.55) org-verbatim)
+                                     (org-block (<span class="org-builtin">:height</span> 1.25) org-block)
+                                     (org-block-begin-line (<span class="org-builtin">:height</span> 0.7) org-block)))
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Set a blank header line string to create blank space at the top</span>
+  (<span class="org-keyword">setq</span> header-line-format <span class="org-string">" "</span>)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Display inline images automatically</span>
+  (org-display-inline-images)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Center the presentation and wrap lines</span>
+  (visual-fill-column-mode 1)
+  (visual-line-mode 1))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/org-present-end</span> ()
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Reset font customizations</span>
+  (<span class="org-keyword">setq-local</span> face-remapping-alist '((default variable-pitch default)))
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Clear the header line string so that it isn't displayed</span>
+  (<span class="org-keyword">setq</span> header-line-format nil)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Stop displaying inline images</span>
+  (org-remove-inline-images)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Stop centering the document</span>
+  (visual-fill-column-mode 0)
+  (visual-line-mode 0))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Turn on variable pitch fonts in Org Mode buffers</span>
+(add-hook 'org-mode-hook 'variable-pitch-mode)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Register hooks with org-present</span>
+(add-hook 'org-present-mode-hook 'my/org-present-start)
+(add-hook 'org-present-mode-quit-hook 'my/org-present-end)
+(add-hook 'org-present-after-navigate-functions 'my/org-present-prepare-slide)
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
