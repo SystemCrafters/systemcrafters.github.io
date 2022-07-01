@@ -1,0 +1,339 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - July 1, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - July 1, 2022</h1><p class="blog-post-meta"></p><div>
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>This week I <a href="https://youtu.be/SCPoF1PTZpI">posted a video</a> about my Emacs presentation setup!</li>
+</ul>
+
+<h2><a id="rewriting-my-configuration-with-rational-emacs" class="anchor" href="#rewriting-my-configuration-with-rational-emacs">¶</a>Rewriting my configuration with Rational Emacs</h2><p>Rational Emacs has been out for about 5 months now and in that time, a number of System Crafters community members have contributed!
+</p>
+
+<p>Thanks to <strong>Jeff Bowman's</strong> help, we've been able to merge around 80 PRs adding new features, documentation, and bug fixes!
+</p>
+
+<p><a href="https://github.com/SystemCrafters/rational-emacs/">https://github.com/SystemCrafters/rational-emacs/</a>
+</p>
+
+<p>Today I'm finally going to start a new personal Emacs configuration from the ground up, but this time I'm going to use Rational Emacs as the basis.
+</p>
+
+<p>The goal is to see how much of my own configuration I can replicate using what's already there and figure out places where we might be able to add some additional functionality!
+</p>
+
+<h2><a id="what-do-i-use-regularly" class="anchor" href="#what-do-i-use-regularly">¶</a>What do I use regularly?</h2><p>Here are some of the things I want to set up:
+</p>
+
+<ul><li>General theme and mode line config</li>
+<li>Straight.el and Guix package sources</li>
+<li>Completion system (Vertico) with Consult and Embark</li>
+<li>Magit</li>
+<li>Project.el</li>
+<li>Evil Mode</li>
+<li>Org Mode settings</li>
+<li>Eglot for software development</li>
+<li>Eshell and vterm</li>
+</ul>
+
+<p>Things we may need to add to Rational Emacs:
+</p>
+
+<ul><li>Lispy or some other Lisp editing mode (paredit, etc)</li>
+<li>org-present</li>
+<li><kbd>compile</kbd> (in IDE module?)</li>
+<li>Dired</li>
+</ul>
+
+<h2><a id="what-should-we-do-next" class="anchor" href="#what-should-we-do-next">¶</a>What should we do next?</h2><p>I'd really like to make Rational Emacs more useful to more people!
+</p>
+
+<p>I'd like to get your feedback on the following:
+</p>
+
+<ul><li>Have you tried it?  What kept it from being your daily driver?</li>
+<li>Tweak the principles to make things more convenient or effective?</li>
+<li>Should we make modules more granular?</li>
+<li>Rename the project?</li>
+<li>What else?</li>
+</ul>
+
+<p>Potential expansion areas:
+</p>
+
+<ul><li>Email (mu4e?  Notmuch?  Gnus?)</li>
+<li>RSS</li>
+<li>More IDE languages</li>
+</ul>
+
+<p>Name Ideas:
+</p>
+<ul><li>crafted-emacs</li>
+<li>us-emacs</li>
+</ul>
+
+<h2><a id="final-config" class="anchor" href="#final-config">¶</a>Final config:</h2><p><strong>config.el</strong>
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Personal Rational Emacs Config</span>
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Author: David Wilson</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">TODO: Override this macro?  Make it configurable?</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(defmacro rational-package-install-package (package)</span>
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">"Only install the package if it is not already installed."</span>
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">`(unless (package-installed-p ,package) (package-install ,package)))</span>
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Core Settings</span>
+
+(<span class="org-keyword">require</span> '<span class="org-constant">rational-defaults</span>)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Set up C-SPC prefix map</span>
+
+(<span class="org-keyword">defalias</span> '<span class="org-function-name">ctl-spc-keymap</span> (make-sparse-keymap))
+
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">ctl-spc-map</span> (symbol-function 'ctl-spc-keymap)
+  <span class="org-doc">"Global keymap for characters following C-SPC."</span>)
+
+(define-key global-map (kbd <span class="org-string">"C-SPC"</span>) 'ctl-spc-keymap)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">User Interface</span>
+
+(<span class="org-keyword">require</span> '<span class="org-constant">rational-ui</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install minions</span>
+(rational-package-install-package 'minions)
+(add-hook 'doom-modeline-mode-hook 'minions-mode)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install doom-themes and set the theme</span>
+(rational-package-install-package 'doom-themes)
+(disable-theme 'deeper-blue)
+(load-theme 'doom-palenight t)
+
+(custom-set-faces '(mode-line ((t (<span class="org-builtin">:height</span> 200))))
+                  '(mode-line-inactive ((t (<span class="org-builtin">:height</span> 200)))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set configuration variables</span>
+(custom-set-variables '(rational-ui-display-line-numbers t)
+                      '(doom-modeline-height 35))
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Evil Mode</span>
+
+(<span class="org-keyword">require</span> '<span class="org-constant">rational-evil</span>)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set configuration variables</span>
+(custom-set-variables '(rational-evil-discourage-arrow-keys t)
+                      '(evil-want-C-u-scroll t))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set preferred key bindings</span>
+(global-set-key (kbd <span class="org-string">"M-/"</span>) 'evilnc-comment-or-uncomment-lines)
+(global-set-key (kbd <span class="org-string">"C-M-u"</span>) 'universal-argument)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Completions and Actions</span>
+
+(<span class="org-keyword">require</span> '<span class="org-constant">rational-completion</span>)
+
+(define-key vertico-map (kbd <span class="org-string">"C-f"</span>) 'vertico-exit)
+(define-key minibuffer-local-map (kbd <span class="org-string">"C-d"</span>) 'embark-act)
+(define-key project-prefix-map (kbd <span class="org-string">"g"</span>) 'consult-ripgrep)
+
+(global-set-key (kbd <span class="org-string">"C-M-j"</span>) 'consult-buffer)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Project Management</span>
+
+(<span class="org-keyword">require</span> '<span class="org-constant">rational-project</span>)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Source Control</span>
+
+(rational-package-install-package 'magit)
+(<span class="org-keyword">setq</span> magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+
+(global-set-key (kbd <span class="org-string">"C-M-;"</span>) #'magit-status)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Org Mode</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Turn on variable pitch for non-monospace fonts</span>
+(variable-pitch-mode 1)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Presentations</span>
+
+(<span class="org-keyword">require</span> '<span class="org-constant">rational-screencast</span>)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">IDE</span>
+
+(<span class="org-keyword">require</span> '<span class="org-constant">rational-ide</span>)
+
+(rational-package-install-package 'typescript-mode)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Lisp Editing</span>
+
+(<span class="org-keyword">require</span> '<span class="org-constant">rational-lisp</span>)
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">Shells</span>
+
+(rational-package-install-package 'vterm)
+(rational-package-install-package 'xterm-color)
+
+(<span class="org-keyword">setq</span> vterm-max-scrollback 10000)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Configure vterm for evil-mode</span>
+(<span class="org-keyword">with-eval-after-load</span> 'evil
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Make sure that entering insert mode positions the cursor correctly</span>
+  (advice-add 'evil-collection-vterm-insert <span class="org-builtin">:before</span> #'vterm-reset-cursor-point))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">read-file</span> (file-path)
+  (<span class="org-keyword">with-temp-buffer</span>
+    (insert-file-contents file-path)
+    (buffer-string)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/get-current-package-version</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let</span> ((package-json-file (concat (eshell/pwd) <span class="org-string">"/package.json"</span>)))
+    (<span class="org-keyword">when</span> (file-exists-p package-json-file)
+      (<span class="org-keyword">let*</span> ((package-json-contents (read-file package-json-file))
+             (package-json (<span class="org-keyword">ignore-errors</span> (json-parse-string package-json-contents))))
+        (<span class="org-keyword">when</span> package-json
+          (<span class="org-keyword">ignore-errors</span> (gethash <span class="org-string">"version"</span> package-json)))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/map-line-to-status-char</span> (line)
+  (<span class="org-keyword">cond</span> ((string-match <span class="org-string">"^?\\? "</span> line) <span class="org-string">"?"</span>)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/get-git-status-prompt</span> ()
+  (<span class="org-keyword">let</span> ((status-lines (cdr (process-lines <span class="org-string">"git"</span> <span class="org-string">"status"</span> <span class="org-string">"--porcelain"</span> <span class="org-string">"-b"</span>))))
+    (seq-uniq (seq-filter 'identity (mapcar 'dw/map-line-to-status-char status-lines)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/get-prompt-path</span> ()
+  (<span class="org-keyword">let*</span> ((current-path (eshell/pwd))
+         (git-output (shell-command-to-string <span class="org-string">"git rev-parse --show-toplevel"</span>))
+         (has-path (not (string-match <span class="org-string">"^fatal"</span> git-output))))
+    (<span class="org-keyword">if</span> (not has-path)
+        (abbreviate-file-name current-path)
+      (string-remove-prefix (file-name-directory git-output) current-path))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">This prompt function mostly replicates my custom zsh prompt setup</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">that is powered by github.com/denysdovhan/spaceship-prompt.</span>
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/eshell-prompt</span> ()
+  (<span class="org-keyword">let</span> ((current-branch (magit-get-current-branch))
+        (package-version (dw/get-current-package-version)))
+    (concat
+     <span class="org-string">"\n"</span>
+     (propertize (system-name) 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"#62aeed"</span>))
+     (propertize <span class="org-string">" &#2384; "</span> 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"white"</span>))
+     (propertize (dw/get-prompt-path) 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"#82cfd3"</span>))
+     (<span class="org-keyword">when</span> current-branch
+       (concat
+        (propertize <span class="org-string">" &#8226; "</span> 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"white"</span>))
+        (propertize (concat <span class="org-string">"&#57504; "</span> current-branch) 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"#c475f0"</span>))))
+     (<span class="org-keyword">when</span> package-version
+       (concat
+        (propertize <span class="org-string">" @ "</span> 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"white"</span>))
+        (propertize package-version 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"#e8a206"</span>))))
+     (propertize <span class="org-string">" &#8226; "</span> 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"white"</span>))
+     (propertize (format-time-string <span class="org-string">"%I:%M:%S %p"</span>) 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"#5a5b7f"</span>))
+     (<span class="org-keyword">if</span> (= (user-uid) 0)
+         (propertize <span class="org-string">"\n#"</span> 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"red2"</span>))
+       (propertize <span class="org-string">"\n&#955;"</span> 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"#aece4a"</span>)))
+     (propertize <span class="org-string">" "</span> 'face `(<span class="org-builtin">:foreground</span> <span class="org-string">"white"</span>)))))
+
+
+(add-hook 'eshell-banner-load-hook
+          (<span class="org-keyword">lambda</span> ()
+            (<span class="org-keyword">setq</span> eshell-banner-message
+                  (concat <span class="org-string">"\n"</span> (propertize <span class="org-string">" "</span> 'display (create-image <span class="org-string">"~/.dotfiles/.emacs.d/images/flux_banner.png"</span> 'png nil <span class="org-builtin">:scale</span> 0.2 <span class="org-builtin">:align-to</span> <span class="org-string">"center"</span>)) <span class="org-string">"\n\n"</span>))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/eshell-configure</span> ()
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Make sure magit is loaded</span>
+  (<span class="org-keyword">require</span> '<span class="org-constant">magit</span>)
+
+  (<span class="org-keyword">require</span> '<span class="org-constant">evil-collection-eshell</span>)
+  (evil-collection-eshell-setup)
+
+  (<span class="org-keyword">require</span> '<span class="org-constant">xterm-color</span>)
+
+  (<span class="org-keyword">push</span> 'eshell-tramp eshell-modules-list)
+  (<span class="org-keyword">push</span> 'xterm-color-filter eshell-preoutput-filter-functions)
+  (delq 'eshell-handle-ansi-color eshell-output-filter-functions)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Save command history when commands are entered</span>
+  (add-hook 'eshell-pre-command-hook 'eshell-save-some-history)
+
+  (add-hook 'eshell-before-prompt-hook
+            (<span class="org-keyword">lambda</span> ()
+              (<span class="org-keyword">setq</span> xterm-color-preserve-properties t)))
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Truncate buffer for performance</span>
+  (add-to-list 'eshell-output-filter-functions 'eshell-truncate-buffer)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">We want to use xterm-256color when running interactive commands</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">in eshell but not during other times when we might be launching</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">a shell command to gather its output.</span>
+  (add-hook 'eshell-pre-command-hook
+            (<span class="org-keyword">lambda</span> () (setenv <span class="org-string">"TERM"</span> <span class="org-string">"xterm-256color"</span>)))
+  (add-hook 'eshell-post-command-hook
+            (<span class="org-keyword">lambda</span> () (setenv <span class="org-string">"TERM"</span> <span class="org-string">"dumb"</span>)))
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Use completion-at-point to provide completions in eshell</span>
+  (define-key eshell-mode-map (kbd <span class="org-string">"&lt;tab&gt;"</span>) 'completion-at-point)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Initialize the shell history</span>
+  (eshell-hist-initialize)
+
+  (evil-define-key '(normal insert visual) eshell-mode-map (kbd <span class="org-string">"C-r"</span>) 'consult-history)
+  (evil-define-key '(normal insert visual) eshell-mode-map (kbd <span class="org-string">"&lt;home&gt;"</span>) 'eshell-bol)
+  (evil-normalize-keymaps)
+
+  (setenv <span class="org-string">"PAGER"</span> <span class="org-string">"cat"</span>)
+
+  (<span class="org-keyword">setq</span> eshell-prompt-function      'dw/eshell-prompt
+        eshell-prompt-regexp        <span class="org-string">"^&#955; "</span>
+        eshell-history-size         10000
+        eshell-buffer-maximum-lines 10000
+        eshell-hist-ignoredups t
+        eshell-highlight-prompt t
+        eshell-scroll-to-bottom-on-input t
+        eshell-prefer-lisp-functions nil))
+
+(add-hook 'eshell-first-time-mode-hook #'dw/eshell-configure)
+(<span class="org-keyword">setq</span> eshell-directory-name <span class="org-string">"~/.dotfiles/.emacs.d/eshell/"</span>
+      eshell-aliases-file (expand-file-name <span class="org-string">"~/.dotfiles/.emacs.d/eshell/alias"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(setup (:pkg exec-path-from-shell)</span>
+<span class="org-comment-delimiter">;;        </span><span class="org-comment">(setq exec-path-from-shell-check-startup-files nil)</span>
+<span class="org-comment-delimiter">;;        </span><span class="org-comment">(when (memq window-system '(mac ns x))</span>
+<span class="org-comment-delimiter">;;          </span><span class="org-comment">(exec-path-from-shell-initialize)))</span>
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/switch-to-eshell</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">if</span> (project-current)
+      (call-interactively #'project-eshell)
+    (call-interactively #'eshell)))
+
+(define-key ctl-spc-map (kbd <span class="org-string">"SPC"</span>) #'dw/switch-to-eshell)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">TODO: These may not be needed</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(add-hook 'c-mode-hook 'eglot-ensure)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(add-hook 'typescript-mode-hook 'eglot-ensure)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">TODO: Bring over org-present config</span>
+
+</code></pre>
+
+<p><strong>early-config.el</strong>
+</p>
+
+<pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">early-config.el --- Early Emacs configuration    -*- lexical-binding: t; -*-</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Copyright (C) 2022  David Wilson</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Author: David Wilson <a href="mailto:daviwil%40phantom">&lt;daviwil@phantom&gt;</a></span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Keywords:</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set the font faces early</span>
+(custom-set-variables '(rational-ui-default-font '(<span class="org-builtin">:font</span> <span class="org-string">"JetBrains Mono"</span> <span class="org-builtin">:height</span> 230)))
+(set-face-attribute 'variable-pitch nil <span class="org-builtin">:font</span> <span class="org-string">"Iosevka Aile"</span> <span class="org-builtin">:weight</span> 'light)
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set frame transparency and maximize frame by default before the first frame loads</span>
+(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
