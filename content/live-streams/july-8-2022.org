@@ -23,6 +23,10 @@ Configuring Rational Emacs with Guix has interesting implications:
 
 There are also possible downsides, but we can discuss those later.
 
+If you want some more details on how you can use Guix to manage an Emacs configuration, check out Andrew Tropin's latest video:
+
+https://www.youtube.com/watch?v=gqmZjovuomc
+
 ** How?
 
 I'm not entirely sure yet what will be needed, but here's what we'll try to do:
