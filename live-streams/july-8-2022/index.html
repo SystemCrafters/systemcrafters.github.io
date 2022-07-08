@@ -1,6 +1,8 @@
 <!--  -->
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - July 8, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - July 8, 2022</h1><p class="blog-post-meta"></p><div>
 <h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Still thinking about what the next SC video should be.  If you have a particular request, let me know!</li>
+<li>I'll be speaking at the Guix Birthday Event: <a href="https://guix.gnu.org/blog/2022/celebrating-10-years-of-guix-in-paris/">https://guix.gnu.org/blog/2022/celebrating-10-years-of-guix-in-paris/</a></li>
+<li>Jeff Bowman wrote a nice status report blog post for Rational Emacs here: <a href="https://jeffbowman.writeas.com/rational-emacs-update-s64h">https://jeffbowman.writeas.com/rational-emacs-update-s64h</a></li>
 </ul>
 
 <h2><a id="configuring-rational-emacs-with-guix-home" class="anchor" href="#configuring-rational-emacs-with-guix-home">¶</a>Configuring Rational Emacs with Guix Home</h2><p>Today we're going to try and combine two areas that are interesting to me: configuring Emacs and managing your dotfiles configuration with Guix Home.
@@ -9,7 +11,7 @@
 <p>We'll attempt to make it possible to install and configure Rational Emacs using the functionality provided by Guix Home!
 </p>
 
-<h3><a id="why" class="anchor" href="#why">¶</a>Why?</h3><p>One of my goals with creating Rational Home was to make a base Emacs configuration that could be used both with and without Guix.
+<h3><a id="why" class="anchor" href="#why">¶</a>Why?</h3><p>One of my goals with creating Rational Emacs was to make a base Emacs configuration that could be used both with and without Guix.
 </p>
 
 <p>Configuring Rational Emacs with Guix has interesting implications:
@@ -38,4 +40,125 @@
 <li>Add configuration parameters to the home service to create Rational Emacs configuration files in <kbd>~/.config/rational-emacs</kbd></li>
 <li>Test it all out using <kbd>guix home container</kbd></li>
 </ul>
+
+<h2><a id="the-files" class="anchor" href="#the-files">¶</a>The files</h2><p><strong>rational/home-config.scm</strong>
+</p>
+
+<p>This is an example home configuration that uses <kbd>home-rational-emacs-service-type</kbd>!
+</p>
+
+<pre><code class="scheme">
+(<span class="org-keyword">define-module</span> (<span class="org-type">rational</span> home-config)
+  <span class="org-builtin">#:use-module</span> (gnu)
+  <span class="org-builtin">#:use-module</span> (gnu home)
+  <span class="org-builtin">#:use-module</span> (gnu home services)
+  <span class="org-builtin">#:use-module</span> (rational home services rational-emacs))
+
+(home-environment
+ (services (list
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">Set up desktop environment</span>
+            (service home-rational-emacs-service-type
+                     (home-rational-emacs-configuration
+                      (config-file <span class="org-string">"(require 'rational-ui)\n(require 'rational-editing)\n(require 'rational-evil)"</span>)
+                      (early-config-file <span class="org-string">""</span>))))))
+</code></pre>
+
+<p><strong>rational/packages/emacs.scm</strong>
+</p>
+
+<pre><code class="sh">
+(define-module (rational packages emacs)
+  <span class="org-comment-delimiter">#</span><span class="org-comment">:use-module (guix download)</span>
+  <span class="org-comment-delimiter">#</span><span class="org-comment">:use-module (guix git-download)</span>
+  <span class="org-comment-delimiter">#</span><span class="org-comment">:use-module (guix packages)</span>
+  <span class="org-comment-delimiter">#</span><span class="org-comment">:use-module (guix build-system copy)</span>
+  <span class="org-comment-delimiter">#</span><span class="org-comment">:use-module ((guix licenses) #:prefix license:))</span>
+
+(define-public rational-emacs
+  (package
+    (name <span class="org-string">"rational-emacs"</span>)
+    (version <span class="org-string">"0.1"</span>)
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference
+                    (url <span class="org-string">"https://github.com/SystemCrafters/rational-emacs/"</span>)
+                    (commit <span class="org-string">"75020f247ab39e19d998319d0e84d3ab5386fb2d"</span>)))
+              (sha256
+               (base32
+                <span class="org-string">"1xj5qdhh6wnlyrlrxrsb7rbwmv86iq7yaj2vqs30h785nn88mr4g"</span>))))
+    (build-system copy-build-system)
+    (home-page <span class="org-string">"https://github.com/SystemCrafters/rational-emacs"</span>)
+    (synopsis <span class="org-string">"Rational Emacs"</span>)
+    (description <span class="org-string">"Rational Emacs"</span>)
+    (license license:expat)))
+
+</code></pre>
+
+<p><strong>rational/home/services/rational-emacs.scm</strong>
+</p>
+
+<pre><code class="scheme">
+(<span class="org-keyword">define-module</span> (<span class="org-type">rational</span> home services rational-emacs)
+  <span class="org-builtin">#:use-module</span> (gnu services)
+  <span class="org-builtin">#:use-module</span> (gnu services configuration)
+  <span class="org-builtin">#:use-module</span> (gnu home services)
+  <span class="org-builtin">#:use-module</span> (gnu home services shepherd)
+  <span class="org-builtin">#:use-module</span> (gnu home services utils)
+  <span class="org-builtin">#:use-module</span> (gnu packages certs)
+  <span class="org-builtin">#:use-module</span> (gnu packages emacs)
+  <span class="org-builtin">#:use-module</span> (guix gexp)
+  <span class="org-builtin">#:use-module</span> (guix packages)
+  <span class="org-builtin">#:use-module</span> (rational packages emacs)
+  <span class="org-builtin">#:use-module</span> (ice-9 format)
+
+  <span class="org-builtin">#:export</span> (home-rational-emacs-service-type
+            home-rational-emacs-configuration))
+
+(define-configuration home-rational-emacs-configuration
+  (package
+    (package rational-emacs)
+    <span class="org-string">"The Rational Emacs package to use."</span>)
+  (emacs-package
+   (package emacs)
+   <span class="org-string">"The Emacs package to use."</span>)
+  (config-file
+   (text-config '())
+   <span class="org-string">"The config.el file."</span>)
+  (early-config-file
+   (text-config '())
+   <span class="org-string">"The early-config.el file."</span>))
+
+(<span class="org-keyword">define</span> <span class="org-function-name">package-user-dir</span> <span class="org-string">"~/.cache/emacs/elpa"</span>)
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">home-rational-emacs-files-service</span> config)
+  (list `(<span class="org-string">".emacs.d"</span> ,rational-emacs)
+        `(<span class="org-string">".config/rational-emacs/config.el"</span>
+          ,(mixed-text-file <span class="org-string">"config.el"</span>
+                            <span class="org-string">";; Rational Emacs Config from Guix Home\n"</span>
+                            (home-rational-emacs-configuration-config-file config)))
+        `(<span class="org-string">".config/rational-emacs/early-config.el"</span>
+          ,(mixed-text-file <span class="org-string">"early-config.el"</span>
+                            <span class="org-string">";; Rational Emacs Early Config from Guix Home\n"</span>
+                            (format #f <span class="org-string">"(make-directory \"~a\" t)\n"</span> package-user-dir)
+                            (format #f <span class="org-string">"(setq package-user-dir \"~a\")\n"</span> package-user-dir)
+                            (home-rational-emacs-configuration-early-config-file config)))))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">home-rational-emacs-profile-service</span> config)
+  (list nss-certs
+        (home-rational-emacs-configuration-package config)
+        (home-rational-emacs-configuration-emacs-package config)))
+
+(<span class="org-keyword">define</span> <span class="org-function-name">home-rational-emacs-service-type</span>
+  (service-type (name 'home-rational-emacs)
+                (description <span class="org-string">"The home service to confiure Rational Emacs."</span>)
+                (extensions
+                 (list (service-extension
+                        home-files-service-type
+                        home-rational-emacs-files-service)
+                       (service-extension
+                        home-profile-service-type
+                        home-rational-emacs-profile-service)))
+                (default-value (home-rational-emacs-configuration))))
+
+</code></pre>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
