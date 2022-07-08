@@ -3,6 +3,8 @@
 * Updates
 
 - Still thinking about what the next SC video should be.  If you have a particular request, let me know!
+- I'll be speaking at the Guix Birthday Event: https://guix.gnu.org/blog/2022/celebrating-10-years-of-guix-in-paris/
+- Jeff Bowman wrote a nice status report blog post for Rational Emacs here: https://jeffbowman.writeas.com/rational-emacs-update-s64h
 
 * Configuring Rational Emacs with Guix Home
 
@@ -12,7 +14,7 @@ We'll attempt to make it possible to install and configure Rational Emacs using 
 
 ** Why?
 
-One of my goals with creating Rational Home was to make a base Emacs configuration that could be used both with and without Guix.
+One of my goals with creating Rational Emacs was to make a base Emacs configuration that could be used both with and without Guix.
 
 Configuring Rational Emacs with Guix has interesting implications:
 
@@ -35,3 +37,125 @@ I'm not entirely sure yet what will be needed, but here's what we'll try to do:
 - Create a Guix Home service which places Rational Emacs in =~/.emacs.d=
 - Add configuration parameters to the home service to create Rational Emacs configuration files in =~/.config/rational-emacs=
 - Test it all out using =guix home container=
+
+* The files
+
+*rational/home-config.scm*
+
+This is an example home configuration that uses =home-rational-emacs-service-type=!
+
+#+begin_src scheme
+
+(define-module (rational home-config)
+  #:use-module (gnu)
+  #:use-module (gnu home)
+  #:use-module (gnu home services)
+  #:use-module (rational home services rational-emacs))
+
+(home-environment
+ (services (list
+            ;; Set up desktop environment
+            (service home-rational-emacs-service-type
+                     (home-rational-emacs-configuration
+                      (config-file "(require 'rational-ui)\n(require 'rational-editing)\n(require 'rational-evil)")
+                      (early-config-file ""))))))
+#+end_src
+
+*rational/packages/emacs.scm*
+
+#+begin_src sh
+
+(define-module (rational packages emacs)
+  #:use-module (guix download)
+  #:use-module (guix git-download)
+  #:use-module (guix packages)
+  #:use-module (guix build-system copy)
+  #:use-module ((guix licenses) #:prefix license:))
+
+(define-public rational-emacs
+  (package
+    (name "rational-emacs")
+    (version "0.1")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference
+                    (url "https://github.com/SystemCrafters/rational-emacs/")
+                    (commit "75020f247ab39e19d998319d0e84d3ab5386fb2d")))
+              (sha256
+               (base32
+                "1xj5qdhh6wnlyrlrxrsb7rbwmv86iq7yaj2vqs30h785nn88mr4g"))))
+    (build-system copy-build-system)
+    (home-page "https://github.com/SystemCrafters/rational-emacs")
+    (synopsis "Rational Emacs")
+    (description "Rational Emacs")
+    (license license:expat)))
+
+#+end_src
+
+*rational/home/services/rational-emacs.scm*
+
+#+begin_src scheme
+
+(define-module (rational home services rational-emacs)
+  #:use-module (gnu services)
+  #:use-module (gnu services configuration)
+  #:use-module (gnu home services)
+  #:use-module (gnu home services shepherd)
+  #:use-module (gnu home services utils)
+  #:use-module (gnu packages certs)
+  #:use-module (gnu packages emacs)
+  #:use-module (guix gexp)
+  #:use-module (guix packages)
+  #:use-module (rational packages emacs)
+  #:use-module (ice-9 format)
+
+  #:export (home-rational-emacs-service-type
+            home-rational-emacs-configuration))
+
+(define-configuration home-rational-emacs-configuration
+  (package
+    (package rational-emacs)
+    "The Rational Emacs package to use.")
+  (emacs-package
+   (package emacs)
+   "The Emacs package to use.")
+  (config-file
+   (text-config '())
+   "The config.el file.")
+  (early-config-file
+   (text-config '())
+   "The early-config.el file."))
+
+(define package-user-dir "~/.cache/emacs/elpa")
+
+(define (home-rational-emacs-files-service config)
+  (list `(".emacs.d" ,rational-emacs)
+        `(".config/rational-emacs/config.el"
+          ,(mixed-text-file "config.el"
+                            ";; Rational Emacs Config from Guix Home\n"
+                            (home-rational-emacs-configuration-config-file config)))
+        `(".config/rational-emacs/early-config.el"
+          ,(mixed-text-file "early-config.el"
+                            ";; Rational Emacs Early Config from Guix Home\n"
+                            (format #f "(make-directory \"~a\" t)\n" package-user-dir)
+                            (format #f "(setq package-user-dir \"~a\")\n" package-user-dir)
+                            (home-rational-emacs-configuration-early-config-file config)))))
+
+(define (home-rational-emacs-profile-service config)
+  (list nss-certs
+        (home-rational-emacs-configuration-package config)
+        (home-rational-emacs-configuration-emacs-package config)))
+
+(define home-rational-emacs-service-type
+  (service-type (name 'home-rational-emacs)
+                (description "The home service to confiure Rational Emacs.")
+                (extensions
+                 (list (service-extension
+                        home-files-service-type
+                        home-rational-emacs-files-service)
+                       (service-extension
+                        home-profile-service-type
+                        home-rational-emacs-profile-service)))
+                (default-value (home-rational-emacs-configuration))))
+
+#+end_src
