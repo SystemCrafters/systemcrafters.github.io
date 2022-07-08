@@ -1,0 +1,33 @@
+#+title: System Crafters Live! - July 8, 2022
+
+* Updates
+
+- Still thinking about what the next SC video should be.  If you have a particular request, let me know!
+
+* Configuring Rational Emacs with Guix Home
+
+Today we're going to try and combine two areas that are interesting to me: configuring Emacs and managing your dotfiles configuration with Guix Home.
+
+We'll attempt to make it possible to install and configure Rational Emacs using the functionality provided by Guix Home!
+
+** Why?
+
+One of my goals with creating Rational Home was to make a base Emacs configuration that could be used both with and without Guix.
+
+Configuring Rational Emacs with Guix has interesting implications:
+
+- Potentially easier to configure Rational Emacs, just include some code in your Guix Home config
+- You can much more easily roll back to a previous working version of Rational Emacs
+- You can customize aspects of your Emacs configuration across different machines at the Guix layer (faces, themes, loaded modules, etc)
+- You can even "containerize" your Emacs dev environment configurations
+
+There are also possible downsides, but we can discuss those later.
+
+** How?
+
+I'm not entirely sure yet what will be needed, but here's what we'll try to do:
+
+- Create a Guix package to install Rational Emacs from GitHub
+- Create a Guix Home service which places Rational Emacs in =~/.emacs.d=
+- Add configuration parameters to the home service to create Rational Emacs configuration files in =~/.config/rational-emacs=
+- Test it all out using =guix home container=
