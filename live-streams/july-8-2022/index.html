@@ -1,0 +1,35 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - July 8, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - July 8, 2022</h1><p class="blog-post-meta"></p><div>
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Still thinking about what the next SC video should be.  If you have a particular request, let me know!</li>
+</ul>
+
+<h2><a id="configuring-rational-emacs-with-guix-home" class="anchor" href="#configuring-rational-emacs-with-guix-home">¶</a>Configuring Rational Emacs with Guix Home</h2><p>Today we're going to try and combine two areas that are interesting to me: configuring Emacs and managing your dotfiles configuration with Guix Home.
+</p>
+
+<p>We'll attempt to make it possible to install and configure Rational Emacs using the functionality provided by Guix Home!
+</p>
+
+<h3><a id="why" class="anchor" href="#why">¶</a>Why?</h3><p>One of my goals with creating Rational Home was to make a base Emacs configuration that could be used both with and without Guix.
+</p>
+
+<p>Configuring Rational Emacs with Guix has interesting implications:
+</p>
+
+<ul><li>Potentially easier to configure Rational Emacs, just include some code in your Guix Home config</li>
+<li>You can much more easily roll back to a previous working version of Rational Emacs</li>
+<li>You can customize aspects of your Emacs configuration across different machines at the Guix layer (faces, themes, loaded modules, etc)</li>
+<li>You can even "containerize" your Emacs dev environment configurations</li>
+</ul>
+
+<p>There are also possible downsides, but we can discuss those later.
+</p>
+
+<h3><a id="how" class="anchor" href="#how">¶</a>How?</h3><p>I'm not entirely sure yet what will be needed, but here's what we'll try to do:
+</p>
+
+<ul><li>Create a Guix package to install Rational Emacs from GitHub</li>
+<li>Create a Guix Home service which places Rational Emacs in <kbd>~/.emacs.d</kbd></li>
+<li>Add configuration parameters to the home service to create Rational Emacs configuration files in <kbd>~/.config/rational-emacs</kbd></li>
+<li>Test it all out using <kbd>guix home container</kbd></li>
+</ul>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
