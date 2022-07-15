@@ -1,5 +1,7 @@
 #+title: System Crafters Live! - July 15, 2022
 
+[[yt:QcRY_rsX0yY][Watch the recording on YouTube!]]
+
 * Updates
 
 - My streaming and video schedule might be disrupted over the next few weeks!  I'll keep you posted.
@@ -21,3 +23,75 @@ Today we're going to try out a new note-taking package by Protesilaos Stavrou ("
 https://protesilaos.com/emacs/denote
 
 I'm going to try and build up a note taking workflow from scratch while reading the manual that Prot put together.  The goal would be to replicate something similar to what I have with Org Roam while benefitting from the unique features of Denote.
+
+** Things to try
+
+- Creating new notes
+- Linking notes
+- Backlinks?
+- Capture templates
+- Journalling workflow
+
+** Comparison to Org Roam
+
+*Pros*
+
+- Much easier to build your own workflow, especially when you need to use your files across multiple machines
+- Simpler to understand and extend
+- Very easy to filter all of your note files based on filename metadata
+- Meshes well with existing Emacs functionality, you can customize behavior more easily because it's just plain Emacs Lisp in most cases
+- Note renaming works pretty well, better than Org Roam
+- Note subdirectories and silos are a first-class capability
+- Timestamps are not timezone agnostic?
+
+*Cons*
+
+- You may not like how the file name convention looks, especially because that's the way you navigate your notes (though this is also a benefit!)
+- Lack of database means you miss some functionality like backlink context, finding notes by title (especially in completions), generating a graph of all notes.  These may matter to you!
+- Generating backlinks buffers is slow because it must be done on the fly by scraping files
+- Could cause problems on systems where long file names aren't supported
+- Not as clear how to deal with multiple notes bearing the same name
+
+* The final configuration
+
+Also check out the [[https://protesilaos.com/emacs/denote#h:8ed2bb6f-b5be-4711-82e9-8bee5bb06ece][Extending Denote]] section of the manual for more cool ideas!
+
+#+begin_src emacs-lisp
+
+(package-install 'denote)
+(require 'denote)
+
+(setq denote-directory "~/Denotes")
+(setq denote-known-keywords '("journal" "projects" "ideas"))
+;; (setq denote-prompts '(title subdirectory))
+
+;; Buttonize all denote links in text buffers
+(add-hook 'find-file-hook #'denote-link-buttonize-buffer)
+
+;; Fontify file names in Dired
+(require 'denote-dired)
+(add-hook 'dired-mode-hook #'denote-dired-mode)
+
+(with-eval-after-load 'org-capture
+  (require 'denote-org-capture)
+  (add-to-list 'org-capture-templates
+               '("n" "New note (with Denote)" plain
+                 (file denote-last-path)
+                 #'denote-org-capture
+                 :no-save t
+                 :immediate-finish nil
+                 :kill-buffer t
+                 :jump-to-captured t)))
+
+(defun my-denote-journal ()
+  "Create an entry tagged 'journal' with the date as its title."
+  (interactive)
+  (denote
+   (format-time-string "%A %e %B %Y")   ; format like Tuesday 14 June 2022
+   '("journal")
+   nil
+   "~/Denotes/Journal")
+
+  (insert "* Thoughts\n\n* Tasks\n\n")) ; multiple keywords are a list of strings: '("one" "two")
+
+#+end_src
