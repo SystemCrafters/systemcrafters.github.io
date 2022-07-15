@@ -1,0 +1,23 @@
+#+title: System Crafters Live! - July 15, 2022
+
+* Updates
+
+- My streaming and video schedule might be disrupted over the next few weeks!  I'll keep you posted.
+
+* Renaming Rational Emacs to Crafted Emacs
+
+Today we're renaming Rational Emacs to *Crafted Emacs*!
+
+Why?  Because this name fits better with the philosophy and "tone" of the community.
+
+Huge thanks to Jeff Bowman for putting together the necessary changes and providing a migration script so that most users can easily get migrated over.
+
+Let's finalize the rename now!
+
+* Denote, a new note-taking package
+
+Today we're going to try out a new note-taking package by Protesilaos Stavrou ("also known as Prot") which looks like it could be a promising alternative to other packages like Org Roam!
+
+https://protesilaos.com/emacs/denote
+
+I'm going to try and build up a note taking workflow from scratch while reading the manual that Prot put together.  The goal would be to replicate something similar to what I have with Org Roam while benefitting from the unique features of Denote.
