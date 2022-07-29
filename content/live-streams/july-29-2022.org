@@ -29,4 +29,11 @@ Here's the flow I have in mind:
 
 We probably won't get through all of this today!  I do have a starting point, though.  My =live-crafter= package has some YouTube Data API code we can borrow to kick things off!
 
+** Reference
+
+- https://developers.google.com/youtube/v3/getting-started
+- https://developers.google.com/youtube/v3/guides/implementation/videos
+- https://developers.google.com/youtube/v3/docs/videos
+- https://developers.google.com/youtube/v3/determine_quota_cost
+
 * The final code
