@@ -37,3 +37,171 @@ We probably won't get through all of this today!  I do have a starting point, th
 - https://developers.google.com/youtube/v3/determine_quota_cost
 
 * The final code
+
+#+begin_src emacs-lisp
+
+  ;; -*- lexical-binding: t; -*-
+
+  (require 'simple-httpd)
+
+  (defvar video-meta-client-id nil)
+  (defvar video-meta-api-key nil)
+  (defvar video-meta-client-secret nil)
+  (defvar video-meta--access-token-func nil)
+  (defvar video-meta--auth-redirect-uri "http://localhost:3000/oauth2_callback")
+  (defvar video-meta--use-bearer-auth nil)
+  (defvar video-meta--request-url nil)
+  (defvar video-meta--video-file-path "/tmp/video-meta")
+
+  (defun video-meta--get-access-token ()
+    (funcall video-meta--access-token-func))
+
+  (defun video-meta--build-params (params)
+    (string-join (mapcar (lambda (pair)
+                           (format "%s=%s" (car pair) (cdr pair)))
+                         params)
+                 "&"))
+
+  (defun video-meta--build-uri (path params)
+    (let ((param-string (video-meta--build-params params)))
+      (concat path
+              (if (> (length param-string) 0) "?" "")
+              param-string)))
+
+  (defun video-meta--http-get (url params)
+    (plz 'get (video-meta--build-uri url params)
+      :as #'json-read
+      :else (lambda (err) (message "ERROR: %S" err))
+      :headers `(("Content-Type" . "application/json")
+                 ("Authorization" . ,(format "Bearer %s" (video-meta--get-access-token))))))
+
+  (defun video-meta--http-put (url params body)
+    (plz 'put (video-meta--build-uri url params)
+      :as #'json-read
+      :body (json-encode body)
+      :headers `(("Content-Type" . "application/json")
+                 ("Authorization" . ,(format "Bearer %s" (video-meta--get-access-token))))))
+
+  (defun video-meta--build-auth-url (client-id redirect-uri)
+    (video-meta--build-uri
+     "https://accounts.google.com/o/oauth2/v2/auth"
+     `((client_id . ,client-id)
+       (response_type . "code")
+       (redirect_uri . ,redirect-uri)
+       ("scope" . ,(string-join '("https://www.googleapis.com/auth/youtube"
+                                  "https://www.googleapis.com/auth/youtube.force-ssl"
+                                  "https://www.googleapis.com/auth/youtube.readonly")
+                                " ")))))
+
+  (defun video-meta--extract-token (json-body)
+    (cdr (assoc 'access_token json-body)))
+
+  (defun video-meta--request-token (auth-code)
+    (let* ((params `((client_id . ,video-meta-client-id)
+                     (client_secret . ,video-meta-client-secret)
+                     (code . ,auth-code)
+                     (grant_type . "authorization_code")
+                     (redirect_uri . ,video-meta--auth-redirect-uri)))
+           (url-request-method "POST")
+           (url-request-extra-headers
+            '(("Content-Type" . "application/x-www-form-urlencoded")))
+           (url-request-data (video-meta--build-params params)))
+      (with-temp-buffer
+        (url-retrieve
+         "https://oauth2.googleapis.com/token"
+         (lambda (status)
+           (message "In callback!")
+           (re-search-forward "^\n")
+           (let ((token-details (json-read)))
+             (setq video-meta--access-token-func
+                   #'(lambda ()
+                       (video-meta--extract-token token-details)))))
+         nil
+         t))))
+
+  (defun video-meta-authenticate ()
+    (interactive)
+    (let ((httpd-port 3000)
+          (auth-url (video-meta--build-auth-url video-meta-client-id
+                                                  "http://localhost:3000/oauth2_callback")))
+      (httpd-start)
+      (browse-url auth-url)))
+
+  (defservlet* oauth2_callback text/plain (code error)
+    (if error
+        (message "Error during YouTube authentication: %s" error)
+      (progn
+        (message "Requesting token!")
+        (video-meta--request-token code)))
+    (httpd-stop))
+
+  (defun video-meta-get-subscriber-count ()
+    (let ((params `((part . "statistics")
+                    (mine . "true")
+                    (key . ,video-meta-api-key))))
+      (video-meta--http-get
+       "https://youtube.googleapis.com/youtube/v3/channels"
+       params
+       (lambda (response)
+         (message "Got response! %S" response)))))
+
+  (defun video-meta--extract-video-list (response)
+    (cdr (assoc 'items response)))
+
+  (defun video-meta--extract-video-details (video)
+    (let ((snippet (cdr (assoc 'snippet video))))
+      `((id . ,(cdr (assoc 'id video)))
+        (category-id . ,(cdr (assoc 'categoryId snippet)))
+        (title . ,(cdr (assoc 'title snippet)))
+        (description . ,(cdr (assoc 'description snippet))))))
+
+  (defun video-meta-get-video-details (video-id)
+    (let ((response (video-meta--http-get
+                     "https://youtube.googleapis.com/youtube/v3/videos"
+                     `((part . "snippet")
+                       (id . ,video-id)
+                       (key . ,video-meta-api-key)))))
+
+      (video-meta--extract-video-details
+        (aref (video-meta--extract-video-list response)
+              0))))
+
+  (defun video-meta--download-video-description (video-id)
+    (let* ((video (video-meta-get-video-details video-id))
+           (description (cdr (assoc 'description video))))
+      ;; Save the file to the path using the video id as filename
+      (with-temp-file (expand-file-name (format "%s.txt" video-id)
+                                        video-meta--video-file-path)
+        ;; Try pretty printing with pp and with-output-to-string
+        (insert (format "%S" (map-delete video 'description)))
+        (insert "\n---\n")
+        (insert description))))
+
+  ;; (video-meta--download-video-description "za99DwdZEyg")
+
+  (defun video-meta--upload-video-description (video-id category-id title description)
+    (let ((response (video-meta--http-put
+                     "https://youtube.googleapis.com/youtube/v3/videos"
+                     `((part . "snippet")
+                       (id . ,video-id)
+                       (key . ,video-meta-api-key))
+
+                     `((id . ,video-id)
+                       (snippet . ((title . ,title)
+                                   (categoryId . ,category-id)
+                                   (description . ,description)))))))))
+
+
+  ;; (let* ((video-id "za99DwdZEyg")
+  ;;        (video (video-meta-get-video-details video-id)))
+
+  ;;   (video-meta--upload-video-description video-id
+  ;;                                         (cdr (assoc 'category-id video))
+  ;;                                         (cdr (assoc 'title video))
+  ;;                                         (concat "Testing description uploading!  " (cdr (assoc 'description video)))))
+
+  ;; (video-meta--upload-video-description "za99DwdZEyg" "Automated Org Mode Website Publishing with GitHub or SourceHut")
+
+  (provide 'video-meta)
+
+#+end_src
