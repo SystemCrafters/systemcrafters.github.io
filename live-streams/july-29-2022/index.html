@@ -38,5 +38,170 @@
 <li><a href="https://developers.google.com/youtube/v3/determine_quota_cost">https://developers.google.com/youtube/v3/determine_quota_cost</a></li>
 </ul>
 
-<h2><a id="the-final-code" class="anchor" href="#the-final-code">¶</a>The final code</h2>
+<h2><a id="the-final-code" class="anchor" href="#the-final-code">¶</a>The final code</h2><pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">-*- lexical-binding: t; -*-</span>
+
+(<span class="org-keyword">require</span> '<span class="org-constant">simple-httpd</span>)
+
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">video-meta-client-id</span> nil)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">video-meta-api-key</span> nil)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">video-meta-client-secret</span> nil)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">video-meta--access-token-func</span> nil)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">video-meta--auth-redirect-uri</span> <span class="org-string">"http://localhost:3000/oauth2_callback"</span>)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">video-meta--use-bearer-auth</span> nil)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">video-meta--request-url</span> nil)
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">video-meta--video-file-path</span> <span class="org-string">"/tmp/video-meta"</span>)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--get-access-token</span> ()
+  (funcall video-meta--access-token-func))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--build-params</span> (params)
+  (string-join (mapcar (<span class="org-keyword">lambda</span> (pair)
+                         (format <span class="org-string">"%s=%s"</span> (car pair) (cdr pair)))
+                       params)
+               <span class="org-string">"&amp;"</span>))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--build-uri</span> (path params)
+  (<span class="org-keyword">let</span> ((param-string (video-meta--build-params params)))
+    (concat path
+            (<span class="org-keyword">if</span> (&gt; (length param-string) 0) <span class="org-string">"?"</span> <span class="org-string">""</span>)
+            param-string)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--http-get</span> (url params)
+  (plz 'get (video-meta--build-uri url params)
+    <span class="org-builtin">:as</span> #'json-read
+    <span class="org-builtin">:else</span> (<span class="org-keyword">lambda</span> (err) (message <span class="org-string">"ERROR: %S"</span> err))
+    <span class="org-builtin">:headers</span> `((<span class="org-string">"Content-Type"</span> . <span class="org-string">"application/json"</span>)
+               (<span class="org-string">"Authorization"</span> . ,(format <span class="org-string">"Bearer %s"</span> (video-meta--get-access-token))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--http-put</span> (url params body)
+  (plz 'put (video-meta--build-uri url params)
+    <span class="org-builtin">:as</span> #'json-read
+    <span class="org-builtin">:body</span> (json-encode body)
+    <span class="org-builtin">:headers</span> `((<span class="org-string">"Content-Type"</span> . <span class="org-string">"application/json"</span>)
+               (<span class="org-string">"Authorization"</span> . ,(format <span class="org-string">"Bearer %s"</span> (video-meta--get-access-token))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--build-auth-url</span> (client-id redirect-uri)
+  (video-meta--build-uri
+   <span class="org-string">"https://accounts.google.com/o/oauth2/v2/auth"</span>
+   `((client_id . ,client-id)
+     (response_type . <span class="org-string">"code"</span>)
+     (redirect_uri . ,redirect-uri)
+     (<span class="org-string">"scope"</span> . ,(string-join '(<span class="org-string">"https://www.googleapis.com/auth/youtube"</span>
+                                <span class="org-string">"https://www.googleapis.com/auth/youtube.force-ssl"</span>
+                                <span class="org-string">"https://www.googleapis.com/auth/youtube.readonly"</span>)
+                              <span class="org-string">" "</span>)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--extract-token</span> (json-body)
+  (cdr (assoc 'access_token json-body)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--request-token</span> (auth-code)
+  (<span class="org-keyword">let*</span> ((params `((client_id . ,video-meta-client-id)
+                   (client_secret . ,video-meta-client-secret)
+                   (code . ,auth-code)
+                   (grant_type . <span class="org-string">"authorization_code"</span>)
+                   (redirect_uri . ,video-meta--auth-redirect-uri)))
+         (url-request-method <span class="org-string">"POST"</span>)
+         (url-request-extra-headers
+          '((<span class="org-string">"Content-Type"</span> . <span class="org-string">"application/x-www-form-urlencoded"</span>)))
+         (url-request-data (video-meta--build-params params)))
+    (<span class="org-keyword">with-temp-buffer</span>
+      (url-retrieve
+       <span class="org-string">"https://oauth2.googleapis.com/token"</span>
+       (<span class="org-keyword">lambda</span> (status)
+         (message <span class="org-string">"In callback!"</span>)
+         (re-search-forward <span class="org-string">"^\n"</span>)
+         (<span class="org-keyword">let</span> ((token-details (json-read)))
+           (<span class="org-keyword">setq</span> video-meta--access-token-func
+                 #'(lambda ()
+                     (video-meta--extract-token token-details)))))
+       nil
+       t))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta-authenticate</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">let</span> ((httpd-port 3000)
+        (auth-url (video-meta--build-auth-url video-meta-client-id
+                                                <span class="org-string">"http://localhost:3000/oauth2_callback"</span>)))
+    (httpd-start)
+    (browse-url auth-url)))
+
+(defservlet* oauth2_callback text/plain (code error)
+  (<span class="org-keyword">if</span> error
+      (message <span class="org-string">"Error during YouTube authentication: %s"</span> error)
+    (<span class="org-keyword">progn</span>
+      (message <span class="org-string">"Requesting token!"</span>)
+      (video-meta--request-token code)))
+  (httpd-stop))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta-get-subscriber-count</span> ()
+  (<span class="org-keyword">let</span> ((params `((part . <span class="org-string">"statistics"</span>)
+                  (mine . <span class="org-string">"true"</span>)
+                  (key . ,video-meta-api-key))))
+    (video-meta--http-get
+     <span class="org-string">"https://youtube.googleapis.com/youtube/v3/channels"</span>
+     params
+     (<span class="org-keyword">lambda</span> (response)
+       (message <span class="org-string">"Got response! %S"</span> response)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--extract-video-list</span> (response)
+  (cdr (assoc 'items response)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--extract-video-details</span> (video)
+  (<span class="org-keyword">let</span> ((snippet (cdr (assoc 'snippet video))))
+    `((id . ,(cdr (assoc 'id video)))
+      (category-id . ,(cdr (assoc 'categoryId snippet)))
+      (title . ,(cdr (assoc 'title snippet)))
+      (description . ,(cdr (assoc 'description snippet))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta-get-video-details</span> (video-id)
+  (<span class="org-keyword">let</span> ((response (video-meta--http-get
+                   <span class="org-string">"https://youtube.googleapis.com/youtube/v3/videos"</span>
+                   `((part . <span class="org-string">"snippet"</span>)
+                     (id . ,video-id)
+                     (key . ,video-meta-api-key)))))
+
+    (video-meta--extract-video-details
+      (aref (video-meta--extract-video-list response)
+            0))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--download-video-description</span> (video-id)
+  (<span class="org-keyword">let*</span> ((video (video-meta-get-video-details video-id))
+         (description (cdr (assoc 'description video))))
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">Save the file to the path using the video id as filename</span>
+    (<span class="org-keyword">with-temp-file</span> (expand-file-name (format <span class="org-string">"%s.txt"</span> video-id)
+                                      video-meta--video-file-path)
+      <span class="org-comment-delimiter">;; </span><span class="org-comment">Try pretty printing with pp and with-output-to-string</span>
+      (insert (format <span class="org-string">"%S"</span> (map-delete video 'description)))
+      (insert <span class="org-string">"\n---\n"</span>)
+      (insert description))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(video-meta--download-video-description "za99DwdZEyg")</span>
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">video-meta--upload-video-description</span> (video-id category-id title description)
+  (<span class="org-keyword">let</span> ((response (video-meta--http-put
+                   <span class="org-string">"https://youtube.googleapis.com/youtube/v3/videos"</span>
+                   `((part . <span class="org-string">"snippet"</span>)
+                     (id . ,video-id)
+                     (key . ,video-meta-api-key))
+
+                   `((id . ,video-id)
+                     (snippet . ((title . ,title)
+                                 (categoryId . ,category-id)
+                                 (description . ,description)))))))))
+
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(let* ((video-id "za99DwdZEyg")</span>
+<span class="org-comment-delimiter">;;        </span><span class="org-comment">(video (video-meta-get-video-details video-id)))</span>
+
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">(video-meta--upload-video-description video-id</span>
+<span class="org-comment-delimiter">;;                                         </span><span class="org-comment">(cdr (assoc 'category-id video))</span>
+<span class="org-comment-delimiter">;;                                         </span><span class="org-comment">(cdr (assoc 'title video))</span>
+<span class="org-comment-delimiter">;;                                         </span><span class="org-comment">(concat "Testing description uploading!  " (cdr (assoc 'description video)))))</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(video-meta--upload-video-description "za99DwdZEyg" "Automated Org Mode Website Publishing with GitHub or SourceHut")</span>
+
+(<span class="org-keyword">provide</span> '<span class="org-constant">video-meta</span>)
+
+</code></pre>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
