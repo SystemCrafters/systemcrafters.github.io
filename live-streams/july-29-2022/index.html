@@ -1,0 +1,36 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - July 29, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - July 29, 2022</h1><p class="blog-post-meta"></p><div><p><div class="embed-responsive embed-responsive-16by9"> <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/6zvE2vZEPzs" allowfullscreen></iframe> </div>
+</p>
+
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Jeff Bowman wrote an article about the rename from Rational Emacs to Crafted Emacs: <a href="https://jeffbowman.writeas.com/from-rational-to-crafted-emacs">https://jeffbowman.writeas.com/from-rational-to-crafted-emacs</a></li>
+
+<li>A new way to support the channel: <strong>Buy Mastering Emacs</strong> with this link <a href="https://www.masteringemacs.org/r/systemcrafters">https://www.masteringemacs.org/r/systemcrafters</a></li>
+</ul>
+
+<h2><a id="automating-tasks-with-emacs-lisp" class="anchor" href="#automating-tasks-with-emacs-lisp">¶</a>Automating Tasks with Emacs Lisp</h2><p>Today we're going to write a lot of Emacs Lisp code to automate a particular monotonous task: editing my YouTube video descriptions!
+</p>
+
+<p>Why?  It's nice to be able to keep all of your video descriptions following a standard format so that they can be automatically updated using code for things like:
+</p>
+
+<ul><li>Adding links to new playlists to every video</li>
+<li>Updating links to my websites</li>
+<li>Temporary links to occasional events I want to promote</li>
+</ul>
+
+<p>Here's the flow I have in mind:
+</p>
+
+<ul><li>Download the description of a particular video to a file on disk (in a temporary location)</li>
+<li>Open the buffer to make any desired edits</li>
+<li>Use a command to send the changes back to the original video</li>
+<li>Make it possible to download all video descriptions at once</li>
+<li>Create a bulk editing action to edit (and verify) changes to all description files</li>
+<li>Mass-upload all changed description files back to YouTube</li>
+</ul>
+
+<p>We probably won't get through all of this today!  I do have a starting point, though.  My <kbd>live-crafter</kbd> package has some YouTube Data API code we can borrow to kick things off!
+</p>
+
+<h2><a id="the-final-code" class="anchor" href="#the-final-code">¶</a>The final code</h2>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
