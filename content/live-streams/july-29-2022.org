@@ -1,0 +1,32 @@
+#+title: System Crafters Live! - July 29, 2022
+
+[[yt:6zvE2vZEPzs][Watch the recording on YouTube!]]
+
+* Updates
+
+- Jeff Bowman wrote an article about the rename from Rational Emacs to Crafted Emacs: https://jeffbowman.writeas.com/from-rational-to-crafted-emacs
+
+- A new way to support the channel: *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Automating Tasks with Emacs Lisp
+
+Today we're going to write a lot of Emacs Lisp code to automate a particular monotonous task: editing my YouTube video descriptions!
+
+Why?  It's nice to be able to keep all of your video descriptions following a standard format so that they can be automatically updated using code for things like:
+
+- Adding links to new playlists to every video
+- Updating links to my websites
+- Temporary links to occasional events I want to promote
+
+Here's the flow I have in mind:
+
+- Download the description of a particular video to a file on disk (in a temporary location)
+- Open the buffer to make any desired edits
+- Use a command to send the changes back to the original video
+- Make it possible to download all video descriptions at once
+- Create a bulk editing action to edit (and verify) changes to all description files
+- Mass-upload all changed description files back to YouTube
+
+We probably won't get through all of this today!  I do have a starting point, though.  My =live-crafter= package has some YouTube Data API code we can borrow to kick things off!
+
+* The final code
