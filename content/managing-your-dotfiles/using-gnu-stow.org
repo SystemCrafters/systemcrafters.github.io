@@ -71,11 +71,12 @@ This means that =stow .= is equivalent to:
 
 #+begin_src sh
 
-  stow --dir=~/.dotfiles --target=~/
+  # dot here is a relative path to --dir and you have to put it
+  stow -S . --dir=~/.dotfiles --target=~/
 
   # OR
 
-  stow -d ~/.dotfiles -t ~/
+  stow . -d ~/.dotfiles -t ~/
 
 #+end_src
 
