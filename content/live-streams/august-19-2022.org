@@ -1,0 +1,62 @@
+#+title: System Crafters Live! - August 19, 2022
+
+[[yt:j0GmFP9hDCc][Watch the recording on YouTube!]]
+
+* Updates
+
+- The next System Crafters video will be about Embark, perhaps next week!
+
+- Flux Harmonic will be starting up again soon!  Subscribe if you haven't yet:
+  https://youtube.com/FluxHarmonicLive
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Distilling the Essence of Emacs
+
+As you may have already suspected, Emacs is probably the most hackable and customizable program that has ever existed.  But how does it accomplish that?
+
+Today I'd like to spend some time discussing the unique aspects of Emacs that enable this ultimate hackability so that we can basically produce a blueprint for other programs that might hope to replicate what Emacs has accomplished.
+
+What I really want is to get your ideas and feedback here so that I don't miss anything!
+
+The purpose for discussing this is that I would really like to experiment with building Emacs-like applications for other use cases.  We'll be looking into this on the Flux Harmonic channel when I start producing videos there again.
+
+** User Interface
+
+- The text-focused interface
+- Defining user-facing actions as commands
+- The flexibility of the minibuffer
+- Theming and visual customization with faces
+- Window and frame management
+
+*Question:* could a more graphical representation still be as effective or hackable?
+
+** Key Bindings
+
+- Prefix key system
+- Binding keys directly to commands
+- Ability to totally change input style (=evil-mode=, etc)
+
+*Question:* does a program need such extensive ability to control key bindings to be considered hackable?
+
+** Extension Language
+
+What are the unique aspects of Emacs Lisp that make it especially effective as a configuration language?
+
+- Lack of namespaces
+- Simplicity of libraries
+- Hooks as a core extensibility point
+- Core program behavior (buffers, windows, frames) represented as first class objects
+- Major and minor modes
+- Self-documenting
+- You can inspect any variable or function at any time
+- You can hook/hack any function
+- Easy to pull in community-authored packages
+
+*Question:* could you still achieve the same hackability with a better language?
+
+** What else?  What could be improved?
+
+Anything major that we're missing from the previous items?
+
+What could be done better?
