@@ -27,14 +27,19 @@
 <li>The flexibility of the minibuffer</li>
 <li>Theming and visual customization with faces</li>
 <li>Window and frame management</li>
+<li>Mode line (you can put whatever you want in there)</li>
 </ul>
 
 <p><strong>Question:</strong> could a more graphical representation still be as effective or hackable?
 </p>
 
+<p>(How does Blender accomplish UI extensibility?)
+</p>
+
 <h3><a id="key-bindings" class="anchor" href="#key-bindings">¶</a>Key Bindings</h3><ul><li>Prefix key system</li>
 <li>Binding keys directly to commands</li>
 <li>Ability to totally change input style (<kbd>evil-mode</kbd>, etc)</li>
+<li>Mode maps</li>
 </ul>
 
 <p><strong>Question:</strong> does a program need such extensive ability to control key bindings to be considered hackable?
@@ -43,23 +48,37 @@
 <h3><a id="extension-language" class="anchor" href="#extension-language">¶</a>Extension Language</h3><p>What are the unique aspects of Emacs Lisp that make it especially effective as a configuration language?
 </p>
 
-<ul><li>Lack of namespaces</li>
+<ul><li>Lack of module namespaces</li>
 <li>Simplicity of libraries</li>
 <li>Hooks as a core extensibility point</li>
+<li>You can hook/hack any function with advice</li>
+<li>You can redefine any function no matter where it's defined (as long as it wasn't a C function)</li>
 <li>Core program behavior (buffers, windows, frames) represented as first class objects</li>
 <li>Major and minor modes</li>
-<li>Self-documenting</li>
+<li>Self-documenting and source is easily accessible</li>
 <li>You can inspect any variable or function at any time</li>
-<li>You can hook/hack any function</li>
 <li>Easy to pull in community-authored packages</li>
 </ul>
 
 <p><strong>Question:</strong> could you still achieve the same hackability with a better language?
 </p>
 
+<ul><li>Having a clear documentation/manual strategy that isn't hard to keep up to date is critical for a hackable application</li>
+</ul>
+
 <h3><a id="what-else--what-could-be-improved" class="anchor" href="#what-else--what-could-be-improved">¶</a>What else?  What could be improved?</h3><p>Anything major that we're missing from the previous items?
 </p>
 
+<ul><li>The fact that you can re-evaluate code and extend Emacs while the program is running!</li>
+</ul>
+
 <p>What could be done better?
 </p>
+
+<ul><li>The way you manipulate buffers is not very convenient (especially when you need to have a more structured representation of data)</li>
+<li>Emacs was designed in a totally different era, lots of legacy design decisions</li>
+<li>Asychrony should be easier to manage (not so in Emacs Lisp) - but how do you deal with the inevitable concurrency issues</li>
+<li>Being able to make use of modern computing resources (more memory, more cores)</li>
+<li>Immutable data types?</li>
+</ul>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
