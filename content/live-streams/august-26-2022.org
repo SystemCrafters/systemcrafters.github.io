@@ -1,0 +1,19 @@
+#+title: System Crafters Live! - August 26, 2022
+
+[[yt:dCmyMCfmUhQ][Watch the recording on YouTube!]]
+
+* Updates
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Object-Oriented Emacs Lisp with EIEIO
+
+Today we're going to look at the EIEIO library that comes built in to Emacs.  This library looks really useful if you want to write more sophisticated code in Emacs Lisp because it enables you to add new types to Emacs with type inheritance, dynamic method dispatch, and a whole lot more.
+
+It is based on the [[https://en.wikipedia.org/wiki/Common_Lisp_Object_System][Common Lisp Object System]] which is a pretty influential object-oriented programming implementation.  A classic book called [[https://amzn.to/3R5q1Mw][The Art of the Metaobject Protocol]] is said to be a really good source for learning more about it.
+
+You can read the manual online or by running =(info "EIEIO")= in Emacs:
+
+https://www.gnu.org/software/emacs/manual/html_mono/eieio.html
+
+I haven't used EIEIO before but I have read a bit about CLOS, so we're going to learn about it together today!
