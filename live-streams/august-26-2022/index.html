@@ -19,4 +19,82 @@
 
 <p>I haven't used EIEIO before but I have read a bit about CLOS, so we're going to learn about it together today!
 </p>
+
+<p><strong>NOTE:</strong> I was working through this block of code live so it's possible that you won't be able to execute it directly!  Try running pieces of it separately if it gives you any errors.
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defclass</span> <span class="org-type">person</span> ()
+  ((name <span class="org-builtin">:initarg</span> <span class="org-builtin">:name</span>
+         <span class="org-builtin">:initform</span> <span class="org-string">""</span>
+         <span class="org-builtin">:type</span> string
+         <span class="org-builtin">:custom</span> string
+         <span class="org-builtin">:documentation</span> <span class="org-doc">"The name of a person."</span>)
+   (birthday <span class="org-builtin">:initarg</span> <span class="org-builtin">:birthday</span>
+             <span class="org-builtin">:initform</span> <span class="org-string">"Jan 1, 1970"</span>
+             <span class="org-builtin">:custom</span> string
+             <span class="org-builtin">:type</span> string
+             <span class="org-builtin">:documentation</span> <span class="org-doc">"The person's birthday."</span>)
+   (phone <span class="org-builtin">:initarg</span> <span class="org-builtin">:phone</span>
+          <span class="org-builtin">:initform</span> <span class="org-string">""</span>
+          <span class="org-builtin">:documentation</span> <span class="org-doc">"Phone number."</span>))
+  <span class="org-doc">"A class for tracking people I know."</span>)
+
+(<span class="org-keyword">defclass</span> <span class="org-type">employee</span> (person)
+  ((company <span class="org-builtin">:initarg</span> <span class="org-builtin">:company</span>
+            <span class="org-builtin">:initform</span> <span class="org-string">""</span>
+            <span class="org-builtin">:type</span> string
+            <span class="org-builtin">:custom</span> string
+            <span class="org-builtin">:documentation</span> <span class="org-doc">"The company the person works for."</span>)
+   (manager <span class="org-builtin">:initarg</span> <span class="org-builtin">:manager</span>
+            <span class="org-builtin">:initform</span> <span class="org-string">""</span>
+            <span class="org-builtin">:type</span> string
+            <span class="org-builtin">:custom</span> string
+            <span class="org-builtin">:documentation</span> <span class="org-doc">"The person who can fire me."</span>))
+  <span class="org-doc">"A class for tracking my wage slave details."</span>)
+
+(<span class="org-keyword">defclass</span> <span class="org-type">android</span> ()
+  ((name <span class="org-builtin">:initarg</span> <span class="org-builtin">:name</span>
+         <span class="org-builtin">:initform</span> <span class="org-string">""</span>
+         <span class="org-builtin">:type</span> string
+         <span class="org-builtin">:custom</span> string
+         <span class="org-builtin">:documentation</span> <span class="org-doc">"The name of a person."</span>)))
+
+(<span class="org-keyword">setq</span> test-person (employee <span class="org-builtin">:name</span> <span class="org-string">"David"</span>
+                            <span class="org-builtin">:birthday</span> <span class="org-string">"Jan 1, 1970"</span>
+                            <span class="org-builtin">:phone</span> <span class="org-string">"867-5309"</span>
+                            <span class="org-builtin">:company</span> <span class="org-string">"Acme Inc"</span>
+                            <span class="org-builtin">:manager</span> <span class="org-string">"Bob Bobbob"</span>))
+
+(<span class="org-keyword">cl-defmethod</span> <span class="org-function-name">call-person</span> (pers <span class="org-type">&amp;optional</span> scriptname)
+  <span class="org-doc">"Dial the phone for the person PERS.</span>
+<span class="org-doc">   Execute the program SCRIPTNAME to dial the phone."</span>
+  (message <span class="org-string">"Can't call %S!"</span> pers))
+
+(<span class="org-keyword">cl-defmethod</span> <span class="org-function-name">call-person</span> <span class="org-builtin">:after</span> (pers)
+  (message <span class="org-string">"I tried to call!"</span> pers))
+
+(<span class="org-keyword">cl-defmethod</span> <span class="org-function-name">call-person</span> <span class="org-builtin">:after</span> ((pers person))
+  (message <span class="org-string">"I called a person!"</span> pers))
+
+(<span class="org-keyword">cl-defmethod</span> <span class="org-function-name">call-person</span> ((pers person) <span class="org-type">&amp;optional</span> scriptname)
+  <span class="org-doc">"Dial the phone for the person PERS.</span>
+<span class="org-doc">   Execute the program SCRIPTNAME to dial the phone."</span>
+  (message <span class="org-string">"Dialing the phone for %s"</span> (slot-value pers 'name)))
+
+(<span class="org-keyword">cl-defmethod</span> <span class="org-function-name">call-person</span> ((emp employee))
+  <span class="org-doc">"Dial the phone for the employee EMP."</span>
+  (message <span class="org-string">"Dialing the phone for EMPLOYEE %s"</span> (slot-value emp 'name)))
+
+(<span class="org-keyword">cl-defmethod</span> <span class="org-function-name">call-person</span> ((andr android))
+  <span class="org-doc">"Dial the phone for the employee EMP."</span>
+  (message <span class="org-string">"Dialing the phone for ANDROID %s"</span> (slot-value andr 'name)))
+
+</code></pre>
+
+<p>You can use the <kbd>M-x eieio-browse</kbd> command to look at all classes presently defined in Emacs.
+</p>
+
+<p>If you want to try CLOS in Guile Scheme, try GOOPS: <a href="https://www.gnu.org/software/guile/manual/html_node/GOOPS.html">https://www.gnu.org/software/guile/manual/html_node/GOOPS.html</a>
+</p>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
