@@ -17,3 +17,79 @@ You can read the manual online or by running =(info "EIEIO")= in Emacs:
 https://www.gnu.org/software/emacs/manual/html_mono/eieio.html
 
 I haven't used EIEIO before but I have read a bit about CLOS, so we're going to learn about it together today!
+
+*NOTE:* I was working through this block of code live so it's possible that you won't be able to execute it directly!  Try running pieces of it separately if it gives you any errors.
+
+#+begin_src emacs-lisp
+
+  (defclass person ()
+    ((name :initarg :name
+           :initform ""
+           :type string
+           :custom string
+           :documentation "The name of a person.")
+     (birthday :initarg :birthday
+               :initform "Jan 1, 1970"
+               :custom string
+               :type string
+               :documentation "The person's birthday.")
+     (phone :initarg :phone
+            :initform ""
+            :documentation "Phone number."))
+    "A class for tracking people I know.")
+
+  (defclass employee (person)
+    ((company :initarg :company
+              :initform ""
+              :type string
+              :custom string
+              :documentation "The company the person works for.")
+     (manager :initarg :manager
+              :initform ""
+              :type string
+              :custom string
+              :documentation "The person who can fire me."))
+    "A class for tracking my wage slave details.")
+
+  (defclass android ()
+    ((name :initarg :name
+           :initform ""
+           :type string
+           :custom string
+           :documentation "The name of a person.")))
+
+  (setq test-person (employee :name "David"
+                              :birthday "Jan 1, 1970"
+                              :phone "867-5309"
+                              :company "Acme Inc"
+                              :manager "Bob Bobbob"))
+
+  (cl-defmethod call-person (pers &optional scriptname)
+    "Dial the phone for the person PERS.
+     Execute the program SCRIPTNAME to dial the phone."
+    (message "Can't call %S!" pers))
+
+  (cl-defmethod call-person :after (pers)
+    (message "I tried to call!" pers))
+
+  (cl-defmethod call-person :after ((pers person))
+    (message "I called a person!" pers))
+
+  (cl-defmethod call-person ((pers person) &optional scriptname)
+    "Dial the phone for the person PERS.
+     Execute the program SCRIPTNAME to dial the phone."
+    (message "Dialing the phone for %s" (slot-value pers 'name)))
+
+  (cl-defmethod call-person ((emp employee))
+    "Dial the phone for the employee EMP."
+    (message "Dialing the phone for EMPLOYEE %s" (slot-value emp 'name)))
+
+  (cl-defmethod call-person ((andr android))
+    "Dial the phone for the employee EMP."
+    (message "Dialing the phone for ANDROID %s" (slot-value andr 'name)))
+
+#+end_src
+
+You can use the =M-x eieio-browse= command to look at all classes presently defined in Emacs.
+
+If you want to try CLOS in Guile Scheme, try GOOPS: https://www.gnu.org/software/guile/manual/html_node/GOOPS.html
