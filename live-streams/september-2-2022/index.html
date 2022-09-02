@@ -23,4 +23,86 @@
 <li>Macros</li>
 <li>Continuations</li>
 </ul>
+
+<h2><a id="the-code-we-wrote" class="anchor" href="#the-code-we-wrote">¶</a>The code we wrote</h2><pre><code class="scheme">
+(<span class="org-keyword">define-module</span> (<span class="org-type">system-crafters</span> guile-demo)
+  <span class="org-builtin">#:export</span> (find find-x))
+
+(<span class="org-keyword">define</span> <span class="org-function-name">my-var</span> 15)
+
+(set! my-var 20)
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">find</span> value lst)
+  (<span class="org-keyword">if</span> (pair? lst)
+      (<span class="org-keyword">begin</span>
+        (display (string-append <span class="org-string">"Looking at: "</span>
+                                (number-&gt;string (car lst))
+                                <span class="org-string">"\n"</span>))
+        (<span class="org-keyword">if</span> (equal? (car lst) value)
+            (<span class="org-keyword">begin</span> (display <span class="org-string">"Found it!\n"</span>)
+                   (car lst))
+            (find value (cdr lst))))
+      #f))
+
+(<span class="org-keyword">let</span> <span class="org-function-name">find-loop</span> ((value 5)
+                (lst '(1 2 3 4 5)))
+  (<span class="org-keyword">if</span> (pair? lst)
+      (<span class="org-keyword">begin</span>
+        (display (string-append <span class="org-string">"Looking at: "</span>
+                                (number-&gt;string (car lst))
+                                <span class="org-string">"\n"</span>))
+        (<span class="org-keyword">if</span> (equal? (car lst) value)
+            (<span class="org-keyword">begin</span> (display <span class="org-string">"Found it!\n"</span>)
+                   (car lst))
+            (find-loop value (cdr lst))))
+      #f))
+
+(<span class="org-keyword">define</span> <span class="org-function-name">find-x</span> (<span class="org-keyword">lambda</span> (value lst)
+                 (<span class="org-keyword">if</span> (pair? lst)
+                     (<span class="org-keyword">begin</span>
+                       (display (string-append <span class="org-string">"Looking at: "</span>
+                                               (number-&gt;string (car lst))
+                                               <span class="org-string">"\n"</span>))
+                       (<span class="org-keyword">if</span> (equal? (car lst) value)
+                           (<span class="org-keyword">begin</span> (display <span class="org-string">"Found it!\n"</span>)
+                                  (car lst))
+                           (find value (cdr lst))))
+                     #f)))
+
+(<span class="org-keyword">letrec</span> ([even? (<span class="org-keyword">lambda</span> (n) (<span class="org-keyword">or</span> (zero? n) (odd? (- n 1))))]
+         [odd? (<span class="org-keyword">lambda</span> (n) (<span class="org-keyword">and</span> (not (zero? n)) (even? (- n 1))))])
+  (even? 4))
+
+(<span class="org-keyword">let</span> ((x 5)
+      (y (+ x 1)))
+  (display (number-&gt;string y)))
+
+((<span class="org-keyword">lambda</span> (x y)
+   (display (number-&gt;string y)))
+ 5
+ (+ x 1))
+
+(<span class="org-keyword">let*</span> ((x 5)
+       (y (+ x 1)))
+  y)
+
+((<span class="org-keyword">lambda</span> (x)
+   ((<span class="org-keyword">lambda</span> (y)
+      y)
+    (+ x 1)))
+ 5)
+
+(<span class="org-keyword">define</span> <span class="org-function-name">my-map</span> (<span class="org-keyword">lambda</span> (func lst)))
+
+(find-x 3 '(1 2 3 4 5 6))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Loading modules</span>
+(use-modules (ice-9 textual-ports)
+             (ice-9 command-line))
+
+(with-input-from-file <span class="org-string">"guile.scm"</span>
+  (<span class="org-keyword">lambda</span> ()
+    (display (get-string-n (current-input-port) 20))))
+
+</code></pre>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
