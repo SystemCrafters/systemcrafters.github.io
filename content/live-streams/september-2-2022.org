@@ -1,0 +1,25 @@
+#+title: System Crafters Live! - September 2, 2022
+
+[[yt:vgFLtW_6Ui4][Watch the recording on YouTube!]]
+
+* Updates
+
+- Next week I will be streaming on this channel around *7AM to 9AM UTC* on Monday and Wednesday!  We'll be working on improvements to my Scheme-inspired programming language [[https://github.com/mesche-lang/compiler][Mesche]].
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* A Rough Introduction to Guile Scheme
+
+Today we're going to discuss the language Scheme through the lens of Guile Scheme!  This will mainly be geared toward those who have some experience with Lisp languages like Emacs Lisp or Common Lisp already.  If there's enough interest, I'll be happy to create a video series going more in depth!
+
+I'll give you a rough (unprepared) walkthrough of the following topics:
+
+- Basic language characteristics
+- Defining variables and functions
+- Setting variables
+- =let= expressions
+- Looping constructs and higher-order functions
+- Interacting with the environment (console and file I/O)
+- Modules, importing, and exporting
+- Macros
+- Continuations
