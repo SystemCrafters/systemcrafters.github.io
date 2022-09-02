@@ -23,3 +23,88 @@ I'll give you a rough (unprepared) walkthrough of the following topics:
 - Modules, importing, and exporting
 - Macros
 - Continuations
+
+* The code we wrote
+
+#+begin_src scheme
+
+(define-module (system-crafters guile-demo)
+  #:export (find find-x))
+
+(define my-var 15)
+
+(set! my-var 20)
+
+(define (find value lst)
+  (if (pair? lst)
+      (begin
+        (display (string-append "Looking at: "
+                                (number->string (car lst))
+                                "\n"))
+        (if (equal? (car lst) value)
+            (begin (display "Found it!\n")
+                   (car lst))
+            (find value (cdr lst))))
+      #f))
+
+(let find-loop ((value 5)
+                (lst '(1 2 3 4 5)))
+  (if (pair? lst)
+      (begin
+        (display (string-append "Looking at: "
+                                (number->string (car lst))
+                                "\n"))
+        (if (equal? (car lst) value)
+            (begin (display "Found it!\n")
+                   (car lst))
+            (find-loop value (cdr lst))))
+      #f))
+
+(define find-x (lambda (value lst)
+                 (if (pair? lst)
+                     (begin
+                       (display (string-append "Looking at: "
+                                               (number->string (car lst))
+                                               "\n"))
+                       (if (equal? (car lst) value)
+                           (begin (display "Found it!\n")
+                                  (car lst))
+                           (find value (cdr lst))))
+                     #f)))
+
+(letrec ([even? (lambda (n) (or (zero? n) (odd? (- n 1))))]
+         [odd? (lambda (n) (and (not (zero? n)) (even? (- n 1))))])
+  (even? 4))
+
+(let ((x 5)
+      (y (+ x 1)))
+  (display (number->string y)))
+
+((lambda (x y)
+   (display (number->string y)))
+ 5
+ (+ x 1))
+
+(let* ((x 5)
+       (y (+ x 1)))
+  y)
+
+((lambda (x)
+   ((lambda (y)
+      y)
+    (+ x 1)))
+ 5)
+
+(define my-map (lambda (func lst)))
+
+(find-x 3 '(1 2 3 4 5 6))
+
+;; Loading modules
+(use-modules (ice-9 textual-ports)
+             (ice-9 command-line))
+
+(with-input-from-file "guile.scm"
+  (lambda ()
+    (display (get-string-n (current-input-port) 20))))
+
+#+end_src
