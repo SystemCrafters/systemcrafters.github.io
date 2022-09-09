@@ -4,7 +4,9 @@
 
 * Updates
 
-- The live coding streams this week were fun!
+- The live coding streams this week were fun!  I haven't decided yet if I will continue, will keep you posted.
+
+- I'll be speaking at the Guix Birthday Event next Saturday!  The event might be streamed, watch the official site for more details: https://10years.guix.gnu.org/program/
 
 - Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
 
@@ -14,6 +16,8 @@ I've really been enjoying Prot's package Denote recently:
 
 https://protesilaos.com/emacs/denote
 
+[[https://www.youtube.com/watch?v=QcRY_rsX0yY][My previous stream on Denote]]
+
 It works well with how I like to write notes, basically as a linear series of entries to capture my thoughts over time.
 
 Now that I've been using it for a couple of months, I'd like to start generating my personal website from a tagged subset of my Denote files so that I can share some of my personal writings with the public.
@@ -22,4 +26,134 @@ Today we'll hack some Emacs Lisp to figure out a simple way to generate such a w
 
 ** The Plan
 
+- Find a list of all note files with a specific tag like =public= or =publish=
+- Generate a simple site with just an index page with post titles and dates and links to the full pages for the articles
+- RSS feed for the main posts
+- Optionally an RSS feed for specific tags
+
 ** The Final Code
+
+#+begin_src emacs-lisp
+
+;; Initialize package sources
+(require 'package)
+
+;; Set the package installation directory so that packages aren't stored in the
+;; ~/.emacs.d/elpa path.
+(setq package-user-dir (expand-file-name "./.packages"))
+
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+
+;; Initialize the package system
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; Install and load weblorg
+(unless (package-installed-p 'weblorg)
+  (package-install 'weblorg))
+(require 'weblorg)
+
+;; Install and load Denote
+(unless (package-installed-p 'denote)
+  (package-install 'denote))
+(require 'denote)
+
+(setq denote-directory "~/Denotes")
+
+;; (setq files-to-publish
+;;       (mapcar #'file-name-nondirectory
+;;               (denote--directory-files-matching-regexp "_public.*\\.org$")))
+
+;; (defun get-article-output-path (org-file pub-dir)
+;;   (if (string-match "\\/index\\(.org|.html\\)$" org-file)
+;;       pub-dir
+;;     (let ((article-dir (concat pub-dir
+;;                                (thread-first org-file
+;;                                              (file-name-nondirectory)
+;;                                              (file-name-sans-extension)
+;;                                              (file-name-as-directory)
+;;                                              (dw/strip-file-name-metadata)
+;;                                              (concat "/")))))
+;;       (message "ARTICLE DIR: %s" article-dir)
+;;       (unless (file-directory-p article-dir)
+;;         (make-directory article-dir t))
+;;       article-dir)))
+
+;; (defun org-html-publish-to-html (plist filename pub-dir)
+;;   "Publish an org file to HTML, using the FILENAME as the output directory."
+;;   (let ((article-path (get-article-output-path filename pub-dir)))
+;;     (cl-letf (((symbol-function 'org-export-output-file-name)
+;;                (lambda (extension &optional subtreep pub-dir)
+;;                  (concat article-path "index" extension))))
+;;       (org-publish-org-to 'html
+;;                           filename
+;;                           (concat "." (or (plist-get plist :html-extension)
+;;                                           "html"))
+;;                           plist
+;;                           article-path))))
+
+;; (setq org-publish-project-alist
+;;       (list
+;;        (list "blog-site:main"
+;;              :auto-sitemap t
+;;              :sitemap-filename "index.html"
+;;              :base-extension "org"
+;;              :base-directory denote-directory
+;;              :exclude "\\.org$"
+;;              :include files-to-publish
+;;              :publishing-function '(org-html-publish-to-html)
+;;              :publishing-directory "./public"
+;;              :with-timestamps t
+;;              :with-title nil)))
+
+;; (org-publish-all t)
+
+;; Configure the site
+(setq denote-site (weblorg-site
+                   :name "daviwil.com"
+                   :base-url (if (string= (getenv "PROD") "true")
+                                 "https://daviwil.com"
+                               "http://localhost:8080")))
+
+(defun dw/fix-slugs (posts)
+  (weblorg-input-aggregate-all-desc
+   (mapcar (lambda (post)
+             (message "Post:" (cdaadr post))
+             post)
+           posts)))
+
+(defun dw/strip-file-name-metadata (file-name)
+  (replace-regexp-in-string "^.*--\\(.*?\\)__.*$" "\\1" file-name))
+
+(setq posts
+      (mapcar (lambda (file)
+                ;; This also needs "route" and "url" which seems to be something
+                ;; you need to do yourself when using :input-sources
+                `("post" . (("title" . ,(denote--retrieve-title-value file 'org))
+                            ("slug" . ,(dw/strip-file-name-metadata file))
+                            ("file" . ,file))))
+              (denote--directory-files-matching-regexp "_public.*\\.org$")))
+
+;; Live streams index page
+(weblorg-route
+ :name "index"
+ :site denote-site
+ :input-source posts
+ :template "post-index.html"
+ :output "public/index.html"
+ :url "index.html")
+
+(weblorg-route
+ :name "posts"
+ :site denote-site
+ :input-source posts
+ :template "post.html"
+ :output "public/{{ slug }}/index.html"
+ :url "/{{ slug }}/")
+
+;; Export the site
+(weblorg-export)
+
+#+end_src
