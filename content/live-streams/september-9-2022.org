@@ -1,0 +1,25 @@
+#+title: System Crafters Live! - September 9, 2022
+
+[[yt:5R7ad5xz5wo][Watch the recording on YouTube!]]
+
+* Updates
+
+- The live coding streams this week were fun!
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Generating a Blog Site from Denote Entries
+
+I've really been enjoying Prot's package Denote recently:
+
+https://protesilaos.com/emacs/denote
+
+It works well with how I like to write notes, basically as a linear series of entries to capture my thoughts over time.
+
+Now that I've been using it for a couple of months, I'd like to start generating my personal website from a tagged subset of my Denote files so that I can share some of my personal writings with the public.
+
+Today we'll hack some Emacs Lisp to figure out a simple way to generate such a website!
+
+** The Plan
+
+** The Final Code
