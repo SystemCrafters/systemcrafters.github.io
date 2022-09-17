@@ -1,0 +1,261 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>How to Make GNU Guix Irresistible in 2022 and Beyond - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">How to Make GNU Guix Irresistible in 2022 and Beyond</h1><p class="blog-post-meta"></p><div>
+<h2><a id="who-am-i" class="anchor" href="#who-am-i">¶</a>Who am I?</h2><p>I'm David Wilson, creator of the System Crafters YouTube channel and community:
+</p>
+
+<ul><li>YouTube: <a href="https://youtube.com/SystemCrafters">https://youtube.com/SystemCrafters</a></li>
+<li>LBRY/Odysee: <a href="https://odysee.com/@SystemCrafters">https://odysee.com/@SystemCrafters</a></li>
+<li>Web: <a href="https://systemcrafters.net">https://systemcrafters.net</a></li>
+<li>Chat: #systemcrafters on <a href="https://libera.chat">libera.chat</a></li>
+<li>E-mail: david@systemcrafters.net</li>
+</ul>
+
+<h2><a id="i-love-gnu-guix" class="anchor" href="#i-love-gnu-guix">¶</a>I love GNU Guix.</h2><p>Guix has been my GNU/Linux distribution of choice for almost 3 years now!
+</p>
+
+<p>I've used it both for personal and professional computing and overall I've had a great experience with it.  I honestly can't imagine using any other system.
+</p>
+
+<p>I enjoy it so much that I've also produced <a href="https://www.youtube.com/playlist?list=PLEoMzSkcN8oNxnj7jm5V2ZcGc52002pQU">6 videos</a> and a number of live streams about it on YouTube:
+</p>
+
+<ul><li><a href="https://www.youtube.com/watch?v=iBaqOK75cho">Introduction to GNU Guix</a></li>
+<li><a href="https://www.youtube.com/watch?v=Nk8sprN7oZ0">Installing the GNU Guix Package Manager</a></li>
+<li><a href="https://www.youtube.com/watch?v=Xy0YgnXFt1M">Everyday Package Management with GNU Guix</a></li>
+<li><a href="https://www.youtube.com/watch?v=xVyvz2aViP8">Using Package Channels in GNU Guix</a></li>
+<li><a href="https://www.youtube.com/watch?v=oSy-TmoxG_Y">Installing Guix as a Complete GNU/Linux System</a></li>
+<li><a href="https://www.youtube.com/watch?v=7ZdMRLPZhFs">5 Reasons to Try Guix in 2022</a></li>
+</ul>
+
+<p>I built my channel around this concept of "crafting your system" and Guix was one of the primary inspirations for it!
+</p>
+
+<p>I'm personally invested in the future of Guix and I would love to help its community grow.
+</p>
+
+<h2><a id="gentle-disclaimer" class="anchor" href="#gentle-disclaimer">¶</a>Gentle Disclaimer</h2><p>The points and ideas I discuss in this talk are based primarily on my own experiences with Guix and those of the people who I've helped get started with it over the last couple of years.
+</p>
+
+<p>I don't follow the mailing lists very closely, so if some of these ideas have been discussed and debated thoroughly, I might have missed it!
+</p>
+
+<h2><a id="my-history-with-guix" class="anchor" href="#my-history-with-guix">¶</a>My history with Guix</h2><h3><a id="first-contact" class="anchor" href="#first-contact">¶</a>First contact</h3><p>I learned about GNU Guix in 2018 but didn't really try it until 2019.
+</p>
+
+<p>Since I'm a Lisp enthusiast, I was <strong>very</strong> interested in using a GNU/Linux distribution that is configured with Scheme!
+</p>
+
+<p>I was also really excited about the features it provided.  I had used NixOS a few years prior, so I understood the value of having a declarative system configuration that was applied in a "functional" way.
+</p>
+
+<h3><a id="trying-it-out" class="anchor" href="#trying-it-out">¶</a>Trying it out</h3><p>I installed the Guix package manager on Manjaro to try it out.  It was great to use Guix to install packages on my system and I learned a bit about how to install them from manifest files.
+</p>
+
+<p>But that was too basic, I wanted the real thing!
+</p>
+
+<h3><a id="installing-the-system" class="anchor" href="#installing-the-system">¶</a>Installing the system</h3><p>So I read the manual for a while and tried to digest what it was telling me and eventually gained the courage to try and install it.
+</p>
+
+<p>I copied the system configuration example from the manual, tweaked it a bit for my needs, and then booted up the installation ISO from a USB stick.
+</p>
+
+<p>With great excitement, I ran <kbd>guix system reconfigure config.scm</kbd>...
+</p>
+
+<p>... and then I realized my laptop's wifi didn't work and I couldn't install any packages.
+</p>
+
+<h2><a id="new-guix-users-face-a-number-of-challenges" class="anchor" href="#new-guix-users-face-a-number-of-challenges">¶</a>New Guix users face a number of challenges</h2><p>In my view, these are the problems that are preventing GNU Guix from attracting and retaining more users:
+</p>
+
+<h3><a id="it-has-a-steep-learning-curve" class="anchor" href="#it-has-a-steep-learning-curve">¶</a>It has a steep learning curve</h3><p>In my experience, setting up the package manager on a foreign distribution was pretty easy but not 100% perfect.  It was much harder to get started with installing the system.
+</p>
+
+<p>The graphical installer helps a lot!  The starter configuration it generates is useful.  However, you still have to learn how to configure the various services you need and do more complex configuration tasks.
+</p>
+
+<p>Only the most dedicated users will push through the installation and learning phase, especially if they run into the next problem.
+</p>
+
+<h3><a id="the-lack-of-proprietary-drivers-is-a-blocker-for-many-people" class="anchor" href="#the-lack-of-proprietary-drivers-is-a-blocker-for-many-people">¶</a>The lack of proprietary drivers is a blocker for many people</h3><p>Let's face it, many (most?) people use laptops these days and almost none of them have freedom-respecting or open hardware.
+</p>
+
+<p>I sympathize with the problem the Guix maintainers have here: complying with the <a href="https://www.gnu.org/distros/free-system-distribution-guidelines.html">Free System Distribution Guidelines</a> requires that no proprietary software or drivers be included with Guix.  You can't even give users tips in the manual on how to install them.
+</p>
+
+<p>The bigger challenge is that users can't even ask about how to install proprietary drivers and firmware on the official communication channels like the mailing lists and IRC.  They have to be willing to search around for solutions and hopefully find a blog post or video that explains it.
+</p>
+
+<p>We'll talk about this more in a bit.
+</p>
+
+<h3><a id="you-cant-easily-install-a-lot-of-necessary-software-on-it" class="anchor" href="#you-cant-easily-install-a-lot-of-necessary-software-on-it">¶</a>You can't easily install a lot of necessary software on it</h3><p>Obviously Guix doesn't have proprietary software in the official channel, that's not really the problem.  But, even some free software programs are hard to package and distribute on Linux because of the components they depend on.
+</p>
+
+<p>Users who want to use Guix for work or school often have to install proprietary programs.
+</p>
+
+<p>Some users also want to use popular proprietary communication tools like Discord or Slack.
+</p>
+
+<p>If they're unable to, they either have to use a workaround or give up the idea of using Guix entirely!
+</p>
+
+<h4><a id="using-pre-built-programs-for-another-distro" class="anchor" href="#using-pre-built-programs-for-another-distro">¶</a>Using pre-built programs for another distro</h4><p>The next thing someone may want to do is go download a pre-compiled Linux program from a website and run it on their machine.  If you don't understand Linux Standard Base and how programs are linked, then you'll be lost on why it doesn't run.
+</p>
+
+<h4><a id="using-flatpak" class="anchor" href="#using-flatpak">¶</a>Using Flatpak</h4><p>Keeping Flatpak available in the Guix package repo is a <strong>critical necessity</strong>.  I've been able to happily use a number of proprietary applications by adding the Flathub repository.  I don't know if I would have been able to keep using Guix without it.
+</p>
+
+<p>However, it's a context switch to use Flatpak and it also has its own slight learning curve and quirks due to Guix, so it's not perfect.  You have to learn how to install the programs correctly, configure their permissions, integrate them with your Guix environment, etc.
+</p>
+
+<h4><a id="using-nix" class="anchor" href="#using-nix">¶</a>Using Nix</h4><p>You can also install Nix package manager and use it pretty successfully for other things like developer tools that aren't in Guix.
+</p>
+
+<p>It would be much better if there were community Guix channels available for these things!
+</p>
+
+<h4><a id="conclusion" class="anchor" href="#conclusion">¶</a>Conclusion?</h4><p>Workarounds like the two I mentioned are fine, but it would be much better if we had a more robust channel ecosystem which packaged more software that isn't appropriate for the main Guix repository.
+</p>
+
+<p>The Nonguix channel is a great resource for this, but I think it needs a lot more contributors to cover the wider range of programs that users need.
+</p>
+
+<h3><a id="some-people-are-not-comfortable-writing-code-to-manage-their-system" class="anchor" href="#some-people-are-not-comfortable-writing-code-to-manage-their-system">¶</a>Some people are not comfortable writing code to manage their system</h3><p>Related to the learning curve issue, you have to learn how to write Scheme code to some level to manage your system long-term.  You miss out on a lot of the power of Guix if you don't!
+</p>
+
+<p>I think many users may not rise past the level of just poking around in their system configuration file.
+</p>
+
+<p>Guix also introduces its own syntax and concepts like G-expressions which require further study.
+</p>
+
+<h4><a id="how-big-of-a-problem-is-it" class="anchor" href="#how-big-of-a-problem-is-it">¶</a>How big of a problem is it?</h4><p>This is not a huge problem, since Guix is generally meant for a more sophisticated user who is willing to learn.
+</p>
+
+<p>It does raise the question of how one might make things easier for a more mainstream user who isn't as interested in hand-editing their configuration file.
+</p>
+
+<h2><a id="to-solve-these-problems-we-need-clear-criteria" class="anchor" href="#to-solve-these-problems-we-need-clear-criteria">¶</a>To solve these problems, we need clear criteria</h2><p>Now that we've delved into the user adoption problems Guix has, let's talk about some ideas for how we might improve the situation.
+</p>
+
+<p>But first, let's define the criteria for solutions that we consider.
+</p>
+
+<h3><a id="who-is-the-target-audience-for-gnu-guix" class="anchor" href="#who-is-the-target-audience-for-gnu-guix">¶</a>Who is the target audience for GNU Guix?</h3><p>Guix does many things!  It's really hard to explain to someone else what Guix is or what it's meant to do.
+</p>
+
+<p>Because it solves problems across many domains, it can also be hard to pinpoint the ideal type of Guix user.
+</p>
+
+<ul><li>Desktop Linux users?</li>
+<li>System administrators</li>
+<li>Software developers who need standard development environments</li>
+<li>"Hardcore" users who want control over every aspect of the system?</li>
+<li>Scientific computing, reproducible research?</li>
+</ul>
+
+<h4><a id="the-real-characteristics" class="anchor" href="#the-real-characteristics">¶</a>The real characteristics</h4><p>At a high level, a Guix user:
+</p>
+
+<ul><li>is willing to learn and get their hands dirty</li>
+<li>probably understands the value of Lisp and Scheme or is curious about trying it</li>
+<li>wants to build something reproducible that lasts</li>
+<li>is motivated to contribute back to the ecosystem, either through code or content</li>
+</ul>
+
+<h3><a id="what-does-success-mean-for-guix" class="anchor" href="#what-does-success-mean-for-guix">¶</a>What does "success" mean for Guix?</h3><ul><li>It becomes one of the top 3 GNU/Linux distributions?</li>
+<li>It gains hundreds of thousands of daily users?</li>
+<li>It becomes commercialized and rakes in tens of thousands of dollars per month?</li>
+</ul>
+
+<h4><a id="or" class="anchor" href="#or">¶</a>Or...</h4><p>In my opinion, "success" means more contributors to Guix and its ecosystem:
+</p>
+
+<ul><li>Package and service definitions for more software, both FOSS and proprietary</li>
+<li>Tools that build on Guix like Cuirass, etc</li>
+<li>Improving the functionality of Guix itself</li>
+<li>More "content" and documentation to help new users get started</li>
+</ul>
+
+<h2><a id="so-how-do-we-make-guix-irresistable" class="anchor" href="#so-how-do-we-make-guix-irresistable">¶</a>So how do we make Guix "irresistable?"</h2><p>Here are some ideas I have for how to attract the right kind of users to Guix:
+</p>
+
+<h3><a id="send-a-clear-signal-that-guix-is-for-lispers" class="anchor" href="#send-a-clear-signal-that-guix-is-for-lispers">¶</a>Send a clear signal that Guix is for Lispers</h3><p>Many Lisp enthusiasts might not know about Guix!  We need to find them where they congregate.  Conferences, internet forums, etc.
+</p>
+
+<p>Even if they do know about Guix, they might not understand how Guix can be another exciting Lisp hacking project for their free time!  You can configure your system with a REPL!
+</p>
+
+<p>One way to attract Lispers could be to write a series of posts for the Guix blog about some of the more interesting aspects of how Scheme is used in Guix to accomplish the amazing things it does.
+</p>
+
+<p>These are easier to share because they have general value to people who want to learn more about Lisp and Scheme.
+</p>
+
+<h3><a id="advertise-an-easy-path-to-get-involved" class="anchor" href="#advertise-an-easy-path-to-get-involved">¶</a>Advertise an easy path to get involved</h3><p>Guix operates very differently than other Linux distributions.  Anyone can contribute a package or service definition without having to become defacto maintainer!
+</p>
+
+<p>The best way to start contributing code to Guix is by writing or updating package definitions.  We somehow need to make this fact a lot clearer to new users who might be interested in helping out.
+</p>
+
+<p>There also needs to be an organized call for contributors for both mainline Guix improvements and those for community channels which fill in the gaps.
+</p>
+
+<p>Contributing to Guix is a great way to learn more about Scheme and get better as a programmer!
+</p>
+
+<h3><a id="promote-guix-home-as-a-gateway-drug-to-guix" class="anchor" href="#promote-guix-home-as-a-gateway-drug-to-guix">¶</a>Promote Guix Home as a "gateway drug" to Guix</h3><p>I believe that Guix Home has a strong chance to draw the attention of Lispers and Linux configuration hackers who might be interested in writing their "dotfiles" in Scheme.  In fact, I personally intend to promote this idea with videos on my channel in the very near future.
+</p>
+
+<p>Because the current set of built-in Guix Home services is rather scarce, new users might find it an easier entry point for contributing to the project!  Guix Home services are easy and fun to write and contributions to it would have a huge impact for the future of Guix.
+</p>
+
+<p>I'll tell you more about Guix Home in another talk after lunch!
+</p>
+
+<h3><a id="create-a-central-community-wiki-that-is-easy-to-find" class="anchor" href="#create-a-central-community-wiki-that-is-easy-to-find">¶</a>Create a central community wiki that is easy to find</h3><p>One thing I think Guix desperately needs is a community wiki like the <a href="https://wiki.archlinux.org/">Arch Wiki</a>.  This would be a one-stop shop for learning how to use Guix and how to write your own packages, services, customizations, etc.
+</p>
+
+<p>The key thing is that the Guix project cannot be the owner of this wiki because it needs to cover all aspects of how to use Guix day to day, including the use of proprietary software and drivers.
+</p>
+
+<p>It also would be nice if it could be called something obvious like the "Guix Community Wiki" or "Guix Help Wiki" so that users can easily find it via search engines.
+</p>
+
+<p>It would be nice if the Guix project could point people to it somehow, but I understand how this might be difficult due to the FSDG rules.
+</p>
+
+<h3><a id="encourage-specialized-community-distributions-of-guix" class="anchor" href="#encourage-specialized-community-distributions-of-guix">¶</a>Encourage specialized community distributions of Guix</h3><p>I think it would be interesting to see a collection of community-driven Linux distributions that are built on GNU Guix.  The foundation that Guix provides is actually perfect for creating custom distributions while still retaining all of the benefits of the Guix System.
+</p>
+
+<p>Andrew Tropin's RDE is one example of this, and I've been considering starting my own.
+</p>
+
+<p>Community distributions could help to ease the transition into using Guix, providing a smoother installation experience and a customized environment for different types of users.  Since everything would be built on GNU Guix, a user could eventually drop the community layer and adopt Guix itself.
+</p>
+
+<p>To enable this, the maintainers of Guix would need to provide guidance on how the name "Guix" can be used for this purpose.  Arch Linux has a <a href="https://wiki.archlinux.org/title/DeveloperWiki:TrademarkPolicy">trademark policy</a> for this purpose.
+</p>
+
+<p>It's likely that such distributions could not be promoted by the Guix project, but it might be nice to discuss ways for new users to find them via the official channels.
+</p>
+
+<h2><a id="when-you-cross-the-chasm-the-future-is-bright" class="anchor" href="#when-you-cross-the-chasm-the-future-is-bright">¶</a>When you cross the chasm, the future is bright</h2><p>GNU Guix is a fantastic tool with a lot of value across a number domains.  I think many people will find it extremely compelling if they learn about it and then have a positive experience the first time they try to install it.
+</p>
+
+<p>The continued growth of Guix and the community surrounding it proves that it can happen, but things can only get better the more we try to improve the onboarding experience!
+</p>
+
+<h2><a id="lets-talk" class="anchor" href="#lets-talk">¶</a>Let's talk!</h2><p>What other ideas do you have?
+</p>
+
+<ul><li>Debian's "how can I help" tool is an interesting example</li>
+<li>Advertise the "technical excellence" of Guix</li>
+</ul>
+
+<p>Please find me after the talk or e-mail me david@systemcrafters.net to discuss further!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
