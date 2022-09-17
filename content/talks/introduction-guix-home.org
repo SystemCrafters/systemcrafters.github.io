@@ -1,0 +1,559 @@
+#+title: An Introduction to Guix Home
+
+* The power of Guix for your $HOME folder
+
+After you've tamed your computer using Guix System, you've probably wondered "how do I apply this amazing technology to my user-level configuration and applications?"
+
+In this talk, I'll tell you what Guix Home can do for you and how to use it effectively without fear of destroying your home folder.
+
+* Who am I?
+
+I'm David Wilson, creator of the System Crafters YouTube channel and community:
+
+- YouTube: https://youtube.com/SystemCrafters
+- LBRY/Odysee: https://odysee.com/@SystemCrafters
+- Web: https://systemcrafters.net
+- Chat: http://systemcrafters.chat (#systemcrafters on [[https://libera.chat][libera.chat]])
+- E-mail: david@systemcrafters.net
+
+* What is Guix Home?
+
+Guix Home is a feature which enables you to apply a declarative configuration to your home folder for managing your user-level programs and services.  In short, it's Guix System for $HOME!
+
+It was created by Andrew Tropin as part of the [[https://github.com/abcdw/rde][Reproducible Development Environments]] (rde) project and eventually extracted into a contribution to Guix itself.
+
+It got merged after Guix 1.3.0 was released, so you'll have to make sure you've pulled Guix in the last few months to find it!
+
+You can find the documentation for Guix Home in the development version of the manual:
+
+https://guix.gnu.org/manual/devel/en/html_node/Home-Configuration.html
+
+* Why use it?
+
+If you've spent much time using Guix System, you probably realized how nice it is to create a declarative configuration for your whole system which can be checked into source control and reproduced any time you like.
+
+You've probably also been saved once or twice by Guix's rollback feature which enables you to bring your configuration back to a previous working state when things go wrong.
+
+Guix Home gives you these exact same benefits!  You can even use it without Guix System by installing the Guix package manager on your second-favorite Linux distribution.
+
+Another interesting benefit is that you can now configure your favorite programs using Scheme instead of the varied configuration file formats they all support.  You can also share the same configuration between multiple systems and customize the configuration values per-system!
+
+* Getting started
+
+You can easily get started with Guix Home by generating a home configuration with the following command:
+
+#+begin_src sh
+
+  guix home import ~/my-home-config
+
+#+end_src
+
+This command will create a file in the specified folder called =home-configuration.scm=.  Let's walk through this configuration and see what we can learn from it.
+
+* Understanding the home configuration
+
+A home configuration file describes a =home-environment= which essentially boils down to two things:
+
+- The list of =packages= to install in your user profile
+- The list of =services= used to configure your =$HOME=
+
+A "service" in this context does not imply a Shepherd service or any running daemon!  A home service is a component of your configuration which may create configuration files, install packages, and potentially set up Shepherd services for your programs.  They basically enable you to pull in reusable bits of configuration!
+
+Your new configuration will contain a list of all packages that it found from your user-level Guix profile and also a shell service configuration like =home-bash-service-type=.
+
+Let's take a look:
+
+#+begin_src scheme
+
+  (use-modules
+    (gnu home)
+    (gnu packages)
+    (gnu services)
+    (guix gexp)
+    (gnu home services shells))
+
+  ;; Define a home-environment which specifies packages and services
+  (home-environment
+    (packages
+      ;; Reference all desired packages by name and let Guix find them
+      (specifications->packages
+        (list "emacs"
+              "herbstluftwm")))
+
+    (services
+      (list (service
+              home-bash-service-type
+              (home-bash-configuration
+                (aliases
+                  '(("grep" . "grep --color=auto")
+                    ("ll" . "ls -l")
+                    ("ls" . "ls -p --color=auto")))
+                (bashrc
+                  (list (local-file ".bashrc" "bashrc")))
+                (bash-profile
+                  (list (local-file ".bash_profile" "bash_profile"))))))))
+
+#+end_src
+
+* Trying out the configuration
+
+We can try out this configuration right now without harming our home folder by using the following command:
+
+#+begin_src sh
+
+  guix home container ~/my-home-config/home-configuration.scm
+
+#+end_src
+
+You will now be dropped into a shell prompt which only has the files that would be applied by Guix Home!
+
+Since we know that Guix Home should have configured Bash, let's take a look at the =.bash*= files in the container environment.  They're symlinked into the =~/.guix-home= folder and they're marked as read only!
+
+If we want to make changes to these files, we must change the original home configuration and run the command again.
+
+* Applying the configuration
+
+When you're satisfied with the configuration that you see in the container environment, you can deploy it to your home folder by running the following command:
+
+#+begin_src sh
+
+  guix home reconfigure home-config.scm
+
+#+end_src
+
+Guix Home will create a new folder in your =$HOME= called =~/.guix-home= where it stores your current profile.  Inspecting that folder can be pretty enlightening!
+
+** What happens to my old files?
+
+If you're applying a Guix Home configuration for the first time, you could overwrite existing files in your home directory!  Don't Panic, though, Guix Home made a backup of any file that it replaced.
+
+Take a look at your home folder, you will likely see a folder named =TIMESTAMP-guix-home-legacy-configs-backup= (=TIMESTAMP= will be an actual Unix timestamp).  This folder will contain all of the files Guix Home had to replace!
+
+** What if I made a change that broke my configuration?
+
+Guix was built to solve this problem and Guix Home is no different.  Run the following command to inspect your old home configuration generations and then roll back to an earlier one with these commands:
+
+#+begin_src sh
+
+  guix home list-generations
+  guix home switch-generation <generation number>
+
+#+end_src
+
+You can also simply run this command to roll back to the previous generation:
+
+#+begin_src sh
+
+  guix home roll-back
+
+#+end_src
+
+* Finding home services to use
+
+Well that's great, we can generate a configuration configuration file and apply it.  How do I find more services to use?
+
+There's a nice command you can use to find home services that you might be interested to try.  For instance, if you like using the Fish Shell:
+
+#+begin_src scheme
+
+  guix home search fish
+
+#+end_src
+
+This will point you to the =home-fish= service!  That's a good starting point to find the source code where the service is defined or even to go look it up in the Guix manual.
+
+Each home service has its own configuration object that you'll want to populate for your needs, so check out the code or documentation to learn more about what fields are provided for customization.
+
+* Writing your own home service
+
+It's a great idea to try writing your own Guix Home service for one of the applications you like to use regularly.  It would also help the Guix community a lot if you contribute it back to the project.
+
+Let's try writing one right now!
+
+Guix Home services are implemented using same [[https://guix.gnu.org/manual/devel/en/html_node/Defining-Services.html][service framework]] that Guix System services are built from.  This means that if you've ever written a service for your system configuration, you will have a similar experience writing one for your home configuration.
+
+** The simplest home service
+
+Let's create a home service that simply places an existing file in a particular location of your user configuration.  We'll start simple and then build on it.
+
+We'll define a home service called =home-xsettingsd-service-type= for configuring the minimalist =xsettingsd= daemon to customize things like the GTK theme, DPI and font settings in Xorg sessions without using something heavier like =gnome-settings-daemon=.
+
+We can easily pull in a pre-written =xsettingsd.conf= file by adding an extension for the =home-files-service-type= to our service.  The extension function we define will provide a list of files that should be created when the service is used in a home configuration.
+
+#+begin_src scheme
+
+  (define (home-xsettingsd-files-service config)
+    (list `(".config/xsettingsd/xsettingsd.conf" ,(local-file "xsettingsd.conf"))))
+
+  (define home-xsettingsd-service-type
+    (service-type (name 'home-xsettingsd)
+                  (extensions
+                   (list (service-extension
+                          home-files-service-type
+                          home-xsettingsd-files-service)))
+                  (default-value #f)
+                  (description "Configures UI appearance settings for Xorg sessions using the xsettingsd
+  daemon.")))
+
+#+end_src
+
+Then you can add it to the =services= list of your =home-configuration=:
+
+#+begin_src scheme
+
+  (service home-xsettingsd-service-type)
+
+#+end_src
+
+The contents of =xsettingsd.conf=:
+
+#+begin_src sh
+
+  Net/ThemeName "Matcha-dark-azul"
+  Net/IconThemeName "Papirus-Dark"
+  Gtk/DecorationLayout "menu:minimize,maximize,close"
+  Gtk/FontName "Iosevka Aile 11"
+  Gtk/MonospaceFontName "JetBrains Mono 10"
+  Gtk/CursorThemeName "Adwaita"
+  Xft/Antialias 1
+  Xft/Hinting 0
+  Xft/HintStyle "hintnone"
+  Xft/DPI 184320 # 1024 * DPI
+
+#+end_src
+
+Another option is to just produce the file as a string in-line:
+
+#+begin_src scheme
+
+  (define dpi 220)
+
+  (define (home-xsettingsd-files-service config)
+    (list
+     `(".config/xsettingsd/xsettingsd.conf" ,(plain-file "xsettingsd.conf" (string-append "
+  Net/ThemeName \"Matcha-dark-azul\"
+  Net/IconThemeName \"Papirus-Dark\"
+  Gtk/DecorationLayout \"menu:minimize,maximize,close\"
+  Gtk/FontName \"Iosevka Aile 11\"
+  Gtk/MonospaceFontName \"JetBrains Mono 10\"
+  Gtk/CursorThemeName \"Adwaita\"
+  Xft/Antialias 1
+  Xft/Hinting 0
+  Xft/HintStyle \"hintnone\"
+  Xft/DPI " (number->string (* 1024 dpi)) " # 1024 * DPI")))))
+
+#+end_src
+
+You can probably already see how configuring your programs with Scheme will allow you to do some interesting things, especially when you consider using the same configuration across multiple machines!
+
+** Installing a package as part of the service
+
+Home services can also specify packages to be installed so that the user of the home service doesn't have to know what packages to install to use it!
+
+We can use the =home-profile-service-type= extension to specify the list of packages to install for our home service:
+
+#+begin_src scheme
+
+  ;; Requires this import
+  ;; #:use-module (gnu packages xdisorg)
+
+  (define (home-xsettingsd-profile-service config)
+    (list xsettingsd))
+
+  (define home-xsettingsd-service-type
+    (service-type (name 'home-xsettingsd)
+                  (extensions
+                   (list (service-extension
+                          home-profile-service-type
+                          home-xsettingsd-profile-service)
+                         (service-extension
+                          home-files-service-type
+                          home-xsettingsd-files-service)))
+                  (default-value #f)
+                  (description "Configures UI appearance settings for Xorg sessions using the xsettingsd
+  daemon.")))
+
+#+end_src
+
+Now we can verify that the xsettingsd package is installed by looking in =~/.guix-home/profile/bin=!
+
+** Starting a Shepherd service
+
+=xsettingsd= can't apply these settings without its daemon being run when you log in, so let's add a simple Shepherd service to do that!
+
+We can add an extension to the =home-shepherd-service-type= to launch =xsettingsd= when we log in:
+
+#+begin_src scheme
+
+  ;; Also need to include
+  ;; (gnu home services shepherd)
+
+  (define (home-xsettingsd-shepherd-service config)
+    (list (shepherd-service
+           (provision '(xsettingsd))
+           (documentation "Run and control xsettingsd daemon.")
+           (start #~(make-forkexec-constructor '("xsettingsd")))
+           (stop #~(make-kill-destructor)))))
+
+  (define home-xsettingsd-service-type
+    (service-type (name 'home-xsettingsd)
+                  (extensions
+                   (list (service-extension
+                          home-profile-service-type
+                          home-xsettingsd-profile-service)
+                         (service-extension
+                          home-shepherd-service-type
+                          home-xsettingsd-shepherd-service)
+                         (service-extension
+                          home-files-service-type
+                          home-xsettingsd-files-service)))
+                  (default-value #f)
+                  (description "Configures UI appearance settings for Xorg sessions using the xsettingsd
+  daemon.")))
+
+#+end_src
+
+The service fails to start up on my machine, probably because there isn't a =$DISPLAY= environment variable in this container.  However, we can verify that the Shepherd service was created and registered by running this command:
+
+#+begin_src sh
+
+  herd status
+
+#+end_src
+
+** Making the service configurable
+
+For this home service to truly be reusable, we need to provide a way for the user to configure its settings via the Scheme interface.
+
+We can do that by defining our own custom configuration object:
+
+#+begin_src scheme
+
+  (define-configuration home-xsettingsd-configuration
+    (dpi
+     (integer 180)
+     "Screen dots per inch (DPI).")
+
+    (theme
+     (string "Adwaita")
+     "The name of the GTK theme to apply.")
+
+    (font
+     (string "Deja Vu Sans 10")
+     "The name and size of the normal user interface font.")
+
+    (monospace-font
+     (string "Deja Vu Mono 10")
+     "The name and size of the monospace user interface font.")
+
+    (extra-content
+     (string "")
+     "Extra content appended as-is to the xsettingsd configuration file.")
+
+    ;; Don't use the serialization system!
+    (no-serialization))
+
+#+end_src
+
+We can set the default configuration of our service type by changing this line in the =home-xsettingsd-service-type= declaration:
+
+#+begin_src scheme
+
+  (default-value (home-xsettingsd-configuration))
+
+#+end_src
+
+We also need a function that can serialize the configuration object into the format that =xsettingsd= expects:
+
+#+begin_src scheme
+
+  (define (generate-xsettingsd-file config)
+    (string-append "
+  Net/ThemeName \"" (home-xsettingsd-configuration-theme config) "\"
+  Gtk/DecorationLayout \"menu:minimize,maximize,close\"
+  Gtk/FontName \"" (home-xsettingsd-configuration-font config) "\"
+  Gtk/MonospaceFontName \"" (home-xsettingsd-configuration-monospace-font config) "\"
+  Gtk/CursorThemeName \"Adwaita\"
+  Xft/DPI " (number->string (* 1024 (home-xsettingsd-configuration-dpi config))) " # 1024 * DPI"
+  "\n"
+  (home-xsettingsd-configuration-extra-content config)
+  "\n"))
+
+#+end_src
+
+Lastly, let's update our =home-xsettingsd-files-service= to use the configuration generator function:
+
+#+begin_src scheme
+
+  (define (home-xsettingsd-files-service config)
+    (list
+     `(".config/xsettingsd/xsettingsd.conf" ,(plain-file "xsettingsd.conf"
+                                                         (generate-xsettingsd-file config)))))
+
+#+end_src
+
+Now the user can create this configuration object and populate its fields whenever they use our service:
+
+#+begin_src scheme
+
+  (service
+   home-xsettingsd-service-type
+   (home-xsettingsd-configuration
+    (dpi 180)
+    (theme "Matcha-dark-azul")
+    (font "Iosevka Aile 11")
+    (monospace-font "JetBrains Mono 10")
+    (extra-content "
+  Xft/Antialias 1
+  Xft/Hinting 0
+  Xft/HintStyle \"hintnone\"")))
+
+#+end_src
+
+Let's try it out and check the output!
+
+You can imagine adding a few more things to this configuration object:
+
+- Setting the cursor theme
+- Antialiasing configuration
+- A list of extra font and theme packages to be installed (and include some basic fonts and themes used by the default configuration)
+
+I'll leave that as an exercise for you :)
+
+** A note about the configuration system
+
+As I mentioned before, I disabled serialization on the configuration object so that the example would be simpler for this talk.  In practice, you will probably want to do things the right way!
+
+I believe that involves letting the Guix build logic take care of generating the configuration file while building the derivation, but I'll admit that I don't have a lot of experience with that.
+
+If you want to see a good example of writing a similar home service that uses the configuration serialization system, check out the Redshift service that Ludo created:
+
+https://git.savannah.gnu.org/cgit/guix.git/tree/gnu/home/services/desktop.scm
+
+
+* How you can help
+
+Once you start trying to use Guix Home, you will quickly find that there aren't a whole lot of home services in the Guix repo right now!
+
+While Andrew and contributors to the RDE project have authored many home services for various different programs, it would really help adoption for there to be high-quality in-box services for a variety of commonly used programs:
+
+I think it would also be nice to create a library of reusable patterns for emitting common configuration file formats.  Some may already exist for Guix system services!
+
+* The final home configuration
+
+Here's the final version of the home configuration and service we built so that you can experiment with it!
+
+#+begin_src scheme
+
+(use-modules
+  (gnu home)
+  (gnu packages)
+  (gnu services)
+  (gnu services configuration)
+  (gnu home services)
+  (gnu home services shepherd)
+  (gnu packages xdisorg)
+  (guix gexp)
+  (gnu home services shells))
+
+(define-configuration home-xsettingsd-configuration
+  (dpi
+   (integer 180)
+   "Screen dots per inch (DPI).")
+
+  (theme
+   (string "Adwaita")
+   "The name of the GTK theme to apply.")
+
+  (font
+   (string "Deja Vu Sans 10")
+   "The name and size of the normal user interface font.")
+
+  (monospace-font
+   (string "Deja Vu Mono 10")
+   "The name and size of the monospace user interface font.")
+
+  (extra-content
+   (string "")
+   "Extra content appended as-is to the xsettingsd configuration file.")
+
+  ;; Don't use the serialization system!
+  (no-serialization))
+
+(define (generate-xsettingsd-file config)
+  (string-append "
+Net/ThemeName \"" (home-xsettingsd-configuration-theme config) "\"
+Gtk/DecorationLayout \"menu:minimize,maximize,close\"
+Gtk/FontName \"" (home-xsettingsd-configuration-font config) "\"
+Gtk/MonospaceFontName \"" (home-xsettingsd-configuration-monospace-font config) "\"
+Gtk/CursorThemeName \"Adwaita\"
+Xft/DPI " (number->string (* 1024 (home-xsettingsd-configuration-dpi config))) " # 1024 * DPI"
+"\n"
+(home-xsettingsd-configuration-extra-content config)
+"\n"))
+
+(define (home-xsettingsd-files-service config)
+  (list
+   `(".config/xsettingsd/xsettingsd.conf" ,(plain-file "xsettingsd.conf"
+                                                       (generate-xsettingsd-file config)))))
+
+(define (home-xsettingsd-profile-service config)
+  (list xsettingsd))
+
+(define (home-xsettingsd-shepherd-service config)
+  (list (shepherd-service
+         (provision '(xsettingsd))
+         (documentation "Run and control xsettingsd daemon.")
+         (start #~(make-forkexec-constructor '("xsettingsd")))
+         (stop #~(make-kill-destructor)))))
+
+(define home-xsettingsd-service-type
+  (service-type (name 'home-xsettingsd)
+                (extensions
+                 (list (service-extension
+                        home-profile-service-type
+                        home-xsettingsd-profile-service)
+                       (service-extension
+                        home-shepherd-service-type
+                        home-xsettingsd-shepherd-service)
+                       (service-extension
+                        home-files-service-type
+                        home-xsettingsd-files-service)))
+                (default-value (home-xsettingsd-configuration))
+                (description "Configures UI appearance settings for Xorg sessions using the xsettingsd
+daemon.")))
+
+(home-environment
+ (packages
+  (specifications->packages
+   (list "emacs"
+         "herbstluftwm")))
+ (services
+  (list (service
+         home-xsettingsd-service-type
+         (home-xsettingsd-configuration
+          (dpi 180)
+          (theme "Matcha-dark-azul")
+          (font "Iosevka Aile 11")
+          (monospace-font "JetBrains Mono 10")
+          (extra-content "
+Xft/Antialias 1
+Xft/Hinting 0
+Xft/HintStyle \"hintnone\"")))
+        (service
+         home-bash-service-type
+         (home-bash-configuration
+          (aliases
+           '(("grep" . "grep --color=auto")
+             ("ll" . "ls -l")
+             ("ls" . "ls -p --color=auto")))
+          (bashrc
+           (list (local-file
+                  "/home/daviwil/my-home-config/.bashrc"
+                  "bashrc")))
+          (bash-profile
+           (list (local-file
+                  "/home/daviwil/my-home-config/.bash_profile"
+                  "bash_profile"))))))))
+
+#+end_src

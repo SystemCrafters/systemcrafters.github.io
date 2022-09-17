@@ -1,0 +1,37 @@
+#+title: Emacs: The real GNU desktop environment?
+
+* Emacs *is* a desktop environment
+
+The case I'll try to make here is that Emacs is the ultimate desktop environment for hackers who prefer the GNU ecosystem of tools.
+
+* What does a desktop environment usually provide?
+
+- Window management
+- Configuration and theming
+- Basic productivity applications
+- Device management
+- System management
+
+* Window management
+
+- EXWM
+- Workspaces with perspective.el
+
+* Configuration and theming
+
+- Emacs is fully themeable
+- More configurable and hackable than any other DE
+- Key bindings are very flexible
+
+* Basic productivity applications
+
+- Calendar
+- Org Mode
+
+* System management
+
+- desktop-environment
+- daemons
+- pulseaudio-control.el
+- emacs-guix (and GNU Guix itself)
+- https://github.com/akermu/emacs-libvterm

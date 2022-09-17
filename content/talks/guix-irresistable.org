@@ -1,0 +1,241 @@
+#+title: How to Make GNU Guix Irresistible in 2022 and Beyond
+
+* Who am I?
+
+I'm David Wilson, creator of the System Crafters YouTube channel and community:
+
+- YouTube: https://youtube.com/SystemCrafters
+- LBRY/Odysee: https://odysee.com/@SystemCrafters
+- Web: https://systemcrafters.net
+- Chat: #systemcrafters on [[https://libera.chat][libera.chat]]
+- E-mail: david@systemcrafters.net
+
+* I love GNU Guix.
+
+Guix has been my GNU/Linux distribution of choice for almost 3 years now!
+
+I've used it both for personal and professional computing and overall I've had a great experience with it.  I honestly can't imagine using any other system.
+
+I enjoy it so much that I've also produced [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oNxnj7jm5V2ZcGc52002pQU][6 videos]] and a number of live streams about it on YouTube:
+
+- [[https://www.youtube.com/watch?v=iBaqOK75cho][Introduction to GNU Guix]]
+- [[https://www.youtube.com/watch?v=Nk8sprN7oZ0][Installing the GNU Guix Package Manager]]
+- [[https://www.youtube.com/watch?v=Xy0YgnXFt1M][Everyday Package Management with GNU Guix]]
+- [[https://www.youtube.com/watch?v=xVyvz2aViP8][Using Package Channels in GNU Guix]]
+- [[https://www.youtube.com/watch?v=oSy-TmoxG_Y][Installing Guix as a Complete GNU/Linux System]]
+- [[https://www.youtube.com/watch?v=7ZdMRLPZhFs][5 Reasons to Try Guix in 2022]]
+
+I built my channel around this concept of "crafting your system" and Guix was one of the primary inspirations for it!
+
+I'm personally invested in the future of Guix and I would love to help its community grow.
+
+* Gentle Disclaimer
+
+The points and ideas I discuss in this talk are based primarily on my own experiences with Guix and those of the people who I've helped get started with it over the last couple of years.
+
+I don't follow the mailing lists very closely, so if some of these ideas have been discussed and debated thoroughly, I might have missed it!
+
+* My history with Guix
+
+** First contact
+
+I learned about GNU Guix in 2018 but didn't really try it until 2019.
+
+Since I'm a Lisp enthusiast, I was *very* interested in using a GNU/Linux distribution that is configured with Scheme!
+
+I was also really excited about the features it provided.  I had used NixOS a few years prior, so I understood the value of having a declarative system configuration that was applied in a "functional" way.
+
+** Trying it out
+
+I installed the Guix package manager on Manjaro to try it out.  It was great to use Guix to install packages on my system and I learned a bit about how to install them from manifest files.
+
+But that was too basic, I wanted the real thing!
+
+** Installing the system
+
+So I read the manual for a while and tried to digest what it was telling me and eventually gained the courage to try and install it.
+
+I copied the system configuration example from the manual, tweaked it a bit for my needs, and then booted up the installation ISO from a USB stick.
+
+With great excitement, I ran =guix system reconfigure config.scm=...
+
+... and then I realized my laptop's wifi didn't work and I couldn't install any packages.
+
+* New Guix users face a number of challenges
+
+In my view, these are the problems that are preventing GNU Guix from attracting and retaining more users:
+
+** It has a steep learning curve
+
+In my experience, setting up the package manager on a foreign distribution was pretty easy but not 100% perfect.  It was much harder to get started with installing the system.
+
+The graphical installer helps a lot!  The starter configuration it generates is useful.  However, you still have to learn how to configure the various services you need and do more complex configuration tasks.
+
+Only the most dedicated users will push through the installation and learning phase, especially if they run into the next problem.
+
+** The lack of proprietary drivers is a blocker for many people
+
+Let's face it, many (most?) people use laptops these days and almost none of them have freedom-respecting or open hardware.
+
+I sympathize with the problem the Guix maintainers have here: complying with the [[https://www.gnu.org/distros/free-system-distribution-guidelines.html][Free System Distribution Guidelines]] requires that no proprietary software or drivers be included with Guix.  You can't even give users tips in the manual on how to install them.
+
+The bigger challenge is that users can't even ask about how to install proprietary drivers and firmware on the official communication channels like the mailing lists and IRC.  They have to be willing to search around for solutions and hopefully find a blog post or video that explains it.
+
+We'll talk about this more in a bit.
+
+** You can't easily install a lot of necessary software on it
+
+Obviously Guix doesn't have proprietary software in the official channel, that's not really the problem.  But, even some free software programs are hard to package and distribute on Linux because of the components they depend on.
+
+Users who want to use Guix for work or school often have to install proprietary programs.
+
+Some users also want to use popular proprietary communication tools like Discord or Slack.
+
+If they're unable to, they either have to use a workaround or give up the idea of using Guix entirely!
+
+*** Using pre-built programs for another distro
+
+The next thing someone may want to do is go download a pre-compiled Linux program from a website and run it on their machine.  If you don't understand Linux Standard Base and how programs are linked, then you'll be lost on why it doesn't run.
+
+*** Using Flatpak
+
+Keeping Flatpak available in the Guix package repo is a *critical necessity*.  I've been able to happily use a number of proprietary applications by adding the Flathub repository.  I don't know if I would have been able to keep using Guix without it.
+
+However, it's a context switch to use Flatpak and it also has its own slight learning curve and quirks due to Guix, so it's not perfect.  You have to learn how to install the programs correctly, configure their permissions, integrate them with your Guix environment, etc.
+
+*** Using Nix
+
+You can also install Nix package manager and use it pretty successfully for other things like developer tools that aren't in Guix.
+
+It would be much better if there were community Guix channels available for these things!
+
+*** Conclusion?
+
+Workarounds like the two I mentioned are fine, but it would be much better if we had a more robust channel ecosystem which packaged more software that isn't appropriate for the main Guix repository.
+
+The Nonguix channel is a great resource for this, but I think it needs a lot more contributors to cover the wider range of programs that users need.
+
+** Some people are not comfortable writing code to manage their system
+
+Related to the learning curve issue, you have to learn how to write Scheme code to some level to manage your system long-term.  You miss out on a lot of the power of Guix if you don't!
+
+I think many users may not rise past the level of just poking around in their system configuration file.
+
+Guix also introduces its own syntax and concepts like G-expressions which require further study.
+
+*** How big of a problem is it?
+
+This is not a huge problem, since Guix is generally meant for a more sophisticated user who is willing to learn.
+
+It does raise the question of how one might make things easier for a more mainstream user who isn't as interested in hand-editing their configuration file.
+
+* To solve these problems, we need clear criteria
+
+Now that we've delved into the user adoption problems Guix has, let's talk about some ideas for how we might improve the situation.
+
+But first, let's define the criteria for solutions that we consider.
+
+** Who is the target audience for GNU Guix?
+
+Guix does many things!  It's really hard to explain to someone else what Guix is or what it's meant to do.
+
+Because it solves problems across many domains, it can also be hard to pinpoint the ideal type of Guix user.
+
+- Desktop Linux users?
+- System administrators
+- Software developers who need standard development environments
+- "Hardcore" users who want control over every aspect of the system?
+- Scientific computing, reproducible research?
+
+*** The real characteristics
+
+At a high level, a Guix user:
+
+- is willing to learn and get their hands dirty
+- probably understands the value of Lisp and Scheme or is curious about trying it
+- wants to build something reproducible that lasts
+- is motivated to contribute back to the ecosystem, either through code or content
+
+** What does "success" mean for Guix?
+
+- It becomes one of the top 3 GNU/Linux distributions?
+- It gains hundreds of thousands of daily users?
+- It becomes commercialized and rakes in tens of thousands of dollars per month?
+
+*** Or...
+
+In my opinion, "success" means more contributors to Guix and its ecosystem:
+
+- Package and service definitions for more software, both FOSS and proprietary
+- Tools that build on Guix like Cuirass, etc
+- Improving the functionality of Guix itself
+- More "content" and documentation to help new users get started
+
+* So how do we make Guix "irresistable?"
+
+Here are some ideas I have for how to attract the right kind of users to Guix:
+
+** Send a clear signal that Guix is for Lispers
+
+Many Lisp enthusiasts might not know about Guix!  We need to find them where they congregate.  Conferences, internet forums, etc.
+
+Even if they do know about Guix, they might not understand how Guix can be another exciting Lisp hacking project for their free time!  You can configure your system with a REPL!
+
+One way to attract Lispers could be to write a series of posts for the Guix blog about some of the more interesting aspects of how Scheme is used in Guix to accomplish the amazing things it does.
+
+These are easier to share because they have general value to people who want to learn more about Lisp and Scheme.
+
+** Advertise an easy path to get involved
+
+Guix operates very differently than other Linux distributions.  Anyone can contribute a package or service definition without having to become defacto maintainer!
+
+The best way to start contributing code to Guix is by writing or updating package definitions.  We somehow need to make this fact a lot clearer to new users who might be interested in helping out.
+
+There also needs to be an organized call for contributors for both mainline Guix improvements and those for community channels which fill in the gaps.
+
+Contributing to Guix is a great way to learn more about Scheme and get better as a programmer!
+
+** Promote Guix Home as a "gateway drug" to Guix
+
+I believe that Guix Home has a strong chance to draw the attention of Lispers and Linux configuration hackers who might be interested in writing their "dotfiles" in Scheme.  In fact, I personally intend to promote this idea with videos on my channel in the very near future.
+
+Because the current set of built-in Guix Home services is rather scarce, new users might find it an easier entry point for contributing to the project!  Guix Home services are easy and fun to write and contributions to it would have a huge impact for the future of Guix.
+
+I'll tell you more about Guix Home in another talk after lunch!
+
+** Create a central community wiki that is easy to find
+
+One thing I think Guix desperately needs is a community wiki like the [[https://wiki.archlinux.org/][Arch Wiki]].  This would be a one-stop shop for learning how to use Guix and how to write your own packages, services, customizations, etc.
+
+The key thing is that the Guix project cannot be the owner of this wiki because it needs to cover all aspects of how to use Guix day to day, including the use of proprietary software and drivers.
+
+It also would be nice if it could be called something obvious like the "Guix Community Wiki" or "Guix Help Wiki" so that users can easily find it via search engines.
+
+It would be nice if the Guix project could point people to it somehow, but I understand how this might be difficult due to the FSDG rules.
+
+** Encourage specialized community distributions of Guix
+
+I think it would be interesting to see a collection of community-driven Linux distributions that are built on GNU Guix.  The foundation that Guix provides is actually perfect for creating custom distributions while still retaining all of the benefits of the Guix System.
+
+Andrew Tropin's RDE is one example of this, and I've been considering starting my own.
+
+Community distributions could help to ease the transition into using Guix, providing a smoother installation experience and a customized environment for different types of users.  Since everything would be built on GNU Guix, a user could eventually drop the community layer and adopt Guix itself.
+
+To enable this, the maintainers of Guix would need to provide guidance on how the name "Guix" can be used for this purpose.  Arch Linux has a [[https://wiki.archlinux.org/title/DeveloperWiki:TrademarkPolicy][trademark policy]] for this purpose.
+
+It's likely that such distributions could not be promoted by the Guix project, but it might be nice to discuss ways for new users to find them via the official channels.
+
+* When you cross the chasm, the future is bright
+
+GNU Guix is a fantastic tool with a lot of value across a number domains.  I think many people will find it extremely compelling if they learn about it and then have a positive experience the first time they try to install it.
+
+The continued growth of Guix and the community surrounding it proves that it can happen, but things can only get better the more we try to improve the onboarding experience!
+
+* Let's talk!
+
+What other ideas do you have?
+
+- Debian's "how can I help" tool is an interesting example
+- Advertise the "technical excellence" of Guix
+
+Please find me after the talk or e-mail me david@systemcrafters.net to discuss further!
