@@ -1,4 +1,4 @@
-#+title: How to Make GNU Guix Irresistible in 2022 and Beyond
+#+title: How to Make GNU Guix Irresistable in 2022 and Beyond
 
 * Who am I?
 
