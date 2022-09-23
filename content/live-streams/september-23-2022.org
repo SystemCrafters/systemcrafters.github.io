@@ -8,7 +8,7 @@
 
   https://10years.guix.gnu.org/program/
 
-- Ludum Dare 51 is next weekend!  I will participate and stream it on my other channel Flux Harmonic.
+- Ludum Dare 51 is next weekend (October 1)!  I will participate and stream it on my other channel Flux Harmonic.
 
   - https://youtube.com/FluxHarmonicLive
   - https://ldjam.com/events/ludum-dare/51
@@ -25,8 +25,8 @@ If you are interested to study this idea further, you can't beat the book [[http
 
 The metaobject "protocol" is a design pattern that enables a highly flexible object oriented system that goes beyond what you would normally expect from classes and methods in a programming language.
 
-- An extensible class system where
-- Highly flexible method dispatch against specific types signatures
+- An extensible class system where you can even customize how a particular type gets initialized
+- Highly flexible method dispatch against specific type signatures
 - Modules that add new implementations to a standard generic method
 - Control many aspects of class and instance creation by adding new generic method implementations (this is where "metaobject" comes in)
 - Classes and methods can be redefined at runtime, even updating existing class instances with new fields
