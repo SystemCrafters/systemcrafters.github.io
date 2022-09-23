@@ -1,0 +1,109 @@
+#+title: System Crafters Live! - September 23, 2022
+
+[[yt:ZKsvmkovXH0][Watch the recording on YouTube!]]
+
+* Updates
+
+- The Guix Birthday Event was a great success!  Keep an eye out here for talk recordings, coming soon:
+
+  https://10years.guix.gnu.org/program/
+
+- Ludum Dare 51 is next weekend!  I will participate and stream it on my other channel Flux Harmonic.
+
+  - https://youtube.com/FluxHarmonicLive
+  - https://ldjam.com/events/ludum-dare/51
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Exploring the Metaobject Protocol
+
+Today we'll take a look at the concept of a "metaobject protocol" from a high level and try to understand it by studying the implementation of Tiny CLOS, a minimal implementation of the metaobject protocol for Scheme.
+
+If you are interested to study this idea further, you can't beat the book [[https://amzn.to/3R5q1Mw][The Art of the Metaobject Protocol]].  It is considered the bible on the subject!
+
+** What is it?
+
+The metaobject "protocol" is a design pattern that enables a highly flexible object oriented system that goes beyond what you would normally expect from classes and methods in a programming language.
+
+- An extensible class system where
+- Highly flexible method dispatch against specific types signatures
+- Modules that add new implementations to a standard generic method
+- Control many aspects of class and instance creation by adding new generic method implementations (this is where "metaobject" comes in)
+- Classes and methods can be redefined at runtime, even updating existing class instances with new fields
+- More interestingly, you can write such a system as a library in many cases!
+
+https://en.wikipedia.org/wiki/Metaobject
+
+** Why should you be interested?
+
+Because it's cool!
+
+Also because it adds an interesting new layer onto the functional programming capabilities of Lisps:
+
+#+begin_src scheme
+
+  (use-modules (oop goops))
+
+  (define-class <cat> ())
+  (define-class <dog> ())
+  (define-class <human> ())
+
+  (define (speak entity)
+    (display "This one doesn't know how to speak!"))
+
+  (define-generic speak)
+
+  (define-method (speak (dog <dog>))
+    (display "Bark!\n"))
+
+  (define-method (speak (cat <cat>))
+    (display "Meow!\n"))
+
+  (define-method (speak (human <human>))
+    (display "What's for dinner?\n"))
+
+  ;; Call `speak` on each item of the list
+  (map speak (list (make-instance <cat>)
+                   (make-instance <dog>)
+                   (make-instance <human>)
+                   ;; "I'm a string!\n"
+                   ))
+
+#+end_src
+
+Interesting aspects:
+
+- There doesn't need to be any common class in the hierarchy, any classes can have a method
+- You can even make methods for primitive types like =<string>=
+
+** Why am I interested in it?
+
+Because I'm implementing it for Mesche!
+
+https://github.com/mesche-lang/compiler/commit/8ff6fa21b287d296db665b525191c0a95edcf979
+
+I believe this feature will give Mesche an interesting advantage in hackability:
+
+- Well-defined types for important concepts
+- Many high-level concepts (=equal?=, =append=, =map=, etc) can be represented as generic methods
+- Any library can augment a standard type with new methods
+- User code can insert hooks around methods or even instance initialization to customize behavior
+
+** Let's dive in!
+
+Now we'll take a look at the code for Tiny CLOS and see what we can make of it:
+
+https://github.com/kstephens/tinyclos/blob/master/tiny-clos.scm
+
+We can also experiment with Guile's GOOPS some more to try out some of these ideas:
+
+https://www.gnu.org/software/guile/manual/html_node/GOOPS.html
+
+** Lisps with a meta-object protocol
+
+If you'd like to try out a Lisp with a meta-object protocol, check these out:
+
+- STklos: https://stklos.net/
+- Guile Scheme (GOOPS): https://git.savannah.gnu.org/cgit/guile.git/tree/module/oop/goops.scm
+- Common Lisp (CLOS)
+- ... and probably many others
