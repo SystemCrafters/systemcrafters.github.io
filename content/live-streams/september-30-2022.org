@@ -1,0 +1,33 @@
+#+title: System Crafters Live! - September 30, 2022
+
+* Updates
+
+- Ludum Dare 51 is tomorrow, October 1!  I will be streaming starting around 6AM - 10 AM EEST (3AM UTC, 8PM Pacific, 11PM Eastern), and a second stream from 2PM to 6PM EEST.
+
+  - https://youtube.com/FluxHarmonicLive
+  - https://twitch.tv/FluxHarmonicLive
+  - https://ldjam.com/events/ludum-dare/51
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+  - Check out Jeff Bowman's new =crafted-mastering-emacs= module:
+
+    https://github.com/SystemCrafters/crafted-emacs/pull/234
+
+* Learning Paredit for Structural Lisp Editing
+
+Today we'll be learning how to use Paredit, a long-standing and venerable "structural editing" package for Lisp coding.
+
+- https://www.emacswiki.org/emacs/ParEdit
+- https://github.com/emacsmirror/paredit
+- http://danmidwood.com/content/2014/11/21/animated-paredit.html
+
+** Other Similar Packages
+
+- Parinfer: https://github.com/justinbarclay/parinfer-rust-mode
+- Lispy / Lispyville: https://github.com/abo-abo/lispy
+- SmartParens: https://github.com/Fuco1/smartparens
+- Symex: https://github.com/countvajhula/symex.el
+- Puni: https://github.com/AmaiKinono/puni
+- evil-cleverparens: https://github.com/luxbock/evil-cleverparens
+- Vanilla structural editing in Emacs: https://dawranliou.com/blog/structural-editing-in-vanilla-emacs/
