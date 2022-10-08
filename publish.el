@@ -196,7 +196,7 @@
                                     ,(org-export-data (plist-get info :title) info))
                                 (p (@ (class "blog-post-meta"))
                                    ,(org-export-data (org-export-get-date info "%B %e, %Y") info))
-                                ,contents
+                                (*RAW-STRING* ,contents)
                                 ,(let ((tags (plist-get info :filetags)))
                                    (when (and tags (> (list-length tags) 0))
                                      `(p (@ (class "blog-post-tags"))
