@@ -6,13 +6,14 @@
 
 <li>Mesche development is progressing!  Working on an implementation of hygenic macros now.</li>
 
+<li>The Emacs package in Guix now has <kbd>--with-native-compilation</kbd> turned on by default!</li>
+
 <li>Support the channel!  <strong>Buy Mastering Emacs</strong> with this link <a href="https://www.masteringemacs.org/r/systemcrafters">https://www.masteringemacs.org/r/systemcrafters</a></li>
 </ul>
-
 <h2><a id="running-pre-built-linux-software-on-guix" class="anchor" href="#running-pre-built-linux-software-on-guix">¶</a>Running Pre-Built Linux Software on Guix</h2><p>Today we're going to try and get a pre-built program running in Guix!  I decided to try this because a new Guix feature just got mentioned on Twitter today:
 </p>
 
-<p><a href="https://twitter.com/GuixHpc/status/1580565330144899074?s=20&t=ULG4bzPG3erarFKBQM5w9A">https://twitter.com/GuixHpc/status/1580565330144899074?s=20&t=ULG4bzPG3erarFKBQM5w9A</a>
+<p><a href="https://twitter.com/GuixHpc/status/1580565330144899074">https://twitter.com/GuixHpc/status/1580565330144899074</a>
 </p>
 
 <p>It seems that Guix containers can now emulate the Linux Standard Base file system layout!  This might help get some pre-built apps working without a lot of extra trouble.
@@ -30,6 +31,53 @@
 <p>If Discord doesn't work, we'll figure out another app to try!
 </p>
 
+<h3><a id="notes" class="anchor" href="#notes">¶</a>Notes</h3><p>Things we needed to do:
+</p>
+
+<ul><li>export LD_LIBRARY_PATH=$LIBRARY_PATH:/lib/nss</li>
+<li>strace -ff -e trace=file ./Discord</li>
+<li>LD_DEBUG=libs ./Discord</li>
+</ul>
+
 <p><a href="https://guix.gnu.org/manual/devel/en/html_node/Invoking-guix-shell.html">Guix Shell Documentation</a>
 </p>
+
+<h3><a id="the-manifest-file" class="anchor" href="#the-manifest-file">¶</a>The manifest file</h3><p>Here's the manifest file we were building to launch Discord:
+</p>
+
+<pre><code class="scheme">
+(specifications-&gt;manifest
+ '( <span class="org-comment-delimiter">;; </span><span class="org-comment">Library Dependencies</span>
+   <span class="org-string">"coreutils"</span>
+   <span class="org-string">"glib"</span>
+   <span class="org-string">"gcc:lib"</span>
+   <span class="org-string">"gtk+"</span>
+   <span class="org-string">"nss"</span>
+   <span class="org-string">"nss-certs"</span>
+   <span class="org-string">"ffmpeg"</span>
+   <span class="org-string">"alsa-lib"</span>
+   <span class="org-string">"cups"</span>
+   <span class="org-string">"atk"</span>
+
+   <span class="org-comment-delimiter">;; </span><span class="org-comment">export LD_LIBRARY_PATH=$LIBRARY_PATH:/lib/nss</span>
+
+   <span class="org-comment-delimiter">;; </span><span class="org-comment">Debugging Tools</span>
+   <span class="org-string">"glibc"</span>
+   <span class="org-string">"gdb"</span>
+   <span class="org-string">"strace"</span>
+
+   <span class="org-comment-delimiter">;; </span><span class="org-comment">Program Dependencies</span>
+   <span class="org-string">"gzip"</span>
+   <span class="org-string">"unzip"</span>
+   <span class="org-string">"wget"</span>))
+
+</code></pre>
+
+<p>And here's the command we used to execute it:
+</p>
+
+<pre><code class="sh">
+guix shell --container --emulate-fhs --network --preserve=<span class="org-string">'^DISPLAY$'</span> -m guix.scm
+
+</code></pre>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
