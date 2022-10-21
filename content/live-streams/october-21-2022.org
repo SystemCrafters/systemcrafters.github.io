@@ -1,0 +1,41 @@
+#+title: System Crafters Live! - October 22, 2022
+
+[[yt:i0IBgrOcGU8][Watch the recording on YouTube!]]
+
+* Updates
+
+- [[https://github.com/joaotavora/eglot][Eglot]] is now a part of Emacs 29 (devel): https://git.savannah.gnu.org/cgit/emacs.git/commit/?id=83fbda715973f57dc49fe002d255ecaff8273154
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Are Text-Centric Interfaces Better for Crafters?
+
+Today I'd like to discuss something I've been thinking about a lot this week: are text-centric interfaces better for people like us?
+
+I'm sure we all have a similar opinion on this topic but I thought it would be interesting to go into a bit more detail to see if there are any unique advantages we haven't considered yet.
+
+Also, "interfaces" in this case is not just about user interfaces, it's also about protocols as they are another type of interface we care about!
+
+For each of these areas, I'd like us to discuss a few specific factors:
+
+- Effectiveness: Can you accomplish more or less with a text-based interace?
+- Efficiency: Can you work faster with a text-based interface?
+- Hackability: Can you build your own tools around the interface?
+
+** Code Collaboration
+
+GitHub vs Sourcehut
+
+** Chat
+
+Discord vs Matrix vs IRC
+
+** System and Programming Tools
+
+I don't just mean whether Emacs is better than a graphical IDE; this also relates to compilers, linting tools, service managers, system control applications, and many other tools you might use.
+
+** Creative Tools
+
+It's slightly harder to imagine a text-centric interface for creating images, videos, or music!
+
+** What else?
