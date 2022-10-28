@@ -1,0 +1,58 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - October 28, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - October 28, 2022</h1><p class="blog-post-meta"></p><div><p><div class="embed-responsive embed-responsive-16by9"> <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zMzkorlfqLA" allowfullscreen></iframe> </div>
+</p>
+
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Jeff Bowman will be speaking at the EmacsATX meetup <strong>Next Thursday, Nov 6</strong> about Crafted Emacs and his work on the <kbd>crafted-mastering-emacs</kbd> module! <a href="https://www.meetup.com/emacsatx/events/sstqrsydcpbdb/">https://www.meetup.com/emacsatx/events/sstqrsydcpbdb/</a></li>
+
+<li>Next week is the yearly GitHub Game Off competition.  It's a month-long game jam which will give me a lot more time to hack on a small game with <a href="https://github.com/mesche-lang/compiler">Mesche</a>!
+
+<p>Keep an eye on the <strong>Flux Harmonic</strong> <a href="https://youtube.com/FluxHarmonicLive">YouTube</a> and <a href="https://twitch.tv/FluxHarmonicLive">Twitch</a> channels (FluxHarmonicLive on both), I'll be streaming my work there occasionally.
+</p></li>
+
+<li>Support the channel!  <strong>Buy Mastering Emacs</strong> with this link <a href="https://www.masteringemacs.org/r/systemcrafters">https://www.masteringemacs.org/r/systemcrafters</a></li>
+</ul>
+
+<h2><a id="crafting-a-configuration-site-generator-in-emacs" class="anchor" href="#crafting-a-configuration-site-generator-in-emacs">¶</a>Crafting a Configuration Site Generator in Emacs</h2><p>I've been saying for a long time that I want to simplify my configuration and eliminate the literate-style Org files that generate my entire configuration.  However, I still want to produce a really nice site from my config files which documents them!
+</p>
+
+<p>For the next few streams, I'd like to focus on building such a site generator with Emacs so that I can finally get my entire configuration up to date on <a href="https://config.daviwil.com">https://config.daviwil.com</a>.
+</p>
+
+<p>Check out <strong>Hawk</strong>, a package that has inspired me to try to come up with my own approach for this:
+</p>
+
+<p><a href="https://migrev-dolseg.com/hawk/README.html">https://migrev-dolseg.com/hawk/README.html</a>
+</p>
+
+<h3><a id="desired-features" class="anchor" href="#desired-features">¶</a>Desired Features</h3><ul><li>Use the same syntax highlighting as I do in my configuration (or at least a specific Emacs theme)</li>
+<li>Linkable line numbers</li>
+<li><em>Possibly</em> generate "permalink" folders for older commits</li>
+<li>Some basic method of formatting the contents of comments in code files, including links to other files</li>
+<li>Basic file tree pages and header/footer for navigation</li>
+<li>Possibly extract defined function names to generate a table of contents</li>
+<li>It should also be good for generating literate documentation sites for code projects!</li>
+</ul>
+
+<h3><a id="why" class="anchor" href="#why">¶</a>Why?</h3><ul><li><strong>Why not just use a normal repo website like GitHub or SourceHut?</strong>
+
+<p>It's a good idea, but I'd like to have more control over how everything is presented.
+</p></li>
+
+<li><strong>Why drop Org-based config?</strong>
+
+<p>I'm tired of having to tangle when syncing config between machines.  I also want to treat my configuration as code because I intend to move more of my config to <strong>Guix Home</strong>!
+</p></li>
+</ul>
+
+<h3><a id="the-plan" class="anchor" href="#the-plan">¶</a>The Plan</h3><p>Here's the rough idea:
+</p>
+
+<ul><li>Use <kbd>htmlize</kbd>, <kbd>htmlfontify</kbd> or another similar package to generate HTML from code files</li>
+<li>Use <kbd>dom.el</kbd> to edit the HTML output to extract the body</li>
+<li>Use <kbd>esxml</kbd> to generate the outer layout of the pages</li>
+<li>Possibly use normal Org Export to export any <kbd>.org</kbd> files which can be used as entrypoints or commentary files</li>
+</ul>
+
+<h3><a id="the-name" class="anchor" href="#the-name">¶</a>The Name</h3><p>Help me come up with something!
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
