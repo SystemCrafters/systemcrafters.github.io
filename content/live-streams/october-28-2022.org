@@ -1,0 +1,56 @@
+#+title: System Crafters Live! - October 28, 2022
+
+[[yt:zMzkorlfqLA][Watch the recording on YouTube!]]
+
+* Updates
+
+- Jeff Bowman will be speaking at the EmacsATX meetup *Next Thursday, Nov 6* about Crafted Emacs and his work on the =crafted-mastering-emacs= module! https://www.meetup.com/emacsatx/events/sstqrsydcpbdb/
+
+- Next week is the yearly GitHub Game Off competition.  It's a month-long game jam which will give me a lot more time to hack on a small game with [[https://github.com/mesche-lang/compiler][Mesche]]!
+
+  Keep an eye on the *Flux Harmonic* [[https://youtube.com/FluxHarmonicLive][YouTube]] and [[https://twitch.tv/FluxHarmonicLive][Twitch]] channels (FluxHarmonicLive on both), I'll be streaming my work there occasionally.
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Crafting a Configuration Site Generator in Emacs
+
+I've been saying for a long time that I want to simplify my configuration and eliminate the literate-style Org files that generate my entire configuration.  However, I still want to produce a really nice site from my config files which documents them!
+
+For the next few streams, I'd like to focus on building such a site generator with Emacs so that I can finally get my entire configuration up to date on https://config.daviwil.com.
+
+Check out *Hawk*, a package that has inspired me to try to come up with my own approach for this:
+
+https://migrev-dolseg.com/hawk/README.html
+
+** Desired Features
+
+- Use the same syntax highlighting as I do in my configuration (or at least a specific Emacs theme)
+- Linkable line numbers
+- /Possibly/ generate "permalink" folders for older commits
+- Some basic method of formatting the contents of comments in code files, including links to other files
+- Basic file tree pages and header/footer for navigation
+- Possibly extract defined function names to generate a table of contents
+- It should also be good for generating literate documentation sites for code projects!
+
+** Why?
+
+- *Why not just use a normal repo website like GitHub or SourceHut?*
+
+  It's a good idea, but I'd like to have more control over how everything is presented.
+
+- *Why drop Org-based config?*
+
+  I'm tired of having to tangle when syncing config between machines.  I also want to treat my configuration as code because I intend to move more of my config to *Guix Home*!
+
+** The Plan
+
+Here's the rough idea:
+
+- Use =htmlize=, =htmlfontify= or another similar package to generate HTML from code files
+- Use =dom.el= to edit the HTML output to extract the body
+- Use =esxml= to generate the outer layout of the pages
+- Possibly use normal Org Export to export any =.org= files which can be used as entrypoints or commentary files
+
+** The Name
+
+Help me come up with something!
