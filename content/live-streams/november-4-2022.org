@@ -1,0 +1,35 @@
+#+title: System Crafters Live! - November 4, 2022
+
+[[yt:MvNIUnep22g][Watch the recording on YouTube!]]
+
+* Updates
+
+- I've been hacking a lot on [[https://github.com/mesche-lang/mesche][Mesche]] this week to prepare for the GitHub Game Off competition that's going on right now.
+
+  Starting tomorrow, I'll be streaming my work on it pretty regularly on the *Flux Harmonic* [[https://youtube.com/FluxHarmonicLive][YouTube]] and [[https://twitch.tv/FluxHarmonicLive][Twitch]] channels (FluxHarmonicLive on both), come check it out!  First stream will be tomorrow.
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Crafting a Configuration Site Generator in Emacs - Part 2
+
+This week we'll continue where we left off building the =dotweaver.el= package that will generate a website from a repository of source code files.
+
+https://github.com/daviwil/dotweaver.el
+
+To recap, here's the set of features we'd like to have
+
+** Desired Features
+
+- Use the same syntax highlighting as I do in my configuration (or at least a specific Emacs theme)
+- Linkable line numbers
+- /Possibly/ generate "permalink" folders for older commits
+- Some basic method of formatting the contents of comments in code files, including links to other files
+- Basic file tree pages and header/footer for navigation
+- Possibly extract defined function names to generate a table of contents
+- It should also be good for generating literate documentation sites for code projects!
+
+
+** Progress Last Time
+
+- Basic HTML page generation using the current color theme
+- Initial logic for generating files for the whole site, but not fully working yet
