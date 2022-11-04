@@ -4,7 +4,7 @@
 
 * Updates
 
-- Jeff Bowman will be speaking at the EmacsATX meetup *Next Thursday, Nov 6* about Crafted Emacs and his work on the =crafted-mastering-emacs= module! https://www.meetup.com/emacsatx/events/sstqrsydcpbdb/
+- Jeff Bowman will be speaking at the EmacsATX meetup *Next Wednesday, Nov 2* about Crafted Emacs and his work on the =crafted-mastering-emacs= module! https://www.meetup.com/emacsatx/events/sstqrsydcpbdb/
 
 - Next week is the yearly GitHub Game Off competition.  It's a month-long game jam which will give me a lot more time to hack on a small game with [[https://github.com/mesche-lang/compiler][Mesche]]!
 
@@ -22,25 +22,25 @@ Check out *Hawk*, a package that has inspired me to try to come up with my own a
 
 https://migrev-dolseg.com/hawk/README.html
 
-** Desired Features
-
-- Use the same syntax highlighting as I do in my configuration (or at least a specific Emacs theme)
-- Linkable line numbers
-- /Possibly/ generate "permalink" folders for older commits
-- Some basic method of formatting the contents of comments in code files, including links to other files
-- Basic file tree pages and header/footer for navigation
-- Possibly extract defined function names to generate a table of contents
-- It should also be good for generating literate documentation sites for code projects!
-
 ** Why?
+
+- *Why drop Org-based config?*
+
+  I'm tired of having to tangle when syncing config between machines.  I also want to treat my configuration as code because I intend to move more of my config to *Guix Home*!
 
 - *Why not just use a normal repo website like GitHub or SourceHut?*
 
   It's a good idea, but I'd like to have more control over how everything is presented.
 
-- *Why drop Org-based config?*
+** Desired Features
 
-  I'm tired of having to tangle when syncing config between machines.  I also want to treat my configuration as code because I intend to move more of my config to *Guix Home*!
+- [X] Use the same syntax highlighting as I do in my configuration (or at least a specific Emacs theme)
+- Linkable line numbers
+- /Possibly/ generate "permalink" folders for older commits
+- Some basic method of formatting the contents of comments in code files, including links to other files
+- Basic file tree pages and header/footer for navigation
+- Possibly extract defined function names or comment heading to generate a table of contents
+- It should also be good for generating literate documentation sites for code projects!
 
 ** The Plan
 
@@ -54,3 +54,7 @@ Here's the rough idea:
 ** The Name
 
 Help me come up with something!
+
+- configweaver
+- *dotweaver*
+- dotvanity
