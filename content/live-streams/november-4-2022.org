@@ -15,10 +15,11 @@
 This week we'll continue where we left off building the =dotweaver.el= package that will generate a website from a repository of source code files.
 
 https://github.com/daviwil/dotweaver.el
-
-To recap, here's the set of features we'd like to have
+Inspired by HAWK: https://migrev-dolseg.com/hawk/README.html
 
 ** Desired Features
+
+To recap, here's the set of features we'd like to have:
 
 - Use the same syntax highlighting as I do in my configuration (or at least a specific Emacs theme)
 - Linkable line numbers
