@@ -1,0 +1,37 @@
+#+title: System Crafters Live! - November 18, 2022
+
+[[yt:0C16LLHGYzk][Watch the recording on YouTube!]]
+
+* Updates
+
+- Join the new Emacs Mastodon instance! https://emacs.ch/
+
+  I've already got an account on Fosstodon: https://fosstodon.org/@daviwil
+
+- EXWM 0.27 was just released!  I'm thinking about switching back...
+
+- Tomorrow, I'll be continuing my work on a 2D platformer game for GitHub Game Off 2022 on the *Flux Harmonic* [[https://youtube.com/FluxHarmonicLive][YouTube]] and [[https://twitch.tv/FluxHarmonicLive][Twitch]] channels (FluxHarmonicLive on both), come check it out!
+
+  Streams will start around 11AM UTC on Saturday and Sunday!
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Converting a Literate Org Config to Guix Home
+
+Today we're going to try converting more of my Emacs-based Org Babel literate system configuration over to Guix Home!  I've wanted to do this for a while and I now have more reason than ever to do it.
+
+The biggest reason, though: my configuration is a total headache to manage now!
+
+Here's what I'd like to accomplish:
+
+- Any files that need to be symlinked into =$HOME= should be done via Guix Home, not =stow= or =dotcrafter=
+- Stop using individual manifest files, move the packages I actually use into Home config
+- Improve my desktop environment home service, make it configurable
+- Create other home services so that I can conditionally bring in different functionality (audio systems, etc)
+- Archive my old =.org= files
+
+When we're finished, I plan to check in the changes to the =master= branch of my dotfiles repository:
+
+https://github.com/daviwil/dotfiles
+
+I still need to figure out how I'll make it into a wbesite
