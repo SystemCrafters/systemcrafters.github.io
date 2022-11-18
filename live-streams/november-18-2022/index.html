@@ -1,0 +1,44 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - November 18, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - November 18, 2022</h1><p class="blog-post-meta"></p><div><p><div class="embed-responsive embed-responsive-16by9"> <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0C16LLHGYzk" allowfullscreen></iframe> </div>
+</p>
+
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Join the new Emacs Mastodon instance! <a href="https://emacs.ch/">https://emacs.ch/</a>
+
+<p>I've already got an account on Fosstodon: <a href="https://fosstodon.org/@daviwil">https://fosstodon.org/@daviwil</a>
+</p></li>
+
+<li>EXWM 0.27 was just released!  I'm thinking about switching back...</li>
+
+<li>Tomorrow, I'll be continuing my work on a 2D platformer game for GitHub Game Off 2022 on the <strong>Flux Harmonic</strong> <a href="https://youtube.com/FluxHarmonicLive">YouTube</a> and <a href="https://twitch.tv/FluxHarmonicLive">Twitch</a> channels (FluxHarmonicLive on both), come check it out!
+
+<p>Streams will start around 11AM UTC on Saturday and Sunday!
+</p></li>
+
+<li>Support the channel!  <strong>Buy Mastering Emacs</strong> with this link <a href="https://www.masteringemacs.org/r/systemcrafters">https://www.masteringemacs.org/r/systemcrafters</a></li>
+</ul>
+
+<h2><a id="converting-a-literate-org-config-to-guix-home" class="anchor" href="#converting-a-literate-org-config-to-guix-home">¶</a>Converting a Literate Org Config to Guix Home</h2><p>Today we're going to try converting more of my Emacs-based Org Babel literate system configuration over to Guix Home!  I've wanted to do this for a while and I now have more reason than ever to do it.
+</p>
+
+<p>The biggest reason, though: my configuration is a total headache to manage now!
+</p>
+
+<p>Here's what I'd like to accomplish:
+</p>
+
+<ul><li>Any files that need to be symlinked into <kbd>$HOME</kbd> should be done via Guix Home, not <kbd>stow</kbd> or <kbd>dotcrafter</kbd></li>
+<li>Stop using individual manifest files, move the packages I actually use into Home config</li>
+<li>Improve my desktop environment home service, make it configurable</li>
+<li>Create other home services so that I can conditionally bring in different functionality (audio systems, etc)</li>
+<li>Archive my old <kbd>.org</kbd> files</li>
+</ul>
+
+<p>When we're finished, I plan to check in the changes to the <kbd>master</kbd> branch of my dotfiles repository:
+</p>
+
+<p><a href="https://github.com/daviwil/dotfiles">https://github.com/daviwil/dotfiles</a>
+</p>
+
+<p>I still need to figure out how I'll make it into a wbesite
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
