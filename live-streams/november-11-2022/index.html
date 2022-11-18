@@ -1,0 +1,263 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - November 11, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - November 11, 2022</h1><p class="blog-post-meta"></p><div>
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Tomorrow, I'll be continuing my work on a 2D platformer game for GitHub Game Off 2022 on the <strong>Flux Harmonic</strong> <a href="https://youtube.com/FluxHarmonicLive">YouTube</a> and <a href="https://twitch.tv/FluxHarmonicLive">Twitch</a> channels (FluxHarmonicLive on both), come check it out!
+
+<p>Streams will start around 12PM UTC on Saturday and Sunday!
+</p></li>
+
+<li>Support the channel!  <strong>Buy Mastering Emacs</strong> with this link <a href="https://www.masteringemacs.org/r/systemcrafters">https://www.masteringemacs.org/r/systemcrafters</a></li>
+</ul>
+
+<h2><a id="hacking-a-lispy-wm-with-qtile-and-hy" class="anchor" href="#hacking-a-lispy-wm-with-qtile-and-hy">¶</a>Hacking a Lispy WM with QTile and Hy</h2><p>The resulting configuration:
+</p>
+
+<pre><code class="emacs-lisp">
+(import [libqtile [bar layout widget]]
+        [libqtile.config [Click Drag Group Key Match Screen]]
+        [libqtile.lazy [lazy]])
+
+(setv mod <span class="org-string">"mod4"</span>)
+
+(setv keys
+      [(Key [mod] <span class="org-string">"h"</span> (lazy.layout.left) <span class="org-builtin">:desc</span> <span class="org-string">"Move focus to left"</span>)
+       (Key [mod] <span class="org-string">"Tab"</span> (lazy.window.toggle_floating) <span class="org-builtin">:desc</span> <span class="org-string">"Move focus to left"</span>)
+       (Key [mod, <span class="org-string">"control"</span>] <span class="org-string">"q"</span> (lazy.shutdown) <span class="org-builtin">:desc</span> <span class="org-string">"Shutdown Qtile"</span>)])
+
+(setv groups
+      [(Group <span class="org-string">"1"</span> <span class="org-builtin">:label</span> <span class="org-string">"chat"</span>)
+       (Group <span class="org-string">"2"</span> <span class="org-builtin">:label</span> <span class="org-string">"dev"</span>)
+       (Group <span class="org-string">"3"</span> <span class="org-builtin">:label</span> <span class="org-string">"web"</span>)
+       (Group <span class="org-string">"4"</span> <span class="org-builtin">:label</span> <span class="org-string">"media"</span>)])
+
+(for [i groups]
+     (keys.extend [(Key
+                    [mod]
+                    i.name
+                    (.toscreen (get (. lazy group)
+                                    (. i name))))]))
+
+(setv screens
+      [(Screen
+        <span class="org-builtin">:top</span> (bar.Bar [(widget.CurrentLayout)
+                       (widget.GroupBox)
+                       (widget.Prompt)
+                       (widget.WindowName)
+                       (widget.Chord
+                        <span class="org-builtin">:chords_colors</span> {<span class="org-string">"launch"</span> [<span class="org-string">"#ff0000"</span> <span class="org-string">"#ffffff"</span>]}
+                        <span class="org-builtin">:name_transform</span> (fn [name] (name.upper)))
+                       (widget.Systray)
+                       (widget.Clock <span class="org-builtin">:format</span> <span class="org-string">"%Y-%m-%d %a %I:%M %p"</span>)
+                       ]
+                      24
+                      <span class="org-builtin">:background</span> <span class="org-string">"232635"</span>)
+        )])
+
+</code></pre>
+
+<p>This was the original configuration we were targetting:
+</p>
+
+<pre><code class="emacs-lisp">
+from libqtile import bar, layout, widget
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.lazy import lazy
+from libqtile.utils import guess_terminal
+
+mod = <span class="org-string">"mod4"</span>
+terminal = guess_terminal()
+
+keys = [
+    # A list of available commands that can be bound to keys can be found
+    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
+    # Switch between windows
+    Key([mod], <span class="org-string">"h"</span>, lazy.layout.left(), desc=<span class="org-string">"Move focus to left"</span>),
+    Key([mod], <span class="org-string">"l"</span>, lazy.layout.right(), desc=<span class="org-string">"Move focus to right"</span>),
+    Key([mod], <span class="org-string">"j"</span>, lazy.layout.down(), desc=<span class="org-string">"Move focus down"</span>),
+    Key([mod], <span class="org-string">"k"</span>, lazy.layout.up(), desc=<span class="org-string">"Move focus up"</span>),
+    Key([mod], <span class="org-string">"space"</span>, lazy.layout.next(), desc=<span class="org-string">"Move window focus to other window"</span>),
+    # Move windows between left/right columns or move up/down in current stack.
+    # Moving out of range in Columns layout will create new column.
+    Key([mod, <span class="org-string">"shift"</span>], <span class="org-string">"h"</span>, lazy.layout.shuffle_left(), desc=<span class="org-string">"Move window to the left"</span>),
+    Key([mod, <span class="org-string">"shift"</span>], <span class="org-string">"l"</span>, lazy.layout.shuffle_right(), desc=<span class="org-string">"Move window to the right"</span>),
+    Key([mod, <span class="org-string">"shift"</span>], <span class="org-string">"j"</span>, lazy.layout.shuffle_down(), desc=<span class="org-string">"Move window down"</span>),
+    Key([mod, <span class="org-string">"shift"</span>], <span class="org-string">"k"</span>, lazy.layout.shuffle_up(), desc=<span class="org-string">"Move window up"</span>),
+    # Grow windows. If current window is on the edge of screen and direction
+    # will be to screen edge - window would shrink.
+    Key([mod, <span class="org-string">"control"</span>], <span class="org-string">"h"</span>, lazy.layout.grow_left(), desc=<span class="org-string">"Grow window to the left"</span>),
+    Key([mod, <span class="org-string">"control"</span>], <span class="org-string">"l"</span>, lazy.layout.grow_right(), desc=<span class="org-string">"Grow window to the right"</span>),
+    Key([mod, <span class="org-string">"control"</span>], <span class="org-string">"j"</span>, lazy.layout.grow_down(), desc=<span class="org-string">"Grow window down"</span>),
+    Key([mod, <span class="org-string">"control"</span>], <span class="org-string">"k"</span>, lazy.layout.grow_up(), desc=<span class="org-string">"Grow window up"</span>),
+    Key([mod], <span class="org-string">"n"</span>, lazy.layout.normalize(), desc=<span class="org-string">"Reset all window sizes"</span>),
+    # Toggle between split and unsplit sides of stack.
+    # Split = all windows displayed
+    # Unsplit = 1 window displayed, like Max layout, but still with
+    # multiple stack panes
+    Key(
+        [mod, <span class="org-string">"shift"</span>],
+        <span class="org-string">"Return"</span>,
+        lazy.layout.toggle_split(),
+        desc=<span class="org-string">"Toggle between split and unsplit sides of stack"</span>,
+    )<span class="org-warning">,</span>
+    Key([mod], <span class="org-string">"Return"</span>, lazy.spawn(terminal), desc=<span class="org-string">"Launch terminal"</span>),
+    # Toggle between different layouts as defined below
+    Key([mod], <span class="org-string">"Tab"</span>, lazy.next_layout(), desc=<span class="org-string">"Toggle between layouts"</span>),
+    Key([mod], <span class="org-string">"t"</span>, lazy.window.toggle_floating(), desc=<span class="org-string">"Toggle floating window"</span>),
+    Key([mod], <span class="org-string">"q"</span>, lazy.window.kill(), desc=<span class="org-string">"Kill focused window"</span>),
+    Key([mod, <span class="org-string">"control"</span>], <span class="org-string">"r"</span>, lazy.restart(), desc=<span class="org-string">"Reload the config"</span>),
+    Key([mod, <span class="org-string">"control"</span>], <span class="org-string">"q"</span>, lazy.shutdown(), desc=<span class="org-string">"Shutdown Qtile"</span>),
+    Key([mod], <span class="org-string">"r"</span>, lazy.spawncmd(), desc=<span class="org-string">"Spawn a command using a prompt widget"</span>),
+]
+
+groups = [
+    Group(<span class="org-string">"1"</span>, label=<span class="org-string">"chat"</span>),
+    Group(<span class="org-string">"2"</span>, label=<span class="org-string">"dev"</span>),
+    Group(<span class="org-string">"3"</span>, label=<span class="org-string">"web"</span>),
+    Group(<span class="org-string">"4"</span>, label=<span class="org-string">"media"</span>)
+]
+
+for i in groups:
+    keys.extend(
+        [
+            # mod1 + letter of group = switch to group
+            Key(
+                [mod],
+                i.name,
+                lazy.group[i.name].toscreen(),
+                desc=<span class="org-string">"Switch to group {}"</span>.format(i.name),
+            )<span class="org-warning">,</span>
+            # mod1 + shift + letter of group = switch to &amp; move focused window to group
+            Key(
+                [mod, <span class="org-string">"shift"</span>],
+                i.name,
+                lazy.window.togroup(i.name, switch_group=True),
+                desc=<span class="org-string">"Switch to &amp; move focused window to group {}"</span>.format(i.name),
+            )<span class="org-warning">,</span>
+            # Or, use below if you prefer not to switch to that group.
+            # # mod1 + shift + letter of group = move focused window to group
+            # Key([mod, <span class="org-string">"shift"</span>], i.name, lazy.window.togroup(i.name),
+            #     desc=<span class="org-string">"move focused window to group {}"</span>.format(i.name))<span class="org-warning">,</span>
+        ]
+    )
+
+layouts = [
+    layout.Columns(border_focus_stack=[<span class="org-string">"#d75f5f"</span>, <span class="org-string">"#8f3d3d"</span>], border_width=4),
+    layout.Max(),
+    # Try more layouts by unleashing below layouts.
+    layout.Stack(num_stacks=2),
+    layout.Bsp(),
+    # layout.Matrix(),
+    # layout.MonadTall(),
+    # layout.MonadWide(),
+    # layout.RatioTile(),
+    # layout.Tile(),
+    layout.TreeTab(),
+    # layout.VerticalTile(),
+    # layout.Zoomy(),
+]
+
+widget_defaults = dict(
+    font=<span class="org-string">"Iosevka Aile Light"</span>,
+    fontsize=13,
+    padding=3,
+)
+extension_defaults = widget_defaults.copy()
+
+screens = [
+    Screen(
+        top=bar.Bar(
+            [
+                widget.CurrentLayout(),
+                widget.GroupBox(),
+                widget.Prompt(),
+                widget.WindowName(),
+                widget.Chord(
+                    chords_colors={
+                        <span class="org-string">"launch"</span>: (<span class="org-string">"#ff0000"</span>, <span class="org-string">"#ffffff"</span>),
+                    },
+                    name_transform=lambda name: name.upper(),
+                )<span class="org-warning">,</span>
+                # widget.TextBox(<span class="org-string">"System Crafters"</span>, name=<span class="org-string">"default"</span>),
+                # widget.TextBox(<span class="org-string">"Press &amp;lt;M-r&amp;gt; to spawn"</span>, foreground=<span class="org-string">"#d75f5f"</span>),
+                widget.Systray(),
+                widget.Clock(format=<span class="org-string">"%Y-%m-%d %a %I:%M %p"</span>),
+            ]<span class="org-warning">,</span>
+            24,
+            background=<span class="org-string">"232635"</span>
+            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            # border_color=[<span class="org-string">"ff00ff"</span>, <span class="org-string">"000000"</span>, <span class="org-string">"ff00ff"</span>, <span class="org-string">"000000"</span>]  # Borders are magenta
+        )<span class="org-warning">,</span>
+    )<span class="org-warning">,</span>
+    Screen(
+        top=bar.Bar(
+            [
+                widget.CurrentLayout(),
+                widget.GroupBox(),
+                widget.Prompt(),
+                widget.WindowName(),
+                widget.Chord(
+                    chords_colors={
+                        <span class="org-string">"launch"</span>: (<span class="org-string">"#ff0000"</span>, <span class="org-string">"#ffffff"</span>),
+                    },
+                    name_transform=lambda name: name.upper(),
+                )<span class="org-warning">,</span>
+                widget.TextBox(<span class="org-string">"default config"</span>, name=<span class="org-string">"default"</span>),
+                widget.TextBox(<span class="org-string">"Press &amp;lt;M-r&amp;gt; to spawn"</span>, foreground=<span class="org-string">"#d75f5f"</span>),
+                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
+                # widget.StatusNotifier(),
+                widget.Systray(),
+                widget.Clock(format=<span class="org-string">"%Y-%m-%d %a %I:%M %p"</span>),
+            ]<span class="org-warning">,</span>
+            24,
+            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            # border_color=[<span class="org-string">"ff00ff"</span>, <span class="org-string">"000000"</span>, <span class="org-string">"ff00ff"</span>, <span class="org-string">"000000"</span>]  # Borders are magenta
+        )<span class="org-warning">,</span>
+    )<span class="org-warning">,</span>
+]
+
+# Drag floating layouts.
+mouse = [
+    Drag([mod], <span class="org-string">"Button1"</span>, lazy.window.set_position_floating(), start=lazy.window.get_position()),
+    Drag([mod], <span class="org-string">"Button3"</span>, lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Click([mod], <span class="org-string">"Button2"</span>, lazy.window.bring_to_front()),
+]
+
+dgroups_key_binder = None
+dgroups_app_rules = []  # type: list
+follow_mouse_focus = True
+bring_front_click = False
+cursor_warp = False
+floating_layout = layout.Floating(
+    float_rules=[
+        # Run the utility of `xprop` to see the wm class and name of an X client.
+        *layout.Floating.default_float_rules,
+        Match(wm_class=<span class="org-string">"confirmreset"</span>),  # gitk
+        Match(wm_class=<span class="org-string">"makebranch"</span>),  # gitk
+        Match(wm_class=<span class="org-string">"maketag"</span>),  # gitk
+        Match(wm_class=<span class="org-string">"ssh-askpass"</span>),  # ssh-askpass
+        Match(title=<span class="org-string">"branchdialog"</span>),  # gitk
+        Match(title=<span class="org-string">"pinentry"</span>),  # GPG key password entry
+    ]
+)
+auto_fullscreen = True
+focus_on_window_activation = <span class="org-string">"smart"</span>
+reconfigure_screens = True
+
+# If things like steam games want to auto-minimize themselves when losing
+# focus, should we respect this or not?
+auto_minimize = True
+
+# When using the Wayland backend, this can be used to configure input devices.
+wl_input_rules = None
+
+# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
+# string besides java UI toolkits<span class="org-comment-delimiter">; </span><span class="org-comment">you can see several discussions on the</span>
+# mailing lists, GitHub issues, and other WM documentation that suggest setting
+# this string if your java app doesn't work correctly. We may as well just lie
+# and say that we're a working one by default.
+#
+# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
+# java that happens to be on java's whitelist.
+wmname = <span class="org-string">"LG3D"</span>
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
