@@ -32,10 +32,11 @@ So what is Mastodon?  It's only one implementation of this protocol with its own
 
 https://en.wikipedia.org/wiki/Fediverse#Fediverse_software_platforms
 
-Each instance has its own rules and culture!  Typically you pick a server based on the kind of local activity
+Each instance has its own rules and culture!  Typically you pick a server based on the kind of local activity that is happening on that server.
 
 ** How does it work?
 
+Check out https://activitypub.rocks
 
 ** How to get started with Mastodon
 
@@ -107,3 +108,10 @@ This package is in active development and things may be changing rapidly!  Keep 
 ** Interesting use cases for ActivityPub
 
 There are a couple of interesting ways that other platforms are using ActivityPub right now:
+
+- https://owncast.online/docs/chat-authentication/
+- https://docs.joinpeertube.org/api-activitypub
+- https://funkwhale.audio/
+- https://bookwyrm.social/
+- https://join-lemmy.org/ - reddit for the fediverse
+- https://pixelfed.org/
