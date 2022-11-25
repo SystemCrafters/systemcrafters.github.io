@@ -34,4 +34,4 @@ When we're finished, I plan to check in the changes to the =master= branch of my
 
 https://github.com/daviwil/dotfiles
 
-I still need to figure out how I'll make it into a wbesite
+I still need to figure out how I'll make it into a website, but that's a problem for another day.
