@@ -1,0 +1,109 @@
+#+title: System Crafters Live! - November 25, 2022
+
+[[yt:0C16LLHGYzk][Watch the recording on YouTube!]]
+
+* Updates
+
+- Join the new Emacs Mastodon instance! https://emacs.ch/
+
+- Tomorrow is the final weekend where I work on a 2D platformer game for GitHub Game Off 2022 on the *Flux Harmonic* [[https://youtube.com/FluxHarmonicLive][YouTube]] and [[https://twitch.tv/FluxHarmonicLive][Twitch]] channels (FluxHarmonicLive on both), come check it out!
+
+  Streams will start around 11AM UTC on Saturday and Sunday.
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+  => It's 20% off today for Black Friday!
+
+* Why Mastodon (and ActivityPub) is Better for Crafters
+
+Over the past week, I've been having a really awesome time using Mastodon.  Recently there's been a huge surge of people migrating over to the Fediverse thanks to the "interesting" developments over at Twitter.
+
+This is fantastic news for people like us, because the Fediverse, Mastodon, and ActivityPub are much more hacker friendly and self-directed than the monolithic, proprietary networks like Twitter, Facebook, LinkedIn, etc.
+
+In today's stream, I want to make a case for why you should consider moving to the Fediverse for your social networking needs, especially if you've tried it before and weren't that impressed in the past!
+
+** What is ActivityPub?
+
+It's a decentralized social networking protocol that enables many different servers to form one big federated network that people like to call the Fediverse.
+
+The servers I referred to are typically called "instances" and they can serve a single person up to tens to hundreds or thousands of people.
+
+So what is Mastodon?  It's only one implementation of this protocol with its own mature web and mobile clients.  There are many others!
+
+https://en.wikipedia.org/wiki/Fediverse#Fediverse_software_platforms
+
+Each instance has its own rules and culture!  Typically you pick a server based on the kind of local activity
+
+** How does it work?
+
+
+** How to get started with Mastodon
+
+First, pick an instance to join and create an account.  I have two recommendations, but there are a ton of different instances out there:
+
+- https://emacs.ch: Many Emacs enthusiasts are joining here!
+- https://fosstodon.org: Great for general FOSS enthusiasts, GNU/Linux users, etc
+
+You can check out this site to search for many more: https://mastodon.help/instances
+
+The Mastodon web client is really nice and you can get along really well with it first.  They also seem to have mobile apps for Android and iOS.
+
+On Android, I've been enjoying a client called Tusky: https://tusky.app/
+
+Since this is an open protocol, anyone can make a client!  Also, many of the clients, even if they sound like they are only for Mastodon, will also work with other ActivityPub server implementations.
+
+** How do I find people to follow?
+
+Once you join an instance, here are the three *most useful* things you can do:
+
+- Follow hash tags!  #emacs, #guix, #linux, etc
+- Find people you already follow on Twitter: https://debirdify.pruvisto.org
+- Follow me :)  =@daviwil@fosstodon.org= / https://fosstodon.org/@daviwil
+
+** What if I don't like the instance I picked?
+
+If you want to switch to a different instance, you can migrate a decent amount of your data to the new account (including your followers!).
+
+There is official documentation on how to migrate a Mastodon account to another instance:
+
+https://docs.joinmastodon.org/user/moving/
+
+It's OK to pick a server and then move eventually!
+
+** Hosting your own instance
+
+I haven't done this yet, so I can't claim any expertise.  However, there is lots of information online about how to host your own Mastodon instance, even with one-click installation to cloud providers like DigitalOcean.
+
+Official docs: https://docs.joinmastodon.org/user/run-your-own/
+
+However, Mastodon's backend is pretty complicated for a single-user instance.  I'd only recommend running it if you plan to host a community of your own!
+
+If you want a single-user server, consider another ActivityPub implementation like Pleroma or GotoSocial:
+
+- https://pleroma.social/
+- https://gotosocial.org/
+
+These implementations seem to have a much smaller footprint and simpler architecture, making them ideal for hosting on a very small VM, Raspberry PI, home server, etc.
+
+I think hosting your own instance would actually be a great idea, I am considering it!
+
+** Using Mastodon in Emacs
+
+Let's take a look at a Mastodon (and ActivityPub) client for Emacs:
+
+https://codeberg.org/martianh/mastodon.el/
+
+One important thing to note, you will want to set the following variables to refer to your instance URL and email address!
+
+#+begin_src emacs-lisp
+
+  (setq mastodon-instance-url "https://fosstodon.org"
+        mastodon-active-user "daviwil")
+
+#+end_src
+
+This package is in active development and things may be changing rapidly!  Keep an eye on the Codeberg repository for updates.
+
+** Interesting use cases for ActivityPub
+
+There are a couple of interesting ways that other platforms are using ActivityPub right now:
