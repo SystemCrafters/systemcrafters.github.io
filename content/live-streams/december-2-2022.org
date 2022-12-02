@@ -1,0 +1,27 @@
+#+title: System Crafters Live! - December 2, 2022
+
+* Updates
+
+- EmacsConf 2022 is this weekend! https://emacsconf.org/2022/
+
+- Check out Jeff Bowman's update on Crafted Emacs: https://jeffbowman.writeas.com/craftedemacs-update-versions-and-namespaces
+
+  Also follow Jeff on the Fediverse: @wolfjb@emacs.ch
+
+- Join the Emacs Mastodon instance! https://emacs.ch/
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Taking a Look at Emacs 29
+
+This week, Eli Zaretskii created the release branch for Emacs 29!
+
+https://lists.gnu.org/archive/html/emacs-devel/2022-11/msg01774.html
+
+This means that Emacs 29 has begun the final stabilization phase
+
+There are some huge new features in this release!  Today I'd like to try out a recent build of Emacs 29 and follow along with this really excellent post by Lucien Cartier-Tilet aka Phundrak (https://fosstodon.org/@phundrak):
+
+https://blog.phundrak.com/emacs-29-what-can-we-expect/
+
+Also try =pixel-precision-scrolling=!
