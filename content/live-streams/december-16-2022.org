@@ -6,7 +6,7 @@
 
   Follow me: =@daviwil@fosstodon.org= / https://fosstodon.org/@daviwil
 
-  When you're there, go reply to this post:
+  When you're there, go reply to this post: https://fosstodon.org/@daviwil/109524207442385802
 
 - Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
 
@@ -71,5 +71,31 @@ Let's examine the Edebug manual to figure out what to try:
 #+begin_src emacs-lisp
 
   (info "(elisp) Edebug Execution Modes")
+
+#+end_src
+
+* The Example
+
+Here's the example I was using in the stream:
+
+#+begin_src emacs-lisp
+
+(defvar my-variable 5)
+
+(defun return-something ()
+  (+ 4 1))
+
+(defun do-bad-thing ()
+  (let ((x 5)
+        (y 0))
+    (message "The result is: %s" (return-something))
+    ;; (/ x y)
+    ;; (cl-do () (nil) (message "Oops!"))
+    ))
+
+(advice-add 'org-cycle-item-indentation :after #'do-bad-thing)
+(advice-remove 'org-cycle-item-indentation #'do-bad-thing)
+
+(setq debug-on-message "^O")
 
 #+end_src
