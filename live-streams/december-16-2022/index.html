@@ -5,7 +5,7 @@
 <p>Follow me: <kbd>@daviwil@fosstodon.org</kbd> / <a href="https://fosstodon.org/@daviwil">https://fosstodon.org/@daviwil</a>
 </p>
 
-<p>When you're there, go reply to this post:
+<p>When you're there, go reply to this post: <a href="https://fosstodon.org/@daviwil/109524207442385802">https://fosstodon.org/@daviwil/109524207442385802</a>
 </p></li>
 
 <li>Support the channel!  <strong>Buy Mastering Emacs</strong> with this link <a href="https://www.masteringemacs.org/r/systemcrafters">https://www.masteringemacs.org/r/systemcrafters</a></li>
@@ -66,6 +66,30 @@
 
 <pre><code class="emacs-lisp">
 (info <span class="org-string">"(elisp) Edebug Execution Modes"</span>)
+
+</code></pre>
+
+<h2><a id="the-example" class="anchor" href="#the-example">¶</a>The Example</h2><p>Here's the example I was using in the stream:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">my-variable</span> 5)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">return-something</span> ()
+  (+ 4 1))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">do-bad-thing</span> ()
+  (<span class="org-keyword">let</span> ((x 5)
+        (y 0))
+    (message <span class="org-string">"The result is: %s"</span> (return-something))
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">(/ x y)</span>
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">(cl-do () (nil) (message "Oops!"))</span>
+    ))
+
+(advice-add 'org-cycle-item-indentation <span class="org-builtin">:after</span> #'do-bad-thing)
+(advice-remove 'org-cycle-item-indentation #'do-bad-thing)
+
+(<span class="org-keyword">setq</span> debug-on-message <span class="org-string">"^O"</span>)
 
 </code></pre>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
