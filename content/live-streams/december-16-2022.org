@@ -1,0 +1,75 @@
+#+title: System Crafters Live! - December 16, 2022
+
+* Updates
+
+- Join the Emacs Mastodon instance! https://emacs.ch/
+
+  Follow me: =@daviwil@fosstodon.org= / https://fosstodon.org/@daviwil
+
+  When you're there, go reply to this post:
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Learning To Use the Emacs Debugger
+
+One thing we haven't talked about much on this channel yet is how to diagnose problems in your Emacs configuration beyond just looking at the =*Messages*= buffer and hoping you can figure out the cryptic error message that appeared.
+
+Today we're going to take a look at Emacs' built-in Emacs Lisp debuggers, =debug= and =edebug= (yes, there are two!).  The goal is to figure out some good debugging strategies, not only for your personal configuration but also for Emacs Lisp packages that you use or those that you authored yourself!
+
+We'll be using the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Debugging.html#Debugging][Debugging Lisp Programs]] section of the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html][Emacs Lisp manual]] as our resource.  You can get to it inside of Emacs by evaluating the following expression with =M-:=
+
+#+begin_src emacs-lisp
+
+  (info "(elisp) Debugging")
+
+#+end_src
+
+* Features to Investigate
+
+** debug
+
+*** Entering the debugger
+
+- =M-x toggle-debug-on-error=
+- =M-x toggle-debug-on-quit=
+- =(setq debug-on-message "Oops")=
+- =M-x debug-on-entry= / =cancel-debug-on-entry=
+- =M-x debug-on-variable-change= / =cancel-debug-on-variable-change=
+- =(debug)=
+
+*** Inspecting backtraces
+
+When the =*Backtrace*= buffer appears, try these bindings:
+
+- =v= -> Display local variables of stack frame
+- =p= -> Move to previous stack frame
+- =n= -> Move to next stack frame
+- =+= -> Add line breaks to stack trace to make it readable
+- =-= -> Make stack frame expression a single line
+- =#= -> Toggle =print-circle= for frame
+- =:= -> Toggle =print-gensym= for frame
+- =.= -> Expand all =...= forms
+
+*** Debugger commands
+
+- =c= -> Continue execution
+- =d= -> Continue execution but stop again at the next function call
+- =b= -> Flag the current frame so that the debugger stops again when it exits
+- =u= -> Undo the flag on the current frame
+- =e= -> Eval an expression at the current stack frame
+- =r= -> Return a value for the currently executing frame (useful for errors)
+- =l= -> List all functions that will cause the debugger to break
+
+** edebug
+
+One difference with edebug is that you can actually step through execution of a function!  The downside is that you have to explicitly instrument a function by evaluating it with =C-u C-M-x= or (=M-x edebug-eval-top-level-form=).
+
+You can debug all definitions by setting =edebug-all-defs= to =t= before evaluating the code.
+
+Let's examine the Edebug manual to figure out what to try:
+
+#+begin_src emacs-lisp
+
+  (info "(elisp) Edebug Execution Modes")
+
+#+end_src
