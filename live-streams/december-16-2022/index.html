@@ -1,0 +1,71 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - December 16, 2022 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - December 16, 2022</h1><p class="blog-post-meta"></p><div>
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Join the Emacs Mastodon instance! <a href="https://emacs.ch/">https://emacs.ch/</a>
+
+<p>Follow me: <kbd>@daviwil@fosstodon.org</kbd> / <a href="https://fosstodon.org/@daviwil">https://fosstodon.org/@daviwil</a>
+</p>
+
+<p>When you're there, go reply to this post:
+</p></li>
+
+<li>Support the channel!  <strong>Buy Mastering Emacs</strong> with this link <a href="https://www.masteringemacs.org/r/systemcrafters">https://www.masteringemacs.org/r/systemcrafters</a></li>
+</ul>
+
+<h2><a id="learning-to-use-the-emacs-debugger" class="anchor" href="#learning-to-use-the-emacs-debugger">¶</a>Learning To Use the Emacs Debugger</h2><p>One thing we haven't talked about much on this channel yet is how to diagnose problems in your Emacs configuration beyond just looking at the <kbd>*Messages*</kbd> buffer and hoping you can figure out the cryptic error message that appeared.
+</p>
+
+<p>Today we're going to take a look at Emacs' built-in Emacs Lisp debuggers, <kbd>debug</kbd> and <kbd>edebug</kbd> (yes, there are two!).  The goal is to figure out some good debugging strategies, not only for your personal configuration but also for Emacs Lisp packages that you use or those that you authored yourself!
+</p>
+
+<p>We'll be using the <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Debugging.html#Debugging">Debugging Lisp Programs</a> section of the <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html">Emacs Lisp manual</a> as our resource.  You can get to it inside of Emacs by evaluating the following expression with <kbd>M-:</kbd>
+</p>
+
+<pre><code class="emacs-lisp">
+(info <span class="org-string">"(elisp) Debugging"</span>)
+
+</code></pre>
+
+<h2><a id="features-to-investigate" class="anchor" href="#features-to-investigate">¶</a>Features to Investigate</h2><h3><a id="debug" class="anchor" href="#debug">¶</a>debug</h3><h4><a id="entering-the-debugger" class="anchor" href="#entering-the-debugger">¶</a>Entering the debugger</h4><ul><li><kbd>M-x toggle-debug-on-error</kbd></li>
+<li><kbd>M-x toggle-debug-on-quit</kbd></li>
+<li><kbd>(setq debug-on-message "Oops")</kbd></li>
+<li><kbd>M-x debug-on-entry</kbd> / <kbd>cancel-debug-on-entry</kbd></li>
+<li><kbd>M-x debug-on-variable-change</kbd> / <kbd>cancel-debug-on-variable-change</kbd></li>
+<li><kbd>(debug)</kbd></li>
+</ul>
+
+<h4><a id="inspecting-backtraces" class="anchor" href="#inspecting-backtraces">¶</a>Inspecting backtraces</h4><p>When the <kbd>*Backtrace*</kbd> buffer appears, try these bindings:
+</p>
+
+<ul><li><kbd>v</kbd> -&gt; Display local variables of stack frame</li>
+<li><kbd>p</kbd> -&gt; Move to previous stack frame</li>
+<li><kbd>n</kbd> -&gt; Move to next stack frame</li>
+<li><kbd>+</kbd> -&gt; Add line breaks to stack trace to make it readable</li>
+<li><kbd>-</kbd> -&gt; Make stack frame expression a single line</li>
+<li><kbd>#</kbd> -&gt; Toggle <kbd>print-circle</kbd> for frame</li>
+<li><kbd>:</kbd> -&gt; Toggle <kbd>print-gensym</kbd> for frame</li>
+<li><kbd>.</kbd> -&gt; Expand all <kbd>...</kbd> forms</li>
+</ul>
+
+<h4><a id="debugger-commands" class="anchor" href="#debugger-commands">¶</a>Debugger commands</h4><ul><li><kbd>c</kbd> -&gt; Continue execution</li>
+<li><kbd>d</kbd> -&gt; Continue execution but stop again at the next function call</li>
+<li><kbd>b</kbd> -&gt; Flag the current frame so that the debugger stops again when it exits</li>
+<li><kbd>u</kbd> -&gt; Undo the flag on the current frame</li>
+<li><kbd>e</kbd> -&gt; Eval an expression at the current stack frame</li>
+<li><kbd>r</kbd> -&gt; Return a value for the currently executing frame (useful for errors)</li>
+<li><kbd>l</kbd> -&gt; List all functions that will cause the debugger to break</li>
+</ul>
+
+<h3><a id="edebug" class="anchor" href="#edebug">¶</a>edebug</h3><p>One difference with edebug is that you can actually step through execution of a function!  The downside is that you have to explicitly instrument a function by evaluating it with <kbd>C-u C-M-x</kbd> or (<kbd>M-x edebug-eval-top-level-form</kbd>).
+</p>
+
+<p>You can debug all definitions by setting <kbd>edebug-all-defs</kbd> to <kbd>t</kbd> before evaluating the code.
+</p>
+
+<p>Let's examine the Edebug manual to figure out what to try:
+</p>
+
+<pre><code class="emacs-lisp">
+(info <span class="org-string">"(elisp) Edebug Execution Modes"</span>)
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
