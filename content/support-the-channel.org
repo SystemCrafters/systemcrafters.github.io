@@ -24,8 +24,15 @@ You can also reach me on the Fediverse: https://fosstodon.org/@daviwil
 
 I have a wide variety of experience in many programming languages, platforms, frameworks, and application styles so I'm sure I we can find a way that I can help!
 
+Some ideas:
+
+- Building Emacs and Guix configurations
+- Packaging software or services for Guix
+- Integrating tools and services with Emacs
+- Building CI automation for projects
+- Building deployment images with Guix
+- General software or development consulting
+
 * System Crafters Merchandise
 
-The [[https://store.systemcrafters.net?utm_source=support-the-channel][System Crafters Store]] is currently offline while we switch store providers.
-
-Keep an eye out for the relaunch to get t-shirts, hoodies, coffee cups, hats, stickers, and more in the future!
+The [[https://store.systemcrafters.net?utm_source=support-the-channel][System Crafters Store]] is a place where you can find t-shirts, hoodies, coffee cups, hats, stickers, and more!  Support the channel by buying something with our logo on it.
