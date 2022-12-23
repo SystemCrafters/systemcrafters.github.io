@@ -58,9 +58,11 @@ I started a series of streams in 2021 called "Dotfile Detective" where we take a
 
 I also want to have a regular stream where we dig into the code of various different Emacs packages, Guix services, etc to see what we can learn from them.  This is one good way to learn a lot of obscure functions and coding patterns!
 
+Packages like Magit, Evil Mode, ERC/rcirc, mastodon.el, Vertico or other completion UIs, and more!
+
 ** Written Content
 
-I've been saying for a while now that I'd like to try my hand at writing longer-form structured content like books about the topics we discuss on this channel.  You can think of them as
+I've been saying for a while now that I'd like to try my hand at writing longer-form structured content like books about the topics we discuss on this channel.  You can think of them as more in-depth and complete tutorials on a particular topic.
 
 My goal for these would be to produce these in a way where they can be read freely online with a pay-what-you-want model for the PDF and e-reader copies (free by default).
 
@@ -69,6 +71,7 @@ Topics I could cover:
 - An optimal task and project management workflow using Org Mode, Org Roam, Denote, etc
 - A complete tutorial for configuring a system and your dotfiles using Guix
 - An updated Emacs From Scratch in book form
+- Setting up EXWM as desktop environment
 
 It's been hard to find time to spend on writing but I'm determined to get something started this year.
 
@@ -109,7 +112,7 @@ Send me an e-mail if you're interested to help!
 
 - Window Managers: experimentation, example configurations, contributions to EXWM (or a soft fork)
 - Community Improvements: Moving to FOSS equivalents (like Discord -> Matrix, etc), process for organizing interest groups, code of conduct, etc
-- Service Administration: I'd like to consider hosting useful services for the community (Peertube, IRC bouncer, maybe Matrix or XMPP, maybe other things)
+- Service Administration: I'd like to consider hosting useful services for the community (Peertube, IRC bouncer, maybe Matrix or XMPP, mailing lists, maybe other things)
 - Wiki Maintainers: The System Crafters Wiki has been broken for a while.  It'd be nice to revive it and make it easier to contribute!
 - Mentors: A self-selected group who want to help newcomers to the community learn the finer details of system crafting with Emacs and Guix
 
@@ -150,3 +153,8 @@ Another way you can help support my work is by hiring me for freelance work!
 I'm open to any sort of ideas you have!  E-mail me and let me know how I can help you.
 
 * Thoughts?  Ideas?  Feedback?
+
+- Guix image builder for server systems
+- Set up a codementor or other related site
+- General scripting with Emacs Lisp
+- Look at Railwayapp's Nixpacks for inspiration for Guix
