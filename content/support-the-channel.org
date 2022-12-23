@@ -2,13 +2,11 @@
 
 If you enjoy the content on the System Crafters channel, please consider supporting it using one of the methods below!
 
-* Buy System Crafters Merchandise!
-
-Check out the [[https://store.systemcrafters.net?utm_source=support-the-channel][System Crafters Store]] for t-shirts, hoodies, coffee cups, hats, stickers, and more in the future!
-
 * Monthly Sponsorship
 
-If you'd like to provide monthly financial support to help me keep making this content, you can use one of the providers below.  Currently GitHub Sponsors or Liberapay are my preferred platforms because they don't take a percentage of your contribution!
+Monthly sponsorship on one of the options below is the best way to help me have more time to focus on building useful content and projects for the community!
+
+Currently GitHub Sponsors or Liberapay are my preferred platforms because they don't take a percentage of your contribution!
 
 - [[https://github.com/sponsors/daviwil][GitHub Sponsors]]
 - [[https://liberapay.com/SystemCrafters/][Liberapay]]
@@ -16,4 +14,18 @@ If you'd like to provide monthly financial support to help me keep making this c
 
 * One-Time Tips
 
-You can also send a tip via [[https://paypal.me/SystemCrafters][PayPal]]
+You can also send a one-time tip via [[https://github.com/sponsors/daviwil][GitHub Sponsors]] or [[https://paypal.me/SystemCrafters][PayPal]]!
+
+* Hire Me
+
+If you're interested in hiring me to help with anything from building your Emacs or Guix configurations to building larger scale projects, please send a message to /david [at] systemcrafters.net/!
+
+You can also reach me on the Fediverse: https://fosstodon.org/@daviwil
+
+I have a wide variety of experience in many programming languages, platforms, frameworks, and application styles so I'm sure I we can find a way that I can help!
+
+* System Crafters Merchandise
+
+The [[https://store.systemcrafters.net?utm_source=support-the-channel][System Crafters Store]] is currently offline while we switch store providers.
+
+Keep an eye out for the relaunch to get t-shirts, hoodies, coffee cups, hats, stickers, and more in the future!
