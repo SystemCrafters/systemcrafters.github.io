@@ -1,0 +1,152 @@
+#+title: System Crafters Live! - December 23, 2022
+
+* Updates
+
+- I've reopened the System Crafters Store using Teespring: https://store.systemcrafters.net
+
+  The merch is slightly different than in the last iteration!  This is a test run, go take a look and let me know your feedback.
+
+- Join us on the Fediverse!  https://emacs.ch or https://fosstodon.org
+
+  Follow me: @daviwil@fosstodon.org / https://fosstodon.org/@daviwil
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Expanding the Craft in 2023
+
+Since this is the last stream of 2022, I thought it might be fun to talk about what my plans are for the channel and the community next year!
+
+My hope is that by discussing what we can do next year, you might decide to get involved and support the effort!
+
+** Videos
+
+As of this moment, I have a list of 36 different videos about Emacs, Guix, and Guile Scheme that I can make next year!
+
+- New tutorials on packages like Embark, Consult, Avy, Tabspaces, and many more
+- New tutorials on built-in Emacs features like =vc-mode=, =project.el=, =tab-bar-mode=, =M-x compile=, =ERT=, =Eglot=, =Tree Sitter=, and more
+- Multiple videos on Guix Home including how to migrate your dotfiles over to it
+- More details on how to write packages, services, and system configurations with Guix
+- General coverage of writing code with Guile Scheme using Emacs' Geiser as the IDE
+
+Aside from those, there's a ton of tools outside of Emacs and Guix that we can cover just as a way to broaden our perspective or get good ideas on things we can add to our Emacs and Guix configurations.
+
+My goal is to have the first video out somewhere in the first week of January and then post a new one every 1-2 weeks after that!
+
+** Friday Streams
+
+*** Interviews
+
+One thing I've been thinking about for a while is having guests on for the Friday streams to interview them about their background and projects or just to discuss a particular topic.
+
+I think it would be really valuable to learn more about how they all got into hacking and why they contribute to projects like Emacs and Guix!
+
+I've got a list of possible guests that I'd like to interview with a few already in early planning.  My hope is that we'll have our first interview stream in January or February, depending on who might be available then.
+
+Let me know who you think we should talk to on the channel!
+
+*** Community Spotlight
+
+We'll talk about community efforts in a minute, but before we get to that I did want to discuss my desire to bring people from the community on the streams to discuss projects that they've built or the status of larger projects that are associated with our community.
+
+For example, I could bring on Jeff Bowman to talk about progress on Crafted Emacs and ideas that we'd like to get feedback on.
+
+We could also have panel discussions on certain topics that people would find interesting!
+
+*** Dotfile Detective and Code Exploration
+
+I started a series of streams in 2021 called "Dotfile Detective" where we take a look at someone's dotfiles to see if there are any interesting tricks we can learn.  I'd like to get that series started up again!  This could be another avenue for interviewing people about the decisions they made, other things they tried, etc.
+
+I also want to have a regular stream where we dig into the code of various different Emacs packages, Guix services, etc to see what we can learn from them.  This is one good way to learn a lot of obscure functions and coding patterns!
+
+** Written Content
+
+I've been saying for a while now that I'd like to try my hand at writing longer-form structured content like books about the topics we discuss on this channel.  You can think of them as
+
+My goal for these would be to produce these in a way where they can be read freely online with a pay-what-you-want model for the PDF and e-reader copies (free by default).
+
+Topics I could cover:
+
+- An optimal task and project management workflow using Org Mode, Org Roam, Denote, etc
+- A complete tutorial for configuring a system and your dotfiles using Guix
+- An updated Emacs From Scratch in book form
+
+It's been hard to find time to spend on writing but I'm determined to get something started this year.
+
+** Community Efforts
+
+*** Crafted Emacs
+
+For those who haven't heard about it before, Crafted Emacs is a base Emacs configuration that one can use as a quick starting point if they haven't configured Emacs before, and also as a basis for gradually building one's own custom configuration.
+
+Jeff Bowman has been doing a fantastic job shepherding this project this year!  I'm planning to give Jeff a hand next year and help build some more interest and contributions.
+
+There have already been a number of contributions to the project since it was announced, thank you all!  We'd love to help onboard new contributors if you're interested in writing Emacs Lisp.
+
+I have some ideas for how I'd like to improve Crafted Emacs in the very near future, we can discuss them at the end of the stream if we have time!
+
+https://github.com/SystemCrafters/crafted-emacs
+
+*** Crafted Guix (or Crafted OS)
+
+People have been asking me about producing my own Guix "distribution" for a while now.  I actually think this is a good idea, but it has to be done in a way that justifies it being a standalone project from Guix itself.
+
+Here's what I'd like to accomplish:
+
+- Default to an Emacs-driven desktop environment with EXWM
+- Provide useful modules that help writing a Guix config
+- Incubate Guix Home services that enable configuration of a variety of programs
+- Package useful tools and software that might not be appropriate for Guix (or another channel like Nonguix)
+- Contribute anything we can back to mainline Guix
+- Like Crafted Emacs, it will enable you to gradually write your own configuration and later abandon it if you want to use plain Guix
+
+If you want to learn more about hacking Guix, contributing to this project would be a good place to start!
+
+https://github.com/SystemCrafters/crafted-guix
+
+Send me an e-mail if you're interested to help!
+
+*** Other Interest Groups
+
+- Window Managers: experimentation, example configurations, contributions to EXWM (or a soft fork)
+- Community Improvements: Moving to FOSS equivalents (like Discord -> Matrix, etc), process for organizing interest groups, code of conduct, etc
+- Service Administration: I'd like to consider hosting useful services for the community (Peertube, IRC bouncer, maybe Matrix or XMPP, maybe other things)
+- Wiki Maintainers: The System Crafters Wiki has been broken for a while.  It'd be nice to revive it and make it easier to contribute!
+- Mentors: A self-selected group who want to help newcomers to the community learn the finer details of system crafting with Emacs and Guix
+
+Send me an e-mail if you're interested in helping in any of these areas!
+
+*** Events
+
+- Hackathons
+- Virtual Conference?
+
+Send me an e-mail if you're interested in helping in any of these areas!
+
+* My Plan
+
+My big goal in 2023 is to start working on System Crafters and related projects (Mesche, Flux Harmonic) full time!
+
+What I realized is that there is so much value I can create for this community if I just had more time to focus on it.  I'm so dedicated to System Crafters that I'm willing to take a leap of faith and leave my full-time employment so that I can focus deeply on building out all the things we discussed in this stream, and also creating a more organized community experience.
+
+System Crafters should be more than just a YouTube Channel!  We should have organized efforts where we can work together and help each other build cool things and contribute to our favorite projects.
+
+If you'd like to support my efforts for all the projects that I discussed today, definitely consider becoming a GitHub Sponsor or support on Liberapay to help prolong the amount of time I can survive without resorting to full-time employment again!
+
+More info at https://systemcrafters.net/support-the-channel/
+
+One other thing your sponsorship will enable me to do is relicense all of my previous and future content under Creative Commons licenses so that they can be freely posted to any other sites around the Internet.  I really want the things that I create to be useful to the maximum amount of people without any restrictions on where you see them.
+
+** Hire Me
+
+Another way you can help support my work is by hiring me for freelance work!
+
+- Building Emacs and Guix configurations
+- Packaging software or services for Guix
+- Integrating tools and services with Emacs
+- Building CI automation for projects
+- Building deployment images with Guix
+- General software or development consulting
+
+I'm open to any sort of ideas you have!  E-mail me and let me know how I can help you.
+
+* Thoughts?  Ideas?  Feedback?
