@@ -27,16 +27,33 @@
 
 </code></pre>
 
-<ul><li><kbd>(build-derivations store derivations [mode])</kbd>: Builds a list of derivations against the given store
+<p><kbd>(build-derivations store derivations [mode])</kbd>: Builds a list of derivations against the given store
+</p>
 
 <pre><code class="scheme">
 (<span class="org-keyword">define</span> (<span class="org-function-name">sh-symlink</span>)
   (gexp-&gt;derivation <span class="org-string">"sh"</span>
                     #~(symlink (string-append #$bash <span class="org-string">"/bin/bash"</span>)
-                               #$output)))
+                                #$output)))
 
 (run-with-store (open-connection) (sh-symlink))
 
-</code></pre></li>
-</ul>
+</code></pre>
+
+<pre><code class="scheme">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">guix home -L ~/.dotfiles container test-config.scm</span>
+
+(use-modules (gnu home)
+              (gnu services)
+              (daviwil home-services emacs))
+
+(home-environment
+  (services (list (service home-emacs-service-type
+                          (home-emacs-configuration
+                            (modules (home-emacs-module-configuration
+                                      (module-name <span class="org-string">"dw-core"</span>)
+                                      <span class="org-comment-delimiter">;; </span><span class="org-comment">(variables '(("dw-core-use-something" . #t)))</span>
+                                      ))
+                            (extra-init <span class="org-string">";; Foo!"</span>))))))
+</code></pre>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
