@@ -1,0 +1,43 @@
+#+title: System Crafters Live! - January 6, 2023
+
+[[yt:KNXOZtbfslY][Watch the recording on YouTube!]]
+
+* Updates
+
+- Introductory video on Guix Home coming soon!
+
+- Join us on the Fediverse!  https://emacs.ch or https://fosstodon.org
+
+  Follow me: @daviwil@fosstodon.org / https://fosstodon.org/@daviwil
+
+- Support the channel!  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Hacking Guix Home Services in the REPL
+
+Today I want to spend some time learning how to hack on Guix Home services in the Guile REPL so that I can build up a service without running =guix home container= a bunch of times!
+
+#+begin_src scheme
+
+  (use-modules (guix store))
+
+  (let* ((server (open-connection))
+         (path (add-text-to-store server "hello.txt" "Hello Guix!")))
+    (display "The store path is: ")
+    (display path)
+    (newline)
+    (close-connection server))
+
+#+end_src
+
+- =(build-derivations store derivations [mode])=: Builds a list of derivations against the given store
+
+  #+begin_src scheme
+
+    (define (sh-symlink)
+      (gexp->derivation "sh"
+                        #~(symlink (string-append #$bash "/bin/bash")
+                                   #$output)))
+
+    (run-with-store (open-connection) (sh-symlink))
+
+  #+end_src
