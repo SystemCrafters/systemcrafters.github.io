@@ -29,15 +29,33 @@ Today I want to spend some time learning how to hack on Guix Home services in th
 
 #+end_src
 
-- =(build-derivations store derivations [mode])=: Builds a list of derivations against the given store
+=(build-derivations store derivations [mode])=: Builds a list of derivations against the given store
 
-  #+begin_src scheme
+#+begin_src scheme
 
-    (define (sh-symlink)
-      (gexp->derivation "sh"
-                        #~(symlink (string-append #$bash "/bin/bash")
-                                   #$output)))
+  (define (sh-symlink)
+    (gexp->derivation "sh"
+                      #~(symlink (string-append #$bash "/bin/bash")
+                                  #$output)))
 
-    (run-with-store (open-connection) (sh-symlink))
+  (run-with-store (open-connection) (sh-symlink))
 
-  #+end_src
+#+end_src
+
+#+begin_src scheme
+
+  ;; guix home -L ~/.dotfiles container test-config.scm
+
+  (use-modules (gnu home)
+                (gnu services)
+                (daviwil home-services emacs))
+
+  (home-environment
+    (services (list (service home-emacs-service-type
+                            (home-emacs-configuration
+                              (modules (home-emacs-module-configuration
+                                        (module-name "dw-core")
+                                        ;; (variables '(("dw-core-use-something" . #t)))
+                                        ))
+                              (extra-init ";; Foo!"))))))
+#+end_src
