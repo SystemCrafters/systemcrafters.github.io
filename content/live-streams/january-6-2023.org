@@ -6,6 +6,10 @@
 
 - Introductory video on Guix Home coming soon!
 
+- Check out this blog post about Guix:
+
+  https://guix.gnu.org/en/blog/2023/dissecting-guix-part-1-derivations/
+
 - Join us on the Fediverse!  https://emacs.ch or https://fosstodon.org
 
   Follow me: @daviwil@fosstodon.org / https://fosstodon.org/@daviwil
@@ -58,4 +62,14 @@ Today I want to spend some time learning how to hack on Guix Home services in th
                                         ;; (variables '(("dw-core-use-something" . #t)))
                                         ))
                               (extra-init ";; Foo!"))))))
+#+end_src
+
+* Notes
+
+You can build a g-exp in the REPL by running the following command:
+
+#+begin_src scheme
+
+  ,build (scheme-file "test.scm" my-g-expr)
+
 #+end_src
