@@ -1,11 +1,12 @@
 <!--  -->
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - January 13, 2023 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - January 13, 2023</h1><p class="blog-post-meta"></p><div>
-<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Big changes coming to Crafted Emacs soon, check out Jeff Bowman's blog post:
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Big changes coming to Crafted Emacs soon, check out Jeff Bowman's blog post:</li>
+</ul>
 
 <p><a href="https://jeffbowman.writeas.com/crafted-emacs-update-for-january-2023-a-new-direction">https://jeffbowman.writeas.com/crafted-emacs-update-for-january-2023-a-new-direction</a>
-</p></li>
+</p>
 
-<li>I submitted a <kbd>home-emacs-service</kbd> for Guix Home!
+<ul><li>I submitted a <kbd>home-emacs-service</kbd> for Guix Home!
 
 <p><a href="https://issues.guix.gnu.org/60753">https://issues.guix.gnu.org/60753</a>
 </p></li>
@@ -33,4 +34,227 @@ More ways to support: <a href="https://systemcrafters.net/support-the-channel/">
 
 <h3><a id="goals" class="anchor" href="#goals">¶</a>Goals</h3><p>(We definitely won't achieve all of these today)
 </p>
+
+<ul><li>Including the full Linux kernel including proprietary blobs</li>
+<li>Having an EXWM-based desktop environment</li>
+<li>Improving the look of the bootup process (splash screen on boot, improved Grub theme, better console font?)</li>
+<li>Certain services pre-configured (bluetooth, thermald/power for laptops, etc)</li>
+<li>Develop it in a way where it's easy to pull in the preconfigured bits, but you can also discard them</li>
+<li>Automatically set up user's guix home configuration at system install time</li>
+</ul>
+
+<h3><a id="the-final-config" class="anchor" href="#the-final-config">¶</a>The final config</h3><p>Unfortunately the stream crashed and we didn't get to finish this!
+</p>
+
+<p>Thanks a lot to Andrew Tropin for pointing me to the <kbd>guix-home-service-type</kbd> from RDE!
+</p>
+
+<p><a href="https://git.sr.ht/~abcdw/rde/tree/master/item/src/gnu/services/home.scm">https://git.sr.ht/~abcdw/rde/tree/master/item/src/gnu/services/home.scm</a>
+</p>
+
+<pre><code class="scheme">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">-*- mode: scheme; -*-</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">This is an operating system configuration for a VM image.</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Modify it as you see fit and instantiate the changes by running:</span>
+<span class="org-comment-delimiter">;;</span>
+<span class="org-comment-delimiter">;;   </span><span class="org-comment">guix system reconfigure /etc/config.scm</span>
+(use-modules (gnu services)
+             (gnu services shepherd)
+             (guix gexp)
+             (guix packages)
+             (guix records))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">guix-home-shepherd-service</span> config)
+  (<span class="org-keyword">map</span>
+   (<span class="org-keyword">lambda</span> (x)
+     (<span class="org-keyword">let</span> ((user (car x))
+           (he (cdr x)))
+       (shepherd-service
+        (documentation <span class="org-string">"Activate Guix Home."</span>)
+        (requirement '(user-homes))
+        (provision (list (symbol-append 'guix-home- (string-&gt;symbol user))))
+        (one-shot? #t)
+        (auto-start? #t)
+        (start #~(make-forkexec-constructor
+                  '(#$(file-append he <span class="org-string">"/activate"</span>))
+                  <span class="org-builtin">#:user</span> #$user
+                  <span class="org-builtin">#:environment-variables</span>
+                  (list (string-append <span class="org-string">"HOME="</span> (passwd:dir (getpw #$user))))
+                  <span class="org-builtin">#:group</span> (group:name (getgrgid (passwd:gid (getpw #$user))))))
+        (stop #~(make-kill-destructor)))))
+     config))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">guix-home-gc-roots</span> config)
+  (<span class="org-keyword">map</span> cdr config))
+
+(<span class="org-keyword">define</span> <span class="org-function-name">guix-home-service-type</span>
+  (service-type
+   (name 'guix-home)
+   (description <span class="org-string">"Setups home-environments specified in the value."</span>)
+   (extensions (list (service-extension
+                      shepherd-root-service-type
+                      guix-home-shepherd-service)))
+   <span class="org-comment-delimiter">;; </span><span class="org-comment">(compose append)</span>
+   <span class="org-comment-delimiter">;; </span><span class="org-comment">(extend append)</span>
+   (default-value '())))
+
+(use-modules (gnu)
+             (gnu packages)
+             (gnu home)
+             (gnu home services)
+             (guix)
+             (srfi srfi-1))
+
+(<span class="org-keyword">define</span> <span class="org-function-name">user-home-config</span>
+  (home-environment
+   (packages (<span class="org-keyword">map</span> specification-&gt;package
+                  (list <span class="org-string">"emacs-doom-themes"</span>
+                        <span class="org-string">"feh"</span>
+                        <span class="org-string">"picom"</span>)))
+   (services (list (simple-service 'put-me-some-files-brah
+                                   home-files-service-type
+                                   (list `(<span class="org-string">".config/emacs/init.el"</span> ,(local-file <span class="org-string">"init.el"</span>))))))))
+
+(use-service-modules desktop mcron networking spice ssh xorg sddm)
+(use-package-modules bootloaders certs fonts nvi
+                     package-management wget xorg)
+
+
+(<span class="org-keyword">define</span> <span class="org-function-name">vm-image-motd</span> (plain-file <span class="org-string">"motd"</span> <span class="org-string">"</span>
+<span class="org-string">\x1b[1;37mThis is the GNU system.  Welcome!\x1b[0m</span>
+
+<span class="org-string">This instance of Guix is a template for virtualized environments.</span>
+<span class="org-string">You can reconfigure the whole system by adjusting /etc/config.scm</span>
+<span class="org-string">and running:</span>
+
+<span class="org-string">  guix system reconfigure /etc/config.scm</span>
+
+<span class="org-string">Run '\x1b[1;37minfo guix\x1b[0m' to browse documentation.</span>
+
+<span class="org-string">\x1b[1;33mConsider setting a password for the 'root' and 'guest' \</span>
+<span class="org-string">accounts.\x1b[0m</span>
+<span class="org-string">"</span>))
+
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">XXX: Xfce does not implement what is needed for the SPICE dynamic</span>
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">resolution to work (see:</span>
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">https://gitlab.xfce.org/xfce/xfce4-settings/-/issues/142).  Workaround it</span>
+<span class="org-comment-delimiter">;;; </span><span class="org-comment">by manually invoking xrandr every second.</span>
+(<span class="org-keyword">define</span> <span class="org-function-name">auto-update-resolution-crutch</span>
+  #~(job '(next-second)
+         (<span class="org-keyword">lambda</span> ()
+           (setenv <span class="org-string">"DISPLAY"</span> <span class="org-string">":0.0"</span>)
+           (setenv <span class="org-string">"XAUTHORITY"</span> <span class="org-string">"/home/guest/.Xauthority"</span>)
+           (execl (string-append #$xrandr <span class="org-string">"/bin/xrandr"</span>) <span class="org-string">"xrandr"</span> <span class="org-string">"-s"</span> <span class="org-string">"0"</span>))
+         <span class="org-builtin">#:user</span> <span class="org-string">"guest"</span>))
+
+(operating-system
+  (host-name <span class="org-string">"gnu"</span>)
+  (timezone <span class="org-string">"Etc/UTC"</span>)
+  (locale <span class="org-string">"en_US.utf8"</span>)
+  (keyboard-layout (keyboard-layout <span class="org-string">"us"</span> <span class="org-string">"altgr-intl"</span>))
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Label for the GRUB boot menu.</span>
+  (label (string-append <span class="org-string">"GNU Guix "</span>
+                        (<span class="org-keyword">or</span> (getenv <span class="org-string">"GUIX_DISPLAYED_VERSION"</span>)
+                            (package-version guix))))
+
+  (firmware '())
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Below we assume /dev/vda is the VM's hard disk.</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Adjust as needed.</span>
+  (bootloader (bootloader-configuration
+               (bootloader grub-bootloader)
+               (targets '(<span class="org-string">"/dev/vda"</span>))
+               (theme (grub-theme
+                         (resolution '(1920 . 1080))
+                         (image (local-file <span class="org-string">"grub-bg.jpg"</span>))))))
+  (file-systems (cons (file-system
+                        (mount-point <span class="org-string">"/"</span>)
+                        (device <span class="org-string">"/dev/vda1"</span>)
+                        (type <span class="org-string">"ext4"</span>))
+                      %base-file-systems))
+
+  (users (cons (user-account
+                (name <span class="org-string">"guest"</span>)
+                (comment <span class="org-string">"GNU Guix Live"</span>)
+                (password <span class="org-string">""</span>)                     <span class="org-comment-delimiter">;</span><span class="org-comment">no password</span>
+                (group <span class="org-string">"users"</span>)
+                (supplementary-groups '(<span class="org-string">"wheel"</span> <span class="org-string">"netdev"</span>
+                                        <span class="org-string">"audio"</span> <span class="org-string">"video"</span>)))
+               %base-user-accounts))
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Our /etc/sudoers file.  Since 'guest' initially has an empty password,</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">allow for password-less sudo.</span>
+  (sudoers-file (plain-file <span class="org-string">"sudoers"</span> <span class="org-string">"\</span>
+<span class="org-string">root ALL=(ALL) ALL</span>
+<span class="org-string">%wheel ALL=NOPASSWD: ALL\n"</span>))
+
+  (packages (append (list font-bitstream-vera nss-certs nvi wget)
+                    (list (specification-&gt;package <span class="org-string">"emacs"</span>)
+                          (specification-&gt;package <span class="org-string">"emacs-exwm"</span>)
+                          (specification-&gt;package <span class="org-string">"emacs-desktop-environment"</span>))
+                    %base-packages))
+
+  (services
+   (append (list <span class="org-comment-delimiter">;; </span><span class="org-comment">(service xfce-desktop-service-type)</span>
+
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">Choose SLiM, which is lighter than the default GDM.</span>
+            (service slim-service-type
+                     (slim-configuration
+                      (auto-login? #t)
+                      (default-user <span class="org-string">"guest"</span>)
+                      (xorg-configuration
+                       (xorg-configuration
+                        <span class="org-comment-delimiter">;; </span><span class="org-comment">The QXL virtual GPU driver is added to provide</span>
+                        <span class="org-comment-delimiter">;; </span><span class="org-comment">a better SPICE experience.</span>
+                        (modules (cons xf86-video-qxl
+                                       %default-xorg-modules))
+                        (keyboard-layout keyboard-layout)))))
+
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">Uncomment the line below to add an SSH server.</span>
+            <span class="org-comment-delimiter">;;</span><span class="org-comment">(service openssh-service-type)</span>
+
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">Add support for the SPICE protocol, which enables dynamic</span>
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">resizing of the guest screen resolution, clipboard</span>
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">integration with the host, etc.</span>
+            (service spice-vdagent-service-type)
+
+            (simple-service 'cron-jobs mcron-service-type
+                            (list auto-update-resolution-crutch))
+
+            (service guix-home-service-type
+                     `((<span class="org-string">"guest"</span> . ,user-home-config)))
+
+            <span class="org-comment-delimiter">;; </span><span class="org-comment">Use the DHCP client service rather than NetworkManager.</span>
+            (service dhcp-client-service-type))
+
+           <span class="org-comment-delimiter">;; </span><span class="org-comment">Remove some services that don't make sense in a VM.</span>
+           (remove (<span class="org-keyword">lambda</span> (service)
+                     (<span class="org-keyword">let</span> ((type (service-kind service)))
+                       (<span class="org-keyword">or</span> (memq type
+                                 (list gdm-service-type
+                                       sddm-service-type
+                                       wpa-supplicant-service-type
+                                       cups-pk-helper-service-type
+                                       network-manager-service-type
+                                       modem-manager-service-type))
+                           (eq? 'network-manager-applet
+                                (service-type-name type)))))
+                   (modify-services %desktop-services
+                     (login-service-type config =&gt;
+                                         (login-configuration
+                                          (inherit config)
+                                          (motd vm-image-motd)))
+
+                     <span class="org-comment-delimiter">;; </span><span class="org-comment">Install and run the current Guix rather than an older</span>
+                     <span class="org-comment-delimiter">;; </span><span class="org-comment">snapshot.</span>
+                     (guix-service-type config =&gt;
+                                        (guix-configuration
+                                         (inherit config)
+                                         (guix (current-guix))))))))
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Allow resolution of '.local' host names with mDNS.</span>
+  (name-service-switch %mdns-host-lookup-nss))
+
+</code></pre>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
