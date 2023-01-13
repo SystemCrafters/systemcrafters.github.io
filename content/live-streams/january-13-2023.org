@@ -4,7 +4,7 @@
 
 - Big changes coming to Crafted Emacs soon, check out Jeff Bowman's blog post:
 
-  https://jeffbowman.writeas.com/crafted-emacs-update-for-january-2023-a-new-direction
+https://jeffbowman.writeas.com/crafted-emacs-update-for-january-2023-a-new-direction
 
 - I submitted a =home-emacs-service= for Guix Home!
 
@@ -30,3 +30,225 @@ We might also take a peek at the RDE source code to get some ideas!
 ** Goals
 
 (We definitely won't achieve all of these today)
+
+- Including the full Linux kernel including proprietary blobs
+- Having an EXWM-based desktop environment
+- Improving the look of the bootup process (splash screen on boot, improved Grub theme, better console font?)
+- Certain services pre-configured (bluetooth, thermald/power for laptops, etc)
+- Develop it in a way where it's easy to pull in the preconfigured bits, but you can also discard them
+- Automatically set up user's guix home configuration at system install time
+
+** The final config
+
+Unfortunately the stream crashed and we didn't get to finish this!
+
+Thanks a lot to Andrew Tropin for pointing me to the =guix-home-service-type= from RDE!
+
+https://git.sr.ht/~abcdw/rde/tree/master/item/src/gnu/services/home.scm
+
+#+begin_src scheme
+
+;; -*- mode: scheme; -*-
+;; This is an operating system configuration for a VM image.
+;; Modify it as you see fit and instantiate the changes by running:
+;;
+;;   guix system reconfigure /etc/config.scm
+(use-modules (gnu services)
+             (gnu services shepherd)
+             (guix gexp)
+             (guix packages)
+             (guix records))
+
+(define (guix-home-shepherd-service config)
+  (map
+   (lambda (x)
+     (let ((user (car x))
+           (he (cdr x)))
+       (shepherd-service
+        (documentation "Activate Guix Home.")
+        (requirement '(user-homes))
+        (provision (list (symbol-append 'guix-home- (string->symbol user))))
+        (one-shot? #t)
+        (auto-start? #t)
+        (start #~(make-forkexec-constructor
+                  '(#$(file-append he "/activate"))
+                  #:user #$user
+                  #:environment-variables
+                  (list (string-append "HOME=" (passwd:dir (getpw #$user))))
+                  #:group (group:name (getgrgid (passwd:gid (getpw #$user))))))
+        (stop #~(make-kill-destructor)))))
+     config))
+
+(define (guix-home-gc-roots config)
+  (map cdr config))
+
+(define guix-home-service-type
+  (service-type
+   (name 'guix-home)
+   (description "Setups home-environments specified in the value.")
+   (extensions (list (service-extension
+                      shepherd-root-service-type
+                      guix-home-shepherd-service)))
+   ;; (compose append)
+   ;; (extend append)
+   (default-value '())))
+
+(use-modules (gnu)
+             (gnu packages)
+             (gnu home)
+             (gnu home services)
+             (guix)
+             (srfi srfi-1))
+
+(define user-home-config
+  (home-environment
+   (packages (map specification->package
+                  (list "emacs-doom-themes"
+                        "feh"
+                        "picom")))
+   (services (list (simple-service 'put-me-some-files-brah
+                                   home-files-service-type
+                                   (list `(".config/emacs/init.el" ,(local-file "init.el"))))))))
+
+(use-service-modules desktop mcron networking spice ssh xorg sddm)
+(use-package-modules bootloaders certs fonts nvi
+                     package-management wget xorg)
+
+
+(define vm-image-motd (plain-file "motd" "
+\x1b[1;37mThis is the GNU system.  Welcome!\x1b[0m
+
+This instance of Guix is a template for virtualized environments.
+You can reconfigure the whole system by adjusting /etc/config.scm
+and running:
+
+  guix system reconfigure /etc/config.scm
+
+Run '\x1b[1;37minfo guix\x1b[0m' to browse documentation.
+
+\x1b[1;33mConsider setting a password for the 'root' and 'guest' \
+accounts.\x1b[0m
+"))
+
+;;; XXX: Xfce does not implement what is needed for the SPICE dynamic
+;;; resolution to work (see:
+;;; https://gitlab.xfce.org/xfce/xfce4-settings/-/issues/142).  Workaround it
+;;; by manually invoking xrandr every second.
+(define auto-update-resolution-crutch
+  #~(job '(next-second)
+         (lambda ()
+           (setenv "DISPLAY" ":0.0")
+           (setenv "XAUTHORITY" "/home/guest/.Xauthority")
+           (execl (string-append #$xrandr "/bin/xrandr") "xrandr" "-s" "0"))
+         #:user "guest"))
+
+(operating-system
+  (host-name "gnu")
+  (timezone "Etc/UTC")
+  (locale "en_US.utf8")
+  (keyboard-layout (keyboard-layout "us" "altgr-intl"))
+
+  ;; Label for the GRUB boot menu.
+  (label (string-append "GNU Guix "
+                        (or (getenv "GUIX_DISPLAYED_VERSION")
+                            (package-version guix))))
+
+  (firmware '())
+
+  ;; Below we assume /dev/vda is the VM's hard disk.
+  ;; Adjust as needed.
+  (bootloader (bootloader-configuration
+               (bootloader grub-bootloader)
+               (targets '("/dev/vda"))
+               (theme (grub-theme
+                         (resolution '(1920 . 1080))
+                         (image (local-file "grub-bg.jpg"))))))
+  (file-systems (cons (file-system
+                        (mount-point "/")
+                        (device "/dev/vda1")
+                        (type "ext4"))
+                      %base-file-systems))
+
+  (users (cons (user-account
+                (name "guest")
+                (comment "GNU Guix Live")
+                (password "")                     ;no password
+                (group "users")
+                (supplementary-groups '("wheel" "netdev"
+                                        "audio" "video")))
+               %base-user-accounts))
+
+  ;; Our /etc/sudoers file.  Since 'guest' initially has an empty password,
+  ;; allow for password-less sudo.
+  (sudoers-file (plain-file "sudoers" "\
+root ALL=(ALL) ALL
+%wheel ALL=NOPASSWD: ALL\n"))
+
+  (packages (append (list font-bitstream-vera nss-certs nvi wget)
+                    (list (specification->package "emacs")
+                          (specification->package "emacs-exwm")
+                          (specification->package "emacs-desktop-environment"))
+                    %base-packages))
+
+  (services
+   (append (list ;; (service xfce-desktop-service-type)
+
+            ;; Choose SLiM, which is lighter than the default GDM.
+            (service slim-service-type
+                     (slim-configuration
+                      (auto-login? #t)
+                      (default-user "guest")
+                      (xorg-configuration
+                       (xorg-configuration
+                        ;; The QXL virtual GPU driver is added to provide
+                        ;; a better SPICE experience.
+                        (modules (cons xf86-video-qxl
+                                       %default-xorg-modules))
+                        (keyboard-layout keyboard-layout)))))
+
+            ;; Uncomment the line below to add an SSH server.
+            ;;(service openssh-service-type)
+
+            ;; Add support for the SPICE protocol, which enables dynamic
+            ;; resizing of the guest screen resolution, clipboard
+            ;; integration with the host, etc.
+            (service spice-vdagent-service-type)
+
+            (simple-service 'cron-jobs mcron-service-type
+                            (list auto-update-resolution-crutch))
+
+            (service guix-home-service-type
+                     `(("guest" . ,user-home-config)))
+
+            ;; Use the DHCP client service rather than NetworkManager.
+            (service dhcp-client-service-type))
+
+           ;; Remove some services that don't make sense in a VM.
+           (remove (lambda (service)
+                     (let ((type (service-kind service)))
+                       (or (memq type
+                                 (list gdm-service-type
+                                       sddm-service-type
+                                       wpa-supplicant-service-type
+                                       cups-pk-helper-service-type
+                                       network-manager-service-type
+                                       modem-manager-service-type))
+                           (eq? 'network-manager-applet
+                                (service-type-name type)))))
+                   (modify-services %desktop-services
+                     (login-service-type config =>
+                                         (login-configuration
+                                          (inherit config)
+                                          (motd vm-image-motd)))
+
+                     ;; Install and run the current Guix rather than an older
+                     ;; snapshot.
+                     (guix-service-type config =>
+                                        (guix-configuration
+                                         (inherit config)
+                                         (guix (current-guix))))))))
+
+  ;; Allow resolution of '.local' host names with mDNS.
+  (name-service-switch %mdns-host-lookup-nss))
+
+#+end_src
