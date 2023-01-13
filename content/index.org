@@ -8,7 +8,7 @@ Check out the many [[videos/][video series]] we have to help you learn Emacs and
 
 * Live Streams
 
-We hope you'll join us for our regular *[[live-streams/][live streams]] every Friday at 9:15 am Pacific*!
+We hope you'll join us for our regular *[[live-streams/][live streams]] every Friday at 8am Pacific, 4pm UTC*!
 
 * Projects
 
