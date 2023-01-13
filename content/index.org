@@ -10,9 +10,15 @@ Check out the many [[videos/][video series]] we have to help you learn Emacs and
 
 We hope you'll join us for our regular *[[live-streams/][live streams]] every Friday at 9:15 am Pacific*!
 
+* Projects
+
+We also have community projects you should check out:
+
+- [[github.com/SystemCrafters/crafted-emacs][Crafted Emacs]]: A sensible starting point for hacking your own Emacs configuration.
+
 * Around the Web
 
-- Visit System Crafters on [[https://youtube.com/c/SystemCrafters][YouTube]] or [[https://lbry.tv/@SystemCrafters:e][lbry.tv]]
-- Follow System Crafters on [[https://twitter.com/SystemCrafters][Twitter]]
-- Join the System Crafters Community on [[https://discord.gg/yVD8Gx6][Discord]]
-- E-mail David - david at systemcrafters.cc
+- Visit System Crafters on [[https://youtube.com/c/SystemCrafters][YouTube]] or [[https://odysee.com/@SystemCrafters:e][Odysee]]
+- Follow David on the [[https://fosstodon.org/@daviwil][Fediverse]]!
+- [[http://systemcrafters.chat][Chat]] with the System Crafters Community
+- E-mail David - david [at] systemcrafters.net
