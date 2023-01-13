@@ -14,7 +14,7 @@ We hope you'll join us for our regular *[[live-streams/][live streams]] every Fr
 
 We also have community projects you should check out:
 
-- [[github.com/SystemCrafters/crafted-emacs][Crafted Emacs]]: A sensible starting point for hacking your own Emacs configuration.
+- [[https://github.com/SystemCrafters/crafted-emacs][Crafted Emacs]]: A sensible starting point for hacking your own Emacs configuration.
 
 * Around the Web
 
