@@ -1,0 +1,32 @@
+#+title: System Crafters Live! - January 13, 2023
+
+* Updates
+
+- Big changes coming to Crafted Emacs soon, check out Jeff Bowman's blog post:
+
+  https://jeffbowman.writeas.com/crafted-emacs-update-for-january-2023-a-new-direction
+
+- I submitted a =home-emacs-service= for Guix Home!
+
+  https://issues.guix.gnu.org/60753
+
+- Join us on the Fediverse!  https://emacs.ch or https://fosstodon.org
+
+  Follow me: @daviwil@fosstodon.org / https://fosstodon.org/@daviwil
+
+- Support the channel!
+
+    *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+    More ways to support: https://systemcrafters.net/support-the-channel/
+
+* Building a Custom Guix Distribution
+
+Today we're going to experiment with how one might build a custom Guix distribution that comes pre-configured with a specific desktop environment and software configuration (i.e. heavily Emacs-driven).
+
+To do that, we're going to build a VM image where one can boot directly into the default environment provided by the distribution to try it out and then later install it to their own machine!
+
+We might also take a peek at the RDE source code to get some ideas!
+
+** Goals
+
+(We definitely won't achieve all of these today)
