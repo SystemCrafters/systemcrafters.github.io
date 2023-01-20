@@ -19,6 +19,11 @@ I'd like to try creating a Guile Scheme library that will make it possible to co
 
 ** What is Sway?
 
+Sway is a Wayland compositor built on wlroots.
+
+- Pin workspaces to specific displays
+- Tabbed full-screen-ish app experience
+
 ** Benefits
 
 - No =xrandr= or =arandr=, configure displays
@@ -30,3 +35,69 @@ I'd like to try creating a Guile Scheme library that will make it possible to co
 - Sometimes hard to make applications play nice with Wayland
 
 ** The final code
+
+#+begin_src scheme
+
+(define-module (sway)
+  #:use-module (json)
+  #:use-module (ice-9 popen)
+  #:use-module (ice-9 match)
+  #:use-module (ice-9 rdelim))
+
+(define (execute-swaymsg command)
+  (read-delimited "" (open-input-pipe (string-append "swaymsg " command))))
+
+(define (get-outputs)
+  (json->scm (open-input-pipe (string-append "swaymsg -t get_outputs"))))
+
+(define (get-inputs)
+  (json->scm (open-input-pipe (string-append "swaymsg -t get_inputs"))))
+
+(define (get-tree)
+  (json->scm (open-input-pipe (string-append "swaymsg -t get_tree"))))
+
+(define (set-layout! layout)
+  (system (string-append "swaymsg layout " (symbol->string layout))))
+
+(define (switch-workspace name)
+  (system (string-append "swaymsg workspace " name)))
+
+(define (set-workspace-output! workspace-name output-name)
+  (system (string-append "swaymsg workspace " workspace-name " output " output-name)))
+
+(define (move-workspace-to-output! workspace-name output-name)
+  (system (string-append "swaymsg workspace " workspace-name))
+  (system (string-append "swaymsg move workspace to output " output-name)))
+
+(define (toggle-fullscreen!)
+  (system "swaymsg fullscreen toggle"))
+
+(define* (set-output! name #:key resolution background scale)
+  (define (call-output . args)
+    (system (string-join (append (list "swaymsg output" name) args) " ")))
+
+  (when scale (call-output "scale" (number->string scale)))
+  (when resolution (call-output "resolution" resolution))
+  (when background
+      (match background
+        ((path . mode)
+         (call-output "background" path mode)))))
+
+(define* (set-border! #:key (style 'normal) (thickness 2))
+  (system (string-append "swaymsg border "
+                         (symbol->string style)
+                         " "
+                         (number->string thickness))))
+
+;; Example Usage
+
+(set-output! "HDMI-A-1"
+             #:scale 2
+             #:background '("~/.dotfiles/backgrounds/mountains-1412683.jpg" . "fill"))
+
+(set-workspace-output! "dev" "HDMI-A-1")
+(move-workspace-to-output! "comm" "HDMI-A-1")
+(move-workspace-to-output! "browser" "HDMI-A-1")
+
+(set-border! #:style 'pixel #:thickness 1)
+#+end_src
