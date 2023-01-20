@@ -1,0 +1,20 @@
+#+title: System Crafters Live! - January 20, 2023
+
+* Updates
+
+- Join us on the Fediverse!  https://emacs.ch or https://fosstodon.org
+
+  Follow me: @daviwil@fosstodon.org / https://fosstodon.org/@daviwil
+
+- Support the channel!
+
+    *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+    More ways to support: https://systemcrafters.net/support-the-channel/
+
+* Configuring Sway with Scheme
+
+Today we're going to take a look at the Sway compositor for Wayland.  I've been playing with it for the last day and I like it so far!
+
+I'd like to try creating a Guile Scheme library that will make it possible to configure Sway using Scheme code, either as a =.scm= file or at the REPL.
+
+** The final code
