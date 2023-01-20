@@ -17,4 +17,16 @@ Today we're going to take a look at the Sway compositor for Wayland.  I've been 
 
 I'd like to try creating a Guile Scheme library that will make it possible to configure Sway using Scheme code, either as a =.scm= file or at the REPL.
 
+** What is Sway?
+
+** Benefits
+
+- No =xrandr= or =arandr=, configure displays
+- No =.desktop= or =.xsession= needed, just run =sway=
+- You can pin specific workspaces to displays!
+
+** Drawbacks
+
+- Sometimes hard to make applications play nice with Wayland
+
 ** The final code
