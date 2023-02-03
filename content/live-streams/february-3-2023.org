@@ -1,0 +1,43 @@
+#+title: System Crafters Live! - February 3, 2023
+
+* Updates
+
+- *FOSDEM 2023* is this weekend!  Check out my talk "An Introduction to Guix Home", Sunday, Feb 5th 8:30 AM UTC
+
+ https://fosdem.org/2023/schedule/event/guixhome/
+
+- Join us on the Fediverse!  https://emacs.ch or https://fosstodon.org
+
+  Follow me: @daviwil@fosstodon.org / https://fosstodon.org/@daviwil
+
+- Support the channel!
+
+    *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+    More ways to support: https://systemcrafters.net/support-the-channel/
+
+* Crafting the Nyxt Browser
+
+Check it out here: https://nyxt.atlas.engineer/
+
+We tried Nyxt 2.2.4 in this stream.
+
+** The non-working configuration
+
+#+begin_src lisp
+
+(define-configuration
+    buffer
+    ((smooth-scrolling t)))
+
+(define-configuration buffer
+    ((default-modes (append '(nyxt::emacs-mode) %slot-default%))))
+
+(defun dw/darken-help-mode ()
+  (nyxt/web-mode:darken))
+
+(define-configuration nyxt/help-mode:help-mode
+    ((enable-hook
+      (hooks:add-hook %slot-default%
+                      (nyxt:make-handler-hook #'dw/darken-help-mode)))))
+
+#+end_src
