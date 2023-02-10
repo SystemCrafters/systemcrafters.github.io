@@ -21,6 +21,37 @@ Concerns:
 
 - Should the configuration files be usable on non-Guix systems too?
 
+*** Experiment: Simplified home service for existing config files
+
+#+begin_src scheme
+
+  #:use-module (ice-9 regex)
+  #:use-module (ice-9 pretty-print)
+  #:use-module (ice-9 textual-ports)
+
+(define (apply-template template-string value-alist)
+  (regexp-substitute/global #f
+                            "\\$\\{([A-Za-z\\-]+)\\}"
+                            template-string
+                            'pre
+                            (lambda (m)
+                              (let ((entry (assq (string->symbol (match:substring m 1))
+                                                 value-alist)))
+                                (if entry
+                                    (cdr entry)
+                                    "Not found!")))
+                            'post))
+
+(define (apply-template-file file-path value-alist)
+  (call-with-input-file file-path
+    (lambda (port)
+      (apply-template (get-string-all port)
+                      value-alist))))
+
+(apply-template-file "/home/daviwil/.dotfiles/daviwil/home-services/qute-config.py" '((default-zoom . 180)))
+
+#+end_src
+
 ** Creating shareable configuration layers
 
 - This requires well-designed home services, either in the main Guix channel or a community channel
