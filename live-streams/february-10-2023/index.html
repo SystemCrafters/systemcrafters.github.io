@@ -21,6 +21,34 @@ More ways to support: <a href="https://systemcrafters.net/support-the-channel/">
 <ul><li>Should the configuration files be usable on non-Guix systems too?</li>
 </ul>
 
+<h4><a id="experiment-simplified-home-service-for-existing-config-files" class="anchor" href="#experiment-simplified-home-service-for-existing-config-files">¶</a>Experiment: Simplified home service for existing config files</h4><pre><code class="scheme">
+  <span class="org-builtin">#:use-module</span> (ice-9 regex)
+  <span class="org-builtin">#:use-module</span> (ice-9 pretty-print)
+  <span class="org-builtin">#:use-module</span> (ice-9 textual-ports)
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">apply-template</span> template-string value-alist)
+  (regexp-substitute/global #f
+                            <span class="org-string">"\\$\\{([A-Za-z\\-]+)\\}"</span>
+                            template-string
+                            'pre
+                            (<span class="org-keyword">lambda</span> (m)
+                              (<span class="org-keyword">let</span> ((entry (assq (string-&gt;symbol (match:substring m 1))
+                                                 value-alist)))
+                                (<span class="org-keyword">if</span> entry
+                                    (cdr entry)
+                                    <span class="org-string">"Not found!"</span>)))
+                            'post))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">apply-template-file</span> file-path value-alist)
+  (<span class="org-keyword">call-with-input-file</span> file-path
+    (<span class="org-keyword">lambda</span> (port)
+      (apply-template (get-string-all port)
+                      value-alist))))
+
+(apply-template-file <span class="org-string">"/home/daviwil/.dotfiles/daviwil/home-services/qute-config.py"</span> '((default-zoom . 180)))
+
+</code></pre>
+
 <h3><a id="creating-shareable-configuration-layers" class="anchor" href="#creating-shareable-configuration-layers">¶</a>Creating shareable configuration layers</h3><ul><li>This requires well-designed home services, either in the main Guix channel or a community channel</li>
 </ul>
 
