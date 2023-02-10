@@ -1,0 +1,42 @@
+#+title: System Crafters Live! - February 10, 2023
+
+* Updates
+
+- Support the channel!
+
+    *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+    More ways to support: https://systemcrafters.net/support-the-channel/
+
+* Improving the Guix Home Experience
+
+Today I'd like to discuss some ideas I have for how to improve the Guix Home experience for both new and experienced users.  If you've used Guix Home, I also want to hear your experience and ideas!
+
+** Simpler "onboarding" for existing configs
+
+- Linking existing configuration files
+- Templating existing configuration files
+- Converting to well-designed "home services" for a better experience
+
+Concerns:
+
+- Should the configuration files be usable on non-Guix systems too?
+
+** Creating shareable configuration layers
+
+- This requires well-designed home services, either in the main Guix channel or a community channel
+
+** Providing a unified configuration model for both home and system services
+
+[[https://www.youtube.com/channel/UCuj_loxODrOPxSsXDfJmpng][Andrew Tropin]]'s RDE has a concept called "features" to accomplish this:
+
+https://git.sr.ht/~abcdw/rde/tree/master/item/src/rde/features
+
+Does Guix need something similar?  Maybe.  However, any Guix channel can provide this kind of feature.
+
+** Implementing a Guix analogue to Nix Flakes
+
+Set up your entire system with a single command using a URL directly to your dotfiles repo!
+
+An example, benoitj's Nix Flake configuration:
+
+https://git.sr.ht/~benoit/dotfiles/tree/neo-guix/item/_old/flake.nix
