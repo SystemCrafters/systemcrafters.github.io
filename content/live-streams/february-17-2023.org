@@ -7,6 +7,8 @@
   https://f-droid.org/packages/org.gnu.emacs/
   https://git.savannah.gnu.org/cgit/emacs.git/log/?h=feature/android
 
+  Also try Orgro: https://f-droid.org/en/packages/com.madlonkay.orgro/
+
 - Should I attempt a real sequel to the original Emacs From Scratch, live streamed?
 
 * The Latest on Emacs Completions
@@ -19,9 +21,77 @@ Today we're going to experiment with the latest advancements in Emacs completion
 
 Let's start by consulting a couple of sources:
 
-- [[https://git.savannah.gnu.org/cgit/emacs.git/tree/etc/NEWS.29][The Emacs 29 NEWS file]]
+- [[https://git.savannah.gnu.org/cgit/emacs.git/tree/etc/NEWS.29][The Emacs 29 NEWS file]] (press ~C-h n~)!
 - [[https://www.scss.tcd.ie/~sulimanm/posts/default-emacs-completion.html][Mohamed Suliman's blog post]] about Emacs 29 improvements
+
+Things to try:
+
+- =icomplete-vertical-mode=
+- =fido-mode= / =fido-vertical-mode=
+
+#+begin_src emacs-lisp
+
+(defun basic-completion-style ()
+  (setq completion-auto-wrap t
+	completion-auto-select 'second-tab
+	completion-auto-help 'always
+	completion-show-help nil
+	completions-format 'one-column
+	completions-max-height 10))
+
+(defun icomplete-vertical-style ()
+  (setq completion-auto-wrap t
+	completion-auto-help nil
+	completions-max-height 15
+	completion-styles '(initials flex)
+	icomplete-in-buffer t
+	max-mini-window-height 10)
+
+  (icomplete-mode 1)
+  (icomplete-vertical-mode 1))
+
+(defun fido-style ()
+  (setq completion-auto-wrap t
+	completion-auto-help nil
+	completions-max-height 15
+	completion-styles '(flex)
+	icomplete-in-buffer t
+	max-mini-window-height 10)
+
+  (fido-mode 1)
+  (fido-vertical-mode 1))
+
+;; Bind C-r to show minibuffer history entries
+(keymap-set minibuffer-mode-map "C-r" #'minibuffer-complete-history)
+
+#+end_src
 
 ** Vertico 1.0 Improvements
 
 [[https://github.com/minad/vertico][Vertico 1.0]]
+
+#+begin_src emacs-lisp
+
+(vertico-mode 1)
+(marginalia-mode 1)
+
+(require 'orderless)
+(setq completion-styles '(orderless basic)
+      completion-category-overrides '((file (styles basic partial-completion))))
+
+(require 'vertico-quick)
+(keymap-set vertico-map "M-q" #'vertico-quick-insert)
+(keymap-set vertico-map "C-q" #'vertico-quick-exit)
+
+(global-set-key "\M-R" #'vertico-repeat)
+(add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
+
+(keymap-set vertico-map "DEL" #'vertico-directory-delete-char)
+(keymap-set vertico-map "M-DEL" #'vertico-directory-delete-word)
+
+(vertico-mouse-mode 1)
+
+(require 'vertico-posframe)
+(vertico-posframe-mode 1)
+
+#+end_src
