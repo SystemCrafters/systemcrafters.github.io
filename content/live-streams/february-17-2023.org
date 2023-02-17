@@ -1,0 +1,27 @@
+#+title: System Crafters Live! - February 17, 2023
+
+* Updates
+
+- There is an (official?) build of Emacs 29 for Android 🤯
+
+  https://f-droid.org/packages/org.gnu.emacs/
+  https://git.savannah.gnu.org/cgit/emacs.git/log/?h=feature/android
+
+- Should I attempt a real sequel to the original Emacs From Scratch, live streamed?
+
+* The Latest on Emacs Completions
+
+Today we're going to experiment with the latest advancements in Emacs completion / selection systems, including a look at improvements that are coming in Emacs 29!
+
+*Let me know if I'm missing anything!*  I'm not fully up to date on all the changes!
+
+** Built-in Emacs 29 Completions
+
+Let's start by consulting a couple of sources:
+
+- [[https://git.savannah.gnu.org/cgit/emacs.git/tree/etc/NEWS.29][The Emacs 29 NEWS file]]
+- [[https://www.scss.tcd.ie/~sulimanm/posts/default-emacs-completion.html][Mohamed Suliman's blog post]] about Emacs 29 improvements
+
+** Vertico 1.0 Improvements
+
+[[https://github.com/minad/vertico][Vertico 1.0]]
