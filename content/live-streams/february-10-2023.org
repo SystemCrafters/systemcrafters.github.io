@@ -2,10 +2,14 @@
 
 * Updates
 
+- The video of my FOSDEM 2023 talk is still not up yet!  Keep an eye on this page:
+
+  https://fosdem.org/2023/schedule/event/guixhome/
+
 - Support the channel!
 
-    *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
-    More ways to support: https://systemcrafters.net/support-the-channel/
+  *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+  More ways to support: https://systemcrafters.net/support-the-channel/
 
 * Improving the Guix Home Experience
 
@@ -17,21 +21,70 @@ Today I'd like to discuss some ideas I have for how to improve the Guix Home exp
 - Templating existing configuration files
 - Converting to well-designed "home services" for a better experience
 
+Assumption:
+
+- Some users won't necessarily want to use a full home service to configure some subset of their programs
+- They may have an existing configuration file that they want to parameterize
+
 Concerns:
 
 - Should the configuration files be usable on non-Guix systems too?
 
+Check out =home-stow-migration-service=:
+
+https://issues.guix.gnu.org/issue/60521
+
 *** Experiment: Simplified home service for existing config files
+
+=test-config.scm=:
 
 #+begin_src scheme
 
+(use-modules
+ (gnu home)
+ (gnu services)
+ (gnu packages base)
+ (daviwil home-services template-file))
+
+(define (template-files base-path file-list value-alist)
+  (service home-template-file-service-type
+           (home-template-file-configuration
+            (base-path base-path)
+            (files file-list)
+            (values value-alist))))
+
+(home-environment
+ (packages (list grep))
+ (services (list (template-files "/home/daviwil/.dotfiles/.files"
+                                 '(".config/dunst/dunstrc"
+                                   ".config/qutebrowser/config.py")
+                                 '((dunst/font . "Iosevka Aile 18")
+                                   (qutebrowser/zoom . "150"))))))
+
+#+end_src
+
+=~/.dotfiles/daviwil/utils.scm=:
+
+#+begin_src scheme
+
+(define-module (daviwil utils)
+  #:use-module (gnu packages)
+  #:use-module (gnu services)
+  #:use-module (gnu home services)
+  #:use-module (gnu home services shepherd)
+  #:use-module (gnu packages freedesktop)
+  #:use-module (gnu services configuration)
+  #:use-module (guix gexp)
   #:use-module (ice-9 regex)
   #:use-module (ice-9 pretty-print)
   #:use-module (ice-9 textual-ports)
 
+  #:export (gather-manifest-packages
+            apply-template-file))
+
 (define (apply-template template-string value-alist)
   (regexp-substitute/global #f
-                            "\\$\\{([A-Za-z\\-]+)\\}"
+                            "\\$\\{([A-Za-z/\\-]+)\\}"
                             template-string
                             'pre
                             (lambda (m)
@@ -39,7 +92,7 @@ Concerns:
                                                  value-alist)))
                                 (if entry
                                     (cdr entry)
-                                    "Not found!")))
+                                    "VALUE NOT FOUND")))
                             'post))
 
 (define (apply-template-file file-path value-alist)
@@ -47,9 +100,6 @@ Concerns:
     (lambda (port)
       (apply-template (get-string-all port)
                       value-alist))))
-
-(apply-template-file "/home/daviwil/.dotfiles/daviwil/home-services/qute-config.py" '((default-zoom . 180)))
-
 #+end_src
 
 ** Creating shareable configuration layers
