@@ -4,6 +4,9 @@
 
 <p><a href="https://f-droid.org/packages/org.gnu.emacs/">https://f-droid.org/packages/org.gnu.emacs/</a>
 <a href="https://git.savannah.gnu.org/cgit/emacs.git/log/?h=feature/android">https://git.savannah.gnu.org/cgit/emacs.git/log/?h=feature/android</a>
+</p>
+
+<p>Also try Orgro: <a href="https://f-droid.org/en/packages/com.madlonkay.orgro/">https://f-droid.org/en/packages/com.madlonkay.orgro/</a>
 </p></li>
 
 <li>Should I attempt a real sequel to the original Emacs From Scratch, live streamed?</li>
@@ -18,10 +21,78 @@
 <h3><a id="built-in-emacs-29-completions" class="anchor" href="#built-in-emacs-29-completions">¶</a>Built-in Emacs 29 Completions</h3><p>Let's start by consulting a couple of sources:
 </p>
 
-<ul><li><a href="https://git.savannah.gnu.org/cgit/emacs.git/tree/etc/NEWS.29">The Emacs 29 NEWS file</a></li>
+<ul><li><a href="https://git.savannah.gnu.org/cgit/emacs.git/tree/etc/NEWS.29">The Emacs 29 NEWS file</a> (press <kbd>C-h n</kbd>)!</li>
 <li><a href="https://www.scss.tcd.ie/~sulimanm/posts/default-emacs-completion.html">Mohamed Suliman's blog post</a> about Emacs 29 improvements</li>
 </ul>
 
+<p>Things to try:
+</p>
+
+<ul><li><kbd>icomplete-vertical-mode</kbd></li>
+<li><kbd>fido-mode</kbd> / <kbd>fido-vertical-mode</kbd></li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">basic-completion-style</span> ()
+  (<span class="org-keyword">setq</span> completion-auto-wrap t
+        completion-auto-select 'second-tab
+        completion-auto-help 'always
+        completion-show-help nil
+        completions-format 'one-column
+        completions-max-height 10))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">icomplete-vertical-style</span> ()
+  (<span class="org-keyword">setq</span> completion-auto-wrap t
+        completion-auto-help nil
+        completions-max-height 15
+        completion-styles '(initials flex)
+        icomplete-in-buffer t
+        max-mini-window-height 10)
+
+  (icomplete-mode 1)
+  (icomplete-vertical-mode 1))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">fido-style</span> ()
+  (<span class="org-keyword">setq</span> completion-auto-wrap t
+        completion-auto-help nil
+        completions-max-height 15
+        completion-styles '(flex)
+        icomplete-in-buffer t
+        max-mini-window-height 10)
+
+  (fido-mode 1)
+  (fido-vertical-mode 1))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Bind C-r to show minibuffer history entries</span>
+(keymap-set minibuffer-mode-map <span class="org-string">"C-r"</span> #'minibuffer-complete-history)
+
+</code></pre>
+
 <h3><a id="vertico-10-improvements" class="anchor" href="#vertico-10-improvements">¶</a>Vertico 1.0 Improvements</h3><p><a href="https://github.com/minad/vertico">Vertico 1.0</a>
 </p>
+
+<pre><code class="emacs-lisp">
+(vertico-mode 1)
+(marginalia-mode 1)
+
+(<span class="org-keyword">require</span> '<span class="org-constant">orderless</span>)
+(<span class="org-keyword">setq</span> completion-styles '(orderless basic)
+      completion-category-overrides '((file (styles basic partial-completion))))
+
+(<span class="org-keyword">require</span> '<span class="org-constant">vertico-quick</span>)
+(keymap-set vertico-map <span class="org-string">"M-q"</span> #'vertico-quick-insert)
+(keymap-set vertico-map <span class="org-string">"C-q"</span> #'vertico-quick-exit)
+
+(global-set-key <span class="org-string">"\M-R"</span> #'vertico-repeat)
+(add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
+
+(keymap-set vertico-map <span class="org-string">"DEL"</span> #'vertico-directory-delete-char)
+(keymap-set vertico-map <span class="org-string">"M-DEL"</span> #'vertico-directory-delete-word)
+
+(vertico-mouse-mode 1)
+
+(<span class="org-keyword">require</span> '<span class="org-constant">vertico-posframe</span>)
+(vertico-posframe-mode 1)
+
+</code></pre>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>

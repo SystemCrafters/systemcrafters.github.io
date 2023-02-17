@@ -1,6 +1,11 @@
 <!--  -->
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live! - February 10, 2023 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live! - February 10, 2023</h1><p class="blog-post-meta"></p><div>
-<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Support the channel!
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>The video of my FOSDEM 2023 talk is still not up yet!  Keep an eye on this page:
+
+<p><a href="https://fosdem.org/2023/schedule/event/guixhome/">https://fosdem.org/2023/schedule/event/guixhome/</a>
+</p></li>
+
+<li>Support the channel!
 
 <p><strong>Buy Mastering Emacs</strong> with this link <a href="https://www.masteringemacs.org/r/systemcrafters">https://www.masteringemacs.org/r/systemcrafters</a>
 More ways to support: <a href="https://systemcrafters.net/support-the-channel/">https://systemcrafters.net/support-the-channel/</a>
@@ -15,20 +20,74 @@ More ways to support: <a href="https://systemcrafters.net/support-the-channel/">
 <li>Converting to well-designed "home services" for a better experience</li>
 </ul>
 
+<p>Assumption:
+</p>
+
+<ul><li>Some users won't necessarily want to use a full home service to configure some subset of their programs</li>
+<li>They may have an existing configuration file that they want to parameterize</li>
+</ul>
+
 <p>Concerns:
 </p>
 
 <ul><li>Should the configuration files be usable on non-Guix systems too?</li>
 </ul>
 
-<h4><a id="experiment-simplified-home-service-for-existing-config-files" class="anchor" href="#experiment-simplified-home-service-for-existing-config-files">¶</a>Experiment: Simplified home service for existing config files</h4><pre><code class="scheme">
+<p>Check out <kbd>home-stow-migration-service</kbd>:
+</p>
+
+<p><a href="https://issues.guix.gnu.org/issue/60521">https://issues.guix.gnu.org/issue/60521</a>
+</p>
+
+<h4><a id="experiment-simplified-home-service-for-existing-config-files" class="anchor" href="#experiment-simplified-home-service-for-existing-config-files">¶</a>Experiment: Simplified home service for existing config files</h4><p><kbd>test-config.scm</kbd>:
+</p>
+
+<pre><code class="scheme">
+(use-modules
+ (gnu home)
+ (gnu services)
+ (gnu packages base)
+ (daviwil home-services template-file))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">template-files</span> base-path file-list value-alist)
+  (service home-template-file-service-type
+           (home-template-file-configuration
+            (base-path base-path)
+            (files file-list)
+            (values value-alist))))
+
+(home-environment
+ (packages (list grep))
+ (services (list (template-files <span class="org-string">"/home/daviwil/.dotfiles/.files"</span>
+                                 '(<span class="org-string">".config/dunst/dunstrc"</span>
+                                   <span class="org-string">".config/qutebrowser/config.py"</span>)
+                                 '((dunst/font . <span class="org-string">"Iosevka Aile 18"</span>)
+                                   (qutebrowser/zoom . <span class="org-string">"150"</span>))))))
+
+</code></pre>
+
+<p><kbd>~/.dotfiles/daviwil/utils.scm</kbd>:
+</p>
+
+<pre><code class="scheme">
+(<span class="org-keyword">define-module</span> (<span class="org-type">daviwil</span> utils)
+  <span class="org-builtin">#:use-module</span> (gnu packages)
+  <span class="org-builtin">#:use-module</span> (gnu services)
+  <span class="org-builtin">#:use-module</span> (gnu home services)
+  <span class="org-builtin">#:use-module</span> (gnu home services shepherd)
+  <span class="org-builtin">#:use-module</span> (gnu packages freedesktop)
+  <span class="org-builtin">#:use-module</span> (gnu services configuration)
+  <span class="org-builtin">#:use-module</span> (guix gexp)
   <span class="org-builtin">#:use-module</span> (ice-9 regex)
   <span class="org-builtin">#:use-module</span> (ice-9 pretty-print)
   <span class="org-builtin">#:use-module</span> (ice-9 textual-ports)
 
+  <span class="org-builtin">#:export</span> (gather-manifest-packages
+            apply-template-file))
+
 (<span class="org-keyword">define</span> (<span class="org-function-name">apply-template</span> template-string value-alist)
   (regexp-substitute/global #f
-                            <span class="org-string">"\\$\\{([A-Za-z\\-]+)\\}"</span>
+                            <span class="org-string">"\\$\\{([A-Za-z/\\-]+)\\}"</span>
                             template-string
                             'pre
                             (<span class="org-keyword">lambda</span> (m)
@@ -36,7 +95,7 @@ More ways to support: <a href="https://systemcrafters.net/support-the-channel/">
                                                  value-alist)))
                                 (<span class="org-keyword">if</span> entry
                                     (cdr entry)
-                                    <span class="org-string">"Not found!"</span>)))
+                                    <span class="org-string">"VALUE NOT FOUND"</span>)))
                             'post))
 
 (<span class="org-keyword">define</span> (<span class="org-function-name">apply-template-file</span> file-path value-alist)
@@ -44,9 +103,6 @@ More ways to support: <a href="https://systemcrafters.net/support-the-channel/">
     (<span class="org-keyword">lambda</span> (port)
       (apply-template (get-string-all port)
                       value-alist))))
-
-(apply-template-file <span class="org-string">"/home/daviwil/.dotfiles/daviwil/home-services/qute-config.py"</span> '((default-zoom . 180)))
-
 </code></pre>
 
 <h3><a id="creating-shareable-configuration-layers" class="anchor" href="#creating-shareable-configuration-layers">¶</a>Creating shareable configuration layers</h3><ul><li>This requires well-designed home services, either in the main Guix channel or a community channel</li>
