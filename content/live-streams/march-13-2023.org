@@ -1,0 +1,73 @@
+#+title: System Crafters Live - March 17, 2023
+
+* Updates
+
+- We likely won't have a stream next week, March 24!
+- Check out the MNT Pocket Reform: https://www.crowdsupply.com/mnt/pocket-reform
+- Support Prot in improving his housing situation: https://youtu.be/zIeNfX9SuZou
+  https://github.com/sponsors/protesilaos
+
+* Finding New Emacs Packages
+
+Let's go look for interesting Emacs packages to try!
+
+- [[https://elpa.nongnu.org/nongnu/writegood-mode.html][writegood-mode]]
+- [[https://codeberg.org/akib/emacs-workroom][workroom]]
+- [[https://codeberg.org/acdw/machine.el][machine.el]]
+- [[https://bard.github.io/emacs-run-command/][run-command]] and [[https://bard.github.io/emacs-director][director]]
+- [[https://github.com/Malabarba/beacon][beacon]]
+- [[https://github.com/rnkn/olivetti][olivetti]] (also Prot's package [[https://protesilaos.com/emacs/fontaine][logos]])
+- [[https://protesilaos.com/emacs/beframe][beframe]]
+- [[https://protesilaos.com/emacs/ef-themes][ef-themes]]
+- [[https://github.com/mohkale/compile-multi][compile-multi]]
+- [[https://github.com/namilus/denote-menu][denote-menu]]
+- [[https://codeberg.org/akib/emacs-eat][eat]]
+- [[https://github.com/emacsmirror/git-timemachine][git-timemachine]]
+- [[https://github.com/AmaiKinono/puni][puni]]
+- meow vs god-mode vs boon ??? (Another stream)
+
+#+begin_src emacs-lisp
+
+(straight-use-package '(machine :repo "https://codeberg.org/acdw/machine.el"))
+
+#+end_src
+
+#+begin_src emacs-lisp
+
+(defun dw/open-file-in-directory (initial-path)
+  (let ((default-directory (expand-file-name initial-path)))
+    (call-interactively #'find-file)))
+
+#+end_src
+
+Logos config:
+
+#+begin_src emacs-lisp
+
+(require 'logos)
+(setq logos-outlines-are-pages t)
+(setq-default logos-hide-cursor nil
+              logos-hide-mode-line t
+              logos-hide-buffer-boundaries t
+              logos-hide-fringe t
+              logos-variable-pitch t
+              logos-buffer-read-only nil
+              logos-scroll-lock nil
+              logos-olivetti t)
+#+end_src
+
+#+begin_src emacs-lisp
+
+
+(straight-use-package
+ '(eat :type git
+       :host codeberg
+       :repo "https://codeberg.org/akib/emacs-eat"
+       :files ("*.el" ("term" "term/*.el") "*.texi"
+               "*.ti" ("terminfo/e" "terminfo/e/*")
+               ("terminfo/65" "terminfo/65/*")
+               ("integration" "integration/*")
+               (:exclude ".dir-locals.el" "*-tests.el"))))
+
+(straight-use-package '(eat :type git :host github :repo "emacsmirror/eat"))
+#+end_src
