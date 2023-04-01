@@ -1,0 +1,311 @@
+#+title: System Crafters Live - March 31, 2023
+
+* Updates
+
+- Trying a new donation provider for this stream, Ko-Fi:
+
+  https://ko-fi.com/SystemCrafters
+
+* Crafting the Future: AI Assistants in Emacs
+
+** Trying out GPT-3 and GPT-4 with gptel
+
+- https://github.com/karthink/gptel
+
+My gptel configuration:
+
+#+begin_src emacs-lisp
+
+  (defun dw/read-openai-key ()
+    (with-temp-buffer
+      (insert-file-contents "~/key.txt")
+      (string-trim (buffer-string))))
+
+  (use-package gptel
+    :straight t
+    :init
+    (setq-default gptel-model "gpt-3.5-turbo"
+                  gptel-playback t
+                  gptel-default-mode 'org-mode
+                  gptel-api-key #'dw/read-openai-key))
+
+#+end_src
+
+*** Build an s-expression flash light mode that progressively dims expressions further from your mouse cursor
+
+Here's some Elisp code to build an s-expression flash light mode that progressively dims expressions further from your mouse cursor:
+
+#+begin_src  emacs-lisp
+(defvar s-exp-flash-light-overlay nil)
+
+(defun s-exp-flash-light-hide-overlay ()
+  (when (overlayp s-exp-flash-light-overlay)
+    (delete-overlay s-exp-flash-light-overlay)
+    (setq s-exp-flash-light-overlay nil)))
+
+(defun s-exp-flash-light-show-overlay ()
+  (let* ((posn (event-start last-input-event))
+         (exp (ignore-errors (save-excursion
+                               (goto-char posn)
+                               (forward-sexp -1)
+                               (let ((beg (point)))
+                                 (forward-sexp 1)
+                                 (buffer-substring-no-properties beg (point)))))))
+    (when exp
+      (let ((ov (make-overlay posn (1+ posn))))
+        (overlay-put ov 'face '(:background "gray20"))
+        (setq s-exp-flash-light-overlay ov)))))
+
+(defun s-exp-flash-light-maybe-show-overlay ()
+  (when (mouse-event-p last-input-event)
+    (s-exp-flash-light-show-overlay)))
+
+(add-hook 'pre-command-hook 's-exp-flash-light-hide-overlay)
+(add-hook 'post-command-hook 's-exp-flash-light-maybe-show-overlay)
+#+end_src
+
+This code defines two functions, =s-exp-flash-light-hide-overlay= and =s-exp-flash-light-show-overlay=, and a third function (=s-exp-flash-light-maybe-show-overlay=) to trigger the second function on mouse events.
+
+The =s-exp-flash-light-show-overlay= function gets the nearest s-expression to the cursor, creates an overlay at the cursor position, and sets the overlay's face to a dark gray. The =s-exp-flash-light-hide-overlay= function deletes the overlay if it exists. Finally, =s-exp-flash-light-maybe-show-overlay= runs after every command, checks if the last input event was a mouse event, and calls =s-exp-flash-light-show-overlay= if it was.
+
+Note that you can customize the overlay face to adjust the dimming effect as desired.
+
+*** Updated version:
+
+#+begin_src emacs-lisp
+
+(defvar s-exp-flash-light-overlay nil)
+
+(defun s-exp-flash-light-hide-overlay ()
+  (when (overlayp s-exp-flash-light-overlay)
+    (delete-overlay s-exp-flash-light-overlay)
+    (setq s-exp-flash-light-overlay nil)))
+
+(defun s-exp-flash-light-show-overlay ()
+  (let* ((exp (ignore-errors (save-excursion
+                               (goto-char (point))
+                               (backward-sexp)
+                               (let ((beg (point)))
+                                 (forward-sexp 1)
+                                 (buffer-substring-no-properties beg (point)))))))
+    (when exp
+      (let* ((current-pos (point))
+             (start-pos (save-excursion (goto-char (1- (previous-single-property-change current-pos 'face))) (point)))
+             (exp-start-pos (save-excursion (goto-char start-pos) (forward-sexp) (point)))
+             (exp-end-pos (save-excursion (goto-char exp-start-pos) (forward-sexp) (point)))
+             (point-distance-to-exp-start (- current-pos exp-start-pos))
+             (point-distance-to-exp-end (- current-pos exp-end-pos))
+             (total-exp-distance (- exp-end-pos exp-start-pos))
+             (dimming-pct (/ (min point-distance-to-exp-start point-distance-to-exp-end)
+                             (/ total-exp-distance 2.0))))
+        (let ((overlay-face `(:background ,(format "gray%02x" (round (* 20 dimming-pct))))))
+          (when (overlayp s-exp-flash-light-overlay)
+            (move-overlay s-exp-flash-light-overlay (1- start-pos) (1+ exp-end-pos))
+            (overlay-put s-exp-flash-light-overlay 'face overlay-face))
+          (unless (overlayp s-exp-flash-light-overlay)
+            (setq s-exp-flash-light-overlay (make-overlay (1- start-pos) (1+ exp-end-pos)))
+            (overlay-put s-exp-flash-light-overlay 'face overlay-face)))))))
+
+(defun s-exp-flash-light-maybe-show-overlay ()
+  (when (mouse-event-p last-input-event)
+    (s-exp-flash-light-show-overlay)))
+
+(add-hook 'pre-command-hook 's-exp-flash-light-hide-overlay nil t)
+(add-hook 'post-command-hook 's-exp-flash-light-maybe-show-overlay nil t)
+
+#+end_src
+
+*** GPT-4's minimal Emacs configuration
+
+#+begin_src emacs-lisp
+
+;; Configure straight.el package manager
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Install and configure packages
+(straight-use-package 'use-package)
+(setq use-package-always-ensure t) ;; Automatically install packages
+
+(use-package evil
+  :straight t
+  :init
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-integration t) ;; Enable C-u scrolling in evil
+  :config (evil-mode 1))
+
+(use-package avy
+  :straight t
+  :bind ("C-." . avy-goto-word-or-subword-1))
+
+(use-package eglot
+  :straight t)
+
+(use-package magit
+  :straight t
+  :bind (("C-x g" . magit-status)))
+
+(use-package org
+  :straight t
+  :pin org
+  :hook
+  (org-mode . visual-line-mode) ;; enable word wrapping
+  (org-mode . org-indent-mode) ;; visually indent content based on header hierarchy
+  :custom
+  ;; Set the default font to a nice monospace font
+  (org-fontify-whole-heading-line t)
+  (org-fontify-done-headline t)
+  (org-fontify-quote-and-verse-blocks t)
+  (org-hide-emphasis-markers t)
+  (org-imenu-depth 8) ;; allow for 8 levels of header indent
+  (org-pretty-entities t) ;; Support TeX characters, e.g. \to
+  (org-tags-column 0) ;; Don't show a separate column for tags
+  (org-use-speed-commands t) ;; Quick access with single-letter speed commands
+
+  ;; Configure heading appearance
+  (org-bullets-bullet-list '("●" "○" "▸" "◆" "◇" "⟐"))
+  (org-ellipsis " ▼ ")
+  (org-highest-priority ?A)
+  (org-lowest-priority ?F)
+  (org-priority-faces
+   '((?A . (:foreground "#e45649" :weight bold))
+     (?B . (:foreground "#da8548" :weight normal))
+     (?C . (:foreground "#0098dd" :weight normal))
+     (?D . (:foreground "#b9ca4a" :weight normal))
+     (?E . (:foreground "#999999" :weight normal))
+     (?F . (:foreground "#888888" :weight normal))))
+  (org-todo-keyword-faces
+   '(("TODO" . (:foreground "#8888FF" :weight bold))
+     ("NEXT" . (:foreground "#88FF88" :weight bold))
+     ("WAIT" . (:foreground "#FF8800" :weight bold))
+     ("DONE" . (:foreground "#888888" :weight bold))))
+  :config
+  ;; Configure the appearance of source code blocks
+  (setq org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-src-preserve-indentation t
+        org-src-window-setup 'current-window
+        org-confirm-babel-evaluate nil)
+
+  ;; Configure the behavior of tables
+  (setq org-table-copy-increment nil) ;; Copying a table should not increment numeric fields
+  (add-hook 'org-mode-hook 'org-table-sticky-header-mode)
+
+  ;; Include some additional useful packages
+
+  (use-package org-bullets
+    :straight t
+    :commands org-bullets-mode
+    :hook (org-mode . org-bullets-mode))
+
+  (use-package toc-org
+    :straight t
+    :commands toc-org-enable
+    :hook (org-mode . toc-org-enable))
+
+  (use-package org-tempo
+    :straight t))
+
+(use-package corfu
+  :straight t
+  :init
+  (setq corfu-cycle t
+        corfu-auto t
+        corfu-auto-delay 0.3
+        corfu-auto-prefix 1)
+  :config
+  (global-corfu-mode))
+
+(use-package embark
+  :straight t
+  :bind (("C-S-a" . embark-act)
+         ("M-a" . embark-prefix-help-command)))
+
+(use-package orderless
+  :straight t
+  :custom (completion-styles '(orderless)))
+
+(use-package marginalia
+  :straight t
+  :init
+  (marginalia-mode))
+
+(use-package vertico
+  :straight t
+  :init
+  (vertico-mode))
+
+;; Set the color theme
+(use-package doom-themes
+  :straight t
+  :init (load-theme 'doom-gruvbox t))
+
+;; Set up your desired key bindings
+(global-set-key (kbd "C-x C-x") 'execute-extended-command)
+
+#+end_src
+
+** Emacs Lisp hacking with GitHub Copilot
+
+- https://github.com/zerolfx/copilot.el
+
+#+begin_src emacs-lisp
+
+  (defun my/copilot-tab ()
+    (interactive)
+    (or (copilot-accept-completion)
+        (indent-for-tab-command)))
+
+  ;; You either have to use straight.el, Quelpa, or clone the repo directly for now
+  (straight-use-package '(copilot :host github :repo "zerolfx/copilot.el" :files ("dist" "*.el")))
+  (require 'copilot)
+
+  (with-eval-after-load 'copilot
+    (evil-define-key 'insert copilot-mode-map
+      (kbd "<tab>") #'my/copilot-tab))
+
+  (add-hook 'prog-mode-hook 'copilot-mode)
+
+#+end_src
+
+** Should we use AI Assistants in Emacs?
+
+[This answer was written by GPT-4]
+
+Using AI assistants in Emacs can be a powerful tool to boost productivity and efficiency, especially for tasks such as autocompletion and code generation. However, it is important to keep in mind that they are not perfect and may require monitoring and tweaking to ensure that they are producing high-quality results. Ultimately, the decision to use AI assistants in Emacs is up to personal preference and individual needs.
+
+** What are some concerns with using AI assistants for writing and programming?
+
+[This answer was written by GPT-4]
+
+There are several concerns with using AI assistants for writing and programming, such as:
+
+1. Reliability: AI assistants are not perfect and may produce incorrect or irrelevant suggestions that could negatively impact the quality of your code or writing.
+
+2. Security: AI assistants may use machine learning models that are trained on large datasets that could contain sensitive information. There are concerns about how this data is protected and whether it could be accessed by malicious actors.
+
+3. Bias: AI assistants can perpetuate and amplify existing biases in programming and writing, such as gender or racial bias.
+
+4. Ethical concerns: AI assistants can be trained on user data, and there are ethical concerns about the use of this data for commercial or political purposes.
+
+5. Dependence: Over-reliance on AI assistants could lead to a decrease in individual problem-solving abilities or result in a loss of human creativity and imagination.
+
+It is essential to be aware of these concerns and address them before using AI assistants for writing and programming tasks.
+
+** Is it possible to release code generated by Copilot or GPT-4 under an open source license?
+
+[This answer was written by GPT-4]
+
+The code generated by Copilot and GPT-4 is ultimately owned by the creators of these systems, and there are potential legal and ethical issues with releasing it under an open source license. Since the code is generated using proprietary models and data, it may not be legally permissible for it to be released under an open source license. Additionally, while the code may technically be open sourced, it may raise ethical concerns around ownership and attribution for the generated code.
+
+Ultimately, it is important to carefully evaluate the legal and ethical implications of releasing code generated by AI systems under an open source license before doing so. It may require consulting with legal experts and taking steps to clarify attribution and ownership of the generated code.
