@@ -1,0 +1,305 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live - March 31, 2023 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live - March 31, 2023</h1><p class="blog-post-meta"></p><div>
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Trying a new donation provider for this stream, Ko-Fi:
+
+<p><a href="https://ko-fi.com/SystemCrafters">https://ko-fi.com/SystemCrafters</a>
+</p></li>
+</ul>
+
+<h2><a id="crafting-the-future-ai-assistants-in-emacs" class="anchor" href="#crafting-the-future-ai-assistants-in-emacs">¶</a>Crafting the Future: AI Assistants in Emacs</h2><h3><a id="trying-out-gpt-3-and-gpt-4-with-gptel" class="anchor" href="#trying-out-gpt-3-and-gpt-4-with-gptel">¶</a>Trying out GPT-3 and GPT-4 with gptel</h3><ul><li><a href="https://github.com/karthink/gptel">https://github.com/karthink/gptel</a></li>
+</ul>
+
+<p>My gptel configuration:
+</p>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">dw/read-openai-key</span> ()
+  (<span class="org-keyword">with-temp-buffer</span>
+    (insert-file-contents <span class="org-string">"~/key.txt"</span>)
+    (string-trim (buffer-string))))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">gptel</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq-default</span> gptel-model <span class="org-string">"gpt-3.5-turbo"</span>
+                gptel-playback t
+                gptel-default-mode 'org-mode
+                gptel-api-key #'dw/read-openai-key))
+
+</code></pre>
+
+<h4><a id="build-an-s-expression-flash-light-mode-that-progressively-dims-expressions-further-from-your-mouse-cursor" class="anchor" href="#build-an-s-expression-flash-light-mode-that-progressively-dims-expressions-further-from-your-mouse-cursor">¶</a>Build an s-expression flash light mode that progressively dims expressions further from your mouse cursor</h4><p>Here's some Elisp code to build an s-expression flash light mode that progressively dims expressions further from your mouse cursor:
+</p>
+
+<pre><code class="emacs-lisp">(<span class="org-keyword">defvar</span> <span class="org-variable-name">s-exp-flash-light-overlay</span> nil)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">s-exp-flash-light-hide-overlay</span> ()
+  (<span class="org-keyword">when</span> (overlayp s-exp-flash-light-overlay)
+    (delete-overlay s-exp-flash-light-overlay)
+    (<span class="org-keyword">setq</span> s-exp-flash-light-overlay nil)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">s-exp-flash-light-show-overlay</span> ()
+  (<span class="org-keyword">let*</span> ((posn (event-start last-input-event))
+         (exp (<span class="org-keyword">ignore-errors</span> (<span class="org-keyword">save-excursion</span>
+                               (goto-char posn)
+                               (forward-sexp -1)
+                               (<span class="org-keyword">let</span> ((beg (point)))
+                                 (forward-sexp 1)
+                                 (buffer-substring-no-properties beg (point)))))))
+    (<span class="org-keyword">when</span> exp
+      (<span class="org-keyword">let</span> ((ov (make-overlay posn (1+ posn))))
+        (overlay-put ov 'face '(<span class="org-builtin">:background</span> <span class="org-string">"gray20"</span>))
+        (<span class="org-keyword">setq</span> s-exp-flash-light-overlay ov)))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">s-exp-flash-light-maybe-show-overlay</span> ()
+  (<span class="org-keyword">when</span> (mouse-event-p last-input-event)
+    (s-exp-flash-light-show-overlay)))
+
+(add-hook 'pre-command-hook 's-exp-flash-light-hide-overlay)
+(add-hook 'post-command-hook 's-exp-flash-light-maybe-show-overlay)
+</code></pre>
+
+<p>This code defines two functions, <kbd>s-exp-flash-light-hide-overlay</kbd> and <kbd>s-exp-flash-light-show-overlay</kbd>, and a third function (<kbd>s-exp-flash-light-maybe-show-overlay</kbd>) to trigger the second function on mouse events.
+</p>
+
+<p>The <kbd>s-exp-flash-light-show-overlay</kbd> function gets the nearest s-expression to the cursor, creates an overlay at the cursor position, and sets the overlay's face to a dark gray. The <kbd>s-exp-flash-light-hide-overlay</kbd> function deletes the overlay if it exists. Finally, <kbd>s-exp-flash-light-maybe-show-overlay</kbd> runs after every command, checks if the last input event was a mouse event, and calls <kbd>s-exp-flash-light-show-overlay</kbd> if it was.
+</p>
+
+<p>Note that you can customize the overlay face to adjust the dimming effect as desired.
+</p>
+
+<h4><a id="updated-version" class="anchor" href="#updated-version">¶</a>Updated version:</h4><pre><code class="emacs-lisp">
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">s-exp-flash-light-overlay</span> nil)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">s-exp-flash-light-hide-overlay</span> ()
+  (<span class="org-keyword">when</span> (overlayp s-exp-flash-light-overlay)
+    (delete-overlay s-exp-flash-light-overlay)
+    (<span class="org-keyword">setq</span> s-exp-flash-light-overlay nil)))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">s-exp-flash-light-show-overlay</span> ()
+  (<span class="org-keyword">let*</span> ((exp (<span class="org-keyword">ignore-errors</span> (<span class="org-keyword">save-excursion</span>
+                               (goto-char (point))
+                               (backward-sexp)
+                               (<span class="org-keyword">let</span> ((beg (point)))
+                                 (forward-sexp 1)
+                                 (buffer-substring-no-properties beg (point)))))))
+    (<span class="org-keyword">when</span> exp
+      (<span class="org-keyword">let*</span> ((current-pos (point))
+             (start-pos (<span class="org-keyword">save-excursion</span> (goto-char (1- (previous-single-property-change current-pos 'face))) (point)))
+             (exp-start-pos (<span class="org-keyword">save-excursion</span> (goto-char start-pos) (forward-sexp) (point)))
+             (exp-end-pos (<span class="org-keyword">save-excursion</span> (goto-char exp-start-pos) (forward-sexp) (point)))
+             (point-distance-to-exp-start (- current-pos exp-start-pos))
+             (point-distance-to-exp-end (- current-pos exp-end-pos))
+             (total-exp-distance (- exp-end-pos exp-start-pos))
+             (dimming-pct (/ (min point-distance-to-exp-start point-distance-to-exp-end)
+                             (/ total-exp-distance 2.0))))
+        (<span class="org-keyword">let</span> ((overlay-face `(<span class="org-builtin">:background</span> ,(format <span class="org-string">"gray%02x"</span> (round (* 20 dimming-pct))))))
+          (<span class="org-keyword">when</span> (overlayp s-exp-flash-light-overlay)
+            (move-overlay s-exp-flash-light-overlay (1- start-pos) (1+ exp-end-pos))
+            (overlay-put s-exp-flash-light-overlay 'face overlay-face))
+          (<span class="org-keyword">unless</span> (overlayp s-exp-flash-light-overlay)
+            (<span class="org-keyword">setq</span> s-exp-flash-light-overlay (make-overlay (1- start-pos) (1+ exp-end-pos)))
+            (overlay-put s-exp-flash-light-overlay 'face overlay-face)))))))
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">s-exp-flash-light-maybe-show-overlay</span> ()
+  (<span class="org-keyword">when</span> (mouse-event-p last-input-event)
+    (s-exp-flash-light-show-overlay)))
+
+(add-hook 'pre-command-hook 's-exp-flash-light-hide-overlay nil t)
+(add-hook 'post-command-hook 's-exp-flash-light-maybe-show-overlay nil t)
+
+</code></pre>
+
+<h4><a id="gpt-4s-minimal-emacs-configuration" class="anchor" href="#gpt-4s-minimal-emacs-configuration">¶</a>GPT-4's minimal Emacs configuration</h4><pre><code class="emacs-lisp">
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Configure straight.el package manager</span>
+(<span class="org-keyword">defvar</span> <span class="org-variable-name">bootstrap-version</span>)
+(<span class="org-keyword">let</span> ((bootstrap-file
+       (expand-file-name <span class="org-string">"straight/repos/straight.el/bootstrap.el"</span> user-emacs-directory))
+      (bootstrap-version 5))
+  (<span class="org-keyword">unless</span> (file-exists-p bootstrap-file)
+    (<span class="org-keyword">with-current-buffer</span>
+        (url-retrieve-synchronously
+         <span class="org-string">"https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"</span>
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Install and configure packages</span>
+(straight-use-package 'use-package)
+(<span class="org-keyword">setq</span> use-package-always-ensure t) <span class="org-comment-delimiter">;; </span><span class="org-comment">Automatically install packages</span>
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">evil</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> evil-want-C-u-scroll t)
+  (<span class="org-keyword">setq</span> evil-want-integration t) <span class="org-comment-delimiter">;; </span><span class="org-comment">Enable C-u scrolling in evil</span>
+  <span class="org-builtin">:config</span> (evil-mode 1))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">avy</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:bind</span> (<span class="org-string">"C-."</span> . avy-goto-word-or-subword-1))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">eglot</span>
+  <span class="org-builtin">:straight</span> t)
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">magit</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-x g"</span> . magit-status)))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">org</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:pin</span> org
+  <span class="org-builtin">:hook</span>
+  (org-mode . visual-line-mode) <span class="org-comment-delimiter">;; </span><span class="org-comment">enable word wrapping</span>
+  (org-mode . org-indent-mode) <span class="org-comment-delimiter">;; </span><span class="org-comment">visually indent content based on header hierarchy</span>
+  <span class="org-builtin">:custom</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Set the default font to a nice monospace font</span>
+  (org-fontify-whole-heading-line t)
+  (org-fontify-done-headline t)
+  (org-fontify-quote-and-verse-blocks t)
+  (org-hide-emphasis-markers t)
+  (org-imenu-depth 8) <span class="org-comment-delimiter">;; </span><span class="org-comment">allow for 8 levels of header indent</span>
+  (org-pretty-entities t) <span class="org-comment-delimiter">;; </span><span class="org-comment">Support TeX characters, e.g. \to</span>
+  (org-tags-column 0) <span class="org-comment-delimiter">;; </span><span class="org-comment">Don't show a separate column for tags</span>
+  (org-use-speed-commands t) <span class="org-comment-delimiter">;; </span><span class="org-comment">Quick access with single-letter speed commands</span>
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Configure heading appearance</span>
+  (org-bullets-bullet-list '(<span class="org-string">"&#9679;"</span> <span class="org-string">"&#9675;"</span> <span class="org-string">"&#9656;"</span> <span class="org-string">"&#9670;"</span> <span class="org-string">"&#9671;"</span> <span class="org-string">"&#10192;"</span>))
+  (org-ellipsis <span class="org-string">" &#9660; "</span>)
+  (org-highest-priority ?A)
+  (org-lowest-priority ?F)
+  (org-priority-faces
+   '((?A . (<span class="org-builtin">:foreground</span> <span class="org-string">"#e45649"</span> <span class="org-builtin">:weight</span> bold))
+     (?B . (<span class="org-builtin">:foreground</span> <span class="org-string">"#da8548"</span> <span class="org-builtin">:weight</span> normal))
+     (?C . (<span class="org-builtin">:foreground</span> <span class="org-string">"#0098dd"</span> <span class="org-builtin">:weight</span> normal))
+     (?D . (<span class="org-builtin">:foreground</span> <span class="org-string">"#b9ca4a"</span> <span class="org-builtin">:weight</span> normal))
+     (?E . (<span class="org-builtin">:foreground</span> <span class="org-string">"#999999"</span> <span class="org-builtin">:weight</span> normal))
+     (?F . (<span class="org-builtin">:foreground</span> <span class="org-string">"#888888"</span> <span class="org-builtin">:weight</span> normal))))
+  (org-todo-keyword-faces
+   '((<span class="org-string">"TODO"</span> . (<span class="org-builtin">:foreground</span> <span class="org-string">"#8888FF"</span> <span class="org-builtin">:weight</span> bold))
+     (<span class="org-string">"NEXT"</span> . (<span class="org-builtin">:foreground</span> <span class="org-string">"#88FF88"</span> <span class="org-builtin">:weight</span> bold))
+     (<span class="org-string">"WAIT"</span> . (<span class="org-builtin">:foreground</span> <span class="org-string">"#FF8800"</span> <span class="org-builtin">:weight</span> bold))
+     (<span class="org-string">"DONE"</span> . (<span class="org-builtin">:foreground</span> <span class="org-string">"#888888"</span> <span class="org-builtin">:weight</span> bold))))
+  <span class="org-builtin">:config</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Configure the appearance of source code blocks</span>
+  (<span class="org-keyword">setq</span> org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-src-preserve-indentation t
+        org-src-window-setup 'current-window
+        org-confirm-babel-evaluate nil)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Configure the behavior of tables</span>
+  (<span class="org-keyword">setq</span> org-table-copy-increment nil) <span class="org-comment-delimiter">;; </span><span class="org-comment">Copying a table should not increment numeric fields</span>
+  (add-hook 'org-mode-hook 'org-table-sticky-header-mode)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Include some additional useful packages</span>
+
+  (<span class="org-keyword">use-package</span> <span class="org-constant">org-bullets</span>
+    <span class="org-builtin">:straight</span> t
+    <span class="org-builtin">:commands</span> org-bullets-mode
+    <span class="org-builtin">:hook</span> (org-mode . org-bullets-mode))
+
+  (<span class="org-keyword">use-package</span> <span class="org-constant">toc-org</span>
+    <span class="org-builtin">:straight</span> t
+    <span class="org-builtin">:commands</span> toc-org-enable
+    <span class="org-builtin">:hook</span> (org-mode . toc-org-enable))
+
+  (<span class="org-keyword">use-package</span> <span class="org-constant">org-tempo</span>
+    <span class="org-builtin">:straight</span> t))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">corfu</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:init</span>
+  (<span class="org-keyword">setq</span> corfu-cycle t
+        corfu-auto t
+        corfu-auto-delay 0.3
+        corfu-auto-prefix 1)
+  <span class="org-builtin">:config</span>
+  (global-corfu-mode))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">embark</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:bind</span> ((<span class="org-string">"C-S-a"</span> . embark-act)
+         (<span class="org-string">"M-a"</span> . embark-prefix-help-command)))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">orderless</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:custom</span> (completion-styles '(orderless)))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">marginalia</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:init</span>
+  (marginalia-mode))
+
+(<span class="org-keyword">use-package</span> <span class="org-constant">vertico</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:init</span>
+  (vertico-mode))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set the color theme</span>
+(<span class="org-keyword">use-package</span> <span class="org-constant">doom-themes</span>
+  <span class="org-builtin">:straight</span> t
+  <span class="org-builtin">:init</span> (load-theme 'doom-gruvbox t))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Set up your desired key bindings</span>
+(global-set-key (kbd <span class="org-string">"C-x C-x"</span>) 'execute-extended-command)
+
+</code></pre>
+
+<h3><a id="emacs-lisp-hacking-with-github-copilot" class="anchor" href="#emacs-lisp-hacking-with-github-copilot">¶</a>Emacs Lisp hacking with GitHub Copilot</h3><ul><li><a href="https://github.com/zerolfx/copilot.el">https://github.com/zerolfx/copilot.el</a></li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(<span class="org-keyword">defun</span> <span class="org-function-name">my/copilot-tab</span> ()
+  (<span class="org-keyword">interactive</span>)
+  (<span class="org-keyword">or</span> (copilot-accept-completion)
+      (indent-for-tab-command)))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">You either have to use straight.el, Quelpa, or clone the repo directly for now</span>
+(straight-use-package '(copilot <span class="org-builtin">:host</span> github <span class="org-builtin">:repo</span> <span class="org-string">"zerolfx/copilot.el"</span> <span class="org-builtin">:files</span> (<span class="org-string">"dist"</span> <span class="org-string">"*.el"</span>)))
+(<span class="org-keyword">require</span> '<span class="org-constant">copilot</span>)
+
+(<span class="org-keyword">with-eval-after-load</span> 'copilot
+  (evil-define-key 'insert copilot-mode-map
+    (kbd <span class="org-string">"&lt;tab&gt;"</span>) #'my/copilot-tab))
+
+(add-hook 'prog-mode-hook 'copilot-mode)
+
+</code></pre>
+
+<h3><a id="should-we-use-ai-assistants-in-emacs" class="anchor" href="#should-we-use-ai-assistants-in-emacs">¶</a>Should we use AI Assistants in Emacs?</h3><p>[This answer was written by GPT-4]
+</p>
+
+<p>Using AI assistants in Emacs can be a powerful tool to boost productivity and efficiency, especially for tasks such as autocompletion and code generation. However, it is important to keep in mind that they are not perfect and may require monitoring and tweaking to ensure that they are producing high-quality results. Ultimately, the decision to use AI assistants in Emacs is up to personal preference and individual needs.
+</p>
+
+<h3><a id="what-are-some-concerns-with-using-ai-assistants-for-writing-and-programming" class="anchor" href="#what-are-some-concerns-with-using-ai-assistants-for-writing-and-programming">¶</a>What are some concerns with using AI assistants for writing and programming?</h3><p>[This answer was written by GPT-4]
+</p>
+
+<p>There are several concerns with using AI assistants for writing and programming, such as:
+</p>
+
+<ol><li>Reliability: AI assistants are not perfect and may produce incorrect or irrelevant suggestions that could negatively impact the quality of your code or writing.</li>
+
+<li>Security: AI assistants may use machine learning models that are trained on large datasets that could contain sensitive information. There are concerns about how this data is protected and whether it could be accessed by malicious actors.</li>
+
+<li>Bias: AI assistants can perpetuate and amplify existing biases in programming and writing, such as gender or racial bias.</li>
+
+<li>Ethical concerns: AI assistants can be trained on user data, and there are ethical concerns about the use of this data for commercial or political purposes.</li>
+
+<li>Dependence: Over-reliance on AI assistants could lead to a decrease in individual problem-solving abilities or result in a loss of human creativity and imagination.</li>
+</ol>
+
+<p>It is essential to be aware of these concerns and address them before using AI assistants for writing and programming tasks.
+</p>
+
+<h3><a id="is-it-possible-to-release-code-generated-by-copilot-or-gpt-4-under-an-open-source-license" class="anchor" href="#is-it-possible-to-release-code-generated-by-copilot-or-gpt-4-under-an-open-source-license">¶</a>Is it possible to release code generated by Copilot or GPT-4 under an open source license?</h3><p>[This answer was written by GPT-4]
+</p>
+
+<p>The code generated by Copilot and GPT-4 is ultimately owned by the creators of these systems, and there are potential legal and ethical issues with releasing it under an open source license. Since the code is generated using proprietary models and data, it may not be legally permissible for it to be released under an open source license. Additionally, while the code may technically be open sourced, it may raise ethical concerns around ownership and attribution for the generated code.
+</p>
+
+<p>Ultimately, it is important to carefully evaluate the legal and ethical implications of releasing code generated by AI systems under an open source license before doing so. It may require consulting with legal experts and taking steps to clarify attribution and ownership of the generated code.
+</p>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
