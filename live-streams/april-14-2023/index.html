@@ -1,0 +1,55 @@
+<!--  -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta author="David Wilson"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><link rel="stylesheet" href="/css/bootstrap.min.css"/><link rel="stylesheet" href="/fonts/iosevka-aile/iosevka-aile.css"/><link rel="stylesheet" href="/fonts/jetbrains-mono/jetbrains-mono.css"/><link rel="stylesheet" href="/css/code.css"/><link rel="stylesheet" href="/css/site.css"/><script defer="defer" data-domain="systemcrafters.net" src="https://plausible.io/js/plausible.js"></script><title>System Crafters Live - April 14, 2023 - System Crafters</title></head><body><div class="blog-header"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-8"><div class="blog-title">System Crafters</div></div><div class="col-sm col-md"><div class="blog-description text-sm-left text-md-right text-lg-right text-xl-right"></div></div></div></div></div><div class="blog-masthead"><div class="container"><div class="row align-items-center justify-content-between"><div class="col-sm-12 col-md-12"><nav class="nav"><a class="nav-link" href="/">Home</a> <a class="nav-link" href="/videos">Videos</a> <a class="nav-link" href="https://wiki.systemcrafters.net">Wiki</a> <a class="nav-link" href="https://store.systemcrafters.net?utm_source=sc-site-nav">Merch Store</a> <a class="nav-link" href="/support-the-channel">Support The Channel</a></nav></div></div></div></div><div class="container"><div class="row"><div class="col-sm-12 blog-main"><div class="blog-post"><h1 class="blog-post-title">System Crafters Live - April 14, 2023</h1><p class="blog-post-meta"></p><div>
+<h2><a id="updates" class="anchor" href="#updates">¶</a>Updates</h2><ul><li>Finish your taxes!</li>
+
+<li>I've started working on a book about building a modern desktop environment with Sway in Guix (and Linux)!
+
+<p>Keep an eye out here for early access: <a href="https://ko-fi.com/SystemCrafters">https://ko-fi.com/SystemCrafters</a>
+</p></li>
+</ul>
+
+<h2><a id="exploring-d-bus-with-emacs-apis" class="anchor" href="#exploring-d-bus-with-emacs-apis">¶</a>Exploring D-Bus with Emacs APIs</h2><p>D-Bus is a standard part of the Linux desktop environment!  Emacs provides a nice set of functions for interacting with system-level and user-level D-Bus services.
+</p>
+
+<p>We'll be exploring D-Bus with these functions in the <kbd>M-x ielm</kbd> REPL!
+</p>
+
+<ul><li><a href="https://www.freedesktop.org/wiki/Software/dbus/">https://www.freedesktop.org/wiki/Software/dbus/</a></li>
+<li><a href="https://www.freedesktop.org/wiki/Software/DbusProjects/">https://www.freedesktop.org/wiki/Software/DbusProjects/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/D-Bus">https://en.wikipedia.org/wiki/D-Bus</a></li>
+<li><a href="https://www.gnu.org/software/emacs/manual/html_mono/dbus.html">https://www.gnu.org/software/emacs/manual/html_mono/dbus.html</a></li>
+<li><a href="https://github.com/flatpak/xdg-desktop-portal">https://github.com/flatpak/xdg-desktop-portal</a></li>
+<li><a href="https://stackoverflow.com/questions/4474290/how-do-i-use-emacss-dbus-interface">https://stackoverflow.com/questions/4474290/how-do-i-use-emacss-dbus-interface</a></li>
+<li><a href="https://github.com/sinic/ednc">https://github.com/sinic/ednc</a></li>
+</ul>
+
+<pre><code class="emacs-lisp">
+(dbus-call-method <span class="org-builtin">:session</span> <span class="org-string">"org.freedesktop.Notifications"</span> <span class="org-string">"/org/freedesktop/Notifications"</span> <span class="org-string">"org.freedesktop.Notifications"</span> <span class="org-string">"Notify"</span> <span class="org-string">"SystemCrafters"</span> 0 <span class="org-string">""</span> <span class="org-string">"Summary"</span> <span class="org-string">"Body"</span> '(<span class="org-builtin">:array</span>) '(<span class="org-builtin">:array</span> <span class="org-builtin">:signature</span> <span class="org-string">"{sv}"</span>) <span class="org-builtin">:int32</span> -1)
+
+</code></pre>
+
+<h3><a id="listing-known-d-bus-services-in-the-user-session" class="anchor" href="#listing-known-d-bus-services-in-the-user-session">¶</a>Listing known D-Bus services in the user session</h3><pre><code class="emacs-lisp">
+(dbus-list-known-names <span class="org-builtin">:session</span>)
+
+</code></pre>
+
+<h3><a id="finding-all-nodes-object-paths-for-a-service" class="anchor" href="#finding-all-nodes-object-paths-for-a-service">¶</a>Finding all "nodes" (object paths) for a service</h3><pre><code class="emacs-lisp">
+(dbus-introspect-get-all-nodes <span class="org-string">"org.freedesktop.portal.Documents"</span> <span class="org-string">"/"</span>)
+
+</code></pre>
+
+<h3><a id="list-all-interfaces-for-a-given-node" class="anchor" href="#list-all-interfaces-for-a-given-node">¶</a>List all interfaces for a given node</h3><pre><code class="emacs-lisp">
+(dbus-introspect-get-interface-names <span class="org-builtin">:session</span> <span class="org-string">"org.freedesktop.portal.Documents"</span> <span class="org-string">"/org/freedesktop/portal/documents"</span>)
+
+</code></pre>
+
+<h3><a id="describe-a-particular-interface" class="anchor" href="#describe-a-particular-interface">¶</a>Describe a particular interface</h3><pre><code class="emacs-lisp">
+(dbus-introspect-get-interface <span class="org-builtin">:session</span> <span class="org-string">"org.freedesktop.portal.Documents"</span> <span class="org-string">"/org/freedesktop/portal/documents"</span> <span class="org-string">"org.freedesktop.portal.Documents"</span>)
+
+</code></pre>
+
+<h3><a id="call-a-simple-method" class="anchor" href="#call-a-simple-method">¶</a>Call a simple method</h3><pre><code class="emacs-lisp">
+(dbus-call-method <span class="org-builtin">:session</span> <span class="org-string">"org.freedesktop.portal.Documents"</span> <span class="org-string">"/org/freedesktop/portal/documents"</span> <span class="org-string">"org.freedesktop.portal.Documents"</span> <span class="org-string">"GetMountPoint"</span>)
+
+</code></pre>
+</div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
