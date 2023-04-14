@@ -1,0 +1,69 @@
+#+title: System Crafters Live - April 14, 2023
+
+* Updates
+
+- Finish your taxes!
+
+- I've started working on a book about building a modern desktop environment with Sway in Guix (and Linux)!
+
+  Keep an eye out here for early access: https://ko-fi.com/SystemCrafters
+
+* Exploring D-Bus with Emacs APIs
+
+D-Bus is a standard part of the Linux desktop environment!  Emacs provides a nice set of functions for interacting with system-level and user-level D-Bus services.
+
+We'll be exploring D-Bus with these functions in the =M-x ielm= REPL!
+
+- https://www.freedesktop.org/wiki/Software/dbus/
+- https://www.freedesktop.org/wiki/Software/DbusProjects/
+- https://en.wikipedia.org/wiki/D-Bus
+- https://www.gnu.org/software/emacs/manual/html_mono/dbus.html
+- https://github.com/flatpak/xdg-desktop-portal
+- https://stackoverflow.com/questions/4474290/how-do-i-use-emacss-dbus-interface
+- https://github.com/sinic/ednc
+
+#+begin_src emacs-lisp
+
+  (dbus-call-method :session "org.freedesktop.Notifications" "/org/freedesktop/Notifications" "org.freedesktop.Notifications" "Notify" "SystemCrafters" 0 "" "Summary" "Body" '(:array) '(:array :signature "{sv}") :int32 -1)
+
+#+end_src
+
+** Listing known D-Bus services in the user session
+
+#+begin_src emacs-lisp
+
+(dbus-list-known-names :session)
+
+#+end_src
+
+** Finding all "nodes" (object paths) for a service
+
+#+begin_src emacs-lisp
+
+(dbus-introspect-get-all-nodes "org.freedesktop.portal.Documents" "/")
+
+#+end_src
+
+** List all interfaces for a given node
+
+#+begin_src emacs-lisp
+
+(dbus-introspect-get-interface-names :session "org.freedesktop.portal.Documents" "/org/freedesktop/portal/documents")
+
+#+end_src
+
+** Describe a particular interface
+
+#+begin_src emacs-lisp
+
+(dbus-introspect-get-interface :session "org.freedesktop.portal.Documents" "/org/freedesktop/portal/documents" "org.freedesktop.portal.Documents")
+
+#+end_src
+
+** Call a simple method
+
+#+begin_src emacs-lisp
+
+(dbus-call-method :session "org.freedesktop.portal.Documents" "/org/freedesktop/portal/documents" "org.freedesktop.portal.Documents" "GetMountPoint")
+
+#+end_src
