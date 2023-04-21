@@ -26,9 +26,150 @@
 <p><a href="https://github.com/alphapapa/ement.el">https://github.com/alphapapa/ement.el</a>
 </p>
 
+<p>From the System Crafters Discord:
+</p>
+
+<ul><li>What were your favorite channels?  What should we replicate?</li>
+<li>There are "official" channels for Emacs and Guix on Matrix, so should we have SC versions of those channels?  Maybe not?</li>
+</ul>
+
+<p>XMPP can bridge to IRC via Biboumi!
+</p>
+
+<p>IRC cloaks on Libera.Chat: <a href="https://libera.chat/guides/cloaks">https://libera.chat/guides/cloaks</a>
+</p>
+
+<p>More info on how to connect to IRC/Matrix: <a href="http://systemcrafters.chat">http://systemcrafters.chat</a>
+</p>
+
 <h2><a id="emacs-packages-for-modal-editing" class="anchor" href="#emacs-packages-for-modal-editing">¶</a>Emacs Packages for Modal Editing</h2><ul><li>god-mode: <a href="https://github.com/emacsorphanage/god-mode">https://github.com/emacsorphanage/god-mode</a></li>
 <li>boon: <a href="https://github.com/jyp/boon">https://github.com/jyp/boon</a></li>
 <li>meow: <a href="https://github.com/meow-edit/meow">https://github.com/meow-edit/meow</a></li>
-<li>Hydra?  Viper?</li>
+<li>xah-fly-keys: <a href="https://github.com/xahlee/xah-fly-keys">https://github.com/xahlee/xah-fly-keys</a></li>
+<li>Hydra?  Viper?  Avy?</li>
 </ul>
+
+<h3><a id="god-mode" class="anchor" href="#god-mode">¶</a>God Mode</h3><p>This package is pretty nice!  You can just press single letters for many vanilla Emacs key bindings.  Check the README of the repository for more information.
+</p>
+
+<pre><code class="emacs-lisp">
+(straight-use-package 'god-mode)
+(global-set-key (kbd <span class="org-string">"&lt;escape&gt;"</span>) #'god-local-mode)
+(define-key god-local-mode-map (kbd <span class="org-string">"i"</span>) 'god-local-mode)
+
+</code></pre>
+
+<h3><a id="boon" class="anchor" href="#boon">¶</a>Boon</h3><pre><code class="emacs-lisp">
+(straight-use-package 'boon)
+(<span class="org-keyword">require</span> '<span class="org-constant">boon-qwerty</span>)
+(turn-on-boon-mode)
+
+</code></pre>
+
+<h3><a id="meow" class="anchor" href="#meow">¶</a>Meow</h3><p>Meow is definitely worth trying!  Run the tutorial with <kbd>M-x meow-tutor</kbd> after setting up this configuration:
+</p>
+
+<pre><code class="emacs-lisp">
+(straight-use-package 'meow)
+
+(<span class="org-keyword">defun</span> <span class="org-function-name">meow-setup</span> ()
+  (<span class="org-keyword">setq</span> meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+  (meow-motion-overwrite-define-key
+   '(<span class="org-string">"j"</span> . meow-next)
+   '(<span class="org-string">"k"</span> . meow-prev)
+   '(<span class="org-string">"&lt;escape&gt;"</span> . ignore))
+  (meow-leader-define-key
+   <span class="org-comment-delimiter">;; </span><span class="org-comment">SPC j/k will run the original command in MOTION state.</span>
+   '(<span class="org-string">"j"</span> . <span class="org-string">"H-j"</span>)
+   '(<span class="org-string">"k"</span> . <span class="org-string">"H-k"</span>)
+   <span class="org-comment-delimiter">;; </span><span class="org-comment">Use SPC (0-9) for digit arguments.</span>
+   '(<span class="org-string">"1"</span> . meow-digit-argument)
+   '(<span class="org-string">"2"</span> . meow-digit-argument)
+   '(<span class="org-string">"3"</span> . meow-digit-argument)
+   '(<span class="org-string">"4"</span> . meow-digit-argument)
+   '(<span class="org-string">"5"</span> . meow-digit-argument)
+   '(<span class="org-string">"6"</span> . meow-digit-argument)
+   '(<span class="org-string">"7"</span> . meow-digit-argument)
+   '(<span class="org-string">"8"</span> . meow-digit-argument)
+   '(<span class="org-string">"9"</span> . meow-digit-argument)
+   '(<span class="org-string">"0"</span> . meow-digit-argument)
+   '(<span class="org-string">"/"</span> . meow-keypad-describe-key)
+   '(<span class="org-string">"?"</span> . meow-cheatsheet))
+  (meow-normal-define-key
+   '(<span class="org-string">"0"</span> . meow-expand-0)
+   '(<span class="org-string">"9"</span> . meow-expand-9)
+   '(<span class="org-string">"8"</span> . meow-expand-8)
+   '(<span class="org-string">"7"</span> . meow-expand-7)
+   '(<span class="org-string">"6"</span> . meow-expand-6)
+   '(<span class="org-string">"5"</span> . meow-expand-5)
+   '(<span class="org-string">"4"</span> . meow-expand-4)
+   '(<span class="org-string">"3"</span> . meow-expand-3)
+   '(<span class="org-string">"2"</span> . meow-expand-2)
+   '(<span class="org-string">"1"</span> . meow-expand-1)
+   '(<span class="org-string">"-"</span> . negative-argument)
+   '(<span class="org-string">";"</span> . meow-reverse)
+   '(<span class="org-string">","</span> . meow-inner-of-thing)
+   '(<span class="org-string">"."</span> . meow-bounds-of-thing)
+   '(<span class="org-string">"["</span> . meow-beginning-of-thing)
+   '(<span class="org-string">"]"</span> . meow-end-of-thing)
+   '(<span class="org-string">"a"</span> . meow-append)
+   '(<span class="org-string">"A"</span> . meow-open-below)
+   '(<span class="org-string">"b"</span> . meow-back-word)
+   '(<span class="org-string">"B"</span> . meow-back-symbol)
+   '(<span class="org-string">"c"</span> . meow-change)
+   '(<span class="org-string">"d"</span> . meow-delete)
+   '(<span class="org-string">"D"</span> . meow-backward-delete)
+   '(<span class="org-string">"e"</span> . meow-next-word)
+   '(<span class="org-string">"E"</span> . meow-next-symbol)
+   '(<span class="org-string">"f"</span> . meow-find)
+   '(<span class="org-string">"g"</span> . meow-cancel-selection)
+   '(<span class="org-string">"G"</span> . meow-grab)
+   '(<span class="org-string">"h"</span> . meow-left)
+   '(<span class="org-string">"H"</span> . meow-left-expand)
+   '(<span class="org-string">"i"</span> . meow-insert)
+   '(<span class="org-string">"I"</span> . meow-open-above)
+   '(<span class="org-string">"j"</span> . meow-next)
+   '(<span class="org-string">"J"</span> . meow-next-expand)
+   '(<span class="org-string">"k"</span> . meow-prev)
+   '(<span class="org-string">"K"</span> . meow-prev-expand)
+   '(<span class="org-string">"l"</span> . meow-right)
+   '(<span class="org-string">"L"</span> . meow-right-expand)
+   '(<span class="org-string">"m"</span> . meow-join)
+   '(<span class="org-string">"n"</span> . meow-search)
+   '(<span class="org-string">"o"</span> . meow-block)
+   '(<span class="org-string">"O"</span> . meow-to-block)
+   '(<span class="org-string">"p"</span> . meow-yank)
+   '(<span class="org-string">"q"</span> . meow-quit)
+   '(<span class="org-string">"Q"</span> . meow-goto-line)
+   '(<span class="org-string">"r"</span> . meow-replace)
+   '(<span class="org-string">"R"</span> . meow-swap-grab)
+   '(<span class="org-string">"s"</span> . meow-kill)
+   '(<span class="org-string">"t"</span> . meow-till)
+   '(<span class="org-string">"u"</span> . meow-undo)
+   '(<span class="org-string">"U"</span> . meow-undo-in-selection)
+   '(<span class="org-string">"v"</span> . meow-visit)
+   '(<span class="org-string">"w"</span> . meow-mark-word)
+   '(<span class="org-string">"W"</span> . meow-mark-symbol)
+   '(<span class="org-string">"x"</span> . meow-line)
+   '(<span class="org-string">"X"</span> . meow-goto-line)
+   '(<span class="org-string">"y"</span> . meow-save)
+   '(<span class="org-string">"Y"</span> . meow-sync-grab)
+   '(<span class="org-string">"z"</span> . meow-pop-selection)
+   '(<span class="org-string">"'"</span> . repeat)
+   '(<span class="org-string">"&lt;escape&gt;"</span> . ignore)))
+
+(<span class="org-keyword">require</span> '<span class="org-constant">meow</span>)
+(meow-setup)
+(meow-global-mode 1)
+
+</code></pre>
+
+<h3><a id="repeat-mode" class="anchor" href="#repeat-mode">¶</a>Repeat Mode</h3><p>This is not really a modal editing feature, but you can repeat key bindings easily.
+</p>
+
+<p>Check out Karthik's blog about it:
+</p>
+
+<p><a href="https://karthinks.com/software/it-bears-repeating/">https://karthinks.com/software/it-bears-repeating/</a>
+</p>
 </div></div></div></div></div><footer class="blog-footer"><div class="container"><div class="row"><div class="col-sm col-md text-sm-left text-md-right text-lg-right text-xl-right"><p>Made with Emacs 27.2 (Org mode 9.4.4)</p><p><a href="https://systemcrafters.net/privacy-policy/">Privacy Policy</a></p></div></div></div></footer><script src="/js/bootstrap.bundle.min.js"/></body></html>
