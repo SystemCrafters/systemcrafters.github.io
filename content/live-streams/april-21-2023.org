@@ -1,0 +1,31 @@
+#+title: System Crafters Live - April 21, 2023
+
+* Updates
+
+- Updated my Emacs configuration to remove Straight.el and setup.el, now back to =use-package= and =package.el= in Emacs 29!
+
+- Jeff Bowman has been working hard on Crafted Emacs v2!  We'll discuss it next Friday, but until then, check it out here:
+
+  https://github.com/SystemCrafters/crafted-emacs/tree/craftedv2alpha
+
+- Support the channel!
+
+ *Buy me a coffee* at https://ko-fi.com/SystemCrafters
+ *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* Moving to Matrix, Feedback Wanted!
+
+I've been mulling over this for a while and I think I'm finally ready to proceed: the System Crafters community chat will be moving from Discord to Matrix and IRC!
+
+Here are some things I'd like to know:
+
+If you're interested in trying out Matrix, check out Alphapapa's excellent Ement.el package:
+
+https://github.com/alphapapa/ement.el
+
+* Emacs Packages for Modal Editing
+
+- god-mode: https://github.com/emacsorphanage/god-mode
+- boon: https://github.com/jyp/boon
+- meow: https://github.com/meow-edit/meow
+- Hydra?  Viper?
