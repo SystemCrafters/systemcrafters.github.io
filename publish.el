@@ -37,6 +37,7 @@
 (setq package-user-dir (expand-file-name "./.packages"))
 
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
 ;; Initialize the package system
 (package-initialize)
@@ -58,6 +59,7 @@
 
 ;; Install other dependencies
 (use-package esxml
+  :pin "melpa-stable"
   :ensure t)
 
 (use-package htmlize
