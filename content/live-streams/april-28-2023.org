@@ -1,0 +1,81 @@
+#+title: The Principles of System Crafting
+#+subtitle: System Crafters Live - April 28, 2023
+
+* Updates
+
+- I've been experimenting more with =god-mode= and =meow= this week.  Videos coming soon!
+
+- Support the channel!
+
+ *Buy me a coffee* at https://ko-fi.com/SystemCrafters
+ *Buy Mastering Emacs* with this link https://www.masteringemacs.org/r/systemcrafters
+
+* A new System Crafters site is coming!
+
+Sneak peek: https://systemcrafters.net
+
+Lots of links are broken right now!  I'm still in the process of rearranging all the old show notes into new
+
+*Goals*
+
+- Produce written guides for various topics
+- New videos will be made to supplement the written text
+- Much faster to add new content, easier to keep up to date!
+
+* The Principles of System Crafting
+
+Today I'd like to try and codify the "principles" of system crafting.  Why?  As part of the new System Crafters website, I want to develop the content of the site in a way that helps readers to adopt these principles and take control of their computing experience!
+
+I've got a set I've already thought of but I'd love to hear your suggestions for additional ones to add:
+
+** Choose Free Software
+
+- Software that you can depend on
+- Values are aligned with yours
+- You are free to modify and extend!
+
+** Prefer Plain Text for Configuration and Files
+
+- The ideal: configuration is code
+- Use plain-text for your personal files: Org Mode, Markdown, .txt, etc
+- Source control for file history and syncing
+
+** Prefer Text-Centric Interfaces
+
+Text-centric interfaces are typically more efficient!
+
+What about nice-looking graphical tools?
+
+- File browsers
+- Mail clients
+- Social (chat, Fediverse, etc) clients
+
+** Prefer Reproducible Systems
+
+Your life will be easier if you can build a configuration that lasts!
+
+GNU Guix and NixOS are great tools for this.
+
+Perhaps there are others?
+
+** Prefer Open Platforms
+
+- Matrix, XMPP, and IRC
+- E-mail!
+- Collaboration (Codeberg, Sourcehut, etc)
+
+** Build Your Own Tools
+
+This doesn't mean write whole programs, but write scripts and extensions to existing programs.
+
+- Emacs Lisp
+- Guile Scheme
+- Python
+
+** Host Your Own Services
+
+Don't depend on proprietary cloud appications!
+
+** Share What You Learn
+
+Sharing the tools you make is nice, but it's even better to share what you learn!
