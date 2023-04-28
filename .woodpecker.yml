@@ -5,9 +5,7 @@ pipeline:
       branch: [v2]
     secrets: [ repo_token ]
     commands: |
-      git clone --depth 1 https://git.sr.ht/~daviwil/daviwil.com daviwil.com
-      cp -R daviwil.com/public .
-      emacs --batch -l ./publish.el --funcall dw/publish
+      CI=true emacs --batch -l ./publish.el --funcall dw/publish
 
       cd public
       git init
