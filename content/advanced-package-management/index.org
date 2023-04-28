@@ -2,4 +2,4 @@
 
 * Episodes
 
-1. [[using-straight-el/][Getting Started with straight.el]]
+1. [[file:using-straight-el.org][Getting Started with straight.el]]

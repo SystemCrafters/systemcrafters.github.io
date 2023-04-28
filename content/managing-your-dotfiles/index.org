@@ -2,4 +2,4 @@
 
 * Episodes
 
-3. [[using-gnu-stow/][Using GNU Stow to Manage Symbolic Links for Your Dotfiles]]
+3. [[file:using-gnu-stow.org][Using GNU Stow to Manage Symbolic Links for Your Dotfiles]]

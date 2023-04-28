@@ -4,11 +4,11 @@ System Crafters is a community for computer enthusiasts who love to craft their 
 
 * Video Series
 
-Check out the many [[videos/][video series]] we have to help you learn Emacs and Guix in depth!
+Check out the many [[file:videos.org][video series]] we have to help you learn Emacs and Guix in depth!
 
 * Live Streams
 
-We hope you'll join us for our regular *[[live-streams/][live streams]] every Friday at 8am Pacific, 4pm UTC*!
+We hope you'll join us for our regular *[[file:live-streams/index.org][live streams]] every Friday at 8am Pacific, 4pm UTC*!
 
 * Projects
 
