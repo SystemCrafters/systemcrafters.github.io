@@ -366,7 +366,9 @@
   (interactive)
   (org-publish-all (string-equal (or (getenv "FORCE")
                                      (getenv "CI"))
-                                 "true")))
+                                 "true"))
+
+  (copy-file ".domains" "public/.domains" t))
 
             ;;  :rss-extension "xml"
             ;;  :rss-image-url "http://example.com/logo.png"
