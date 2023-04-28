@@ -1,0 +1,105 @@
+#+title: The Principles of System Crafting
+#+subtitle: System Crafters Live - April 28, 2023
+
+* Updates
+
+- I've been experimenting more with =god-mode= and =meow= this week.  Videos coming soon!
+
+- Support the channel!
+
+ *Buy me a coffee* at https://ko-fi.com/SystemCrafters
+
+ *Buy Mastering Emacs* with this link:
+ https://www.masteringemacs.org/r/systemcrafters
+
+* A new System Crafters site is coming!
+
+Sneak peek: https://new.systemcrafters.net
+On Codeberg: https://codeberg.org/SystemCrafters/systemcrafters-site
+
+Lots of links are broken right now!  I'm still in the process of rearranging all the old show notes into new
+
+*Goals*
+
+- Produce written guides for various topics
+- New videos will be made to supplement the written text
+- Much faster to add new content, easier to keep up to date!
+
+* The Principles of System Crafting
+
+Today I'd like to try and codify the "principles" of system crafting.  Why?  As part of the new System Crafters website, I want to develop the content of the site in a way that helps readers to adopt these principles and take control of their computing experience!
+
+I've got a set I've already thought of but I'd love to hear your suggestions for additional ones to add:
+
+** Prefer Free Software
+
+- Software that you can depend on
+- Values are aligned with yours
+- You are free to modify and extend!
+
+Things like GNU Emacs, GNU Guix, Linux, coreutils, GCC, etc.
+
+Permissive Open Source licenses like MIT, BSD, etc are also OK!
+
+** Prefer Plain Text for Configuration and Files
+
+- Plain, human-readable and editable text
+- The ideal: configuration is code
+- Use plain-text for your personal files: Org Mode, Markdown, .txt, Ledger/hledger etc
+- Source control for file history and syncing
+
+Org Down: https://karl-voit.at/2021/11/27/orgdown/
+
+** Prefer Keyboard-Driven, Text-Centric Interfaces
+
+Text-centric, keyboard driven interfaces are typically more efficient!
+
+- File browsers
+- Mail clients
+- Social (chat, Fediverse, etc) clients
+
+What about nice-looking graphical tools?
+
+- Node-based editors are valuable when you want to see the flow of a graph at a high level
+- Other visualizations like org-roam-ui can be useful
+
+** Prefer Reproducible Systems
+
+Your life will be easier if you can build a configuration that lasts!
+
+GNU Guix and NixOS are great tools for this.
+
+Perhaps there are others? Ansible?
+
+** Prefer Open Platforms
+
+- Matrix, XMPP, and IRC
+- E-mail!
+- Collaboration (Codeberg, Sourcehut, etc)
+
+** Build Your Own Tools
+
+This doesn't mean write whole programs, but write scripts and extensions to existing programs.
+
+- /bin/sh
+- Emacs Lisp
+- Guile Scheme
+- Python
+
+** Host Your Own Services
+
+Don't depend on proprietary cloud appications!
+
+- Host your own Git repositories over SSH!
+
+** Share What You Learn
+
+Sharing the tools you make is nice, but it's even better to share what you learn!
+
+Also, writing down what you learned in a blog, or even in a journal, will help you to remember what you had to do to solve a problem!
+
+Contribute documentation and fixes to the things you use!
+
+** Prefer Open Architectures
+
+Over time, ARM and RISC-V machines will get better and better.  It can be better to use these architectures because of openness, availability of open source drivers and firmwares, etc.
