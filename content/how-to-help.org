@@ -1,0 +1,29 @@
+#+title: How to Help
+
+If you enjoy the content on the System Crafters website and YouTube channel, please consider supporting it using one of the methods below!
+
+* Monthly Sponsorship
+
+Monthly sponsorship on one of the options below is the best way to help me have more time to focus on building useful content and projects for the community!
+
+Currently GitHub Sponsors or Liberapay are my preferred platforms because they don't take a percentage of your contribution!
+
+- [[https://ko-fi.com/SystemCrafters][Ko-Fi]]
+- [[https://github.com/sponsors/daviwil][GitHub Sponsors]]
+- [[https://liberapay.com/SystemCrafters/][Liberapay]]
+
+* One-Time Tips
+
+You can also send a one-time tip via [[https://ko-fi.com/SystemCrafters][Ko-Fi]], [[https://github.com/sponsors/daviwil][GitHub Sponsors]] or [[https://paypal.me/SystemCrafters][PayPal]]!
+
+* System Crafters Merchandise
+
+The [[https://store.systemcrafters.net?utm_source=support-the-channel][System Crafters Store]] is a place where you can find t-shirts, hoodies, coffee cups, hats, stickers, and more!  Support the channel by purchasing something with our logo on it.
+
+* Buy Mastering Emacs
+
+Mastering Emacs is an excellent resource to deepen your knowledge about Emacs!  If you use the following affiliate link, a portion of your purchase will go to supporting System Crafters.
+
+https://www.masteringemacs.org/r/systemcrafters
+
+The Mastering Emacs website is also a really good source of tips and tricks for Emacs, so check it out before you buy the book to get a good idea of the quality of Mickey's content!

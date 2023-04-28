@@ -107,11 +107,10 @@
                       (div (@ (class "container"))
                            (nav (@ (class "nav"))
                                 (a (@ (class "nav-link") (href "/")) "Home") " "
-                                (a (@ (class "nav-link") (href "/start-here")) "Start Here!") " "
                                 (a (@ (class "nav-link") (href "/guides")) "Guides") " "
                                 (a (@ (class "nav-link") (href "/news")) "News") " "
                                 (a (@ (class "nav-link") (href "https://store.systemcrafters.net?utm_source=sc-site-nav")) "Store") " "
-                                (a (@ (class "nav-link") (href "/support-the-channel")) "Support Us")))))))
+                                (a (@ (class "nav-link") (href "/how-to-help")) "How to Help")))))))
 
 (defun dw/site-footer (info)
   (list `(footer (@ (class "blog-footer"))
@@ -369,7 +368,8 @@
                                      (getenv "CI"))
                                  "true"))
 
-  (copy-file ".domains" "public/.domains" t))
+  (copy-file ".domains" "public/.domains" t)
+  (copy-file "_redirects" "public/_redirects" t))
 
             ;;  :rss-extension "xml"
             ;;  :rss-image-url "http://example.com/logo.png"
