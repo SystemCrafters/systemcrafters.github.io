@@ -1,6 +1,6 @@
 #+title: Efficient Text Selection with Emacs Key Bindings
 
-[[https://youtu.be/Dq5UOt63Mms][Watch the video]] on YouTube!
+[[yt:Dq5UOt63Mms][Watch the video on YouTube!]]
 
 * What will we learn?
 

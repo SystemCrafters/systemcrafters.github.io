@@ -1,14 +1,11 @@
 #+title: How to Help
 
-If you enjoy the content on the System Crafters website and YouTube channel, please consider supporting it using one of the methods below!
+If you are getting value from the content on the System Crafters website and YouTube channel, please consider supporting me using one of the methods below!
 
 * Monthly Sponsorship
 
 Monthly sponsorship on one of the options below is the best way to help me have more time to focus on building useful content and projects for the community!
 
-Currently GitHub Sponsors or Liberapay are my preferred platforms because they don't take a percentage of your contribution!
-
-- [[https://ko-fi.com/SystemCrafters][Ko-Fi]]
 - [[https://github.com/sponsors/daviwil][GitHub Sponsors]]
 - [[https://liberapay.com/SystemCrafters/][Liberapay]]
 

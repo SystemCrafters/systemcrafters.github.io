@@ -1,6 +1,6 @@
 #+title: The Absolute Beginner's Guide to Emacs
 
-[[https://youtu.be/48JlgiBpw_I][Watch the video]] on YouTube!
+[[yt:48JlgiBpw_I][Watch the video on YouTube!]]
 
 * Welcome!
 
@@ -11,6 +11,9 @@ I've made about 50 videos on Emacs for this channel, but the one thing I haven't
 In this video, I'm going to give you *exactly* what you need to get started using Emacs and understand the basic concepts and key bindings of the editor.  I know this video might seem long, but I've got chapter markers in the timeline below so that you can easily jump around to different parts if you want to use it as a reference.
 
 Let's get started!
+
+#+begin_cta
+#+end_cta
 
 * Installation
 

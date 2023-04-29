@@ -55,9 +55,6 @@
 (require 'subr-x)
 (require 'cl-lib)
 
-;; Unfortunately this is necessary for now...
-(load-file "./ox-slimhtml.el")
-
 ;; Install other dependencies
 (use-package esxml
   :pin "melpa-stable"
@@ -248,16 +245,32 @@
      (when (and container (not (string= "" container)))
        (format "</%s>" (cl-subseq container 0 (cl-search " " container)))))))
 
+(defun dw/org-html-src-block (src-block _contents info)
+  (let* ((lang (org-element-property :language src-block))
+	       (code (org-html-format-code src-block info)))
+    (format "<pre>%s</pre>" (string-trim code))))
+
+(defun dw/org-html-special-block (special-block contents info)
+  "Transcode a SPECIAL-BLOCK element from Org to HTML.
+CONTENTS holds the contents of the block.  INFO is a plist
+holding contextual information."
+  (let* ((block-type (org-element-property :type special-block))
+         (attributes (org-export-read-attribute :attr_html special-block)))
+	  (format "<div class=\"%s center\">\n%s\n</div>"
+            block-type
+            (or contents
+                (if (string= block-type "cta")
+                    "If you find this guide helpful, please consider supporting System Crafters via the links on the <a href=\"/how-to-help\">How to Help</a> page!"
+                  "")))))
+
 (org-export-define-derived-backend 'site-html
-    'slimhtml
+    'html
   :translate-alist
   '((template . dw/org-html-template)
     (link . dw/org-html-link)
-    (code . ox-slimhtml-verbatim)
-    (headline . dw/org-html-headline))
-  :options-alist
-  '((:page-type "PAGE-TYPE" nil nil t)
-    (:html-use-infojs nil nil nil)))
+    (src-block . dw/org-html-src-block)
+    (special-block . dw/org-html-special-block)
+    (headline . dw/org-html-headline)))
 
 (defun org-html-publish-to-html (plist filename pub-dir)
   "Publish an org file to HTML, using the FILENAME as the output directory."
@@ -272,21 +285,6 @@
                           plist
                           article-path))))
 
-(defun dw/sitemap-entry (entry style project)
-  (format "<h4><em>%s</em> - <a href=\"%s\">%s</a></h4>"
-          (format-time-string "%Y-%m-%d" (org-publish-find-date entry project))
-          (concat (file-name-sans-extension entry) "/")
-          (org-publish-find-title entry project)))
-
-(defun dw/generate-sitemap (title list)
-  (concat "#+TITLE: " title "\n\n"
-          "#+BEGIN_EXPORT html\n"
-          (mapconcat (lambda (item)
-                       (car item))
-                     (cdr list)
-                     "\n")
-          "\n#+END_EXPORT\n"))
-
 (setq org-publish-use-timestamps-flag t
       org-publish-timestamp-directory "./.org-cache/"
       org-export-with-section-numbers nil
@@ -295,18 +293,14 @@
       org-export-with-sub-superscripts nil
       org-export-with-tags 'not-in-toc
       org-html-htmlize-output-type 'css
-      ;; org-html-metadata-timestamp-format "%Y-%m-%d"
-      ;; org-html-checkbox-type 'site-html
-      ;; org-html-html5-fancy nil
-      ;; org-html-self-link-headlines t
-      ;; org-html-validation-link nil
-      ;; org-html-doctype "html5"
-      org-export-with-toc t
-      make-backup-files nil)
-
-(setq org-html-link-home dw/site-url
+      org-html-prefer-user-labels t
+      org-html-link-home dw/site-url
       org-html-link-use-abs-url t
-      org-html-link-org-files-as-html t)
+      org-html-link-org-files-as-html t
+      org-html-html5-fancy t
+      org-html-self-link-headlines t
+      org-export-with-toc nil
+      make-backup-files nil)
 
 (defun dw/video-series-config (series-path)
   (list (format "systemcrafters:%s" series-path)
@@ -417,42 +411,6 @@
             ;;  :html-link-use-abs-url t
             ;;  :exclude "articles.html"
             ;;  :recursive t))))
-
-(defun org-html-htmlize-generate-css ()
-  "Create the CSS for all font definitions in the current Emacs session.
-Use this to create face definitions in your CSS style file that can then
-be used by code snippets transformed by htmlize.
-This command just produces a buffer that contains class definitions for all
-faces used in the current Emacs session.  You can copy and paste the ones you
-need into your CSS file.
-
-If you then set `org-html-htmlize-output-type' to `css', calls
-to the function `org-html-htmlize-region-for-paste' will
-produce code that uses these same face definitions."
-  (interactive)
-  (unless (require 'htmlize nil t)
-    (error "htmlize library missing.  Aborting"))
-  (and (get-buffer "*html*") (kill-buffer "*html*"))
-  (with-temp-buffer
-    (let ((fl (nreverse (face-list)))
-	  (htmlize-css-name-prefix "org-")
-	  (htmlize-output-type 'css)
-	  f i)
-      (while (setq f (pop fl)
-		   i (and f (face-attribute f :inherit)))
-	(when (and (symbolp f) (or (not i) (not (listp i))))
-	  (insert (org-add-props (copy-sequence "1") nil 'face f))))
-      (htmlize-region (point-min) (point-max))))
-  (pop-to-buffer-same-window "*html*")
-  (goto-char (point-min))
-  (when (re-search-forward "<style" nil t)
-    (delete-region (point-min) (match-beginning 0)))
-  (when (re-search-forward "</style>" nil t)
-    (delete-region (1+ (match-end 0)) (point-max)))
-  (beginning-of-line 1)
-  (when (looking-at " +") (replace-match ""))
-  (goto-char (point-min)))
-
 
 (provide 'publish)
 ;;; publish.el ends here

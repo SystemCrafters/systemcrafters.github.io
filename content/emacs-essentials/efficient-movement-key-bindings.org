@@ -1,6 +1,6 @@
 #+title: Efficient Movement with Emacs
 
-[[https://www.youtube.com/watch?v=wT_jUtEGfeg][Watch the video]] on YouTube!
+[[yt:wT_jUtEGfeg][Watch the video on YouTube!]]
 
 * What will we learn?
 

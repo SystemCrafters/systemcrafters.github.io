@@ -4,26 +4,6 @@
 
 Check out the final code [[https://github.com/daviwil/emacs-from-scratch/blob/219c060e1bd695948c7691955a12a5dcaf3a9530/Emacs.org#window-management][here]].
 
-* Table of Contents
-:PROPERTIES:
-:TOC:      :include siblings :ignore this
-:END:
-
-:CONTENTS:
-- [[#what-is-exwm][What is EXWM?]]
-- [[#settings-up-emacsd][Settings up .emacs.d]]
-- [[#how-to-boot-into-emacs][How to boot into Emacs]]
-- [[#setting-up-exwm][Setting up EXWM]]
-- [[#managing-windows][Managing windows]]
-- [[#workspaces][Workspaces]]
-- [[#rebind-capslock-to-ctrl][Rebind CapsLock to Ctrl]]
-- [[#setting-screen-resolution][Setting screen resolution]]
-- [[#set-screen-dpi-optional][Set screen DPI (optional)]]
-- [[#system-tray][System Tray]]
-- [[#debugging-startup-issues][Debugging startup issues]]
-- [[#whats-next][What's next?]]
-:END:
-
 * What is EXWM?
 
 Check out the wiki: https://github.com/ch11ng/exwm/wiki
