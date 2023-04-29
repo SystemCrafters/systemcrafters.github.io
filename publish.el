@@ -53,6 +53,7 @@
 (require 'vc-git)
 (require 'ox-publish)
 (require 'subr-x)
+(require 'cl-lib)
 
 ;; Unfortunately this is necessary for now...
 (load-file "./ox-slimhtml.el")
@@ -95,7 +96,7 @@
      (format yt-iframe-format
              path (or desc "")))))
 
-(defun dw/site-header (info)
+(defun dw/site-header ()
   (list `(header (@ (class "blog-header"))
                  (div (@ (class "container"))
                       (div (@ (class "blog-title"))
@@ -111,7 +112,7 @@
                                 (a (@ (class "nav-link") (href "https://store.systemcrafters.net?utm_source=sc-site-nav")) "Store") " "
                                 (a (@ (class "nav-link") (href "/how-to-help")) "How to Help")))))))
 
-(defun dw/site-footer (info)
+(defun dw/site-footer ()
   (list `(footer (@ (class "blog-footer"))
                  (div (@ (class "container"))
                       (div (@ (class "row"))
@@ -144,12 +145,17 @@
   "Get the short hash of the latest commit in the current repository."
   (string-trim-right
    (with-output-to-string
-    (with-current-buffer standard-output
-      (vc-git-command t nil nil "rev-parse" "--short" "HEAD")))))
+     (with-current-buffer standard-output
+       (vc-git-command t nil nil "rev-parse" "--short" "HEAD")))))
 
-(defun dw/org-html-template (contents info)
+(cl-defun dw/generate-page (title
+                            content
+                            &key
+                            (publish-date)
+                            (head-extra)
+                            (pre-content))
   (concat
-   "<!-- Generated from " (dw/get-commit-hash)  " on " (format-time-string "%Y-%m-%d @ %H:%M") " with " (plist-get info :creator) " -->\n"
+   "<!-- Generated from " (dw/get-commit-hash)  " on " (format-time-string "%Y-%m-%d @ %H:%M") " with " org-export-creator-string " -->\n"
    "<!DOCTYPE html>"
    (sxml-to-xml
     `(html (@ (lang "en"))
@@ -168,16 +174,23 @@
                        (src "https://plausible.io/js/plausible.js"))
                     ;; Empty string to cause a closing </script> tag
                     "")
-            (title ,(concat (org-export-data (plist-get info :title) info) " - System Crafters")))
-           (body ,@(dw/site-header info)
+            ,(when head-extra head-extra)
+            (title ,(concat title " - System Crafters")))
+           (body ,@(dw/site-header)
                  (div (@ (class "container"))
                       (div (@ (class "blog-post"))
                            (h1 (@ (class "blog-post-title"))
-                               ,(org-export-data (plist-get info :title) info))
-                           (p (@ (class "blog-post-meta"))
-                              ,(org-export-data (org-export-get-date info "%B %e, %Y") info))
-                           ,contents))
-                 ,@(dw/site-footer info))))))
+                               ,title)
+                           ,(when publish-date
+                              `(p (@ (class "blog-post-meta")) ,publish-date))
+                           ,(when pre-content pre-content)
+                           ,content))
+                 ,@(dw/site-footer))))))
+
+(defun dw/org-html-template (contents info)
+  (dw/generate-page (org-export-data (plist-get info :title) info)
+                    contents
+                    :publish-date (org-export-data (org-export-get-date info "%B %e, %Y") info)))
 
 ;; Thanks Ashraz!
 (defun dw/org-html-link (link contents info)
@@ -362,12 +375,26 @@
             ;; (dw/video-series-config "publishing-websites-with-org-mode")
             ))
 
+(defun dw/generate-redirects (redirects)
+  (dolist (redirect redirects)
+    (let ((output-path (concat "./public/" (car redirect) "/index.html"))
+          (redirect-url (concat dw/site-url "/" (cdr redirect) "/")))
+      (with-temp-file output-path
+        (insert
+         (dw/generate-page "Redirecting..."
+                           (concat "You are being redirected to "
+                                   "<a href=\"" redirect-url "\">" redirect-url "</a>")
+                           :head-extra
+                           (concat "<meta http-equiv=\"refresh\" content=\"0; url='" redirect-url "'\"/>")))))))
+
 (defun dw/publish ()
   "Publish the entire site."
   (interactive)
   (org-publish-all (string-equal (or (getenv "FORCE")
                                      (getenv "CI"))
                                  "true"))
+
+  (dw/generate-redirects '(("support-the-channel" . "how-to-help")))
 
   (copy-file ".domains" "public/.domains" t)
   (copy-file "_redirects" "public/_redirects" t))
