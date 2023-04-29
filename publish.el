@@ -379,6 +379,7 @@
   (dolist (redirect redirects)
     (let ((output-path (concat "./public/" (car redirect) "/index.html"))
           (redirect-url (concat dw/site-url "/" (cdr redirect) "/")))
+      (make-directory output-path t)
       (with-temp-file output-path
         (insert
          (dw/generate-page "Redirecting..."
