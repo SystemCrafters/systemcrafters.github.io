@@ -195,7 +195,7 @@
       (format "<a href=\"%s\">%s</a>"
               (org-element-property :raw-link link)
               (org-element-property :raw-link link)))
-     (t (org-export-with-backend 'slimhtml link contents info)))))
+     (t (org-export-with-backend 'html link contents info)))))
 
 (defun dw/make-heading-anchor-name (headline-text)
   (thread-last headline-text
@@ -345,13 +345,14 @@
             ;;   :with-title nil
             ;;   :with-timestamps nil)
             (dw/video-series-config "advanced-package-management")
-            ;; (dw/video-series-config "build-a-second-brain-in-emacs")
-            ;; (dw/video-series-config "chatting-with-emacs")
-            ;; (dw/video-series-config "craft-your-system-with-guix")
-            ;; (dw/video-series-config "effective-emacs-workflow")
-            ;; (dw/video-series-config "emacs-essentials")
-            ;; (dw/video-series-config "emacs-from-scratch")
-            ;; (dw/video-series-config "emacs-ide")
+            (dw/video-series-config "build-a-second-brain-in-emacs")
+            (dw/video-series-config "chatting-with-emacs")
+            (dw/video-series-config "craft-your-system-with-guix")
+            (dw/video-series-config "effective-emacs-workflow")
+            (dw/video-series-config "emacs-desktop-environment")
+            (dw/video-series-config "emacs-essentials")
+            (dw/video-series-config "emacs-from-scratch")
+            (dw/video-series-config "emacs-ide")
             ;; (dw/video-series-config "emacs-mail")
             ;; (dw/video-series-config "emacs-shorts")
             ;; (dw/video-series-config "emacs-tips")
