@@ -69,10 +69,9 @@
   :ensure t)
 
 (defvar yt-iframe-format
-  ;; TODO: Change this after switching from Bootstrap
-  (concat "<div class=\"embed-responsive embed-responsive-16by9\">"
-          " <iframe class=\"embed-responsive-item\" src=\"https://www.youtube.com/embed/%s\" allowfullscreen></iframe>"
-          " </div>"))
+  (concat "<div class=\"video\">"
+          "  <iframe src=\"https://www.youtube.com/embed/%s\" allowfullscreen></iframe>"
+          "</div>"))
 
 (setq user-full-name "David Wilson")
 (setq user-mail-address "david@systemcrafters.net")
@@ -274,6 +273,7 @@
                      (cdr list)
                      "\n")
           "\n#+END_EXPORT\n"))
+
 (setq org-publish-use-timestamps-flag t
       org-publish-timestamp-directory "./.org-cache/"
       org-export-with-section-numbers nil
