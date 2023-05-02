@@ -345,19 +345,19 @@ holding contextual information."
               :publishing-directory "./public"
               :recursive t
               :publishing-function org-publish-attachment)
-            ;; '("systemcrafters:live-streams"
-            ;;   :base-directory "./content/live-streams"
-            ;;   :base-extension "org"
-            ;;   :publishing-directory "./public/live-streams"
-            ;;   :publishing-function org-html-publish-to-html
-            ;;   :auto-sitemap t
-            ;;   :sitemap-filename "index.org"
-            ;;   :sitemap-title "Live Streams"
-            ;;   :sitemap-format-entry dw/format-live-stream-entry
-            ;;   :sitemap-style list
-            ;;   :sitemap-sort-files anti-chronologically
-            ;;   :with-title nil
-            ;;   :with-timestamps nil)
+            '("systemcrafters:live-streams"
+              :base-directory "./content/live-streams"
+              :base-extension "org"
+              :publishing-directory "./public/live-streams"
+              :publishing-function org-html-publish-to-html
+              :auto-sitemap t
+              :sitemap-filename "index.org"
+              :sitemap-title "Live Streams"
+              :sitemap-format-entry dw/format-live-stream-entry
+              :sitemap-style list
+              :sitemap-sort-files anti-chronologically
+              :with-title nil
+              :with-timestamps nil)
             (dw/video-series-config "advanced-package-management")
             (dw/video-series-config "build-a-second-brain-in-emacs")
             (dw/video-series-config "chatting-with-emacs")
