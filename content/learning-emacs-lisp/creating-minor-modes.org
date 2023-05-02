@@ -1,6 +1,6 @@
 #+title: Creating a Custom Minor Mode
 
-[[https://youtu.be/JJqchO3fnds][Watch the video]] on YouTube!
+[[yt:JJqchO3fnds][Watch the video on YouTube!]]
 
 * What will we learn?
 
@@ -9,6 +9,9 @@ Today we're going to learn about Emacs' concept of modes and then walk through s
 We'll be continuing with the =dotcrafter.el= project that we started working on earlier in this series!  At this point we have full functionality for managing our dotfiles configuration both from within Org Mode files and with individual files that must be symbolically linked back into your home directory.
 
 The minor mode that we'll write today will enable us to automatically "tangle" our Org-based configuration files each time we edit one of them and then link any new output configuration files into our home directory.  We'll also be able to set up a custom key map for dotcrafter commands which will only be activated when the mode is turned on!
+
+#+begin_cta
+#+end_cta
 
 * What is a "mode"?
 

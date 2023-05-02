@@ -1,10 +1,6 @@
 #+title: Managing Files and Directories in Practice
 
-This is Part 6 of the [[/learning-emacs-lisp][Learning Emacs Lisp]] series!
-
-Watch the video on YouTube: https://youtu.be/nq-gqNGmayI
-
-The final code from this episode can be found [[https://github.com/daviwil/dotcrafter.el/blob/8589c71e64b60f9395b418c09b60815a86c7da8f/dotcrafter.el][on GitHub]].
+[[yt:nq-gqNGmayI][Watch the video on YouTube!]]
 
 * What will we cover?
 
@@ -13,6 +9,8 @@ Today we're going to talk about the many ways you can interact with files and di
 There are a few different ways to do this with user-facing Emacs functionality (=find-file=, =eshell=, Dired, etc), but at some point you will want to automate some of these tasks with Emacs Lisp code.
 
 Today I'll show you a wide range of the functions you have at your disposal and then use them in real code examples!
+
+The final code from this episode can be found [[https://github.com/daviwil/dotcrafter.el/blob/8589c71e64b60f9395b418c09b60815a86c7da8f/dotcrafter.el][on GitHub]].
 
 ** Explaining symbolic links
 
@@ -37,6 +35,9 @@ By the end of this episode, we'll have a fully working dotfiles management packa
 We'll commit improvements made in this video to the GitHub repository: https://github.com/daviwil/dotcrafter.el
 
 The starting point of the examples in this episode is [[https://github.com/daviwil/dotcrafter.el/blob/0374d5a1ad1e5ecadcdfbdf07e0ae428946b0138/dotcrafter.el][this version of dotcrafter.el]] from the repository.
+
+#+begin_cta
+#+end_cta
 
 * Getting the current directory
 

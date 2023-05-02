@@ -4,10 +4,10 @@ You can find the complete YouTube playlist here: [[https://www.youtube.com/watch
 
 ** Episodes
 
-1. [[https://youtu.be/RQK_DaaX34Q][Introduction to Emacs Lisp]] ([[https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Lisp-01.org][Notes]])
-2. [[https://youtu.be/XXpgzyeYh_4][Types, Conditionals, and Loops]] ([[https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Lisp-02.org][Notes]])
-3. [[https://youtu.be/EqgkAUHw0Yc][Defining Functions and Commands]] ([[https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Lisp-03.org][Notes]])
-4. [[https://youtu.be/tq4kTNL1VD8][Defining Variables and Scopes]] ([[https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Lisp-04.org][Notes]])
-5. [[https://youtu.be/J7d2LmivyyM][Reading and Writing Buffers in Practice]] ([[https://github.com/daviwil/emacs-from-scratch/blob/master/show-notes/Emacs-Lisp-05.org][Notes]], [[https://github.com/daviwil/dotcrafter.el/blob/8d507eda31e08a789c38a5d729866eb4cda6abaf/dotcrafter.el][Code]])
-6. [[managing-files-and-directories/][Managing Files and Directories in Practice]]
-7. [[creating-minor-modes/][Creating a Custom Minor Mode]]
+1. [[file:introduction-to-emacs-lisp.org][Introduction to Emacs Lisp]]
+2. [[file:types-conditionals-loops.org][Types, Conditionals, and Loops]]
+3. [[file:defining-functions-and-commands.org][Defining Functions and Commands]]
+4. [[file:defining-variables-and-scopes.org][Defining Variables and Scopes]]
+5. [[file:reading-and-writing-buffers.org][Reading and Writing Buffers in Practice]]
+6. [[file:managing-files-and-directories.org][Managing Files and Directories in Practice]]
+7. [[file:creating-minor-modes.org][Creating a Custom Minor Mode]]

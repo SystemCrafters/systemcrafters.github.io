@@ -362,7 +362,7 @@ holding contextual information."
             (dw/video-series-config "emacs-mail")
             (dw/video-series-config "emacs-shorts")
             ;; (dw/video-series-config "emacs-tips")
-            ;; (dw/video-series-config "learning-emacs-lisp")
+            (dw/video-series-config "learning-emacs-lisp")
             (dw/video-series-config "managing-your-dotfiles")
             (dw/video-series-config "mastering-git-with-magit")
             (dw/video-series-config "publishing-websites-with-org-mode")))
