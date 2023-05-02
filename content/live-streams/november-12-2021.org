@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - November 12, 2021
-
-[[https://youtu.be/dB4ydMQgmNk][Watch the recording]] on YouTube!
+#+title: Editor Popularity: Does it Matter?
+#+date: [2021-11-12 Fri]
+#+video: dB4ydMQgmNk
 
 * Editor Popularity: Does it matter?
 

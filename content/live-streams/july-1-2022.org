@@ -1,4 +1,6 @@
 #+title: System Crafters Live! - July 1, 2022
+#+date: [2022-07-01 Fri]
+#+video: 2agRcDHgRAg
 
 * Updates
 

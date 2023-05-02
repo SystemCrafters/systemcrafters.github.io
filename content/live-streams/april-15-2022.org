@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - April 15, 2022
-
-[[yt:yPiO0_ExeRA][Watch the recording on YouTube!]]
+#+title: Experimenting with Wayland Compositors
+#+date: [2022-04-15 Fri]
+#+video: yPiO0_ExeRA
 
 * Updates
 

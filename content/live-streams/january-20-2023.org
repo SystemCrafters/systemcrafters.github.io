@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - January 20, 2023
+#+title: Configuring Sway with Scheme
+#+date: [2023-01-20 Fri]
+#+video: zx_wItkicKE
 
 * Updates
 

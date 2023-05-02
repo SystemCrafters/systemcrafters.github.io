@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - November 25, 2022
-
-[[yt:0C16LLHGYzk][Watch the recording on YouTube!]]
+#+title: Why Mastodon is Better for Crafters
+#+date: [2022-11-25 Fri]
+#+video: tsmrjlEeFqI
 
 * Updates
 

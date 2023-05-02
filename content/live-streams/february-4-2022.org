@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - February 4, 2022
-
-[[yt:76jp8qkLZC8][Watch the recording on YouTube!]]
+#+title: Configuring Emacs with Only the UI?
+#+date: [2022-02-04 Fri]
+#+video: 76jp8qkLZC8
 
 * Updates
 

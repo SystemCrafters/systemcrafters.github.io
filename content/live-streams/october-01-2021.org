@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - A First Look at Guix Home
-
-[[https://youtu.be/R5cdtSfTpE0][Watch the recording]] on YouTube!
+#+title: A First Look at Guix Home
+#+date: [2021-10-01 Fri]
+#+video: R5cdtSfTpE0
 
 * News
 

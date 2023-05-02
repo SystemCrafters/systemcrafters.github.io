@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - November 19, 2021
-
-[[https://youtu.be/MbZ2iK3U8y0][Watch the recording]] on YouTube!
+#+title: Tools for Building a Lisp-Focused System
+#+date: [2021-11-19 Fri]
+#+video: MbZ2iK3U8y0
 
 * Updates
 

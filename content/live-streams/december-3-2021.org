@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - December 3, 2021
-
-[[https://youtu.be/g_0raRhGLXs][Watch the recording]] on YouTube!
+#+title: Can StumpWM Replace EXWM?
+#+date: [2021-12-03 Fri]
+#+video: g_0raRhGLXs
 
 * Updates
 

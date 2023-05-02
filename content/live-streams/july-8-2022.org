@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - July 8, 2022
+#+title: Configuring Rational Emacs with Guix Home
+#+date: [2022-07-08 Fri]
+#+video: qYqwEmdaOy0
 
 * Updates
 

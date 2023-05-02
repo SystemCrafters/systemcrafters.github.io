@@ -1,4 +1,8 @@
-#+title: System Crafters Live! - November 11, 2022
+#+title: Hacking a Lispy WM with QTile and Hy
+#+date: [2022-11-11 Fri]
+#+video: QVX-UL6hEz0
+
+- Part 2: https://www.youtube.com/watch?v=wfZ5cg7kM8M
 
 * Updates
 

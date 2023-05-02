@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - August 26, 2022
-
-[[yt:dCmyMCfmUhQ][Watch the recording on YouTube!]]
+#+title: Object-Oriented Emacs Lisp with EIEIO
+#+date: [2022-08-26 Fri]
+#+video: dCmyMCfmUhQ
 
 * Updates
 

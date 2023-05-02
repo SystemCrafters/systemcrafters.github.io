@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - August 19, 2022
-
-[[yt:j0GmFP9hDCc][Watch the recording on YouTube!]]
+#+title: Distilling the Essence of Emacs
+#+date: [2022-08-19 Fri]
+#+video: j0GmFP9hDCc
 
 * Updates
 

@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - February 3, 2023
+#+title: Crafting the Nyxt Browser
+#+date: [2023-02-03 Fri]
+#+video: Hvlkca98tyw
 
 * Updates
 

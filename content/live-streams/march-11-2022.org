@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - March 11, 2022
-
-[[yt:f8LNWLWOIXI][Watch the recording on YouTube!]]
+#+title: Reviewing Rational Emacs PRs
+#+date: [2022-03-11 Fri]
+#+video: f8LNWLWOIXI
 
 * Updates
 

@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - January 6, 2023
-
-[[yt:KNXOZtbfslY][Watch the recording on YouTube!]]
+#+title: Hacking Guix Home Services in the REPL
+#+date: [2023-01-06 Fri]
+#+video: KNXOZtbfslY
 
 * Updates
 

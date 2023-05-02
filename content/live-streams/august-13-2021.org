@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - August 13, 2021
-
-[[https://youtu.be/EmLCTPwhC4I][Watch the recording]] on YouTube!
+#+title: Emacs Package Potluck!
+#+date: [2021-08-13 Fri]
+#+video: EmLCTPwhC4I
 
 * News
 

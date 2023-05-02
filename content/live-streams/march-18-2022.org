@@ -1,6 +1,10 @@
-#+title: System Crafters Live! - March 18, 2022
+#+title: Writing Tools with Transient in Emacs
+#+date: [2022-03-18 Fri]
+#+video: f8LNWLWOIXI
 
-[[yt:f8LNWLWOIXI][Watch the recording on YouTube!]]
+- Part 2: https://www.youtube.com/watch?v=Q2uOWXlUpgw
+- Part 3: https://www.youtube.com/watch?v=GxO-xD9LoQo
+- Part 4: https://www.youtube.com/watch?v=rxp68l-jPSw
 
 * Updates
 

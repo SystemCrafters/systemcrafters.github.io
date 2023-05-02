@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - May 21, 2021
-
-[[https://www.youtube.com/watch?v=UtqE-lR2HCA][Watch the recording]] on YouTube!
+#+title: Replacing Ivy and Counsel with Vertico and Consult
+#+date: [2021-05-21 Fri]
+#+video: UtqE-lR2HCA
 
 * Replacing Ivy and Counsel with Vertico and Consult
 

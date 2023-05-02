@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - October 8, 2021
-
-[[https://youtu.be/1sn8m5u5VaE][Watch the recording]] on YouTube!
+#+title: Comparing Project.el to Projectile
+#+date: [2021-10-08 Fri]
+#+video: 1sn8m5u5VaE
 
 * News
 

@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - July 23, 2021
+#+title: Is Emacs Intimidating for Beginners?
+#+date: [2021-07-23 Fri]
+#+video: CM7xCJEU4ik
 
 * Is Emacs hard / intimidating to learn?
 

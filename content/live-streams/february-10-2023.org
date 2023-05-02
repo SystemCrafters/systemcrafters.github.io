@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - February 10, 2023
+#+title: Improving the Guix Home Experience
+#+date: [2023-02-10 Fri]
+#+video: zZCfDXlbkXo
 
 * Updates
 

@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - June 4, 2021
-
-[[https://www.youtube.com/watch?v=Qci8t_jpVGA][Watch the recording]] on YouTube!
+#+title: Improving the IRC Experience in ERC
+#+date: [2021-06-04 Fri]
+#+video: Qci8t_jpVGA
 
 * The Great IRC Experiment
 

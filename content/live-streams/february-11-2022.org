@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - February 11, 2022
-
-[[yt:uB8McDsRyXY][Watch the recording on YouTube!]]
+#+title: Rational Emacs: A New Base Emacs Configuration
+#+date: [2022-02-11 Fri]
+#+video: uB8McDsRyXY
 
 * Updates
 

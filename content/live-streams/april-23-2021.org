@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - April 23, 2021
+#+title: Lisp Compiler Progress • Live Lisp Hacking
+#+date: [2021-04-23 Fri]
+#+video: E-g3Ls1GRz4
 
 * Mesche Progress Update
 

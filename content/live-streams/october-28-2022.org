@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - October 28, 2022
-
-[[yt:zMzkorlfqLA][Watch the recording on YouTube!]]
+#+title: Crafting a Configuration Site Generator in Emacs - Part 1
+#+date: [2022-10-28 Fri]
+#+video: zMzkorlfqLA
 
 * Updates
 

@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - February 25, 2022
+#+title: Trying New Emacs Packages by Minad
+#+date: [2022-02-25 Fri]
+#+video: f0FMo_XxujU
 
 * Updates
 

@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - June 24, 2022
+#+title: Configuring HerbstluftWM with Emacs Lisp
+#+date: [2022-06-24 Fri]
+#+video: OMcpd9ixPOU
 
 * Updates
 

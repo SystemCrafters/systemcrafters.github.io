@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - November 18, 2022
-
-[[yt:0C16LLHGYzk][Watch the recording on YouTube!]]
+#+title: Converting a Literate Org Config to Guix Home
+#+date: [2022-11-18 Fri]
+#+video: 0C16LLHGYzk
 
 * Updates
 

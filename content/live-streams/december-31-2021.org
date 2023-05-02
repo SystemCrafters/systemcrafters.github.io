@@ -1,6 +1,6 @@
 #+title: The Best of 2021!
-
-[[https://youtu.be/aUhDLuD3F_Y][Watch the recording]] on YouTube!
+#+date: [2021-12-31 Fri]
+#+video: aUhDLuD3F_Y
 
 * Updates
 

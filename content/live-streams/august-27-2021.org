@@ -1,6 +1,6 @@
 #+title: System Crafters Live! - August 27, 2021
-
-[[https://youtu.be/nMH3QXWxTGg][Watch the recording]] on YouTube!
+#+date: [2021-08-27 Fri]
+#+video: nMH3QXWxTGg
 
 * System Crafters Store is live!
 

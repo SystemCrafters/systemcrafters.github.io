@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - November 26, 2021
-
-[[https://www.youtube.com/watch?v=2VpHr6sfLy0][Watch the recording]] on YouTube!
+#+title: I'm Rewriting My Configuration... Again
+#+date: [2021-11-26 Fri]
+#+video: 2VpHr6sfLy0
 
 * Updates
 

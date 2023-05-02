@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - December 16, 2022
+#+title: Learning to Use the Emacs Debugger
+#+date: [2022-12-16 Fri]
+#+video: LfwSc-lfFxM
 
 * Updates
 

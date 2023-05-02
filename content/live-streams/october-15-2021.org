@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - October 15, 2021
-
-[[https://youtu.be/qk2Is_sC8Lk][Watch the recording]] on YouTube!
+#+title: The Many Uses of Embark
+#+date: [2021-10-15 Fri]
+#+video: qk2Is_sC8Lk
 
 * Updates
 
