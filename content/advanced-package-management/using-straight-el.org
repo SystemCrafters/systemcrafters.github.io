@@ -1,6 +1,6 @@
 #+title: Advanced Emacs Package Management with straight.el
 
-[[https://youtu.be/UmbVeqphGlc][Watch the video]] on YouTube!
+[[yt:UmbVeqphGlc][Watch the video on YouTube!]]
 
 * What will we learn?
 
@@ -9,6 +9,9 @@ Today I'm going to show you a different way to install all of the community pack
 We'll walk through all of the main features it provides and take a look at how you would use it day to day.
 
 I'll also convert the Emacs From Scratch configuration to use =straight.el= so you can see how to update your own configuration to use it with very little effort!
+
+#+begin_cta
+#+end_cta
 
 * What is straight.el?
 

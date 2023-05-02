@@ -1,6 +1,6 @@
 #+title: Clean Your Commits Like a Git Rebase Expert with Magit
 
-[[https://youtu.be/zM7K1y4h6UQ][Watch the video]] on YouTube!
+[[yt:zM7K1y4h6UQ][Watch the video on YouTube!]]
 
 * Intro
 
@@ -8,14 +8,8 @@ Have you ever made a mistake or created sloppy commits when checking in changes 
 
 After watching this video, you'll know exactly how to fix those problems and create a clean commit history with =git rebase= and Magit.
 
-* Support the Channel
-
-The content on this channel is supported by the System Crafters Community!
-
-If you enjoy this video, please click the "Like" button and check out the links below in the description to see other ways you can support my work!
-
-https://systemcrafters.net/support-the-channel
-https://store.systemcrafters.net
+#+begin_cta
+#+end_cta
 
 * Getting Started
 

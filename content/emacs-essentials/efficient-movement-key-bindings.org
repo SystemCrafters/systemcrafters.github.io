@@ -12,6 +12,9 @@ I will also tell you the exact Emacs commands that these keys bind to so that yo
 
 I recommend opening a text buffer in Emacs while watching this episode so that you can try these bindings and follow along.
 
+#+begin_cta
+#+end_cta
+
 * Moving the Point
 
 In Emacs, the term "point" refers to the location of the cursor in a given buffer.  The point is the place where text will be inserted when you type and its location can be changed using movement keys.

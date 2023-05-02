@@ -1,6 +1,6 @@
 #+title: Emacs Has a Built-in Pomodoro Timer?
 
-[[https://youtu.be/JbHE819kVGQ][Watch the video]] on YouTube!
+[[yt:JbHE819kVGQ][Watch the video on YouTube!]]
 
 * It's true!
 

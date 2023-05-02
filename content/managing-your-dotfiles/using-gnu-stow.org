@@ -1,6 +1,6 @@
 #+title: Using GNU Stow to Manage Symbolic Links for Your Dotfiles
 
-[[https://youtu.be/CxAT1u8G7is][Watch the video]] on YouTube!
+[[yt:CxAT1u8G7is][Watch the video on YouTube!]]
 
 * Intro
 

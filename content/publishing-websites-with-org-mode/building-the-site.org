@@ -1,12 +1,15 @@
 #+title: Build Your Website with Org Mode
 
-[[https://youtu.be/AfkrzFodoNw][Watch the video]] on YouTube!
+[[yt:AfkrzFodoNw][Watch the video on YouTube!]]
 
 * Intro
 
 One of Org Mode's most useful features is its publishing system which allows you to turn Org files into many other formats.
 
 In this video, I'll show you how to use it to generate a simple but nice looking website using Org Mode's HTML publishing capabilities!
+
+#+begin_cta
+#+end_cta
 
 * Getting started
 

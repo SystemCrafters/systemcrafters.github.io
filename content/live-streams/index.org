@@ -1,42 +1,150 @@
-#+title: Systems Crafters Live!
+#+TITLE: Live Streams
 
-We stream every Friday at 8 am Pacific time!
-
-* Episodes
-
-- [[march-11-2022/][March 11, 2022]]: Reviewing Rational Emacs PRs
-- [[february-25-2022/][February 25, 2022]]: Trying New Emacs Packages by Minad
-- [[february-18-2022/][February 18, 2022]]: Live Crafting: Rational Emacs
-- [[february-11-2022/][February 11, 2022]]: Rational Emacs: A New Base Configuration
-- [[february-4-2022/][February 4, 2022]]: Customizing Emacs With Only the UI?
-- [[january-21-2022/][January 21, 2022]]: Planning the New Emacs From Scratch
-- [[january-14-2022/][January 14, 2022]]: Building the WORST Emacs Configuration
-- [[january-7-2022/][January 7, 2022]]: Why Geeks Don't Use Guix
-- [[december-31-2021/][December 31, 2021]]: The Best of 2021!
-- [[december-17-2021/][December 17, 2021]]: The Hidden Value of Emacs' Tab Bar
-- [[december-10-2021/][December 10, 2021]]: Community Chat and Config Hacking
-- [[december-3-2021/][December 3, 2021]]: Can StumpWM Replace EXWM?
-- [[november-26-2021/][November 26, 2021]]: I'm Rewriting My Configuration (Again)
-- [[november-19-2021/][November 19, 2021]]: Tools for Building a Lisp-Focused System
-- [[november-12-2021/][November 12, 2021]]: Editor Popularity: Does It Matter?
-- [[november-5-2021/][November 5, 2021]]: Catching Up With Emacs
-- [[october-15-2021/][October 15, 2021]]: The Many Uses of Embark
-- [[october-08-2021/][October 8, 2021]]: Comparing Project.el to Projectile
-- [[october-01-2021/][October 1, 2021]]: A First Look at Guix Home
-- [[september-24-2021/][September 24, 2021]]: Investigating =use-package= Alternatives
-- [[september-17-2021/][September 17, 2021]]: The Many Varieties of Emacs
-- [[september-10-2021/][September 10, 2021]]: Emacs Package Potluck: The Sequel!
-- [[september-03-2021/][September 3, 2021]]: Exploring the Org Roam DB API
-- [[august-27-2021/][August 27, 2021]]: We Need to Talk About EXWM
-- [[august-20-2021/][August 20, 2021]]: Can We Fix a Bug in Emacs?
-- [[august-13-2021/][August 13, 2021]]: Emacs Package Potluck (Trying Your Suggestions!)
-- [[august-06-2021/][August 6, 2021]]: Can You Apply Zettelkasten in Emacs?
-- [[july-30-2021/][July 30, 2021]]: The Future of System Crafters
-- [[july-23-2021/][July 23, 2021]]: Is Emacs intimidating to learn for beginners?
-- [[july-16-2021/][July 16, 2021]]: Do we really need use-package in Emacs?
-- [[june-04-2021/][June 4, 2021]]: Improving the IRC Experience in ERC
-- [[may-21-2021/][May 21, 2021]]: Replacing Ivy and Counsel with Vertico and Consult
-- [[may-07-2021/][May 7, 2021]]: Should you use pre-made Emacs configurations? • Emacs News
-- [[april-30-2021/][April 30, 2021]]: Trying out Emacs Packages: Vertico and Corfu • Emacs Lisp Hacking
-- [[april-23-2021/][April 23, 2021]]: Lisp Compiler Progress • Live Lisp Hacking
-- [[april-16-2021/][April 16, 2021]]: I'm creating a new Lisp • Emacs News
+- *[[file:april-21-2023.org][System Crafters Live - April 21, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Apr 26, 2023.</p>
+- *[[file:march-13-2023.org][System Crafters Live - March 17, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Apr 21, 2023.</p>
+- *[[file:april-14-2023.org][System Crafters Live - April 14, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Apr 14, 2023.</p>
+- *[[file:march-31-2023.org][System Crafters Live - March 31, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Apr 01, 2023.</p>
+- *[[file:march-17-2023.org][System Crafters Live - March 17, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Apr 01, 2023.</p>
+- *[[file:february-10-2023.org][System Crafters Live! - February 10, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Apr 01, 2023.</p>
+- *[[file:february-17-2023.org][System Crafters Live! - February 17, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Apr 01, 2023.</p>
+- *[[file:march-11-2022.org][System Crafters Live! - March 11, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Mar 17, 2023.</p>
+- *[[file:january-20-2023.org][System Crafters Live! - January 20, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Feb 10, 2023.</p>
+- *[[file:february-3-2023.org][System Crafters Live! - February 3, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Feb 10, 2023.</p>
+- *[[file:january-13-2023.org][System Crafters Live! - January 13, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Jan 17, 2023.</p>
+- *[[file:january-6-2023.org][System Crafters Live! - January 6, 2023]]*
+  #+html: <p class='pubdate'>by David Wilson on Jan 13, 2023.</p>
+- *[[file:december-23-2022.org][System Crafters Live! - December 23, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Jan 06, 2023.</p>
+- *[[file:december-16-2022.org][System Crafters Live! - December 16, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Dec 22, 2022.</p>
+- *[[file:december-2-2022.org][System Crafters Live! - December 2, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Dec 02, 2022.</p>
+- *[[file:november-18-2022.org][System Crafters Live! - November 18, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Dec 02, 2022.</p>
+- *[[file:november-25-2022.org][System Crafters Live! - November 25, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Dec 02, 2022.</p>
+- *[[file:november-4-2022.org][System Crafters Live! - November 4, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Nov 18, 2022.</p>
+- *[[file:october-28-2022.org][System Crafters Live! - October 28, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Nov 18, 2022.</p>
+- *[[file:november-11-2022.org][System Crafters Live! - November 11, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Nov 18, 2022.</p>
+- *[[file:october-21-2022.org][System Crafters Live! - October 22, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Nov 04, 2022.</p>
+- *[[file:october-14-2022.org][System Crafters Live! - October 14, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Oct 21, 2022.</p>
+- *[[file:september-30-2022.org][System Crafters Live! - September 30, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Oct 14, 2022.</p>
+- *[[file:september-23-2022.org][System Crafters Live! - September 23, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Oct 14, 2022.</p>
+- *[[file:september-9-2022.org][System Crafters Live! - September 9, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Sep 17, 2022.</p>
+- *[[file:september-2-2022.org][System Crafters Live! - September 2, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Sep 09, 2022.</p>
+- *[[file:august-26-2022.org][System Crafters Live! - August 26, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Sep 02, 2022.</p>
+- *[[file:august-19-2022.org][System Crafters Live! - August 19, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 26, 2022.</p>
+- *[[file:july-29-2022.org][System Crafters Live! - July 29, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 19, 2022.</p>
+- *[[file:july-15-2022.org][System Crafters Live! - July 15, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Jul 29, 2022.</p>
+- *[[file:july-8-2022.org][System Crafters Live! - July 8, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Jul 15, 2022.</p>
+- *[[file:july-1-2022.org][System Crafters Live! - July 1, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Jul 08, 2022.</p>
+- *[[file:june-24-2022.org][System Crafters Live! - June 24, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Jun 28, 2022.</p>
+- *[[file:june-10-2022.org][System Crafters Live! - June 10, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Jun 11, 2022.</p>
+- *[[file:may-20-2022.org][System Crafters Live! - May 20, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Jun 10, 2022.</p>
+- *[[file:may-06-2022.org][System Crafters Live! - May 6, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on May 20, 2022.</p>
+- *[[file:march-18-2022.org][System Crafters Live! - March 18, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on May 20, 2022.</p>
+- *[[file:april-15-2022.org][System Crafters Live! - April 15, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on May 20, 2022.</p>
+- *[[file:february-25-2022.org][System Crafters Live! - February 25, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Mar 11, 2022.</p>
+- *[[file:february-11-2022.org][System Crafters Live! - February 11, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Feb 22, 2022.</p>
+- *[[file:february-4-2022.org][System Crafters Live! - February 4, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Feb 22, 2022.</p>
+- *[[file:february-18-2022.org][System Crafters Live! - February 18, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Feb 22, 2022.</p>
+- *[[file:january-21-2022.org][System Crafters Live! - January 21, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Jan 21, 2022.</p>
+- *[[file:january-14-2022.org][System Crafters Live! - January 14, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Jan 14, 2022.</p>
+- *[[file:january-7-2022.org][System Crafters Live! - January 7, 2022]]*
+  #+html: <p class='pubdate'>by David Wilson on Jan 07, 2022.</p>
+- *[[file:december-31-2021.org][The Best of 2021!]]*
+  #+html: <p class='pubdate'>by David Wilson on Dec 31, 2021.</p>
+- *[[file:december-17-2021.org][System Crafters Live! - December 17, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Dec 17, 2021.</p>
+- *[[file:december-10-2021.org][System Crafters Live! - December 10, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Dec 17, 2021.</p>
+- *[[file:december-3-2021.org][System Crafters Live! - December 3, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Dec 03, 2021.</p>
+- *[[file:november-26-2021.org][System Crafters Live! - November 26, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Nov 26, 2021.</p>
+- *[[file:november-19-2021.org][System Crafters Live! - November 19, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Nov 19, 2021.</p>
+- *[[file:november-12-2021.org][System Crafters Live! - November 12, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Nov 12, 2021.</p>
+- *[[file:november-5-2021.org][System Crafters Live! - November 5, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Nov 05, 2021.</p>
+- *[[file:october-15-2021.org][System Crafters Live! - October 15, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Oct 15, 2021.</p>
+- *[[file:october-08-2021.org][System Crafters Live! - October 8, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Oct 08, 2021.</p>
+- *[[file:october-01-2021.org][System Crafters Live! - A First Look at Guix Home]]*
+  #+html: <p class='pubdate'>by David Wilson on Oct 01, 2021.</p>
+- *[[file:september-24-2021.org][System Crafters Live! - Investigating use-package Alternatives]]*
+  #+html: <p class='pubdate'>by David Wilson on Sep 24, 2021.</p>
+- *[[file:september-17-2021.org][System Crafters Live! - September 17, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Sep 17, 2021.</p>
+- *[[file:integrating-nushell-1.org][System Crafters Live! - Integrating Nushell with Emacs]]*
+  #+html: <p class='pubdate'>by David Wilson on Sep 13, 2021.</p>
+- *[[file:september-10-2021.org][System Crafters Live! - September 10, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Sep 10, 2021.</p>
+- *[[file:september-03-2021.org][System Crafters Live! - September 3, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Sep 03, 2021.</p>
+- *[[file:august-27-2021.org][System Crafters Live! - August 27, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 27, 2021.</p>
+- *[[file:august-20-2021.org][System Crafters Live! - August 20, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 20, 2021.</p>
+- *[[file:august-13-2021.org][System Crafters Live! - August 13, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 13, 2021.</p>
+- *[[file:august-06-2021.org][System Crafters Live! - August 6, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 06, 2021.</p>
+- *[[file:may-07-2021.org][System Crafters Live! - May 7, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 04, 2021.</p>
+- *[[file:april-23-2021.org][System Crafters Live! - April 23, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 04, 2021.</p>
+- *[[file:may-21-2021.org][System Crafters Live! - May 21, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 04, 2021.</p>
+- *[[file:june-04-2021.org][System Crafters Live! - June 4, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 04, 2021.</p>
+- *[[file:april-30-2021.org][System Crafters Live! - April 30, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 04, 2021.</p>
+- *[[file:july-16-2021.org][System Crafters Live! - July 16, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 04, 2021.</p>
+- *[[file:april-16-2021.org][System Crafters Live! - April 16, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 04, 2021.</p>
+- *[[file:july-23-2021.org][System Crafters Live! - July 23, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 04, 2021.</p>
+- *[[file:july-30-2021.org][System Crafters Live! - July 30, 2021]]*
+  #+html: <p class='pubdate'>by David Wilson on Aug 04, 2021.</p>

@@ -1,6 +1,6 @@
 #+title: Mastering Git with Magit - Getting Started
 
-[[https://youtu.be/_zfvQkJsYwI][Watch the video]] on YouTube!
+[[yt:_zfvQkJsYwI][Watch the video on YouTube!]]
 
 * What will we learn?
 
@@ -13,6 +13,9 @@ This is the first video in a series about Magit where I'll show you how to do al
 The only expectation in this series is that you have a basic understanding of how to use Git to create commits and use branches.  If you are a beginner to Git, let me know in the comments and I'll consider making a video series covering the basics of using it!
 
 Let's get started!
+
+#+begin_cta
+#+end_cta
 
 * What is Magit?
 

@@ -1,12 +1,15 @@
 #+title: Automated Org Mode Website Publishing with GitHub or SourceHut
 
-[[https://youtu.be/za99DwdZEyg][Watch the video]] on YouTube!
+[[yt:za99DwdZEyg][Watch the video on YouTube!]]
 
 * Intro
 
 Once you start generating a static website using Org Mode's publishing system, the next thing you'll probably want to know is how to publish the site so that other people can check it out.
 
 In this video, you'll learn how to set up automatic publishing of your Org Mode website every time you push a commit to your Git repository.
+
+#+begin_cta
+#+end_cta
 
 * Getting started
 

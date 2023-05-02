@@ -1,12 +1,15 @@
 #+title: Capturing Notes Efficiently with Org Roam
 
-[[https://youtu.be/YxgA5z2R08I][Watch the video]] on YouTube!
+[[yt:YxgA5z2R08I][Watch the video on YouTube!]]
 
 * Intro
 
 When building a personal knowledge system, one of the most important things you can do is create an efficient workflow for capturing new information.
 
 By the end of video you'll know how to create custom templates for capturing notes and project details into your Org Roam files.
+
+#+begin_cta
+#+end_cta
 
 * The need for a good capture workflow
 

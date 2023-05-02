@@ -189,7 +189,6 @@
                     contents
                     :publish-date (org-export-data (org-export-get-date info "%B %e, %Y") info)))
 
-;; Thanks Ashraz!
 (defun dw/org-html-link (link contents info)
   "Removes file extension and changes the path into lowercase file:// links."
   (when (string= 'file (org-element-property :type link))
@@ -360,14 +359,13 @@ holding contextual information."
             (dw/video-series-config "emacs-essentials")
             (dw/video-series-config "emacs-from-scratch")
             (dw/video-series-config "emacs-ide")
-            ;; (dw/video-series-config "emacs-mail")
-            ;; (dw/video-series-config "emacs-shorts")
+            (dw/video-series-config "emacs-mail")
+            (dw/video-series-config "emacs-shorts")
             ;; (dw/video-series-config "emacs-tips")
             ;; (dw/video-series-config "learning-emacs-lisp")
-            ;; (dw/video-series-config "managing-your-dotfiles")
-            ;; (dw/video-series-config "mastering-git-with-magit")
-            ;; (dw/video-series-config "publishing-websites-with-org-mode")
-            ))
+            (dw/video-series-config "managing-your-dotfiles")
+            (dw/video-series-config "mastering-git-with-magit")
+            (dw/video-series-config "publishing-websites-with-org-mode")))
 
 (defun dw/generate-redirects (redirects)
   (dolist (redirect redirects)

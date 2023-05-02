@@ -8,6 +8,9 @@ In the last video we learned the key bindings you can use to move around Emacs b
 
 We'll also learn about a cool feature called the "mark ring" that will make it easy to jump back to places you've been in the buffers you have open.
 
+#+begin_cta
+#+end_cta
+
 * Oh hi, Mark
 
 To understand selections in Emacs, it's best to start with the concept of the "mark."  The mark is a location in the buffer that is used as the starting point for various selection and editing operations.

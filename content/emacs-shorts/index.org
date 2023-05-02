@@ -2,4 +2,4 @@
 
 * Episodes
 
-1. [[pomodoro-timer/][Emacs Has a Built-in Pomodoro Timer??]]
+1. [[file:pomodoro-timer.org][Emacs Has a Built-in Pomodoro Timer?]]

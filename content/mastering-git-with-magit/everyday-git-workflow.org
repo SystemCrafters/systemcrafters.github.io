@@ -1,6 +1,6 @@
 #+title: Everyday Git Workflow in Emacs with Magit
 
-[[https://youtu.be/qPfJoeQCIvA][Watch the video]] on YouTube!
+[[yt:qPfJoeQCIvA][Watch the video on YouTube!]]
 
 * What will we learn?
 
@@ -11,6 +11,9 @@ This is Part 2 of the [[https://www.youtube.com/watch?v=_zfvQkJsYwI&list=PLEoMzS
 Instead of covering every Magit feature exhaustively, I'm going to use a scenario-driven approach to show you how to accomplish specific tasks that I use Magit for every day, both when managing my dotfiles repository and working on larger projects where I have to collaborate with others.
 
 Let me know in the comments if there's anything you'd like to see covered in more detail and I'll do that in future videos of this series!
+
+#+begin_cta
+#+end_cta
 
 * Cloning a repository
 

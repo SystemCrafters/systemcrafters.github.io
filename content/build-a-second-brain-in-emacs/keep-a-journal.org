@@ -1,10 +1,13 @@
 #+title: Keep a Journal in Emacs with Org Roam
 
-[[https://www.youtube.com/watch?v=3-sLBaJAtew][Watch the video]] on YouTube!
+[[yt:3-sLBaJAtew][Watch the video on YouTube!]]
 
 * Intro
 
 One of the best ways to think and work through problems is to have a written dialogue with yourself.  By the end of this video, you'll know how to log your thoughts from the day, link them to existing notes, and easily review the notes for any day, all with Org Roam.
+
+#+begin_cta
+#+end_cta
 
 * The starting configuration
 

@@ -1,12 +1,15 @@
 #+title: 5 Org Roam Hacks for Better Productivity in Emacs
 
-[[https://youtu.be/CUkuyW6hr18][Watch the video]] on YouTube!
+[[yt:CUkuyW6hr18][Watch the video on YouTube!]]
 
 * Intro
 
 Org Roam is an excellent tool for writing and organizing your thoughts, but when you leverage more of the functions it provides, you can create highly efficient custom workflows for common tasks.
 
 In this video, I'm going to show you 5 hacks to optimize your note taking and project management workflows using the features of Org Roam and Org Mode!
+
+#+begin_cta
+#+end_cta
 
 * The starting configuration
 

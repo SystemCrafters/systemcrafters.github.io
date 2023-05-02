@@ -2,5 +2,5 @@
 
 * Episodes
 
-1. [[building-the-site/][Build Your Website with Org Mode]]
-2. [[automated-site-publishing/][Automated Org Mode Website Publishing with GitHub or SourceHut]]
+1. [[file:building-the-site.org][Build Your Website with Org Mode]]
+2. [[file:automated-site-publishing.org][Automated Org Mode Website Publishing with GitHub or SourceHut]]

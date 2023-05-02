@@ -2,6 +2,9 @@
 
 [[yt:AyhPmypHDEw][Watch the video on YouTube!]]
 
+#+begin_cta
+#+end_cta
+
 * What is Org Roam?
 
 Org Mode is known to be a great tool not just for writing and personal notes but also TODO lists, project planning, time tracking, and more.  Once you start to become really invested in Org Mode you'll eventually have to come up with a system for managing your Org files so that it's easy to store and find the information you need.

@@ -1,6 +1,6 @@
 #+title: Chat Like the 90's in Emacs with ERC
 
-[[https://www.youtube.com/watch?v=qWHTZIYTA4s][Watch the video]] on YouTube!
+[[yt:qWHTZIYTA4s][Watch the video on YouTube!]]
 
 * Yet another thing Emacs can do!
 
