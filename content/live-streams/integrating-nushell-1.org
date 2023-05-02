@@ -1,6 +1,6 @@
 #+title: System Crafters Live! - Integrating Nushell with Emacs
-
-[[https://www.youtube.com/watch?v=IHeKUeO7bpo][Watch the recording]] on YouTube!
+#+date: [2021-09-12 Sun]
+#+video: IHeKUeO7bpo
 
 * Systems with JT
 
