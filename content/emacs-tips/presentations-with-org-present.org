@@ -6,11 +6,12 @@
 
 I get asked pretty regularly about how I achieve the look of the presentations I that give from within Emacs.  I made [[https://youtu.be/vz9aLmxYJB0][another video]] in the past showing how to use a package called =org-tree-slide= for presentations, but I've actually been using another package called =org-present= for the last year or more.
 
-In this video, I'll show you exactly how I achieve my presentation style using =org-present= and a few other customizations.
+In the video, I'll show you exactly how I achieve my presentation style using =org-present= and a few other customizations.
 
-If you check the link to the show notes in the description, I provide a *complete* Emacs configuration that will replicate what you see here.
+At the end of this tutorial, I provide a *complete* Emacs configuration that will replicate what you see here.
 
-Please make sure to give this video a like 👍 if you learn something useful from it!
+#+begin_cta
+#+end_cta
 
 * Installing org-present
 
