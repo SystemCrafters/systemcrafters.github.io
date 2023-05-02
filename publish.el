@@ -66,10 +66,16 @@
 (use-package webfeeder
   :ensure t)
 
+(defvar dw/page-video nil
+  "If set, contains the YouTube ID for the main video to display on the page.")
+
 (defvar yt-iframe-format
   (concat "<div class=\"video\">"
           "  <iframe src=\"https://www.youtube.com/embed/%s\" allowfullscreen></iframe>"
           "</div>"))
+
+(defun dw/embed-video (video-id)
+  (format yt-iframe-format video-id))
 
 (setq user-full-name "David Wilson")
 (setq user-mail-address "david@systemcrafters.net")
@@ -90,8 +96,7 @@
  :export
  (lambda (path desc backend channel)
    (when (eq backend 'html)
-     (format yt-iframe-format
-             path (or desc "")))))
+     (dw/embed-video path))))
 
 (defun dw/site-header ()
   (list `(header (@ (class "blog-header"))
@@ -147,6 +152,7 @@
 
 (cl-defun dw/generate-page (title
                             content
+                            info
                             &key
                             (publish-date)
                             (head-extra)
@@ -180,6 +186,8 @@
                                ,title)
                            ,(when publish-date
                               `(p (@ (class "blog-post-meta")) ,publish-date))
+                           ,(if-let ((video-id (plist-get info :video)))
+                                (dw/embed-video video-id))
                            ,(when pre-content pre-content)
                            ,content))
                  ,@(dw/site-footer))))))
@@ -187,6 +195,7 @@
 (defun dw/org-html-template (contents info)
   (dw/generate-page (org-export-data (plist-get info :title) info)
                     contents
+                    info
                     :publish-date (org-export-data (org-export-get-date info "%B %e, %Y") info)))
 
 (defun dw/org-html-link (link contents info)
@@ -262,14 +271,15 @@ holding contextual information."
                     "If you find this guide helpful, please consider supporting System Crafters via the links on the <a href=\"/how-to-help\">How to Help</a> page!"
                   "")))))
 
-(org-export-define-derived-backend 'site-html
-    'html
+(org-export-define-derived-backend 'site-html 'html
   :translate-alist
   '((template . dw/org-html-template)
     (link . dw/org-html-link)
     (src-block . dw/org-html-src-block)
     (special-block . dw/org-html-special-block)
-    (headline . dw/org-html-headline)))
+    (headline . dw/org-html-headline))
+  :options-alist
+  '((:video "VIDEO" nil dw/page-video)))
 
 (defun org-html-publish-to-html (plist filename pub-dir)
   "Publish an org file to HTML, using the FILENAME as the output directory."
@@ -313,12 +323,10 @@ holding contextual information."
 (defun dw/format-live-stream-entry (entry style project)
   "Format posts with author and published data in the index page."
   (cond ((not (directory-name-p entry))
-         (format "*[[file:%s][%s]]*
-                 #+HTML: <p class='pubdate'>by %s on %s.</p>"
+         (format "*[[file:%s][%s]]* - %s"
                  entry
                  (org-publish-find-title entry project)
-                 (car (org-publish-find-property entry :author project))
-                 (format-time-string "%b %d, %Y"
+                 (format-time-string "%B %d, %Y"
                                      (org-publish-find-date entry project))))
         ((eq style 'tree) (file-name-nondirectory (directory-file-name entry)))
         (t entry)))
@@ -377,6 +385,7 @@ holding contextual information."
          (dw/generate-page "Redirecting..."
                            (concat "You are being redirected to "
                                    "<a href=\"" redirect-url "\">" redirect-url "</a>")
+                           '()
                            :head-extra
                            (concat "<meta http-equiv=\"refresh\" content=\"0; url='" redirect-url "'\"/>")))))))
 
