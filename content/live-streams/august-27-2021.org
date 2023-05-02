@@ -1,4 +1,4 @@
-#+title: System Crafters Live! - August 27, 2021
+#+title: We Need to Talk About EXWM
 #+date: [2021-08-27 Fri]
 #+video: nMH3QXWxTGg
 
