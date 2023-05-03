@@ -134,7 +134,7 @@
                                (file-name-sans-extension
                                 (file-name-nondirectory org-file)))))))
 
-    (if (string-match "\\/index.org$" org-file)
+    (if (string-match "\\/index.org\\|\\/404.org$" org-file)
         pub-dir
         (progn
           (unless (file-directory-p article-dir)
@@ -290,7 +290,10 @@ holding contextual information."
   (let ((article-path (get-article-output-path filename pub-dir)))
     (cl-letf (((symbol-function 'org-export-output-file-name)
                (lambda (extension &optional subtreep pub-dir)
-                 (concat article-path "index" extension))))
+                 ;; The 404 page is a special case, it must be named "404.html"
+                 (concat article-path
+                         (if (string= (file-name-nondirectory filename) "404.org") "404" "index")
+                         extension))))
       (org-publish-org-to 'site-html
                           filename
                           (concat "." (or (plist-get plist :html-extension)
