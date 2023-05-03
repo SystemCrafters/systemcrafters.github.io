@@ -320,15 +320,6 @@ holding contextual information."
       org-export-with-toc nil
       make-backup-files nil)
 
-(defun dw/video-series-config (series-path)
-  (list (format "systemcrafters:%s" series-path)
-        :base-directory (format "./content/%s" series-path)
-        :base-extension "org"
-        :publishing-directory (format "./public/%s" series-path)
-        :publishing-function 'org-html-publish-to-html
-        :with-title nil
-        :with-timestamps nil))
-
 (defun dw/format-live-stream-entry (entry style project)
   "Format posts with author and published data in the index page."
   (cond ((not (directory-name-p entry))
@@ -427,22 +418,14 @@ holding contextual information."
               :sitemap-sort-files anti-chronologically
               :with-title nil
               :with-timestamps nil)
-            (dw/video-series-config "advanced-package-management")
-            (dw/video-series-config "build-a-second-brain-in-emacs")
-            (dw/video-series-config "chatting-with-emacs")
-            (dw/video-series-config "craft-your-system-with-guix")
-            (dw/video-series-config "effective-emacs-workflow")
-            (dw/video-series-config "emacs-desktop-environment")
-            (dw/video-series-config "emacs-essentials")
-            (dw/video-series-config "emacs-from-scratch")
-            (dw/video-series-config "emacs-ide")
-            (dw/video-series-config "emacs-mail")
-            (dw/video-series-config "emacs-shorts")
-            (dw/video-series-config "emacs-tips")
-            (dw/video-series-config "learning-emacs-lisp")
-            (dw/video-series-config "managing-your-dotfiles")
-            (dw/video-series-config "mastering-git-with-magit")
-            (dw/video-series-config "publishing-websites-with-org-mode")))
+            '("systemcrafters:videos"
+              :base-directory "./content/videos"
+              :base-extension "org"
+              :recursive t
+              :publishing-directory "./public"
+              :publishing-function org-html-publish-to-html
+              :with-title nil
+              :with-timestamps nil)))
 
 (defun dw/generate-redirects (redirects)
   (dolist (redirect redirects)
