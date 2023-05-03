@@ -203,7 +203,8 @@
 
 (defun dw/org-html-link (link contents info)
   "Removes file extension and changes the path into lowercase file:// links."
-  (when (string= 'file (org-element-property :type link))
+  (when (and (string= 'file (org-element-property :type link))
+             (string= "org" (file-name-extension (org-element-property :path link))))
     (org-element-put-property link :path
                               (downcase
                                (file-name-sans-extension
