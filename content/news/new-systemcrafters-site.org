@@ -7,12 +7,12 @@ Welcome to the redesigned and improved System Crafters site!
 
 * What Changed?
 
-- The overall design has been updated to use the System Crafters logo and color theme
+- All content is now organized under the [[http:/guides][Guides]] section
+- A [[http:/news][News]] page has been added with an associated [[http:/rss/news.xml][RSS feed]]
+- A [[http:/community][Community]] section has been added to highlight community members and projects
 - The site's main page now does a better job of pointing you to the learning resources you might be interested in
-- All content is now organized under the [[file:../guides.org][Guides]] section
-- A [[file:../news.org][News]] page has been added with an associated [[file:../rss/news.xml][RSS feed]]
-- A [[file:../community.org][Community]] section has been added to highlight community members and projects
-- Live stream show notes pages automatically appear on the [[file:../live-streams.org][Live Streams]] page
+- Live stream show notes pages automatically appear on the [[http:/live-streams][Live Streams]] page
+- The overall design has been updated to use the System Crafters logo and color theme
 
 * The Plan
 
@@ -26,8 +26,8 @@ With the new site design, we now finally have a single place where you can stay 
 - Community project updates (Crafted Emacs, etc)
 - Announcements for the System Crafters Store
 
-To be notified about any new posts, you can susbcribe to the [[https://systemcrafters.net/rss/news.xml][News RSS Feed]].
+To be notified about any new posts, you can susbcribe to the [[http:/rss/news.xml][News RSS Feed]].
 
 Even better, join the System Crafters Newsletter!  All of the news in the RSS feed will be covered there along with additional news and insights that you won't get anywhere else on the website or YouTube channel.
 
-Sign up below or head to the [[file:../newsletter.org][Newsletter]] page to read more about it!
+Sign up below or head to the [[http:/newsletter][Newsletter]] page to read more about it!
