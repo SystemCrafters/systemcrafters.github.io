@@ -26,6 +26,10 @@ html {
   .video {
     width: 100%;
   }
+
+  .list-form {
+    width: 100%;
+  }
 }
 
 /* sm */
@@ -62,6 +66,10 @@ html {
 
   .video {
     width: 70%;
+  }
+
+  .list-form {
+    width: 60%;
   }
 }
 
@@ -399,7 +407,6 @@ strong {
 
 .list-form {
   font-size: 0.9rem;
-  width: 50%;
   padding: 1rem;
   margin-bottom: 1rem;
   border: 1px solid #c3e88d;
