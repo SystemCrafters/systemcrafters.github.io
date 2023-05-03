@@ -427,6 +427,7 @@ holding contextual information."
               :with-title nil
               :with-timestamps nil)))
 
+;; TODO: Generate a _redirects file instead once Codeberg Pages releases a new version
 (defun dw/generate-redirects (redirects)
   (dolist (redirect redirects)
     (let ((output-path (concat "./public/" (car redirect) "/index.html"))
@@ -462,8 +463,8 @@ holding contextual information."
 
   (dw/generate-redirects '(("support-the-channel" . "how-to-help")))
 
-  (copy-file ".domains" "public/.domains" t)
-  (copy-file "_redirects" "public/_redirects" t))
+  ;; Copy the domains file to ensure the custom domain resolves
+  (copy-file ".domains" "public/.domains" t))
 
 (provide 'publish)
 ;;; publish.el ends here
