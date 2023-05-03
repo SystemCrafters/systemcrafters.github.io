@@ -396,3 +396,48 @@ strong {
   border-radius: 4px;
   background-color: #232635;
 }
+
+.list-form {
+  font-size: 0.9rem;
+  width: 50%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #c3e88d;
+  border-radius: 4px;
+  background-color: #232635;
+}
+
+.list-form-title {
+  font-family: "Iosevka Aile Web", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #c3e88d;
+}
+
+.list-form-label {
+  margin-top: 0.8rem;
+  font-weight: bold;
+}
+
+.list-form input[type="text"] {
+  width: 100%;
+  padding: 10px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #c3e88d;
+  border-radius: 4px;
+  background-color: #232635;
+  color: #eeffff;
+}
+
+.list-form input[type="submit"] {
+  width: 50%;
+  padding: 10px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #89aaeb;
+  border-radius: 4px;
+  background-color: #89aaeb;
+  color: #232635;
+}
