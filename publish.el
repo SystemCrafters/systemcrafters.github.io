@@ -282,7 +282,7 @@ holding contextual information."
     (special-block . dw/org-html-special-block)
     (headline . dw/org-html-headline))
   :options-alist
-  '((:video "VIDEO" nil dw/page-video)))
+  '((:video "VIDEO" nil nil)))
 
 (defun org-html-publish-to-html (plist filename pub-dir)
   "Publish an org file to HTML, using the FILENAME as the output directory."
