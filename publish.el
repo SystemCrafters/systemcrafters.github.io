@@ -119,7 +119,9 @@
                            (div (@ (class "column"))
                                 (p (a (@ (href ,(concat dw/site-url "/privacy-policy/"))) "Privacy Policy")
                                    " · "
-                                   (a (@ (href ,(concat dw/site-url "/credits/"))) "Credits"))
+                                   (a (@ (href ,(concat dw/site-url "/credits/"))) "Credits")
+                                   " · "
+                                   (a (@ (href ,(concat dw/site-url "/rss/"))) "RSS Feeds"))
                                 (p "© 2021-2023 System Crafters LLC"))
                            (div (@ (class "column align-right"))
                                 (p (a (@ (href "https://codeberg.org/SystemCrafters/systemcrafters.net"))
