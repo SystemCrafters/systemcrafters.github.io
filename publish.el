@@ -66,9 +66,6 @@
 (use-package webfeeder
   :ensure t)
 
-(defvar dw/page-video nil
-  "If set, contains the YouTube ID for the main video to display on the page.")
-
 (defvar yt-iframe-format
   (concat "<div class=\"video\">"
           "  <iframe src=\"https://www.youtube.com/embed/%s\" allowfullscreen></iframe>"
@@ -99,23 +96,24 @@
      (dw/embed-video path))))
 
 (defun dw/site-header ()
-  (list `(header (@ (class "blog-header"))
+  (list `(header (@ (class "site-header"))
                  (div (@ (class "container"))
-                      (div (@ (class "blog-title"))
+                      (div (@ (class "site-title"))
                            (img (@ (class "logo")
                                    (src ,(concat dw/site-url "/img/sc_logo.png"))
                                    (alt "System Crafters")))))
-                 (div (@ (class "blog-masthead"))
+                 (div (@ (class "site-masthead"))
                       (div (@ (class "container"))
                            (nav (@ (class "nav"))
                                 (a (@ (class "nav-link") (href "/")) "Home") " "
-                                (a (@ (class "nav-link") (href "/guides")) "Guides") " "
-                                (a (@ (class "nav-link") (href "/news")) "News") " "
+                                (a (@ (class "nav-link") (href "/guides/")) "Guides") " "
+                                (a (@ (class "nav-link") (href "/news/")) "News") " "
+                                ;; (a (@ (class "nav-link") (href "/community/")) "Community") " "
                                 (a (@ (class "nav-link") (href "https://store.systemcrafters.net?utm_source=sc-site-nav")) "Store") " "
-                                (a (@ (class "nav-link") (href "/how-to-help")) "How to Help")))))))
+                                (a (@ (class "nav-link") (href "/how-to-help/")) "How to Help")))))))
 
 (defun dw/site-footer ()
-  (list `(footer (@ (class "blog-footer"))
+  (list `(footer (@ (class "site-footer"))
                  (div (@ (class "container"))
                       (div (@ (class "row"))
                            (div (@ (class "column"))
@@ -168,6 +166,10 @@
             (meta (@ (name "viewport")
                      (content "width=device-width, initial-scale=1, shrink-to-fit=no")))
             (link (@ (rel "icon") (type "image/png") (href "/img/favicon.png")))
+            (link (@ (rel "alternative")
+                     (type "application/rss+xml")
+                     (title "System Crafters News")
+                     (href ,(concat dw/site-url "/rss/news.xml"))))
             (link (@ (rel "stylesheet") (href ,(concat dw/site-url "/fonts/iosevka-aile/iosevka-aile.css"))))
             (link (@ (rel "stylesheet") (href ,(concat dw/site-url "/fonts/jetbrains-mono/jetbrains-mono.css"))))
             (link (@ (rel "stylesheet") (href ,(concat dw/site-url "/css/code.css"))))
@@ -181,15 +183,16 @@
             (title ,(concat title " - System Crafters")))
            (body ,@(dw/site-header)
                  (div (@ (class "container"))
-                      (div (@ (class "blog-post"))
-                           (h1 (@ (class "blog-post-title"))
+                      (div (@ (class "site-post"))
+                           (h1 (@ (class "site-post-title"))
                                ,title)
                            ,(when publish-date
-                              `(p (@ (class "blog-post-meta")) ,publish-date))
+                              `(p (@ (class "site-post-meta")) ,publish-date))
                            ,(if-let ((video-id (plist-get info :video)))
                                 (dw/embed-video video-id))
                            ,(when pre-content pre-content)
-                           ,content))
+                           (div (@ (id "content"))
+                                ,content)))
                  ,@(dw/site-footer))))))
 
 (defun dw/org-html-template (contents info)
@@ -331,6 +334,52 @@ holding contextual information."
         ((eq style 'tree) (file-name-nondirectory (directory-file-name entry)))
         (t entry)))
 
+(defun dw/format-news-entry (entry style project)
+  "Format posts with author and published data in the index page."
+  (cond ((not (directory-name-p entry))
+         (format "*[[file:%s][%s]]* - %s · %s"
+                 entry
+                 (org-publish-find-title entry project)
+                 (car (org-publish-find-property entry :author project))
+                 (format-time-string "%B %d, %Y"
+                                     (org-publish-find-date entry project))))
+        ((eq style 'tree) (file-name-nondirectory (directory-file-name entry)))
+        (t entry)))
+
+(defun dw/news-sitemap (title files)
+  (format "#+title: %s\n\n%s"
+          title
+          (mapconcat (lambda (file)
+                       (format "- %s\n" file))
+                     (cadr files)
+                     "\n")))
+
+(defun dw/rss-extract-title (html-file)
+  "Extract the title from an HTML file."
+  (with-temp-buffer
+    (insert-file-contents html-file)
+    (let ((dom (libxml-parse-html-region (point-min) (point-max))))
+      (dom-text (car (dom-by-class dom "site-post-title"))))))
+
+(defun dw/rss-extract-date (html-file)
+  "Extract the post date from an HTML file."
+  (with-temp-buffer
+    (insert-file-contents html-file)
+    (let* ((dom (libxml-parse-html-region (point-min) (point-max)))
+           (date-string (dom-text (car (dom-by-class dom "site-post-meta"))))
+           (parsed-date (parse-time-string date-string))
+           (day (nth 3 parsed-date))
+           (month (nth 4 parsed-date))
+           (year (nth 5 parsed-date)))
+      ;; NOTE: Hardcoding this at 8am for now
+      (encode-time 0 0 8 day month year))))
+
+;(defun dw/rss-extract-summary (html-file)
+;  )
+
+(setq webfeeder-title-function #'dw/rss-extract-title
+      webfeeder-date-function #'dw/rss-extract-date)
+
 (setq org-publish-project-alist
       (list '("systemcrafters:main"
               :base-directory "./content"
@@ -351,10 +400,24 @@ holding contextual information."
               :publishing-directory "./public/live-streams"
               :publishing-function org-html-publish-to-html
               :auto-sitemap t
-              :sitemap-filename "index.org"
+              :sitemap-filename "../live-streams.org"
               :sitemap-title "Live Streams"
               :sitemap-format-entry dw/format-live-stream-entry
               :sitemap-style list
+              :sitemap-sort-files anti-chronologically
+              :with-title nil
+              :with-timestamps nil)
+            '("systemcrafters:news"
+              :base-directory "./content/news"
+              :base-extension "org"
+              :publishing-directory "./public/news"
+              :publishing-function org-html-publish-to-html
+              :auto-sitemap t
+              :sitemap-filename "../news.org"
+              :sitemap-title "System Crafters News"
+              :sitemap-format-entry dw/format-news-entry
+              :sitemap-style list
+              :sitemap-function dw/news-sitemap
               :sitemap-sort-files anti-chronologically
               :with-title nil
               :with-timestamps nil)
@@ -396,28 +459,22 @@ holding contextual information."
                                      (getenv "CI"))
                                  "true"))
 
+  (webfeeder-build "rss/news.xml"
+                   "./public"
+                   dw/site-url
+                   (let ((default-directory (expand-file-name "./public/")))
+                     (remove "news/index.html"
+                             (directory-files-recursively "news"
+                                                          ".*\\.html$")))
+                   :builder 'webfeeder-make-rss
+                   :title "System Crafters News"
+                   :description "News and Insights from System Crafters!"
+                   :author "David Wilson")
+
   (dw/generate-redirects '(("support-the-channel" . "how-to-help")))
 
   (copy-file ".domains" "public/.domains" t)
   (copy-file "_redirects" "public/_redirects" t))
-
-            ;;  :rss-extension "xml"
-            ;;  :rss-image-url "http://example.com/logo.png"
-            ;;  :rss-exclude-tags ("noexport")
-            ;;  :html-link-home "/"
-            ;;  :html-link-use-abs-url t
-            ;;  :html-link-org-files-as-html t)
-
-            ;; ("rss"
-            ;;  :base-directory ,input-dir
-            ;;  :base-extension "org"
-            ;;  :publishing-directory ,output-dir
-            ;;  :publishing-function org-rss-publish-to-rss
-            ;;  :rss-extension "xml"
-            ;;  :html-link-home "https://systemcrafters.net/"
-            ;;  :html-link-use-abs-url t
-            ;;  :exclude "articles.html"
-            ;;  :recursive t))))
 
 (provide 'publish)
 ;;; publish.el ends here

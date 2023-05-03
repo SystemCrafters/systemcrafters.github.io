@@ -211,7 +211,7 @@ strong {
  * Masthead for nav
  */
 
-.blog-masthead {
+.site-masthead {
   margin-bottom: 0.5rem;
   background-color: rgba(28, 31, 38, 0.5);
   border-bottom: 0.05rem solid #c3e88d;
@@ -261,26 +261,26 @@ strong {
  * Blog name and description
  */
 
-.blog-header {
+.site-header {
   font-family: "Iosevka Aile Web", sans-serif;
   font-weight: bold;
   background-image: url("/img/header_bg.png");
   background-size: cover;
 }
 
-.blog-title {
+.site-title {
   margin-bottom: 0;
   font-size: 3rem;
   font-weight: bold;
   color: #82aaff;
 }
-.blog-description {
+.site-description {
   font-size: 1.5rem;
   color: #999;
 }
 
 @media (max-width: 40em) {
-  .blog-description {
+  .site-description {
     margin-bottom: 1rem;
   }
 }
@@ -305,10 +305,10 @@ strong {
 }
 
 /* Pagination */
-.blog-pagination {
+.site-pagination {
   margin-bottom: 4rem;
 }
-.blog-pagination > .btn {
+.site-pagination > .btn {
   border-radius: 2rem;
 }
 
@@ -316,21 +316,21 @@ strong {
  * Blog posts
  */
 
-.blog-post {
+.site-post {
   margin-bottom: 4rem;
 }
 
-.blog-post-title {
+.site-post-title {
   margin-bottom: 0.75rem;
   font-size: 2.5rem;
 }
 
-.blog-post-meta {
+.site-post-meta {
   margin-bottom: 1.25rem;
   color: #999;
 }
 
-.blog-post-tags {
+.site-post-tags {
   margin-top: 3rem;
   margin-bottom: 1.25rem;
   font-size: 1.1rem;
@@ -341,7 +341,7 @@ strong {
  * Footer
  */
 
-.blog-footer {
+.site-footer {
   padding: 1.3rem 0;
   color: #cdddeb;
   font-size: 1rem;
@@ -349,11 +349,11 @@ strong {
   border-top: 0.05rem solid #c3e88d;
 }
 
-.blog-footer p:last-child {
+.site-footer p:last-child {
   margin-bottom: 0;
 }
 
-.blog-footer-right {
+.site-footer-right {
   text-align: right;
 }
 

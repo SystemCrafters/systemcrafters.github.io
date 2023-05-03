@@ -1,0 +1,33 @@
+#+title: Unveiling the New System Crafters Site!
+#+date: [2023-05-02 Tue]
+#+author: David Wilson
+#+kind: news
+
+Welcome to the redesigned and improved System Crafters site!
+
+* What Changed?
+
+- The overall design has been updated to use the System Crafters logo and color theme
+- The site's main page now does a better job of pointing you to the learning resources you might be interested in
+- All content is now organized under the [[file:../guides.org][Guides]] section
+- A [[file:../news.org][News]] page has been added with an associated [[file:../rss/news.xml][RSS feed]]
+- A [[file:../community.org][Community]] section has been added to highlight community members and projects
+- Live stream show notes pages automatically appear on the [[file:../live-streams.org][Live Streams]] page
+
+* The Plan
+
+As I discussed in this stream, ...
+
+* Stay Up to Date!
+
+With the new site design, we now finally have a single place where you can stay up to date on all news related to System Crafters and the community:
+
+- New video releases and written guide updates
+- Community project updates (Crafted Emacs, etc)
+- Announcements for the System Crafters Store
+
+To be notified about any new posts, you can susbcribe to the [[https://systemcrafters.net/rss/news.xml][News RSS Feed]].
+
+Even better, join the System Crafters Newsletter!  All of the news in the RSS feed will be covered there along with additional news and insights that you won't get anywhere else on the website or YouTube channel.
+
+Sign up below or head to the [[file:../newsletter.org][Newsletter]] page to read more about it!

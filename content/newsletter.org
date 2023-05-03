@@ -1,0 +1,9 @@
+#+title: System Crafters Newsletter
+
+Receive the latest insights, tips, and content from System Crafters by signing up for my weekly newsletter!
+
+Each week, I will send out an e-mail giving you the latest updates for the System Crafters website, YouTube channel, and community.  I'll also give you my thoughts on any interesting developments in the wider Emacs, Guix, and Linux communities!
+
+For those who are concerned with privacy and spam, I promise that all e-mails will be sent in plain-text format with no trackers included.  I will also only send a maximum of 2 e-mails a week in the /rare/ case.  I want this mailing list to be high value and low noise for everyone!
+
+Sign up below, unsubscribe at any time.  If you have feedback on the mailing list, please feel free to e-mail me directly, david at systemcrafters.net.
