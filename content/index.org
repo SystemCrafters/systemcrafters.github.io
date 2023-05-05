@@ -26,7 +26,11 @@ If you need help on specific topics, there are a few resources to consider:
 
 * Live Streams
 
-We hope you'll join us for our regular *[[file:live-streams.org][live streams]] every Friday at 8am Pacific, 4pm UTC*!
+Join us *every Friday* for our weekly show *[[file:live-streams.org][System Crafters Live!]]* The stream is broadcast on both [[https://youtube.com/@SystemCrafters][YouTube]] and [[https://twitch.tv/SystemCrafters][Twitch]].
+
+In these streams we usually experiment with new packages, configurations, and customizations to understand the pros and cons of using them.  Other times we have philosophical discussions about software, computing, and productivity.  It's always a good time!
+
+[[https://time.is/compare/1800_in_Athens][Click here]] to see the stream time in your local time zone!
 
 * Stay Up to Date!
 
