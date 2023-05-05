@@ -1,0 +1,31 @@
+#+title: Exploring dwl-guile: A Wayland Compositor for Guile and Guix
+#+subtitle: System Crafters Live - May 5, 2023
+#+date: [2023-05-05 Fri]
+#+video: wHbH0VGJ6TQ
+
+* Updates
+
+- The new System Crafters website will be officially launched next week!
+
+- Subscribe to the System Crafters Newsletter!
+
+  https://new.systemcrafters.net/newsletter/
+
+- Support the channel!
+
+ *Buy me a coffee* at https://ko-fi.com/SystemCrafters
+
+ *Buy Mastering Emacs* with this link:
+ https://www.masteringemacs.org/r/systemcrafters
+
+* Let's try =dwl-guile=!
+
+I've mentioned a few times recently that I've really enjoyed using Wayland via Sway recently.  It's the future!  However, we haven't really seen many Lisp or Scheme-based compositors yet.
+
+[[https://github.com/engstrand-config/dwl-guile][dwl-guile]] is a fork of the [[https://github.com/djpohly/dwl][dwl]] Wayland Compositor (which is a port of [[https://dwm.suckless.org/][dwm]]).
+
+=dwl-guile= was developed to be used with GNU Guix!  There is a custom Guix channel which also provides a Guix Home service for configuring the window manager:
+
+https://github.com/engstrand-config/home-service-dwl-guile
+
+Today we'll see if we can get =dwl-guile= up and running and see if it can be a solid addition to our modern, Lisp-based system crafting toolset!
