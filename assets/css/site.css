@@ -110,6 +110,10 @@ b {
   font-weight: 800;
 }
 
+blockquote {
+  font-style: italic;
+}
+
 .container {
   margin-right: auto;
   margin-left: auto;
@@ -378,6 +382,16 @@ strong {
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 1px solid #f78c6c;
+  border-radius: 4px;
+  background-color: #232635;
+}
+
+.stream-time {
+  width: 80%;
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #c792ea;
   border-radius: 4px;
   background-color: #232635;
 }
