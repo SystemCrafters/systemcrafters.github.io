@@ -486,7 +486,8 @@ holding contextual information."
                    :description "News and Insights from System Crafters!"
                    :author "David Wilson")
 
-  (dw/generate-redirects '(("support-the-channel" . "how-to-help")))
+  (dw/generate-redirects '(("support-the-channel" . "how-to-help")
+                           ("videos" . "guides")))
 
   ;; Copy the domains file to ensure the custom domain resolves
   (copy-file ".domains" "public/.domains" t))
