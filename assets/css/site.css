@@ -28,7 +28,7 @@ html {
   }
 
   .list-form {
-    width: 100%;
+    width: 90%;
   }
 }
 
@@ -128,17 +128,11 @@ blockquote {
 }
 
 h1,
-.h1,
 h2,
-.h2,
 h3,
-.h3,
 h4,
-.h4,
 h5,
-.h5,
-h6,
-.h6 {
+h6 {
   font-family: "Iosevka Aile Web", sans-serif;
   font-weight: 600;
   line-height: 1.2;
@@ -147,19 +141,20 @@ h6,
   color: #eeffff;
 }
 
-h1,
-.h1 {
+h1 {
   color: #89aaeb;
 }
 
-h2,
-.h2 {
+h2 {
   color: #c3e88d;
 }
 
-h3,
-.h3 {
+h3 {
   color: #c792ea;
+}
+
+h4 {
+  color: #c3e88d;
 }
 
 a {
@@ -306,7 +301,7 @@ strong {
  */
 
 .site-post {
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 
 .site-post-title {
@@ -332,6 +327,7 @@ strong {
 
 .site-footer {
   padding: 1.3rem 0;
+  margin-top: 1rem;
   color: #cdddeb;
   font-size: 1rem;
   background-color: #232635;
