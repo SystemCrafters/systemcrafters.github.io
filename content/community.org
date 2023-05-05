@@ -20,7 +20,7 @@ If you'd like a more classic experience, try the [[https://en.wikipedia.org/wiki
 
 * Friday Streams
 
-Join us *every Friday* for our weekly show *[[file:live-streams.org][System Crafters Live!]]* The stream is broadcast on both [[https://youtube.com/@SystemCrafters][YouTube]] and [[https://twitch.tv/SystemCrafters][Twitch]].
+Join us *every Friday* for our weekly show *[[file:../live-streams.org][System Crafters Live!]]* The stream is broadcast on both [[https://youtube.com/@SystemCrafters][YouTube]] and [[https://twitch.tv/SystemCrafters][Twitch]].
 
 In these streams we usually experiment with new packages, configurations, and customizations to understand the pros and cons of using them.  Other times we have philosophical discussions about software, computing, and productivity.  It's always a good time!
 

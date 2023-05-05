@@ -144,7 +144,7 @@
                                    (a (@ (href ,(concat dw/site-url "/credits/"))) "Credits")
                                    " · "
                                    (a (@ (href ,(concat dw/site-url "/rss/"))) "RSS Feeds")
-                                   " . "
+                                   " · "
                                    (a (@ (rel "me") (href "https://fosstodon.org/@daviwil")) "Fediverse"))
                                 (p "© 2021-2023 System Crafters LLC"))
                            (div (@ (class "column align-right"))
@@ -349,7 +349,7 @@ holding contextual information."
   "Format posts with author and published data in the index page."
   (cond ((not (directory-name-p entry))
          (format "[[file:%s][%s]] - %s"
-                 (concat "live-streams/" entry)
+                 entry
                  (org-publish-find-title entry project)
                  (format-time-string "%B %d, %Y"
                                      (org-publish-find-date entry project))))
