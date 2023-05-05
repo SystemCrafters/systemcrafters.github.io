@@ -106,6 +106,10 @@ p {
   margin-bottom: 1rem;
 }
 
+b {
+  font-weight: 800;
+}
+
 .container {
   margin-right: auto;
   margin-left: auto;
@@ -294,34 +298,7 @@ strong {
 }
 
 /*
- * Main column and sidebar layout
- */
-
-/* Sidebar modules for boxing content */
-.sidebar-module {
-  padding: 1rem;
-}
-.sidebar-module-inset {
-  padding: 1rem;
-  background-color: #f5f5f5;
-  border-radius: 0.25rem;
-}
-.sidebar-module-inset p:last-child,
-.sidebar-module-inset ul:last-child,
-.sidebar-module-inset ol:last-child {
-  margin-bottom: 0;
-}
-
-/* Pagination */
-.site-pagination {
-  margin-bottom: 4rem;
-}
-.site-pagination > .btn {
-  border-radius: 2rem;
-}
-
-/*
- * Blog posts
+ * Site pages
  */
 
 .site-post {

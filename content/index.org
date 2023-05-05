@@ -1,6 +1,6 @@
 #+title: Welcome!
 
-System Crafters is a community and learning resource for computer enthusiasts who are interested in crafting a custom computing experience.
+System Crafters is a community and learning resource for computer enthusiasts who are interested in crafting their computing experience to *increase their enjoyment and productivity*.
 
 This website is intended to be the /most comprehensive/ reference on the internet for learning how to leverage tools like [[https://www.gnu.org/software/emacs/][GNU Emacs]], [[https://guix.gnu.org/][GNU Guix]], and [[https://en.wikipedia.org/wiki/Linux][GNU/Linux]] to craft a fully customized workflow using Free Software tools!
 
@@ -10,11 +10,19 @@ The [[https://youtube.com/@SystemCrafters][System Crafters YouTube channel]] als
 
 If you are just getting started with *GNU Emacs* and want to learn the basics, check out [[file:emacs-essentials/absolute-beginners-guide-to-emacs.org][The Absolute Beginner's Guide to Emacs]]!
 
-From there, check out the [[file:emacs-essentials.org][Emacs Essentials]] series to learn more about the basics of using Emacs and then follow the [[file:emacs-from-scratch.org][Emacs From Scratch]] series to learn how to fully customize Emacs!
+From there, check out the [[file:emacs-essentials.org][Emacs Essentials]] series to learn more about the basics of using Emacs and then follow the [[file:emacs-from-scratch.org][Emacs From Scratch]] series to learn how to build a modern Emacs configuration that you understand!
 
 Once you're comfortable using Emacs, learn how to use *GNU Guix* to craft a complete, reproducible system configuration by checking out the [[file:craft-your-system-with-guix.org][Craft Your System with GNU Guix]] series!
 
-You can also check out the many [[file:videos.org][video series]] I've made help you learn these tools in depth.
+You can also check out the many [[file:videos.org][video series]] I've created to help you learn these tools in depth.
+
+* Need Help?
+
+If you need help on specific topics, there are a few resources to consider:
+
+- The FAQ pages for various topics like [[file:faq/emacs.org][Emacs]] and [[file:faq/guix.org][Guix]]
+- Join the [[file:community.org][System Crafters chat]] and discuss it with the community
+- [[file:how-to-help.org][Patrons]] at the $5 level or higher can ask questions on a private discussion list!
 
 * Live Streams
 
