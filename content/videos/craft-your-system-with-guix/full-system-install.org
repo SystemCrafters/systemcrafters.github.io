@@ -1,6 +1,5 @@
 #+title: Installing Guix as a Complete GNU/Linux System
-
-[[https://youtu.be/oSy-TmoxG_Y][Watch the video]] on YouTube!
+#+video: oSy-TmoxG_Y
 
 * The time has come!
 
@@ -9,6 +8,9 @@ Today we're finally going to learn how to install GNU Guix as a full Linux distr
 By the end of this video, we'll have Guix installed with the GNOME desktop environment and working WiFi, and I'll also show you how to update your system so that you can keep things up to date!
 
 *NOTE:* If you're watching this video a month or later after it has been released, please check the show notes linked in the description just in case any corrections are needed for the steps we take today!  Guix is constantly changing so there's a chance the instructions will be updated over time.
+
+#+begin_cta
+#+end_cta
 
 * Assumptions
 

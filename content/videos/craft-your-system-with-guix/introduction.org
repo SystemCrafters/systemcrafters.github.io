@@ -1,6 +1,5 @@
 #+title: An Introduction to GNU Guix
-
-[[https://youtu.be/iBaqOK75cho][Watch the video]] on YouTube!
+#+video: iBaqOK75cho
 
 * Why talk about GNU Guix?
 
@@ -9,6 +8,9 @@ So far on this channel, we've primarily been focused on GNU Emacs.  Why talk abo
 In my opinion, the combination of Emacs + EXWM + Guix creates the ultimate hackable system.
 
 In this video, I'll explain what GNU Guix can do for you and then show you how to do these things in the subsequent videos in the series.
+
+#+begin_cta
+#+end_cta
 
 * What is GNU Guix?
 

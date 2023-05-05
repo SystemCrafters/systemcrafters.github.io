@@ -1,8 +1,5 @@
 #+title: 5 Reasons to Try GNU Guix in 2022
-
-Watch the video on YouTube!
-
-[[yt:7ZdMRLPZhFs][Video Link]]
+#+video: 7ZdMRLPZhFs
 
 * What is GNU Guix?
 
@@ -13,6 +10,9 @@ To be more specific, it is a /functional package manager/ (inspired by [[https:/
 One interesting aspect of GNU Guix for the Lisp enthusiasts out there is that the entire tool is written and configured with Guile Scheme, so you can almost think of this as the Emacs of Linux distributions.
 
 Read more about this model in the [[https://guix.gnu.org/manual/en/html_node/Managing-Software-the-Guix-Way.html][Guix Manual]]!
+
+#+begin_cta
+#+end_cta
 
 * Follow along!
 

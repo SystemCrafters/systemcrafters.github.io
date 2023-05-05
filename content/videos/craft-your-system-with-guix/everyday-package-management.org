@@ -1,6 +1,5 @@
 #+title: Everyday Package Management with GNU Guix
-
-[[https://youtu.be/Xy0YgnXFt1M][Watch the video]] on YouTube!
+#+video: Xy0YgnXFt1M
 
 * What will we learn?
 
@@ -9,6 +8,9 @@ In the last video I showed how you can install GNU Guix as an alternative packag
 In this video I'm going to show you how you can use Guix for your day to day package management needs and also show you one of the really useful things it can do that most other package managers can't!  What I cover today will apply to both using Guix as a package manager on your current Linux distro as well as with the full Guix system when we finally talk about how to set that up.
 
 By the end of this video, you'll know how to install and update the packages you use on a daily basis, and more importantly, how to deal with any package updates that cause problems for your system.
+
+#+begin_cta
+#+end_cta
 
 * Searching for Packages
 

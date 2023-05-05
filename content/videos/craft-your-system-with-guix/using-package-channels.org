@@ -1,12 +1,14 @@
 #+title: Using Package Channels in GNU Guix
-
-[[https://youtu.be/xVyvz2aViP8][Watch the video]] on YouTube!
+#+video: xVyvz2aViP8
 
 * What will we learn?
 
 In this video I'll show you how you can find more software and drivers than what's available in Guix by default using a feature called "channels."  Channels give you even more freedom to manage your Guix configuration the way you want and also ensure that all your Guix machines are using the exact same versions of all software and drivers.
 
 You can even create your own channel pretty easily!  We'll cover that in another video.
+
+#+begin_cta
+#+end_cta
 
 * What is a channel?
 

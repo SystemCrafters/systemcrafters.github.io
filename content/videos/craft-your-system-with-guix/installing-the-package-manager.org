@@ -1,4 +1,5 @@
 #+title: Installing the GNU Guix Package Manager
+#+video: Xy0YgnXFt1M
 
 * What will we learn?
 
@@ -9,6 +10,9 @@ In the Guix manual this is called installing on a "foreign distribution", basica
 Even if you don't intend to install Guix as a full distribution in the future, it can still be a very useful as an alternative package manager and development environment tool!
 
 However, if you do want to try Guix as a system distribution in the future, one benefit of installing it as a package manager is that you can use it to build a custom installation image!  This is really only necessary if your computer's hardware requires firmware blobs that don't come with the Linux Libre kernel.
+
+#+begin_cta
+#+end_cta
 
 * Supported Linux distributions
 
