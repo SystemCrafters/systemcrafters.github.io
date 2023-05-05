@@ -143,7 +143,9 @@
                                    " · "
                                    (a (@ (href ,(concat dw/site-url "/credits/"))) "Credits")
                                    " · "
-                                   (a (@ (href ,(concat dw/site-url "/rss/"))) "RSS Feeds"))
+                                   (a (@ (href ,(concat dw/site-url "/rss/"))) "RSS Feeds")
+                                   " . "
+                                   (a (@ (rel "me") (href "https://fosstodon.org/@daviwil")) "Fediverse"))
                                 (p "© 2021-2023 System Crafters LLC"))
                            (div (@ (class "column align-right"))
                                 (p (a (@ (href "https://codeberg.org/SystemCrafters/systemcrafters.net"))
