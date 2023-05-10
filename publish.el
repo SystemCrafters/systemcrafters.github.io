@@ -87,7 +87,7 @@
   `(div (@ (class "list-form center"))
         (div (@ (class "list-form-title")) "Subscribe to the System Crafters Newsletter!")
         (form (@ (method "POST")
-                 (action "http://www.simplelists.com/subscribe.php"))
+                 (action "https://www.simplelists.com/subscribe.php"))
               (input (@ (type "hidden") (name "format") (value "text")))
               (input (@ (type "hidden") (name "action") (value "subscribe")))
               (input (@ (type "hidden") (name "list") (value "news@lists.systemcrafters.net")))
