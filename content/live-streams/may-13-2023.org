@@ -1,0 +1,25 @@
+#+title: How I Crafted the New Website with Org Publish
+#+subtitle: System Crafters Live - May 12, 2023
+#+date: [2023-05-12 Fri]
+#+video: atKDa510qaM
+
+* Updates
+
+- The new System Crafters website is live!
+  https://systemcrafters.net
+
+- Add the News RSS feed to Elfeed:
+  https://systemcrafters.net/rss/news.xml
+
+- Subscribe to the Newsletter
+  https://systemcrafters.net/newsletter
+
+- Patron discussion list(s)
+
+  I'm creating a private discussion list for $5 and above patrons!  I will send out an invite in the next few days, more information will be here:
+
+  https://systemcrafters.net/how-to-help/#support-my-work
+
+* Using Org Publish for the New Site
+
+[More content before the stream.]
