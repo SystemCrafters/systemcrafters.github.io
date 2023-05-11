@@ -78,8 +78,7 @@
 (setq user-mail-address "david@systemcrafters.net")
 
 (defvar dw/site-url (if (string-equal (getenv "CI") "true")
-                        "https://new.systemcrafters.net"
-                        ;"https://systemcrafters.net"
+                        "https://systemcrafters.net"
                       "http://localhost:8080")
   "The URL for the site being generated.")
 
