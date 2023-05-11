@@ -16,11 +16,11 @@ David on the Fediverse: [[https://fosstodon.org/@daviwil][@daviwil@fosstodon.org
 
 You can also contribute to the System Crafters community in a number of ways:
 
-- Participate in [[http:/community/#chat-with-us][community chatrooms]]
-- Contribute to [[http:/community/#community-projects][community projects]] like [[http:/community/#crafted-emacs][Crafted Emacs]]
+- Participate in [[/community/#chat-with-us][community chatrooms]]
+- Contribute to [[/community/#community-projects][community projects]] like [[/community/#crafted-emacs][Crafted Emacs]]
 - Make suggestions and report issues in System Crafters content (e-mail =david= at =systemcrafters.net=)
 
-Read the [[http:/community][Community page]] for more information!
+Read the [[/community][Community page]] for more information!
 
 * Support My Work
 

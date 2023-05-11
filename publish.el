@@ -244,6 +244,10 @@
       (format "<a href=\"%s\">%s</a>"
               (org-element-property :raw-link link)
               (org-element-property :raw-link link)))
+     ((string-prefix-p "/" (org-element-property :raw-link link))
+      (format "<a href=\"%s\">%s</a>"
+              (org-element-property :raw-link link)
+              contents))
      (t (org-export-with-backend 'html link contents info)))))
 
 (defun dw/make-heading-anchor-name (headline-text)
