@@ -302,7 +302,7 @@ holding contextual information."
             block-type
             (or contents
                 (if (string= block-type "cta")
-                    "If you find this guide helpful, please consider supporting System Crafters via the links on the <a href=\"/how-to-help\">How to Help</a> page!"
+                    "If you find this guide helpful, please consider supporting System Crafters via the links on the <a href=\"/how-to-help/#support-my-work\">How to Help</a> page!"
                   "")))))
 
 (org-export-define-derived-backend 'site-html 'html

@@ -22,7 +22,7 @@ If you need help on specific topics, there are a few resources to consider:
 
 - The FAQ pages for various topics like [[file:faq/emacs.org][Emacs]] and [[file:faq/guix.org][Guix]]
 - Join the [[file:community.org][System Crafters chat]] and discuss it with the community
-- [[file:how-to-help.org][Patrons]] at the $5 level or higher can ask questions on a private discussion list!
+- [[/how-to-help/#support-my-work][Patrons]] at the $5 level or higher can ask questions on a private discussion list!
 
 * Live Streams
 
