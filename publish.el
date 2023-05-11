@@ -442,6 +442,13 @@ holding contextual information."
               :publishing-function org-html-publish-to-html
               :with-title nil
               :with-timestamps nil)
+            '("systemcrafters:faq"
+              :base-directory "./content/faq"
+              :base-extension "org"
+              :publishing-directory "./public/faq"
+              :publishing-function org-html-publish-to-html
+              :with-title nil
+              :with-timestamps nil)
             '("systemcrafters:assets"
               :base-directory "./assets"
               :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|woff2\\|ttf"

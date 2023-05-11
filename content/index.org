@@ -34,6 +34,6 @@ In these streams we usually experiment with new packages, configurations, and cu
 
 * Stay Up to Date!
 
-Check out new News page to see the latest updates for the website and community.  You can also subscribe to RSS Feeds for various parts of the site.
+Check out new [[/news][News page]] to see the latest updates for the website and community.  You can also subscribe to [[/rss][RSS Feeds]] for various parts of the site.
 
 A much better option is to subscribe to the [[file:newsletter.org][System Crafters Newsletter]] below!
