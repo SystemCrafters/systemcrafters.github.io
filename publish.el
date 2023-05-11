@@ -179,7 +179,9 @@
                             &key
                             (publish-date)
                             (head-extra)
-                            (pre-content))
+                            (pre-content)
+                            (exclude-header)
+                            (exclude-footer))
   (concat
    "<!-- Generated from " (dw/get-commit-hash)  " on " (format-time-string "%Y-%m-%d @ %H:%M") " with " org-export-creator-string " -->\n"
    "<!DOCTYPE html>"
@@ -206,7 +208,8 @@
                     "")
             ,(when head-extra head-extra)
             (title ,(concat title " - System Crafters")))
-           (body ,@(dw/site-header)
+           (body ,@(unless exclude-header
+                     (dw/site-header))
                  (div (@ (class "container"))
                       (div (@ (class "site-post"))
                            (h1 (@ (class "site-post-title"))
@@ -219,7 +222,8 @@
                            (div (@ (id "content"))
                                 ,content))
                       ,(dw/embed-list-form))
-                 ,@(dw/site-footer))))))
+                 ,@(unless exclude-footer
+                     (dw/site-footer)))))))
 
 (defun dw/org-html-template (contents info)
   (dw/generate-page (org-export-data (plist-get info :title) info)
@@ -330,6 +334,31 @@ holding contextual information."
                                           "html"))
                           plist
                           article-path))))
+
+(defun dw/publish-newsletter-page (plist filename pub-dir)
+  "Publish a newsletter .txt file to a simple HTML page."
+  (let* ((issue-name (file-name-sans-extension
+                      (file-name-nondirectory filename)))
+         (output-file (expand-file-name
+                       (concat issue-name ".html")
+                       pub-dir))
+         (contents (with-temp-buffer
+                     (insert-file-contents filename)
+                     (buffer-string))))
+    (with-temp-file output-file
+      (insert
+       (dw/generate-page
+        (concat "Issue "
+                (nth 2 (split-string issue-name "-")))
+        (format "<pre class=\"newsletter-text\">%s</pre>"
+                (replace-regexp-in-string
+                 "\\(http\\|https\\)://[^ \t\n\r<>\"']*[^ \t\n\r<>\".,;!?']"
+                 (lambda (match)
+                   (format "<a href=\"%s\">%s</a>" match match))
+                 contents))
+        '()
+        :exclude-header t
+        :exclude-footer t)))))
 
 (setq org-publish-use-timestamps-flag t
       org-publish-timestamp-directory "./.org-cache/"
@@ -446,6 +475,11 @@ holding contextual information."
               :sitemap-sort-files anti-chronologically
               :with-title nil
               :with-timestamps nil)
+            '("systemcrafters:newsletter"
+              :base-directory "./content/newsletter"
+              :base-extension "txt"
+              :publishing-directory "./public/newsletter"
+              :publishing-function dw/publish-newsletter-page)
             '("systemcrafters:videos"
               :base-directory "./content/videos"
               :base-extension "org"

@@ -30,6 +30,10 @@ html {
   .list-form {
     width: 90%;
   }
+
+  .newsletter-text {
+    font-size: 0.65rem;
+  }
 }
 
 /* sm */
@@ -70,6 +74,10 @@ html {
 
   .list-form {
     width: 60%;
+  }
+
+  .newsletter-text {
+    font-size: 1.2rem;
   }
 }
 
@@ -190,6 +198,7 @@ kbd {
 }
 
 pre {
+  font-family: "JetBrains Mono", monospace;
   background-color: #232635;
   padding: 1em;
   overflow-x: scroll;
@@ -434,4 +443,7 @@ strong {
   border-radius: 4px;
   background-color: #89aaeb;
   color: #232635;
+}
+
+.newsletter-text {
 }
