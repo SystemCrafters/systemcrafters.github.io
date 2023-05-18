@@ -478,7 +478,7 @@ holding contextual information."
               :sitemap-title "System Crafters News"
               :sitemap-format-entry dw/format-news-entry
               :sitemap-style list
-              :sitemap-function dw/news-sitemap
+              ;; :sitemap-function dw/news-sitemap
               :sitemap-sort-files anti-chronologically
               :with-title nil
               :with-timestamps nil)
