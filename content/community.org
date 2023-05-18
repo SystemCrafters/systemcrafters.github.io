@@ -9,7 +9,7 @@ If you'd like to chat with the community, you can join us both on IRC and Matrix
 - *IRC*: Join =irc.libera.chat= and join the =#systemcrafters= room ([[https://web.libera.chat/?channel=#systemcrafters][web chat]])
 - *Matrix*: Join the [[https://matrix.to/#/#systemcrafters-space:matrix.org][System Crafters Space]] on matrix.org
 
-I recommend using the Matrix space with the official [[https://element.io/][Element]] client if you prefer a Discord or Slack style experience with chat history, embedded links, etc.
+I recommend using the Matrix space with the official [[https://element.io/][Element]] client if you prefer a Discord or Slack style experience with chat history, embedded links, etc.  You can read more details about using the Libera.Chat IRC bridge to Matrix on [[https://libera.chat/guides/faq#can-i-connect-with-matrix][this page]].
 
 If you'd prefer to chat from inside of Emacs, the [[https://github.com/alphapapa/ement.el][ement.el]] Matrix client by [[https://github.com/alphapapa][Alphapapa]] is an excellent choice! I will soon be producing a video for how to use it.
 

@@ -1,0 +1,60 @@
+#+title: Community Chat is Moving From Discord to Matrix and IRC
+#+date:[2023-05-18 Thu]
+#+author: David Wilson
+#+kind: news
+
+Hey Crafters!
+
+In 2020, I started making live streams teaching people how to configure Emacs from the ground up using community packages.  After the streams started gaining some interest, I decided to create a Discord so that viewers could gather and discuss their Emacs configurations, ask questions, and just hang out.
+
+At the time, Discord seemed to be the best option for creating a community chat because many people already used it and the user experience was pretty good.  However, as time went on I started to regret choosing Discord for a number of reasons:
+
+- You can't use unofficial clients or bridges without violating the Terms of Service, meaning that you can't exercise your freedom in how you connect to the chat
+- The desktop client is quite a drain on resources thanks to the technologies it uses
+- The desktop client is not Free Software, so you can't modify it to suit your needs
+- The Discord service as a whole is constantly nagging you to buy Nitro, plus whatever else they're trying to sell
+
+For these reasons (and probably more that I'm forgetting), I started thinking about how and when I'd move the System Crafters chat to a more appropriate home.  Over time I've considered IRC, XMPP, Matrix, RocketChat, Zulip, and more but I struggled to make a decision on which one I thought would be a sufficient replacement.
+
+* Our new home on Matrix and IRC
+
+Recently, I finally came to the conclusion that the best option is to use both Matrix and IRC to give you all the best experience and range of choice in clients and ways to join!
+
+Matrix provides an experience that should be pretty familiar to Discord users.  It also has really nice desktop and mobile apps which have chat history, emoji reactions, link embeds, and more.  It's also Free Software and an open protocol with lots of alternative clients (including [[https://github.com/alphapapa/ement.el][Ement.el]] for Emacs!)
+
+IRC is the classic chat protocol that people have used [[https://en.wikipedia.org/wiki/Internet_Relay_Chat][over 30 years]], especially in Free Software communities.  Emacs comes with *two* IRC clients built in, ERC and rcirc.  It's a simpler protocol and it doesn't have some of the modern comforts you would expect (like chat history, reactions, and more) but the flexibility of how you can connect to it is unbeatable.
+
+The nice thing for us that there is a bridge between Matrix and [[https://libera.chat/][Libera.Chat]], so you can join the same chatroom from both of these protocols!  It doesn't matter which one you choose, you will see all of us there.
+
+I've included more details about how to join these channels along with client recommendations on the Community page:
+
+https://systemcrafters.net/community/#chat-with-us
+
+I hope you'll join us there soon!  It's really easy to participate from within the comfort of Emacs :)
+
+* Why not leave the Discord running?
+
+Instead of having there be confusion about why the community is split across multiple chat services, I've decided that the Discord should be deactivated as part of this transition.
+
+Frankly, I've felt guilty over the last year for not being an active part of the community there, and since I don't really intend to use Discord even for personal use, I think it's best that I close it down so that it doesn't eventually turn into a place I wouldn't be proud of.
+
+*The System Crafters Discord will be disabled on July 1, 2023.*  The Discord itself will not be deleted, but all channels will be made read-only, pointing users to the new home on Matrix and IRC.
+
+* Thank you, moderators!
+
+These fine folks have been moderating the System Crafters Discord over the last year while I haven't been as active:
+
+- Ashraz
+- [[https://sqrtminusone.xyz/][SqrtMinusOne]]
+- [[https://elken.dev/][Elken]]
+- [[https://github.com/angrybacon][angrybacon]]
+
+Thank you all for helping me with the spammers and the bad actors who have showed up over time and also for helping to welcome newcomers to the community!
+
+* Please let me know your thoughts!
+
+I know this change might come as a surprise to some since I haven't mentioned it on the Discord until now.  I apologize for that!  I regret my extended absense on that platform, but I believe that making this change will be better for all of us.
+
+If you have any concerns, feel free to send me an email: =david= at =systemcrafters.net=.  Also, send me an e-mail if you have suggestions for how to make the Matrix and IRC experience better!
+
+Thank you all for being a part of this community so far, I'm looking forward to chatting with you all on Matrix and IRC soon!
