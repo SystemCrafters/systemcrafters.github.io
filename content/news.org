@@ -1,3 +1,4 @@
-#+title: System Crafters News
+#+TITLE: System Crafters News
 
+- [[file:moving-from-discord-to-matrix-irc.org][Community Chat is Moving From Discord to Matrix and IRC]] - David Wilson · May 18, 2023
 - [[file:new-systemcrafters-site.org][Unveiling the New System Crafters Site!]] - David Wilson · May 11, 2023
