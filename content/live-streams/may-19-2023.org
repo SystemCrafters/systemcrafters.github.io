@@ -1,0 +1,20 @@
+#+title: Exploring the Depths of Dired
+#+subtitle: System Crafters Live - May 19, 2023
+#+date: [2023-05-19 Fri]
+#+video: h6ZssDbEt4A
+
+* Updates
+
+- We're moving to Matrix and IRC!  Discord to close on July 1, 2023
+
+  It's finally happening, read more here:
+  https://systemcrafters.net/news/moving-from-discord-to-matrix-irc/
+
+- Subscribe to the Newsletter:
+  https://systemcrafters.net/newsletter
+
+- Support my work!
+
+  https://systemcrafters.net/how-to-help/#support-my-work
+
+* Let's dive into Dired!
