@@ -1,0 +1,268 @@
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+                                 Welcome to the
+                          System Crafters Newsletter!
+
+                           Issue #002 - May 18, 2023
+
+                                by David Wilson
+
+
+         --  This newsletter is best viewed with a monospace font!   --
+         --    If your e-mail client can't do that, use this URL:    --
+         --  https://systemcrafters.net/newsletter/sc-news-002.html  --
+         --            Read it in Emacs with `M-x eww`!              --
+
+== Contents ==
+
+1. Introduction
+2. The Future of System Crafters Chat
+3. Tips of the Week
+4. Crafter News
+5. Friday's Stream - Exploring the Depths of Dired
+6. Closing
+
+== Introduction ==
+
+Welcome to the new issue of the System Crafters Newsletter!
+
+First of all, I want to say thank you to all of you who signed up for the
+newsletter and checked out the new System Crafters website last week, it was
+awesome to have such a positive response!
+
+I got a lot of great feedback after last week's newsletter and I'm hoping to
+integrate some of it as the weeks go on.  If you're a new reader and you have
+feedback about this issue, please feel free to send an e-mail to
+david@systemcrafters.net or just reply to this e-mail!
+
+== The Future of System Crafters Chat ==
+
+Early in the history of the System Crafters channel, I created a Discord for
+viewers of the channel to hang out, trade Emacs and Guix tips, and share other
+cool things that they learned.
+
+Over time, I started to regret choosing Discord for a variety of reasons, but
+the primary reason being that it doesn't give community members the freedom to
+engage with the chat using their client of choice (especially Emacs!).
+
+Today I'm changing that!  I just posted an announcement that we're now going to
+call Matrix and IRC home (bridged, of course) and that I'm deactivating the
+System Crafters Discord server on July 1, 2023.
+
+You can read more information about the history of this change here:
+
+  -> https://systemcrafters.net/news/moving-from-discord-to-matrix-irc/
+
+I hope you all feel the same as I do, that this is a positive change for the
+community!  Please feel free to reply to this e-mail to let me know your
+thoughts.
+
+NOTE: Since making this post, I've noticed that the IRC -> Matrix bridge is not
+working correctly!  Messages are not propagating from IRC back to Matrix.  I'm
+actively investigating this issue and hope to have it fixed soon!
+
+== Tips of the Week ==
+
+* Scheduling regular time blocks in your Org Mode Agenda
+
+If you're like me, you probably need to establish some structure in your daily
+schedule to ensure that you take care of certain responsibilities.  These time
+blocks might be at different times on different days of the week!
+
+I started looking for a way to put such a schedule right into my Org Mode Agenda
+and it turns out there's a pretty easy way to do that!
+
+Here's what I did:
+
+1. Create an Org file that will hold your daily schedule.  I called mine
+   "Schedule.org"
+
+2. Create headings for each of the time blocks you want to schedule on your
+   calendar.  The text of each entry should end in the time range that the block
+   should cover, like "12:00-14:00" for 12pm to 2pm.
+
+   See below these bullet points for a complete example of what this looks like!
+
+3. Add the following line directly under each heading to choose which days of
+   the week that the time block applies to:
+
+   <%%(memq (calendar-day-of-week date) '(1 2 3 4 5))>
+
+   That line will make the entry appear from Monday through Friday of each week!
+
+   Here are the numbers that correlate to each day of the week:
+
+   0 - Sunday
+   1 - Monday
+   2 - Tuesday
+   3 - Wednesday
+   4 - Thursday
+   5 - Friday
+   6 - Saturday
+
+   The list in this line can have any combination of week days!  For only
+   Monday-Wednesday-Friday, use '(1 3 5), etc.
+
+4. Add the schedule .org file to your `org-agenda-files` list:
+
+   (add-to-list 'org-agenda-files "~/Notes/Schedule.org")
+
+5. Open up the daily agenda and take a look!  Execute the `org-agenda` command
+   and press `a` for the daily agenda.
+
+Here's a full example straight out of my own schedule file!
+
+TIP: Use context tag names as your heading titles so you know how to filter
+     your agenda for each time block!
+
+```
+** Morning Block
+
+*** @writing @plan 06:00-07:00
+<%%(memq (calendar-day-of-week date) '(0 1 2 3 4 5 6))>
+
+*** @email @accounting @easy 09:00-10:00
+<%%(memq (calendar-day-of-week date) '(1 2 3 4 5))>
+
+*** @hacking 10:00-12:00
+<%%(memq (calendar-day-of-week date) '(1 2 3 5))>
+
+*** @creative 10:00-12:00
+<%%(memq (calendar-day-of-week date) '(4 5))>
+
+** Afternoon Block
+
+*** @creative 13:00-14:00
+<%%(memq (calendar-day-of-week date) '(1 2 3))>
+
+*** @hacking 13:00-14:00
+<%%(memq (calendar-day-of-week date) '(4 5))>
+
+*** @work 14:00-18:00
+<%%(memq (calendar-day-of-week date) '(1 2 3 4))>
+
+** Evening Block
+
+*** @work @calls 20:00-22:00
+<%%(memq (calendar-day-of-week date) '(1 2 3 4))>
+```
+
+So how does this work?
+
+Org Mode can integrate with Emacs' diary functionality to add diary entries and
+dates to the agenda.  The special <%% ... > syntax represents an Emacs Lisp
+expression that evaluates to diary dates.  The Org Agenda will pick up on the
+diary dates that come from this expression and then insert them in the agenda.
+
+You should experiment with this and possibly find other ways to apply it!
+
+This seems to work out of the box for me, but if for some reason it doesn't for
+you, try setting the following variable:
+
+  (setq org-agenda-include-diary t)
+
+More information can be found in the Org Mode manual here:
+
+  -> https://orgmode.org/manual/Weekly_002fdaily-agenda.html
+
+I really like this approach!  If you have any tips of your own about this
+strategy please let me know about them!
+
+* Discovering more Guix packages via community channels
+
+One of the great things about GNU Guix is that you can easily add package
+channels to get access to packages that don't come in the default Guix channel.
+If you've followed my tutorial on installing Guix System then you're probably
+familiar with the Nonguix channel.
+
+But there are many other community channels out there, each of which containing
+their own sets of useful packages.  How do you find them?
+
+That's where this site comes in!
+
+  -> https://toys.whereis.みんな
+  -> https://toys.whereis.xn--q9jyb4c/ (if the previous link doesn't work)
+
+This is a searchable repository of packages and services that come from the
+official Guix channel, Nonguix, and a few other community channels!  If you
+want to see the list of channels that are indexed, check out this link:
+
+  -> https://toys.whereis.みんな/channels
+
+Kudos to jgart and the Where is Everyone crew for putting this together!  You
+can learn more about the project here:
+
+  -> https://sr.ht/~whereiseveryone/guixrus/
+
+== Crafter News ==
+
+Here are some interesting news items in the broader sphere of system crafting:
+
+* Nyxt browser version 3.0 has just been released!
+
+Nyxt is an interesting Emacs-inspired web browser written with Common Lisp.
+I know quite a few members of the System Crafters community have tried it out
+and many have told me they like it a lot!  I've had mixed results with it, but
+I'm patiently waiting for the day when I can make it my primary browser.
+
+This week, the new major version of Nyxt has been released!  This release
+promises a variety of new features and bug fixes, so I'm optimistic that it will
+be an improvement for my use cases.
+
+Read more about the release and all the new features on the Nyxt website:
+
+  -> https://nyxt.atlas.engineer/article/release-3.0.0.org
+
+I might check it out on stream as soon as it gets updated in Guix!
+
+* Try the second pretest for the upcoming Emacs 29.1 release!
+
+The official Emacs 29 seems to be getting closer every day!  Recently Eli
+Zaretskii sent out an e-mail to emacs-devel asking people to try out the latest
+pretest build for Emacs 29.1.
+
+If you're excited about the upcoming release, give this build a try and report
+any issues you find with it!
+
+  -> https://lists.gnu.org/archive/html/emacs-devel/2023-05/msg00379.html
+
+         -----------------------------------------------------------
+         --  Do you have a new project relevant to this audience  --
+         --  that you'd like to promote in the next Newsletter?   --
+         --    Reply to this e-mail and let me know about it!     --
+         -----------------------------------------------------------
+
+== Friday's Stream - Exploring the Depths of Dired ==
+
+In tomorrow's stream, we'll explore the depths of Emacs' Dired feature to see if
+we can discover some of its lesser-known capabilities.  We'll try to figure out
+bulk file operations, file previews, advanced Dired buffer tricks, and more.  If
+you use Dired for basic file management capabilities, this is our chance to
+figure out more valuable ways to use it!
+
+The stream will go live at Friday, May 12th at 6PM EEST (UTC+3),
+  check your local time on this page: https://time.is/compare/1800_in_Athens
+
+You can find the stream at these URLs:
+
+  -> https://youtube.com/live/h6ZssDbEt4A
+  -> https://twitch.tv/SystemCrafters
+  -> https://systemcrafters.net/live-streams/may-19-2023/
+
+== Closing ==
+
+I hope you enjoyed this issue of the System Crafters Newsletter!  I always want
+to improve and streamline the content as time goes on so please send me your
+thoughts and feedback by replying directly to this e-mail!
+
+Until next time, Happy Hacking!
+
+        ---------------------------------------------------------------
+        --    If you enjoyed this newsletter and other content by    --
+        --       System Crafters, consider supporting my work!       --
+        --            More information can be found here:            --
+        --  https://systemcrafters.net/how-to-help/#support-my-work  --
+        ---------------------------------------------------------------
+
+--
+David Wilson
+david@systemcrafters.net
