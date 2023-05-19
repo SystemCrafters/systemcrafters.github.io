@@ -11,8 +11,10 @@
 - Add the News RSS feed to Elfeed:
   https://systemcrafters.net/rss/news.xml
 
-- Subscribe to the Newsletter:
-  https://systemcrafters.net/newsletter
+- Subscribe to the Newsletter: https://systemcrafters.net/newsletter
+
+  Here's the first issue for those who missed it!
+  https://systemcrafters.net/newsletter/sc-news-001.html
 
 - Patron discussion list(s)
 
@@ -50,7 +52,7 @@ I'll also give a tutorial on Emacs Lisp development since it will be pretty crit
 
 This will be a guide for intermediate to advanced users who want to leverage Org Mode to manage their tasks, projects, calendar, and personal knowledgebase.
 
-Instead of just being a dry reference of Org Mode functionality, we will build a personal productivity system from scratch using Org Mode using many of its features.  Once we finish that, we will build the same thing again with community packages like Denote and Org Mode to see how they might help us do things more efficiently!
+Instead of just being a dry reference of Org Mode functionality, we will build a personal productivity system from scratch using Org Mode using many of its features.  Once we finish that, we will build the same thing again with community packages like Denote and Org Roam to see how they might help us do things more efficiently!
 
 We might also cover building basic personal websites from your Org files, but I'm not sure yet!
 
