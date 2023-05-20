@@ -42,11 +42,33 @@ Things to try:
 - Cleaning up folders with =~=
 - Running shell commands on files
 - Comparing files between directories
-- Bulk file renames with =Q= (=query-replace-regexp=)
+- Bulk file content changes with =Q= (=query-replace-regexp=)
 - Using =wdired= mode
-- Investigating =dired-x
+- Investigating =dired-x=
 
 Any other suggestions?
+
+** Notes
+
+=(setq dired-dwim-target t)= to automatically pick the right target for copy/move operations based on another open Dired window.
+
+Interesting bindings under =%=:
+
+#+begin_src sh
+
+% &		dired-flag-garbage-files
+% C		dired-do-copy-regexp
+% R		dired-do-rename-regexp
+% d		dired-flag-files-regexp
+% g		dired-mark-files-containing-regexp
+% m		dired-mark-files-regexp
+% r		dired-do-rename-regexp
+
+#+end_src
+
+*** Renaming files with a regular expression:
+
+=C-x C-q= then =C-M-%=, enter a regular expression like ~\(.*\)-\([[:digit:]]\{4\}\) → \2-\1~
 
 ** How does Dirvish work?
 
