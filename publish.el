@@ -534,7 +534,10 @@ holding contextual information."
                            ("videos" . "guides")))
 
   ;; Copy the domains file to ensure the custom domain resolves
-  (copy-file ".domains" "public/.domains" t))
+  (copy-file ".domains" "public/.domains" t)
+
+  ;; Copy the .well-known folder for Matrix
+  (copy-directory ".well-known" "public/" t))
 
 (provide 'publish)
 ;;; publish.el ends here
