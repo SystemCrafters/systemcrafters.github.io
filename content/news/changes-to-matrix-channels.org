@@ -21,10 +21,10 @@ Unfortunately it's necessary to leave these channels first otherwise your IRC pr
 
 ** 2. Join the new channels
 
-Here are the new channels to join, you can either take a look at the System Crafters Space to join them (I have removed the old channels) or use these channel names to join directly:
+Here are the new channels to join, you can either take a look at the [[https://matrix.to/#/#systemcrafters-space:matrix.org][System Crafters Space]] to join them (I have removed the old channels) or use these channel names to join directly:
 
-#systemcrafters-general:matrix.org
-#systemcrafters-emacs:matrix.org
+- =#systemcrafters-general:matrix.org=
+- =#systemcrafters-emacs:matrix.org=
 
 Joining these two channels will put you in the right place, and you'll also get all of the channel history before you joined!
 
