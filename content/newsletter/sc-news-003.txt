@@ -1,0 +1,240 @@
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+                                 Welcome to the
+                          System Crafters Newsletter!
+
+                           Issue #003 - May 25, 2023
+
+                                by David Wilson
+
+
+         --  This newsletter is best viewed with a monospace font!   --
+         --    If your e-mail client can't do that, use this URL:    --
+         --  https://systemcrafters.net/newsletter/sc-news-003.html  --
+         --            Read it in Emacs with `M-x eww`!              --
+
+== Contents ==
+
+1. Introduction
+2. Changes to the New Matrix Channels
+3. Tip of the Week
+4. Crafter News
+5. Friday's Stream - Is Ement.el the Best Matrix Client?
+6. Closing
+
+== Introduction ==
+
+Welcome to the new issue of the System Crafters Newsletter!
+
+This one is a bit shorter than last time because I've had a busy week, but I
+hope you like it!
+
+If you have feedback about this issue, please feel free to send an e-mail to
+david@systemcrafters.net or just reply to this e-mail!
+
+== Changes to the New Matrix Channels ==
+
+Last week I announced that we'll be shutting down the System Crafters Discord in
+July and that we'll all be moving over to a combination of Matrix and IRC:
+
+  -> https://systemcrafters.net/news/moving-from-discord-to-matrix-irc/
+
+Lots of people jumped over and we've been having a ton of fun chatting the last
+few days!  There's been a bit of churn due to issues with the IRC bridge to
+Libera.Chat, but I've finally got most of the issues cleared up with a solid
+path forward.
+
+With that said, those of you who joined the Matrix channels before I figured out
+the IRC situation have some homework to do!  This changeover required creating
+new channels to replace the old ones that were originally in the System Crafters
+space and apparently it's not as simple as just joining the new channel.
+
+If you fall into this category, check out this news post that I wrote describing
+the steps to fix your room membership so that you show up in IRC correctly:
+
+  -> https://systemcrafters.net/news/changes-to-matrix-channels/
+
+I apologize for the trouble there, but this is a one time issue that we should
+not have to deal with again!
+
+I'm very optimistic about the future of our chat on Matrix and IRC so I hope
+you'll join us there soon if you haven't tried it out yet :)
+
+== Tip of the Week ==
+
+* Creating an evil-mode leader key with SPC like Doom Emacs and Spacemacs
+
+Are you a former user of Doom Emacs or Spacemacs?  Do you really miss the SPC
+leader key?  The general.el package has you covered:
+
+  -> https://github.com/noctuid/general.el
+
+I've shown how to use this package before in Episode #3 of the original Emacs
+From Scratch series, but since then I've actually figured out a cleaner approach
+for this which blends really nicely with `use-package`.
+
+But first, what is a "leader key?"  This is a bit of terminology from Vim which
+describes a special key you press to access a set of quick bindings for common
+actions.  Emacs just calls this a "key map" :) However, the general.el package
+makes it easy to emulate leader key behavior with the excellent `evil-mode`.
+
+The trick is to define a key map for your SPC leader key which can be referenced
+in other `use-package` blocks:
+
+```
+(use-package general
+  :ensure t
+  :after evil
+  :config
+  (general-evil-setup t)
+  (general-define-key
+   :keymaps '(normal insert emacs)
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   :prefix-map 'my/leader-key-map))
+```
+
+This sets up a leader key map called `my/leader-key-map` which is bound to `SPC`
+in 'normal' mode and `M-SPC` in 'insert' mode.
+
+This key map can now be used in `use-package' blocks with the `:general' keyword:
+
+```
+(use-package project
+  :general
+  (my/leader-key-map
+   "SPC" 'project-find-file
+   "p p" 'project-switch-project
+   "p d" 'project-dired
+   "p b" 'project-switch-to-buffer
+   "p B" 'project-list-buffers))
+```
+
+This sets up the following key bindings for project.el:
+
+- SPC SPC - Find a file in the project
+- SPC p p - Switch to a different projeect
+- SPC p d - Open a Dired buffer for the current project
+- SPC p b - Shows a buffer selector with only buffers from the current project
+- SPC p B - Shows a full buffer list for the project to manage them precisely
+
+The key here is to use the special `:general` keyword in `use-package` which is
+provided by the `general.el` package.
+
+Following the `:general` keyword, we have a list that starts with the name of
+our custom key map `my/leader-key-map` and the list of binding pairs which are
+all prefixed with the "SPC" leader key for this map.
+
+The bindings created in this map also have the same qualities as normal `:bind`
+mappings with `use-package`: they cause the package loading to be deferred until
+one of those bindings are used!
+
+I hope that gives you some ideas for how you can use `general.el` to make a nice
+custom leader key map to rival those of Doom Emacs and Spacemacs!
+
+== Crafter News ==
+
+Here are some interesting news items in the broader sphere of system crafting:
+
+* The Lem editor just released v2.0 with an SDL2 frontend!
+
+Lem is an Emacs-inspired text editor written with Common Lisp:
+
+  -> https://github.com/lem-project/lem
+
+It's primarily intended to be an integrated editing environment for Common Lisp
+but it seems to have great potential to be a next-generation Emacs competitor!
+
+This new 2.0 release replaces the old Electron-based graphical frontend with
+one written with SDL2, meaning that it will be much faster and more lightweight
+while still being more cross-platform than previous releases.
+
+You can read more information about the 2.0 release on their GitHub repository
+here:
+
+  -> https://github.com/lem-project/lem/releases/tag/v2.0.0
+
+Gavin Freeborn made a video about Lem about a year ago which might still be
+useful if you're interested to learn more about it:
+
+  -> https://www.youtube.com/watch?v=Ph8M8ThBgPc
+
+I'll try to set Lem up myself so that we can take a look at it on a stream soon!
+
+* The Lisp Game Jam starts tomorrow, May 26th!
+
+                 -- Thanks to ~acdw~ for suggesting this item! --
+
+The Lisp Game Jam is a regular event put on by some familiar folks in the Emacs
+and Lisp communities, David Thompson and Phil Hagelberg (aka technomancy).  It's
+a week-long event where you try to build a game (not necessarily from scratch!)
+using a Lisp dialect!
+
+Use Common Lisp, Scheme, Clojure, Fennel, or your own Lisp implementation.  It
+will be a lot of fun!
+
+If you're interested to participate, check out the information page on Itch.io:
+
+  -> https://itch.io/jam/spring-lisp-game-jam-2023
+
+I'll be busy with a new baby next week but I'm hoping to get to hack on a game
+in Guile Scheme!
+
+* Check out these old-school Emacs badges!
+
+             -- Thanks to ~summeremacs~ for suggesting this item! --
+
+Here's a fun bit of Emacs history: a collection of small badge images that you
+can use to show that your website was written or generated with Emacs!  Many of
+these look *super* retro, so it's a fun way to identify yourself as a die-hard
+Emacs user.
+
+Check out the collection at the following link and the Irreal blog post that
+gives more context:
+
+ -> https://erkin.party/emacs/
+ -> Irreal blog entry: https://irreal.org/blog/?p=11379
+
+         -----------------------------------------------------------
+         --  Do you have a new project relevant to this audience  --
+         --  that you'd like to promote in the next Newsletter?   --
+         --    Reply to this e-mail and let me know about it!     --
+         -----------------------------------------------------------
+
+== Friday's Stream - Is Ement.el the Best Matrix Client? ==
+
+In tomorrow's stream, we'll take a look at the Ement.el package by prolific
+Emacs package author Alphapapa.  Ement.el is a really capable client for the
+Matrix chat protocol which provides a Slack or Discord-like experience from the
+comfort of Emacs!
+
+We'll walk through the basic features of the package and then dive deep into
+customization to see how far we can push it.  If you're interested in joining
+the System Crafters Matrix rooms, definitely give this a look!
+
+The stream will go live at Friday, May 12th at 6PM EEST (UTC+3),
+  check your local time on this page: https://time.is/compare/1800_in_Athens
+
+You can find the stream at these URLs:
+
+  -> https://youtube.com/live/KCmlupc9z34
+  -> https://twitch.tv/SystemCrafters
+  -> https://systemcrafters.net/live-streams/may-26-2023/
+
+== Closing ==
+
+I hope you enjoyed this issue of the System Crafters Newsletter!  I always want
+to improve and streamline the content as time goes on so please send me your
+thoughts and feedback by replying directly to this e-mail!
+
+Until next time, Happy Hacking!
+
+        ---------------------------------------------------------------
+        --    If you enjoyed this newsletter and other content by    --
+        --       System Crafters, consider supporting my work!       --
+        --            More information can be found here:            --
+        --  https://systemcrafters.net/how-to-help/#support-my-work  --
+        ---------------------------------------------------------------
+
+--
+David Wilson
+david@systemcrafters.net
