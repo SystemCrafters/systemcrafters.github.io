@@ -33,3 +33,13 @@
   https://systemcrafters.net/how-to-help/#support-my-work
 
 * Getting Started with Ement.el
+
+- Creating a Matrix account
+- Joining the System Crafters space
+- Emoji reactions
+- Inserting and viewing links, files, and images
+- Customizing faces
+- Loading more room history with ~M-v~ (=ement-room-scroll-down-command=)
+- Saving chat layout with Burly
+- Side-pinned room list
+- Customizing the room list
