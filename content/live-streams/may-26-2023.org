@@ -32,7 +32,9 @@
 
   https://systemcrafters.net/how-to-help/#support-my-work
 
-* Getting Started with Ement.el
+* Getting Started with Ement.el 
+
+Official Ement.el chat on Matrix: #ement.el:matrix.org
 
 - Creating a Matrix account
 - Joining the System Crafters space
@@ -43,3 +45,46 @@
 - Saving chat layout with Burly
 - Side-pinned room list
 - Customizing the room list
+
+  #+begin_src emacs-lisp
+
+    (use-package ement
+      :ensure t
+      :custom
+      (ement-room-prism 'both)
+      (ement-save-sessions t) ;; Beware, this stores your token to disk in plain text!
+      )
+
+    (use-package burly
+      :ensure t)
+
+    ;; Thanks alphapapa!
+    (cl-defun ap/display-buffer-in-side-window (&optional (buffer (current-buffer))
+                                                          &key (side 'right) (slot 0))
+      "Display BUFFER in dedicated side window.
+    With universal prefix, use left SIDE instead of right.  With two
+    universal prefixes, prompt for side and slot (which allows
+    setting up an IDE-like layout)."
+      (interactive (list (current-buffer)
+                         :side (pcase current-prefix-arg
+                                 ('nil 'right)
+                                 ('(0) left)
+                                 (_ (intern (completing-read "Side: " '(left right top bottom) nil t))))
+                         :slot (pcase current-prefix-arg
+                                 ('nil 0)
+                                 ('(0) 0)
+                                 (_ (read-number "Slot: ")))))
+      (let ((display-buffer-mark-dedicated t))
+        (display-buffer buffer
+                        `(display-buffer-in-side-window
+                          (side . ,side)
+                          (slot . ,slot)
+                          (window-parameters
+                           (no-delete-other-windows . t))))))
+
+  #+end_src
+
+
+Discussion about auth-sources and why Ement.el does not use them:
+
+https://github.com/alphapapa/ement.el/issues/109 https://old.reddit.com/r/emacs/comments/8lvda6/is_authsource_from_the_dark_side/ 
