@@ -1,0 +1,7 @@
+#+title: Mastering Git with Magit
+
+* Episodes
+
+1. [[file:introduction.org][An Introduction to Magit]]
+2. [[file:everyday-git-workflow.org][Everyday Git Workflow with Magit]]
+3. [[file:using-interactive-rebase.org][Clean Your Commits Like a Git Rebase Expert with Magit]]

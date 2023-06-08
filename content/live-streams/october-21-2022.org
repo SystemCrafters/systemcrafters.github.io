@@ -1,6 +1,8 @@
-#+title: System Crafters Live! - October 22, 2022
+#+title: Are Text-Centric Interfaces Better for Crafters?
+#+date: [2022-10-21 Fri]
+#+video: U8v32ChA-Rc
 
-[[yt:i0IBgrOcGU8][Watch the recording on YouTube!]]
+*NOTE:* This stream was unfortunately cut short due to internet problems!
 
 * Updates
 

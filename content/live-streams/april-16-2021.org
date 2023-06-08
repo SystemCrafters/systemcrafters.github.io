@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - April 16, 2021
-
-[[https://youtu.be/fo-Px21AyTE][Watch the recording]] on YouTube!
+#+title: Creating a New Lisp
+#+date: [2021-04-16 Fri]
+#+video: fo-Px21AyTE
 
 * Emacs News
 

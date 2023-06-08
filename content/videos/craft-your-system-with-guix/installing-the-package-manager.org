@@ -1,0 +1,240 @@
+#+title: Installing the GNU Guix Package Manager
+#+video: Xy0YgnXFt1M
+
+* What will we learn?
+
+Today I'm going to show you how you can install the GNU Guix package manager on your existing Linux system so that you can start learning the basics of how to use it.
+
+In the Guix manual this is called installing on a "foreign distribution", basically a Linux distribution that is not Guix itself.
+
+Even if you don't intend to install Guix as a full distribution in the future, it can still be a very useful as an alternative package manager and development environment tool!
+
+However, if you do want to try Guix as a system distribution in the future, one benefit of installing it as a package manager is that you can use it to build a custom installation image!  This is really only necessary if your computer's hardware requires firmware blobs that don't come with the Linux Libre kernel.
+
+#+begin_cta
+#+end_cta
+
+* Supported Linux distributions
+
+The Guix installer supports distributions with the following init systems:
+
+- systemd (Ubuntu, Debian, Arch, Fedora, openSUSE...  most of them)
+- OpenRC (Gentoo, Alpine, Parabola, Artix)
+- sysv-init (Not commonly used)
+- upstart (Not commonly used)
+
+The installer will still work if you don't use one of these init systems but you will have to run the =guix-daemon= yourself!
+
+It is necessary to run the =guix-daemon= service /somehow/ because this service is used for building and installing packages from Guix into the =/gnu/store= path.
+
+* Running the installer script
+
+Let's install GNU Guix!
+
+The installation process is simple, you just download =guix-install.sh= to the =/tmp= directory, make it executable, and run it:
+
+#+begin_src sh
+
+  cd /tmp
+  wget https://git.savannah.gnu.org/cgit/guix.git/plain/etc/guix-install.sh
+  chmod +x guix-install.sh
+  sudo ./guix-install.sh
+
+#+end_src
+
+It's not necessary to use =wget= for this, you can just download the script from [[https://git.savannah.gnu.org/cgit/guix.git/plain/etc/guix-install.sh][this link]] using your browser.
+
+Once you start running the script, it will likely prompt you to download and install a GPG key that the Guix binaries are signed with.  Run this command to download and install the key (you must have =gpg= installed!):
+
+#+begin_src sh
+
+  wget 'https://sv.gnu.org/people/viewgpg.php?user_id=15145' -qO - | sudo -i gpg --import -
+
+#+end_src
+
+It will also ask you a question about downloading pre-built package binaries, answer *YES* to this unless you want to build all packages from source!
+
+[[https://guix.gnu.org/manual/en/html_node/Binary-Installation.html][Guix Manual: Binary Installation]]
+
+* Installing a package
+
+Now that Guix is installed, let's try installing a program to see if it works!
+
+#+begin_src sh
+
+  guix install emacs
+
+#+end_src
+
+Notice that we didn't use =sudo= on this command! Guix enables every user to install packages in a user profile in their home directory.
+
+Guix will download the precompiled binary package for Emacs 27.1!
+
+Other things to notice:
+
+- =setlocale= warnings
+- Substitute downloads
+- It installs a lot of dependencies!  Your Guix install is a blank slate, it doesn't use your distro's dependencies
+
+[[https://guix.gnu.org/manual/en/html_node/Invoking-guix-package.html][Guix Manual: Invoking guix package]]
+
+* Ensuring your Guix profile gets loaded
+
+Now let's try to run Emacs:
+
+#+begin_src sh
+
+  emacs
+
+#+end_src
+
+It doesn't work!
+
+To make sure you can easily access all the applications you install with Guix, you'll want to make sure that your Guix "profile" gets loaded as part of your shell environment!
+
+Make sure these lines are in your =~/.bash_profile=, =~/.zprofile= or generally the file your preferred shell uses to configure the environment:
+
+#+begin_src sh
+
+  GUIX_PROFILE="$HOME/.guix-profile"
+  . "$GUIX_PROFILE/etc/profile"
+
+#+end_src
+
+Now once you log in your environment will be set up with all the paths needed to run applications from Guix!
+
+For now, we can run these lines directly in the shell to activate the Guix profile and then try running =emacs= again.
+
+It works!
+
+Let's take a look at this folder briefly.
+
+* Pulling the Latest Guix
+
+The first time you install Guix on your distribution, it actually won't have the latest package definitions since it comes bundled with an older set.  At the time of this recording, Guix actually has the latest version of Emacs, 27.2, but we only got 27.1!
+
+To bring things up to date you can run the following command:
+
+#+begin_src sh
+
+  guix pull
+
+#+end_src
+
+It might take a while to run the first time, so be patient!
+
+** Important! Adding another GUIX_PROFILE
+
+One *very important* message gets printed out at the end of this very first =pull= operation!  We need to update our login profile (=~/.bash_profile=) to add another =GUIX_PROFILE= path:
+
+#+begin_src sh
+
+  GUIX_PROFILE="$HOME/.config/guix/current"
+  . "$GUIX_PROFILE/etc/profile"
+
+#+end_src
+
+This is necessary because a new build of the =guix= command has been installed in this path!
+
+Just to clarify, you are adding these lines *in addition to* the lines you already added before!  We are now using two separate Guix "profiles", one for your installed applications and the other for your personal build of the =guix= command which gets updated with =guix pull=.
+
+* Upgrading Packages
+
+Now let's run =guix pull= one more time just to make sure things are up to date!
+
+This command syncs the latest package definitions from all the channels you have configured and then prints out an abbreviated list of everything that is new or updated since your last =pull=.
+
+To see the full list of updates, run:
+
+#+begin_src sh
+
+  guix pull --news
+
+#+end_src
+
+Keep in mind that this doesn't mean all of these packages are installed on your system!  It is informing you about the packages that are added or updated to the package repositories that you are currently using (the main Guix channel by default).
+
+After pulling, you can update all of the packages you have installed by running the following command:
+
+#+begin_src sh
+
+  guix upgrade
+
+#+end_src
+
+Depending on when you watch this video, you might notice that Emacs is being upgraded from 27.1 to 27.2!
+
+*NOTE:* I mentioned in the video that I wasn't sure if =guix upgrade emacs= would work.  It does!
+
+If you're itching to learn more, check out this section of the Guix manual for some other commands you can try:
+
+[[https://guix.gnu.org/manual/en/html_node/Getting-Started.html][Guix Manual: Getting Started]]
+
+* Setting the locale correctly
+
+As we saw while installing the =emacs= package, =guix= will repeatedly write out warnings about =setlocale: LC_ALL: cannot change locale=.  You can fix this issue by running this command (as *sudo*!):
+
+#+begin_src sh
+
+  sudo guix install glibc-locales
+  sudo vim /root/.profile
+
+#+end_src
+
+Now edit the file =/root/.profile= with your preferred text editor (as sudo) and add the following line:
+
+#+begin_src sh
+
+  GUIX_LOCPATH=$HOME/.guix-profile/lib/locale
+
+#+end_src
+
+Now you shouldn't see the =setlocale= warning anymore when you install packages!
+
+* Upgrading Guix
+
+As we talked about before, Guix needs the =guix-daemon= to be running as a system service so that it can build and install all your packages correctly.  Sometimes this daemon and the =guix= tools will need to be updated!
+
+You might also be surprised to know that at this point, your user profile's =guix= and the system (root) =guix= are not the same version!  You'll need to periodically update the root user's Guix profile to keep things in sync.
+
+To do this, you can run the following command:
+
+#+begin_src sh
+
+  sudo -i guix pull
+
+#+end_src
+
+Once the pull operation is completed, you should restart the =guix-daemon= service using the appropriate command for your init system:
+
+*systemd*
+
+#+begin_src sh
+
+  sudo systemctl restart guix-daemon.service
+
+#+end_src
+
+*OpenRC*
+
+#+begin_src sh
+
+  sudo rc-service guix-daemon restart
+
+#+end_src
+
+*Shepherd*
+
+#+begin_src sh
+
+  sudo herd restart guix-daemon
+
+#+end_src
+
+For other init systems, consult your documentation for instructions on how to restart a service!
+
+[[https://guix.gnu.org/manual/en/html_node/Upgrading-Guix.html][Guix Manual: Upgrading Guix]]
+
+* What's next?
+
+In the next video, I'm going to teach you everything you need to know about using the Guix package manager so that you can use it for installing and managing your day to day programs.  I'll also show you some of the special features of using Guix that you can't get from your distro's package manager!

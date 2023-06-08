@@ -1,0 +1,8 @@
+#+title: Emacs Desktop Environment
+
+1. [[file:getting-started-with-exwm.org][Getting Started with EXWM]]
+2. [[file:improving-the-experience.org][Improving the EXWM Experience]]
+3. [[file:optimizing-window-placement.org][Optimizing Window Placement in EXWM]]
+4. [[file:using-multiple-monitors.org][Using Multiple Monitors in EXWM]]
+5. [[file:adding-a-panel.org][The Perfect Panel: Integrating Polybar with Emacs]]
+6. [[file:enabling-desktop-notifications.org][Enabling Desktop Notifications with Dunst]]

@@ -1,0 +1,15 @@
+#+title: Emacs Tips
+
+You can find the complete YouTube playlist here: [[https://www.youtube.com/watch?v=wKTKmE1wLyw&list=PLEoMzSkcN8oMHJ6Xil1YdnYtlWd5hHZql][Emacs Tips]]
+
+** Episodes
+
+1. [[file:managing-multiple-windows.org][How to Create and Manage Multiple Windows]]
+2. [[file:tab-bar-workspaces.org][Organize Your Windows with the Tab Bar in Emacs 27]]
+3. [[file:dynamic-tiling-edwina.org][Dynamic Tiling Windows in Emacs with Edwina]]
+4. [[file:using-the-emacs-daemon.org][Unlock the Power of the Daemon with emacsclient]]
+5. [[file:completion-sorting-with-prescient.org][Give Emacs Psychic Completion Powers with prescient.el]]
+6. [[file:keeping-folders-clean.org][Teach Emacs to Keep Your Folders Clean]]
+7. [[file:using-encrypted-passwords.org][Managing Encrypted Passwords with Emacs]]
+8. [[file:managing-multiple-windows.org][Hey Emacs, Don't Move My Windows!]]
+9. [[file:presentations-with-org-present.org][The Secrets of My Presentation Style]]

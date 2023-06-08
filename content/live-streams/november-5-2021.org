@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - November 5, 2021
-
-[[https://youtu.be/ogama8yMlTU][Watch the recording]] on YouTube!
+#+title: Catching Up With Emacs
+#+date: [2021-11-05 Fri]
+#+video: ogama8yMlTU
 
 * Catching Up With Emacs
 

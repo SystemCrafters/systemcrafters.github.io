@@ -1,0 +1,48 @@
+#+title: Unveiling the New System Crafters Site!
+#+date: [2023-05-11 Thu]
+#+author: David Wilson
+#+kind: news
+
+Welcome to the redesigned and improved System Crafters site!
+
+Over the past couple of years, this site has been relatively bare-bones with a simple layout and not much information other than the listings of my YouTube videos and their show notes.  Today, that changes!
+
+The new iteration of this site is meant to be the center of the System Crafters universe.  If you want to know about new video releases, scheduled live streams and other announcements, just come to systemcrafters.net!
+
+Going forward, one major improvement will be the addition of /comprehensive written guides/ about the topics we discuss on the System Crafters channel like GNU Emacs, GNU Guix, and related tools.  These guides are currently in development, so make sure you subscribe to the [[/newsletter][Newsletter]] to be notified as they are released and updated.
+
+* What Changed?
+
+On the surface the site may not look very different, so here's a list of the important changes:
+
+- All content is now organized under the [[/guides][Guides]] section to prepare for the future written guides
+
+- All video and live stream pages now have an embedded YouTube player so that you can watch directly in the page
+
+- A [[/news][News]] page has been added with an associated [[/rss/news.xml][RSS feed]]
+
+- I've redesigned the [[/how-to-help][How to Help]] page to describe more ways to get involved
+
+- A [[/community][Community]] section has been added to highlight community members and projects
+
+- Live stream show notes pages automatically appear on the [[/live-streams][Live Streams]] page so you can always find the latest stream!
+
+- The site's home page now does a better job of pointing you to the learning resources you might be interested in
+
+- The overall design has been updated to use the System Crafters logo and color theme
+
+I'm really proud of the new site and I hope you like it!  Feel free to send any feedback or issue reports to =david= at =systemcrafters.net= or file an issue on the [[https://codeberg.org/SystemCrafters/systemcrafters-site][Codeberg repository]].
+
+* Stay Up to Date!
+
+With the new site design, we now finally have a single place where you can stay up to date on all news related to System Crafters and the community:
+
+- New video releases and written guide updates
+- Community project updates (Crafted Emacs, etc)
+- Announcements for the System Crafters Store
+
+To be notified about important news, you can susbcribe to the [[/rss/news.xml][News RSS Feed]].
+
+Even better, join the System Crafters Newsletter!  All of the news in the RSS feed will be covered there along with additional articles, news, and tips that you won't get anywhere else on the website or YouTube channel.  This is going to be really fun, so don't miss out on it!
+
+Sign up below or head to the [[/newsletter][Newsletter]] page for more details.

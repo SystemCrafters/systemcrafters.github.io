@@ -1,6 +1,7 @@
-#+title: System Crafters Live! - January 14, 2022
+#+title: Building the WORST Emacs Configuration!
+#+date: [2022-01-14 Fri]
+#+video: L4NaIUqx8fw
 
-[[yt:L4NaIUqx8fw][Stream Recording Part 1]]
 [[yt:IDFm4y6KLks][Stream Recording Part 2]]
 
 * Updates

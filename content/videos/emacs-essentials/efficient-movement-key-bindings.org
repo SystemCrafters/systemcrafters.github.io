@@ -1,0 +1,161 @@
+#+title: Efficient Movement with Emacs
+
+[[yt:wT_jUtEGfeg][Watch the video on YouTube!]]
+
+* What will we learn?
+
+We covered the basics of using Emacs in The Absolute Beginners' Guide to Emacs but we didn't really get a chance to talk about the key bindings you might want to use to navigate around file buffers.
+
+In this video I'll show you the built-in bindings you can use to move around in a file very efficiently without moving your fingers from the letter keys!
+
+I will also tell you the exact Emacs commands that these keys bind to so that you can bind them to new keys if you like or even use them directly in Emacs Lisp code!
+
+I recommend opening a text buffer in Emacs while watching this episode so that you can try these bindings and follow along.
+
+#+begin_cta
+#+end_cta
+
+* Moving the Point
+
+In Emacs, the term "point" refers to the location of the cursor in a given buffer.  The point is the place where text will be inserted when you type and its location can be changed using movement keys.
+
+Emacs allows you to use the arrow keys to move the point just like in many typical text editors.
+
+In addition to the arrow keys, Emacs also provides a set of movement keys using alphabetical letters.  The interesting thing is that these keys are chosen because of the words they map to so that they are easy to remember!
+
+- The letter =f= stands for "forward"
+- The letter =b= stands for "backward"
+- The letter =n= stands for "next"
+- The letter =p= stands for "previous"
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html][Emacs Manual: Changing the Location of Point]]
+
+** Basic Movements
+
+Basic point movements are done using the keys I mentioned above in combination with the CTRL key:
+
+- ~C-f~ executes =forward-char= to move the point forward by one character
+- ~C-b~ executes =backward-char= to move the point backward by one character
+- ~C-n~ executes =next-line= to move the point forward by one line, keeping horizontal position
+- ~C-p~ executes =previous-line= to move the point backward by one line, keeping horizontal position
+
+The benefit of these bindings is that they are closer to where your fingers already rest on the keyboard.  No more moving your right hand to the arrow keys just to navigate around the buffer!
+
+The ~<LEFT>~ and ~<RIGHT>~ arrow keys are slightly different in that they call =left-char= and =right-char= which properly respect the direction right-to-left text!
+
+* Moving to Beginning and End of Line
+
+It's very common to want to move to the beginning or end of a line of text!
+
+- ~C-a~ executes =move-beginning-of-line= which moves the point to the beginning of the line
+- ~C-e~ executes =move-end-of-line= which moves the point to the end of the line
+
+You can think of this like:
+
+- =a= is the /beginning/ of the English alphabet
+- =e= stands for /end/ of line
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html][Emacs Manual: Changing the Location of Point]]
+
+* Moving to Beginning and End of Buffer
+
+Sometimes you want to jump to the beginning or end of the buffer quickly!
+
+- ~M-<~ executes =beginning-of-buffer= to move the point to the beginning of the buffer
+- ~M->~ executes =end-of-buffer= to move the point to the end of the buffer.
+
+If you're using the GUI version of Emacs (not in the terminal) you can also press ~C-<HOME>~ and ~C-<END>~ to accomplish the same thing!
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html][Emacs Manual: Changing the Location of Point]]
+
+* Moving to a Specific Line or Column
+
+When a compiler tells you an error is on a specific line number, you'll want to know how to get there quickly!
+
+- ~M-g M-g~ (press Alt+g twice!) executes =goto-line= which prompts you for the line number
+- ~M-g <TAB>~ executes =move-to-column= which prompts you for the column number
+
+*TIP:* you can easily show line numbers in a buffer by running =M-x display-line-numbers-mode=!
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Moving-Point.html][Emacs Manual: Changing the Location of Point]]
+
+* Moving by Words, Sentences, and Paragraphs
+
+There are other bindings that move in larger steps in the buffer, usually corresponding to units that you understand like words, sentences, and paragraphs.
+
+** Words
+
+To move forward and backward by words using the same keys, use ALT (Meta):
+
+- ~M-f~ executes =forward-word= to move the point forward by one word
+- ~M-b~ executes =backward-word= to move the point backward by one word
+
+Note that there is no equivalent for ~C-n~ and ~C-p~!
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Words.html][Emacs Manual: Words]]
+
+** Paragraphs
+
+You can move between paragraphs using the following keys:
+
+- ~M-}~ executes =forward-paragraph= to move the point forward by one paragraph
+- ~M-{~ executes =backward-paragraph= to move the point backward by one paragraph
+
+These keys can also be used in code!  The definition of a "paragraph" is basically any section of text that is separated by blank lines (see documentation for the =paragraph-start= variable).
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Paragraphs.html][Emacs Manual: Paragraphs]]
+
+** Sentences
+
+You can move between sentences using keys similar to jumping to beginning or end of the line:
+
+- ~M-e~ executes =forward-sentence= to move the point forward to the end of the sentence or the next sentence
+- ~M-a~ executes =backward-sentence= to move the point backward to the beginning of the sentence or the preceding sentence
+
+What qualifies as a sentence is a bit more complex (see documentation for the =sentence-end= function).  If the normal sentence patterns aren't found, it defaults to following paragraph boundaries, so it works in code too!
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Sentences.html][Emacs Manual: Sentences]]
+
+* Scrolling the Window
+
+Aside from using the expected ~<PageUp>~ and ~<PageDown>~ keys for scrolling the window, you can also use these keys:
+
+- ~C-v~ executes =scroll-up-command= to move the window to the next page of content in the buffer
+- ~M-v~ executes =scroll-down-command= to move the window to the previous page of content in the buffer
+
+The reversed up/down terminology is a little confusing, but it's a more literal description of the direction the buffer contents are moving.
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Scrolling.html][Emacs Manual: Scrolling]]
+
+* "Centering" the Window
+
+These key bindings can be helpful to move the scroll position to give you context above and below the current line:
+
+- ~C-l~ executes =recenter-top-bottom= which scrolls the buffer so that the line where the point is positioned in the center of the window.  If you press it repeatedly it will cycle so that the current line will show at the top of the window, then the bottom of the window, then at the center again!
+- ~C-M-l~ executes =reposition-window= which will attempt to scroll the screen to fit as much of the current "thing" as possible in the window (current paragraph, current function definition, etc)
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Recentering.html][Emacs Manual: Recentering]]
+
+* Searching for Text
+
+You can easily move around in the buffer by searching for text with the following bindings:
+
+- ~C-s~ executes =isearch-forward= which prompts for the search term and places the cursor after the occurrence found after the point position after you press ~<RET>~ (Enter)
+- ~C-r~ executes =isearch-backward= which prompts for the search term and places the cursor before the occurrence found before the point position after you press ~<RET>~
+
+These commands are incremental which means that you see the results as you type!
+
+If you keep the prompt open (without pressing ~<RET>~), you can keep pressing the ~C-s~ and ~C-r~ keys to navigate forward and backward in all the results for this string in the same buffer!
+
+*Tips*:
+
+- These commands can be useful to just jump forward or backward to a specific character or string on the same line!
+- You can also set a mark just before searching to make it easy to select a specific region.
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Basic-Isearch.html][Emacs Manual: Basics of Incremental Search]]
+
+* What's next?
+
+In the next video, we'll talk about how you can select regions of text using Emacs' "mark" commands!
+
+After that, we'll continue covering the fundamental key bindings for editing and manipulating text.

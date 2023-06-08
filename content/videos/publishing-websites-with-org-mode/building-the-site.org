@@ -1,0 +1,320 @@
+#+title: Build Your Website with Org Mode
+
+[[yt:AfkrzFodoNw][Watch the video on YouTube!]]
+
+* Intro
+
+One of Org Mode's most useful features is its publishing system which allows you to turn Org files into many other formats.
+
+In this video, I'll show you how to use it to generate a simple but nice looking website using Org Mode's HTML publishing capabilities!
+
+#+begin_cta
+#+end_cta
+
+* Getting started
+
+To get started, we'll need a place to put all of the code we'll use to generate the site along with the =.org= files that will provide the site's content.
+
+We'll create a folder called =my-org-site= with a subfolder called =content= which contains a single =index.org= file.  This will create a file called =index.html= which will be the root page of our site!
+
+The =.org= file you place in there can be very simple like the one I'll show you.  Don't put any code blocks in there yet, we'll cover that a bit later in this video.
+
+Most of what we'll do in this episode only requires Emacs version 24.5 or higher with the Org Mode package that comes built-in.
+
+* Creating the build script
+
+Now we're going to create a script in Emacs Lisp that will generate the HTML files for your Org documents by running a single shell command.
+
+Let's call it =build-site.el=:
+
+#+begin_src emacs-lisp
+
+;; Load the publishing system
+(require 'ox-publish)
+
+(message "Build complete!")
+
+#+end_src
+
+We also need a shell script that can run our Emacs Lisp script.  We'll call that =build.sh=:
+
+#+begin_src sh
+
+#!/bin/sh
+emacs -Q --script build-site.el
+  
+#+end_src
+
+Don't forget to use =chmod +x build.sh= to make the script executable!
+
+*NOTE:* If you're on Windows, you can create a =build.cmd= file that invokes Emacs the same way.
+
+The =-Q= parameter prevents Emacs from loading your own Emacs configuration which will help ensure that this same script can be executed cleanly on other machines once we get ready to start publishing this site.
+
+* Setting up the publish project
+
+Now that we have our basic script ready, we can set up a Org publishing configuration for our website.
+
+We'll add the following snippet into our =build-site.el= file:
+
+#+begin_src emacs-lisp
+
+;; Define the publishing project
+(setq org-publish-project-alist
+      (list
+       (list "my-org-site"
+             :recursive t
+             :base-directory "./content"
+             :publishing-directory "./public"
+             :publishing-function 'org-html-publish-to-html)))
+
+;; Generate the site output
+(org-publish-all t)
+
+#+end_src
+
+This configures the =org-publish-project-alist= variable to define a publishing project for our site.  Read the documentation of this variable using =M-x describe-variable= for a lot more information!
+
+We use the name =my-org-site= but you can call the project whatever you want!
+
+- =:base-directory= tells Org the folder of files that we want to publish to HTML
+- =:publishing-directory= configures the output folder for all published files
+- =:recursive= tells Org to publish =.org= files under all subdirectories of =:base-directory=
+- =:publishing-function= tells Org that we want to publish the files as HTML
+
+The =org-publish-all= function at the end tells Org to publish every project configured in =org-publish-project-alist=!  The =t= parameter tells it to regenerate all files regardless of when they were last generated.
+
+We can now generate the output of our site by running =build.sh=!  Check out the =public/= folder after running it.
+
+* Previewing the generated site
+
+Let's take a look at the basic site we just generated.  There's a great Emacs package called [[https://github.com/skeeto/emacs-web-server][simple-httpd]] which can host your files as a website on your local machine so that you can pull it up in your browser.
+
+You can install =simple-httpd= from [[https://melpa.org/#/getting-started][MELPA]] using =M-x package-install= or by putting the following snippet *in your Emacs configuration* if you have =use-package= installed and MELPA configured as a package source:
+
+#+begin_src emacs-lisp
+
+(use-package simple-httpd
+  :ensure t)
+
+#+end_src
+
+Now you can run =M-x httpd-serve-directory=.  It will prompt you for a directory to serve from within Emacs.
+
+Select the path of your =public/= directory and then open your browser to [[http://localhost:8080]] to see the preview of your site!  Set =httpd-port= to change the default port if necessary.
+
+Any time you regenerate the site files, you can just reload the page to see the result of changes you made!
+
+* Improving the HTML output
+
+There are a few things about the page we just looked at that I'd like to change to make the output look a bit cleaner:
+
+- Section numbers
+- Author name
+- Publish timestamp
+- Validate link
+
+Luckily the publish system is very customizable so I'll show you how we can disable a few things in the project configuration to get a better result.
+
+#+begin_src emacs-lisp
+
+;; Define the publishing project
+(setq org-publish-project-alist
+      (list
+       (list "org-site:main"
+             :recursive t
+             :base-directory "./content"
+             :publishing-function 'org-html-publish-to-html
+             :publishing-directory "./public"
+             :with-author nil           ;; Don't include author name
+             :with-creator t            ;; Include Emacs and Org versions in footer
+             :with-toc t                ;; Include a table of contents
+             :section-numbers nil       ;; Don't include section numbers
+             :time-stamp-file nil)))    ;; Don't include time stamp in file
+
+#+end_src
+
+We'll need to set a different variable to get rid of the validate link at the bottom:
+
+#+begin_src emacs-lisp
+
+(setq org-html-validation-link nil)
+
+#+end_src
+
+** Other project settings you might want to customize
+
+Here's a list of some more project settings you might want to customize, pulled directly from the =org-publish-project-alist= documentation:
+
+| Publish setting key      | Emacs Lisp variable                |
+| ------------------------ | ---------------------------------- |
+| :author                  | user-full-name                     |
+| :email                   | user-mail-address                  |
+| :creator                 | org-export-creator-string          |
+| :exclude-tags            | org-export-exclude-tags            |
+| :headline-levels         | org-export-headline-levels         |
+| :language                | org-export-default-language        |
+| :preserve-breaks         | org-export-preserve-breaks         |
+| :section-numbers         | org-export-with-section-numbers    |
+| :select-tags             | org-export-select-tags             |
+| :time-stamp-file         | org-export-time-stamp-file         |
+| :with-archived-trees     | org-export-with-archived-trees     |
+| :with-author             | org-export-with-author             |
+| :with-creator            | org-export-with-creator            |
+| :with-date               | org-export-with-date               |
+| :with-drawers            | org-export-with-drawers            |
+| :with-email              | org-export-with-email              |
+| :with-emphasize          | org-export-with-emphasize          |
+| :with-entities           | org-export-with-entities           |
+| :with-fixed-width        | org-export-with-fixed-width        |
+| :with-footnotes          | org-export-with-footnotes          |
+| :with-inlinetasks        | org-export-with-inlinetasks        |
+| :with-latex              | org-export-with-latex              |
+| :with-planning           | org-export-with-planning           |
+| :with-priority           | org-export-with-priority           |
+| :with-properties         | org-export-with-properties         |
+| :with-smart-quotes       | org-export-with-smart-quotes       |
+| :with-special-strings    | org-export-with-special-strings    |
+| :with-statistics-cookies | org-export-with-statistics-cookies |
+| :with-sub-superscript    | org-export-with-sub-superscripts   |
+| :with-toc                | org-export-with-toc                |
+| :with-tables             | org-export-with-tables             |
+| :with-tags               | org-export-with-tags               |
+| :with-tasks              | org-export-with-tasks              |
+| :with-timestamps         | org-export-with-timestamps         |
+| :with-title              | org-export-with-title              |
+| :with-todo-keywords      | org-export-with-todo-keywords      |
+
+* Improving the page styling
+
+At this point have a decent basic output for our website, but what if we want to make it look a little bit nicer?
+
+By setting a few more variables, we can use a nice stylesheet to give our site a more polished look:
+
+#+begin_src emacs-lisp
+
+;; Customize the HTML output
+(setq org-html-validation-link nil            ;; Don't show validation link
+      org-html-head-include-scripts nil       ;; Use our own scripts
+      org-html-head-include-default-style nil ;; Use our own styles
+      org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
+
+#+end_src
+
+This will remove the default JavaScript and CSS code that gets injected into the HTML output by default and replace it with the link to a nice stylesheet called [[https://simplecss.org/][Simple.css]] (or a CSS file of your own!).
+
+Let's regenerate the site and take a look!
+
+* Generating pages with code blocks
+
+So far we've been looking at a very simple example page that doesn't really have much on it.  What happens when we try to generate a more elaborate Org file containing code blocks?
+
+Let's try it out with another file, a version of my literate Emacs configuration called =Emacs.org=!
+
+If you're generating a site that features code blocks like a coding blog or a literate Emacs configuration, you'll probably see an error like this when you generate the site:
+
+#+begin_src sh
+
+Cannot fontify source block (htmlize.el >= 1.34 required)
+
+#+end_src
+
+To resolve this issue, you will need to install the =htmlize= package from MELPA.  We can automate the process of installing this package by adding the following snippet to our =build-site.el= file:
+
+#+begin_src emacs-lisp
+
+;; Set the package installation directory so that packages aren't stored in the
+;; ~/.emacs.d/elpa path.
+(require 'package)
+(setq package-user-dir (expand-file-name "./.packages"))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+
+;; Initialize the package system
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; Install dependencies
+(package-install 'htmlize)
+
+#+end_src
+
+In this snippet, we load Emacs' package manager and configure the =package-user-dir= to be a sub-directory of our project folder.  This allows you to install packages for the script without mixing them up with the packages of your personal Emacs configuration!
+
+The next thing we do is add MELPA to the package archive list and refresh the package archive so that =htmlize= can be found.  Finally, we call =package-install= to install it!
+
+In a future video I'll show you how to convert your Emacs color theme to a CSS file that you can use to colorize source blocks with exactly the same colors used in the theme!
+
+* Linking between pages
+
+One last thing I want to show you is how you can create links between pages on your site.  Let's open up =index.org= and create a link to the =Emacs.org= file.
+
+Inside =index.org=, we can press ~C-c C-l~ (=org-insert-link=), enter the path of the Org file we want to link to (=./Emacs.org=), press Enter, then enter the text for the link ("My Emacs configuration").
+
+When you generate the site again, you should be able to follow the link between pages because Org's publishing system will convert the link to the proper output extension.
+
+It will also complain when a linked file can't be found!
+
+#+begin_src sh
+
+Debugger entered--Lisp error: (user-error "Unable to resolve link: \"Emacs2.org\"")
+
+#+end_src
+
+* The final build script
+
+I've committed all of the code you see in this video to the following GitHub repository:
+
+https://github.com/SystemCrafters/org-website-example/ (see the [[https://github.com/SystemCrafters/org-website-example/commit/1ee251e97f5b4d6c614936030203cd7368d4adc8][commit for this episode]])
+
+In the next video I'll show you how to automatically publish an Org-based website to Git hosting services like GitHub Pages and Sourcehut Pages!
+
+Here is the final form of our =build-site.el= script:
+
+#+begin_src emacs-lisp
+
+;; Set the package installation directory so that packages aren't stored in the
+;; ~/.emacs.d/elpa path.
+(require 'package)
+(setq package-user-dir (expand-file-name "./.packages"))
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+
+;; Initialize the package system
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; Install dependencies
+(package-install 'htmlize)
+
+;; Load the publishing system
+(require 'ox-publish)
+
+;; Customize the HTML output
+(setq org-html-validation-link nil            ;; Don't show validation link
+      org-html-head-include-scripts nil       ;; Use our own scripts
+      org-html-head-include-default-style nil ;; Use our own styles
+      org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />")
+
+;; Define the publishing project
+(setq org-publish-project-alist
+      (list
+       (list "org-site:main"
+             :recursive t
+             :base-directory "./content"
+             :publishing-function 'org-html-publish-to-html
+             :publishing-directory "./public"
+             :with-author nil           ;; Don't include author name
+             :with-creator t            ;; Include Emacs and Org versions in footer
+             :with-toc t                ;; Include a table of contents
+             :section-numbers nil       ;; Don't include section numbers
+             :time-stamp-file nil)))    ;; Don't include time stamp in file
+
+;; Generate the site output
+(org-publish-all t)
+
+(message "Build complete!")
+
+#+end_src

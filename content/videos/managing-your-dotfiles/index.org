@@ -1,0 +1,7 @@
+#+title: Managing Your Dotfiles
+
+* Episodes
+
+1. [[https://www.youtube.com/watch?v=BE87kUCTBVU][The Basics of Dotfiles]]
+2. [[file:creating-a-dotfiles-folder.org][How to Create a Dotfiles Folder]]
+3. [[file:using-gnu-stow.org][Using GNU Stow to Manage Symbolic Links for Your Dotfiles]]

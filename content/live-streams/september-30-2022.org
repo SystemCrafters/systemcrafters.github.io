@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - September 30, 2022
+#+title: Learning Paredit for Structural Lisp Editing
+#+date: [2022-09-30 Fri]
+#+video: FiFMZwQbgOM
 
 * Updates
 

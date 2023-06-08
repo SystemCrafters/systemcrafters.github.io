@@ -1,0 +1,425 @@
+#+title: 5 Org Roam Hacks for Better Productivity in Emacs
+
+[[yt:CUkuyW6hr18][Watch the video on YouTube!]]
+
+* Intro
+
+Org Roam is an excellent tool for writing and organizing your thoughts, but when you leverage more of the functions it provides, you can create highly efficient custom workflows for common tasks.
+
+In this video, I'm going to show you 5 hacks to optimize your note taking and project management workflows using the features of Org Roam and Org Mode!
+
+#+begin_cta
+#+end_cta
+
+* The starting configuration
+
+Before we start, make sure you've got Org Roam set up already.
+
+You can get started quickly by copying the configuration below, but you'll learn more if you watch the previous videos in the Org Roam series first:
+
+- [[https://youtu.be/AyhPmypHDEw][Getting Started with Org Roam]]
+- [[https://youtu.be/YxgA5z2R08I][Capturing Notes Efficiently with Org Roam]]
+- [[https://www.youtube.com/watch?v=3-sLBaJAtew][Org Roam: The Best Way to Keep a Journal in Emacs]]
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/RoamNotes")
+    (org-roam-completion-everywhere t)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           :map org-mode-map
+           ("C-M-i" . completion-at-point)
+           :map org-roam-dailies-map
+           ("Y" . org-roam-dailies-capture-yesterday)
+           ("T" . org-roam-dailies-capture-tomorrow))
+    :bind-keymap
+    ("C-c n d" . org-roam-dailies-map)
+    :config
+    (require 'org-roam-dailies) ;; Ensure the keymap is available
+    (org-roam-db-autosync-mode))
+
+#+end_src
+
+* Lots of code ahead!
+
+In this video, I'm going to show you a lot of custom code that I wrote to produce these workflow improvements.  If you haven't studied Emacs Lisp much yet some of it might not be 100% clear, but that is OK!
+
+All of the code is meant to be taken and dropped into your configuration so you don't need to understand how it works as long as it does work!
+
+If you do want to learn though, I'd recommend reading over the code and using =M-x describe-function= and =M-x describe-variable= to read the documentation strings.  You can also watch my [[https://www.youtube.com/watch?v=RQK_DaaX34Q&list=PLEoMzSkcN8oPQtn7FQEF3D7sroZbXuPZ7][Learning Emacs Lisp series]] if you want a more complete tutorial!
+
+Please feel free to ask any questions in the comments and I'll try to clarify things!
+
+* Fast note insertion for a smoother writing flow
+
+Sometimes while writing, you'll want to create a new node in your Org Roam notes without interrupting your writing flow!  Typically you would use =org-roam-node-insert=, but when you create a new note with this command, it will open the new note after it gets created.
+
+We can define a function that enables you to create a new note and insert a link in the current document without opening the new note's buffer.
+
+This will allow you to quickly create new notes for topics you're mentioning while writing so that you can go back later and fill those notes in with more details!
+
+#+begin_src emacs-lisp
+
+  ;; Bind this to C-c n I
+  (defun org-roam-node-insert-immediate (arg &rest args)
+    (interactive "P")
+    (let ((args (cons arg args))
+          (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                    '(:immediate-finish t)))))
+      (apply #'org-roam-node-insert args)))
+
+#+end_src
+
+This function takes the first capture template in =org-roam-capture-templates= (usually the "default" template) and adds the =:immediate-finish t= [[https://orgmode.org/manual/Template-elements.html#Template-elements][capture property]] to prevent the note buffer from being loaded once capture finishes:
+
+Thanks to [[https://www.youtube.com/watch?v=AyhPmypHDEw&lc=Ugw7bYrPOc6oy_UBmPZ4AaABAg][Umar Ahmad]] for the snippet!
+
+* Build your Org agenda from Org Roam notes
+
+One of the most useful features of Org Mode is the agenda view.  You can actually use your Org Roam notes as the source for this view!
+
+Typically you won't want to pull in *all* of your Org Roam notes, so we'll only use the notes with a specific tag like =Project=.
+
+Here is a snippet that will find all the notes with a specific tag and then set your =org-agenda-list= with the corresponding note files.
+
+#+begin_src emacs-lisp
+
+  ;; The buffer you put this code in must have lexical-binding set to t!
+  ;; See the final configuration at the end for more details.
+
+  (defun my/org-roam-filter-by-tag (tag-name)
+    (lambda (node)
+      (member tag-name (org-roam-node-tags node))))
+
+  (defun my/org-roam-list-notes-by-tag (tag-name)
+    (mapcar #'org-roam-node-file
+            (seq-filter
+             (my/org-roam-filter-by-tag tag-name)
+             (org-roam-node-list))))
+
+  (defun my/org-roam-refresh-agenda-list ()
+    (interactive)
+    (setq org-agenda-files (my/org-roam-list-notes-by-tag "Project")))
+
+  ;; Build the agenda list the first time for the session
+  (my/org-roam-refresh-agenda-list)
+
+#+end_src
+
+Check out the Org agenda now by running =M-x org-agenda= and press =a= to see the daily schedule or =d= for the list of all =TODOs= in your project files.
+
+For best results, make sure to add the desired tag to new note files as part of your capture template (=Project= in this case).  Just remember to call =my/org-roam-refresh-agenda-list= to refresh the list after creating a new note with that tag!
+
+*NOTE*: I couldn't find a reliable, efficient way to pull dailies into the agenda yet!  As soon as I do, I might make another video on it.
+
+** TIP: Improving the appearance of notes in the agenda view
+
+You may notice that the agenda lines that come from your Org Roam files look a little unattractive due to the timestamped file names.  We can fix this by adding a =category= to the header lines of one of our project files like so:
+
+#+begin_src
+
+  #+title: Mesche
+  #+category: Mesche
+  #+filetags: Project
+
+#+end_src
+
+Typically you will want to have the category contain the same name as the note so we can update our Project template from [[https://youtu.be/YxgA5z2R08I][Org Roam Episode 2]] to include it automatically:
+
+#+begin_src emacs-lisp
+
+  ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
+   :unnarrowed t)
+
+#+end_src
+
+* Selecting from a list of notes with a specific tag
+
+The =org-roam-node-find= function gives us the ability to filter the list of notes that get displayed for selection.
+
+We can define our own function that shows a selection list for notes that have a specific tag like =Project= which we talked about before.  This can be useful to set up a keybinding to quickly select from a specific set of notes!
+
+One added benefit is that we can override the set of capture templates that get used when a new note gets created.
+
+This means that we can automatically create a new note with our project capture template if the note doesn't already exist!
+
+#+begin_src emacs-lisp
+
+  (defun my/org-roam-project-finalize-hook ()
+    "Adds the captured project file to `org-agenda-files' if the
+  capture was not aborted."
+    ;; Remove the hook since it was added temporarily
+    (remove-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
+
+    ;; Add project file to the agenda list if the capture was confirmed
+    (unless org-note-abort
+      (with-current-buffer (org-capture-get :buffer)
+        (add-to-list 'org-agenda-files (buffer-file-name)))))
+
+  (defun my/org-roam-find-project ()
+    (interactive)
+    ;; Add the project file to the agenda after capture is finished
+    (add-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
+
+    ;; Select a project file to open, creating it if necessary
+    (org-roam-node-find
+     nil
+     nil
+     (my/org-roam-filter-by-tag "Project")
+     :templates
+     '(("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
+        :unnarrowed t))))
+
+  (global-set-key (kbd "C-c n p") #'my/org-roam-find-project)
+
+#+end_src
+
+One useful aspect of this snippet is that the =org-capture-after-finalize-hook= allows us to ensure a new project note is automatically added to the Org agenda by calling the =my/org-roam-project-finalize-hook= function we defined earlier!
+
+* Streamlined custom capture for tasks and notes
+
+Org Roam provides a low-level function called =org-roam-capture-= (yes, the hyphen is there!) which allows you to invoke note capture functionality in a very flexible way.  More information can be found in the Org Roam manual: [[https://www.orgroam.com/manual.html#Extending-the-Capture-System][Extending the Capture System]].
+
+We can use this function to optimize specific parts of our capture workflow!
+
+Here are a couple of ways you might use it:
+
+** Keep an inbox of notes and tasks
+
+If you want to quickly capture new notes and tasks with a single keybinding into a place that you can review later, we can use =org-roam-capture-= to capture to a single-specific file like =Inbox.org=!
+
+Even though this file won't have the timestamped filename, it will still be treated as a node in your Org Roam notes.
+
+#+begin_src emacs-lisp
+
+  (defun my/org-roam-capture-inbox ()
+    (interactive)
+    (org-roam-capture- :node (org-roam-node-create)
+                       :templates '(("i" "inbox" plain "* %?"
+                                    :if-new (file+head "Inbox.org" "#+title: Inbox\n")))))
+
+  (global-set-key (kbd "C-c n b") #'my/org-roam-capture-inbox)
+  
+#+end_src
+
+** Capture a task directly into a specific project
+
+If you've set up project note files like we mentioned earlier, you can set up a capture template that allows you to quickly capture tasks for any project.
+
+Much like the example before, we can either select a project that exists or automatically create a project note when it doesn't exist yet!
+
+#+begin_src emacs-lisp
+
+  (defun my/org-roam-capture-task ()
+    (interactive)
+    ;; Add the project file to the agenda after capture is finished
+    (add-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
+
+    ;; Capture the new task, creating the project file if necessary
+    (org-roam-capture- :node (org-roam-node-read
+                              nil
+                              (my/org-roam-filter-by-tag "Project"))
+                       :templates '(("p" "project" plain "* TODO %?"
+                                     :if-new (file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
+                                                            "#+title: ${title}\n#+category: ${title}\n#+filetags: Project"
+                                                            ("Tasks"))))))
+
+  (global-set-key (kbd "C-c n t") #'my/org-roam-capture-task)
+
+#+end_src
+
+One important thing to point out here is that we're using =file+head+olp= in the capture template so that we can drop the new task entry under the "Tasks" heading.
+
+We're also using the =my/org-roam-project-finalize-hook= function we defined earlier so that any new project gets added to the Org agenda!
+
+* Automatically copy (or move) completed tasks to dailies
+
+One interesting use for daily files is to keep a log of tasks that were completed on that particular day.  What if we could automatically copy completed tasks in *any* Org Mode file to today's daily file?
+
+We can do this by adding some custom code!
+
+The following snippet sets up a hook for all Org task state changes and then copies the completed (=DONE=) entry to today's note file:
+
+#+begin_src emacs-lisp
+
+  (defun my/org-roam-copy-todo-to-today ()
+    (interactive)
+    (let ((org-refile-keep t) ;; Set this to nil to delete the original!
+          (org-roam-dailies-capture-templates
+            '(("t" "tasks" entry "%?"
+               :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n" ("Tasks")))))
+          (org-after-refile-insert-hook #'save-buffer)
+          today-file
+          pos)
+      (save-window-excursion
+        (org-roam-dailies--capture (current-time) t)
+        (setq today-file (buffer-file-name))
+        (setq pos (point)))
+
+      ;; Only refile if the target file is different than the current file
+      (unless (equal (file-truename today-file)
+                     (file-truename (buffer-file-name)))
+        (org-refile nil nil (list "Tasks" today-file nil pos)))))
+
+  (add-to-list 'org-after-todo-state-change-hook
+               (lambda ()
+                 (when (equal org-state "DONE")
+                   (my/org-roam-copy-todo-to-today))))
+
+#+end_src
+
+If you want to move the completed task instead, set =org-refile-keep= in this code to =nil=!
+
+This code is a little more advanced, so consult the next section to learn more about how it works!
+
+** How it works
+
+To be notified on changes to =TODO= item states, we add the =my/org-roam-copy-todo-to-today= function to the =org-after-todo-state-change-hook= list.
+
+When the user completes a task, this function will set up a "daily" temporary capture template which will jump to a heading called "Tasks" in the file for today's date.  This is wrapped in a =save-window-excursion= call to ensure that the capture job won't change your window configuration and current buffer.
+
+If the file being captured to is not the file for the current date, we call =org-refile= to copy (or move if =org-refile-keep= is =nil=) the item to the new location!  This avoids moving a completed task back into the file it already lives in (this will raise an error!)
+
+* The final configuration
+
+*Very important note!*  Make sure that the configuration file where you use this code has the following line at the very top!
+
+#+begin_src emacs-lisp
+
+;; -*- lexical-binding: t; -*-
+
+#+end_src
+
+This line enables lexical binding which ensures that the =my/org-roam-filter-by-tag= function works correctly.
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+    :ensure t
+    :demand t  ;; Ensure org-roam is loaded by default
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/RoamNotes")
+    (org-roam-completion-everywhere t)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           ("C-c n I" . org-roam-node-insert-immediate)
+           ("C-c n p" . my/org-roam-find-project)
+           ("C-c n t" . my/org-roam-capture-task)
+           ("C-c n b" . my/org-roam-capture-inbox)
+           :map org-mode-map
+           ("C-M-i" . completion-at-point)
+           :map org-roam-dailies-map
+           ("Y" . org-roam-dailies-capture-yesterday)
+           ("T" . org-roam-dailies-capture-tomorrow))
+    :bind-keymap
+    ("C-c n d" . org-roam-dailies-map)
+    :config
+    (require 'org-roam-dailies) ;; Ensure the keymap is available
+    (org-roam-db-autosync-mode))
+
+  (defun org-roam-node-insert-immediate (arg &rest args)
+    (interactive "P")
+    (let ((args (push arg args))
+          (org-roam-capture-templates (list (append (car org-roam-capture-templates)
+                                                    '(:immediate-finish t)))))
+      (apply #'org-roam-node-insert args)))
+
+  (defun my/org-roam-filter-by-tag (tag-name)
+    (lambda (node)
+      (member tag-name (org-roam-node-tags node))))
+
+  (defun my/org-roam-list-notes-by-tag (tag-name)
+    (mapcar #'org-roam-node-file
+            (seq-filter
+             (my/org-roam-filter-by-tag tag-name)
+             (org-roam-node-list))))
+
+  (defun my/org-roam-refresh-agenda-list ()
+    (interactive)
+    (setq org-agenda-files (my/org-roam-list-notes-by-tag "Project")))
+
+  ;; Build the agenda list the first time for the session
+  (my/org-roam-refresh-agenda-list)
+
+  (defun my/org-roam-project-finalize-hook ()
+    "Adds the captured project file to `org-agenda-files' if the
+  capture was not aborted."
+    ;; Remove the hook since it was added temporarily
+    (remove-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
+
+    ;; Add project file to the agenda list if the capture was confirmed
+    (unless org-note-abort
+      (with-current-buffer (org-capture-get :buffer)
+        (add-to-list 'org-agenda-files (buffer-file-name)))))
+
+  (defun my/org-roam-find-project ()
+    (interactive)
+    ;; Add the project file to the agenda after capture is finished
+    (add-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
+
+    ;; Select a project file to open, creating it if necessary
+    (org-roam-node-find
+     nil
+     nil
+     (my/org-roam-filter-by-tag "Project")
+     :templates
+     '(("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
+        :unnarrowed t))))
+
+  (defun my/org-roam-capture-inbox ()
+    (interactive)
+    (org-roam-capture- :node (org-roam-node-create)
+                       :templates '(("i" "inbox" plain "* %?"
+                                    :if-new (file+head "Inbox.org" "#+title: Inbox\n")))))
+
+  (defun my/org-roam-capture-task ()
+    (interactive)
+    ;; Add the project file to the agenda after capture is finished
+    (add-hook 'org-capture-after-finalize-hook #'my/org-roam-project-finalize-hook)
+
+    ;; Capture the new task, creating the project file if necessary
+    (org-roam-capture- :node (org-roam-node-read
+                              nil
+                              (my/org-roam-filter-by-tag "Project"))
+                       :templates '(("p" "project" plain "** TODO %?"
+                                     :if-new (file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
+                                                            "#+title: ${title}\n#+category: ${title}\n#+filetags: Project"
+                                                            ("Tasks"))))))
+
+  (defun my/org-roam-copy-todo-to-today ()
+    (interactive)
+    (let ((org-refile-keep t) ;; Set this to nil to delete the original!
+          (org-roam-dailies-capture-templates
+            '(("t" "tasks" entry "%?"
+               :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n" ("Tasks")))))
+          (org-after-refile-insert-hook #'save-buffer)
+          today-file
+          pos)
+      (save-window-excursion
+        (org-roam-dailies--capture (current-time) t)
+        (setq today-file (buffer-file-name))
+        (setq pos (point)))
+
+      ;; Only refile if the target file is different than the current file
+      (unless (equal (file-truename today-file)
+                     (file-truename (buffer-file-name)))
+        (org-refile nil nil (list "Tasks" today-file nil pos)))))
+
+  (add-to-list 'org-after-todo-state-change-hook
+               (lambda ()
+                 (when (equal org-state "DONE")
+                   (my/org-roam-copy-todo-to-today))))
+
+#+end_src

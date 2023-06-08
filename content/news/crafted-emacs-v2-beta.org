@@ -1,0 +1,11 @@
+#+title: Crafted Emacs v2 Beta Announcement
+#+date: [2023-06-08 Thu]
+#+author: Jeff Bowman
+#+kind: news
+
+Hey Crafters!
+
+I have created the [[https://github.com/SystemCrafters/crafted-emacs/tree/craftedv2beta][Crafted Emacs v2 Beta branch]]!  There has been a lot of work to make it as stable as possible to get to this point, and while there is still work to be done, I feel the project has made it far enough along to get a new "release".  Please see the README on the site for information on the project, and my [[https://write.as/jeffbowman/crafted-emacs-v2-beta][blog post]] announcing this release!
+
+Happy Crafting!
+- Jeff Bowman

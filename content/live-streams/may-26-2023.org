@@ -1,0 +1,90 @@
+#+title: Is Ement.el the Best Matrix Client?
+#+subtitle: System Crafters Live - May 26, 2023
+#+date: [2023-05-26 Fri]
+#+video: KCmlupc9z34
+
+* Updates
+
+- The Matrix and IRC migration is going well!
+
+  If you joined the Matrix early before I recreated the channels this week, you may need to follow these steps:
+
+  https://systemcrafters.net/news/changes-to-matrix-channels/
+
+  We didn't move to our own homeserver after all, it wasn't necessary!
+
+- The Lisp Game Jam starts today!
+
+  https://itch.io/jam/spring-lisp-game-jam-2023
+
+  I will try to participate but I probably won't be able to stream it.  We will see!
+
+  Keep an eye on my Mastodon posts, I'll be posting status there:
+  https://fosstodon.org/@daviwil
+
+- Subscribe to the Newsletter:
+
+  Issue #003 just went out yesterday!
+
+  https://systemcrafters.net/newsletter
+
+- Support my work!
+
+  https://systemcrafters.net/how-to-help/#support-my-work
+
+* Getting Started with Ement.el 
+
+Official Ement.el chat on Matrix: #ement.el:matrix.org
+
+- Creating a Matrix account
+- Joining the System Crafters space
+- Emoji reactions
+- Inserting and viewing links, files, and images
+- Customizing faces
+- Loading more room history with ~M-v~ (=ement-room-scroll-down-command=)
+- Saving chat layout with Burly
+- Side-pinned room list
+- Customizing the room list
+
+  #+begin_src emacs-lisp
+
+    (use-package ement
+      :ensure t
+      :custom
+      (ement-room-prism 'both)
+      (ement-save-sessions t) ;; Beware, this stores your token to disk in plain text!
+      )
+
+    (use-package burly
+      :ensure t)
+
+    ;; Thanks alphapapa!
+    (cl-defun ap/display-buffer-in-side-window (&optional (buffer (current-buffer))
+                                                          &key (side 'right) (slot 0))
+      "Display BUFFER in dedicated side window.
+    With universal prefix, use left SIDE instead of right.  With two
+    universal prefixes, prompt for side and slot (which allows
+    setting up an IDE-like layout)."
+      (interactive (list (current-buffer)
+                         :side (pcase current-prefix-arg
+                                 ('nil 'right)
+                                 ('(0) left)
+                                 (_ (intern (completing-read "Side: " '(left right top bottom) nil t))))
+                         :slot (pcase current-prefix-arg
+                                 ('nil 0)
+                                 ('(0) 0)
+                                 (_ (read-number "Slot: ")))))
+      (let ((display-buffer-mark-dedicated t))
+        (display-buffer buffer
+                        `(display-buffer-in-side-window
+                          (side . ,side)
+                          (slot . ,slot)
+                          (window-parameters
+                           (no-delete-other-windows . t))))))
+
+  #+end_src
+
+
+Discussion about auth-sources and why Ement.el does not use them:
+
+https://github.com/alphapapa/ement.el/issues/109 https://old.reddit.com/r/emacs/comments/8lvda6/is_authsource_from_the_dark_side/ 

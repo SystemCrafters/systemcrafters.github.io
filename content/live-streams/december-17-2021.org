@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - December 17, 2021
-
-[[https://youtu.be/wqdT0xKMQT8][Watch the recording]] on YouTube!
+#+title: The Hidden Value of Emacs' Tab Bar
+#+date: [2021-12-17 Fri]
+#+video: wqdT0xKMQT8
 
 * Updates
 

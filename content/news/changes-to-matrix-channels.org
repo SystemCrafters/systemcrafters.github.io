@@ -1,0 +1,45 @@
+#+title: Changes to the System Crafters Matrix Channels
+#+date: [2023-05-23 Tue]
+#+author: David Wilson
+#+kind: news
+
+Hey Crafters!
+
+Since last week's [[https://systemcrafters.net/news/moving-from-discord-to-matrix-irc/][announcement]], we've had a lot of activity in the System Crafters Matrix and IRC rooms!  It's been great to see so many familiar faces joining up.
+
+Over the last few days, I've been working hard to improve the overall experience on Matrix so that we can bridge IRC channels with full chat history for new people who join and so that folks in IRC can easily see and mention Matrix users.
+
+After a lot of trial and error, I've finally figured out the right configuration!  *The bad news* is that people who already joined the SC Matrix channels will have to follow a couple of steps to join the new, better channels.  *New users who join today will not be affected!*
+
+* How to Join the New Channels
+
+If you're already joined to the Matrix channels, here's how you can fix your setup:
+
+** 1. In Matrix, leave both the #systemcrafters and "Emacs - System Crafters" channels
+
+Unfortunately it's necessary to leave these channels first otherwise your IRC presence will be tied to the old, deprecated room instead of the new room.  It will cause Matrix users in the new rooms to see you as an IRC user instead of a matrix user!
+
+** 2. Join the new channels
+
+Here are the new channels to join, you can either take a look at the [[https://matrix.to/#/#systemcrafters-space:matrix.org][System Crafters Space]] to join them (I have removed the old channels) or use these channel names to join directly:
+
+- =#systemcrafters-general:matrix.org=
+- =#systemcrafters-emacs:matrix.org=
+
+Joining these two channels will put you in the right place, and you'll also get all of the channel history before you joined!
+
+** 3. Tell =appservice= to reconnect your IRC connection
+
+When you originally joined the #systemcrafters channel, an instant message with an account named =appservice= showed up for you in Matrix.  Open that conversation and type in the following line as a message in the chat:
+
+#+begin_src sh
+
+  !reconnect
+
+#+end_src
+
+This will cause your IRC persona to reconnect, hopefully putting you in the right state to be seen to IRC users.
+
+* If it didn't work?
+
+If these steps didn't fix everything for you, please let me or one of the mods know in the Matrix chat!  There may be other steps that some users need to follow.  If all else fails, we may have to kick you from the old channel so that you can rejoin!

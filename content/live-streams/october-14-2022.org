@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - October 14, 2022
-
-[[yt:CFlOzdx2FDc][Watch the recording on YouTube!]]
+#+title: Running Pre-Built Linux Software on Guix
+#+date: [2022-10-14 Fri]
+#+video: CFlOzdx2FDc
 
 * Updates
 

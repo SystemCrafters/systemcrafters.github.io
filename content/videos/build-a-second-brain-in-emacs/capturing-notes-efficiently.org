@@ -1,0 +1,197 @@
+#+title: Capturing Notes Efficiently with Org Roam
+
+[[yt:YxgA5z2R08I][Watch the video on YouTube!]]
+
+* Intro
+
+When building a personal knowledge system, one of the most important things you can do is create an efficient workflow for capturing new information.
+
+By the end of video you'll know how to create custom templates for capturing notes and project details into your Org Roam files.
+
+#+begin_cta
+#+end_cta
+
+* The need for a good capture workflow
+
+In the previous video, I gave an overview of using a package called Org Roam to build a personal knowledgebase in Org Mode.
+
+As you start to use Org Roam to store notes and information, it's useful to figure out the common details that you usually fill in for the things you capture and then create templates to streamline the process.
+
+For example, if you often capture detail about books or research papers, there's probably a few different types of information that you'll want to include when you create a new note:
+
+- Summary of the content
+- Bibliographic information
+- Quotes you might want to use
+- Links to topic notes where you expand on ideas you gained
+
+Org Roam provides a way to define templates for the information you capture so that you'll never forget the useful things you need to include in a new note.
+
+* How Org Roam note templates work
+
+Org Roam includes its own specialization of Org Mode capture templates.  If you've never used capture templates before, don't worry, creating and using Org Roam templates is pretty straightforward.
+
+The thing to understand about Org Roam's templates is that they're used when you create a new note.  In the last video I showed you how to create a new note with the =org-roam-node-find= command which we bound to ~C-c n f~.
+
+By default when you create a new note with this command, Org Roam will automatically create a =.org= file with a title and some metadata but nothing else in it.
+
+But after you define your own custom note templates, you will be prompted for which template to use when you create a new note.  This is how you can decide what type of note will be created and the initial content that it contains!
+
+[[https://www.orgroam.com/manual.html#The-Templating-System][Org Roam Manual: The Templating System]]
+
+* Understanding the default template
+
+To understand Org Roam templates, let's start by looking at the default capture template.  We'll do this by setting the =org-roam-capture-templates= variable in the Org Roam configuration that we built in the last video.
+
+This variable stores the list of capture templates that are used when a new note is created.  If you set this variable, you'll have to copy over the default template, otherwise it won't be available anymore.  Read its documentation for more details about the format!
+
+Here's what the default template looks like:
+
+#+begin_src emacs-lisp
+
+  '(("d" "default" plain
+     "%?"
+     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+     :unnarrowed t))
+
+#+end_src
+
+Here's what it contains:
+
+- ="d"=: The "key", a letter that you press to choose the template
+- ="default"=: The full name of the template
+- =plain=: The type of text being inserted, always this value for note templates
+- ="%?"=: This is the text that will be inserted into the new note, can be anything!
+- =:if-new= : The list that follows this describes how the note file will be created
+- =:unnarrowed t= : Ensures that the full file will be displayed when captured (an Org thing)
+
+Aside from the template key and name, the two things you might be interested to change are the initial note text and the format of the filename that gets created, though I don't recommend changing the filename format!
+
+The initial note text has its own special format which can be read about in the Org Mode documentation:
+
+[[https://orgmode.org/manual/Template-expansion.html#Template-expansion][Org Mode Manual: Template Expansion]]
+
+** The complete starting configuration
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/RoamNotes")
+    (org-roam-completion-everywhere t)
+    (org-roam-capture-templates
+     '(("d" "default" plain
+        "%?"
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+        :unnarrowed t)))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           :map org-mode-map
+           ("C-M-i" . completion-at-point))
+    :config
+    (org-roam-setup))
+
+#+end_src
+
+* Creating a topic-specific template
+
+Let's take a look at a simple example of how to create a new template.  We're going to continue with the notes we were using in the previous Org Roam video and add a template for capturing details about a programming language.
+
+#+begin_src emacs-lisp
+
+  ("l" "programming language" plain
+   "* Characteristics\n\n- Family: %?\n- Inspired by: \n\n* Reference:\n\n"
+   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+   :unnarrowed t)
+
+#+end_src
+
+Now let's try creating a new node for "JavaScript" and select our new template.
+
+The capture window that appears is filled with the format that we entered into the string!  We can type in all the details and save the note with ~C-c C-c~.
+
+* Creating a literature reference template
+
+We can add even more structure to our data entry by using Org Mode's template expansion syntax.
+
+The first example of a template we talked about in this video is one to capture details about literature material you read like a book.
+
+Let's create a template to capture some of the things we mentioned before.  This time, we're going to add custom prompts for certain details we want to fill in like the author and the year the book was published.
+
+#+begin_src emacs-lisp
+
+  ("b" "book notes" plain
+   "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\nYear: %^{Year}\n\n* Summary\n\n%?"
+   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+   :unnarrowed t)
+
+#+end_src
+
+Let's create a new note for "Dune" using this template.  We'll be prompted for Author and Year which will be inserted in the capture buffer along with the title of the note that we typed in already!  The cursor will then jump into the Summary section so that we can type our notes about the book.
+
+There are other interesting things you can do with template expansion prompts, so be sure to visit the Org Mode manual to see what else you might be able to use.
+
+[[https://orgmode.org/manual/Template-expansion.html#Template-expansion][Org Mode Manual: Template Expansion]]
+
+* Creating a project template
+
+Another useful template you might want to create is for capturing details about a new project that you've started, particularly the tasks, goals, and any important dates you might need to remember.
+
+Here's a template which sets up a new project file:
+
+#+begin_src emacs-lisp
+
+  ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
+   :unnarrowed t)
+
+#+end_src
+
+The new thing we've added this time is the =#+filetags: Project= configuration inside of the =file+head= section.  This part defines what information gets inserted in the header lines of the new file.
+
+What we've done here is add a =Project= tag to the file.  Tagging your note files gives you some extra benefits when you start using the Org Roam DB API to query your notes.  The tag may also show up in your completion list if you're using Vertico and Marginalia, [[https://www.youtube.com/watch?v=J0OaRy85MOo][check out my video on Vertico]] if you haven't seen it yet.
+
+An example I'll show you in a later video is how you can look up all your project notes using this tag and automatically build your Org Agenda list from that set of files!
+
+* Storing templates in Org files
+
+Let's talk about how you can write your capture templates in real Org files so that you don't have to edit strings inside of your Emacs configuration.
+
+It's actually pretty easy to do this!  Just create a new =.org= file containing the contents of the template string we created before and then clean it up so that it looks like a normal file.
+
+Once you've saved the template file, you'll have to replace the string in the capture template with a =file= sub-list which includes the template file path.
+
+Here's how we would need to change the book notes template to refer to a template file instead:
+
+#+begin_src emacs-lisp
+
+  ("b" "book notes" plain (file "~/RoamNotes/Templates/BookNoteTemplate.org")
+   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+   :unnarrowed t)
+
+#+end_src
+
+* Customizing the default template
+
+You can also customize the default template!
+
+Let's try to insert the date when the note was created.  We can do this by adding the string =#+date: %U= to the initial header string in the =file+head= configuration:
+
+#+begin_src emacs-lisp
+
+  ("d" "default" plain "%?"
+   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n")
+   :unnarrowed t)
+
+#+end_src
+
+And like I mentioned earlier, you can change the naming of files Org Roam creates if you really want to, just change the first string in the =file+head= to contain the format you want where =${slug}= is the part of the filename that reflects the initial note title.
+
+Keep in mind that you'll need to replicate your =:if-new= settings across all your templates if you want consistent file naming and header contents!
+
+* What's next?
+
+Org Roam provides another useful feature for capturing thoughts and ideas that occur during the day called "dailies".  In the next video, I'll show you how you can use this feature for keeping a journal, a daily log of your work, and for any random things you want to remember!

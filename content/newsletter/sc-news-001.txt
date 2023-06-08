@@ -1,0 +1,289 @@
+                                 Welcome to the
+                          System Crafters Newsletter!
+
+                           Issue #001 - May 11, 2023
+
+                                by David Wilson
+
+
+         --  This newsletter is best viewed with a monospace font!   --
+         --    If your e-mail client can't do that, use this URL:    --
+         --  https://systemcrafters.net/newsletter/sc-news-001.html  --
+         --            Read it in Emacs with `M-x eww`!              --
+
+== Contents ==
+
+1. Introduction
+2. Unveiling the New System Crafters Site!
+3. Tips of the Week
+4. Crafter News
+5. Friday's Stream - How I Crafted the New Website with Org Publish
+6. Closing
+
+== Introduction ==
+
+Welcome to the first issue of the System Crafters Newsletter!
+
+I am incredibly excited to kick off this new endeavor to provide a crafter-
+friendly source of news and articles that I can't easily cover in other places
+where I post "content" (I really hate that term).
+
+My goal is to write something new each week to give you a window into my own
+system crafting journeys as well as keep you up to date on the news and events
+in the System Crafters community and broader Emacs, Guix, and Linux communities.
+
+Since this is the first issue of the newsletter, I'm experimenting with the
+layout, organization, and length of content so I'd be very happy to have your
+feedback!  After reading this issue, reply to this e-mail to let me know what
+you think.
+
+* Why plain text?
+
+When I was a teenage Internet user in the mid-90's, I was fascinated by all of
+the cool magazines that you could find distributed as .txt files.
+
+Many of them were written by computer hackers and others of ill repute, teaching
+you the ways of phone phreaking or social engineering.  I'm sure some of you
+remember reading Phrack and Cult of the Dead Cow postings from that era.
+
+If not, here's what they looked like:
+
+  -> http://phrack.org/issues/1/1.html
+  -> https://github.com/garetharnold/cultdeadcow/
+
+The aesthetic of those text files was inspiring to me.  One aim of mine with
+this newsletter is to capture some of the nostalgia of the 90's internet by
+delivering you a retro-styled newsletter directly to your inbox every week.
+
+There are two other reasons to use plain text files for this newsletter:
+
+- It's easy to read them inside of Emacs!
+
+  If you're using one of the excellent mail clients in Emacs like mu4e, Gnus, or
+  notmuch, this should be easy!  These clients should display the plain text as
+  plain text.
+
+  If you're using a modern e-mail client, these typically don't display plain
+  text e-mails with a monospace font, so the formatting will look wrong and the
+  text will not wrap correctly.
+
+  My intention is to attach a .txt file for the issue along with each mailing so
+  that you can load up the issue in the text editor of your choice.  I've also
+  provided a rendered form of the newsletter at a URL at the top of this issue
+  so that you can open it up in a normal web browser or with Emacs' eww!
+
+- You can't embed pixel trackers in plain text emails
+
+  Most mailing list services include pixel trackers to measure analytics about
+  open rates, click throughs, etc.  I wanted to ensure that anyone could feel
+  comfortable reading this newsletter without feeling that they were being
+  spied upon.
+
+I hope you enjoy the plain-text goodness of this newsletter!  Over time it will
+get better with your feedback.
+
+== Unveiling the New System Crafters Site! ==
+
+OK, so it's not really an unveiling since I've already posted links to it in
+show notes, on the Fediverse, and in Matrix/IRC already, but now I'm officially
+flipping the switch to make it the official systemcrafters.net!
+
+It may not look like a big change on the surface, but I've put a lot of effort
+into improving the organization of the site and providing a clear starting point
+into the guides and videos about Emacs and Guix.  I've also wanted to provide an
+RSS feed for a long time and now we finally have one!
+
+  -> https://systemcrafters.net/rss/news.xml
+
+The larger goal of this redesign is to put the focus on comprehensive written
+guides that I'll be gradually writing and releasing on the site.  These will be
+much more in-depth than the YouTube video series I've made and they'll also form
+the basis for new videos on those topics!
+
+If you want to read more about the details of the website relaunch, you can
+check out this news post on the website:
+
+  -> https://systemcrafters.net/news/new-systemcrafters-site/
+
+== Tips of the Week ==
+
+* Sorting completed Org Mode tasks under a headline
+
+Here's a quick snippet that might help if you have a lot of TODO items in an
+Org file where your DONE tasks are mixed in between them.
+
+This function will move all DONE tasks to the bottom of the top-level heading
+where you keep your TODO items:
+
+```
+(defun my/org-move-done-tasks-to-bottom ()
+  "Sort all tasks in the topmost heading by TODO state."
+  (interactive)
+  (save-excursion
+    (while (org-up-heading-safe))
+    (org-sort-entries nil ?o))
+
+  ;; Reset the view of TODO items
+  (org-overview)
+  (org-show-entry)
+  (org-show-children))
+```
+
+To explain what this code is doing:
+
+- We call `save-excursion` to store the current buffer and cursor position
+
+- `(while (org-up-heading-safe))` moves the cursor to the topmost heading.
+  I do this because I keep my TODO items under a top-level heading like "Tasks"
+
+- `(org-sort-entries nil ?o)` sorts the Org items under the current heading by
+  their TODO state order (determined by `org-todo-keywords`)
+
+- The final 3 function calls reset the view of the document so that the TODO
+  items are collapsed again.  I added this because sorting the items caused all
+  the TODO items to have their contents expanded!
+
+It's also possible to interactively run the `org-sort-entries` command to get
+a full menu to sort Org items in different ways, but I wrote the above function
+to streamline my own task management workflow.
+
+If you know of a better way to do this, please let me know!
+
+* Editing plain text files with a specific "fill width"
+
+This may not be something you need to do very often, but it's useful when you
+need it!
+
+While writing this newsletter, I needed a way to visually see how "wide" the
+text is to ensure I stay within the 80 column width that I'm designing for.  It
+turns out that Emacs provides `display-fill-column-indicator-mode`, a nice minor
+mode that draws a line in your buffer where your `fill-column` cuts off.
+
+You can also turn on `auto-fill-mode` to automatically wrap paragraph text to
+fit within the specified width!
+
+Here's a quick configuration snippet you can use to enable these modes
+automatically in text buffers:
+
+```
+(defun my/setup-text-mode ()
+  (when (eql major-mode #'text-mode))
+    (display-fill-column-indicator-mode 1)
+    (auto-fill-mode 1))
+
+(add-hook 'text-mode-hook 'my/setup-text-mode)
+```
+
+I added a check to ensure we're in `text-mode` because apparently `org-mode`
+ultimately derives from `text-mode` meaning that the `text-mode-hook` gets
+triggered when you open an Org Mode file!
+
+Another couple of useful commands for editing fixed-width text documents:
+
+- `fill-paragraph` (bound to `M-q`): Reformats the text in the current paragraph
+  to fit
+- `center-region`: Select a region of text and run this command to center it
+  within your `fill-width`.  Great for centering ASCII boxes
+
+                                 +------------+
+                                 | like this! |
+                                 +------------+
+
+== Crafter News ==
+
+Here are some interesting news items in the broader sphere of system crafting:
+
+* Check out the new Emacs package `devil` by Susam
+
+Recently we've been discussing modal editing and keybinding efficiency packages
+like `god-mode`, `meow` and more.  A new contender has just stepped into the
+ring, it's called Devil!
+
+  -> https://github.com/susam/devil
+
+It seems to be a new take on god-mode's model, possibly with some inspiration
+from other similar packages.  It looks interesting, I'm hoping to try it soon
+either on stream or in my personal configuration hacking.
+
+* Try out the latest Crafted Emacs v2 Alpha changes!
+
+Jeff Bowman, the Crafted Emacs maintainer, has been working hard on a new design
+for the configuration over the past few months with the goal of making it easier
+to adopt while you need it and abandon once you've crafted your own Emacs
+configuration!
+
+The overall goal is to give you control over your own init.el and early-init.el
+files instead of forcing you to use Crafted's own framework for configuration.
+We hope this will give you more freedom to choose how you use the pre-configured
+modules that it provides!
+
+Please give the latest changes a try and let Jeff know your thoughts by filing
+issues at the Crafted Emacs GitHub repository:
+
+  -> https://github.com/SystemCrafters/crafted-emacs
+
+More information can be found about this effort on Jeff's blog:
+
+  -> https://jeffbowman.writeas.com/crafted-emacs-update-71lr
+  -> https://jeffbowman.writeas.com/crafted-emacs-update-for-march-2023
+  -> https://jeffbowman.writeas.com/crafted-emacs-v2-alpha-update-for-april-2023
+
+* GNU Guix has a ton of new package updates thanks to core-updates branch!
+
+After an extremely long time in development, the `core-updates` branch of the
+main GNU Guix channel has finally been merged on April 25, 2023!
+
+  -> https://git.savannah.gnu.org/cgit/guix.git/commit/?id=c919bfefd98bf2e29549539b4e28e6dc2a8a6f32
+  -> https://lists.gnu.org/r/guix-devel/2023-04/msg00357.html
+
+This branch brings in a ton of package updates that were previously unavailable
+to the main Guix channel because there were interrelated dependencies that all
+needed to be updated simulaneously to avoid disrupting users.
+
+Lots of new core libraries, compilers, development platforms, window managers,
+and more have been updated as a result of this merge.  If you're a Sway user
+like me, you'll be happy to know that we finally have a build of Sway 1.8!
+
+If you haven't pulled the main Guix channel in a while, now is a great time to
+do so!
+
+         -----------------------------------------------------------
+         --  Do you have a new project relevant to this audience  --
+         --  that you'd like to promote in the next Newsletter?   --
+         --    Reply to this e-mail and let me know about it!     --
+         -----------------------------------------------------------
+
+== Friday's Stream - How I Crafted the New Website with Org Publish ==
+
+In tomorrow's stream, I'll walk you through the `publish.el` script for the
+new systemcrafters.net and explain what I learned while adding features like
+generated index pages, RSS feeds, and custom HTML blocks.  I'll also show you
+how I use Emacs Lisp to template the website layout!
+
+The stream will go live at Friday, May 12th at 6PM EEST (UTC+3),
+  check your local time on this page: https://time.is/compare/1800_in_Athens
+
+You can find the stream at these URLs:
+
+  -> https://youtube.com/live/atKDa510qaM
+  -> https://twitch.tv/SystemCrafters
+  -> https://systemcrafters.net/live-streams/may-12-2023/
+
+== Closing ==
+
+I hope you enjoyed this first issue of the System Crafters Newsletter!  Like I
+said before, I want to improve and streamline the content as time goes on so
+please send me your thoughts and feedback by replying directly to this e-mail!
+
+Until next time, Happy Hacking!
+
+        ---------------------------------------------------------------
+        --    If you enjoyed this newsletter and other content by    --
+        --       System Crafters, consider supporting my work!       --
+        --            More information can be found here:            --
+        --  https://systemcrafters.net/how-to-help/#support-my-work  --
+        ---------------------------------------------------------------
+
+--
+David Wilson
+david@systemcrafters.net

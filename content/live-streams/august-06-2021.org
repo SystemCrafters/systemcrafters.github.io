@@ -1,4 +1,9 @@
-#+title: System Crafters Live! - August 6, 2021
+#+title: Can You Apply Zettelkasten in Emacs?
+#+date: [2021-08-06 Fri]
+#+video: -TpWahIzueg
+
+#+begin_cta
+#+end_cta
 
 * Updates
 

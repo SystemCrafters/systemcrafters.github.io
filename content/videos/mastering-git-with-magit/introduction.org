@@ -1,0 +1,202 @@
+#+title: Mastering Git with Magit - Getting Started
+
+[[yt:_zfvQkJsYwI][Watch the video on YouTube!]]
+
+* What will we learn?
+
+In this episode I'm going to show you the basics of how to use the preeminent Git interface for Emacs called Magit!
+
+We'll set it up in a basic Emacs configuration and then take a tour of the main user interface to see what functionality we have at our disposal.
+
+This is the first video in a series about Magit where I'll show you how to do all important source control tasks through its highly efficient interface.  Once you learn Magit, you'll never want to use Git on the command line again!
+
+The only expectation in this series is that you have a basic understanding of how to use Git to create commits and use branches.  If you are a beginner to Git, let me know in the comments and I'll consider making a video series covering the basics of using it!
+
+Let's get started!
+
+#+begin_cta
+#+end_cta
+
+* What is Magit?
+
+Magit is a Git "porcelain", or in other words it's a user-friendly interface for the Git source control tool.
+
+It provides helpful interfaces for many operations you might want to do with Git, both common and advanced:
+
+- Creating and amending commits
+- Managing and merging branches
+- Pulling from and pushing to remotes
+- Reading commit logs and "blaming" source files
+- Cherry-picking
+- Rebasing
+- Using the reflog
+
+...and much more!
+
+No matter whether you are a beginner or advanced user of Git, Magit is going to make your workflow a lot more efficient and enjoyable!
+
+Check out the [[https://magit.vc/manual/magit/index.html#Top][Magit manual]] for more information.
+
+* Installing Magit
+
+The easiest way to install Magit is with =use-package= and =package.el=.  If you have =use-package= set up, you merely need to include this in your Emacs configuration:
+
+#+begin_src emacs-lisp
+
+  (use-package magit
+    :ensure t)
+
+#+end_src
+
+Other installation approaches are covered in the [[https://magit.vc/manual/magit/Installation.html#Installation][Magit manual's Installation section]].
+
+** Evil Integration
+
+If you want to use Vim-style keybindings with Magit, all you need is evil-collection and this bit of configuration:
+
+#+begin_src emacs-lisp
+
+  (use-package evil-collection
+    :ensure t
+    :after evil
+    :init
+    (evil-collection-init))
+
+#+end_src
+
+* The Status Interface
+
+The primary interface you will use to interact with Git repositories is the status interface.  It gives you an overview of the current state of your repository and provides key bindings for quickly launching all of the operations you might want to perform.
+
+You can launch the status interface with the =magit-status= command which we've bound to ~C-x g~ in the configuration snippet above.
+
+When you launch this command, it will look for a Git repository associated with the current value of =default-directory= which is typically the directory containing the file that the selected buffer is associated with.  This makes it really fast to get a status view for the Git repository for the project you're currently working on!
+
+If a Git directory can't be identified, you will be prompted for a path to a directory containing a Git repository.
+
+The status buffer can be closed with the ~q~ key.  Typically you should close it once you're done viewing it, but if you happen to switch to another buffer and make changes to a file, the status buffer might not reflect the new state of the repository.
+
+In this case you can press the ~g~ key when you switch back to the status buffer to run =magit-refresh= so that all sections are up to date!
+
+[[https://magit.vc/manual/magit.html#Status-Buffer][Magit Manual: Status Buffer]]
+
+* Status Sections
+
+The =magit-status= interface is composed of a number of sections that display information about the Git repository:
+
+** Repository Status
+
+This section tells you which commit is currently the "HEAD" of 3 important locations:
+
+- *Head:* The current local branch
+- *Merge / Rebase:* The branch/remote where changes are usually pulled from (the prefix depends on whether you merged or rebased from this location last)
+- *Push:* The branch/remote where changes are usually being pushed to
+
+It also gives you information on the following:
+
+- The latest tag created and the number of commits between that and =HEAD=
+- Errors from the previous Git operation, usually when there are issues during a pull or push
+
+[[https://magit.vc/manual/magit.html#Status-Header-Sections][Magit Manual: Status Header Sections]]
+
+** Untracked Files
+
+This section displays the list of files under the repository directory that are not checked in to source control.  This section is useful for 2 purposes:
+
+- Discovering any new files that you need to add to your commit
+
+- Identifying files that need to be added to your =.gitignore= file
+
+Keep in mind that if you edit your =.gitignore= file without closing the status buffer first, you might need to refresh it with ~g~ / =magit-refresh= before the unwanted files are removed from this list!
+
+** Unstaged Changes
+
+This section displays the list of tracked files which have been changed since the last commit.
+
+You can expand a file to view the changes it contains using the ~TAB~ key (=magit-section-toggle=).  The changes will be displayed in a diff style to show the previous and new state of the changed lines.  You can also open/close the individual diff sections using ~TAB~.
+
+This section may also show parts of your code with merge conflicts when you are running a merge operation.  We'll talk more about this in a later video.
+
+** Staged Changes
+
+This section displays the list of tracked files with changes that have been "staged", meaning that they're marked for inclusion into the next commit that the user creates.
+
+Like the unstaged changes view, you can press ~TAB~ to expand/collapse the files and their diff "hunks".
+
+Keep in mind that when you've staged a change, the associated hunk will move from the unstaged changes view to the staged changes view, you won't see the same change in both!
+
+Note that we're not going to talk about staging/unstaging changes yet in this video, we will discuss it in the next video where we talk about creating commits!
+
+** Stashes
+
+This section displays the list of "stashes" created with the =git stash= command.  These are basically just diffs of changes that are saved to be used later without being committed to the repository.
+
+Unfortunately stashes can't be expanded with ~TAB~ but you can press ~Enter~ on a stash entry to take a look at the list of changes that it contains.
+
+** Unpushed Changes
+
+This section displays the list of commits in the local branch that haven't been pushed to the usual remote branch.  It's very useful for keeping track of the work you've been doing which hasn't been merged yet!
+
+You might not see this section if you haven't pushed the local branch anywhere yet!
+
+** Unmerged Changes
+
+This section displays changes from the remote branch which haven't been merged or rebased into the local branch.  This section will usually be populated when you fetch the latest commits from the remote branch and Git detects that there is a deviation in the commit histories that needs to be merged.
+
+** Unpulled Changes
+
+This section displays changes from the remote branch which haven't been pulled into the local branch.  This indicates that there are new commits that can be pulled cleanly into the local branch without merging.
+
+** Other Sections
+
+Other sections may appear in the status buffer depending on whether you have packages like [[https://magit.vc/manual/forge/][Forge]] or [[https://github.com/alphapapa/magit-todos][Magit Todos]] installed!
+
+* Navigating Sections
+
+Magit has some very efficient movement key bindings set up by default:
+
+- ~C-n~ and ~C-p~: Move forward and backward by line (=magit-next-line= and =magit-previous-line=)
+
+  These bindings should come as no surprise as they mirror the default line movement key bindings in Emacs
+
+- ~n~ and ~p~: Move forward and backward by visible section (=magit-section-forward= and =magit-section-backward=)
+
+  These bindings are useful
+
+- ~M-n~ and ~M-p~: Move forward and backward by section "sibling" (=magit-section-forward-sibling= and =magit-section-backward-sibling=)
+
+- ~^~: Move to the parent of the current section (=magit-section-up=)
+
+[[https://magit.vc/manual/magit.html#Section-Movement][Magit Manual: Section Movement]]
+
+* The Command Panel
+
+In the status buffer, there are many quick command bindings that you will want to learn to make your day-to-day Git operations incredibly efficient.
+
+The easiest way to learn these bindings is to open Magit's Transient panel by pressing ~?~ (question mark).
+
+This panel lists all of the operations you can perform and the prefix keys that you can press to invoke them.
+
+Usually when you press one of the letters listed here, another sub-panel will pop up with more command prefixes and also options which can be configured starting with the ~-~ (hyphen) key.
+
+Any of these panels can be cancelled with ~C-g~!
+
+Keep in mind that if you use =evil-collection= to enable Vim-style keybindings, the prefix keys for some of these commands might be changed from the defaults!
+
+* Our First Commit!
+
+Since I want to make sure you come away from this episode with something actionable to use, I'm going to jump ahead a bit and show you how to make your first commit with Magit!
+
+In this example, we've already got an existing repository cloned locally so all we need to do is run =M-x magit-status= from within a buffer inside of that repository to call up the status interface that we talked about before.
+
+Since we've already got a file with unstaged changes, we can move our cursor to the line that represents the changed file and then press the ~s~ key (lower-case 's') to stage it.  Once we do that, we can see that this file has now been added to the "Staged Changes" section which means it's ready to be committed.  At this point we could add more files to be committed if wanted to, but we'll just go with this one for now.
+
+We can now create a commit in our repository by pressing ~c~ (lower-case 'c') raise the "Commit" panel and then ~c~ one more time to choose the "Commit" action.
+
+Two panes appear, but we're only going to focus on one of them right now: the commit message editor.  In this pane, we can write a quick message about the changes that we're commiting in this box.  You can write as many lines as you like before the commentd lines with =#= (hash) characters and they will all be included in the commit.
+
+Once you're finished writing your commit message, press ~C-c C-c~ and the commit will be created!
+
+* What's next?
+
+In the next video I'll go more in depth on the workflow for using Magit for everyday source control tasks like creating branches, making commits, and pushing those commits to a remote repository.  We'll also learn how to extend and amend our commits to fix them if we made mistakes or forgot to include changes.

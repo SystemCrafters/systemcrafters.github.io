@@ -1,6 +1,0 @@
-#+title: Emacs IDE Series
-
-You can find the complete YouTube playlist here: [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oNvsrtk_iZSb94krGRofFjN][Emacs IDE]]
-
-1. [[https://youtu.be/0bilcQVSlbM][How to Debug Your Code with dap-mode]] ([[https://github.com/daviwil/emacs-from-scratch/blob/210e517353abf4ed669bc40d4c7daf0fabc10a5c/Emacs.org#debugging-with-dap-mode][Code]], [[https://github.com/daviwil/emacs-from-scratch/blob/03825fef04527312da128317fb2f5deae76439aa/show-notes/Emacs-IDE-01.org][Notes]])
-2. [[https://youtu.be/jPXIP46BnNA][Python Development Configuration]] ([[https://github.com/daviwil/emacs-from-scratch/blob/dd9320769f3041ac1edca139496f14abe147d010/Emacs.org#python][Code]], [[https://github.com/daviwil/emacs-from-scratch/blob/03825fef04527312da128317fb2f5deae76439aa/show-notes/Emacs-IDE-02.org][Notes]])

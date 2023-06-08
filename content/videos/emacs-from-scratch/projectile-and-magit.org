@@ -1,0 +1,92 @@
+#+title: Projectile and Magit
+
+- [[https://youtu.be/INTu30BHZGk][Watch the video]] on YouTube!
+- Check out the [[https://github.com/daviwil/emacs-from-scratch/tree/500370fa06889dad313e60473d73090fcfbe106d][final code]] on GitHub
+- Episode 4 of the [[file:../index.org][Emacs From Scratch]] series
+
+* Projectile
+
+#+begin_src emacs-lisp
+
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/Projects/Code")
+    (setq projectile-project-search-path '("~/Projects/Code")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+#+end_src
+
+[[https://github.com/bbatsov/projectile][Projectile]] on GitHub
+[[https://docs.projectile.mx/projectile/index.html][Projectile Manual]]
+[[https://docs.projectile.mx/projectile/projects.html#storing-project-settings][Projectile Manual - Project Settings]]
+[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Directory-Local-Variables.html][Emacs Manual: Directory-Local Variables]]
+
+- Run project =C-c p u=
+- Run tests: =C-c p P=
+- Edit dir-locals: =C-c p E= (reload with =hack-dir-local-variables-non-file-buffer=)
+
+** counsel-projectile
+
+[[https://github.com/ericdanan/counsel-projectile][counsel-projectile]] on GitHub
+
+#+begin_src emacs-lisp
+
+ (use-package counsel-projectile
+  :after projectile
+  :config
+  (counsel-projectile-mode 1))
+
+#+end_src
+
+ - Advanced project switching: =C-c p p=
+ - Quick searching with =counsel-projectile-rg= - =C-c p s r=
+   - Results to buffer with =C-c C-o=
+
+* Magit
+
+[[https://github.com/magit/magit][Magit]] on GitHub
+[[https://magit.vc/][Magit Official Site]]
+[[https://magit.vc/manual/magit/][Magit Manual]]
+
+#+begin_src emacs-lisp
+
+(use-package magit
+  :commands (magit-status magit-get-current-branch)
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+(use-package evil-magit
+  :after magit)
+
+#+end_src
+
+*Operations*
+
+Run =magit-status= in buffer from Git repo, press =?= for command panel.
+
+Refresh buffer with =g r=
+
+- Diffs
+- Commit log
+- Blame
+- Stashes
+- Branches
+- Rebase
+- Pull/push
+
+** Forge
+
+[[https://github.com/magit/forge][Forge]] on GitHub
+[[https://magit.vc/manual/forge][Forge Manual]]
+
+Important: [[https://magit.vc/manual/ghub/Getting-Started.html#Getting-Started][Instructions to set up your GitHub token]]
+
+#+begin_src emacs-lisp
+
+(use-package forge)
+
+#+end_src

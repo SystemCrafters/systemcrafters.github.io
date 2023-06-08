@@ -1,5 +1,0 @@
-#+title: Chatting with Emacs
-
-* Episodes
-
-1. [[irc-basics-with-erc/][Chat Like the 90's in Emacs with ERC - IRC Basics]]

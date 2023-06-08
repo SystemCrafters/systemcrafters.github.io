@@ -1,0 +1,77 @@
+#+title: Exploring the Depths of Dired
+#+subtitle: System Crafters Live - May 19, 2023
+#+date: [2023-05-19 Fri]
+#+video: h6ZssDbEt4A
+
+* Updates
+
+- We're moving to Matrix and IRC!  Discord to close on July 1, 2023
+
+  It's finally happening, read more here:
+  https://systemcrafters.net/news/moving-from-discord-to-matrix-irc/
+
+  NOTE: I might be creating our own Matrix Homeserver!  I'll be experimenting with this soon and will let you know.
+
+- Subscribe to the Newsletter:
+
+  Issue #002 just went out yesterday!
+
+  https://systemcrafters.net/newsletter
+
+- Support my work!
+
+  https://systemcrafters.net/how-to-help/#support-my-work
+
+* Let's dive into Dired!
+
+Dired is truly one of the great features of Emacs, but it can be hard to adopt at first because the interface is pretty bland and unhelpful.
+
+However, I believe that this package is worth learning deeply because it can make many file and directory operations much more efficient!
+
+Today we're going to dive to the depths of Dired via the manual and the information we can find in the functions and variables it provides in Emacs.
+
+We won't cover visual customization specifically, this is more about Dired functionality!
+
+https://www.gnu.org/software/emacs/manual/html_node/emacs/Dired.html
+
+Things to try:
+
+- File marking, especially using patterns
+- =dired-jump=
+- Image thumbnails
+- Cleaning up folders with =~=
+- Running shell commands on files
+- Comparing files between directories
+- Bulk file content changes with =Q= (=query-replace-regexp=)
+- Using =wdired= mode
+- Investigating =dired-x=
+
+Any other suggestions?
+
+** Notes
+
+=(setq dired-dwim-target t)= to automatically pick the right target for copy/move operations based on another open Dired window.
+
+Interesting bindings under =%=:
+
+#+begin_src sh
+
+% &		dired-flag-garbage-files
+% C		dired-do-copy-regexp
+% R		dired-do-rename-regexp
+% d		dired-flag-files-regexp
+% g		dired-mark-files-containing-regexp
+% m		dired-mark-files-regexp
+% r		dired-do-rename-regexp
+
+#+end_src
+
+*** Renaming files with a regular expression:
+
+=C-x C-q= then =C-M-%=, enter a regular expression like ~\(.*\)-\([[:digit:]]\{4\}\) → \2-\1~
+
+** How does Dirvish work?
+
+Dirvish is a really elaborate package that builds on Dired to provide a polished experience!  How do they do it?
+
+https://github.com/alexluigit/dirvish

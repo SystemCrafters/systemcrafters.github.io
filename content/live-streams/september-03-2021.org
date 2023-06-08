@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - September 3, 2021
-
-[[https://youtu.be/fWmZoaTvA8k][Watch the recording]] on YouTube!
+#+title: Exploring the Org Roam DB API
+#+date: [2021-09-03 Fri]
+#+video: fWmZoaTvA8k
 
 * System Crafters Store Update
 

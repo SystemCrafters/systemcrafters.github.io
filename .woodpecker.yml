@@ -1,0 +1,17 @@
+pipeline:
+  build-web:
+    image: silex/emacs:ci
+    when:
+      branch: [ master ]
+    secrets: [ repo_token ]
+    commands: |
+      CI=true emacs --batch -l ./publish.el --funcall dw/publish
+
+      cd public
+      git init
+      git add -A
+      git config --global user.email "david@systemcrafters.net"
+      git config --global user.name "David Wilson"
+      git commit -m "Publish systemcrafters.net"
+      git remote add upstream https://daviwil:$REPO_TOKEN@codeberg.org/SystemCrafters/systemcrafters-site.git
+      git push -f upstream HEAD:pages

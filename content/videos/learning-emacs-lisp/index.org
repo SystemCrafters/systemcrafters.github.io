@@ -1,0 +1,13 @@
+#+title: Learning Emacs Lisp
+
+You can find the complete YouTube playlist here: [[https://www.youtube.com/watch?v=RQK_DaaX34Q&list=PLEoMzSkcN8oPQtn7FQEF3D7sroZbXuPZ7][Learning Emacs Lisp]]
+
+** Episodes
+
+1. [[file:introduction-to-emacs-lisp.org][Introduction to Emacs Lisp]]
+2. [[file:types-conditionals-loops.org][Types, Conditionals, and Loops]]
+3. [[file:defining-functions-and-commands.org][Defining Functions and Commands]]
+4. [[file:defining-variables-and-scopes.org][Defining Variables and Scopes]]
+5. [[file:reading-and-writing-buffers.org][Reading and Writing Buffers in Practice]]
+6. [[file:managing-files-and-directories.org][Managing Files and Directories in Practice]]
+7. [[file:creating-minor-modes.org][Creating a Custom Minor Mode]]

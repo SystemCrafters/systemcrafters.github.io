@@ -1,0 +1,60 @@
+#+title: Join the Community!
+
+The System Crafters community meets in a few places online in case you want to engage with other people about your favorite tools and techniques!
+
+* Chat With Us
+
+If you'd like to chat with the community, you can join us both on IRC and Matrix!
+
+- *IRC*: Join =irc.libera.chat= and join the =#systemcrafters= room ([[https://web.libera.chat/?channel=#systemcrafters][web chat]])
+- *Matrix*: Join the [[https://matrix.to/#/#systemcrafters-space:matrix.org][System Crafters Space]] on matrix.org
+
+I recommend using the Matrix space with the official [[https://element.io/][Element]] client if you prefer a Discord or Slack style experience with chat history, embedded links, etc.  You can read more details about using the Libera.Chat IRC bridge to Matrix on [[https://libera.chat/guides/faq#can-i-connect-with-matrix][this page]].
+
+If you'd prefer to chat from inside of Emacs, the [[https://github.com/alphapapa/ement.el][ement.el]] Matrix client by [[https://github.com/alphapapa][Alphapapa]] is an excellent choice! I will soon be producing a video for how to use it.
+
+If you'd like a more classic experience, try the [[https://en.wikipedia.org/wiki/Internet_Relay_Chat][IRC]] channel!  If you've never used IRC before, check out the following videos:
+
+- [[https://systemcrafters.net/chatting-with-emacs/irc-basics-with-erc/][Chatting in IRC using Emacs and ERC]]
+- [[https://systemcrafters.net/live-streams/june-04-2021/][Improving the IRC experience in ERC]]
+
+* Friday Streams
+
+Join us *every Friday* for our weekly show *[[file:../live-streams.org][System Crafters Live!]]* The stream is broadcast on both [[https://youtube.com/@SystemCrafters][YouTube]] and [[https://twitch.tv/SystemCrafters][Twitch]].
+
+In these streams we usually experiment with new packages, configurations, and customizations to understand the pros and cons of using them.  Other times we have philosophical discussions about software, computing, and productivity.  It's always a good time!
+
+[[https://time.is/compare/1800_in_Athens][Click here]] to see the stream time in your local time zone!
+
+* Community Projects
+
+We also have a growing set of community projects to which you can join and contribute!  If you want to learn more about GNU Emacs and GNU Guix, contributing to one of these projects is a great way to do that.
+
+#+begin_quote
+Have an idea for a community project?  Send me an e-mail: =david= at =systemcrafters.net=
+#+end_quote
+
+** Crafted Emacs
+
+[[https://github.com/SystemCrafters/crafted-emacs/][Crafted Emacs]] is sensible base Emacs configuration created with the following goals:
+
+- Helps you craft your own Emacs configuration faster by providing pre-configured modules for common tasks
+- The code of the configuration is a learning resource to help you understand Emacs Lisp better
+- Easy to remove from your configuration once you've finished crafting your own!
+
+This project is maintained by [[https://github.com/jeffbowman][Jeff Bowman]].  You can read [[https://jeffbowman.writeas.com/][Jeff's blog]] for more information about the project!
+
+** dotcrafter.el
+
+[[https://github.com/daviwil/dotcrafter.el][dotcrafter.el]] is a project I started while creating the [[https://systemcrafters.net/learning-emacs-lisp/][Learning Emacs Lisp]] video series.  It is meant to help you manage your dotfiles using an Emacs package, including the job of "tangling" your [[https://systemcrafters.net/emacs-from-scratch/configure-everything-with-org-babel/][literate Org Mode configuration]] to the necessary output files.
+
+This project has been dormant for a while, I'd be happy if someone wanted to contribute and move it forward!
+
+** Guix Installer and Live CD Images
+
+I've used GitHub Actions to automatically produce up-to-date installation images and Live CDs for GNU Guix using the full Linux kernel from the [[https://gitlab.com/nonguix/nonguix][Nonguix]] channel:
+
+- https://github.com/SystemCrafters/guix-installer
+- https://github.com/SystemCrafters/guix-live-image
+
+If you have ideas for how to improve these, please feel free to send a PR!

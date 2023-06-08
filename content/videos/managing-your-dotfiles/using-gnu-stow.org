@@ -1,0 +1,182 @@
+#+title: Using GNU Stow to Manage Symbolic Links for Your Dotfiles
+
+[[yt:CxAT1u8G7is][Watch the video on YouTube!]]
+
+* Intro
+
+One painful part of keeping a dotfiles directory is managing symbolic links between your configuration files and the locations where they need to go in your home directory.
+
+In this video, I'll show you how easy it is to use GNU Stow to automate the creation of all your symbolic links with a single command!
+
+* Getting started
+
+To get started, make sure you've already set up a dotfiles directory like I've described in the video called [[https://www.youtube.com/watch?v=gibqkbdVbeY][How to Create a Dotfiles Folder]].
+
+In this video I'm going to assume that your dotfiles directory is located right inside of your home directory and it's called =~/.dotfiles=.
+
+You'll also need to install GNU Stow, you can find it in the package managers of most GNU/Linux distributions with the name =stow=.
+
+If you're on macOS, you can install it with Homebrew via the command =brew install stow=
+
+On Windows, you can install Stow via the [[https://www.msys2.org/][MSYS2]] command shell using =pacman -S stow=, but make sure you run the shell as Administrator and have the =MSYS= environment variable set to =winsymlinks:nativestrict= so that it creates symbolic links correctly, otherwise =stow= just copies the files!
+
+* About GNU Stow
+
+[[https://www.gnu.org/software/stow/][GNU Stow]] describes itself as a "symlink farm manager," but in practical terms it's just a program that can mirror the structure of one directory into another by creating symbolic links back to the original files.
+
+This is extremely useful when you have a directory full of configuration files that is managed by Git and you want to send all of those configuration files to where they belong in your home directory.
+
+* Basic usage
+
+Let's say we've got our configuration files stored in a directory under the home directory called =.dotfiles=.  We can easily create symbolic links to the files in this directory to the equivalent locations in the home directory using the following command:
+
+#+begin_src sh
+
+  stow .
+
+#+end_src
+
+Before we run that, let's take a look at what's already in the =.dotfiles= directory and the home directory:
+
+#+begin_src sh
+
+  ls -al ~
+  ls -al ~/.dotfiles
+
+#+end_src
+
+Now let's run the =stow= command that I mentioned before:
+
+#+begin_src sh
+
+  cd ~/.dotfiles
+  stow .
+  ls -al ~
+
+#+end_src
+
+We can now see that all of the configuration files under =~/.dotfiles=, even those in child directories, have had symbolic links created!
+
+It's possible that you will receive an error saying that the target file or link already exists so you might need to remove existing files before this command will succeed.
+
+* How it works
+
+GNU Stow walks the file and directory hierarchy of the directory passed as the first parameter to the =stow= command and creates symbolic links to those files in the equivalent locations in the target directory.
+
+The important thing to be aware of here is that our dotfiles directory *must have the same layout* as where the files would be placed under the home directory.  This means you will need to have the equivalent subdirectory structure in your dotfiles folder so that all symbolic links get created in the right place.
+
+One thing you may have noticed: we didn't specify what the target directory is!  By default, =stow= assumes that the target directory is the parent directory of the one that you specified.
+
+This means that =stow .= is equivalent to:
+
+#+begin_src sh
+
+  stow --dir=~/.dotfiles --target=~/
+
+  # OR
+
+  stow -d ~/.dotfiles -t ~/
+
+#+end_src
+
+This means that you have full control over the source and target directories that Stow uses!
+
+*TIP:* If you keep your dotfiles directory somewhere other than the home folder, I'd recommend creating a simple Bash script for invoking =stow= with the right parameters since you'll probably have to run it occasionally.
+
+* Ignoring files and directories
+
+By default, GNU Stow does a good job of [[https://www.gnu.org/software/stow/manual/stow.html#Types-And-Syntax-Of-Ignore-Lists][ignoring common files and directories]] you might not want to be linked back to your home directory like =README= and =LICENSE= files, source control folders.
+
+Let's say you have other files in your dotfiles folder that you don't want to have linked to your home directory.  For example, our dotfiles folder has a =Notes.org= file.  That really doesn't need to be in our home folder.
+
+To skip files like this, we can create a file in our dotfiles folder called =.stow-local-ignore=.  Each line of this file should be a string or regular expression representing any file or directory you don't want to link to your home folder.
+
+Here's an example:
+
+#+begin_src sh
+
+  \.git
+  misc
+  #LICENSE
+  ^/.*\.org
+
+#+end_src
+
+This will avoid linking the =.git= folder (important!), a folder called =misc=, the =LICENSE= file, and any files ending in =.org=, the latter being useful for you if you use Emacs and Org Mode to keep literate configuration files!
+
+An important detail here is that specifying your own ignore file will override Stow's default ignore list!  We now need to add =LICENSE= to this list to ensure it doesn't get linked.
+
+[[https://www.gnu.org/software/stow/manual/stow.html#Types-And-Syntax-Of-Ignore-Lists][GNU Stow Manual: Types and Syntax of Ignore Lists]]
+
+* Cleaning up symbolic links
+
+If for some reason you'd like to get rid of all the symbolic links that GNU Stow created in your home folder, you can do that with one extra parameter to the command we've been running so far:
+
+#+begin_src sh
+
+  stow -D .
+
+#+end_src
+
+All of the previously-created symbolic links in the home directory will now be gone!
+
+* Don't forget to =stow= every time you sync!
+
+One last tip I'll mention: if you use Git to commit your configuration files to a repo that is shared between multiple machines, don't forget to run =stow= each time you sync to ensure that any new configuration files get linked into the proper location.
+
+To make sure you never forget to do this, you can use this script I created =sync-dotfiles= to automate the whole process.  This script will stash current changes to your dotfiles folder, pull any new changes from the remote repo, pop the stashed changes, and then run =stow .=
+
+You might consider keeping this in a =bin= subfolder of your =~/.dotfiles= directory and add it to your =PATH=!
+
+#+begin_src sh
+
+  #!/bin/sh
+
+  # Sync dotfiles repo and ensure that dotfiles are tangled correctly afterward
+
+  GREEN='\033[1;32m'
+  BLUE='\033[1;34m'
+  RED='\033[1;30m'
+  NC='\033[0m'
+
+  # Navigate to the directory of this script (generally ~/.dotfiles/.bin)
+  cd $(dirname $(readlink -f $0))
+  cd ..
+
+  echo -e "${BLUE}Stashing existing changes...${NC}"
+  stash_result=$(git stash push -m "sync-dotfiles: Before syncing dotfiles")
+  needs_pop=1
+  if [ "$stash_result" = "No local changes to save" ]; then
+      needs_pop=0
+  fi
+
+  echo -e "${BLUE}Pulling updates from dotfiles repo...${NC}"
+  echo
+  git pull origin master
+  echo
+
+  if [[ $needs_pop -eq 1 ]]; then
+      echo -e "${BLUE}Popping stashed changes...${NC}"
+      echo
+      git stash pop
+  fi
+
+  unmerged_files=$(git diff --name-only --diff-filter=U)
+  if [[ ! -z $unmerged_files ]]; then
+     echo -e "${RED}The following files have merge conflicts after popping the stash:${NC}"
+     echo
+     printf %"s\n" $unmerged_files  # Ensure newlines are printed
+  else
+     # Run stow to ensure all new dotfiles are linked
+     stow .
+  fi
+
+#+end_src
+
+*NOTE:* You might need to change the name of the =master= branch to =main= if your repository uses that instead!
+
+* Check out the GNU Stow manual
+
+For more information about GNU Stow and details on other ways it can be used, check out the manual:
+
+[[https://www.gnu.org/software/stow/manual/stow.html][GNU Stow Manual]]

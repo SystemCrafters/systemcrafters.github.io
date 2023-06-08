@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - January 7, 2022
-
-[[https://youtu.be/CEnMzQ9JPtw][Watch the recording]] on YouTube!
+#+title: Why Geeks Don't Use Guix
+#+date: [2022-01-07 Fri]
+#+video: CEnMzQ9JPtw
 
 * Updates
 

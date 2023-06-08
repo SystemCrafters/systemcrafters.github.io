@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - June 10, 2022
-
-[[https://youtu.be/y7E18HpG1wU][Watch the recording on YouTube!]]
+#+title: Modular Emacs Configuration Strategies
+#+date: [2022-06-10 Fri]
+#+video: y7E18HpG1wU
 
 * Updates
 

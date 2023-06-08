@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - January 13, 2023
+#+title: Building a Custom Guix Distribution
+#+date: [2023-01-13 Fri]
+#+video: yiPC4GotNXA
 
 * Updates
 

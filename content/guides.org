@@ -1,0 +1,65 @@
+#+title: Guides
+
+* Complete Guides
+
+/Comprehensive written guides are coming soon!  Subscribe to the [[file:../newsletter.org][System Crafters Newsletter]] to be notified when new guides are released./
+
+* Video Series
+
+I've create a number of video tutorial series to help you learn GNU Emacs and GNU Guix in greater depth!
+
+** GNU Emacs
+
+*** Emacs Essentials
+
+The [[../emacs-essentials/][Emacs Essentials]] series intends to teach you everything you need to know about the built-in functionality of GNU Emacs. Emacs beginners should start here, but seasoned Emacs users might learn a few hidden gems too!
+
+*** Emacs From Scratch
+
+The [[../emacs-from-scratch/][Emacs From Scratch]] series is for users who know the basics and now want to create their own modern Emacs configuration.  I take you step by step through the process of building up a fully custom configuration using many packages that are either built-in or authored by the Emacs community.
+
+*** Emacs Desktop Environment
+
+The [[../emacs-desktop-environment/][Emacs Desktop Environment]] series is a more advanced course where I show you how to build an entire desktop environment with Emacs and EXWM on Linux.  If you want to truly "live" in Emacs, this is for you!
+
+*** Learning Emacs Lisp
+
+In the [[../learning-emacs-lisp/][Learning Emacs Lisp]] series, I explain the core customization language of Emacs called Emacs Lisp.  We start with the basics of the language and then embark on a project to build an Emacs package from scratch!
+
+*** Emacs IDE
+
+Emacs can also be used as an IDE (integrated development environment) like you might be used to from other editors.  The [[../emacs-ide/][Emacs IDE]] series will show you how to set up Emacs as an IDE to get rich development functionality for many languages!
+
+*** Emacs Mail
+
+Emacs can do many things, and this series will show you how you can use it to manage your e-mail!  The [[../emacs-mail/][Emacs Mail]] series shows you how to use the mu4e package to build the most productive e-mail workflow you've ever had.
+
+*** Emacs Tips
+
+There are many interesting topics we can cover about Emacs that don't require their own dedicated series.  The [[../emacs-tips/][Emacs Tips]] series is a collection of videos that will cover many other packages and configuration tricks we didn't get to in the other series!
+
+*** Mastering Git with Magit
+
+The best interface for Git is in Emacs and it's called Magit!  The [[../mastering-git-with-magit/][Mastering Git with Magit]] series will show you the ropes of how to use Magit to make all of your day to day source control operations ninja fast!
+
+*** Advanced Emacs Package Management
+
+The [[../advanced-package-management/][Advanced Emacs Package Management]] will teach more about how to use package managers like straight.el to manage Emacs packages in a more effective way!
+
+*** Build a Second Brain in Emacs
+
+Org Mode gives us the ability to organize our life in Emacs, but we can go even further by building a personal knowledgebase in Emacs using tools like Org Roam!  The [[../build-a-second-brain-in-emacs/][Build a Second Brain in Emacs]] series will show you how to build a personal knowledge management and productivity workflow with these excellent packages.
+
+*** Publishing Websites with Org Mode
+
+Org Mode has the ability to export to various other formats including HTML. We can use that capability to publish website directly from Emacs Org Mode.  The [[../publishing-websites-with-org-mode/][Publishing Websites with Org Mode]] series will show you how to build and publish a website from Org Mode files using Emacs Lisp just like the one you're reading right now!
+
+*** Chatting with Emacs
+
+Want to chat with the communities around various free and open source projects from the comfort of Emacs?  The [[../chatting-with-emacs/][Chatting with Emacs]] series will teach you how to do that!
+
+** GNU Guix
+
+*** Craft Your System with GNU Guix
+
+GNU Guix is an amazing tool for managing not only the programs you use, but also your entire system configuration.  The [[../craft-your-system-with-guix/][Craft Your System with GNU Guix]] series will walk you through the process of learning and using Guix step by step so that you can craft your own repeatable system configuration!

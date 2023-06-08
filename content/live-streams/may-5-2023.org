@@ -1,0 +1,140 @@
+#+title: Exploring dwl-guile: A Wayland Compositor for Guile and Guix
+#+subtitle: System Crafters Live - May 5, 2023
+#+date: [2023-05-05 Fri]
+#+video: wHbH0VGJ6TQ
+
+* Updates
+
+- The new System Crafters website will be officially launched next week!
+
+- Subscribe to the System Crafters Newsletter!
+
+  https://new.systemcrafters.net/newsletter/
+
+- Support the channel!
+
+ *Buy me a coffee* at https://ko-fi.com/SystemCrafters
+
+ *Buy Mastering Emacs* with this link:
+ https://www.masteringemacs.org/r/systemcrafters
+
+* Let's try =dwl-guile=!
+
+I've mentioned a few times recently that I've really enjoyed using Wayland via Sway recently.  It's the future!  However, we haven't really seen many Lisp or Scheme-based compositors yet.
+
+[[https://github.com/engstrand-config/dwl-guile][dwl-guile]] is a fork of the [[https://github.com/djpohly/dwl][dwl]] Wayland Compositor (which is a port of [[https://dwm.suckless.org/][dwm]]).
+
+=dwl-guile= was developed to be used with GNU Guix!  There is a custom Guix channel which also provides a Guix Home service for configuring the window manager:
+
+https://github.com/engstrand-config/home-service-dwl-guile
+
+Today we'll see if we can get =dwl-guile= up and running and see if it can be a solid addition to our modern, Lisp-based system crafting toolset!
+
+To get things running, I added the =home-service-dwl-guile= channel to my Guix Channel configuration:
+
+#+begin_src scheme
+
+(channel
+  (name 'home-service-dwl-guile)
+  (url "https://github.com/engstrand-config/home-service-dwl-guile")
+  (branch "main")
+  (introduction
+    (make-channel-introduction
+      "314453a87634d67e914cfdf51d357638902dd9fe"
+      (openpgp-fingerprint
+        "C9BE B8A0 4458 FDDF 1268 1B39 029D 8EB7 7E18 D68C"))))
+
+#+end_src
+
+I then installed =dwl-guile= and created a configuration file called =dwl-config.scm=.
+
+I ran it like this:
+
+#+begin_src sh
+
+  dwl-guile -c dwl-config.scm
+
+#+end_src
+
+* The final configuration
+
+#+begin_src scheme
+
+;; Inhibit the defaults so that we can control the keys!
+(setq inhibit-defaults? #t)
+
+;; THINGS TO FIGURE OUT:
+;; - Setting the background image (swaybg?)
+;; - Fixing ctrl:nocaps
+;; - Settings desired layouts and switching them
+;; - Set up swaylock/swayidle
+
+;; Start the repl, connect via M-x geiser-connect-local RET /tmp/dwl-guile.socket RET
+(dwl:start-repl-server)
+
+(set-monitor-rules
+ '((name . "HDMI-A-1")
+   (x . 0) (y . 0)
+   (masters . 1)
+   (master-factor . 0.55)
+   (width . 2560)
+   (height . 1440)
+   (scale . 2))
+
+ `((name . "eDP-2")
+   (width . 3840)
+   (height . 2160)
+   (scale . 2)
+   (x . 2560) (y . ,(- (/ 2160 2)
+                       (/ 1440 2)))))
+
+(set-xkb-rules '((layout . "us")
+                 (options . "ctrl:nocaps")))
+
+(setq tags (list "chat" "dev" "web" "media" "misc"))
+
+(dwl:set-tty-keys "C-M")
+(dwl:set-tag-keys "s" "s-S")
+
+(set-keys "s-<space>" '(dwl:spawn "fuzzel" "--no-fuzzy")
+          ;; (dwl:spawn "fuzzel -w 50 -x 8 -y 8 -r 3 -b 232635ff -t A6Accdff -s A6Accdff -S 232635ff -C c792eacc -m c792eacc -f \"Iosevka Aile:weight=light:size=11\" --no-fuzzy --icon-theme=\"Papirus-Dark\"")
+          "s-<return>" '(dwl:spawn "emacsclient" "-c")
+          "s-j" '(dwl:focus-stack 1)
+          "s-k" '(dwl:focus-stack -1)
+          "s-l" '(dwl:change-master-factor 0.05)
+          "s-h" '(dwl:change-master-factor -0.05)
+          "s-<page-up>" '(dwl:change-masters 1)
+          "s-<page-down>" '(dwl:change-masters -1)
+          "s-t" '(dwl:cycle-layout 1)
+          "s-<left>" '(dwl:focus-monitor 'DIRECTION-LEFT)
+          "s-<right>" '(dwl:focus-monitor 'DIRECTION-RIGHT)
+          "s-<up>" '(dwl:focus-monitor 'DIRECTION-UP)
+          "s-<down>" '(dwl:focus-monitor 'DIRECTION-DOWN)
+          "s-S-<left>" '(dwl:tag-monitor 'DIRECTION-LEFT)
+          "s-S-<right>" '(dwl:tag-monitor 'DIRECTION-RIGHT)
+          "s-S-<up>" '(dwl:tag-monitor 'DIRECTION-UP)
+          "s-S-<down>" '(dwl:tag-monitor 'DIRECTION-DOWN)
+          "s-q" 'dwl:kill-client
+          "s-<tab>" 'dwl:view
+          "s-S-0" '(dwl:view 0) ;; 0 will show all tags
+          "s-f" 'dwl:toggle-fullscreen
+          "S-s-<space>" 'dwl:toggle-floating
+          "S-s-q" 'dwl:quit
+          "s-<mouse-left>" 'dwl:move
+          "s-<mouse-middle>" 'dwl:toggle-floating
+          "s-<mouse-right>" 'dwl:resize)
+
+;; Configure gaps
+(dwl:change-gaps 5)
+
+;; Launch helpful programs after init
+(add-hook! dwl:hook-startup
+           (lambda ()
+             (dwl:spawn "setxkbmap" "-option" "ctrl:nocaps")
+             (dwl:spawn "waybar")
+             (dwl:spawn "dunst")
+             (dwl:spawn "nm-applet" "--indicator")
+             (dwl:spawn "udiskie" "-t")
+             (dwl:spawn "emacs")))
+
+#+end_src

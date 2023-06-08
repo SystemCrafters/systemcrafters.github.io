@@ -1,0 +1,203 @@
+#+title: Build a Second Brain in Emacs with Org Roam
+
+[[yt:AyhPmypHDEw][Watch the video on YouTube!]]
+
+#+begin_cta
+#+end_cta
+
+* What is Org Roam?
+
+Org Mode is known to be a great tool not just for writing and personal notes but also TODO lists, project planning, time tracking, and more.  Once you start to become really invested in Org Mode you'll eventually have to come up with a system for managing your Org files so that it's easy to store and find the information you need.
+
+[[https://github.com/org-roam/org-roam][Org Roam]] is an extension to Org Mode which solves a couple of the biggest problems that I've personally had when using Org for personal notes:
+
+- *How many Org files do I need?*
+- *How do I decide where to put things in my Org files?*
+
+Org Roam solves these problems by making it easy to create topic-focused Org Files and link them together so that you can treat the information as nodes in a network rather than as hierarchical documents.  You can think of it like a personal wiki!
+
+It's inspired by a program called [[https://roamresearch.com/][Roam]] and a note-taking strategy called [[https://www.orgroam.com/manual.html#A-Brief-Introduction-to-the-Zettelkasten-Method][Zettelkasten]] where the goal is to create many individual single-topic notes that are linked together to create a "networked" knowledge base.
+
+Many people consider this like creating a "second brain" because it can easily handle a huge amount of knowledge and remind you of connections between topics very effectively.
+
+The major advantage of Org Roam over other similar note taking tools is that you get to use all of the other great features of Org Mode in a new way!
+
+* Prerequisites
+
+Org Roam v2 depends on a customized build of the SQLite database tool to operate. Org Roam will take care of compiling this code for you as long as you have a compatible compiler installed!
+
+For Linux and macOS users, make sure you have a C/C++ compiler like =gcc= or =clang= installed.
+
+Windows users can follow [[https://www.orgroam.com/manual.html#C-Compiler][the instructions in the Org Roam manual]] to build the database program.
+
+You may be wondering why Org Roam needs a database; the database enables Org Roam to keep track of all of the "nodes" that you create and the links between them *very* efficiently.  You can also use Org Roam's database to develop your own extensions!
+
+* Installation
+
+Install the =org-roam= package from MELPA using =package.el=, =straight.el= or any other package manager you normally use to install packages.
+
+If you use =use-package= with =package.el=, add this to your configuration temporarily and execute it to install =org-roam=:
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+    :ensure t)
+
+#+end_src
+
+After loading the package, you can check the variable =org-roam--sqlite-available-p= for a value of =t= to ensure that everything is set up correctly and ready to run.
+
+* Basic configuration
+
+After Org Roam has been installed, the most important thing to configure is the folder where your Org Roam files will be located.
+
+By default, this will be a folder called =org-roam= in your =$HOME= directory but you will probably want to set this to something else.  No matter what path you use, things will be slightly easier if you create the folder in advance!
+
+*TIP:* Don't use your existing Org files folder for this!  Your existing files won't have the necessary metadata so they won't show up in Org Roam's database.
+
+We'll also add some necessary key bindings and a call to =org-roam-setup= to make sure everything is ready to go.
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+    :ensure t
+    :custom
+    (org-roam-directory "~/RoamNotes")
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-setup))
+
+#+end_src
+
+* Dealing with migration warnings
+
+The first time you load the package, you will probably be presented with a message in the =*Warnings*= buffer about the need to migrate Org Roam v1 files to v2.
+
+If you've never used Org Roam before, you can set the variable =org-roam-v2-ack= to =t= in your configuration.
+
+*If you've been using Org Roam v1*, make sure to run =M-x org-roam-migrate-wizard= as suggested by the message!  Check out the [[https://github.com/org-roam/org-roam/wiki/Hitchhiker's-Rough-Guide-to-Org-roam-V2#migration-instructions][migration instructions]] in the wiki for more information.
+
+Here's how to set the variable in your configuration so that you will no longer see this message:
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/RoamNotes")
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-setup))
+
+#+end_src
+
+* Creating your first node
+
+Let's create our first node!  We can use the ~C-c n f~ binding to invoke =org-roam-node-find= which brings up a completion session to select or create a node.
+
+Since we want to create a new node, we can type in the desired node name "Programming Languages" and press ~RET~ (Enter).
+
+A new Org capture buffer will be created for the node.  Why a capture buffer?  Because Org Roam enables you to specify multiple capture templates for new notes in case you have different kinds of nodes you need to create!  We'll cover this in another video.
+
+For now, we can add some text to the file and then press ~C-c C-c~ to confirm the capture to save the file.
+
+Let's follow the same process to create another node called "Emacs Lisp".
+
+* They're just .org files!
+
+These are just plain =.org= files inside of your notes folder!  You can check them into a Git repository or sync them with any other tool you like.  The database file that Org Roam creates *does not* need to be synced between machines because Org Roam can recreate it from existing .org files.
+
+* Inserting links to other nodes
+
+The real power of Org Roam begins when you start linking your node files together!  However, this works differently than normal Org links.
+
+In an Org Roam buffer, we can use the ~C-c n i~ binding to invoke =org-roam-node-insert= which will bring up a completion list containing all of your nodes.  Selecting one of them will cause a link to that node to be inserted at the point in the current buffer.
+
+Let's use this command to insert a link to "Emacs Lisp" in the "Programming Languages" node.
+
+* Inserting links to nodes that don't exist yet
+
+You can also type the name of a node that doesn't exist yet and it will be created!  Once you use ~C-c C-c~ to confirm the capture buffer that appears for the new node, a link to that node will be inserted into the buffer you started from.
+
+Let's use ~C-c n i~ to insert a new node called "Scheme" to see how this works.
+
+This makes it much faster to build out your node graph!
+
+* Inserting node links using completions
+
+You can also use =M-x completion-at-point= to complete the names of nodes inside of double-square brackets =[[]]=.  I've found that this doesn't work in some cases, though!
+
+If you'd like to complete names of nodes anywhere in an Org Roam file without using the brackets, set =org-roam-completion-everywhere= to =t=.  If you type a couple letters in your buffer and run =M-x completion-at-point=, a completion session will allow you to complete the name of the node.  Once you save the file, the =roam:Node= link syntax will be fixed!
+
+Here's an updated configuration that makes node completions easier:
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/RoamNotes")
+    (org-roam-completion-everywhere t)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           :map org-mode-map
+           ("C-M-i"    . completion-at-point))
+    :config
+    (org-roam-setup))
+
+#+end_src
+
+* Creating a heading node
+
+One of the new features of Org Roam v2 is the ability to turn a top-level heading inside of a node file into its own unique node.  This can be helpful if some nodes don't really deserve their own files but you still want to link to them!
+
+When you have your cursor in a top-level header in an Org Roam node buffer, run =M-x org-id-get-create= to assign an Org ID to the header.  You will now see that header's name in the list of nodes displayed by ~C-c n f~.
+
+Let's create a top-level heading node called "Resources" in the "Emacs Lisp" node!
+
+* Creating aliases for nodes
+
+What happens if you have top-level heading nodes in multiple files which have the same name?
+
+Let's create another top-level heading node called "Resources" in the "Scheme" node and use =org-id-get-create= to give it an ID.
+
+Now if we use ~C-c n f~ to list all nodes, we see two "Resources" nodes in the list!  How can we tell them apart?
+
+The way to solve this is to create an alias for one (or all) of the nodes with the same name.  If you put your cursor on a heading node or in a file node, you can run =M-x org-roam-alias-add=.  You will be prompted for the name of the alias to add.
+
+If you check the node listing with ~C-c n f~ now, you will still see the duplicated "Resources" names, but the alias you added will also be in the list!
+
+If you need to, you can add multiple aliases for a single node.
+
+* Viewing backlinks for the current file
+
+Once you've started creating a lot of nodes that are linked together, it might be very helpful to open the backlinks buffer to see which notes are linked to the node you are currently viewing.
+
+Let's open the "Emacs Lisp" node and then press ~C-c n l~ to execute the =org-roam-buffer-toggle= command.  A new buffer called =*org-roam*= will be created in a new window.
+
+Now any time you select a buffer for an Org Roam node, you will see the list of references to that node from any other nodes.  Since we're looking at the "Emacs Lisp" node, we can see a reference from the "Programming Languages" node!
+
+Let's create another node called "System Crafters" and add links to both "Programming" and "Emacs Lisp" to see how it looks in the backlinks buffer for those nodes.
+
+* What's next?
+
+We've covered enough about Org Roam in this video so that you can start taking notes in a new way!  It's very satisfying to build up your personal knowledge base.
+
+In later videos, we'll cover the following topics:
+
+- Using capture templates to create Org Roam nodes
+- Daily journalling and logging with the "dailies" feature
+- Populating the Org Agenda with Org Roam files
+
+... and more as Org Roam v2 develops!
+
+In the meantime, check out the [[https://www.orgroam.com/manual.html][Org Roam Manual]] for more information on the features it provides.

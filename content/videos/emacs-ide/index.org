@@ -1,0 +1,6 @@
+#+title: Emacs IDE Series
+
+You can find the complete YouTube playlist here: [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oNvsrtk_iZSb94krGRofFjN][Emacs IDE]]
+
+1. [[file:debugging-with-dap-mode.org][How to Debug Your Code with dap-mode]]
+2. [[file:python-development-config.org][Python Development Configuration]]

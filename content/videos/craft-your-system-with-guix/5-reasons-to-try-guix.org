@@ -1,0 +1,284 @@
+#+title: 5 Reasons to Try GNU Guix in 2022
+#+video: 7ZdMRLPZhFs
+
+* What is GNU Guix?
+
+Guix is a package manager and system configuration tool which enables you to safely and repeatably install software and an entire GNU/Linux environment on your computer.
+
+To be more specific, it is a /functional package manager/ (inspired by [[https://nixos.org/][Nix]]) which can make transactional changes to your system configuration.  This "functional" model ensures that any configuration you apply will always have the same result when given a particular set of inputs.  Also, every change can be rolled back to a previous configuration if something goes wrong.
+
+One interesting aspect of GNU Guix for the Lisp enthusiasts out there is that the entire tool is written and configured with Guile Scheme, so you can almost think of this as the Emacs of Linux distributions.
+
+Read more about this model in the [[https://guix.gnu.org/manual/en/html_node/Managing-Software-the-Guix-Way.html][Guix Manual]]!
+
+#+begin_cta
+#+end_cta
+
+* Follow along!
+
+In this video I'll demonstrate a few Guix features using a virtual machine.  If you'd like to follow along, you can find instructions on how to set up a standard Guix VM image [[https://guix.gnu.org/manual/en/html_node/Running-Guix-in-a-VM.html][in the Guix manual]].
+
+If you want to get started quickly on a Linux system with QEMU installed, you might be able to run these commands:
+
+#+begin_src sh
+
+  wget -O ~/Downloads/guix-vm.qcow2 https://ftp.gnu.org/gnu/guix/guix-system-vm-image-1.3.0.x86_64-linux.qcow2 --show-progress
+
+  qemu-system-x86_64 \
+    -nic user,model=virtio-net-pci \
+    -enable-kvm -m 2048 \
+    -device virtio-blk,drive=guix-demo \
+    -drive if=none,file=$HOME/Downloads/guix-vm.qcow2,id=guix-demo
+
+#+end_src
+
+* 1. You'll never lose your configuration again
+
+In other GNU/Linux distributions, you install your system and then manually make changes to the configuration:
+
+- Installing packages
+- Adding user accounts
+- Tweaking configuration files
+- Configuring system services
+- Setting up your user configuration (dotfiles)
+
+GNU Guix allows you to describe your /entire/ system configuration using a declarative syntax.  This enables you to manage your whole configuration using a single file and then check it into source control so that you never lose it!
+
+Typically the process is to start with a configuration file generated from Guix' "graphical installer" or one you've found online, install it on your system, and then tweak it to your liking.
+
+Whether you want to install or update your system, it's the same command:
+
+#+begin_src sh
+
+  sudo guix system reconfigure config.scm
+
+#+end_src
+
+You can always find the current system configuration at =/run/current-system/configuration.scm= but I recommend keeping your own copy of your system configuration file that you check into source control.
+
+Let's add a new user to the system configuration:
+
+#+begin_src scheme
+
+  ;; ... starts at line 62 ...
+
+  (users (cons* (user-account
+                 (name "guest")
+                 (comment "GNU Guix Live")
+                 (password "")            ;no password
+                 (group "users")
+                 (supplementary-groups '("wheel" "netdev"
+                                         "audio" "video")))
+                (user-account
+                 (name "david")
+                 (comment "GNU Guix Live")
+                 (password "")            ;no password
+                 (group "users")
+                 (supplementary-groups '("wheel" "netdev"
+                                         "audio" "video")))
+
+                %base-user-accounts)
+
+#+end_src
+
+Now we can verify that the change gets applied by running =sudo guix system reconfigure config.scm= and checking =/etc/passwd=:
+
+#+begin_src sh
+
+  cat /etc/passwd | grep david  # No result!
+  sudo guix system reconfigure config.scm
+  cat /etc/passwd | grep david  # The account is now there!
+
+#+end_src
+
+Guix enables you to truly craft a system configuration that will last, even if you have to reinstall your system or move the configuration to a different computer.
+
+You can even share the same base configuration between multiple machines with custom tweaks for each!
+
+* 2. Changing your configuration is safe
+
+If you've used distributions like Arch, Gentoo, or even Ubuntu, you've probably experienced a system-breaking upgrade at some point.
+
+With Guix, no matter whether you're tweaking some part of your configuration or installing new versions of packages, you can always roll back to the previous state!
+
+And if you make a change that makes your system unbootable, you can always find the previous configuration in the Grub bootloader menu!
+
+Let's try to roll back the user addition we added before:
+
+#+begin_src sh
+
+  sudo guix system roll-back
+
+#+end_src
+
+Now the configuration update we just applied has been rolled back!
+
+We can check for the user we added just like last time:
+
+#+begin_src sh
+
+  cat /etc/passwd | grep david  # The user is gone!
+
+#+end_src
+
+* 3. You can also use it for managing your dotfiles
+
+Last year, an important new feature called =guix home= was added which enables you to apply the same declarative configuration style (including rollbacks) to your user-level configuration.
+
+This makes it possible to ensure all your favorite programs are installed and configured exactly how you want no matter which machine you use them on.  You can even configure user-level services with it!
+
+Let's try it out!  This configuration will install Emacs and Syncthing, configure the Bash profile, and then set up Syncthing as a user-level Shepherd service.
+
+Run the following commands to apply the configuration to the =guest= account's home directory:
+
+#+begin_src sh
+
+  wget https://0x0.st/ozVe.scm -O home.scm
+  guix home reconfigure home.scm
+
+#+end_src
+
+To verify the home configuration:
+
+#+begin_src sh
+
+  emacs -v
+  cat ~/.bash_profile
+  herd status syncthing
+
+#+end_src
+
+*NOTE:* This feature is newer than the Guix 1.3.0 release that the demo VM is based on!  You will need to run the following commands before trying it:
+
+#+begin_src sh
+
+  guix pull
+  hash guix
+
+#+end_src
+
+This might take a while, so be patient!
+
+** Example Home Configuration
+
+#+begin_src scheme
+
+  (use-modules (gnu home)
+               (gnu home services)
+               (gnu home services shepherd)
+               (gnu home services shells)
+               (gnu packages emacs)
+               (gnu packages syncthing)
+               (gnu services)
+               (gnu services shepherd)
+               (guix gexp))
+
+  (define my-syncthing-service
+    (shepherd-service
+     (provision '(syncthing))
+     (documentation "Run and control syncthing.")
+     (start #~(make-forkexec-constructor
+               (list #$(file-append syncthing "/bin/syncthing")
+                     "-no-browser")))
+     (stop #~(make-kill-destructor))))
+
+  (home-environment
+   (packages (list emacs syncthing))
+   (services
+    (list
+     (service home-bash-service-type
+              (home-bash-configuration
+               (environment-variables
+                '(("VISUAL" . "emacsclient")
+                  ("EDITOR" . "emacsclient")))))
+     (simple-service 'my-services
+                     home-shepherd-service-type
+                     (list my-syncthing-service)))))
+
+#+end_src
+
+More information: [[https://guix.gnu.org/manual/devel/en/html_node/Home-Configuration.html][Home Configuration]]
+
+* 4. You can easily create isolated development environments
+
+If you're a software developer, you've probably had to work a variety of different projects, all with their own platforms and tools and different versions of the same libraries.  This can quickly become a nightmare if you have to install all these things directly into your system!
+
+Guix provides a command called =guix shell= that can easily create an on-demand, isolated shell environment to work on your projects!  If you create a Guix manifest file (=manifest.scm= or =guix.scm=) in your project folder, you can run the following command to create such an environment:
+
+#+begin_src sh
+
+  guix shell --pure
+
+#+end_src
+
+It will let you know if you need to mark the project as safe for creating an environment, so run the command that it suggests!
+
+Let's use =guix shell= to set up a development environment for the project I'm building on my other channel [[https://youtube.com/FluxHarmonicLive][Flux Harmonic]]:
+
+#+begin_src sh
+
+  git clone https://github.com/FluxHarmonic/flux-compose
+  cd flux-compose
+
+  # Try to run CMake, it's not there!
+  cmake
+
+  # Set up the development environment using manifest.scm
+  guix shell --pure
+
+  # Try to build the code
+  ./bootstrap.sh
+  cmake  # It works!
+  make -C build
+
+  # Exit the environment to see if commands are still there
+  exit
+  cmake
+  make
+
+#+end_src
+
+*NOTE:* This feature is also newer than the Guix 1.3.0 release that the demo VM is based on!  You will need to run the two commands mentioned in the =guix home= slide (reason #3).
+
+* 5. You can get many of these benefits on your current Linux distribution
+
+You don't need to install the full Guix System to benefit from Guix!  You can install the Guix package manager on many other Linux distributions, either from the distro package manager or by using the [[https://guix.gnu.org/manual/en/html_node/Binary-Installation.html][installation script]] provided by the Guix maintainers.
+
+This enables you to use Guix to install software, manage your dotfiles with =guix home=, create isolated development environments with =guix shell=, and even create installation media for Guix System while still using your existing Linux distribution.
+
+Check out [[https://youtu.be/Nk8sprN7oZ0][my video]] about this for more details!
+
+* How to get started
+
+Last year I made [[https://www.youtube.com/watch?v=iBaqOK75cho&list=PLEoMzSkcN8oNxnj7jm5V2ZcGc52002pQU][a number of videos]] showing how to get started with Guix:
+
+- [[https://youtu.be/iBaqOK75cho][An Introduction to GNU Guix]]
+- [[https://youtu.be/oSy-TmoxG_Y][Installing Guix as a Complete GNU/Linux System]]
+- [[https://youtu.be/Xy0YgnXFt1M][Everyday Package Management with GNU Guix]]
+- [[https://youtu.be/xVyvz2aViP8][Using Package Channels in GNU Guix]]
+- [[https://youtu.be/Nk8sprN7oZ0][Installing the GNU Guix Package Manager]] (if you want to use it on another distribution)
+
+The [[https://guix.gnu.org/manual/en/guix.html][GNU Guix Reference Manual]] is also a great starting point!
+
+* More videos coming soon!
+
+This year I'll be making a lot more videos about GNU Guix to help with day to day usage and also going deeper into how you can write your own customizations and package definitions:
+
+- A crash course on Guile Scheme
+- "I installed Guix, now what?"
+- Writing and updating Guix package definitions
+- Configuring system services
+- Managing your user-level configuration with =guix home=
+- Developing server configurations and managing remotely
+
+* I want to hear from you!
+
+Now I want to hear from all of you, especially those who are finding this channel for the first time.
+
+Leave a comment with an answer to one of these questions:
+
+- What has kept you from using Guix before?
+- If you've tried Guix, what problems did you have?
+- What's the worst you've ever broken your Linux install with another distro?
+
+Don't forget to subscribe and click the bell to be notified when new Guix videos are released!

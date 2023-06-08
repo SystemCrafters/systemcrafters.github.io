@@ -1,8 +1,7 @@
-#+title: System Crafters Live! - September 17, 2021
+#+title: The Many Varieties of Emacs
+#+date: [2021-09-17 Fri]
+#+video: PE714pm1kvE
 
-Watch the recordings here:
-
-- [[https://youtu.be/PE714pm1kvE][Part 1 - Before the Catastrophe]]
 - [[https://youtu.be/JMP8JjmS3ds][Part 2 - Homesteading the Wasteland]]
 
 I crashed the stream midway through by killing OBS by accident.  Enjoy :)

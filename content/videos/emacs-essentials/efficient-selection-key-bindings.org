@@ -1,0 +1,102 @@
+#+title: Efficient Text Selection with Emacs Key Bindings
+
+[[yt:Dq5UOt63Mms][Watch the video on YouTube!]]
+
+* What will we learn?
+
+In the last video we learned the key bindings you can use to move around Emacs buffers efficiently.  In this video I'll how you how you can efficiently mark and select text while editing!
+
+We'll also learn about a cool feature called the "mark ring" that will make it easy to jump back to places you've been in the buffers you have open.
+
+#+begin_cta
+#+end_cta
+
+* Oh hi, Mark
+
+To understand selections in Emacs, it's best to start with the concept of the "mark."  The mark is a location in the buffer that is used as the starting point for various selection and editing operations.
+
+The primary way to "activate" the mark at the location of the point is to press ~C-SPC~ (=set-mark-command=).  There is also an alternate keybinding of ~C-@~ which is a little harder to press but might be useful if you've replaced the default ~C-SPC~ keybinding.
+
+Once the mark is activated, you will be able to create regions to select text!
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Setting-Mark.html][Emacs Manual: Setting the Mark]]
+
+* Regions
+
+In Emacs, selections of text are called "regions".  A region is the range of text in a buffer between the active mark and the point (the cursor).
+
+There are a few ways to create a region:
+
+- Set an active mark at the current location and then move the point using any of the movement keybindings we talked about in the last video.  For example, press ~C-SPC~ (=set-mark-command=) and then ~M-f~ to move the point to the end of the next word.  This will create a region!
+
+- Hold Shift while pressing any movement keybinding.  Like the previous example, you can press ~S-M-f~ (Shift+Alt+F) to create a selection to the end of the next word.  You can continue pressing this key combination to extend the selection by more words.
+
+- If you have a deactivated mark (more on this later), you can press ~C-x C-x~ (=exchange-point-and-mark=) when the point is anywhere in the buffer to set the mark at point and then move the mark to the previous point.
+
+- Using your mouse!  Just click and drag over a region of text.  This should also work in the terminal if your terminal supports mouse events.
+
+- Using specialized marking commands which we'll talk about in a bit.
+
+The important thing to note about the shift-selection approach is that it creates a mark for you automatically at the point where you started the selection so functionally it isn't much different than setting the mark first and the moving the point.  Whether you use mark-first or shift-select is really a matter of preference!
+
+Once you have a region of text selected in a buffer, you can execute a variety of commands that are meant for editing the region:
+
+- ~C-w~ executes =kill-region= which deletes the text in the region and copies to the kill ring
+- ~M-w~ executes =kill-ring-save= which merely copies the text in the region to the kill ring
+- The =upcase-region= / =downcase-region= commands convert all characters in the region to upper or lower case
+- The =eval-region= command will evaluate a selected region of code in Emacs Lisp buffers
+
+You can typically identify region commands by searching for any that end in =-region=!
+
+One last thing to mention: if you want to deselect or clear the current region, just press ~C-g~ (=keyboard-quit=)!
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Mark.html][Emacs Manual: The Mark and the Region]]
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Shift-Selection.html][Emacs Manual: Shift Selection]]
+
+* Specialized Marking Commands
+
+There are some other specialized marking commands that might be useful when you want to select a particular text "object" without using the typical movement bindings:
+
+- ~M-@~ (=mark-word=) sets the mark at the end of the next word without moving the point!
+- ~C-M-@~ (=mark-sexp=) sets the mark after the end of the current s-expression in Emacs Lisp buffers without moving the point
+- ~M-h~ (=mark-paragraph=) marks the whole current paragraph and move the point to the beginning
+- ~C-M-h~ (=mark-defun=) marks the whole "defun" under the point in Emacs Lisp buffers and move point to the beginning
+- ~C-x C-p~ (=mark-page=) marks the entire page by setting point at the beginning of the visible part of the buffer and mark at the end
+- ~C-x h~ (=mark-whole-buffer=) moves the point to the beginning of the buffer and sets mark at the end, selecting the whole buffer
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Marking-Objects.html][Emacs Manual: Commands to Mark Textual Objects]]
+
+* Remember Your Place with the Mark Ring
+
+The mark ring is a really useful feature for navigating around in buffers while editing.  We learned before that you can activate the mark with the ~C-SPC~ key binding.  When the current mark becomes deactivated it will be added to the "mark ring."  This is a history list of the most recent marks in the current buffer!
+
+There are a few ways the mark will become deactivated:
+
+- Typing text into the buffer
+- Running an editing command that affects the region
+- Pressing ~C-g~
+- You can also create and deactivate the mark instantly by pressing ~C-SPC C-SPC~
+
+The mark ring enables you to jump to the location of previous marks in the current buffer using the ~C-u C-SPC~ key binding (~C-SPC~ modified by the universal prefix ~C-u~).  This can be really useful for jumping back to previous locations you were editing in a file.
+
+So why is it called a "ring"?  It's because the history list will wrap back around to the beginning as you "pop" the current mark.  This is useful because it enables you to get back to the latest mark if you just keep pressing ~C-u C-SPC~.
+
+You might want to customize the size of the mark ring if you use it a lot!  Set the value of =mark-ring-max= to a number larger than =16= (the default) to control how many mark locations are stored.
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Mark-Ring.html][Emacs Manual: Mark Ring]]
+
+* The Global Mark Ring
+
+There's a separate mark ring that works across all of the buffers you've visited!  Each time you deactivate a mark in the buffer, it's added to both the buffer's mark ring and the global mark ring.  This enables you to jump back into other files you recently visited!
+
+To pop marks on the global mark ring, press ~C-x C-SPC~ (=pop-global-mark=).  Keep in mind that this will jump backward to other marks in the same file if you have deactivated multiple after switching from the previous buffer!
+
+Just as with the buffer mark ring, the size of the global mark ring can be customized with =global-mark-ring-max=.
+
+[[https://www.gnu.org/software/emacs/manual/html_node/emacs/Global-Mark-Ring.html][Emacs Manual: Global Mark Ring]]
+
+* What's next?
+
+Now that we've learned enough essentials for day to day editing tasks, the next thing you're probably wondering about is how to customize Emacs to set the theme, font, and even the indentation width for various programming languages.  In the next episode I'll walk you through how you can use Emacs' customization interface to set everything up!
+
+If you have any specific areas you'd like to learn about Emacs for day to day use, leave suggestions in the comments!

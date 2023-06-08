@@ -1,5 +1,0 @@
-#+title: Managing Your Dotfiles
-
-* Episodes
-
-3. [[using-gnu-stow/][Using GNU Stow to Manage Symbolic Links for Your Dotfiles]]

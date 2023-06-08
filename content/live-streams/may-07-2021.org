@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - May 7, 2021
+#+title: Should You Use Pre-Made Emacs Configurations?
+#+date: [2021-05-07 Fri]
+#+video: 9bL7DPQ83c8
 
 * Should you use pre-made Emacs configurations?
 

@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - February 18, 2022
-
-[[yt:vS5Ykl1dNN4][Watch the recording on YouTube!]]
+#+title: Live Crafting: Rational Emacs
+#+date: [2022-02-18 Fri]
+#+video: vS5Ykl1dNN4
 
 * Updates
 

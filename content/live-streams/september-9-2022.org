@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - September 9, 2022
-
-[[yt:5R7ad5xz5wo][Watch the recording on YouTube!]]
+#+title: Generating a Blog Site from Denote Entries
+#+date: [2022-09-09 Fri]
+#+video: 5R7ad5xz5wo
 
 * Updates
 

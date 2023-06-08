@@ -1,0 +1,471 @@
+#+title: The Secrets of My Emacs Presentation Style
+
+[[yt:SCPoF1PTZpI][Watch the video on YouTube!]]
+
+* It's not really a secret, but I'll tell you anyway
+
+I get asked pretty regularly about how I achieve the look of the presentations I that give from within Emacs.  I made [[https://youtu.be/vz9aLmxYJB0][another video]] in the past showing how to use a package called =org-tree-slide= for presentations, but I've actually been using another package called =org-present= for the last year or more.
+
+In the video, I'll show you exactly how I achieve my presentation style using =org-present= and a few other customizations.
+
+At the end of this tutorial, I provide a *complete* Emacs configuration that will replicate what you see here.
+
+#+begin_cta
+#+end_cta
+
+* Installing org-present
+
+=org-present= can be installed from either the [[https://elpa.nongnu.org/nongnu/org-present.html][NonGNU]] or [[https://melpa.org/#/org-present][MELPA]] package archives.  I prefer using the NonGNU archive since it's already part of the default set of package archives in Emacs 28.
+
+If you're using a version of Emacs before 28 you can add the following line to your configuration to add the NonGNU archive:
+
+#+begin_src emacs-lisp
+
+  ;; Make sure the NonGNU repo is added
+  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/"))
+
+#+end_src
+
+*NOTE:* You don't need to add this archive if you're already using the MELPA archive!
+
+After adding this entry to the archives you might need to run =M-x package-refresh-contents= to pull the NonGNU package index!
+
+Now you can install the package by using =M-x package-install RET org-present= or (ideally) by adding these lines to your configuration:
+
+#+begin_src emacs-lisp
+
+  ;; Install org-present if needed
+  (unless (package-installed-p 'org-present)
+    (package-install 'org-present))
+
+#+end_src
+
+*NOTE:* In this video I'll be showing Emacs Lisp snippets that don't use configuration macro packages like =use-package=, etc!
+
+* The basics of org-present
+
+Let's take a look at what Org Present looks like without any customization!  Open up an Org Mode file and run =M-x org-present=.
+
+The presentation will be displayed like this by default:
+
+- The first slide is the document title followed by any text before the first heading
+- Each subsequent slide contains the content of the next top-level heading
+- Each slide's sub-headings can be folded or expanded
+
+Looks pretty basic, right?  That's great!  We can use everything we know about Emacs to make it look however we want.
+
+Before we do that though, let's get familiar with the essential key bindings you'll need when you use this package:
+
+** Key Bindings
+
+| Key     | Command                | Description                            |
+|---------+------------------------+----------------------------------------|
+| ~<left>~  | =org-present-prev=       | Move to the previous slide             |
+| ~<right>~ | =org-present-next=       | Move to the next slide                 |
+| ~C-c <~   | =org-present-beginning=  | Move to the first slide                |
+| ~C-c >~   | =org-present-end=        | Move to the last slide                 |
+| ~C-c C-q~ | =org-present-quit=       | Exit the presentation and reset buffer |
+| ~C-c C-r~ | =org-present-read-only=  | Make the slides read-only              |
+| ~C-c C-w~ | =org-present-read-write= | Make the slides writable               |
+
+You can also bind your own keys in the =org-present-mode-keymap=!
+
+* Centering the presentation
+
+In my opinion, the display of =org-present= doesn't look like much of a presentation until we center it on the screen.
+
+Luckily there's a simple package called =visual-fill-column= which helps with this!  There are two ways we might want to use it:
+
+- Keep it enabled permanently by turning it on for every Org Mode document (using the =org-mode-hook=)
+- Only turn it on when giving a presentation
+
+I like the way my Org documents look with =visual-fill-column= turned on so I leave it on all the time, but in this example I'll show you how to turn it on only for presentations.
+
+I've already got the package installed here so I'll run =M-x visual-fill-column-mode= so we can try it out.
+
+** The configuration
+
+Let's break down what we need to do:
+
+- Create functions for configuring the current buffer when starting and stopping a presentation
+- Enable centering when starting presentation, disable when presentation ends
+- Add these functions to the =org-present-mode-hook= and =org-present-mode-quit-hook=
+
+I also use =visual-line-mode= here to cause lines to be wrapped within the centered document, otherwise you will have to horizontally scroll to see them all!
+
+#+begin_src emacs-lisp
+
+;; Install visual-fill-column
+(unless (package-installed-p 'visual-fill-column)
+  (package-install 'visual-fill-column))
+
+;; Configure fill width
+(setq visual-fill-column-width 110
+      visual-fill-column-center-text t)
+
+(defun my/org-present-start ()
+  ;; Center the presentation and wrap lines
+  (visual-fill-column-mode 1)
+  (visual-line-mode 1))
+
+(defun my/org-present-end ()
+  ;; Stop centering the document
+  (visual-fill-column-mode 0)
+  (visual-line-mode 0))
+
+;; Register hooks with org-present
+(add-hook 'org-present-mode-hook 'my/org-present-start)
+(add-hook 'org-present-mode-quit-hook 'my/org-present-end)
+
+#+end_src
+
+* Increasing font sizes
+
+The next thing we'll want to do is make the text a lot bigger because it's a little unreadable at the default size!
+
+There's a very cool variable for this called =face-remapping-alist=!  It allows you to set a list of face overrides for the current buffer using =setq-local=.  You can also use relative font heights based on existing faces.
+
+We'll add the following snippet to our =my/org-present-start= function:
+
+#+begin_src emacs-lisp
+
+;; Tweak font sizes
+(setq-local face-remapping-alist '((default (:height 1.5) variable-pitch)
+                                   (header-line (:height 4.0) variable-pitch)
+                                   (org-document-title (:height 1.75) org-document-title)
+                                   (org-code (:height 1.55) org-code)
+                                   (org-verbatim (:height 1.55) org-verbatim)
+                                   (org-block (:height 1.25) org-block)
+                                   (org-block-begin-line (:height 0.7) org-block)))
+
+#+end_src
+
+*NOTE:* You might notice I base a couple of faces on the =variable-pitch= face.  We'll talk about that in the next slide!
+
+To reset the fonts back to their normal sizes once the presentation is complete, add the following snippet to the =my/org-present-end= function:
+
+#+begin_src emacs-lisp
+
+;; Reset font customizations
+(setq-local face-remapping-alist '((default variable-pitch default)))
+
+#+end_src
+
+It's important to note that we don't set =face-remapping-alist= to =nil= or an empty list because it will remove the =variable-pitch= face in our buffer if we already have it set!
+
+* Theme and fonts
+
+The color theme and fonts you use will make a huge impact on how your presentation looks!
+
+An important aspect of the look is the use of "variable pitch" fonts for most text in Org Mode files so that your slides look more like a document than a source code file.  The =variable-pitch-mode= and the =variable-pitch= face will do a lot to help your presentation look more polished.
+
+Font and theme selection is purely a matter of personal taste, but I'll tell you exactly what I'm using so that you can use it as a starting point if you like:
+
+- Fixed-pitch font: [[https://www.jetbrains.com/lp/mono/][JetBrains Mono]], =light= weight
+- Variable-pitch font: [[https://typeof.net/Iosevka/][Iosevka Aile]], =light= weight
+- Color theme: =doom-palenight= from [[https://github.com/doomemacs/themes][Doom Themes]]
+
+#+begin_src emacs-lisp
+
+;; Install doom-themes
+(unless (package-installed-p 'doom-themes)
+  (package-install 'doom-themes))
+
+;; Load up doom-palenight for the System Crafters look
+(load-theme 'doom-palenight t)
+
+;; NOTE: These settings might not be ideal for your machine, tweak them as needed!
+(set-face-attribute 'default nil :font "JetBrains Mono" :weight 'light :height 180)
+(set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :weight 'light :height 190)
+(set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :weight 'light :height 1.3)
+
+#+end_src
+
+After dropping in this snippet, the slides start to look a lot more like mine!  However, there are still a few things that need to be improved to make it look really good.
+
+* Improving Org Mode appearance
+
+Org Mode provides a wide variety of variables and faces for customizing its appearance.  Here's a list of the things we'll want to customize to get the best look for the slides:
+
+- Increase the size of heading text with =org-level-N= faces
+- Make a few text elements like tables, =code text=, and more use a properly sized, fixed-width font
+- Hide formatting markers for *bold*, /italic/ and =code text= with =org-hide-emphasis-markers=
+- Ensure code blocks use a fixed-width font at the right size
+- Make the presentation title larger
+- Add some space between the top of the window and the slide heading (we customized =header-line= with face remapping)
+
+#+begin_src emacs-lisp
+
+;; Load org-faces to make sure we can set appropriate faces
+(require 'org-faces)
+
+;; Hide emphasis markers on formatted text
+(setq org-hide-emphasis-markers t)
+
+;; Resize Org headings
+(dolist (face '((org-level-1 . 1.2)
+                (org-level-2 . 1.1)
+                (org-level-3 . 1.05)
+                (org-level-4 . 1.0)
+                (org-level-5 . 1.1)
+                (org-level-6 . 1.1)
+                (org-level-7 . 1.1)
+                (org-level-8 . 1.1)))
+  (set-face-attribute (car face) nil :font "Iosevka Aile" :weight 'medium :height (cdr face)))
+
+;; Make the document title a bit bigger
+(set-face-attribute 'org-document-title nil :font "Iosevka Aile" :weight 'bold :height 1.3)
+
+;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
+(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+
+#+end_src
+
+One last thing we need to do is set the heading text for the presentation buffer to ensure the extra space gets added above.  We'll do this in the =my/org-present-start= function we defined:
+
+#+begin_src emacs-lisp
+
+;; Set a blank header line string to create blank space at the top
+(setq header-line-format " ")
+
+#+end_src
+
+Let's also add a matching removal of the header string in the =my/org-present-end= function:
+
+#+begin_src emacs-lisp
+
+;; Clear the header line format by setting to `nil'
+(setq header-line-format nil)
+
+#+end_src
+
+* Making Emacs more minimal
+
+Another thing we can do to improve the look of our presentation is get rid of unnecessary UI elements that might distract from the experience!
+
+These settings will probably be no surprise if you've watched some of my other customization videos:
+
+#+begin_src emacs-lisp
+
+;; Hide unneeded UI elements (this can even be done in my/org-present-start!)
+(menu-bar-mode 0)
+(tool-bar-mode 0)
+(scroll-bar-mode 0)
+
+;; Let the desktop background show through
+(set-frame-parameter (selected-frame) 'alpha '(97 . 100))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
+#+end_src
+
+* Initializing slide content
+
+One last thing to consider: when you have a lot of content on a single slide, it might make sense to break it up into sub-headings so that it isn't all shown at the same time.
+
+However, just putting more content in sub-headings isn't enough; we also need to tell Org Present to collapse these subheadings when we enter a slide so that their contents aren't initially visible.
+
+I'll show you what I mean in the example slides.
+
+To set up a slide correctly as we enter it, we can define a new function called =my/org-present-prepare-slide= and call some standard Org Mode functions to do the following:
+
+- Hide everything except for top-level headings
+- Unfold the content of the current heading (the current slide)
+- Show the immediate children of the heading without expanding them
+
+#+begin_src emacs-lisp
+
+(defun my/org-present-prepare-slide (buffer-name heading)
+  ;; Show only top-level headlines
+  (org-overview)
+
+  ;; Unfold the current entry
+  (org-show-entry)
+
+  ;; Show only direct subheadings of the slide but don't expand them
+  (org-show-children))
+
+#+end_src
+
+We'll add this function to the (surprisingly named) hook function =org-present-after-navigate-functions= so that it gets called whenever the slide changes:
+
+#+begin_src emacs-lisp
+
+(add-hook 'org-present-after-navigate-functions 'my/org-present-prepare-slide)
+
+#+end_src
+
+* Now you can give nice presentations in Emacs!
+
+We definitely covered a lot more than you expected in this video, but I think it's an interesting use case in seeing how a variety of Emacs features and packages can enable you to create something fully custom and surprisingly nice.
+
+So let me know in the comments:
+
+- Do you think you'll try giving your next presentation in Emacs?
+- If you've done it before, what strategies or packages did you use?
+
+Don't forget to check out the final configuration on the next slide, it's a more polished version of what we put together!
+
+* The final configuration
+
+Try this out with [[https://raw.githubusercontent.com/daviwil/emacs-from-scratch/master/show-notes/Emacs-Lisp-02.org][the Org File I showed]] in this video!
+
+#+begin_src emacs-lisp
+
+  ;;; Configure Package Archives -----------------------------
+
+  ;; Initialize package sources
+  (require 'package)
+
+  ;; org-present is in the "nongnu" package archive.  This line isn't needed in
+  ;; Emacs 28!
+  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/"))
+
+  ;; This will be needed if you decide to use doom-themes!
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+  ;; Set up package.el and refresh package archives if it hasn't been done yet
+  (package-initialize)
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  ;;; Basic Appearance ---------------------------------------
+
+  ;; More minimal UI
+  (setq inhibit-startup-screen t)
+  (menu-bar-mode 0)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
+
+  ;; Let the desktop background show through
+  (set-frame-parameter (selected-frame) 'alpha '(97 . 100))
+  (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
+  ;;; Theme and Fonts ----------------------------------------
+
+  ;; Install doom-themes
+  (unless (package-installed-p 'doom-themes)
+    (package-install 'doom-themes))
+
+  ;; Load up doom-palenight for the System Crafters look
+  (load-theme 'doom-palenight t)
+
+  ;; Set reusable font name variables
+  (defvar my/fixed-width-font "JetBrains Mono"
+    "The font to use for monospaced (fixed width) text.")
+
+  (defvar my/variable-width-font "Iosevka Aile"
+    "The font to use for variable-pitch (document) text.")
+
+  ;; NOTE: These settings might not be ideal for your machine, tweak them as needed!
+  (set-face-attribute 'default nil :font my/fixed-width-font :weight 'light :height 180)
+  (set-face-attribute 'fixed-pitch nil :font my/fixed-width-font :weight 'light :height 190)
+  (set-face-attribute 'variable-pitch nil :font my/variable-width-font :weight 'light :height 1.3)
+
+  ;;; Org Mode Appearance ------------------------------------
+
+  ;; Load org-faces to make sure we can set appropriate faces
+  (require 'org-faces)
+
+  ;; Hide emphasis markers on formatted text
+  (setq org-hide-emphasis-markers t)
+
+  ;; Resize Org headings
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font my/variable-width-font :weight 'medium :height (cdr face)))
+
+  ;; Make the document title a bit bigger
+  (set-face-attribute 'org-document-title nil :font my/variable-width-font :weight 'bold :height 1.3)
+
+  ;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
+
+  ;;; Centering Org Documents --------------------------------
+
+  ;; Install visual-fill-column
+  (unless (package-installed-p 'visual-fill-column)
+    (package-install 'visual-fill-column))
+
+  ;; Configure fill width
+  (setq visual-fill-column-width 110
+        visual-fill-column-center-text t)
+
+  ;;; Org Present --------------------------------------------
+
+  ;; Install org-present if needed
+  (unless (package-installed-p 'org-present)
+    (package-install 'org-present))
+
+  (defun my/org-present-prepare-slide (buffer-name heading)
+    ;; Show only top-level headlines
+    (org-overview)
+
+    ;; Unfold the current entry
+    (org-show-entry)
+
+    ;; Show only direct subheadings of the slide but don't expand them
+    (org-show-children))
+
+  (defun my/org-present-start ()
+    ;; Tweak font sizes
+    (setq-local face-remapping-alist '((default (:height 1.5) variable-pitch)
+                                       (header-line (:height 4.0) variable-pitch)
+                                       (org-document-title (:height 1.75) org-document-title)
+                                       (org-code (:height 1.55) org-code)
+                                       (org-verbatim (:height 1.55) org-verbatim)
+                                       (org-block (:height 1.25) org-block)
+                                       (org-block-begin-line (:height 0.7) org-block)))
+
+    ;; Set a blank header line string to create blank space at the top
+    (setq header-line-format " ")
+
+    ;; Display inline images automatically
+    (org-display-inline-images)
+
+    ;; Center the presentation and wrap lines
+    (visual-fill-column-mode 1)
+    (visual-line-mode 1))
+
+  (defun my/org-present-end ()
+    ;; Reset font customizations
+    (setq-local face-remapping-alist '((default variable-pitch default)))
+
+    ;; Clear the header line string so that it isn't displayed
+    (setq header-line-format nil)
+
+    ;; Stop displaying inline images
+    (org-remove-inline-images)
+
+    ;; Stop centering the document
+    (visual-fill-column-mode 0)
+    (visual-line-mode 0))
+
+  ;; Turn on variable pitch fonts in Org Mode buffers
+  (add-hook 'org-mode-hook 'variable-pitch-mode)
+
+  ;; Register hooks with org-present
+  (add-hook 'org-present-mode-hook 'my/org-present-start)
+  (add-hook 'org-present-mode-quit-hook 'my/org-present-end)
+  (add-hook 'org-present-after-navigate-functions 'my/org-present-prepare-slide)
+
+#+end_src

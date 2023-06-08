@@ -1,0 +1,39 @@
+#+title: Emacs Has a Built-in Pomodoro Timer?
+
+[[yt:JbHE819kVGQ][Watch the video on YouTube!]]
+
+* It's true!
+
+Sometimes the best way to focus is to use a short timer like a Pomodoro!
+
+You can do this from anywhere in Emacs, just make sure you've loaded Org Mode first.
+
+#+begin_src emacs-lisp
+
+  ;; In your configuration
+  (require 'org)
+
+#+end_src
+
+Just use ~M-x~ to run the command =org-timer-set-timer= or press ~C-c C-x ;~ inside of an Org file buffer.
+
+At the prompt, type in a number of minutes for the timer and press Enter.
+
+In the mode line you'll see the timer counting down to show you how much time you have left.
+
+If you need to pause the timer run =org-timer-pause-or-continue= and to stop the timer, run =org-timer-stop=.
+
+A Pomodoro wouldn't be complete without a bell, so let's add one!
+
+Just set the variable =org-clock-sound= to the path of a =.wav= file.
+
+#+begin_src emacs-lisp
+
+  ;; Download the sound at https://freesound.org/people/.Andre_Onate/sounds/484665/
+  (setq org-clock-sound "~/Downloads/ding.wav")
+
+#+end_src
+
+Now let's run a 2 second timer to try it out!
+
+That's it!  Check the link in the description for more info and don't forget to subscribe to System Crafters!  Happy Hacking!

@@ -1,0 +1,148 @@
+#+title: Clean Your Commits Like a Git Rebase Expert with Magit
+
+[[yt:zM7K1y4h6UQ][Watch the video on YouTube!]]
+
+* Intro
+
+Have you ever made a mistake or created sloppy commits when checking in changes to a Git repository?
+
+After watching this video, you'll know exactly how to fix those problems and create a clean commit history with =git rebase= and Magit.
+
+#+begin_cta
+#+end_cta
+
+* Getting Started
+
+Make sure you've got Magit installed first, check out the first video in the series for more information:
+
+- [[https://youtu.be/_zfvQkJsYwI][An Introduction to the Ultimate Git Interface, Magit!]]
+
+We'll be using the =magit-status= interface a lot in this video!
+
+I've prepared an example repository that you can use to try the techniques I'll show you in this video, you can clone it here:
+
+https://github.com/SystemCrafters/filet-magit
+
+To make sure you're in the right branch when you clone this repository, use this command!
+
+#+begin_src sh
+
+  git clone https://github.com/SystemCrafters/filet-magit -b add-recipes
+
+#+end_src
+
+* Reviewing our commits
+
+Let's imagine that we're writing a cookbook package for Emacs.  We've been working on a feature for adding new cookbook entries and we're just about ready to push those changes to the public repository.
+
+But before we do that, let's take a look at our commit history and see if there's any cleanup work we want to do.
+
+From a file within the project folder, we can run =M-x magit-status= to pull up the status buffer.
+
+We can take a look at the "Recent commits" section to review what we've done so far.
+
+* We've got some work to do
+
+We're going to clean up these commits using a feature of Git called "interactive rebase".
+
+This is a very powerful tool that allows you to edit commit history in a number of ways, so it's very important to know to use it if you work with Git a lot.
+
+And as usual, Magit makes it much easier and more efficient to perform rebase operations than it would be on the command line.
+
+*NOTE:* If you have changes to tracked files in your repo you will need to [[https://systemcrafters.net/mastering-git-with-magit/everyday-git-workflow/#saving-local-changes-for-later][stash them]] before proceeding!  (See [[https://youtu.be/qPfJoeQCIvA?t=2176][this video]] for an example).
+
+* An important tip!
+
+Here's something I recommend before doing any rebase operation if you're not that familiar with it yet.
+
+Back up your branch before the rebase just to make sure you won't lose access to the original commits!
+
+In the =magit-status= buffer you can press ~b n~ to create a new branch.  It will ask you the source branch and the name for the target branch.
+
+Now that we have our backup branch, we can always get the original commits back if we make a mistake!
+
+* Rewording commits
+
+You can reword any commit in your branch's history by performing an interactive rebase using Magit.
+
+In the =magit-status= buffer, put your cursor on the commit you want to reword and press ~r i~ (lower-case ~R~ then ~I~).  This will bring up a rebase interface which displays the list of commits starting at the selected commit to allow you to pick which operation to take on each of them.
+
+For the commit we want to reword, we can put our cursor on its line and press ~r~ (lower-case ~R~) and it will be marked as =reword=.  Press ~C-c C-c~ to confirm.
+
+You will now be given a commit message editing buffer to fix the wording of the commit.  Make your changes and press ~C-c C-c~ to confirm.
+
+* You just changed history!
+
+Keep in mind that editing *any* commit in the history will cause *all following commits* to be recreated so they will all have a new commit hash!  This means that you will need to "force push" your changes to the remote repository if you have already pushed the branch there once before.
+
+* Reordering commits
+
+The commit history you create can be seen as the story of the code's creation.  Sometimes it makes sense for a more recent change to be moved back before other changes to improve the narrative.
+
+You can reorder commits easily in the interactive rebase view by placing the cursor on a particular commit and using the following key bindings:
+
+- ~M-n~ / ~M-j~ (evil): Move the commit forward in time by one commit
+- ~M-p~ / ~M-k~ (evil): Move the commit backward in time by one commit
+
+You can reorder multiple commits in one interactive rebase operation!
+
+* Dealing with conflicts when moving commits
+
+Now let's move another commit, but this time the move is going to create a conflict with the changes in the commit history.
+
+We're going to move the commit titled "Add function to make a cookbook entry" to come just after the initial commit of the package code.
+
+Since there's a conflict in the changes of both commits, we need to edit the file to resolve the issues.  Once we've finished the edit the changes will be automatically staged and we can use ~r r~ (two lower-case 'r') to continue the rebase.
+
+We'll be asked to edit and confirm the commit message.  We don't need to add any changes so we can use ~C-c C-c~ to complete the commit.
+
+We'll also have to deal with another conflict!  Let's add the function back in the next commit and continue from there.
+
+*NOTE:* If the merge is looking too complicated and you want to start over, you can use ~r a~ to abort the current rebase!
+
+* Editing a commit
+
+We'll need to make a tweak to the following commit to restore the use of the new =filet-new-recipe= in the =filet-add-recipe= command since we had to remove it when resolving the previous conflicts.
+
+Let's start a new interactive rebase and use the =edit= command on that commit by pressing ~e~ with the cursor on that line.
+
+We can now go and change the code however we like and then stage those changes to be added to the existing commit.
+
+In the =magit-status= screen press ~r r~ to complete the rebase operation.
+
+* Combining commits
+
+Now we're going to see how we can combine two commits together.  There are two ways to do this:
+
+- =fixup=: Merges only the changes of a commit into the previous commit
+- =squash=: Merges the changes of a commit into the previous commit and combines their commits messages
+
+Use =fixup= when you don't care about the commit message and =squash= when you want to keep it!
+
+We'll use =fixup= to combine the "oops" commit into the initial package code commit and =squash= to combine the two documentation commits and merge their messages.
+
+* Deleting commits
+
+Sometimes you will make temporary commits that are only useful for debugging purposes or maybe diagnosing a test failure in your CI runs.
+
+Before you merge your branch, you will probably want to delete these commits!  Thankfully interactive rebase makes this easy.
+
+Start a new interactive rebase at the commit that you want to delete.  We can press the ~k~ key to use the "drop" operation on the temporary commit and then press ~C-c C-c~ to confirm and then the commit will be deleted!  (=evil-collection= users will need to press ~d~ instead)
+
+* Let's do it all at once!
+
+Now that we know the whole flow, let's clean up the same commits all in one interactive rebase!
+
+Here's the point where the backup branch we created becomes useful.
+
+Inside the =magit-status= screen we can press ~X~ (capital letter 'X') to open the "Reset" panel.  =evil-collection= users will need to press ~O~ (capital letter 'O') instead!
+
+We will then press ~h~ (lower-cased 'H') to select the "Hard" option.  In this case, a hard reset will set our working tree back to the state of the source we select.
+
+We can now select our =add-recipes-backup= branch to reset the =add-recipes= branch back to its previous history!
+
+Now let's start the interactive rebase process again and perform all the changes we saw so far in one operation.
+
+* That's it!
+
+Let me know in the comments if this video was helpful or if you have any questions and don't forget to click the "Like" button!

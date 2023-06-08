@@ -1,0 +1,112 @@
+#+title: How I Crafted the New Website with Org Publish
+#+subtitle: System Crafters Live - May 12, 2023
+#+date: [2023-05-12 Fri]
+#+video: atKDa510qaM
+
+* Updates
+
+- The new System Crafters website is live!
+  https://systemcrafters.net
+
+- Add the News RSS feed to Elfeed:
+  https://systemcrafters.net/rss/news.xml
+
+- Subscribe to the Newsletter: https://systemcrafters.net/newsletter
+
+  Here's the first issue for those who missed it!
+  https://systemcrafters.net/newsletter/sc-news-001.html
+
+- Patron discussion list(s)
+
+  I'm creating a private discussion list for $5 and above patrons!  I will send out an invite in the next few days, more information will be here:
+
+  https://systemcrafters.net/how-to-help/#support-my-work
+
+* The Next Phase
+
+With the launch of the new System Crafters website and newsletter, I consider this to be the next phase of the "channel."
+
+Going forward, I'm going to spend most of my energy on developing a holistic set of guides that go deep into the topics we discuss on this channel.  I'm going to be developing each of these guides in the open with your feedback every step of the way.
+
+I'll also be making new YouTube videos based on everything I'm writing about, but mainly for the purpose of demonstrating what is written about in the guides!  Shorter videos balanced with deeper written content should be better for everyone!
+
+Here are the guides that I plan to write:
+
+** Emacs for Everyone
+
+This will be a guide for complete Emacs beginners from basic/intermediate computer literacy to advanced users like many of you.
+
+The overall goal is to teach anyone how to use Emacs as it was intended and how to apply it as a versatile tool for many areas of life.  Most of the "how do I do X" content for Emacs will be here.
+
+We will also cover basic Emacs configuration using the Customization UI since that is more approachable for non-programmers.
+
+** Craft a Modern Emacs Configuration from Scratch
+
+This will be a much more in-depth remake of the Emacs From Scratch series, giving you a full picture of how one can use both in-box and community Emacs packages to build a highly efficient personal configuration.
+
+We won't spend any time on Emacs basics in this guide, it is intended for those who are already familiar with general use of Emacs.
+
+I'll also give a tutorial on Emacs Lisp development since it will be pretty critical to understanding how one can get the most out of Emacs!
+
+** Craft a Productive Life with Org Mode and Emacs
+
+This will be a guide for intermediate to advanced users who want to leverage Org Mode to manage their tasks, projects, calendar, and personal knowledgebase.
+
+Instead of just being a dry reference of Org Mode functionality, we will build a personal productivity system from scratch using Org Mode using many of its features.  Once we finish that, we will build the same thing again with community packages like Denote and Org Roam to see how they might help us do things more efficiently!
+
+We might also cover building basic personal websites from your Org files, but I'm not sure yet!
+
+** Craft Your System with GNU Guix
+
+This series will be geared toward intermediate to advanced computer users who want to learn how to apply GNU Guix to craft a fully custom system configuration.
+
+Before we get into full-system configuration, though, we will cover using Guix as a package manager and tool on other Linux distributions since it's a good starting point for bootstrapping your Guix journey.
+
+** (The) Crafter's Guide to Guile Scheme
+
+This series will be targetted to Scheme beginners, and hopefully even those who are not that familiar with programming, to show how Guile Scheme can be used for many personal computing tasks outside the realm of Emacs.
+
+We'll cover the basics of Scheme development and then gradually get into practical application of Guile for things like personal scripting and tool development, system management with Guix, and some discussion of using Guile for larger application development tasks.
+
+If you've always wanted to learn more about Scheme, this will be the guide for you!
+
+** That's...  a lot!
+
+Yes, this will probably be a multi-year effort, but I will be developing each of these guides piece-meal to start getting the ball rolling.  I imagine I will be writing multiple guides in tandem to reinforce and refer to each other!  I'll also be drawing from that content to make new tutorial videos as I go!
+
+These guides will be free for everyone to read on systemcrafters.net but I will probably also provide "symbolic" paid versions that are converted to different formats like ePub, PDF, .info, etc.
+
+If you want to support the development of these guides, head over to this page to learn more:
+
+https://systemcrafters.net/how-to-help/#support-my-work
+
+* Using Org Publish for the New Site
+
+Today I wanted to give you a walkthrough of the work I did to make the new System Crafters website possible!
+
+The whole website is generated with a single script, [[https://codeberg.org/SystemCrafters/systemcrafters-site/src/commit/4776525255f7f45067422d8e912dae1c879fec89/publish.el][publish.el]], using Org Publish.
+
+This should give you an idea of what is possible for a more complex website managed with Org and Emacs Lisp!
+
+** Points of Interest
+
+- Overall project structure
+- Index pages
+- Redirect pages
+- Newsletter pages
+- Removal of ox-slimhtml
+- Esxml for templating: https://github.com/tali713/esxml
+- Customization of page URLs
+- YouTube video embedding with custom file-level field
+- Customization of =ox-html= export
+- RSS Feed(s) with Webfeeder: https://gitlab.com/ambrevar/emacs-webfeeder
+- Responsive CSS
+- Publishing on Codeberg (=.domains=)
+- CI pipeline on Codeberg: https://ci.codeberg.org/SystemCrafters/systemcrafters-site
+
+** Website Hacking
+
+Here are some things we can work on if we have time:
+
+- Generate a breadcrumb trail based on path
+- Breaking the site code into modules: this is now a program!

@@ -1,0 +1,9 @@
+#+title: Emacs Essentials
+
+You can find the complete YouTube playlist here: [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPZvSdewHG8uApD7THlLLCV][Emacs Essentials]]
+
+* Episodes
+
+1. [[file:absolute-beginners-guide-to-emacs.org][The Absolute Beginner's Guide to Emacs]]
+2. [[file:efficient-movement-key-bindings.org][Efficient Movement with Emacs Key Bindings]]
+3. [[file:efficient-selection-key-bindings.org][Efficient Text Selection with Emacs Key Bindings]]

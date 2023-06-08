@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - November 4, 2022
-
-[[yt:MvNIUnep22g][Watch the recording on YouTube!]]
+#+title: Crafting a Configuration Site Generator in Emacs - Part 2
+#+date: [2022-11-04 Fri]
+#+video: MvNIUnep22g
 
 * Updates
 

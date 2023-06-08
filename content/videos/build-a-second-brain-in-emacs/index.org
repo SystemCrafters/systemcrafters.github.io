@@ -1,0 +1,8 @@
+#+title: Build a Second Brain in Emacs
+
+* Episodes
+
+1. [[file:getting-started-with-org-roam.org][Getting Started with Org Roam]]
+2. [[file:capturing-notes-efficiently.org][Capturing Notes Efficiently with Org Roam]]
+3. [[file:keep-a-journal.org][Keep a Journal in Emacs with Org Roam]]
+4. [[file:5-org-roam-hacks.org][5 Org Roam Hacks for Better Productivity in Emacs]]

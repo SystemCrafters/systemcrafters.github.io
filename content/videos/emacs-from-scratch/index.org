@@ -1,0 +1,26 @@
+#+title: Emacs From Scratch
+
+You can find the complete [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][Emacs From Scratch]] playlist on YouTube!
+
+* Episodes
+
+1. [[file:basics-of-emacs-configuration.org][The Basics of Emacs Configuration]]
+2. [[file:the-best-default-settings.org][The 6 Emacs Settings Every User Should Consider]]
+3. [[file:the-modus-themes.org][Style Your Emacs with The Modus Themes]]
+
+* Old Series
+
+Here are the notes form episodes of the previous [[https://www.youtube.com/playlist?list=PLEoMzSkcN8oPH1au7H6B7bBJ4ZO7BXjSZ][Emacs From Scratch]] playlist created in 2020:
+
+1. [[file:getting-started.org][Getting Started with a Basic Configuration]]
+2. [[file:helpful-ui-improvements.org][Adding Helpful UI Improvements]]
+3. [[file:key-bindings-and-evil.org][Key Bindings and Evil]]
+4. [[file:projectile-and-magit.org][Projectile and Magit]]
+5. [[file:org-mode-basics.org][Org Mode Basics]]
+6. [[file:organize-your-life-with-org-mode.org][Organize Your Life with Org Mode]]
+7. [[file:configure-everything-with-org-babel.org][Configure Everything with Org Babel]]
+8. [[file:build-your-own-ide-with-lsp-mode.org][Build Your Own IDE with lsp-mode]]
+9. [[file:learn-to-love-the-terminal-modes.org][Learn to Love the Terminal Modes]]
+10. [[file:effortless-file-management-with-dired.org][Effortless File Management with Dired]]
+11. [[file:keeping-your-packages-up-to-date.org][Keeping Your Emacs Packages Up to Date]]
+12. [[file:cut-start-up-time-in-half.org][How to Cut Emacs Start Up Time in Half!]]

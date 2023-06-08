@@ -1,4 +1,6 @@
-#+title: System Crafters Live - March 17, 2023
+#+title: Finding New Emacs Packages
+#+date: [2023-03-17 Fri]
+#+video: spPFQZ5sZEc
 
 * Updates
 

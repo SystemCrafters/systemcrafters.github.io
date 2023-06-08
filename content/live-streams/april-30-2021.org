@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - April 30, 2021
+#+title: Trying out Emacs Packages: Vertico and Corfu
+#+date: [2021-04-30 Fri]
+#+video: nyz4O7EwxIk
 
 * Trying Emacs Packages
 

@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - May 20, 2022
+#+title: Resetting the System
+#+date: [2022-05-20 Fri]
+#+video: k30wB8mu_m8
 
 * Resetting the System
 

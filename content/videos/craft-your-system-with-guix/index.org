@@ -1,0 +1,10 @@
+#+title: Craft Your System with GNU Guix
+
+* Episodes
+
+1. [[file:introduction.org][An Introduction to GNU Guix]]
+2. [[file:installing-the-package-manager.org][Installing the GNU Guix Package Manager]]
+3. [[file:everyday-package-management.org][Everyday Package Management with GNU Guix]]
+4. [[file:using-package-channels.org][Using Package Channels in GNU Guix]]
+5. [[file:full-system-install.org][Installing Guix as a Complete GNU/Linux System]]
+5. [[file:5-reasons-to-try-guix.org][5 Reasons to Try GNU Guix in 2022]]

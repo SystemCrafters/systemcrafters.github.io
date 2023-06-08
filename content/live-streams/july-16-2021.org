@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - July 16, 2021
+#+title: Do we really need use-package in Emacs?
+#+date: [2021-07-16 Fri]
+#+video: zWIByv8JOrg
 
 * Do we really need use-package?
 

@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - September 2, 2022
-
-[[yt:vgFLtW_6Ui4][Watch the recording on YouTube!]]
+#+title: A Rough Introduction to Guile Scheme
+#+date: [2022-09-02 Fri]
+#+video: vgFLtW_6Ui4
 
 * Updates
 

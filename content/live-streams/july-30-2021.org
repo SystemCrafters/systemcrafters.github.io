@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - July 30, 2021
-
-[[https://youtu.be/Mu_04oY_ub0][Watch the recording]] on YouTube!
+#+title: The Future of System Crafters
+#+date: [2021-07-30 Fri]
+#+video: Mu_04oY_ub0
 
 * The Future of System Crafters
 

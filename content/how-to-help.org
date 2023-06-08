@@ -1,0 +1,63 @@
+#+title: How to Help
+
+The System Crafters website, YouTube channel, and community would not exist without your participation and support!
+
+If have found value from my content, please consider contributing in one of the following ways:
+
+* Spread the Word!
+
+If there is a particular video, guide, or series that has been especially helpful to you, please share it on your favorite website and social platforms!  Many people have recommended my videos on Reddit and other websites and it has helped many new people find the community.
+
+If you're on the [[https://en.wikipedia.org/wiki/Fediverse][Fediverse]] ([[https://joinmastodon.org][Mastodon]], etc), feel free to mention me in posts about the configurations you make after following my guides and I will boost you!
+
+David on the Fediverse: [[https://fosstodon.org/@daviwil][@daviwil@fosstodon.org]].
+
+* Join the Community
+
+You can also contribute to the System Crafters community in a number of ways:
+
+- Participate in [[/community/#chat-with-us][community chatrooms]]
+- Contribute to [[/community/#community-projects][community projects]] like [[/community/#crafted-emacs][Crafted Emacs]]
+- Make suggestions and report issues in System Crafters content (e-mail =david= at =systemcrafters.net=)
+
+Read the [[/community][Community page]] for more information!
+
+* Support My Work
+
+Please consider supporting my work financially as well!
+
+My ultimate goal is to work on System Crafters *full time* so that I have the freedom to go really deep into the tools we discuss on the channel and then teach you everything that I've learned.  The more financial support I get, the closer I get to that goal!
+
+** Monthly Sponsorships
+
+Monthly support is the best way to help me achieve my goal of going full-time with System Crafters!  There are different sponsorship tiers to choose from, each with their own perks.
+
+$5 and above sponsors will get access to private discussion lists where you can ask questions to a small group of fellow Crafters.  I will prioritize responding to questions on these lists!
+
+Monthly support options:
+
+- [[https://github.com/sponsors/daviwil][GitHub Sponsors]]
+- [[https://patreon.com/SystemCrafters][Patreon]]
+- [[https://liberapay.com/SystemCrafters/][Liberapay]]
+
+** One-Time Tips
+
+You can also send a one-time tip via [[https://ko-fi.com/SystemCrafters][Ko-Fi]], [[https://github.com/sponsors/daviwil][GitHub Sponsors]] or [[https://paypal.me/SystemCrafters][PayPal]]!  I really appreciate all support, no matter the amount.
+
+** Custom Crafting Support
+
+If you have a configuration or tool you want to build and you need a little help with it, contact me by e-mail (=david= at =systemcrafters.net=) to discuss consulting rates.  From small enhancements to complete Emacs and Guix configurations, I will be happy to help you!
+
+* Buy System Crafters Merchandise
+
+The [[https://store.systemcrafters.net?utm_source=support-the-channel][System Crafters Store]] is a place where you can find t-shirts, hoodies, coffee cups, hats, stickers, and more!  Support the channel by purchasing something with our logo on it.
+
+If you have ideas for other cool things to add to the store, send me an e-mail: =david= at =systemcrafters.net=!
+
+* Buy Mastering Emacs
+
+Mastering Emacs is an excellent resource to deepen your knowledge about Emacs!  If you use the following affiliate link, a portion of your purchase will go to supporting System Crafters.
+
+https://www.masteringemacs.org/r/systemcrafters
+
+The Mastering Emacs website is also a really good source of tips and tricks for Emacs, so check it out before you buy the book to get a good idea of the quality of Mickey's content!

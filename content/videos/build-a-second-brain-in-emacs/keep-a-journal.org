@@ -1,0 +1,164 @@
+#+title: Keep a Journal in Emacs with Org Roam
+
+[[yt:3-sLBaJAtew][Watch the video on YouTube!]]
+
+* Intro
+
+One of the best ways to think and work through problems is to have a written dialogue with yourself.  By the end of this video, you'll know how to log your thoughts from the day, link them to existing notes, and easily review the notes for any day, all with Org Roam.
+
+#+begin_cta
+#+end_cta
+
+* The starting configuration
+
+Before we start, make sure you've got Org Roam set up already.
+
+You can get started quickly by copying the configuration below, but you'll learn more if you watch the two previous videos in the Org Roam series first:
+
+- [[https://youtu.be/AyhPmypHDEw][Getting Started with Org Roam]]
+- [[https://youtu.be/YxgA5z2R08I][Capturing Notes Efficiently with Org Roam]]
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/RoamNotes")
+    (org-roam-completion-everywhere t)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           :map org-mode-map
+           ("C-M-i" . completion-at-point)
+           :map org-roam-dailies-map
+           ("Y" . org-roam-dailies-capture-yesterday)
+           ("T" . org-roam-dailies-capture-tomorrow))
+    :bind-keymap
+    ("C-c n d" . org-roam-dailies-map)
+    :config
+    (require 'org-roam-dailies) ;; Ensure the keymap is available
+    (org-roam-db-autosync-mode))
+
+#+end_src
+
+** Configuration Notes
+
+- Make sure to update the value of =org-roam-directory= to the path where you'd like your Org Roam files to be stored.  Create the directory before loading the configuration!
+
+- There is one slight difference with this configuration from the one in the previous episodes, the function =org-roam-setup= was renamed to =org-roam-db-autosync-mode=
+
+
+* Creating the folder for journal entries
+
+Before we can create and view journal entries, we first need to make sure the folder exists.
+
+By default, Org Roam will create daily files under the =daily/= subfolder of your =org-roam-directory=.  Let's create that folder!
+
+If you'd like to change this folder to a different path, you can set the =org-roam-dailies-directory= like so:
+
+#+begin_src emacs-lisp
+
+  (setq org-roam-dailies-directory "journal/")
+
+#+end_src
+
+This path must be relative to =org-roam-directory=!
+
+* Creating a journal entry for today
+
+Once you've got Org Roam configured, you can run the command =org-roam-dailies-capture-today= which we've bound to ~C-c n d n~.
+
+We're using the existing =org-roam-dailies-map= for key bindings!
+
+When you run that command, a capture window will appear for a file named with the current date.  Here, you can write whatever you like and then press ~C-c C-c~ to save the entry or ~C-c C-k~ to cancel the capture without saving it.
+
+The nice thing about this command is that you can run it again to capture another entry, basically allowing you to create entries across the entire day.  Let's try it!
+
+One major benefit of using Org Roam for your journal (instead of something like [[https://github.com/bastibe/org-journal][org-journal]]) is that you can link to any other note in your Org Roam database.  We can use ~C-c n i~ to insert a link to the =Scheme= entry that we created in a previous episode.
+
+* Reviewing today's journal entries
+
+Perhaps you want to take a look at the journal entries you've already written for today.  To do this, you can run the command =org-roam-dailies-goto-today= which we've bound to ~C-c n d d~.
+
+When you run this command, the journal file for today will be opened so that you can read it and make any edits you like.
+
+This file is set up like any other Org Roam note.  You can also use ~C-c n f~ to navigate to it and even insert a link to it in other note files!
+
+* Creating and viewing entries for yesterday or tomorrow
+
+You can also create entries for the previous or next day from today:
+
+- Capture a note for yesterday with =org-roam-dailies-capture-yesterday= (~C-c n d Y~)
+- Capture a note for tomorrow with =org-roam-dailies-capture-tomorrow= (~C-c n d T~)
+
+These commands can be useful for writing concluding thoughts for the previous day or leaving notes for yourself for tomorrow!
+
+There are also commands to navigate to the entries for these days:
+
+- Go to the file for yesterday with =org-roam-dailies-goto-yesterday= (~C-c n d y~)
+- Go to the file for tomorrow with =org-roam-dailies-goto-tomorrow= (~C-c n d t~)
+
+* Creating and viewing entries for a specific date
+
+You can create or view notes for a specific day with the following commands:
+
+- Capture a note for a specific date with =org-roam-dailies-capture-date= (~C-c n d v~)
+- Go to the file for a specific date with =org-roam-dailies-goto-date= (~C-c n d c~)
+
+When you run either of these commands, you'll be shown a calendar which lets you pick the date to view or create entries.  Just hold shift and use the arrow keys to move around in the calendar!
+
+You can also navigate forward or backward in time from the date of the file you're currently viewing:
+
+- Go back one existing date file with =org-roam-dailies-goto-next-note= (~C-c n d b~)
+- Go forward one existing date file with =org-roam-dailies-goto-previous-note= (~C-c n d f~)
+
+* Adding the time to each entry
+
+If you want to add some more information to the entries that you capture, you can customize the default capture template:
+
+#+begin_src emacs-lisp
+
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry "* %<%I:%M %p>: %?"
+           :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+
+#+end_src
+
+More information on the format can be found in the documentation for =format-time-string=.
+
+Now when we create a new daily entry, the date will be captured in the heading.
+
+You can create more capture templates for daily entries!  I'll give some more examples on how to use this in another video.
+* The final configuration
+
+Here's the final configuration for everything you saw in the video:
+
+#+begin_src emacs-lisp
+
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/RoamNotes")
+    (org-roam-completion-everywhere t)
+    (org-roam-dailies-capture-templates
+      '(("d" "default" entry "* %<%I:%M %p>: %?"
+         :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           :map org-mode-map
+           ("C-M-i" . completion-at-point)
+           :map org-roam-dailies-map
+           ("Y" . org-roam-dailies-capture-yesterday)
+           ("T" . org-roam-dailies-capture-tomorrow))
+    :bind-keymap
+    ("C-c n d" . org-roam-dailies-map)
+    :config
+    (require 'org-roam-dailies) ;; Ensure the keymap is available
+    (org-roam-db-autosync-mode))
+
+#+end_src

@@ -1,4 +1,6 @@
-#+title: System Crafters Live - April 14, 2023
+#+title: Exploring D-Bus with Emacs APIs
+#+date: [2023-04-14 Fri]
+#+video: HdzxY3UB3bY
 
 * Updates
 

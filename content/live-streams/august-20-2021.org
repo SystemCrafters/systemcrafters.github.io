@@ -1,6 +1,6 @@
-#+title: System Crafters Live! - August 20, 2021
-
-[[https://youtu.be/AA9EyyTufVo][Watch the recording]] on YouTube!
+#+title: Can We Fix a Bug in Emacs?
+#+date: [2021-08-20 Fri]
+#+video: AA9EyyTufVo
 
 * News
 

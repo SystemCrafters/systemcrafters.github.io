@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - Investigating use-package Alternatives
+#+title: Investigating use-package Alternatives
+#+date: [2021-09-24 Fri]
+#+video: ZolOUgXHgbo
 
 * News
 

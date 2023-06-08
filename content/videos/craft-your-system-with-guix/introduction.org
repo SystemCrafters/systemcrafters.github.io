@@ -1,0 +1,128 @@
+#+title: An Introduction to GNU Guix
+#+video: iBaqOK75cho
+
+* Why talk about GNU Guix?
+
+So far on this channel, we've primarily been focused on GNU Emacs.  Why talk about GNU Guix?
+
+In my opinion, the combination of Emacs + EXWM + Guix creates the ultimate hackable system.
+
+In this video, I'll explain what GNU Guix can do for you and then show you how to do these things in the subsequent videos in the series.
+
+#+begin_cta
+#+end_cta
+
+* What is GNU Guix?
+
+Guix is a next-generation tool for installing and managing both the software you use and your entire system configuration.
+
+In my opinion, it's the best Linux distribution to use for crafting your own system configuration!
+
+** A functional package manager
+
+Guix makes it possible to manage all of the applications and libraries you use in a consistent and repeatable way.  You can easily install all of the packages you care about using a "manifest" file that you can check in to source control.  You can also lock the versions of all the packages you want to use to make sure you never get upgraded until you are ready!
+
+Guix installs packages and updates in a "transactional" way, meaning that the changes aren't applied to your system until installation completes successfully.
+
+You can also roll back your installed packages to a previous "generation" if things go wrong!  A package upgrade will never permanently break your system again.
+
+You can use the package manager on any GNU/Linux distribution!  It has its own package ecosystem which typically has newer versions of everything you might want to use.
+
+** A "virtual environment" tool for software development
+
+Think =virtualenv= but for /all/ programs, not just code dependencies!  If you are working on a project which depends on both code *and* software dependencies, GNU Guix can simplify the installation of both.
+
+You can also create "pure" environments which only contain the libraries and programs you want to develop and test with so that you know that your system configuration isn't giving you a false sense of trust that your code will work on another machine.
+
+This means you can have this functionality not only for Python, but also Rust, C/C++, Haskell, Common Lisp, Guile Scheme, and any other language or programming platform that GNU Guix has packages for!
+
+** A tool for applying declarative system configurations
+
+Guix allows you to declare a complete system configuration which can be applied to a machine with a single command.
+
+No more hand-editing of files in =/etc=! Now you can use Scheme code to configure your systems all in one place.
+
+Most importantly, Guix allows you to roll back your /entire system configuration/ if something you change makes it unbootable.  You can easily boot a previous system configuration from the GRUB menu and continue with your work.
+
+** A GNU/Linux distribution!
+
+Guix has its own package repository with many free and open source applications that you would find on other Linux distributions.
+
+You can easily add additional package sources using a feature of Guix called "channels".  A channel is basically just a Git repository with a collection of package definitions in it!
+
+** A full embodiment of GNU principles
+
+The maintainers of GNU Guix care a lot about freedom and privacy!  This means that they work hard to make sure that no proprietary software (which restricts your freedoms) or software with tracking code (which harms your privacy) is included in the main Guix repository.
+
+This can actually be a downside in some respects when you /need/ to install some proprietary software or hardware drivers, but there are ways around this.
+
+* Why Guile Scheme?
+
+I mentioned that GNU Guix is written and configured with Guile Scheme. Why is this useful?
+
+Let's look at an example package definition: =emacs-org-roam=
+
+All of the configuration you write is declarative and looks like markup, but it's code!  You can enhance your configurations and package definitions with embedded code that can make customization a lot easier.
+
+Guix also has a REPL where you can experiment with the built-in APIs!  You can learn how to use the functions that are helpful for package definitions and configurations.
+
+You can also write your own Guile Scheme code to script the behavior of Guix.  This would allow you to make your own custom system management commands!
+
+Example: profile management scripts.
+
+* What about proprietary software?
+
+GNU Guix is a GNU/Linux distribution that conforms to the [[https://www.gnu.org/distros/free-system-distribution-guidelines.html][GNU Free System Distribution Guidelines]].  This means that all of the software (including the kernel), documentation, fonts, etc must all be licensed with [[https://www.gnu.org/licenses/license-list.html#GPLCompatibleLicenses][GPL-compatible licenses]].  This means that you won't find proprietary applications or hardware drivers in the main Guix repository!
+
+There are solutions to this, though:
+
+- Alternative Guix channels like [[https://gitlab.com/nonguix/nonguix][Nonguix]]
+- Using [[https://nixos.org/][Nix]] package manager
+- [[https://www.flatpak.org/][Flatpak]] with [[https://www.flatpak.org/][Flathub]]
+
+I'll talk about these options more once we start configuring a full system with Guix.
+
+NOTE: You should avoid asking about how to install proprietary software or drivers on the main Guix mailing lists and IRC chat.  Since they are a FSDG distro, I don't think they can (or even want) to help with that.
+
+* Some examples of how I use Guix
+
+** Managing Emacs packages
+
+I have a "manifest" of Emacs packages that gets generated from Emacs.org which I can install with a single command.
+
+Some packages aren't (yet) in the Guix repository!  I conditionally install those using =straight.el= or make my own packages in a custom channel.
+
+** Installing categories of packages separately
+
+I have separate manifest files for different categories of packages that I use:
+
+- [[https://gist.github.com/daviwil/ecef35bde8fa69236e7c8f1727c271e4][desktop.scm]] (generated from [[https://github.com/daviwil/dotfiles/blob/master/Desktop.org][Desktop.org]])
+- [[https://gist.github.com/daviwil/0d503fadffe2c777cc110f9a23db78bb][emacs.scm]] (generated from [[https://github.com/daviwil/dotfiles/blob/master/Emacs.org][Emacs.org]])
+- [[https://gist.github.com/daviwil/ffcb4d0f58c56f0893b5246c34c592a5][video.scm]]
+- [[https://gist.github.com/daviwil/ea8a0e5a94ac59240dd1c8344cd6202f][games.scm]]
+
+Splitting them in this way allows me to only install the software I need on a particular machine.
+
+** Using different package channels
+
+My channel configuration includes a few other channels outside of the main Guix repository.
+
+- [[https://github.com/daviwil/dotfiles/blob/aeb26ff509895cd44ecc4a5832c8f66223b563bb/.config/guix/channels.scm][~/.config/guix/channels.scm]]
+
+** Configuring multiple systems with a shared base configuration
+
+When I started installing GNU Guix on more than one machine, I separated out the common configuration bits into base-system.scm so that my individual system configurations can be much simpler and focus only on the unique hardware configurations of those systems:
+
+- [[https://github.com/daviwil/dotfiles/blob/master/Systems.org#base-configuration][base-system.scm]]
+- [[https://github.com/daviwil/dotfiles/blob/master/Systems.org#zerocool][zerocool.scm]]
+- [[https://github.com/daviwil/dotfiles/blob/master/Systems.org#acidburn][acidburn.scm]]
+
+I'm also generating these configurations from my Systems.org file!
+
+* What's next?
+
+In the next episode of this series, I'll show you how to install GNU Guix as a package manager on your existing GNU/Linux distribution so that you can try it out!
+
+In the subsequent videos, we'll perform a full system installation and then learn how to manage your entire system using Guix and Emacs.
+
+I'll also make videos on how you can create your own package definitions for programs and libraries you'd like to contribute to Guix, and also how to make your own package channel for everything else!

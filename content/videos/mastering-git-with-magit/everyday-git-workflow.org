@@ -1,0 +1,239 @@
+#+title: Everyday Git Workflow in Emacs with Magit
+
+[[yt:qPfJoeQCIvA][Watch the video on YouTube!]]
+
+* What will we learn?
+
+In this video, I'm going to show how you can use Magit to perform your day to day Git operations much more efficiently than what you might do with =git= on the command line.
+
+This is Part 2 of the [[https://www.youtube.com/watch?v=_zfvQkJsYwI&list=PLEoMzSkcN8oMc34dTjyFmTUWbXTKrNfZA][Mastering Git with Magit]] series, so be sure to watch the first one if you haven't seen it yet!
+
+Instead of covering every Magit feature exhaustively, I'm going to use a scenario-driven approach to show you how to accomplish specific tasks that I use Magit for every day, both when managing my dotfiles repository and working on larger projects where I have to collaborate with others.
+
+Let me know in the comments if there's anything you'd like to see covered in more detail and I'll do that in future videos of this series!
+
+#+begin_cta
+#+end_cta
+
+* Cloning a repository
+
+While it's not something you might do every day, you will eventually need to clone a Git repository from a remote location, typically a collaboration site like GitHub, GitLab, or Sourcehut.
+
+The easiest way to do this is from anywhere in Emacs is to run =M-x magit-clone=.  You will be prompted for which type of input you'd like to use to identify the repo.  We'll choose ~u~ for "url or name" because we want to clone a repo from GitHub.
+
+One interesting thing here is that you don't need to specify a full URL if you're just cloning a repository from GitHub; Magit will assume the repo is from GitHub if you merely enter =username/reponame=, for example: =daviwil/dotfiles=.
+
+You can also use a prefix to indicate the host, like =gitlab:user/reponame= or =gl:user/reponame= to clone a repository from GitLab.  Check =magit-clone-name-alist= for the known name prefixes or add your own!
+
+Once you confirm the repo URL, you will be asked for the path in which the repo will be cloned.  Magit will then ask you if you want to set the "pushRemote" to =origin=, it's generally a good idea to respond =y= to this so you can push branches to your repo afterward.
+
+After the repository has finished cloning, the =magit-status= buffer will be opened so that you can run Git operations there!
+
+** Preparing for later examples
+
+#+begin_src emacs-lisp
+
+  (let ((default-directory (expand-file-name "~/Projects/Code/dotfiles")))
+    (magit-reset-hard "1e0fa45a5e7fd9fd45c2d385b5970d7de53eb205")
+    (copy-file "../Emacs-edit.org" "./Emacs.org" t)
+    (find-file-noselect "Emacs.org"))
+
+#+end_src
+
+* Looking at the commit history
+
+Before we get into the more interesting and useful features of Magit, let's take a look at how you can view the commit history of your Git repository.
+
+Other Magit operations like cherry-picking and rebasing will use this commit log view, so it's helpful to be familiar with it!
+
+** Viewing commits from the current branch
+
+The most obvious thing you might want to do is view the commit history for the current branch.  You can view the log for the current branch using one of these entrypoints:
+
+- *Direct command*: =M-x magit-log-current=
+- *Status buffer*: ~l l~ (lower-cased 'l' twice)
+
+This view shows every commit in reverse-chronological order, giving you the commit hash, description, author, and a relative timestamp for when it was created.
+
+You can use the normal movement keys and press ~RET~ (Enter) on any line to see more details about the commit, including the diff.  Pressing lower-cased ~q~ will exit the commit details view and pressing it again will also allow you to exit the log view.
+
+One useful feature of this view is that you can use any buffer-searching functionality you like (Swiper, =consult-line=, =isearch=, etc) to search across the commits by their log message.
+
+By default, only a limited number of commits will be displayed, but you can press the ~+~ (plus sign) key at any time to load more commits for the current log.
+
+** Viewing commits from a specific branch
+
+This path will ask you for a branch using the prompt "Log rev,s" which isn't very clear, but you can type in the name of any branch here, either local or remote.  You can also press the ~TAB~ key to get a completion list of all the branch names.
+
+Once you select a branch to be listed, the commit listing for that branch will be displayed.
+
+- *Direct command*: =M-x magit-log-other=
+- *Status buffer*: ~l o~ (lower-cased 'L' then lower-cased 'o')
+
+* Commiting only one section of a modified file
+
+If you've been using Git for a little while, you're probably familiar with staging whole files to be committed using =git add filename=.
+
+Magit's status buffer (=M-x magit-status=, or ~C-x g~) enables you to stage whole files by using the lower-cased ~s~ key when the cursor is on the filename in the *Unstaged Changes* section of the status buffer.
+
+But what if you want to stage only one part of the modified file?  Magit makes this very easy!
+
+Put your cursor on the entry for the modified file, press ~TAB~ to expand it, then move your cursor into the "hunk" containing the change.  Now press lower-cased ~s~ and that hunk will be staged!
+
+You can also stage individual lines by selecting them using the normal Emacs (or Evil) key bindings and then press ~s~ in the same way, just make sure that you include the "removal" lines that correspond to any additions you are staging!
+
+You can similarly unstage hunks and lines in the *Staged Changes* section using the lower-cased ~u~ key.
+
+I'll perform a commit with these changes now using lower-cased ~c c~ (Commit -> Create) in the status buffer.
+
+I use this functionality very frequently, both for my dotfiles repository and the various code projects I contribute to!
+
+* Adding a file or change to the most recent commit
+
+So what if we forgot some lines that we wanted to add to this commit?  Magit makes it really easy to "extend" your most recent commit with additional changes.
+
+First, stage the changes that you want to add to the commit, then press ~c e~ (Commit -> Extend).  Magit will "amend" the commit with those changes without asking you to edit the commit message!
+
+If you /do/ want to edit the commit message when adding the new files, you can do this by pressing ~c a~ (Commit -> Amend).  The commit message editor will appear with the contents of the original commit message so that you can edit it.  Press ~C-c C-c~ to confirm the changes or ~C-c C-k~ to abort the edit.
+
+If you only want to edit the commit message without adding any staged changes, use ~c w~ (Commit -> Reword).
+
+*NOTE:* If you've already pushed the original commit to a remote branch, you'll have to force-push the branch the next time because the commit histories won't match!  I'll show you how to do this in a bit.
+
+* Adding a file or change to a specific commit
+
+Maybe you've already made other commits after the commit you need to edit, how can you add new changes to the earlier commit?
+
+On the command line, you would normally use =git rebase= to accomplish this, which is generally considered to be a more advanced Git technique.
+
+Luckily Magit makes this specific operation much simpler with the "Instant Fixup" feature!
+
+To add changes to an earlier commit, just stage them like you normally would and then press ~c F~ (Commit -> Instant Fixup).
+
+You'll be presented with Magit's commit log view which shows the current branch's commits with the newest commits sorted first.  Just move your cursor to the line of the commit you want to edit and press ~C-c C-c~ and the changes will be added to this commit!
+
+*NOTE:* Like we talked about before, any operation that changes an existing commit will require you to force-push the branch!
+
+* Create a new branch from the changes of the current branch
+
+Magit has a really convenient interface for creating branches through =M-x magit-branch= or the ~b~ key in the =magit-status= buffer.
+
+One of my favorite Magit features is here: it allows you to create a new branch with the changes you already committed to the current branch while putting the original branch back to the commit where it started.
+
+Imagine this scenario: you've been working on some changes for a while, making commits without really thinking about where you've been committing them.  It turns out you've been committing them to the =main/master= branch all along!
+
+To create a new branch with all these commits while putting the original branch back to its previous state, you can run =M-x magit-branch-spinoff= or press lower-cased ~b s~ inside of the status buffer.  It will ask you for the name of the new branch and then create it, resetting =master= back to the commit before your new commits were added.
+
+*NOTE:* This only works when the branch you're starting from has been pushed to the remote!
+
+We can then use ~b b~ in the status buffer to switch back to =master= to confirm that it has been rolled back to the original commit!  Once we're satisfied with that, we can use ~b b~ again to select the new branch we created.
+
+* Pushing a local branch to a remote
+
+Once you've made a few commits to a branch, you'll eventually need to push those commits to a remote location (like GitHub) so that you can share or collarborate with others.
+
+Magit has a very convenient interface for this which enables you to do all the things you might do on the command line with just a few key presses:
+
+** Pushing a new local branch to a remote
+
+Usually when you create a new branch, there won't be a matching branch on the remote repository yet.
+
+To push the new branch we created, we can press ~P p~ (upper-cased 'P' then lower-cased 'p') while in the =magit-status= buffer.
+
+This will create the branch on the remote called =origin= and push the commits from the local branch to this new remote branch.
+
+You can also see that the "Push:" entry in the repo status section at the top of the status buffer now mentions the remote branch!
+
+** Pushing new changes to an existing branch
+
+If you make a new commit on the current branch, you can push it to the same remote branch by pressing ~P p~ in the status buffer again.
+
+Magit remembers the branch that you pushed to the last time so you can always use ~P p~ to push there again!
+
+** Pushing a branch that has had its commits modified
+
+In a couple of examples before, I showed how you can edit existing commits by adding more changes or rewording the commit message.
+
+If you've done this, the only way to push those changes to the same branch is to use the ~-f~ argument when you launch the /Push/ panel with ~P~!
+
+*NOTE:* Enabling this option will *overwrite* the remote branch with the commits in the local branch, so make sure you are only force-pushing to a branch that is not =main= or =master=!  Changing the commit history makes it really difficult for collaborators to pull your changes.
+
+* Saving local changes for later
+
+There will be times where you'll need to move uncommitted local changes out of the way so that you can perform some other Git operation like a pull or rebase.
+
+Git provides a command for this called =git stash=, it basically saves your uncommitted changes and clears them from your local folder so that they don't show up in =git status= any longer.
+
+In Magit, you can stash changes from the =magit-status= buffer by pressing ~z z~ (Stash -> Both).  This will create a local stash entry for those changes after prompting you for a description for the stash.
+
+You can now view the stashed changes by expanding the *Stashes* list on the status buffer.
+
+You can restore the latest stash by running ~z p~ (Stash -> Pop) which will restore the stashed changes and delete the stash entry.  If you want to keep the stash entry around you can use ~z a~ (Stash -> Apply) instead!
+
+* Pulling new commits from a remote into a local branch
+
+Regardless of whether you're working on your dotfiles repo or collaborating with others on a project, you'll eventually need to pull commits from a remote repository.
+
+From the =magit-status= buffer, you can press the ~F~ key to open the *Pull* panel.
+
+To pull any new changes from the remote version of the current local branch, you can press ~p~ (or ~F p~ from the status buffer) to pull the latest commits from the remote.
+
+This will fetch the latest commits from the selected remote and then attempt to pull them into the current branch!
+
+If you receive an error saying that there are uncommitted local changes, use the ~z z~ (stash) command we talked about before to stash those local changes before pulling the remote changes!
+
+** Pulling new changes from another branch
+
+The option I use more often when working on a branch is ~F u~ which enables you to pull from an "upstream" branch, local or remote, for example =origin/main= or =origin/master=.
+
+You can also use ~F e~ to choose any local or remote branch without saving it as your upstream!
+
+** Rebasing local changes onto the new commits
+
+You'll inevitably need to pull new commits from another branch (like =main= or =master=) into your current branch before you can merge it back into the main branch.
+
+You can easily do this by turning on the *rebase* option in the *Pull* panel by pressing the ~r~ key: ~F r~.  Now when you pull this branch, the commits you've made will be replayed on top of the branch you are pulling from.
+
+If your changes apply cleanly to the changes you're pulling from the remote branch, everything should finish smoothly!  However if there are merge conflicts with the new commits, you will need to make edits to fix those before you can proceed with the rebase.
+
+After all merge markers have been cleaned up and all files are staged, you can press ~r r~ to continue the rebase operation and ~C-c C-c~ to confirm the updated commit.
+
+We'll cover how you can deal with merge conflicts in the next episode of this series!  I'll also describe =git rebase= in more detail since this is only a very brief introduction to it.
+
+** Fetching without pulling changes
+
+If you merely want to fetch the latest branches and commits from the remote repository without pulling them into your local branch, you can follow a different path:
+
+Open =magit-status= and press ~f p~ to fetch the =origin= repository or ~f u~ to fetch from the configured =upstream= repository.  You will now be able to check out branches or list commits from the remote!
+
+* Discarding unwanted changes
+
+Let's say you've been making changes in your repo that you later decide that you no longer need.  Instead of going back to those files to undo the changes, you can use the *Discard* action of the status buffer to get rid of them!
+
+In the status buffer, you can put your cursor on any file, hunk, or line and press ~k~ to discard the change.  Typically you will be prompted to confirm before it actually gets discarded.
+
+*NOTE:* If you're using =evil-collection= with =evil-mode=, the key will be ~x~ instead!
+
+This also works for untracked files!  This is usually faster than going to the command line to delete the unwanted files.
+
+* Adding a file to .gitignore
+
+Perhaps you've got a file in the repository that you never want to see in the *Untracked Files* section because it doesn't belong in the repository.  Normally you'd add that to your =.gitignore= file in the repo.
+
+Magit can help with this!  Put your cursor on the file and press ~i~ to raise the *Gitignore* panel which has 3 options:
+
+- ~t~: Add the file to the repo-level =.gitignore= file
+- ~s~: Add the file to a =.gitignore= file in the folder where the file lives
+- ~p~: Ignore the file "privately" in your local clone of the repo without editing =.gitignore=
+
+Upon pressing any of these keys, you'll be prompted for the actual file pattern to add to the ignore file, usually the first suggestion is the one you should use!
+
+Magit will now create the =.gitignore= file if it doesn't exist and then add it to *Staged Changes* for you.  Just commit the file to make the change permanent!
+
+* What's next?
+
+In the next video, I'll show you how to do even more advanced Git operations like rebasing, cherry picking, and managing the reflog.  If you're a programmer that uses Git to collaborate with others on a daily basis, Magit will make your life a lot easier!
+
+If you have any questions about what we covered today, leave a note in the comments!
+
+Support Jonas on GitHub sponsors: https://github.com/sponsors/tarsius

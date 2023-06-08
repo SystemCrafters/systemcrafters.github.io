@@ -1,4 +1,6 @@
-#+title: System Crafters Live! - February 17, 2023
+#+title: The Latest in Emacs Completions
+#+date: [2023-02-17 Fri]
+#+video: -MhSXU6Tx28
 
 * Updates
 
@@ -11,7 +13,7 @@
 
 - Should I attempt a real sequel to the original Emacs From Scratch, live streamed?
 
-* The Latest on Emacs Completions
+* The Latest in Emacs Completions
 
 Today we're going to experiment with the latest advancements in Emacs completion / selection systems, including a look at improvements that are coming in Emacs 29!
 
