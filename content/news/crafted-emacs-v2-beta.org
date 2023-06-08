@@ -1,5 +1,5 @@
 #+title: Crafted Emacs v2 Beta Announcement
-#+date: [2023-05-28 Sun]
+#+date: [2023-06-08 Thu]
 #+author: Jeff Bowman
 #+kind: news
 
