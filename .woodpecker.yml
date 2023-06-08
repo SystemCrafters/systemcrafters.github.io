@@ -2,7 +2,7 @@ pipeline:
   build-web:
     image: silex/emacs:ci
     when:
-      branch: [v2]
+      branch: [ master ]
     secrets: [ repo_token ]
     commands: |
       CI=true emacs --batch -l ./publish.el --funcall dw/publish
