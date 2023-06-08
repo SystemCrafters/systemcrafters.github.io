@@ -537,7 +537,8 @@ holding contextual information."
   (copy-file ".domains" "public/.domains" t)
 
   ;; Copy the .well-known folder for Matrix
-  (copy-directory ".well-known" "public/" t))
+  (unless (file-exists-p "public/.well-known")
+    (copy-directory ".well-known" "public/" t)))
 
 (provide 'publish)
 ;;; publish.el ends here
